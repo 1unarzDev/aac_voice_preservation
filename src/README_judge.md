@@ -1,4 +1,4 @@
-# Judge, attribution and annotation (SPEC v0.1, D-007, CB-1..CB-5)
+# Judge, attribution and annotation (SPEC v0.1, CB-1..CB-5)
 
 `outputs.jsonl` (explode.py) → `judge.py` → `judgments.jsonl` → `attribute.py` →
 `scored.parquet` + `endpoints.json`. Then `make_gold.py` → `annotate.html` → `score_gold.py`.
@@ -8,7 +8,7 @@ Run everything from the repo root after `. .venv/bin/activate`. The API key is r
 
 | file | role |
 |---|---|
-| `src/labels.py` | Option strings (verbatim from SPEC), definitions, chip→spec sets, `critical_match` (D-007). |
+| `src/labels.py` | Option strings (verbatim from SPEC), definitions, chip→spec sets, `critical_match`. |
 | `src/layer0.py` | Deterministic general-dimension labels (spaCy + lexicons). |
 | `src/runio.py` | Run-dir adapter. Reads explode's `outputs.jsonl`, or a fixture `exploded.jsonl`. Items come from all `data/items/*.jsonl`. Join key is `text_id`. |
 | `src/judge.py` | LLM extraction judge, J1/J2, cache, agreement report. |
@@ -52,7 +52,7 @@ browser.
   - A critical label outside that item's own option list is rejected.
   - Missing or invalid items are asked again, up to 5 attempts with backoff.
 - **Settings.** Batch 25, concurrency 16, model `gpt-6.1-sol`, `reasoning_effort=low`.
-- **Cache.** `cache/judge/<variant>.jsonl`, keyed by sha256(variant, template sha, model, text, dimension, options[, input]). Any prompt edit changes the template sha and therefore re-judges.
+- **Cache.** `cache/judge/<variant>.jsonl` (created on demand; git-ignored), keyed by sha256(variant, template sha, model, text, dimension, options[, input]). Any prompt edit changes the template sha and therefore re-judges.
 - **Final labels.**
   - critical = J1 if J1 == J2; otherwise `needs_arbiter=true` and critical=null.
   - General dims use agreement, then layer0 as tiebreaker, then null.
@@ -63,7 +63,7 @@ browser.
 ## Attribution (`attribute.py`)
 This follows SPEC "Deterministic attribution" literally. The column glossary is in the module docstring. Key choices:
 - **Spec sets.** A variant's general spec is a *set* of honouring values built from `all_chips`:
-  - `[SURE]` = plain or emphatic (D-007);
+  - `[SURE]` = plain or emphatic;
   - `[PLEASE]` = any polite marker;
   - unspecified dimensions default to affirmative / statement / plain / none;
   - agent has no default.
@@ -77,7 +77,7 @@ This follows SPEC "Deterministic attribution" literally. The column glossary is 
 - **Directed flags.**
   - `politeness_added` = spec none, output has a marker.
   - `hedge_added`.
-  - `emphatic_added` = output emphatic while layer0 on the *source* is not emphatic (D-007 logging).
+  - `emphatic_added` = output emphatic while layer0 on the *source* is not emphatic (logged separately).
 - **Non-completions.** Errored or empty generations come from `generations.jsonl` and count as constraint-preserving = False.
 - **Shared requests.** bare/noncrit requests are shared by A and B, so the commitment and direction endpoints count each (request, suggestion) once.
 - **Endpoints** are written to `endpoints.json`:
@@ -97,7 +97,7 @@ This follows SPEC "Deterministic attribution" literally. The column glossary is 
   - frequency adverbs;
   - approximators;
   - softeners, which go to politeness.
-- **Rules.** Rules follow the codebook: D-007 "Can I" = question; CB-1 "you need to" = statement; CB-3/4 agent of the embedded clause, statal passives, body parts.
+- **Rules.** Rules follow the codebook: "Can I" = question; CB-1 "you need to" = statement; CB-3/4 agent of the embedded clause, statal passives, body parts.
 - **Known blind spots.**
   - Sarcasm, ellipsis and fragments.
   - Multi-clause speech acts.

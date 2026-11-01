@@ -1,4 +1,4 @@
-"""Offline cycle-2 Action 1: audit the frozen W-B restoration contract.
+"""Offline audit of the frozen W-B restoration contract.
 
 No generation, judging, relabeling, or historical request reconstruction. Uses
 stored extraction labels; its verdicts remain machine-assessed. Run from root:
@@ -72,7 +72,7 @@ def boot(frame, col, key):
 
 
 def main():
-    start = pd.read_csv(ROOT / "ideas/cycles/c2/cue_source_audit.csv").set_index("family_id")
+    start = pd.read_csv(ROOT / "analysis/derived/wb_cue_source_audit.csv").set_index("family_id")
     items = {r["family_id"]: r for r in records("data/items/wb.jsonl")}
     panel = {r["id"]: r for r in records("annotation/wb_admissibility/panel.jsonl")}
     sample = {r["id"]: r for r in records("data/specs/wb_sample.jsonl")}
@@ -259,12 +259,12 @@ def main():
     cf=df[df.dim.eq('certainty') & df.audit_status.eq('definite_conflict')].sort_values(['family_id','model'])
     assert len(cf)==20 and cf.actual_input_critical_match.all() and ~cf.old_source_critical_match.any()
     ex=cf.iloc[0].to_dict()
-    prior=json.loads((ROOT/'ideas/cycles/c2/hyp_checks.json').read_text())['inputs']
+    prior=json.loads((ROOT/'analysis/derived/r2_hyp_checks.json').read_text())['inputs']
     preserved={name:sha(name)==prior[name] for name in [
         'data/items/wb.jsonl','runs/wb1/scored.parquet','runs/wb1/outputs.jsonl',
         'analysis/wb/long_dims.csv.gz','annotation/judge_validation_main1.json','analysis/oracle/human_gate.log']}
-    assert all(preserved.values()), 'Underlying evidence changed since cycle-2 mining'
-    result=dict(schema_version=1,action='ideas/cycles/c2/decision.md Action 1',
+    assert all(preserved.values()), 'Underlying evidence changed since the round-2 hypothesis mining'
+    result=dict(schema_version=1,action='W-B restoration contract audit',
                 generator_calls=0,judge_calls=0,bootstrap=dict(reps=B,seed=SEED,unit='message',
                 method='pointwise percentile; endpoint-keyed RNG; samples separate; fixed model roster'),
                 inventory=dict(messages=len(inv),outputs=len(df),modes=inv['mode'].value_counts().to_dict(),
@@ -281,13 +281,12 @@ def main():
                 row={k:clean(v) for k,v in ex.items()}),
                 prior_c2_hash_verification=preserved,
                 input_hashes={p:sha(p) for p in [
-                    'ideas/cycles/c2/cue_source_audit.csv','data/items/wb.jsonl','data/specs/wb_sample.jsonl',
+                    'analysis/derived/wb_cue_source_audit.csv','data/items/wb.jsonl','data/specs/wb_sample.jsonl',
                     'annotation/wb_admissibility/panel.jsonl','annotation/wb_audit.json',
                     'annotation/judge_validation_main1.json','runs/wb1/scored.parquet','runs/wb1/outputs.jsonl',
                     'src/wb_items.py','src/labels.py','src/wb_report.py','src/wb_contract_audit.py',
                     'prompts/chip_legend.txt','runs/requests/wb1.jsonl',
-                    'runs/wb1/generations.jsonl','runs/wb1/judgments.jsonl','runs/wb1/config.json',
-                    'orchestration/SPEC.md']})
+                    'runs/wb1/generations.jsonl','runs/wb1/judgments.jsonl','runs/wb1/config.json']})
     (OUT/'contract_audit.json').write_text(json.dumps(result,indent=2,ensure_ascii=False,allow_nan=False)+'\n')
     print(json.dumps({k:result[k] for k in ['inventory','verdict_changes']},indent=2))
     print('Wrote 139 inventory rows, 556 verdict diffs, estimates and human-status evidence; no model calls.')

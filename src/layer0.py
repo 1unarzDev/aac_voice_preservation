@@ -66,7 +66,7 @@ BOOSTERS = {"definitely", "certainly", "absolutely", "really", "totally", "surel
             "without a doubt", "clearly", "obviously", "completely", "for real",
             "seriously", "i'm positive", "i am positive", "i promise", "100%", "always",
             "never ever", "really really"}
-# D-007: "can you ...?" is a request but NOT a polite marker; polite = please, could you,
+# Codebook rule: "can you ...?" is a request but NOT a polite marker; polite = please, could you,
 # would you (mind), thanks/sorry.
 EXTRA_SOFTENERS = {"could you", "would you", "could i", "may i", "would it be possible", "would you be able", "is it okay if",
                    "is it ok if", "would it be okay", "do you think you could",
@@ -83,7 +83,7 @@ REFUSAL_PATTERNS = [r"^(no|nope|nah)\b", r"\bno,? thank", r"\bi'?ll pass\b",
 OFFER_Q = [r"^(shall|should) (i|we)\b", r"^how about\b", r"^what about\b",
            r"^why don't (we|you|i)\b", r"^do you want (me|to)\b", r"^would you like\b",
            r"^want to\b", r"^do you wanna\b"]
-# D-007: "Can I ...?" / "Can we ...?" are questions; "Can you ...?" is a request.
+# Codebook rule: "Can I ...?" / "Can we ...?" are questions; "Can you ...?" is a request.
 REQUEST_Q = [r"^(please )?(can|could|would|will) you\b",
              r"^would you mind\b", r"^do you mind\b", r"^would it be possible\b",
              r"^is it (ok|okay) if\b", r"^would it be (ok|okay)\b", r"^do you think you could\b"]

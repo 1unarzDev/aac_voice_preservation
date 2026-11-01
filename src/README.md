@@ -63,7 +63,7 @@ Families with `split: smoke` are skipped unless `--split smoke` is given.
 Validation: every variant needs at least 1 chip, all chips must be in the vocabulary, and
 `critical_value` must be one of `critical_options`.
 
-### Follow-up experiments (D-012)
+### Follow-up experiments
 `python src/make_followup_items.py` writes `data/items/expB.jsonl` / `expC.jsonl` (splits `expB`/`expC`,
 opt-in like `smoke`). Such families carry `custom_channels` = `{variant: {channel_id: input_text |
 {"input", "commitments", "prompts"}}}`, rendered instead of the 5 standard channels; `commitments` tell
@@ -138,7 +138,7 @@ Extra keys on G1/G1s/I2 generation rows: `base_request_key`, `guard_spec`, `flag
 `runs/cache/` (key = sha1(model, tag `I1-guard-v1`/`I2-span-v1`, messages, T=0, seed)).
 `attribute.py` includes `I2` in coverage@3 (no change for older runs).
 ```bash
-src/run_interventions.sh dev0 guardpilot spanpilot         # flock /tmp/aacv_gpu.lock (D-019), one server at a time + terra
+src/run_interventions.sh dev0 guardpilot spanpilot         # flock /tmp/aacv_gpu.lock (global GPU lock), one server at a time + terra
 python src/judge.py --run guardpilot --concurrency 8 && python src/attribute.py --run guardpilot --fallback J1
 python src/judge.py --run spanpilot  --concurrency 8 && python src/attribute.py --run spanpilot --fallback J1
 python src/interventions.py report --guard guardpilot --span spanpilot --out analysis/interventions/pilot.md
@@ -148,4 +148,4 @@ python src/interventions.py report --guard guardpilot --span spanpilot --out ana
 VRAM shared with an external process: `NGL_QWEN=14 NGL_LLAMA=14 NGL_GEMMA=20 src/run_interventions.sh ...`
 serves with partial CPU offload (`serve_local.sh` honours `NGL`, default 99 = unchanged). This was used
 for the guard/span calls on 2026-10-31 (the cached first passes were served fully on GPU).
-`judge.py --concurrency N` (default 16, unchanged) caps in-flight judge calls; use <= 8 (D-019).
+`judge.py --concurrency N` (default 16, unchanged) caps in-flight judge calls; use <= 8 when the endpoint is shared.

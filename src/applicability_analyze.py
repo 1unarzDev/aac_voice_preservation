@@ -1,4 +1,4 @@
-"""Action 5: reproduce fixed c2 H1/H2 endpoints from a frozen, CPU-only archive.
+"""Reproduce fixed round-2 H1/H2 endpoints from a frozen, CPU-only archive.
 
 No generation, judging, item rebuilding, or additional hypothesis search. The
 archived mine_hyp.py prefix supplies the original endpoints and CI helpers.
@@ -156,7 +156,7 @@ def main():
                 if isinstance(target, ast.Name) and target.id in ["ROOT", "OUT"]:
                     node.value = ast.Call(func=ast.Name(id="Path", ctx=ast.Load()),
                                           args=[ast.Constant(str(frozen if target.id == "ROOT" else replay))], keywords=[])
-        ns = {"__file__": str(ROOT / "ideas/cycles/c2/mine_hyp.py")}
+        ns = {"__file__": str(ROOT / "analysis/derived/r2_mine_hyp.py")}
         exec(compile(ast.fix_missing_locations(tree), "archived_mine_hyp_H1_H2", "exec"), ns)
         mined = ns["results"]
         for k, value in mined.items():

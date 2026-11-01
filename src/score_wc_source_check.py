@@ -5,7 +5,7 @@ usage: python src/score_wc_source_check.py [CSV ...]        (default: annotation
 
 Per family (20, frozen hash-ordered sample, 7 polarity / 7 speech act / 6 politeness):
   authored agreement   human value of source A / B == authored critical value (source unit, n=40)
-  codex agreement      human value == codex verifier's critical value (orchestration/codex_verify_r2.csv)
+  codex agreement      human value == codex verifier's critical value (analysis/item_verification/verifier_r2.csv)
   both authored        both sources of the family match the authored values
   ambiguity confirmed  "Could the bare keywords reasonably mean either sentence?" == yes
                        (also reported: only A / only B / neither counts)

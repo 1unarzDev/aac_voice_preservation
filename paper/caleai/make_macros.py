@@ -158,7 +158,7 @@ for name, ready in EV["pending"].items():
             put(key, f"{v:.3g}" if isinstance(v, float) else v)
 
 
-# ---------------- cycle-2 evidence read directly from the frozen analysis JSON/CSV files
+# ---------------- round-2 evidence read directly from the frozen analysis JSON/CSV files
 # (W-C headline/primary, W-C ladder CSVs, applicability results.json, W-D headline.json).
 # Nothing below is typed: every value is read from a stored file and formatted here.
 import csv  # noqa: E402
@@ -272,7 +272,7 @@ if WD.exists():
         pcu(f"wd_{short}_dboth", W[key + "_damage_minus_both_repeat"], W[key + "_damage_minus_both_repeat_ci_low"],
             W[key + "_damage_minus_both_repeat_ci_high"])
 
-# ---------------- frozen guard transfer to W-C speech act (cycle-3 Action 1; claims ledger C37, renumbered from a duplicate C36 by D-045).
+# ---------------- frozen guard transfer to W-C speech act (accepted with qualifications).
 # Read from analysis/guard_wc/headline.json (written by analysis/guard_wc/analyze.py + close_action1.py from
 # scored.parquet / paired_G1*.parquet). Separate population from the discovery guard result above. Prefix gt_.
 GT = ROOT / "analysis/guard_wc/headline.json"
@@ -317,7 +317,7 @@ if GT.exists():
     co = T["cost"]
     put("gt_calls", f"{co['calls_per_input']:.2f}"); put("gt_calls_flag", f"{co['calls_per_flagged']:.2f}")
     # Actual HTTP calls come from the formal acceptance audit (analysis/guard_wc/ACCEPTANCE.md ->
-    # acceptance_check.json; D-045, ledger C37), which corrects the unsupported "937 calls" figure (D-042).
+    # acceptance_check.json), which corrects an earlier unsupported "937 calls" figure.
     AC = json.loads((ROOT / "analysis/guard_wc/acceptance_check.json").read_text())
     assert AC["verdict"] == "ACCEPT WITH QUALIFICATIONS", AC["verdict"]
     ac = AC["calls"]

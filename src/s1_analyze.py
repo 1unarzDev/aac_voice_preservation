@@ -353,8 +353,7 @@ def main():
     analyze(rows,agreements,nlp)
     import spacy
     paths=list((ROOT/'data/raw/aactext').glob('sent_*_aac.txt'))+[ROOT/'src/s1_cues.py',ROOT/'src/s1_analyze.py',ROOT/'src/s1_verify.py',
-        ROOT/'src/s1_hedges.txt',OUT/'manual_labels_compact.txt',OUT/'validation_notes.md',OUT/'corpus_source.html',
-        ROOT/'orchestration/BRIEF.md',ROOT/'orchestration/SPEC.md']
+        ROOT/'src/s1_hedges.txt',OUT/'manual_labels_compact.txt',OUT/'validation_notes.md',OUT/'corpus_source.html']
     import matplotlib, numpy
     manifest=dict(seed=SEED,n=len(rows),created_utc=datetime.now(timezone.utc).isoformat(),python=sys.version,spacy=spacy.__version__,pandas=pd.__version__,
                   matplotlib=matplotlib.__version__,numpy=numpy.__version__,model=nlp.meta,

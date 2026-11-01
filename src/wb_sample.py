@@ -1,4 +1,4 @@
-"""W-B corpus-transfer sample (PREREG_R2 W-B): 80 simple-random + 80 enriched AACText messages.
+"""W-B corpus-transfer sample (round-2 W-B): 80 simple-random + 80 enriched AACText messages.
 
 Frame (frozen before drawing):
   * every nonempty line of data/raw/aactext/sent_{train,dev,test}_aac.txt (ids as in s1_analyze);

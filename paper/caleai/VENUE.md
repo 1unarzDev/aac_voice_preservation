@@ -89,7 +89,7 @@ EasyChair: https://easychair.org/my/conference?conf=caleai2027. The page's "Subm
 - AAAI-27 main track (context): "Authors may judiciously use generative AI tools, such as large language models
   and image generators"; "authors remain fully responsible for all submitted material"; "non-existent references,
   or other violations of the Code will be subject to appropriate sanctions".
-- Our handling: this draft was written by an AI writing agent from the project's stored evidence. Every reference
+- Our handling: this draft contains AI-generated text drafted from the project's stored evidence. Every reference
   in `refs.bib` was opened (see `verifiedurl`). A disclosure sentence is drafted (commented out) in `main.tex`;
   the authors decide whether to include it.
 

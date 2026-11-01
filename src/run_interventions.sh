@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# GPU-safe intervention runner (D-008, D-019 lock): one local server at a time (PARALLEL=4,
-# CTX 1024), terra (API) alongside at concurrency 8 (<= 8 per D-019). Then assemble + explode.
+# GPU-safe intervention runner (global GPU lock): one local server at a time (PARALLEL=4,
+# CTX 1024), terra (API) alongside at concurrency 8 (<= 8). Then assemble + explode.
 # usage: src/run_interventions.sh <base_run> <guard_run> <span_run> [models...]
 set -u
-# Action 6 adapter: unchanged G1/G1s policy, frozen W-C inventory, no I2 calls.
+# Guard-transfer adapter: unchanged G1/G1s policy, frozen W-C inventory, no I2 calls.
 # The legacy discovery runner below remains the default entry point.
 if [[ "${1:-}" == "--guard-wc" ]]; then
   cd ~/aac-voice-preservation || exit 1
@@ -34,7 +34,7 @@ if [[ "${1:-}" == "--guard-wc" ]]; then
   echo GUARD_WC_GENERATION_DONE
   exit 0
 fi
-# D-019: global GPU lock so only one workstream serves a local model at a time
+# Global GPU lock so only one workstream serves a local model at a time
 exec 9>/tmp/aacv_gpu.lock; flock 9
 base=$1; grun=$2; srun=$3; shift 3
 models=${*:-qwen llama gemma}

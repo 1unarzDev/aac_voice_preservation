@@ -1,9 +1,8 @@
 """Part 5 W-C source check: freeze the hash-ordered 20-family sample and embed it in the tool.
 
-Spec: orchestration/PREREG_R2.md W-C ("humans spot-check 20"); ideas/cycles/c2/decision.md
-action 3. 0 generation, 0 judge calls.
+Spec: round-2 protocol, W-C ("humans spot-check 20"). 0 generation, 0 judge calls.
 
-Eligible: all W-C families in data/items/r2_c1.jsonl + r2_c2.jsonl except the two D-018
+Eligible: all W-C families in data/items/r2_c1.jsonl + r2_c2.jsonl except the two
 primary exclusions (r2act-078, r2act-079): 80 polarity, 78 speech act, 80 politeness.
 
 Selection (frozen, declared before any human label):
@@ -18,7 +17,7 @@ pi would be quota/N within the stratum.
 
 Writes (private, never in the package):
   annotation/wc_source_check_key.csv     20 rows: item_id, family, authored values A/B,
-                                         codex-verifier values and bare_supports_both,
+                                         second-verifier values and bare_supports_both,
                                          construction, cluster, rank, pi_mc
   annotation/wc_source_check_sample.json  rule, counts, hashes of the item files
 and embeds the blind items (item_id, dimension, options, context, A/B sentences, bare
@@ -37,13 +36,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ITEM_FILES = [ROOT / "data/items/r2_c1.jsonl", ROOT / "data/items/r2_c2.jsonl"]
-CODEX = ROOT / "orchestration/codex_verify_r2.csv"
+CODEX = ROOT / "analysis/item_verification/verifier_r2.csv"  # second verifier's item labels
 HTML = ROOT / "annotation_package/wc_source_check.html"
 KEY = ROOT / "annotation/wc_source_check_key.csv"
 SUMMARY = ROOT / "annotation/wc_source_check_sample.json"
 SALT = "wc-source-check-2026"
 QUOTA = {"polarity": 7, "speech_act": 7, "politeness": 6}
-EXCLUDE = {"r2act-078", "r2act-079"}   # D-018
+EXCLUDE = {"r2act-078", "r2act-079"}   # frozen primary exclusions
 MC = 4000
 
 

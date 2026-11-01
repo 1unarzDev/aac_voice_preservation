@@ -6,15 +6,15 @@
       "sha256": "ab30b3a772a715b9d80c3b050b8c0c1683e315ae5f36903dc6c3059dfa49a89d",
       "git_blob": "d381610683cbbe2d5c0354213c91754671156627",
       "source": "analysis/evidence_c3/select_story_v1_original.py",
-      "recovered_from": "orchestration/status/c3_story.log (reverse of the post-run assertion patch)",
-      "produced": "ideas/cycles/c3/story_evidence.json",
+      "recovered_from": "analysis/examples/select_story_v1_to_v1.1.patch (reverse of the post-run assertion patch)",
+      "produced": "analysis/examples/story_evidence.v1.json",
       "manifest_sha256": "4f82defc516a62051b547ade7e9e45c26cf02ee2fa38a434eea5dcf9f636e9a1"
     },
     {
       "version": "v1.1",
       "sha256": "a9d996a00379d0a9a43f06441ffc4fe3c4b0ea95d984a1b79a890abf94ffe786",
       "git_blob": "16e6fa528a0897e0f70ed1a637c67afeaeefebc1",
-      "source": "git 9a61459:ideas/cycles/c3/select_story.py (also analysis/evidence_c3/history_v1.tar.gz)",
+      "source": "analysis/evidence_c3/history_v1.tar.gz (committed selector source)",
       "change": "adds 3 lines: recomputes S1/S5 eligible counts and asserts them against the W-C manifest rates; no selection expression changed",
       "produced": null
     },
@@ -22,9 +22,9 @@
       "version": "v2",
       "sha256": "549409f6d87bc2aaccb0f4d9b3f0c52347739b057048e3c3ae368a3f3a998d57",
       "git_blob": "a71e3be71186af79dcd609884e6ced2778a28fb1",
-      "source": "ideas/cycles/c3/select_story.py",
+      "source": "analysis/examples/select_story.py",
       "change": "adds argparse --out so a replay cannot overwrite the v1 manifest; no selection expression changed",
-      "produced": "ideas/cycles/c3/story_evidence.v2.json",
+      "produced": "analysis/examples/story_evidence.v2.json",
       "manifest_sha256": "150a367dff2facd3dc7378767e50831577822047e9a744b1fc04102d1f598fc7"
     }
   ],
@@ -59,7 +59,7 @@
       "v1": "7e96ed4281f61ae21f9a5589f59152c4ac1b0b7da4db015d584360c2b3d3dcc9",
       "v2": "b959c1c813c799a0e16827d38be0c71581f4e27b54c6bed998285064a0c70889"
     },
-    "ideas/cycles/c3/select_story.py": {
+    "analysis/examples/select_story.py": {
       "v1": "ab30b3a772a715b9d80c3b050b8c0c1683e315ae5f36903dc6c3059dfa49a89d",
       "v2": "549409f6d87bc2aaccb0f4d9b3f0c52347739b057048e3c3ae368a3f3a998d57"
     },
@@ -69,9 +69,9 @@
     }
   },
   "changed_input_reason": {
-    "ideas/cycles/c3/select_story.py": "v1 → v2 source versions above",
+    "analysis/examples/select_story.py": "v1 → v2 source versions above",
     "src/interventions.py": "report-status hook only (annotate_report); scoring/policy byte-identical otherwise",
-    "analysis/interventions/report.md": "D-031 supersession notice and inline pointers; historical tables unchanged"
+    "analysis/interventions/report.md": "human-validation supersession notice and inline pointers; historical tables unchanged"
   },
   "namespace": "c3:S4 is the appointment P2/S3 menu; c2:S4 is the accident sequence"
 }

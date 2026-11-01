@@ -1,4 +1,4 @@
-"""Offline cycle-3 Action 3: current evidence map, provenance reconciliation and display checks.
+"""Offline evidence map, provenance reconciliation and display checks.
 
 Consumes completed analyses only. It never calls a model or judge, and never reruns a freeze recorder.
 Every number in analysis/EVIDENCE_MAP.md is formatted here from its source file and checked twice:
@@ -19,6 +19,9 @@ from pathlib import Path
 import tarfile
 
 import pandas as pd
+
+from provenance_paths import (GUARD_INCREMENT, SELECTOR, SELECTOR_V1_PATCH, STORY_V1, STORY_V2,
+                              published, resolve)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'analysis/evidence_c3'
@@ -74,12 +77,13 @@ def pp(est, lo, hi):
 # ------------------------------------------------------------------ selector provenance
 def reconcile_story():
     """Versioned selector manifest: v1 (recovered original), v1.1 (committed), v2 (current)."""
-    old = js('ideas/cycles/c3/story_evidence.json')
-    new = js('ideas/cycles/c3/story_evidence.v2.json')
+    old = js(STORY_V1)
+    new = js(STORY_V2)
+    selector_key = next(k for k in new['sha256'] if published(k) == SELECTOR)  # path as recorded in the manifests
     assert old['cards'] == new['cards'], 'Selection rules/occurrences/rates changed; block display'
     assert new['verified_occurrences'] == old['verified_occurrences'] == 31
     for p, h in new['sha256'].items():
-        assert sha(ROOT / p) == h, ('v2 story input changed', p)
+        assert sha(resolve(p)) == h, ('v2 story input changed', p)
     lines = {}
     for c in new['cards']:
         assert c['selection_rule'] and c['rates']
@@ -93,17 +97,17 @@ def reconcile_story():
         for v in c['rates'].values():
             if 'k' in v:
                 assert v['n'] > 0 and 0 <= v['k'] <= v['n'] and abs(v['percent'] - 100 * v['k'] / v['n']) < 1e-10
-    # v1: the source whose hash the original manifest recorded, recovered byte-exactly from the c3 story
-    # session log (orchestration/status/c3_story.log: `apply patch` diff `index d381610..16e6fa5`). The patch
-    # added three assertion lines after the v1 run; reversing it yields the recorded SHA-256.
+    # v1: the source whose hash the original manifest recorded, recovered byte-exactly by reversing the
+    # post-run assertion patch (analysis/examples/select_story_v1_to_v1.1.patch, `index d381610..16e6fa5`).
+    # The patch added three assertion lines after the v1 run; reversing it yields the recorded SHA-256.
     v1 = (OUT / 'select_story_v1_original.py').read_bytes()
     with tarfile.open(OUT / 'history_v1.tar.gz') as t:
-        v11 = t.extractfile('ideas/cycles/c3/select_story.py').read()
-    v2 = (ROOT / 'ideas/cycles/c3/select_story.py').read_bytes()
-    log = (ROOT / 'orchestration/status/c3_story.log').read_text(errors='replace')
-    assert hashlib.sha256(v1).hexdigest() == old['sha256']['ideas/cycles/c3/select_story.py']
-    assert f'index {git_blob(v1)}..{git_blob(v11)}' in log, 'recovery patch not found in session log'
-    assert hashlib.sha256(v2).hexdigest() == new['sha256']['ideas/cycles/c3/select_story.py']
+        v11 = t.extractfile(selector_key).read()
+    v2 = (ROOT / SELECTOR).read_bytes()
+    patch = (ROOT / SELECTOR_V1_PATCH).read_text()
+    assert hashlib.sha256(v1).hexdigest() == old['sha256'][selector_key]
+    assert f'index {git_blob(v1)}..{git_blob(v11)}' in patch, 'recovery patch index line not found'
+    assert hashlib.sha256(v2).hexdigest() == new['sha256'][selector_key]
     diffs = {}
     for name, a, b, fa, fb in [('v1_to_v1.1', v1, v11, 'v1_original_hash_ab30b3', 'v1.1_committed_a9d996'),
                                ('v1.1_to_v2', v11, v2, 'v1.1_committed_a9d996', 'v2_current_549409')]:
@@ -122,40 +126,41 @@ def reconcile_story():
         versions=[
             dict(version='v1', sha256=hashlib.sha256(v1).hexdigest(), git_blob=git_blob(v1),
                  source='analysis/evidence_c3/select_story_v1_original.py',
-                 recovered_from='orchestration/status/c3_story.log (reverse of the post-run assertion patch)',
-                 produced='ideas/cycles/c3/story_evidence.json', manifest_sha256=sha(ROOT / 'ideas/cycles/c3/story_evidence.json')),
+                 recovered_from=f'{SELECTOR_V1_PATCH} (reverse of the post-run assertion patch)',
+                 produced=STORY_V1, manifest_sha256=sha(ROOT / STORY_V1)),
             dict(version='v1.1', sha256=hashlib.sha256(v11).hexdigest(), git_blob=git_blob(v11),
-                 source='git 9a61459:ideas/cycles/c3/select_story.py (also analysis/evidence_c3/history_v1.tar.gz)',
+                 source='analysis/evidence_c3/history_v1.tar.gz (committed selector source)',
                  change='adds 3 lines: recomputes S1/S5 eligible counts and asserts them against the W-C manifest rates; '
                         'no selection expression changed', produced=None),
             dict(version='v2', sha256=hashlib.sha256(v2).hexdigest(), git_blob=git_blob(v2),
-                 source='ideas/cycles/c3/select_story.py',
+                 source=SELECTOR,
                  change='adds argparse --out so a replay cannot overwrite the v1 manifest; no selection expression changed',
-                 produced='ideas/cycles/c3/story_evidence.v2.json',
-                 manifest_sha256=sha(ROOT / 'ideas/cycles/c3/story_evidence.v2.json'))],
+                 produced=STORY_V2,
+                 manifest_sha256=sha(ROOT / STORY_V2))],
         diffs=diffs, cards_rules_rates_equal=True, verified_occurrences=31,
-        changed_input_hashes={p: dict(v1=h, v2=new['sha256'][p]) for p, h in old['sha256'].items() if h != new['sha256'][p]},
-        changed_input_reason={'ideas/cycles/c3/select_story.py': 'v1 → v2 source versions above',
+        changed_input_hashes={published(p): dict(v1=h, v2=new['sha256'][p]) for p, h in old['sha256'].items()
+                              if h != new['sha256'][p]},
+        changed_input_reason={SELECTOR: 'v1 → v2 source versions above',
                               'src/interventions.py': 'report-status hook only (annotate_report); scoring/policy byte-identical otherwise',
-                              'analysis/interventions/report.md': 'D-031 supersession notice and inline pointers; historical tables unchanged'},
+                              'analysis/interventions/report.md': 'human-validation supersession notice and inline pointers; historical tables unchanged'},
         namespace='c3:S4 is the appointment P2/S3 menu; c2:S4 is the accident sequence')
     write('analysis/evidence_c3/selector_versions.json', versions)
-    rec = dict(status=versions['status'], v1_manifest='ideas/cycles/c3/story_evidence.json',
-               v2_manifest='ideas/cycles/c3/story_evidence.v2.json', versions='analysis/evidence_c3/selector_versions.json',
+    rec = dict(status=versions['status'], v1_manifest=STORY_V1,
+               v2_manifest=STORY_V2, versions='analysis/evidence_c3/selector_versions.json',
                original_hash_matching_source_recovered=True,
                review='The v1 source matching the recorded hash ab30b3… was recovered byte-exactly and reviewed: '
                       'v1→v1.1 adds only a 3-line eligible-count assertion for S1/S5; v1.1→v2 adds only an --out argument. '
                       'No selection expression changed. The v2 replay reproduces all cards, rules, 31 occurrences, rates and '
                       'menu slots exactly; v1 manifest and its recorded hash stay byte-preserved. Displays use v2.',
                verified_occurrences=31, cards_rules_rates_equal=True,
-               supersedes='earlier Action-3 note that the original source was unrecoverable (codex worker, 13:38)')
+               supersedes='earlier note that the original source was unrecoverable')
     write('analysis/evidence_c3/selector_reconciliation.json', rec)
     return rec
 
 
 # ------------------------------------------------------------------ evidence collection
 def collect():
-    synth = js('ideas/cycles/c3/synth_checks.json')
+    synth = js(GUARD_INCREMENT)
     inc = synth['guard_increment']
     for p in ['runs/guard1/scored.parquet', 'runs/guard1/generations.jsonl',
               'annotation/label_resolution.jsonl', 'annotation/judge_validation_main1.json']:
@@ -286,7 +291,7 @@ def values(ev):
     V['c11_req'] = f"{int(tq[tq.crit.eq('request/command')].n.sum())}/{int(tq.n.sum())}"
     nm = row('analysis/r2c/cue_value_match.csv', dimension='polarity', cv='negated')
     V['neg_chip'] = rate(nm['sum'], nm['n'], nm['ci_low'], nm['ci_high'])
-    s1 = js('ideas/cycles/c3/story_evidence.v2.json')
+    s1 = js(STORY_V2)
     cards = {c['id']: c for c in s1['cards']}
     r1 = cards['S1']['rates']['manifest_rate_with_ci']
     V['additions'] = rate(r1['sum'], r1['n'], r1['ci_low'], r1['ci_high'])
@@ -363,15 +368,14 @@ def cross_check(V, ev, W):
 
 # ------------------------------------------------------------------ the map
 def write_map(V, story, transfer):
-    t = f"""# Current evidence map (cycle 3)
+    t = f"""# Current evidence map
 
 As of **2026-11-01**. This is the single current routing table for both target papers. It is generated by
 `src/c3_evidence.py` from the files linked in each row. Every displayed number is formatted from its source
 and re-checked ([display_verification.json](evidence_c3/display_verification.json)). It is a retrospective
 reconciliation, not a preregistration. **0 generation / 0 judge calls.** Freezes: SE4All evidence November 10,
-CALE-AI November 16. HUMANE is a non-submitted draft (D-014). The newest ledger row supersedes older shorthand,
-and historical tables and snapshots are preserved. The previous map version is `orchestration/evidence_map.md`,
-which now points here.
+CALE-AI November 16. HUMANE is a non-submitted draft (D-014). Newer results supersede older shorthand,
+and historical tables and snapshots are preserved.
 
 | Population / version | Authoritative files | Current result (ledger) | Interpretation limits |
 |---|---|---|---|
@@ -385,7 +389,7 @@ which now points here.
 
 ## Display and example contract
 
-Current exact examples: [c3 v2 manifest](../ideas/cycles/c3/story_evidence.v2.json), mirrored in
+Current exact examples: [v2 example manifest](examples/story_evidence.v2.json), mirrored in
 [`paper/figs/example_manifest_c3.json`](../paper/figs/example_manifest_c3.json). Selector provenance:
 [versioned selector manifest](evidence_c3/selector_versions.json). The source matching the original recorded hash
 was **recovered byte-exactly** (`select_story_v1_original.py`) and reviewed. v1→v1.1 adds a 3-line count assertion,
@@ -424,8 +428,8 @@ def verify_display(V):
     mirror = ROOT / 'paper/figs/example_manifest_c3.json'
     if mirror.exists():
         m = json.loads(mirror.read_text())
-        ok = m['cards'] == js('ideas/cycles/c3/story_evidence.v2.json')['cards'] and \
-            m['source_sha256'] == sha(ROOT / 'ideas/cycles/c3/story_evidence.v2.json')
+        ok = m['cards'] == js(STORY_V2)['cards'] and \
+            m['source_sha256'] == sha(ROOT / STORY_V2)
         checks.append(dict(file='paper/figs/example_manifest_c3.json', key='cards==v2', string='', present=ok))
     em = ROOT / 'paper/figs/example_manifest.json'
     if em.exists():

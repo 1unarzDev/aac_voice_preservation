@@ -1,4 +1,4 @@
-"""Builder for data/items/r2_c1.jsonl: round-2 W-C families (PREREG_R2.md), polarity + politeness.
+"""Builder for data/items/r2_c1.jsonl: round-2 W-C families, polarity + politeness.
 
 All sentences, chips and notes below were hand-written by the item author (Claude, in-session;
 no LLM API was called and no model server was started). Re-run to regenerate; edit here, not the JSONL.
@@ -7,7 +7,7 @@ Per dimension: 40 AACText-seeded (seed = one real message from data/raw/aactext/
 CC BY 4.0, Vertanen & Kristensson 2011; seed_line is the 1-based line number), 30 independently
 drafted, 10 adversarial. Seeds avoid every line in data/specs/aactext_sample400.jsonl (the W-B sample).
 
-Conventions (apply SPEC v0.1, D-007, CB-1..CB-9):
+Conventions (apply SPEC v0.1, CB-1..CB-9):
 - The critical chip is derived from critical_value: negated->[NOT], affirmative->[YES],
   polite->[PLEASE], plain->[PLAIN]; it is the first chip of all_chips (polarity) or the last (politeness).
 - all_chips also states speech act ([TELL]/[?]/[ASK]) and agent when a doer is named. Inanimate
@@ -17,7 +17,7 @@ Conventions (apply SPEC v0.1, D-007, CB-1..CB-9):
 - Non-scored chips, applied uniformly here: [PAST] for a past event, [LATER] for a future event,
   [WANT] for want, [MUST] for need to / have to. Present and habitual get no time chip, and neither do
   imperatives/requests (verifier VR-12).
-- Imperatives / "Can you" / "Could you" are [ASK][YOU]; "Can I ...?" is [?][I] (D-007, CB-9).
+- Imperatives / "Can you" / "Could you" are [ASK][YOU]; "Can I ...?" is [?][I] (CB-9).
   "Can you"/"Will you" alone are plain; could you / would you / would you mind / please / thanks /
   sorry are polite (CB-2, codebook politeness rule). "may I", "if possible", "excuse me" are never used,
   because the critical politeness rule does not list them.
@@ -46,7 +46,7 @@ counter = {"polarity": 0, "politeness": 0}
 def F(dim, con, ctx, A, B, bare, nc, notes, seed=None, sv=None, subtype=None, gs=None, cluster=None):
     """A/B = (source, critical_value, other all_chips). seed = line number; sv = variant that keeps the seed.
     gs = {variant: general_spec override} (labels.general_spec); cluster = shared construction cluster id
-    for drafted near-duplicate frames (verifier r2c1, orchestration/item_verification_r2c1.md)."""
+    for drafted near-duplicate frames (verifier r2c1, analysis/item_verification/r2_c1.md)."""
     counter[dim] += 1
     n = counter[dim]
     fid = f"{'r2pol' if dim == 'polarity' else 'r2plt'}-{n:03d}"

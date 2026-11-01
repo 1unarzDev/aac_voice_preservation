@@ -1,4 +1,4 @@
-"""Offline ACTION 2 refresh. Launch with setsid nohup; no model/server calls.
+"""Offline evidence refresh. Launch with setsid nohup; no model/server calls.
 
 Use --stage labels first, then --stage reports after reviewing reconciliation.
 Every subprocess and its produced artifacts are recorded in refresh_commands.json.

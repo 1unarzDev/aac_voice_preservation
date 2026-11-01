@@ -1,0 +1,74 @@
+[
+  {
+    "label": "H1 plain chipall request lost",
+    "stored_file": "runs/main1/outputs.jsonl",
+    "output_id": "885bbf93e0237bc8",
+    "request_key": "ecd2a4826f4d7c5150922a1c5f545bd8addc8fe3",
+    "family_id": "pol2-07",
+    "model": "llama3.1-8b",
+    "variant": "B",
+    "channel": "chipall",
+    "input_text": "Keywords: [ASK] [YOU] [PLAIN] wear headphones",
+    "text": "You wear headphones."
+  },
+  {
+    "label": "H2 action question chip1 failure",
+    "stored_file": "runs/main1/outputs.jsonl",
+    "output_id": "e8e2de31522353ca",
+    "request_key": "7bf7045c56d4397b9cace914edd7fb8071621082",
+    "family_id": "act-07",
+    "model": "gemma3-4b",
+    "variant": "A",
+    "channel": "chip1",
+    "input_text": "Keywords: [?] bring dog",
+    "text": "Will you bring the dog?"
+  },
+  {
+    "label": "H3 certainty edit source",
+    "stored_file": "runs/span1/outputs.jsonl",
+    "output_id": "6eacc50dd8ddfcfb",
+    "request_key": "1561b57eda39430ba49f04efd1b72e4b2e88c4a7",
+    "family_id": "act-07",
+    "model": "llama3.1-8b",
+    "variant": "A",
+    "channel": "bare",
+    "input_text": "Keywords: bring dog",
+    "text": "Can you bring the dog?"
+  },
+  {
+    "label": "H3 certainty edit act changed",
+    "stored_file": "runs/span1/outputs.jsonl",
+    "output_id": "e47f97200d5f3ee4",
+    "request_key": "11dd915fab4d95011de5ffc4f547db119987a8eb",
+    "family_id": "act-07",
+    "model": "llama3.1-8b",
+    "variant": "A",
+    "channel": "bare",
+    "input_text": "Keywords: bring dog",
+    "text": "I think you might bring the dog."
+  },
+  {
+    "label": "H3 polarity edit source",
+    "stored_file": "runs/span1/outputs.jsonl",
+    "output_id": "f042f5dadb8fa0a9",
+    "request_key": "67e22ba48987d33f0b2c676387257a86dc63a679",
+    "family_id": "act-08",
+    "model": "gemma3-4b",
+    "variant": "A",
+    "channel": "bare",
+    "input_text": "Keywords: clinic open",
+    "text": "Please tell me when the clinic is open now."
+  },
+  {
+    "label": "H3 polarity edit act changed",
+    "stored_file": "runs/span1/outputs.jsonl",
+    "output_id": "86e3574ade9eee01",
+    "request_key": "e1d8373668c07ac719bf7741bb7c1a0b2c41eadb",
+    "family_id": "act-08",
+    "model": "gemma3-4b",
+    "variant": "A",
+    "channel": "bare",
+    "input_text": "Keywords: clinic open",
+    "text": "The clinic is not open now."
+  }
+]

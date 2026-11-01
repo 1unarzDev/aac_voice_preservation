@@ -36,7 +36,7 @@ class PromptSpec:
     k: int               # number of independent samples (requests) per input
     n_suggestions: int   # suggestions expected in ONE response
     max_tokens: int
-    legend_file: str = "chip_legend.txt"   # P0x: extended legend (D-012); default keeps P0..P2 shas
+    legend_file: str = "chip_legend.txt"   # P0x: extended legend; default keeps P0..P2 shas
 
 
 PROMPTS: dict[str, PromptSpec] = {p.prompt_id: p for p in [
@@ -44,7 +44,7 @@ PROMPTS: dict[str, PromptSpec] = {p.prompt_id: p for p in [
     PromptSpec("S3", "P0.txt", 0.7, 3, 1, 96),
     PromptSpec("P1", "P1.txt", 0.0, 1, 1, 96),
     PromptSpec("P2", "P2.txt", 0.0, 1, 3, 256),
-    # D-012: P0 template + extended legend (alias chips, [·] padding = ignore, "Meaning:" line).
+    # P0 template + extended legend (alias chips, [·] padding = ignore, "Meaning:" line).
     # Separate id so P0's sha / request_keys / cache stay valid. Not in DEFAULT_PROMPTS.
     PromptSpec("P0x", "P0.txt", 0.0, 1, 1, 96, "chip_legend_x.txt"),
 ]}
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     print(all_shas())
 
 
-# D-012 encodings for follow-up Exp B (aliases are defined in prompts/chip_legend_x.txt, i.e. P0x).
+# Encodings for follow-up Exp B (aliases are defined in prompts/chip_legend_x.txt, i.e. P0x).
 ALIAS = {"[NOT]": "[NEGATIVE]", "[YES]": "[AFFIRMATIVE]", "[?]": "[QUESTION]", "[ASK]": "[REQUEST]",
          "[REFUSE]": "[DECLINE]", "[TELL]": "[STATEMENT]", "[I]": "[I-DO-IT]", "[YOU]": "[YOU-DO-IT]",
          "[THEY]": "[THEY-DO-IT]", "[PLEASE]": "[POLITE]", "[PLAIN]": "[NO-PLEASE]"}

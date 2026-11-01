@@ -528,7 +528,7 @@ def main() -> int:
     tables["pareto"] = pareto_flags(tables["fidelity_cost"])
     sensitive = df[~df.family_id.isin(["act-01", "act-02"])]
     tables["sensitivity_without_act01_act02"] = summarize(sensitive, GROUP, ["critical_match", "constraint_preserving"], nboot, seed)
-    # PREREG_R2 W-A: refusal/acceptance families are quarantined from primary speech-act estimates.
+    # Round-2 W-A: refusal/acceptance families are quarantined from primary speech-act estimates.
     quar = quarantine
     sa = all_df[all_df.dimension.eq("speech_act")]
     qmetrics = ["critical_match", "violation", "constraint_preserving"]

@@ -1,4 +1,4 @@
-"""Independent, read-only acceptance audit of the closed W-C guard transfer (cycle-3).
+"""Independent, read-only acceptance audit of the closed W-C guard transfer.
 
 Recomputes call counts, concurrency, wall clock, baseline parity and headline
 arithmetic from the stored artifacts. No model, judge or network calls. Writes
@@ -84,8 +84,8 @@ def main():
     resume_first_judge = db[(db.kind == 'judge') & (db.start - L > 3000)].start.min()
     early = db[db.start < resume_first_judge]
     res['figure_937'] = dict(
-        quoted_in=['orchestration/decision_log.md D-042 ("Action-6 generation complete (937 calls)")',
-                   'ideas/cycles/c3/decision.md Action 1 ("reuse 937 completed calls")'],
+        quoted_in=['internal run log ("generation complete (937 calls)")',
+                   'internal planning note ("reuse 937 completed calls")'],
         reproduced_exactly=False,
         retry_generation_http=kinds['generation'],
         instrumented_http_before_resume=len(early),
@@ -120,12 +120,12 @@ def main():
         all_calls_inside_window=bool(((db.start >= L) & (db.end <= launch['deadline_epoch'])).all()),
         resume_first_judge_utc=utc(resume_first_judge),
         freeze_written_before_launch='2026-11-01T18:28:32' in freeze_note and utc(L) > '2026-11-01T18:28:32')
-    # The resume script's readiness probe (orchestration/guard_wc_resume.sh) is an HTTP request to
+    # The resume script's readiness probe is an HTTP request to
     # gpt-6.1-sol that the budget ledger does not instrument. Its loop sleeps 120 s after a failed
     # probe; the first resumed judge call starts <120 s after the 13:28 local (UTC-6) gate, so exactly one probe ran.
     gate = datetime(2026, 11, 1, 19, 28, tzinfo=timezone.utc).timestamp()
     res['uninstrumented_http'] = dict(
-        source='orchestration/guard_wc_resume.sh readiness probe ("hi" to gpt-6.1-sol)',
+        source='resume script readiness probe ("hi" to gpt-6.1-sol)',
         seconds_from_gate_to_first_resumed_judge=round(resume_first_judge - gate, 1),
         inferred_probe_calls=1 if resume_first_judge - gate < 120 else None,
         counted_in_budget=False)

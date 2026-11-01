@@ -1,0 +1,727 @@
+{
+  "date": "2026-11-01",
+  "status": "post-outcome illustrative selection; rates describe the declared stratum",
+  "sha256": {
+    "analysis/applicability/report.md": "712de60adf8244ed3a983a1eef1ac826e703e14d59620ede7356da6e15ea3c55",
+    "analysis/interventions/report.md": "b959c1c813c799a0e16827d38be0c71581f4e27b54c6bed998285064a0c70889",
+    "analysis/r2c/examples.json": "7e526f104f9b86b0a6aa32de78f6446b2edc01bbc6ef470a76183c1b9959bdd5",
+    "analysis/r2c/report.md": "ed544494710afa5863aab40ce0f3d656c5e14388d0a73f19d498fb6724d4c7b7",
+    "analysis/r2c/scored.parquet": "f09f9ae7f1137c37906c2dab2b1714189440eecfb7246affee7cd4b77bb4ab9a",
+    "analysis/r2d/repeats.parquet": "1473f287f84469815f8b8bbbeb916b0d96eabec0ed244f736f4a7eb6d807f1d0",
+    "analysis/r2d/repeats_both.parquet": "836cac8af5d836087d23820d85e70dac6cef8f41b40e620679f206c718bbb261",
+    "analysis/r2d/transitions.parquet": "50142375f8b684f05ee0a98304f1e2d62d5279b661c3dcc9dc80715348378981",
+    "annotation/judge_validation_main1.json": "77a0dd8ba8f97806ff9e7e678734be91f7ed33b45204d19b83024b502280dad1",
+    "annotation/label_resolution.jsonl": "6adfc648a60f8a9e0e09fef6b633a151d06467a9d3c18f1587f17525aa9ab5de",
+    "data/items/r2_c1.jsonl": "3ca2e1a6109abd423981ca15263d47165d4648fe12b42adf1a3402cc911f6061",
+    "data/items/r2_c2.jsonl": "457eea54566154bc33f1fbab88245d704cbb4693d6ba887691a1a4dd32578821",
+    "data/items/test.jsonl": "f98d7f81828fb86879745ef191758eb4f795bb9d8ec507b5adcf4a40fe01e6d0",
+    "ideas/cycles/c3/select_story.py": "549409f6d87bc2aaccb0f4d9b3f0c52347739b057048e3c3ae368a3f3a998d57",
+    "runs/guard1/outputs.jsonl": "6756b69f5f62e910d6163c296670d053699fa500ba5c2be8cc53ce0d50234c04",
+    "runs/guard1/scored.parquet": "e647f767dfc1cccccb633add58aade764d93aeb5108eaf6052231ff822cdf772",
+    "runs/main1/outputs.jsonl": "0b5b28ddc33a395c230e0efc9a22b17619da605a4cb6d6a24fd64e2fd8ece82a",
+    "runs/main1/scored.parquet": "2ee9fd9dd224f53b28c2538b65fe6a87830a2edf945e8d023e63902c5f72761f",
+    "runs/r2c1/outputs.jsonl": "b62d4935ae8387c6af13dc4c0852401c1ff5e32abdae482c916b5ec0d8011390",
+    "runs/r2d1/outputs.jsonl": "aa09dbe0493d41a5171ad96d21c76e8399ceff1fcc592a8dbe7893bc925998ea",
+    "runs/r2d1/scored.parquet": "52b772982d0d053742162006d5445aba7aedfea00be98f2ec06a704febb55066",
+    "runs/span1/outputs.jsonl": "f8ceb8059e554d0f01cba9ca3d35709be34068ba3e7681b533cbf1bf67cbef28",
+    "runs/span1/scored.parquet": "fff300839a763d1270216e6f507eff4220957aa35b125ac83f235d22b0e51481",
+    "src/interventions.py": "c82c2fe19e414a3dc7fb261dde3cc392c966d0facf9970199d02bce69e706bcf"
+  },
+  "verified_occurrences": 31,
+  "cards": [
+    {
+      "id": "S1",
+      "selection_rule": "Reuse analysis/r2c/examples.json SHA256-minimum rule: P0 full politeness plain targets, known critical label; plain→polite event",
+      "source": "Open this pickle jar for me.",
+      "outputs": [
+        {
+          "output_id": "968b8cae25e89374",
+          "request_key": "fb09efcadce06832c3fd5d742f055c3fca07a2ea",
+          "text": "Please open this pickle jar for me.",
+          "model": "gemma3-4b",
+          "family_id": "r2plt-015",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: Open this pickle jar for me.",
+          "run": "r2c1",
+          "prompt_id": "P0",
+          "jsonl_line": 26791
+        }
+      ],
+      "rates": {
+        "manifest_event": {
+          "k": 26,
+          "n": 320,
+          "percent": 8.125
+        },
+        "manifest_rate_with_ci": {
+          "estimate": 0.08125,
+          "ci_low": 0.053125,
+          "ci_high": 0.1125,
+          "n": 320,
+          "n_total": 320,
+          "n_missing": 0,
+          "n_boot_valid": 10000,
+          "n_clusters": 80,
+          "n_clusters_observed": 80,
+          "n_families": 80,
+          "n_clusters_effective": 80.0,
+          "sum": 26.0
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "selection_rule": "First P0 bare negated polarity target by family, variant, fixed model order; display same target bare/noncrit/chip1/full.",
+      "source": "I'm not feeling well today.",
+      "outputs": [
+        {
+          "output_id": "b8710d1931aff1db",
+          "request_key": "6294e7143df35ca8911aac884d683fe08bc0a323",
+          "text": "I feel well.",
+          "model": "qwen2.5-7b",
+          "family_id": "r2pol-001",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: feel well",
+          "run": "r2c1",
+          "prompt_id": "P0",
+          "jsonl_line": 1
+        },
+        {
+          "output_id": "c2892e27b862735d",
+          "request_key": "caf8040887206298eb69e24f135512b08e7ce3aa",
+          "text": "I feel well today.",
+          "model": "qwen2.5-7b",
+          "family_id": "r2pol-001",
+          "variant": "A",
+          "channel": "noncrit",
+          "input_text": "Keywords: feel well today",
+          "run": "r2c1",
+          "prompt_id": "P0",
+          "jsonl_line": 57
+        },
+        {
+          "output_id": "3e0686492475ef9a",
+          "request_key": "8b87436f229f4cc047ac695b8af328227b611439",
+          "text": "I don't feel well.",
+          "model": "qwen2.5-7b",
+          "family_id": "r2pol-001",
+          "variant": "A",
+          "channel": "chip1",
+          "input_text": "Keywords: [NOT] feel well",
+          "run": "r2c1",
+          "prompt_id": "P0",
+          "jsonl_line": 113
+        },
+        {
+          "output_id": "f80a4997f94581e0",
+          "request_key": "5a16c922d19f7f2fad767eca3aeb7189ad8dd6f9",
+          "text": "I'm not feeling well today.",
+          "model": "qwen2.5-7b",
+          "family_id": "r2pol-001",
+          "variant": "A",
+          "channel": "full",
+          "input_text": "The user typed: I'm not feeling well today.",
+          "run": "r2c1",
+          "prompt_id": "P0",
+          "jsonl_line": 169
+        }
+      ],
+      "rates": {
+        "bare_affirmative_all": {
+          "k": 317,
+          "n": 320,
+          "percent": 99.0625
+        },
+        "bare_affirmative_directional": {
+          "k": 317,
+          "n": 319,
+          "percent": 99.3730407523511
+        },
+        "negated_chip_match": {
+          "k": 315,
+          "n": 320,
+          "percent": 98.4375
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "selection_rule": "First hedged certainty P0 bare target by family, variant, fixed model order; display bare/chip1/full (retained cycle-1 E2).",
+      "source": "I think I have a fever again.",
+      "outputs": [
+        {
+          "output_id": "8d6f9d1322aa8b19",
+          "request_key": "36a75c2090017138a85862a18de243d4a795a61c",
+          "text": "I have a fever.",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-07",
+          "variant": "B",
+          "channel": "bare",
+          "input_text": "Keywords: have fever",
+          "run": "main1",
+          "prompt_id": "P0",
+          "jsonl_line": 6402
+        },
+        {
+          "output_id": "aef4cedb9f91ef90",
+          "request_key": "10b13c1f050c420b7fe740a75de2565851c78df3",
+          "text": "Maybe I have fever.",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-07",
+          "variant": "B",
+          "channel": "chip1",
+          "input_text": "Keywords: [MAYBE] have fever",
+          "run": "main1",
+          "prompt_id": "P0",
+          "jsonl_line": 6625
+        },
+        {
+          "output_id": "3ca142f53a86ea98",
+          "request_key": "dab79c4767755a50fc61083022ec785a136d1809",
+          "text": "I think I have a fever again.",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-07",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I think I have a fever again.",
+          "run": "main1",
+          "prompt_id": "P0",
+          "jsonl_line": 6689
+        }
+      ],
+      "rates": {
+        "bare_plain": {
+          "k": 36,
+          "n": 40,
+          "percent": 90.0
+        },
+        "hedged_chip_match": {
+          "k": 39,
+          "n": 40,
+          "percent": 97.5
+        },
+        "full_hedge_lost": {
+          "k": 0,
+          "n": 40,
+          "percent": 0.0
+        }
+      }
+    },
+    {
+      "id": "S4",
+      "selection_rule": "First complete full-P2 polarity set reproducing its normalized partner source; sort family_id, model (lexical), variant, suggestion_idx; show all P2 and S3 slots.",
+      "source": "I don't have a doctor's appointment on Tuesday morning.",
+      "outputs": [
+        {
+          "output_id": "a6b85bd8b7b3e23e",
+          "request_key": "a03d3f1149afc804cfc8170c2e569b061c8da53b",
+          "text": "I don't have a doctor's appointment on Tuesday morning.",
+          "model": "llama3.1-8b",
+          "family_id": "r2pol-024",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I don't have a doctor's appointment on Tuesday morning.",
+          "run": "r2c1",
+          "prompt_id": "P2",
+          "jsonl_line": 6698
+        },
+        {
+          "output_id": "5d4c48fdab31b958",
+          "request_key": "a03d3f1149afc804cfc8170c2e569b061c8da53b",
+          "text": "I have a doctor's appointment on Tuesday morning.",
+          "model": "llama3.1-8b",
+          "family_id": "r2pol-024",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I don't have a doctor's appointment on Tuesday morning.",
+          "run": "r2c1",
+          "prompt_id": "P2",
+          "jsonl_line": 6699
+        },
+        {
+          "output_id": "65cc47dcbbbf34ae",
+          "request_key": "a03d3f1149afc804cfc8170c2e569b061c8da53b",
+          "text": "Do you have a doctor's appointment on Tuesday morning?",
+          "model": "llama3.1-8b",
+          "family_id": "r2pol-024",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I don't have a doctor's appointment on Tuesday morning.",
+          "run": "r2c1",
+          "prompt_id": "P2",
+          "jsonl_line": 6700
+        },
+        {
+          "output_id": "fa7d5fd470ae095e",
+          "request_key": "7cc3f68cf35ee4ec3d1a4e435930736f4a97080b",
+          "text": "I don't have a doctor's appointment on Tuesday morning.",
+          "model": "llama3.1-8b",
+          "family_id": "r2pol-024",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I don't have a doctor's appointment on Tuesday morning.",
+          "run": "r2c1",
+          "prompt_id": "S3",
+          "jsonl_line": 6710
+        },
+        {
+          "output_id": "745e115a66299efa",
+          "request_key": "c50372e4220c64beec2b6c7179509b78c922c990",
+          "text": "I do not have a doctor's appointment on Tuesday morning.",
+          "model": "llama3.1-8b",
+          "family_id": "r2pol-024",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I don't have a doctor's appointment on Tuesday morning.",
+          "run": "r2c1",
+          "prompt_id": "S3",
+          "jsonl_line": 6711
+        },
+        {
+          "output_id": "59d62fef5e2ef7a7",
+          "request_key": "da8bb050e3c087a221c5a4c2a0fe7d2892d0c615",
+          "text": "I don't have a doctor's appointment on Tuesday morning.",
+          "model": "llama3.1-8b",
+          "family_id": "r2pol-024",
+          "variant": "B",
+          "channel": "full",
+          "input_text": "The user typed: I don't have a doctor's appointment on Tuesday morning.",
+          "run": "r2c1",
+          "prompt_id": "S3",
+          "jsonl_line": 6712
+        }
+      ],
+      "rates": {
+        "P0": {
+          "k": 1,
+          "n": 639,
+          "percent": 0.1564945226917058
+        },
+        "P2": {
+          "k": 21,
+          "n": 639,
+          "percent": 3.2863849765258215
+        },
+        "S3": {
+          "k": 2,
+          "n": 639,
+          "percent": 0.3129890453834116
+        }
+      }
+    },
+    {
+      "id": "S5",
+      "selection_rule": "Reuse analysis/r2c/examples.json SHA256-minimum rule: P0 question chip1 targets with observed match; failure event",
+      "source": "Does the parcel from the bank need a signature?",
+      "outputs": [
+        {
+          "output_id": "7d7ecf9fb02fd2b8",
+          "request_key": "d3904742b4afbd83ab296b2f953f723cab6dc82e",
+          "text": "Can you sign for this parcel?",
+          "model": "llama3.1-8b",
+          "family_id": "r2act-049",
+          "variant": "B",
+          "channel": "chip1",
+          "input_text": "Keywords: [?] parcel signature",
+          "run": "r2c1",
+          "prompt_id": "P0",
+          "jsonl_line": 58554
+        }
+      ],
+      "rates": {
+        "manifest_event": {
+          "k": 58,
+          "n": 208,
+          "percent": 27.884615384615383
+        },
+        "manifest_rate_with_ci": {
+          "estimate": 0.27884615384615385,
+          "ci_low": 0.18859469370146678,
+          "ci_high": 0.375,
+          "n": 208,
+          "n_total": 208,
+          "n_missing": 0,
+          "n_boot_valid": 10000,
+          "n_clusters": 37,
+          "n_clusters_observed": 37,
+          "n_families": 52,
+          "n_clusters_effective": 24.581818181818182,
+          "sum": 58.0
+        },
+        "question_to_request": {
+          "k": 42,
+          "n": 208,
+          "percent": 20.192307692307693
+        }
+      }
+    },
+    {
+      "id": "S6",
+      "selection_rule": "First STATEMENT polarity damage by scenario, fixed model order, encoding, dimension, cell, draw; show paired TELL control.",
+      "source": "Controlled NOT|YOU cell; protected dimension polarity.",
+      "outputs": [
+        {
+          "output_id": "7275441a9c50dd77",
+          "request_key": "be0a423de934f437733158903b13f0d60a434f57",
+          "text": "I will not lock the door.",
+          "model": "llama3.1-8b",
+          "family_id": "r2d-001-pol-you",
+          "variant": "B",
+          "channel": "pol_STATEMENT",
+          "input_text": "Keywords: [NOT] [STATEMENT] lock door",
+          "run": "r2d1",
+          "prompt_id": "P0x",
+          "jsonl_line": 174
+        },
+        {
+          "output_id": "8b3a5cb35f01d3f7",
+          "request_key": "15d05779c24727a207c4d50a581858de1b85f2a1",
+          "text": "You lock the door.",
+          "model": "llama3.1-8b",
+          "family_id": "r2d-001-pol-you",
+          "variant": "B",
+          "channel": "both_STATEMENT",
+          "input_text": "Keywords: [NOT] [STATEMENT] [YOU] lock door",
+          "run": "r2d1",
+          "prompt_id": "P0x",
+          "jsonl_line": 251
+        },
+        {
+          "output_id": "dda8bece0457b1ed",
+          "request_key": "8b7f0ef4b178a89ac94db6622c5e7a2e9fc39a4c",
+          "text": "I will not lock the door.",
+          "model": "llama3.1-8b",
+          "family_id": "r2d-001-pol-you",
+          "variant": "B",
+          "channel": "pol_TELL",
+          "input_text": "Keywords: [NOT] [TELL] lock door",
+          "run": "r2d1",
+          "prompt_id": "P0x",
+          "jsonl_line": 150
+        },
+        {
+          "output_id": "7d9c8e0ac0f42f80",
+          "request_key": "66785da452c123fe81c79b92690690fe36a96e48",
+          "text": "You should not lock the door.",
+          "model": "llama3.1-8b",
+          "family_id": "r2d-001-pol-you",
+          "variant": "B",
+          "channel": "both_TELL",
+          "input_text": "Keywords: [NOT] [TELL] [YOU] lock door",
+          "run": "r2d1",
+          "prompt_id": "P0x",
+          "jsonl_line": 243
+        }
+      ],
+      "rates": {
+        "llama_statement_damage": {
+          "k": 55,
+          "n": 640,
+          "percent": 8.59375
+        },
+        "affected_scenarios": {
+          "k": 30,
+          "n": 80,
+          "percent": 37.5
+        },
+        "pooled_statement_damage": {
+          "k": 55,
+          "n": 2560,
+          "percent": 2.1484375
+        },
+        "llama_single_repeat": {
+          "k": 0,
+          "n": 160,
+          "percent": 0.0
+        },
+        "llama_both_repeat": {
+          "k": 5,
+          "n": 320,
+          "percent": 1.5625
+        }
+      }
+    },
+    {
+      "id": "S7",
+      "selection_rule": "First failure→pass; cue channels, quarantine excluded; SHA1(base request key,family,variant,channel), output ID tie-break.",
+      "source": "Let me finish my sentence first.",
+      "outputs": [
+        {
+          "output_id": "7aaf1cd767a60b6c",
+          "request_key": "57b2218c6b6bec72ae4e457a43da67acd458d4ee",
+          "text": "Please let me finish my sentence.",
+          "model": "gemma3-4b",
+          "family_id": "pol2-14",
+          "variant": "A",
+          "channel": "chip1",
+          "input_text": "Keywords: [PLAIN] let finish sentence",
+          "run": "guard1",
+          "prompt_id": "P0",
+          "jsonl_line": 1723
+        },
+        {
+          "output_id": "6abe62e6ccf08832",
+          "request_key": "1230fd501142763ce9d9da766ab3ded5df989f16",
+          "text": "Let me finish the sentence.",
+          "model": "gemma3-4b",
+          "family_id": "pol2-14",
+          "variant": "A",
+          "channel": "chip1",
+          "input_text": "Keywords: [PLAIN] let finish sentence",
+          "run": "guard1",
+          "prompt_id": "G1",
+          "jsonl_line": 1724
+        }
+      ],
+      "rates": {
+        "fixed_initial_failures": {
+          "k": 63,
+          "n": 80,
+          "percent": 78.75
+        },
+        "residual_initial_failures": {
+          "k": 17,
+          "n": 80,
+          "percent": 21.25
+        },
+        "final_failures_all_cue_targets": {
+          "k": 17,
+          "n": 1392,
+          "percent": 1.221264367816092
+        },
+        "ask_you_prefix_among_fixed": {
+          "k": 4,
+          "n": 63,
+          "percent": 6.349206349206349
+        }
+      }
+    },
+    {
+      "id": "S8",
+      "selection_rule": "First failure→failure; cue channels, quarantine excluded; SHA1(base request key,family,variant,channel), output ID tie-break.",
+      "source": "Are you charging my wheelchair tonight?",
+      "outputs": [
+        {
+          "output_id": "5c224e70ffdd74db",
+          "request_key": "ae1aa23a6ff747dee26ce60b2bf62e963eb13cd1",
+          "text": "Can you charge my wheelchair?",
+          "model": "llama3.1-8b",
+          "family_id": "act-11",
+          "variant": "A",
+          "channel": "chipall",
+          "input_text": "Keywords: [?] [YOU] charge wheelchair",
+          "run": "guard1",
+          "prompt_id": "P0",
+          "jsonl_line": 4936
+        },
+        {
+          "output_id": "53e4a9f64bf8d10a",
+          "request_key": "9d338cccd92c0a9f8347c46a3008e1dde9c517a1",
+          "text": "Can you charge my wheelchair?",
+          "model": "llama3.1-8b",
+          "family_id": "act-11",
+          "variant": "A",
+          "channel": "chipall",
+          "input_text": "Keywords: [?] [YOU] charge wheelchair",
+          "run": "guard1",
+          "prompt_id": "G1",
+          "jsonl_line": 4937
+        }
+      ],
+      "rates": {
+        "fixed_initial_failures": {
+          "k": 63,
+          "n": 80,
+          "percent": 78.75
+        },
+        "residual_initial_failures": {
+          "k": 17,
+          "n": 80,
+          "percent": 21.25
+        },
+        "final_failures_all_cue_targets": {
+          "k": 17,
+          "n": 1392,
+          "percent": 1.221264367816092
+        },
+        "ask_you_prefix_among_fixed": {
+          "k": 4,
+          "n": 63,
+          "percent": 6.349206349206349
+        }
+      }
+    },
+    {
+      "id": "S9",
+      "selection_rule": "Second failure→pass, retained independently of fragment wording; cue channels, quarantine excluded; SHA1(base request key,family,variant,channel), output ID tie-break.",
+      "source": "Wear headphones for your music.",
+      "outputs": [
+        {
+          "output_id": "885bbf93e0237bc8",
+          "request_key": "ecd2a4826f4d7c5150922a1c5f545bd8addc8fe3",
+          "text": "You wear headphones.",
+          "model": "llama3.1-8b",
+          "family_id": "pol2-07",
+          "variant": "B",
+          "channel": "chipall",
+          "input_text": "Keywords: [ASK] [YOU] [PLAIN] wear headphones",
+          "run": "guard1",
+          "prompt_id": "P0",
+          "jsonl_line": 5125
+        },
+        {
+          "output_id": "6d4fc54b70a181d1",
+          "request_key": "3cbc490055bb03f6c1a62a15e4e284fd725bf657",
+          "text": "Ask you to wear headphones.",
+          "model": "llama3.1-8b",
+          "family_id": "pol2-07",
+          "variant": "B",
+          "channel": "chipall",
+          "input_text": "Keywords: [ASK] [YOU] [PLAIN] wear headphones",
+          "run": "guard1",
+          "prompt_id": "G1",
+          "jsonl_line": 5126
+        }
+      ],
+      "rates": {
+        "fixed_initial_failures": {
+          "k": 63,
+          "n": 80,
+          "percent": 78.75
+        },
+        "residual_initial_failures": {
+          "k": 17,
+          "n": 80,
+          "percent": 21.25
+        },
+        "final_failures_all_cue_targets": {
+          "k": 17,
+          "n": 1392,
+          "percent": 1.221264367816092
+        },
+        "ask_you_prefix_among_fixed": {
+          "k": 4,
+          "n": 63,
+          "percent": 6.349206349206349
+        }
+      }
+    },
+    {
+      "id": "S10",
+      "selection_rule": "First politeness set losing both-reading coverage, SHA1(model,family); show all three original slots in both P2 and I2.",
+      "source": {
+        "A": "Knock before you come into my room.",
+        "B": "Please knock before you come into my room."
+      },
+      "outputs": [
+        {
+          "output_id": "f77957174ba5bcf5",
+          "request_key": "5fb551fd54faaf124c6b3a59a41aa8ec3755772c",
+          "text": "Someone knocked and came in.",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: knock come",
+          "run": "span1",
+          "prompt_id": "P2",
+          "jsonl_line": 1747
+        },
+        {
+          "output_id": "f120a2778e24aaff",
+          "request_key": "5fb551fd54faaf124c6b3a59a41aa8ec3755772c",
+          "text": "Did someone knock before coming in?",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: knock come",
+          "run": "span1",
+          "prompt_id": "P2",
+          "jsonl_line": 1749
+        },
+        {
+          "output_id": "4de32ee878cd7251",
+          "request_key": "5fb551fd54faaf124c6b3a59a41aa8ec3755772c",
+          "text": "Please knock before you come in.",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: knock come",
+          "run": "span1",
+          "prompt_id": "P2",
+          "jsonl_line": 1751
+        },
+        {
+          "output_id": "90c2bfa9b741461c",
+          "request_key": "668371cb685b9d88dd8e890b3b1d22223e62029a",
+          "text": "Someone knocked and came in.",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: knock come",
+          "run": "span1",
+          "prompt_id": "I2",
+          "jsonl_line": 2467
+        },
+        {
+          "output_id": "11d40c681957c0d2",
+          "request_key": "668371cb685b9d88dd8e890b3b1d22223e62029a",
+          "text": "Maybe someone knocked before coming in.",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: knock come",
+          "run": "span1",
+          "prompt_id": "I2",
+          "jsonl_line": 2469
+        },
+        {
+          "output_id": "d38665c19c990014",
+          "request_key": "668371cb685b9d88dd8e890b3b1d22223e62029a",
+          "text": "Don't knock before you come in.",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "input_text": "Keywords: knock come",
+          "run": "span1",
+          "prompt_id": "I2",
+          "jsonl_line": 2471
+        }
+      ],
+      "rates": {
+        "politeness_covered_P2": {
+          "k": 26,
+          "n": 40,
+          "percent": 65.0
+        },
+        "politeness_covered_I2": {
+          "k": 12,
+          "n": 40,
+          "percent": 30.0
+        },
+        "politeness_coverage_lost": {
+          "k": 14,
+          "n": 40,
+          "percent": 35.0
+        },
+        "target_coverage_P2": {
+          "k": 15,
+          "n": 80,
+          "percent": 18.75
+        },
+        "target_coverage_I2": {
+          "k": 78,
+          "n": 80,
+          "percent": 97.5
+        }
+      }
+    }
+  ]
+}

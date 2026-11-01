@@ -2,7 +2,7 @@
 harm ledger and gallery rows used by the paper. No generation, no judging, no network.
 
 Inputs (read-only):
-  analysis/interventions/report.json    refreshed ACTION-2 intervention summary (src/interventions.py)
+  analysis/interventions/report.json    refreshed intervention summary (src/interventions.py)
   runs/{main1,guard1,span1}/scored.parquet, runs/{guard1,span1}/generations.jsonl
 Pending inputs are detected by file existence only (see PENDING below).
 
@@ -11,7 +11,7 @@ Run from anywhere:  ~/aac-voice-preservation/.venv/bin/python paper/caleai/calea
 
 Bootstrap: whole-family percentile bootstrap, 2,000 resamples, seed 20261031
 (src/analyze.family_bootstrap), the same estimator as the intervention report. Primary population
-excludes the refusal/acceptance quarantine (act-10, act-16; D-024).
+excludes the refusal/acceptance quarantine (act-10, act-16).
 """
 from __future__ import annotations
 
@@ -304,7 +304,7 @@ def main() -> None:
                                     "cost": rep["sensitivity_including_quarantine"]["guard"]["cost"]},
           "copy_full_mode": rep["copy_full_mode"], "nondeterminism": nondeterminism_part(), "pending": pending_part(),
           "meta": {"seed": SEED, "n_boot": NB, "manifest": MANIFEST,
-                   "population": "primary: 58 test families, act-10/act-16 quarantined (D-024)"}}
+                   "population": "primary: 58 test families, act-10/act-16 quarantined"}}
     OUT.write_text(json.dumps(ev, indent=1, default=lambda x: x.item() if isinstance(x, np.generic) else str(x)) + "\n")
     print("wrote", OUT)
 

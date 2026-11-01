@@ -284,7 +284,6 @@ def main():
 
     paths = ["runs/r2d1/scored.parquet", "data/items/r2_d.jsonl", "runs/requests/r2d.jsonl",
              "runs/r2d1/config.json", "runs/r2d1/judgments.jsonl", "runs/r2d1/generations.jsonl",
-             "orchestration/PREREG_R2.md", "orchestration/decision_log.md", "ideas/cycles/c1/decision.md",
              "annotation/CB_rules.md", "annotation/CODEBOOK.md", "src/attribute.py", "src/judge.py", "src/r2d_analyze.py",
              "prompts/P0.txt", "prompts/chip_legend_x.txt"]
     gens = records("runs/r2d1/generations.jsonl")

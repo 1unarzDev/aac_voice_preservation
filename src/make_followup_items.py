@@ -1,4 +1,4 @@
-"""Build follow-up item files (D-012): data/items/expB.jsonl and data/items/expC.jsonl.
+"""Build follow-up item files: data/items/expB.jsonl and data/items/expC.jsonl.
 
 Exp B (cue interaction + encoding): pol2-07..10 and act-07..10 copied from test.jsonl
 (sources/specs unchanged, ids prefixed `xb-`), with `custom_channels` per variant:

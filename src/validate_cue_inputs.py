@@ -43,7 +43,7 @@ VERDICTS = ("compatible", "compatible_but_coarser", "conflicting", "unknown", "u
 NONCOMMIT = frozenset({"mixed/unclear", "unclear/mixed", "unclear", "mixed", "unspecified", "other"})
 WRAPPER = "Keywords:"
 POLITE = frozenset(POLITE_VALUES)
-# Word markers supported at the coarse polite-marker endpoint (CB-2; D-007 [PLEASE] semantics).
+# Word markers supported at the coarse polite-marker endpoint (CB-2; [PLEASE] semantics).
 POLITE_WORDS = {"please": "please", "pls": "please", "plz": "please",
                 "thanks": "thanks", "thank": "thanks", "thx": "thanks", "sorry": "apology"}
 POLITE_BIGRAMS = {("could", "you"), ("would", "you")}

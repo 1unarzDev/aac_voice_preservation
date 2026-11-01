@@ -3,9 +3,9 @@
 
 Usage: python src/validate_items.py data/items/pilot.jsonl [more.jsonl ...]
 Exit code 1 if any ERROR is found. WARNs are printed but do not fail.
-Follow-up records (split expB / expC, D-012) may carry `custom_channels`; their inputs,
+Follow-up records (split expB / expC) may carry `custom_channels`; their inputs,
 commitments, alias/padding tokens and "Meaning:" lines are checked too.
-Round-2 records (split r2, PREREG_R2 W-C) use ids r2pol-NNN / r2act-NNN / r2plt-NNN and must carry
+Round-2 records (split r2, round-2 W-C) use ids r2pol-NNN / r2act-NNN / r2plt-NNN and must carry
 `construction` (seeded|drafted|adversarial) and `cluster_id`; seeded records also carry
 `seed_line` (1-based line in data/raw/aactext/sent_train_aac.txt) and `seed_text` (that line verbatim).
 Seeds must be disjoint from the W-B reserved sample (data/specs/aactext_sample400.jsonl).
@@ -229,7 +229,7 @@ def validate_r2(fam, E, W):
         E(f"construction must be one of {sorted(CONSTRUCTIONS)}")
     if not isinstance(fam.get("cluster_id"), str) or not fam["cluster_id"].strip():
         E("cluster_id must be a nonempty string")
-    if fam.get("dimension") == "speech_act":   # PREREG_R2 W-C: no refusal/acceptance pairs
+    if fam.get("dimension") == "speech_act":   # round-2 W-C: no refusal/acceptance pairs
         bad = [k for k, v in fam["variants"].items() if v.get("critical_value") in ("refusal", "acceptance")]
         if bad:
             E(f"r2 speech-act variants {bad} are refusal/acceptance (excluded by PREREG_R2)")

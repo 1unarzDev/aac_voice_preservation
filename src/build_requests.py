@@ -13,7 +13,7 @@ Channels (input_text):
   full     "The user typed: <source>"
 Chips go first, in the fixed legend order (prompts.CHIP_ORDER); words keep source order.
 
-Custom channels (follow-up experiments, D-012): a family may carry
+Custom channels (follow-up experiments): a family may carry
   "custom_channels": {variant: {channel_id: input_text | {"input": str,
                       "commitments": [chips], "prompts": [prompt ids]}}}
 and then ONLY those channels are rendered for it (the 5 standard ones are skipped).
@@ -41,7 +41,7 @@ import models as M  # noqa: E402
 import prompts as P  # noqa: E402
 
 CHANNELS = ["bare", "noncrit", "chip1", "chipall", "full"]
-OPT_IN_SPLITS = {"smoke", "expB", "expC", "wb", "r2", "r2d"}   # never included by default (wb = W-B corpus items; r2/r2d = PREREG_R2 W-C/W-D)
+OPT_IN_SPLITS = {"smoke", "expB", "expC", "wb", "r2", "r2d"}   # never included by default (wb = W-B corpus items; r2/r2d = round-2 W-C/W-D)
 
 
 def custom_spec(fam: dict, vname: str, channel: str) -> dict:

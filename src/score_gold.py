@@ -1,4 +1,4 @@
-"""Score gold labels: reliability and judge validity (PLAN H7, PREREG_R2 W-A).
+"""Score gold labels: reliability and judge validity (gate H7, round-2 W-A).
 
   python src/score_gold.py --run main1 --human annotation/returns/*.csv \
       --panel annotation/returns_codex/*.csv \
@@ -9,7 +9,7 @@
 
 Reference sets (provenance is kept separate in every output; never pooled)
   --human  annotate.html CSV exports from people (alias: --csv).  Gate set: the
-           PREREG_R2 kappa >= 0.6 gate is evaluated ONLY against this set.
+           preregistered kappa >= 0.6 gate is evaluated ONLY against this set.
   --panel  codex annotator panel exports (same CSV schema, machine annotators).
            Reported as provisional machine agreement, never as human validation.
 Inputs
