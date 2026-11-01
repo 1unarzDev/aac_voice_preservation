@@ -1,6 +1,6 @@
 {
- "n_families": 60,
- "n_rows": 19198,
+ "n_families": 58,
+ "n_rows": 18558,
  "models": [
   "gpt-6.1-terra",
   "qwen2.5-7b",
@@ -12,10 +12,12 @@
  "tables": [
   "/home/lunarz/aac-voice-preservation/runs/main1/scored.parquet"
  ],
+ "include_quarantine": false,
+ "label_resolution": "annotation/label_resolution.jsonl",
  "note": "widths in inches of the saved PDFs are reported under pdf_sizes",
  "fig_defaults": {
-  "n_outputs": 240,
-  "n_families": 60,
+  "n_outputs": 232,
+  "n_families": 58,
   "rule": "bare channel, P0, one output per family x model (A/B share the request)",
   "polarity": {
    "n": 40,
@@ -157,72 +159,50 @@
    }
   },
   "speech_act": {
-   "n": 40,
-   "families": 10,
+   "n": 32,
+   "families": 8,
    "shares": {
     "statement": {
-     "estimate": 0.675,
-     "ci_low": 0.5,
-     "ci_high": 0.85,
+     "estimate": 0.75,
+     "ci_low": 0.53125,
+     "ci_high": 0.9375,
      "by_model": {
-      "gpt-6.1-terra": 0.6,
-      "qwen2.5-7b": 0.8,
-      "llama3.1-8b": 0.7,
-      "gemma3-4b": 0.6
+      "gpt-6.1-terra": 0.625,
+      "qwen2.5-7b": 0.875,
+      "llama3.1-8b": 0.875,
+      "gemma3-4b": 0.625
      }
     },
     "question": {
-     "estimate": 0.125,
+     "estimate": 0.0625,
      "ci_low": 0.0,
-     "ci_high": 0.275,
+     "ci_high": 0.1875,
      "by_model": {
-      "gpt-6.1-terra": 0.2,
-      "qwen2.5-7b": 0.1,
+      "gpt-6.1-terra": 0.125,
+      "qwen2.5-7b": 0.0,
       "llama3.1-8b": 0.0,
-      "gemma3-4b": 0.2
+      "gemma3-4b": 0.125
      }
     },
     "request/command": {
-     "estimate": 0.15,
-     "ci_low": 0.025,
-     "ci_high": 0.3,
-     "by_model": {
-      "gpt-6.1-terra": 0.1,
-      "qwen2.5-7b": 0.1,
-      "llama3.1-8b": 0.2,
-      "gemma3-4b": 0.2
-     }
-    },
-    "refusal": {
-     "estimate": 0.0,
+     "estimate": 0.125,
      "ci_low": 0.0,
-     "ci_high": 0.0,
+     "ci_high": 0.3125,
      "by_model": {
-      "gpt-6.1-terra": 0.0,
-      "qwen2.5-7b": 0.0,
+      "gpt-6.1-terra": 0.125,
+      "qwen2.5-7b": 0.125,
       "llama3.1-8b": 0.0,
-      "gemma3-4b": 0.0
-     }
-    },
-    "acceptance": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "by_model": {
-      "gpt-6.1-terra": 0.0,
-      "qwen2.5-7b": 0.0,
-      "llama3.1-8b": 0.0,
-      "gemma3-4b": 0.0
+      "gemma3-4b": 0.25
      }
     },
     "offer/suggestion": {
-     "estimate": 0.05,
+     "estimate": 0.0625,
      "ci_low": 0.0,
-     "ci_high": 0.15,
+     "ci_high": 0.1875,
      "by_model": {
-      "gpt-6.1-terra": 0.1,
+      "gpt-6.1-terra": 0.125,
       "qwen2.5-7b": 0.0,
-      "llama3.1-8b": 0.1,
+      "llama3.1-8b": 0.125,
       "gemma3-4b": 0.0
      }
     },
@@ -369,33 +349,68 @@
   }
  },
  "fig_channel_ladder": {
-  "n_outputs": 2400,
-  "n_families": 60,
+  "n_outputs": 2320,
+  "n_families": 58,
   "all_dims": {
    "bare": {
-    "estimate": 0.38125,
-    "ci_low": 0.3333333333333333,
-    "ci_high": 0.42505208333333305
+    "estimate": 0.3879310344827586,
+    "ci_low": 0.33836206896551724,
+    "ci_high": 0.4331896551724138
    },
    "noncrit": {
-    "estimate": 0.4083333333333333,
-    "ci_low": 0.36244791666666665,
-    "ci_high": 0.45
+    "estimate": 0.41810344827586204,
+    "ci_low": 0.3706896551724138,
+    "ci_high": 0.45905172413793105
    },
    "chip1": {
-    "estimate": 0.94375,
-    "ci_low": 0.9104166666666667,
-    "ci_high": 0.9729166666666667
+    "estimate": 0.9482758620689655,
+    "ci_low": 0.9137931034482759,
+    "ci_high": 0.9762931034482759
    },
    "chipall": {
-    "estimate": 0.9479166666666666,
-    "ci_low": 0.9208333333333333,
-    "ci_high": 0.96875
+    "estimate": 0.959051724137931,
+    "ci_low": 0.9418103448275862,
+    "ci_high": 0.9741379310344828
    },
    "full": {
-    "estimate": 0.96875,
-    "ci_low": 0.9458333333333333,
-    "ci_high": 0.9875
+    "estimate": 0.9741379310344828,
+    "ci_low": 0.9504310344827587,
+    "ci_high": 0.9914331896551721
+   }
+  },
+  "joint_supplied_predicates": {
+   "chip1": {
+    "estimate": 0.9482758620689655,
+    "ci_low": 0.9137931034482759,
+    "ci_high": 0.9762931034482759,
+    "n": 464,
+    "n_total": 464,
+    "n_missing": 0,
+    "n_families": 58,
+    "n_families_observed": 58,
+    "n_boot_valid": 2000
+   },
+   "chipall": {
+    "estimate": 0.9245689655172413,
+    "ci_low": 0.8943965517241379,
+    "ci_high": 0.9525862068965517,
+    "n": 464,
+    "n_total": 464,
+    "n_missing": 0,
+    "n_families": 58,
+    "n_families_observed": 58,
+    "n_boot_valid": 2000
+   },
+   "full": {
+    "estimate": 0.9676724137931034,
+    "ci_low": 0.9396551724137931,
+    "ci_high": 0.9913793103448276,
+    "n": 464,
+    "n_total": 464,
+    "n_missing": 0,
+    "n_families": 58,
+    "n_families_observed": 58,
+    "n_boot_valid": 2000
    }
   },
   "polarity": {
@@ -481,29 +496,29 @@
   },
   "speech_act": {
    "bare": {
-    "estimate": 0.3375,
-    "ci_low": 0.2371875,
-    "ci_high": 0.4375
+    "estimate": 0.375,
+    "ci_low": 0.25,
+    "ci_high": 0.46875
    },
    "noncrit": {
-    "estimate": 0.375,
-    "ci_low": 0.275,
-    "ci_high": 0.475
+    "estimate": 0.4375,
+    "ci_low": 0.34375,
+    "ci_high": 0.5
    },
    "chip1": {
     "estimate": 0.8125,
-    "ci_low": 0.675,
-    "ci_high": 0.925
+    "ci_low": 0.640625,
+    "ci_high": 0.953125
    },
    "chipall": {
-    "estimate": 0.85,
-    "ci_low": 0.75,
-    "ci_high": 0.9375
+    "estimate": 0.90625,
+    "ci_low": 0.828125,
+    "ci_high": 0.96875
    },
    "full": {
-    "estimate": 0.95,
-    "ci_low": 0.8875,
-    "ci_high": 0.9875
+    "estimate": 0.984375,
+    "ci_low": 0.953125,
+    "ci_high": 1.0
    }
   },
   "politeness": {
@@ -600,7 +615,7 @@
    "tq-14",
    "tq-15"
   ],
-  "n_families_with_default": 52,
+  "n_families_with_default": 50,
   "rows": [
    {
     "prompt": "P0",
@@ -666,21 +681,21 @@
     "prompt": "P0",
     "dim": "speech_act",
     "reading": "default",
-    "estimate": 0.375,
-    "ci_low": 0.175,
-    "ci_high": 0.575,
-    "n": 40,
-    "n_families": 10
+    "estimate": 0.3125,
+    "ci_low": 0.09375,
+    "ci_high": 0.53125,
+    "n": 32,
+    "n_families": 8
    },
    {
     "prompt": "P0",
     "dim": "speech_act",
     "reading": "non-default",
-    "estimate": 0.95,
-    "ci_low": 0.85,
+    "estimate": 0.9375,
+    "ci_low": 0.8125,
     "ci_high": 1.0,
-    "n": 40,
-    "n_families": 10
+    "n": 32,
+    "n_families": 8
    },
    {
     "prompt": "P0",
@@ -786,21 +801,21 @@
     "prompt": "P2",
     "dim": "speech_act",
     "reading": "default",
-    "estimate": 0.325,
-    "ci_low": 0.14937500000000004,
-    "ci_high": 0.55,
-    "n": 40,
-    "n_families": 10
+    "estimate": 0.25,
+    "ci_low": 0.0625,
+    "ci_high": 0.5,
+    "n": 32,
+    "n_families": 8
    },
    {
     "prompt": "P2",
     "dim": "speech_act",
     "reading": "non-default",
-    "estimate": 0.975,
-    "ci_low": 0.925,
+    "estimate": 0.96875,
+    "ci_low": 0.90625,
     "ci_high": 1.0,
-    "n": 40,
-    "n_families": 10
+    "n": 32,
+    "n_families": 8
    },
    {
     "prompt": "P2",
@@ -845,32 +860,32 @@
   ],
   "pooled": {
    "P0_default": {
-    "estimate": 0.21153846153846154,
-    "ci_low": 0.13942307692307693,
-    "ci_high": 0.27884615384615385,
-    "n": 208,
-    "n_families": 52
+    "estimate": 0.195,
+    "ci_low": 0.13,
+    "ci_high": 0.265,
+    "n": 200,
+    "n_families": 50
    },
    "P0_non-default": {
-    "estimate": 0.9278846153846154,
-    "ci_low": 0.8846153846153846,
-    "ci_high": 0.9663461538461539,
-    "n": 208,
-    "n_families": 52
+    "estimate": 0.925,
+    "ci_low": 0.879875,
+    "ci_high": 0.965,
+    "n": 200,
+    "n_families": 50
    },
    "P2_default": {
-    "estimate": 0.24519230769230768,
-    "ci_low": 0.16334134615384616,
-    "ci_high": 0.33653846153846156,
-    "n": 208,
-    "n_families": 52
+    "estimate": 0.23,
+    "ci_low": 0.145,
+    "ci_high": 0.33,
+    "n": 200,
+    "n_families": 50
    },
    "P2_non-default": {
-    "estimate": 0.8605769230769231,
-    "ci_low": 0.7884615384615384,
-    "ci_high": 0.9230769230769231,
-    "n": 208,
-    "n_families": 52
+    "estimate": 0.855,
+    "ci_low": 0.78,
+    "ci_high": 0.92,
+    "n": 200,
+    "n_families": 50
    }
   }
  },
@@ -1041,13 +1056,13 @@
    }
   },
   "politeness_added_all_plain_sources": {
-   "Pooled": 0.022727272727272728,
-   "gpt-6.1-terra": 0.01818181818181818,
+   "Pooled": 0.02358490566037736,
+   "gpt-6.1-terra": 0.018867924528301886,
    "qwen2.5-7b": 0.0,
-   "llama3.1-8b": 0.00909090909090909,
-   "gemma3-4b": 0.06363636363636363,
-   "n": 440,
-   "families": 60
+   "llama3.1-8b": 0.009433962264150943,
+   "gemma3-4b": 0.0660377358490566,
+   "n": 424,
+   "families": 58
   }
  },
  "fig_sets": {
@@ -1139,29 +1154,29 @@
    },
    "speech_act": {
     "S3": {
-     "estimate": 0.025,
+     "estimate": 0.03125,
      "ci_low": 0.0,
-     "ci_high": 0.075,
-     "n": 40,
-     "n_families": 10,
+     "ci_high": 0.09375,
+     "n": 32,
+     "n_families": 8,
      "by_model": {
       "gemma3-4b": 0.0,
-      "gpt-6.1-terra": 0.1,
+      "gpt-6.1-terra": 0.125,
       "llama3.1-8b": 0.0,
       "qwen2.5-7b": 0.0
      }
     },
     "P2": {
-     "estimate": 0.375,
-     "ci_low": 0.225,
-     "ci_high": 0.525,
-     "n": 40,
-     "n_families": 10,
+     "estimate": 0.46875,
+     "ci_low": 0.34375,
+     "ci_high": 0.625,
+     "n": 32,
+     "n_families": 8,
      "by_model": {
-      "gemma3-4b": 0.3,
-      "gpt-6.1-terra": 0.8,
-      "llama3.1-8b": 0.2,
-      "qwen2.5-7b": 0.2
+      "gemma3-4b": 0.375,
+      "gpt-6.1-terra": 1.0,
+      "llama3.1-8b": 0.25,
+      "qwen2.5-7b": 0.25
      }
     }
    },
@@ -1252,18 +1267,18 @@
   },
   "pooled": {
    "P2": {
-    "estimate": 0.325,
-    "ci_low": 0.25,
-    "ci_high": 0.4041666666666667,
-    "n": 240,
-    "n_families": 60
+    "estimate": 0.33620689655172414,
+    "ci_low": 0.25862068965517243,
+    "ci_high": 0.41379310344827586,
+    "n": 232,
+    "n_families": 58
    },
    "S3": {
-    "estimate": 0.0375,
-    "ci_low": 0.0125,
-    "ci_high": 0.06666666666666667,
-    "n": 240,
-    "n_families": 60
+    "estimate": 0.03879310344827586,
+    "ci_low": 0.01293103448275862,
+    "ci_high": 0.06896551724137931,
+    "n": 232,
+    "n_families": 58
    }
   }
  },
@@ -1277,8 +1292,8 @@
  },
  "pdf_sizes": {
   "fig_channel_ladder": [
-   6.02,
-   2.57
+   6.14,
+   2.64
   ],
   "fig_cost_asymmetry": [
    3.21,

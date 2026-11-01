@@ -53,7 +53,7 @@ def jkey(r):
 # ------------------------------------------------------------------ injection
 
 def injection():
-    df = attribute.score(INJ)
+    df = attribute.score(INJ, resolution=ROOT / "annotation/label_resolution.jsonl")
     muts = {(m["family_id"], m["variant"]): m for m in runio.read_jsonl(OUT / "source_mutations.jsonl")}
     judg = {jkey(j): j for j in runio.read_jsonl(INJ / "judgments.jsonl")}
     df["raw_match"] = [crit_match(d, v, c, raw=True) for d, v, c in zip(df.dimension, df.variant_value, df.critical)]
@@ -318,12 +318,14 @@ def panel():
 
 # ------------------------------------------------------------------- verdicts
 
-def verdicts(tag="", title="panel majority (3 members)"):
+def verdicts(tag="", title="panel majority (3 members)", include_quarantine=False):
     items = runio.load_items(ROOT / "data/items/test.jsonl")
     key = {r["item_id"]: r for r in csv.DictReader(open(ROOT / "annotation/gold_key_main1.csv"))}
     maj = {r["item_id"]: r for r in csv.DictReader(open(ROOT / f"annotation/panel_majority_main1{tag}.csv"))}
     sc = pd.read_parquet(ROOT / "runs/main1/scored.parquet")
     sc = sc[sc.judged]
+    if not include_quarantine:
+        sc = sc[~sc.quarantine_refusal_acceptance.fillna(False).astype(bool)]
     by = defaultdict(list)
     for r in sc.to_dict("records"):
         by[(r["text_id"], r["family_id"], r["input_text"])].append(r)
@@ -351,7 +353,8 @@ def verdicts(tag="", title="panel majority (3 members)"):
                 rec[f"judge_{v}"], rec[f"panel_{v}"], rec[f"panel_strict_{v}"] = vj[v], vp[v], vps[v]
             recs.append(rec)
     df = pd.DataFrame(recs)
-    df.to_csv(OUT / f"verdict_validation{tag}.csv", index=False)
+    suffix = "_inclusive" if include_quarantine else ""
+    df.to_csv(OUT / f"verdict_validation{tag}{suffix}.csv", index=False)
     w(f"### Reference: {title}\n")
     w("Each sampled gold unit (text, family, visible input) maps to one or more scored occurrences in "
       "runs/main1/scored.parquet: different variants share bare/noncrit inputs, and models and prompts can produce "
@@ -405,10 +408,37 @@ def main():
     P = panel()
     pl = list(L); L.clear()
     w("## 5. Contract-verdict validation (gold items, main1)\n")
-    verdicts()
+    primary_verdicts = verdicts()
     verdicts("_sens_sol_astra", "gpt-5.6-sol + gpt-6-astra agreement (sensitivity)")
+    inclusive_verdicts = verdicts(title="panel majority, quarantine-inclusive sensitivity", include_quarantine=True)
     vl = list(L); L.clear()
     intro = (OUT / "report_intro.md").read_text() if (OUT / "report_intro.md").exists() else ""
+    metrics = {}
+    for name, frame in [("primary", primary_verdicts), ("quarantine_inclusive", inclusive_verdicts)]:
+        metrics[name] = {}
+        for v in ["violation", "constraint_preserving", "assumption"]:
+            both = frame[frame[f"judge_{v}"].notna() & frame[f"panel_{v}"].notna()]
+            flips = both[both[f"judge_{v}"] != both[f"panel_{v}"]]
+            pis = both.groupby("item_id").pi.first()
+            weighted = sum(1 / pis[i] for i in set(flips.item_id)) / (1 / pis).sum()
+            metrics[name][v] = dict(n_units=len(pis), units_flipped=flips.item_id.nunique(),
+                                    weighted_flip=float(weighted), n_occurrences=len(both),
+                                    occurrences_flipped=len(flips))
+    metrics["identity"] = dict(n=len(idn), false_alarms=int(idn.constraint_preserving.eq(False).sum()))
+    metrics["scoped_mutation"] = dict(n=len(mut), detected=int(mut.violation.eq(True).sum()))
+    metrics["new_challenge"] = dict(mutants_detected=int(det), controls_false_alarm=int(fa), n_each=24)
+    (OUT / "refreshed_summary.json").write_text(json.dumps(metrics, indent=2) + "\n")
+    # Historical intro is retained in evidence_prev; regenerate its verdict row
+    # from this exact primary table rather than repeating the older 1.3% figure.
+    summary = "; ".join(f"{v}: {m['units_flipped']}/{m['n_units']} units ({100*m['weighted_flip']:.2f}% weighted)"
+                        for v, m in metrics["primary"].items())
+    intro = "\n".join(("| Contract verdicts recomputed from panel labels (primary, excluding quarantine) | "
+                        + summary + " | machine agreement only; human gate pending |")
+                       if line.startswith("| Contract verdicts recomputed") else line
+                       for line in intro.splitlines())
+    intro = intro.replace("the arbiter rule and src/attribute.py are unchanged.",
+                          "the extraction calls are historical. ACTION 2 refresh uses shared arbiter > agreement > unknown "
+                          "resolution and primary quarantine exclusions; no new judge calls were made.")
     outro = (OUT / "report_outro.md").read_text() if (OUT / "report_outro.md").exists() else ""
     quar = quarantine()
     (OUT / "report.md").write_text("\n".join([intro] + inj + chl + pl + vl + quar + [outro]) + "\n")
@@ -421,9 +451,11 @@ def quarantine():
     out = ["## 6. Refusal/acceptance quarantine\n",
            "src/attribute.py now writes `quarantine_refusal_acceptance` (True for every row of a speech-act family "
            "with a refusal or acceptance variant: act-10, act-16 in main1). runs/main1/scored.parquet was regenerated; "
-           "all 60 pre-existing columns are byte-identical. src/analyze.py writes "
-           "analysis/main1/sensitivity_quarantine_refusal_acceptance.csv. All 17 pre-existing analysis/main1 CSVs "
-           "reproduce byte-for-byte. The primary speech-act estimate is `primary_excl_quarantine` (8 families).\n",
+           "critical labels use annotation/label_resolution.jsonl across all refreshed runs. Old tables are "
+           "preserved as scored_prev.parquet; analysis/reconciliation.md lists changed endpoints. "
+           "src/analyze.py writes analysis/main1/sensitivity_quarantine_refusal_acceptance.csv; headline analyses "
+           "now exclude quarantine throughout (58 families, including 8 speech-act families). "
+           "The full 60-family analysis is retained in analysis/main1_quarantine_inclusive.\n",
            "P0 speech-act critical match / constraint_preserving (pooled over 4 models; mean of model estimates):\n"]
     q = t[(t.prompt_id == "P0")]
     rows = []

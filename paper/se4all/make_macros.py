@@ -32,6 +32,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
+from analyze import family_bootstrap
 OUT = Path(__file__).resolve().parent
 SEED = 20261031
 NBOOT = 2000
@@ -66,19 +68,11 @@ def put(key: str, value, src: str, fmt: str = "pct"):
 
 def boot(df: pd.DataFrame, col: str, cluster: str = "family_id"):
     """Row-weighted mean of df[col] (bool/float) with whole-family percentile bootstrap."""
-    x = df[[cluster, col]].dropna()
+    x = df[[cluster, col]].rename(columns={cluster: "family_id"})
     if x.empty:
         return np.nan, np.nan, np.nan, 0
-    v = x[col].astype(float)
-    g = x.assign(v=v).groupby(cluster)["v"].agg(["sum", "count"])
-    s, n = g["sum"].to_numpy(), g["count"].to_numpy()
-    est = s.sum() / n.sum()
-    rng = np.random.default_rng(SEED)
-    k = len(g)
-    idx = rng.integers(0, k, size=(NBOOT, k))
-    bs = s[idx].sum(1) / n[idx].sum(1)
-    lo, hi = np.percentile(bs, [2.5, 97.5])
-    return est, lo, hi, int(n.sum())
+    r = family_bootstrap(x, col, n_boot=NBOOT, seed=SEED)
+    return r['estimate'], r['ci_low'], r['ci_high'], r['n']
 
 
 def put_ci(key, df, col, src, cluster="family_id"):
@@ -133,7 +127,8 @@ for ch in ["chip1", "chipall", "full"]:
     inclusive = all_scored[(all_scored.prompt_id == "P0") & (all_scored.channel == ch)]
     put_frac(f"sensitivity_match_{ch}", int(inclusive.critical_match.sum()), len(inclusive),
              "runs/main1/scored.parquet; quarantine-inclusive sensitivity")
-put("n_fam_dim", d.groupby("dimension").family_id.nunique().min(), src_main, "int")
+put("n_fam_dim", all_scored.groupby("dimension").family_id.nunique().min(), "runs/main1/scored.parquet (design inventory)", "int")
+put("n_fam_dim_primary_min", d.groupby("dimension").family_id.nunique().min(), src_main, "int")
 put("n_rows_main", len(d[d.prompt_id != "P1"]), src_main + " (P1 excluded, D-010)", "int")
 put("n_texts_main", d[d.prompt_id != "P1"].text_id.nunique(), src_main, "int")
 put("n_requests_main", d[d.prompt_id != "P1"].request_key.nunique(), src_main, "int")
@@ -179,7 +174,7 @@ for pr in ["P2", "S3"]:
         if len(x):
             put(f"cov_{pr.lower()}_{DSHORT[dim]}", x.estimate.mean(), "analysis/main1/coverage.csv (mean of 4 models)")
     x = cov[cov.prompt_id == pr]
-    put(f"cov_{pr.lower()}_all", x.estimate.mean(), "analysis/main1/coverage.csv (mean over dims x models)")
+    put(f"cov_{pr.lower()}_all", (x.estimate*x.n).sum()/x.n.sum(), "analysis/main1/coverage.csv (weighted by observed sets)")
 
 # ---- MR1: noncritical-word invariance (bare vs noncrit, aligned P0 pairs, variant A dedup)
 key = ["family_id", "model", "prompt_id", "sample_idx", "suggestion_idx"]
@@ -268,6 +263,10 @@ for ch in ["bare", "chip1", "chipall", "full"]:
 FN = ROOT / "paper/figs/fig_numbers.json"
 if FN.exists():
     fn = json.load(open(FN))
+    pa = fn.get("fig_politeness_ratchet", {}).get("politeness_added_all_plain_sources", {})
+    if pa:
+        put_frac("full_pz_added_allfam", round(pa['Pooled']*pa['n']), pa['n'],
+                 "paper/figs/fig_numbers.json; P0 full, source specs with plain politeness")
     ca = fn.get("fig_cost_asymmetry", {})
     for name, v in (ca.get("pooled") or {}).items():
         pr, reading = name.split("_", 1)
@@ -275,6 +274,9 @@ if FN.exists():
         for suf, fld in [("", "estimate"), ("_lo", "ci_low"), ("_hi", "ci_high")]:
             put(f"fcost_{pr.lower()}_{tag}{suf}", v[fld], "paper/figs/fig_numbers.json", "f2")
     put("fcost_n_fam", ca.get("n_families_with_default"), "paper/figs/fig_numbers.json", "int")
+    for ch in ['chip1', 'chipall', 'full']:
+        q = p0[p0.channel.eq(ch)]
+        put_frac(f"joint_{ch}", int(q.constraint_preserving.sum()), int(q.constraint_preserving.notna().sum()), src_main)
 
 # ---------------------------------------------------------------- Exp B ----
 B = ROOT / "runs/expB1/scored.parquet"
@@ -521,7 +523,8 @@ hdr = [
     f"% inputs: runs/main1/scored.parquet sha256:{sha(SC)}"
     + (f"; runs/expB1/scored.parquet sha256:{sha(B)}" if B.exists() else "; expB1: absent")
     + (f"; runs/expC1/scored.parquet sha256:{sha(C)}" if C.exists() else "; expC1 scored: absent (PENDING)"),
-    f"% make_macros.py sha256:{sha(Path(__file__))}; labels: shared arbiter > J1/J2 agreement > unknown; human gold: "
+    f"% make_macros.py sha256:{sha(Path(__file__))}; resolution sha256:{sha(ROOT / 'annotation/label_resolution.jsonl')}; "
+    "labels: shared arbiter > J1/J2 agreement > unknown; human gold: "
     + ("present" if "oracle_ready" in macros else "PENDING"),
     "% Percentages are 0-100 with one decimal; *_pp are percentage points; *_k/*_den are counts.",
 ]

@@ -469,7 +469,7 @@ CUE = ["chip1", "chipall", "full"]
 
 def _fb(df, col, n_boot):
     from analyze import family_bootstrap
-    d = df[["family_id", col]].dropna()
+    d = df[["family_id", col]]
     if not len(d):
         return {"estimate": float("nan"), "ci_low": float("nan"), "ci_high": float("nan"), "n": 0}
     return family_bootstrap(d.astype({col: float}), col, n_boot=n_boot)
@@ -487,9 +487,16 @@ def _kappa(a, b):
     return cohen_kappa([str(x) for x in a], [str(x) for x in b])
 
 
-def guard_frame(run: Path):
+def primary_frame(sc, include_quarantine=False):
+    if include_quarantine:
+        return sc
+    return sc[~sc.quarantine_refusal_acceptance.fillna(False).astype(bool)].copy()
+
+
+def guard_frame(run: Path, include_quarantine=False):
     import pandas as pd
     sc = pd.read_parquet(run / "scored.parquet")
+    sc = primary_frame(sc, include_quarantine)
     gens = {g["request_key"]: g for g in runio.read_jsonl(run / "generations.jsonl")}
     sc["base_key"] = [gens[k].get("base_request_key", k) if k in gens else k for k in sc.request_key]
     for f in ("flags_initial", "flags_final", "extra_calls", "extra_latency_s", "extra_completion_tokens",
@@ -512,9 +519,9 @@ def guard_frame(run: Path):
     return sc, out
 
 
-def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
+def guard_section(run: Path, n_boot: int, name: str, include_quarantine=False) -> tuple[list[str], dict]:
     import pandas as pd
-    sc, pairs = guard_frame(run)
+    sc, pairs = guard_frame(run, include_quarantine)
     L, res = [], {}
     cue = sc[sc.channel.isin(CUE) & sc.valid]
     L.append(f"### Guard ({name}): judged outcomes on cue channels (chip1/chipall/full), P0 first pass vs guard\n")
@@ -523,6 +530,9 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
              "of a supplied dimension) AND no politeness addition.\n")
     L.append("| arm | critical match | any contradiction | politeness added | constraint-preserving | strict pass | n |")
     L.append("|---|---|---|---|---|---|---|")
+    res["population"] = dict(n_families=int(sc.family_id.nunique()), n_rows=len(sc),
+                             n_unresolved=int((sc.valid & sc.critical.isna()).sum()),
+                             include_quarantine=include_quarantine)
     for arm in ("P0", "G1", "G1s"):
         g = cue[cue.prompt_id == arm].copy()
         g["cm"] = g.critical_match.astype(float)
@@ -582,7 +592,9 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
                          f"{_fmt(_fb(g2, 'sp2', n_boot))} | {int((g.sp0 == 0).sum())} | "
                          f"{int(((g.sp0 == 0) & (g.sp1 == 1)).sum())} | {len(g)} |")
     # cost: per guarded generation (unique request, not per target)
-    gens = [g for g in runio.read_jsonl(run / "generations.jsonl") if g["prompt_id"] == "G1"]
+    eligible_keys = set(sc.request_key)
+    gens = [g for g in runio.read_jsonl(run / "generations.jsonl")
+            if g["prompt_id"] == "G1" and g["request_key"] in eligible_keys]
     if gens:
         import numpy as np
         L.append(f"\n### Guard ({name}): cost per input (unique generations)\n")
@@ -665,9 +677,10 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
     return L, res
 
 
-def span_sets(run: Path):
+def span_sets(run: Path, include_quarantine=False):
     import pandas as pd
     sc = pd.read_parquet(run / "scored.parquet")
+    sc = primary_frame(sc, include_quarantine)
     sc = sc[(sc.channel == "bare") & (sc.variant == "A")]
     sc = sc[sc.prompt_id.isin(["P2", "S3", "I2", "I2t"])]
     rows = []
@@ -684,18 +697,19 @@ def span_sets(run: Path):
 ARMS2 = ("S3", "P2", "I2t", "I2")
 
 
-def span_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
+def span_section(run: Path, n_boot: int, name: str, include_quarantine=False) -> tuple[list[str], dict]:
     import numpy as np
     import pandas as pd
-    sc, sets = span_sets(run)
+    sc, sets = span_sets(run, include_quarantine)
     L, res = [], {}
     L.append(f"### Ambiguity-complete set ({name}): coverage@3 under bare input\n")
-    L.append("coverage@3 = both variants' critical values appear among the 3 suggestions (judge labels, J1 "
-             "fallback). One set per (model, family); bare is shared by A and B. % with family-cluster 95% CI.\n")
+    L.append("coverage@3 = both variants' critical values appear among the 3 suggestions (shared labels: "
+             "arbiter > J1/J2 agreement > unknown). One set per (model, family); bare is shared by A and B. "
+             "% with family-cluster 95% CI. Unknown sets are excluded from rates and paired differences; n is observed.\n")
     groups = [("polarity+certainty", ["polarity", "certainty"])] + [(d, [d]) for d in
               ["polarity", "certainty", "agent", "speech_act", "politeness", "time_quantity"]] + \
              [("all", None)]
-    L.append("| dimension | S3 | P2 | I2t (rewrite top) | I2 (rewrite in place) | I2t - P2 | I2 - P2 | n sets/arm |")
+    L.append("| dimension | S3 | P2 | I2t (rewrite top) | I2 (rewrite in place) | I2t - P2 | I2 - P2 | observed/total S3; P2; I2t; I2 |")
     L.append("|---|---|---|---|---|---|---|---|")
     for lab, dims in groups:
         s = sets if dims is None else sets[sets.dimension.isin(dims)]
@@ -710,7 +724,8 @@ def span_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
                 dd[arm] = {"n": 0}
         res[lab] = {**cells, "diff_I2t": dd["I2t"], "diff_I2": dd["I2"]}
         L.append(f"| {lab} | " + " | ".join(_fmt(cells[p]) for p in ARMS2) +
-                 f" | {_fmt(dd['I2t'])} | {_fmt(dd['I2'])} | {cells['P2']['n']} |")
+                 f" | {_fmt(dd['I2t'])} | {_fmt(dd['I2'])} | " +
+                 "; ".join(f"{cells[p]['n']}/{cells[p].get('n_total', cells[p]['n'])}" for p in ARMS2) + " |")
     L.append("\nPer model, polarity+certainty families:\n")
     L.append("| model | S3 | P2 | I2t | I2 |\n|---|---|---|---|---|")
     pc = sets[sets.dimension.isin(["polarity", "certainty"])]
@@ -719,6 +734,7 @@ def span_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
         L.append(f"| {m} | " + " | ".join(_fmt(_fb(s[s.prompt_id == p], "coverage", n_boot)) for p in ARMS2) + " |")
     # per-suggestion additions (all targets, valid)
     full = __import__("pandas").read_parquet(run / "scored.parquet")
+    full = primary_frame(full, include_quarantine)
     full = full[(full.channel == "bare") & full.valid & full.prompt_id.isin(list(ARMS2))]
     full = full.assign(ac=(full.added_content == "yes").astype(float),
                        pa=full.politeness_added.astype(float), ha=full.hedge_added.astype(float),
@@ -743,7 +759,8 @@ def span_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
         L.append(f"| {lab} | " + " | ".join(_fmt(r[c]) for c in ("pa", "ha", "ea", "sa", "ac")) + f" | {r['pa']['n']} |")
     # cost
     for arm in ("I2t", "I2"):
-        i2 = [g for g in gens.values() if g["prompt_id"] == arm]
+        eligible_keys = set(sc.request_key)
+        i2 = [g for g in gens.values() if g["prompt_id"] == arm and g["request_key"] in eligible_keys]
         if i2:
             L.append(f"\n### Ambiguity-complete set ({name}): cost per bare input, arm {arm}\n")
             L.append("| model | sets | sets changed | rewrites | extra calls / set | layer0-verified rewrites | "
@@ -828,7 +845,8 @@ attempt (ties -> original). **G1s** = strip-only: deterministic removal of an un
 layer0 finds no slot holding the alternative reading of the top suggestion, replace slot 3 (then 2) with an
 LLM rewrite carrying that reading, layer0-verified with one feedback retry. I2t rewrites the top suggestion;
 I2 (primary, chosen on the pilot) rewrites the replaced slot's own sentence. Evaluation is by the blind
-LLM extraction judge (gpt-6.1-sol, J1/J2, J1 fallback on disagreement) and deterministic attribution; the
+LLM extraction judge (gpt-6.1-sol, J1/J2), cross-run authoritative critical resolution
+(arbiter > J1/J2 agreement > unknown), and deterministic attribution; the
 guard never sees judge labels. CIs: family-cluster percentile bootstrap (src/analyze.family_bootstrap).
 First passes (P0, P2, S3) are the cached generations of the base run."""
 
@@ -852,7 +870,7 @@ def kill_table(gres: dict, sres: dict, label: str) -> list[str]:
 def summary(g: dict, s: dict) -> list[str]:
     c, cs = g.get("cost", {}), s.get("cost_I2", {})
     pc, al = s["polarity+certainty"], s["all"]
-    return ["## Summary (held-out test split, 60 families x 4 models)\n",
+    return [f"## Summary (held-out test split, {g['population']['n_families']} families x 4 models)\n",
             f"- **I1 guard, benefit**: strict pass on cue channels {_fmt(g['P0']['sp'])} -> {_fmt(g['G1']['sp'])}; "
             f"critical match {_fmt(g['P0']['cm'])} -> {_fmt(g['G1']['cm'])}; contradictions of supplied dimensions "
             f"{_fmt(g['P0']['ct'])} -> {_fmt(g['G1']['ct'])}; politeness additions {_fmt(g['P0']['pol_add'])} -> "
@@ -916,6 +934,10 @@ def write_report(a) -> None:
     gl, gres = guard_section(groot(a.guard), a.n_boot, a.guard)
     sl, sres = span_section(groot(a.span), a.n_boot, a.span)
     summ = {"guard": gres, "span": {k: v for k, v in sres.items() if k != "_sets"}}
+    L.append("Primary estimates exclude act-10 and act-16 (D-024 refusal/acceptance quarantine); "
+             "all paired arms use annotation/label_resolution.jsonl. Unresolved critical labels are unknown, "
+             "never J1 fallback. Quarantine-inclusive results follow as a labeled sensitivity. "
+             "All rates remain machine-scored; human oracle validation is pending.\n")
     if a.pilot_guard:
         _, pg = guard_section(groot(a.pilot_guard), a.n_boot, a.pilot_guard)
         _, ps = span_section(groot(a.pilot_span), a.n_boot, a.pilot_span)
@@ -925,10 +947,54 @@ def write_report(a) -> None:
     L += kill_table(gres, sres, a.guard) + [""]
     L += summary(gres, sres) + [""]
     L += ["## Results\n"] + gl + [""] + sl + [""] + examples(groot(a.guard), groot(a.span))
+    copy_lines, copy_result = copy_baseline(groot(a.guard), groot(a.oracle), a.n_boot)
+    L += copy_lines
+    summ["copy_full_mode"] = copy_result
+    igl, ig = guard_section(groot(a.guard), a.n_boot, a.guard + " inclusive sensitivity", True)
+    isl, is_ = span_section(groot(a.span), a.n_boot, a.span + " inclusive sensitivity", True)
+    summ["sensitivity_including_quarantine"] = {
+        "guard": ig, "span": {k: v for k, v in is_.items() if k != "_sets"}}
+    L += ["\n## Sensitivity: including quarantined families (60-family design)\n"] + igl + isl
     L += [""] + caveats(gres, sres)
     out.write_text("\n".join(L) + "\n")
     out.with_suffix(".json").write_text(json.dumps(summ, indent=1, default=str))
     print(f"wrote {out}")
+
+
+def copy_baseline(guard_run: Path, oracle_run: Path, n_boot: int):
+    """Stored identity injections test routing in explicit full mode only."""
+    import attribute
+    sc = attribute.score(oracle_run, resolution=ROOT / "annotation/label_resolution.jsonl")
+    identity = sc[(sc.model == "identity") & (sc.channel == "full")].copy()
+    items = runio.load_items(runio.items_path_for(oracle_run, None))
+    assert len(identity) == 120
+    assert all(r.text == items[r.family_id]["variants"][r.variant]["source"] for r in identity.itertuples())
+    passed = int(identity.constraint_preserving.eq(True).sum())
+    primary = primary_frame(identity)
+    L = ["\n## Exact-copy baseline: explicit full mode\n",
+         f"Returning the typed sentence verbatim passes the partial contract **{passed}/120** "
+         f"stored source-identity injections ({identity.critical.isna().sum()} unresolved). "
+         f"Excluding quarantine: **{int(primary.constraint_preserving.eq(True).sum())}/{len(primary)}**. "
+         "These are 120 authored source sentences, not 480 new model outputs. Copy uses zero generator calls; "
+         "it applies when full mode is explicitly selected. It does not expand keywords or establish fluency. "
+         "The supplied source is visible to the generator, while extraction is blind.\n",
+         "| full-mode arm | partial contract pass | strict pass (also no politeness addition) | observed n |",
+         "|---|---|---|---|"]
+    result = dict(identity_n=len(identity), identity_pass=passed,
+                  identity_unresolved=int(identity.critical.isna().sum()),
+                  primary_n=len(primary), primary_pass=int(primary.constraint_preserving.eq(True).sum()), arms={})
+    guarded, _ = guard_frame(guard_run)
+    for arm in ("P0", "G1", "G1s"):
+        g = guarded[(guarded.channel == "full") & guarded.prompt_id.eq(arm)].copy()
+        g["sp"] = 1 - g.strict_fail.astype(float)
+        r = dict(contract=_fb(g, "constraint_preserving", n_boot), strict=_fb(g, "sp", n_boot))
+        result["arms"][arm] = r
+        L.append(f"| {arm} (primary, 4 models) | {_fmt(r['contract'])} | {_fmt(r['strict'])} | {r['contract']['n']} |")
+    primary["sp"] = primary.constraint_preserving.astype(float) * (1 - primary.politeness_added.astype(float))
+    r = dict(contract=_fb(primary, "constraint_preserving", n_boot), strict=_fb(primary, "sp", n_boot))
+    result["arms"]["COPY"] = r
+    L.append(f"| COPY (primary, source identities) | {_fmt(r['contract'])} | {_fmt(r['strict'])} | {len(primary)} |")
+    return L, result
 
 
 def main() -> int:
@@ -952,6 +1018,7 @@ def main() -> int:
     s.add_argument("--out", required=True); s.add_argument("--title", default="Interventions")
     s.add_argument("--pilot-guard"); s.add_argument("--pilot-span")
     s.add_argument("--n-boot", type=int, default=2000)
+    s.add_argument("--oracle", default="oracle_inject")
     a = ap.parse_args()
     if a.cmd in ("guard", "span"):
         asyncio.run(drive(a.cmd, a))
