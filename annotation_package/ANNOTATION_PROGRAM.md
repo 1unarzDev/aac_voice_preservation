@@ -105,9 +105,9 @@ critical value, and (shown last) whether it adds content beyond the typed keywor
 
 ---
 
-## B. New human-generated data (highest value; B3 and B4 built, B1 and B2 to be built)
+## B. New human-generated data (highest value; all four tools built)
 
-### B1. Human-written minimal pairs ("handwritten data")
+### B1. Human-written minimal pairs ("handwritten data"): Parts 7–8 (`write_pairs.html`, `check_pairs.html`). Built.
 
 **Why this matters most:** all 336 current test families were written by the study's authoring pipeline. A reviewer can
 reasonably ask whether the effects are artifacts of how the items were written. Families written independently by many
@@ -141,7 +141,26 @@ current confirmation set, from independent authors.
 **Deadline:** realistic for CALE-AI (Nov 16 freeze) and for a later version of the HUMANE paper. For SE4All only if the
 pairs are returned by about Nov 5.
 
-### B2. Human keyword elicitation (realistic AAC input)
+**As built (scaled up):** six dimensions (polarity, speech act, politeness, certainty, agent, time), 15 pairs per writer
+session (about 35 min), with a per-writer topic rotation over 11 domains (health, sensory, boundaries, work/school, plans,
+food, transport, money, relationships, self-advocacy, hobbies). Checks come in blind files of 30 pairs, each file
+assigned to 3 checkers who never include a writer of any pair in it. Sized for 600–900 pairs (40–60 writers).
+
+**Coordinator:**
+1. Writer links: `python src/make_writer_links.py --writers P01,...` writes `annotation/written/writer_assignment.csv`
+   (balanced dimensions, spread rotations, link fragments such as `#dim=agent&rot=4&n=15&id=P07`).
+2. Writer returns (`write_pairs_<dim>_<ID>.csv`) go in `annotation/returns_written/`. Then
+   `python src/collect_written_pairs.py --checkers-file checkers.txt` re-runs the format checks, derives chips by rule,
+   validates, writes the private candidates (`annotation/written/hw_candidates.jsonl`, `rejected.csv`), the quota report
+   per dimension × writer (`quota_report.md`), and calls `src/make_check_batches.py`: new blind check files
+   `annotation/written/check_files/hwcNNN.json` and the sheet `check_assignment.csv` (+ `_by_checker.csv`). Re-running
+   later only batches new pairs; files already sent never change.
+3. Check returns (`check_pairs_<file>_<ID>.csv`) go in `annotation/returns_hwcheck/`. Scoring and freezing:
+   `python src/score_pair_checks.py [--exclude P07,P09:P12]` keeps a pair only if ≥2 of 3 independent checkers agree with
+   both writer values, accept the keywords for both sentences, and judge the pair minimal; self-checks are always dropped.
+   Kept families go to `data/items/hw.jsonl` (split `hw`, opt-in in `build_requests.py`; cluster = writer).
+
+### B2. Human keyword elicitation (realistic AAC input): Part 9 (`keyword_elicitation.html` + `elicitation_sets/`). Built.
 
 **Why:** the study currently simulates keyword entry with a rule-based compressor (content words, at most 4). Reviewers
 can object that real people would type "not" when it matters. Asking people which keywords they would actually
@@ -162,6 +181,21 @@ as you can, as if each word takes a long time to select"). The annotator never s
 Headline question: *when people choose their own keywords, how often does the model still default to the wrong reading?*
 
 **Deadline:** CALE-AI or later. If returned by about Nov 6, a compact version can go in SE4All.
+
+**As built:** 300 AACText messages (150 simple-random + 150 enriched: 38 hedges, 38 negation, 37 politeness, 37
+questions/requests; W-B's 160 and the W-C seeds excluded; inclusion probabilities recorded) in 8 sets of 37–38. Each set
+is done by 3 annotators in Latin-square block orders: 24 sessions of about 20 minutes (the "45 sessions" above
+overcounted: 300 × 3 / 38 ≈ 24). B1 sentences can be added as a later set.
+
+**Coordinator:**
+- Sets and design: `python src/make_elicitation_sets.py [--annotators P01,...]` (already run with placeholder slots
+  E01–E24; rerun with real IDs to refresh `annotation/elicitation_assignment.csv`; the draw is fixed by its seed).
+  Session files: `annotation_package/elicitation_sets/elic_sNN_rK.json` (item id + text only). Private key:
+  `annotation/elicitation_key.jsonl`; manifest `annotation/elicitation_sample.json`.
+- Returns (`keyword_elicitation_<file>_<ID>.csv`) go in `annotation/returns_elic/`. Scoring:
+  `python src/score_elicitation.py` (cue survival with the s1_cues detectors, agreement between people, comparison with
+  POS-cap4; `analysis/elicitation/`). It also writes `data/items/elic.jsonl` and the generation requests
+  `runs/requests/elic.jsonl` (human keywords + POS-cap4 baseline, 4 models × P0/P2/S3). It does not generate.
 
 ### B3. Expanded gold on new outputs: Part 10 (`annotate.html` with `part10_gold_new.json`, 162 sentences). Built.
 
