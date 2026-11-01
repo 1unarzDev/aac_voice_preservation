@@ -3,11 +3,14 @@
     . .venv/bin/activate
     python paper/figs/make_figs.py                       # runs/main1/scored.parquet
     python paper/figs/make_figs.py --table a.parquet b.parquet --items 'data/items/*.jsonl'
+    # W-C: --n-boot 10000 --cluster-by-items --strict-critical --exclude-primary
 
 Reads only the scored parquet table(s) and the item files. It reuses the
 deterministic normalisation in src/analyze.py, so the numbers match
 analysis/main1/*.csv. Every CI is a 95% percentile interval from 2000
 whole-family bootstrap resamples (seed 20261031).
+For registered W-C figures the explicit flags above select 10,000 recorded
+seed/construction-cluster resamples and mask unadjudicated critical fallback.
 
 Writes paper/figs/fig_*.pdf (vector) and fig_*.png (600 dpi), plus
 fig_numbers.json (every number quoted in CAPTIONS.md).
@@ -43,6 +46,9 @@ from matplotlib.patches import FancyBboxPatch  # noqa: E402
 
 OUT = Path(__file__).resolve().parent
 N_BOOT, SEED = 2000, 20261031
+CLUSTER_BY_ITEMS = False
+STRICT_CRITICAL = False
+EXCLUDE_PRIMARY = False
 SINGLE, DOUBLE = 3.3, 7.0
 QUARANTINED_BY_DIM: dict = {}
 
@@ -104,7 +110,13 @@ CH_LABEL = {"bare": "bare", "noncrit": "+word", "chip1": "+chip", "chipall": "+a
 
 
 def boot(frame: pd.DataFrame, col: str) -> dict:
-    return A.family_bootstrap(frame, col, n_boot=N_BOOT, seed=SEED)
+    work = frame.copy()
+    if CLUSTER_BY_ITEMS:
+        work['family_id'] = work.family_id.map(ITEM_CLUSTERS)
+    result = A.family_bootstrap(work, col, n_boot=N_BOOT, seed=SEED)
+    result['n_clusters'] = result['n_families']
+    result['n_families'] = int(frame.family_id.nunique())
+    return result
 
 
 def subdim(r) -> str:
@@ -153,10 +165,16 @@ def pct_axis(ax, axis="x"):
 
 # ---------------------------------------------------------------- data
 def load(tables: list[Path], items_glob: str, include_quarantine=False) -> tuple[pd.DataFrame, dict]:
+    global ITEM_CLUSTERS
     items = A.load_items(items_glob)
+    ITEM_CLUSTERS = {f: i.get('cluster_id', f) for f, i in items.items()}
     raw = pd.concat([pd.read_parquet(t) for t in tables], ignore_index=True)
     raw = raw[raw.channel.isin(CHANNELS)]
+    if STRICT_CRITICAL:
+        raw.loc[raw.critical_source.isin(['J1', 'J2']), ['critical', 'critical_source']] = None
     df = A.normalize_table(raw, items)
+    if EXCLUDE_PRIMARY:
+        df = df[~df.family_id.map(lambda f: bool(items[f].get('primary_exclude')))].copy()
     global QUARANTINED_BY_DIM
     from attribute import quarantined
     qf = {f for f in raw.family_id.unique() if quarantined(items[f])}
@@ -173,7 +191,11 @@ def load(tables: list[Path], items_glob: str, include_quarantine=False) -> tuple
 def fig_defaults(df: pd.DataFrame, nums: dict) -> None:
     amb = A.unique_ambiguous(df)
     b = amb[(amb.channel == "bare") & (amb.prompt_id == "P0") & amb.valid.astype(bool)].copy()
-    fig, axes = plt.subplots(2, 4, figsize=(DOUBLE, 2.75),
+    if STRICT_CRITICAL:
+        b = b[b.crit.notna()].copy()
+    ncols = min(4, len(DIMS) + 1)
+    nrows = int(np.ceil((len(DIMS) + 1) / ncols))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(DOUBLE, 2.75 if len(DIMS) == 7 else 1.8 * nrows), squeeze=False,
                              gridspec_kw=dict(hspace=0.62, wspace=1.05))
     axes = axes.ravel()
     nums["fig_defaults"] = {"n_outputs": int(len(b)), "n_families": int(b.family_id.nunique()),
@@ -215,7 +237,7 @@ def fig_defaults(df: pd.DataFrame, nums: dict) -> None:
     lg.axis("off")
     hs = [plt.Rectangle((0, 0), 1, 1, color=BLUE, lw=0),
           Line2D([], [], color=INK, lw=0.7)]
-    ls = ["pooled share", "95% CI (families)"]
+    ls = ["pooled share", "95% CI (seed/construction clusters)" if CLUSTER_BY_ITEMS else "95% CI (families)"]
     for m in MODEL_ORDER:
         hs.append(Line2D([], [], marker=MODEL_MARK[m], ls="", ms=3.2, mfc="white", mec=INK, mew=0.5))
         ls.append(MODEL_LABEL[m])
@@ -232,7 +254,9 @@ def fig_defaults(df: pd.DataFrame, nums: dict) -> None:
 def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     d = df[df.prompt_id == "P0"].copy()
     d["cm"] = d.critical_match.astype(float)
-    fig, axes = plt.subplots(2, 4, figsize=(DOUBLE, 2.7), sharey=True,
+    ncols = min(4, len(DIMS) + 1)
+    nrows = int(np.ceil((len(DIMS) + 1) / ncols))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(DOUBLE, 2.7 if len(DIMS) == 7 else 2.1 * nrows), sharey=True, squeeze=False,
                              gridspec_kw=dict(hspace=0.5, wspace=0.22))
     axes = axes.ravel()
     x = np.arange(len(CHANNELS))
@@ -279,7 +303,7 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     lg.axis("off")
     hs = [Line2D([], [], color=BLUE, lw=1.4, marker="o", ms=3.4, mec="white", mew=0.6),
           plt.Rectangle((0, 0), 1, 1, color=BLUE_LT, alpha=0.55, lw=0)]
-    ls = ["cue visible: critical match,\npooled over 4 models", "95% CI (families)"]
+    ls = ["cue visible: critical match,\npooled over 4 models", "95% CI (seed/construction clusters)" if CLUSTER_BY_ITEMS else "95% CI (families)"]
     hs.append(Line2D([], [], color=ORANGE, lw=0.9, ls='--', marker='s', ms=2.5))
     ls.append("joint supplied-predicate pass")
     for m in MODEL_ORDER:
@@ -323,6 +347,8 @@ def fig_cost_asymmetry(df: pd.DataFrame, nums: dict) -> None:
     defaults = family_defaults(df)
     p0 = df[(df.prompt_id == "P0") & (df.channel == "bare")].copy()
     p0["cost"] = [0.0 if r.chose == r.variant else float(r.repair_chip_cost) for r in p0.itertuples()]
+    if STRICT_CRITICAL:
+        p0.loc[p0.crit.isna() & p0.valid, 'cost'] = np.nan
     sets = A.suggestion_sets(df)
     p2 = sets[(sets.prompt_id == "P2") & (sets.channel == "bare")].copy()
     p2["cost"] = p2.extra_actions.astype(float)
@@ -396,17 +422,24 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
     Counts are printed beside every row; the hedging control is reported as a note because
     every hedging cell is zero."""
     f = df[(df.channel == "full") & df.prompt_id.isin(["P0", "P1"]) & df.valid.astype(bool)].copy()
+    if STRICT_CRITICAL:
+        f = f[f.crit.notna()].copy()
     spec = [general_spec(items[r.family_id]["variants"][r.variant].get("all_chips", []),
                          items[r.family_id]["variants"][r.variant].get("general_spec"))
             for r in f.itertuples()]
     f["pol_plain"] = [s["politeness"] == {"none"} for s in spec]
     f["polite_out"] = (f.politeness != "none").astype(float)
     f["impolite_out"] = (f.politeness == "none").astype(float)
+    if STRICT_CRITICAL:
+        pz = f.dimension.eq('politeness')
+        f.loc[pz, 'polite_out'] = f.loc[pz, 'crit'].eq('polite').astype(float)
+        f.loc[pz, 'impolite_out'] = f.loc[pz, 'crit'].eq('plain').astype(float)
     f["hedged_out"] = (f.certainty == "hedged/uncertain").astype(float)
     f["unhedged_out"] = f.certainty.isin(["plain assertion", "strongly certain/emphatic"]).astype(float)
     nums["fig_politeness_ratchet"] = {"rule": "full channel (user typed the source); P0 primary, P1 cached sensitivity"}
     rows = [("P0", "Pooled (P0)", None)] + [("P0", MODEL_LABEL[m], m) for m in MODEL_ORDER] + \
            [("P1", "Pooled, P1 prompt*", None)]
+    rows = [r for r in rows if r[0] in set(f.prompt_id)]
     fig, ax = plt.subplots(figsize=(SINGLE, 2.15))
     rec = {}
     for i, (pr, lbl, m) in enumerate(rows):
@@ -436,7 +469,8 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
     ax.set_yticks(range(len(rows)), [r[1] for r in rows])
     labs = ax.get_yticklabels()
     labs[0].set_fontweight("bold")
-    labs[-1].set_color(MUTED)
+    if rows[-1][0] == 'P1':
+        labs[-1].set_color(MUTED)
     ax.set_ylim(len(rows) - 0.5, -0.9)
     pct_axis(ax)
     hgrid(ax)
@@ -449,9 +483,10 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
     nums["fig_politeness_ratchet"]["Politeness"] = rec
     nums["fig_politeness_ratchet"]["Hedging_control_P0"] = {"added": [hk_a, int(len(ha))],
                                                             "removed": [hk_r, int(len(hr))]}
-    fig.text(0.02, -0.08, f"Hedging control (certainty families, P0, full input): {hk_a}/{len(ha)} hedges added, "
-             f"{hk_r}/{len(hr)} removed.  *P1 = cached preservation-prompt sensitivity, not a primary arm.",
-             fontsize=5.3, color=INK2, ha="left", va="top", wrap=True)
+    if len(cer):
+        fig.text(0.02, -0.08, f"Hedging control (certainty families, P0, full input): {hk_a}/{len(ha)} hedges added, "
+                 f"{hk_r}/{len(hr)} removed.  *P1 = cached preservation-prompt sensitivity, not a primary arm.",
+                 fontsize=5.3, color=INK2, ha="left", va="top", wrap=True)
     allp = f[(f.prompt_id == "P0") & f.pol_plain]
     nums["fig_politeness_ratchet"]["politeness_added_all_plain_sources"] = {
         k: boot(allp if k == "Pooled" else allp[allp.model == k], "polite_out")["estimate"]
@@ -500,8 +535,13 @@ def fig_sets(df: pd.DataFrame, nums: dict) -> None:
     ax.set_xlabel("coverage@3: both readings of the pair among the 3 suggestions", labelpad=1.5)
     hs = [Line2D([], [], marker="o", ls="", ms=3.6, color=BLUE, mec="white", mew=0.5),
           Line2D([], [], marker="D", ls="", ms=3.2, color=ORANGE, mec="white", mew=0.5)]
-    ax.legend(hs, ["P2: one request for 3 different meanings", "S3: 3 samples at T=0.7"],
-              loc="lower right", bbox_to_anchor=(1.0, 0.0), handlelength=1.0, fontsize=6)
+    if len(DIMS) < 7:
+        ax.set_xlabel('both readings covered among 3 suggestions', labelpad=1.5)
+        ax.legend(hs, ['P2: 3 different meanings', 'S3: 3 samples at T=0.7'],
+                  loc='upper left', bbox_to_anchor=(0.0, -0.24), handlelength=1.0, fontsize=6)
+    else:
+        ax.legend(hs, ["P2: one request for 3 different meanings", "S3: 3 samples at T=0.7"],
+                  loc="lower right", bbox_to_anchor=(1.0, 0.0), handlelength=1.0, fontsize=6)
     allp = {}
     for prompt in ("P2", "S3"):
         r = boot(u[u.prompt_id == prompt], "cov")
@@ -515,11 +555,12 @@ def fig_sets(df: pd.DataFrame, nums: dict) -> None:
 def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
     """Method schematic. The example output and its extracted labels are read from the
     stored data (family pol-07, bare channel, P0, first model in MODEL_ORDER)."""
-    fam = items["pol-07"]
+    fid = 'pol-07' if 'pol-07' in set(df.family_id) else sorted(df[df.dimension.eq('polarity')].family_id.unique())[0]
+    fam = items[fid]
     va, vb = fam["variants"]["A"], fam["variants"]["B"]
-    ex = df[(df.family_id == "pol-07") & (df.channel == "bare") & (df.prompt_id == "P0")]
+    ex = df[(df.family_id == fid) & (df.channel == "bare") & (df.prompt_id == "P0")]
     ex = ex[ex.model == MODEL_ORDER[0]].iloc[0]
-    nums["fig_pipeline"] = {"example_family": "pol-07", "model": ex.model, "output": ex.text,
+    nums["fig_pipeline"] = {"example_family": fid, "model": ex.model, "output": ex.text,
                             "polarity": ex.polarity, "agent": ex.agent, "speech_act": ex.speech_act}
     chans = [(name, A.input_text(fam, "A", channel).removeprefix("Keywords: ").removeprefix("The user typed: "))
              for name, channel in [("bare", "bare"), ("+word", "noncrit"), ("+chip", "chip1"),
@@ -637,21 +678,35 @@ def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
 
 
 def main() -> int:
-    global OUT
+    global OUT, N_BOOT, SEED, DIMS, CLUSTER_BY_ITEMS, STRICT_CRITICAL, EXCLUDE_PRIMARY
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--table", type=Path, nargs="+", default=[ROOT / "runs/main1/scored.parquet"])
     ap.add_argument("--items", default=str(ROOT / "data/items/*.jsonl"))
     ap.add_argument("--only", nargs="*", help="subset of figure names")
     ap.add_argument("--include-quarantine", action="store_true")
     ap.add_argument("--out", type=Path, default=OUT)
+    ap.add_argument('--n-boot', type=int, default=N_BOOT)
+    ap.add_argument('--seed', type=int, default=SEED)
+    ap.add_argument('--cluster-by-items', action='store_true', help='resample item cluster_id instead of family_id')
+    ap.add_argument('--strict-critical', action='store_true', help='unadjudicated J1/J2 fallback critical labels stay unknown')
+    ap.add_argument('--exclude-primary', action='store_true', help='exclude item primary_exclude flags')
     args = ap.parse_args()
     OUT = args.out
+    if args.n_boot < 1:
+        ap.error('--n-boot must be positive')
+    N_BOOT, SEED = args.n_boot, args.seed
+    CLUSTER_BY_ITEMS, STRICT_CRITICAL, EXCLUDE_PRIMARY = args.cluster_by_items, args.strict_critical, args.exclude_primary
     OUT.mkdir(parents=True, exist_ok=True)
     df, items = load(args.table, args.items, args.include_quarantine)
+    DIMS = [d for d in DIMS if d in set(df.subdim)]
     nums = {"n_families": int(df.family_id.nunique()), "n_rows": int(len(df)),
             "models": MODEL_ORDER, "n_boot": N_BOOT, "seed": SEED,
             "tables": [str(t) for t in args.table], "include_quarantine": args.include_quarantine,
-            "label_resolution": "annotation/label_resolution.jsonl"}
+            'cluster_unit': 'cluster_id' if CLUSTER_BY_ITEMS else 'family_id',
+            'n_clusters': len({ITEM_CLUSTERS[f] for f in df.family_id.unique()}),
+            'exclude_primary': EXCLUDE_PRIMARY,
+            'strict_critical': STRICT_CRITICAL,
+            "label_resolution": "supplied scored table; fallback masked" if STRICT_CRITICAL else "supplied scored table"}
     nums["note"] = "widths in inches of the saved PDFs are reported under pdf_sizes"
     todo = {"fig_defaults": lambda: fig_defaults(df, nums),
             "fig_channel_ladder": lambda: fig_channel_ladder(df, nums),
