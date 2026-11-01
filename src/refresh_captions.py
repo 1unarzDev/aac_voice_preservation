@@ -19,6 +19,48 @@ def pct(r):
     return f"{100*r['estimate']:.2f}% [{100*r['ci_low']:.2f}, {100*r['ci_high']:.2f}]"
 
 
+def human_status():
+    h = json.loads((ROOT / "annotation/judge_validation_main1.json").read_text())["human"]
+    tests = [d["sampled_test/final"] for d in h["judge"].values()]
+    assert all(d["kappa"] >= .6 for d in tests)
+    v = h["verdict"]["violation"]["primary"]
+    return (f"D-031: **human extraction gate H7 passed** on the earlier main1 inventory: "
+            f"two annotators, {h['n_items']} items (100 double-coded core, 87 single-coded extras). "
+            f"Held-out `sampled_test/final` κ={min(d['kappa'] for d in tests):.3f}–{max(d['kappa'] for d in tests):.3f}; "
+            f"lowest lower 95% bound {min(d['kappa_ci'][0] for d in tests):.3f}. "
+            f"Primary Violation verdict agreement {v['agree_k']}/{v['n']} [91.5, 99.0]%, κ={v['kappa']:.3f}; "
+            f"judge-positive {v['judge_positive']}, human-positive {v['ref_positive']}, "
+            f"{v['judge_T_ref_F']} judge-only and {v['judge_F_ref_T']} human-only. "
+            "The broader sampled/final κ=.899–.977 is a different view. Plurality reference with ties/unsure excluded; "
+            "labels converted from another format, no per-item timing. Humans corrected the shared ‘can't wait’ "
+            "error but both retain ‘two’ for ‘a couple of’ against the frozen key (D-033). "
+            "Rates remain machine-scored. H7 does not validate repaired-text quality, W-B admissibility, "
+            "or every new W-C/W-D boundary.\n")
+
+
+def wb_contract_caption():
+    path = ROOT / "analysis/wb/contract_audit.json"
+    if not path.exists():
+        return ""
+    audit = json.loads(path.read_text())
+    assert audit['inventory']['messages'] == 139 and audit['inventory']['outputs'] == 556
+    return ("## W-B restoration contract status (cycle-2 Action 1)\n\n"
+            "**Source match and actual-input fidelity are separate endpoints.** Complete audit: 139 messages / 556 stored outputs; "
+            "131 chip mappings and eight word inputs. Seven definite chip/source conflicts preclude a model-ignored-the-source-cue "
+            "attribution on their 28 outputs. Five certainty conflicts: 20/20 source failures honour visible `[MAYBE]`. "
+            "Six word cases are aligned at the coarse polite-marker endpoint; two remain unknown. "
+            "Nine unclear source references and five detector fallbacks lacking panel consensus remain withheld from "
+            "the aligned/expressible sensitivity (116 messages, 464 occurrences). Eight aligned `[SURE]` sources demand "
+            "a finer emphatic distinction than that chip supplies; four source failures honour the coarse cue. "
+            "Original restored general source failures: 12/223 random, 55/276 enriched; actual-input general failures: "
+            "9/231 random, 38/316 enriched. Aligned/expressible general source failures: 8/219 and 26/244; "
+            "actual-input failures in that sensitivity: 8/219 and 22/244. Different populations are never an intervention gain. "
+            "POS-cap4 non-default polarity source-honouring counts are 0/36 and 2/84; strictly negated counts are 0/32 and 2/48. "
+            "W-B is final generation, machine-assessed; the separate 20-message human admissibility audit is absent. "
+            "See `analysis/wb/contract_audit.md`, its complete eligibility/verdict diff and hashed snapshot. "
+            "New audit CIs: 10,000 whole-message resamples, seed 20261101, samples separate; original W-B tables retained.\n")
+
+
 def main():
     directory = ROOT / "paper/figs"
     nums = json.loads((directory / "fig_numbers.json").read_text())
@@ -31,7 +73,7 @@ def main():
         "`analysis/evidence_prev/paper/figs/`. The generated figure numbers, macros and example manifest share this scoring version. "
         "The design contains 60 test families; primary estimates use **58 families**, excluding act-10 and act-16. "
         "Four fixed models. Quarantine-inclusive figures and numbers are in `quarantine_inclusive/`. "
-        "All automated rates are provisional; human oracle validation remains pending.\n",
+        + human_status(),
         "CIs are pointwise 95% percentile intervals from 2,000 whole-family bootstrap resamples, seed 20261031. "
         "Families are resampled jointly over models, targets and paired arms. Exact counts and denominators are retained "
         "in `fig_numbers.json` and `example_manifest.json`. Primary exclusions apply to every figure. "
@@ -41,7 +83,8 @@ def main():
         f"{json.dumps(pipeline['output'], ensure_ascii=False)}. Noncritical input uses the stored order `like new medication`. "
         "Bare/noncritical reference match measures a model's chosen reading; the added word is a length control and "
         "default-sensitivity diagnostic. Supplied-cue correctness is assessed in chip1/chipall/full. Full means source "
-        "visible to the generator; extraction remains blind to source, model and channel. Loss, Violation and Assumption "
+        "visible to the generator; critical/general extraction is output-only and blind to model/channel; "
+        "added-content extraction sees the visible input. Loss, Violation and Assumption "
         "have different denominators. Only the bare channel's connector is drawn solid: the shown output came from bare input; "
         "the other channels' connectors are faint. The arbiter (J1/J2 disagreements only) sees the visible input. "
         "This is a selected example, not a typicality claim.\n",
@@ -90,6 +133,7 @@ def main():
         + ". P2 requests three different meanings; S3 samples three P0 outputs at temperature 0.7. "
         f"Polarity P2 is {pct(sets['by_dim']['polarity']['P2'])} (10/40), after propagating the arbiter to "
         "span1. This is authored-pair coverage under machine labels, not coverage of all admissible meanings.\n"]
+    lines.append(wb_contract_caption())
     (directory / "CAPTIONS.md").write_text("\n".join(lines) + "\n")
 
     examples = []
