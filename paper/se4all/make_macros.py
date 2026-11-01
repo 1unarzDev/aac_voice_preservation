@@ -1062,6 +1062,37 @@ _mvj = json.load(open(_mv)) if _mv.exists() else {}
 _mvj["se4all"] = {"headline_keys_imported": len(_imp), "values_match": bool(_ok)}
 _mv.write_text(json.dumps(_mvj, indent=2) + "\n")
 
+# ---- R5 input-builder validator replay (cycle-3 Action 5; ledger C38). Census, no CI.
+_R5 = "analysis/r5_validator/replay.json"
+_r5 = json.load(open(ROOT / _R5))
+assert _r5["known_conflicts_rejected"] == _r5["known_conflicts"] == _r5["verdicts"]["conflicting"], "R5 conflicts"
+put("r5_n", _r5["n"], _R5, "int")
+put("r5_agree", _r5["agrees_with_audit"], _R5, "int")
+put("r5_rej", _r5["known_conflicts_rejected"], _R5, "int")
+put("r5_conf", _r5["known_conflicts"], _R5, "int")
+put("r5_sure", _r5["sure_granularity_flagged"], _R5, "int")
+put("r5_sure_cert", _r5["coarse_certified"], _R5, "int")
+put("r5_unknown", _r5["verdicts"]["unknown"], _R5, "int")
+
+# ---- frozen guard transfer to W-C speech act (ledger C37, accepted with qualifications, D-045). Macro view only;
+# the intervention analysis belongs to CALE-AI. Source: analysis/guard_wc/headline.json, gated on ACCEPTANCE.
+_GT = "analysis/guard_wc/headline.json"
+_gt = json.load(open(ROOT / _GT))
+_ac = json.load(open(ROOT / "analysis/guard_wc/acceptance_check.json"))
+assert _gt["status"] == "complete" and _gt["transfer_success"] and all(_gt["criteria"].values())
+assert _ac["verdict"] == "ACCEPT WITH QUALIFICATIONS", _ac["verdict"]
+_gp = _gt["paired"]["G1"]
+put("gtw_fam", _gt["n_families"], _GT, "int")
+put("gtw_targets", _gt["n_targets"], _GT, "int")
+put("gtw_jgain", _gp["joint_gain"]["estimate"], _GT, "pct2")
+put("gtw_jgain_lo", _gp["joint_gain"]["ci_low"], _GT, "pct2")
+put("gtw_jgain_hi", _gp["joint_gain"]["ci_high"], _GT, "pct2")
+put("gtw_cc", _gp["strict_changed_correct"]["estimate"], _GT, "pct2")
+put("gtw_cc_k", _gp["strict_changed_correct"]["k"], _GT, "int")
+put("gtw_cc_n", _gp["strict_changed_correct"]["n"], _GT, "int")
+put("gtw_pf_k", _gp["strict_pass_to_fail"]["k"], _GT, "int")
+put("gtw_pf_n", _gp["strict_pass_to_fail"]["n"], _GT, "int")
+
 # ------------------------------------------------------------------ write ---
 from c3_exports import macros as c3_macros
 for _key, _value in c3_macros().items():

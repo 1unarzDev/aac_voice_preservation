@@ -251,6 +251,7 @@ A strictly negated source was kept in \kn{wbr_neg} random and \kn{wbe_neg} enric
 Restoring the focal cue raised source match by \RES{wbr_gain} and \RES{wbe_gain}\,pp.
 Auditing all \RES{wb_msgs_restored} restorations against R5 exposed a defect in our own input builder: \RES{wb_conflicts} displayed a chip that contradicts the stored source category, e.g., \chip{MAYBE} for a plain assertion, after a fallback in the builder.
 In the five \chip{MAYBE} cases, all \RES{wb_maybe_n} outputs followed the visible chip and failed the source, which a source-fidelity score counts as model failures.
+A validator that decodes only the rendered input now rejects all \RES{r5_conf} before generation; on all \RES{wb_msgs_restored} it reproduces the audit and never certifies the \RES{r5_sure} coarser \chip{SURE} restorations (Table~\ref{tab:decisions}).
 Scored against what the input actually displayed, general-predicate fidelity was \pct{wbr_actual} \cip{wbr_actual} (random) and \pct{wbe_actual} \cip{wbe_actual} (enriched); \RES{wb_unknown} further restorations stay unknown for source attribution (unclear or disputed references, ambiguous words).
 These are separate endpoints on different populations, not an improvement.
 Full-source category mismatches (\pct{wbr_vfull} and \pct{wbe_vfull}) partly reflect differences between the source panel's and the judge's codebooks.
@@ -363,7 +364,7 @@ The gate validates extraction of explicit markers on the discovery inventory; it
     R1: a supplied cue is honored &
     Cue check: speech-act tag \pct{wcm_act_chip1} vs.\ full \pct{wcm_act_full} (W-C) &
     Runtime guard: rule-based check against supplied cues; on a flag, regenerate with feedback up to two times. Discovery strict passes P0/strip-only/guard \RES{c3_guard_pass_p0}/\RES{c3_guard_pass_g1s}/\RES{c3_guard_pass_g1} of \RES{strict_n}; repairs \kof{g1_fix} failures; \RES{g1_calls} extra calls/input &
-    \RES{g1_remain_k} failures remain; repairs are scored predicates, not fluent speech (Fig.~\ref{fig:guard}); monitor and evaluator share a rule-based component; its frozen W-C transfer belongs to companion work, not reported here.\\
+    \RES{g1_remain_k} failures remain; repairs are scored predicates, not fluent speech (Fig.~\ref{fig:guard}); monitor and evaluator share a rule-based component.\\
     \addlinespace
     R4: added cues keep protected values &
     Composition check with repeat floor: Llama with \chip{STATEMENT}: \kn{wdll} &
@@ -372,8 +373,8 @@ The gate validates extraction of explicit markers on the discovery inventory; it
     \addlinespace
     R5: test inputs display the claimed cue &
     Audit: \RES{wb_conflicts}/\RES{wb_msgs_restored} restorations contradict their source &
-    Validate every built input against its specification before generation &
-    Historical requests not rebuilt; affected rows withheld from attribution.\\
+    Executable validator on the rendered input (\texttt{src/validate\_cue\_inputs.py}): rejects \RES{r5_rej}/\RES{r5_conf} known conflicts before generation; replay matches the audit on \RES{r5_agree}/\RES{r5_n} &
+    Chips and politeness words only, else unknown; machine-assessed source labels; historical requests not rebuilt.\\
     \addlinespace
     Oracle: an unchanged source passes &
     Identity check on stored outputs: \RES{id_fail_raw} false failures, one sentence &
@@ -400,6 +401,7 @@ Table~\ref{tab:decisions} shows how each requirement becomes a check, what the c
 The full-mode row is the simplest lesson: if the person can say \say{this is my sentence}, the requirement is met by not generating at all; whether full mode is offered and discoverable is a product decision.
 The guard row shows that the same checks can run at run time.
 On discovery cue channels, regeneration passes more targets than zero-call marker stripping, \RES{c3_guard_increment}\,pp \ci{c3_guard_increment} (\RES{c3_guard_increment_clusters} family clusters; exploratory, paired stored configurations), but this does not establish that the feedback causes the gain.
+Frozen and rerun on W-C's \RES{gtw_fam} speech-act families (\RES{gtw_targets} targets), the guard passed its pre-fixed transfer criteria, raising scored joint pass by \RES{gtw_jgain}\,pp \ci{gtw_jgain} while changing \pct{gtw_cc} (\kn{gtw_cc}) of correct texts with \kn{gtw_pf} pass$\to$fail, on the same partial predicates; companion work analyzes it.
 A scored repair is not necessarily a sentence someone could say (Fig.~\ref{fig:guard}); repair quality and the guard's displaced choices are evaluated in companion work and are not claimed here.
 The oracle and input-builder rows show why test infrastructure needs its own tests: our first oracle repair silently weakened the oracle, and our input builder silently supplied the wrong cue.
 
@@ -407,7 +409,7 @@ The oracle and input-builder rows show why test infrastructure needs its own tes
 Write each requirement conditional on the input and per dimension: \say{preserve meaning} is not testable, \say{if the input carries \chip{NOT}, the output is negated} is.
 Test with minimal pairs, keep defaults separate from failures, and report joint as well as focal preservation.
 Treat added politeness on typed text as a failing test and make style assistance opt-in.
-Give the oracle identity and keyed-mutation tests and re-run them after every relaxation; validate generated test inputs against their specification.
+Give the oracle identity and keyed-mutation tests and re-run them after every relaxation; validate generated test inputs against their specification before generation, as our validator does.
 Gate composition per model and encoding, against repeat draws.
 
 %% =====================================================================
