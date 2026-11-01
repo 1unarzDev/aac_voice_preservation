@@ -182,7 +182,7 @@ Headline question: *when people choose their own keywords, how often does the mo
 
 **Deadline:** CALE-AI or later. If returned by about Nov 6, a compact version can go in SE4All.
 
-**As built:** 300 AACText messages (150 simple-random + 150 enriched: 38 hedges, 38 negation, 37 politeness, 37
+**As built:** 600 AACText messages (150 simple-random + 150 enriched: 38 hedges, 38 negation, 37 politeness, 37
 questions/requests; W-B's 160 and the W-C seeds excluded; inclusion probabilities recorded) in 8 sets of 37–38. Each set
 is done by 3 annotators in Latin-square block orders: 24 sessions of about 20 minutes (the "45 sessions" above
 overcounted: 300 × 3 / 38 ≈ 24). B1 sentences can be added as a later set.
