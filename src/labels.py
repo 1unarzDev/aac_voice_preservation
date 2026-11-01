@@ -94,6 +94,10 @@ def dims_in_chips(chips: list[str]) -> set[str]:
     return {CHIP_TO_GENERAL[c][0] for c in chips if c in CHIP_TO_GENERAL}
 
 
+import os as _os
+_RAW = _os.environ.get("ORACLE_RAW") == "1"
+
+
 def critical_match(dimension: str, variant_value: str, label: str | None) -> bool | None:
     """Does an extracted critical label honour the variant's critical value?
     D-007: on certainty, 'plain assertion' is honoured by plain OR emphatic."""
@@ -101,6 +105,10 @@ def critical_match(dimension: str, variant_value: str, label: str | None) -> boo
         return None
     if dimension == "certainty" and variant_value == PLAIN_A:
         return label in (PLAIN_A, EMPH)
+    # D-015: oracle identity test showed 'acceptance' overlaps 'statement' (verbatim source flagged).
+    # Set ORACLE_RAW=1 to reproduce the uncorrected oracle.
+    if dimension == "speech_act" and variant_value == "acceptance" and not _RAW:
+        return label in ("acceptance", "statement")
     return label == variant_value
 
 

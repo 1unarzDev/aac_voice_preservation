@@ -26,10 +26,10 @@ Entries are estimate [95% CI]; n = observed denominator, f = observed families. 
 | politeness | gpt-6.1-terra | 0.900 [0.750, 1.000]; n=20, f=10 | 0.900 [0.750, 1.000]; n=20, f=10 | 0.500 [0.200, 0.800]; n=10, f=10 | 0.800 [0.500, 1.000]; n=10, f=10 | 0.200 [0.000, 0.500]; n=10, f=10 |
 | politeness | llama3.1-8b | 0.950 [0.850, 1.000]; n=20, f=10 | 0.900 [0.750, 1.000]; n=20, f=10 | 0.500 [0.200, 0.800]; n=10, f=10 | 0.600 [0.300, 0.900]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
 | politeness | qwen2.5-7b | 1.000 [1.000, 1.000]; n=20, f=10 | 0.950 [0.850, 1.000]; n=20, f=10 | 0.600 [0.300, 0.900]; n=10, f=10 | 0.400 [0.100, 0.700]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
-| speech_act | gemma3-4b | 0.800 [0.600, 1.000]; n=20, f=10 | 0.850 [0.650, 1.000]; n=20, f=10 | 0.429 [0.000, 0.833]; n=7, f=7 | 0.300 [0.000, 0.600]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
-| speech_act | gpt-6.1-terra | 0.850 [0.650, 1.000]; n=20, f=10 | 0.950 [0.850, 1.000]; n=20, f=10 | 0.600 [0.000, 1.000]; n=5, f=5 | 0.800 [0.500, 1.000]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
-| speech_act | llama3.1-8b | 0.650 [0.400, 0.850]; n=20, f=10 | 0.750 [0.500, 0.950]; n=20, f=10 | 0.667 [0.200, 1.000]; n=6, f=6 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
-| speech_act | qwen2.5-7b | 0.750 [0.600, 0.900]; n=20, f=10 | 0.950 [0.850, 1.000]; n=20, f=10 | 0.667 [0.250, 1.000]; n=6, f=6 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
+| speech_act | gemma3-4b | 0.850 [0.650, 1.000]; n=20, f=10 | 0.950 [0.850, 1.000]; n=20, f=10 | 0.375 [0.000, 0.714]; n=8, f=8 | 0.300 [0.000, 0.600]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
+| speech_act | gpt-6.1-terra | 0.850 [0.650, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 0.500 [0.000, 1.000]; n=6, f=6 | 0.800 [0.500, 1.000]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
+| speech_act | llama3.1-8b | 0.700 [0.450, 0.950]; n=20, f=10 | 0.850 [0.700, 0.950]; n=20, f=10 | 0.667 [0.200, 1.000]; n=6, f=6 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
+| speech_act | qwen2.5-7b | 0.850 [0.700, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 0.571 [0.167, 0.889]; n=7, f=7 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
 | time_quantity | gemma3-4b | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=1, f=1 | 0.000 [0.000, 0.000]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
 | time_quantity | gpt-6.1-terra | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=3, f=3 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
 | time_quantity | llama3.1-8b | 0.950 [0.850, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 0.500 [0.000, 1.000]; n=2, f=2 | 0.000 [0.000, 0.000]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
@@ -390,86 +390,86 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | P2 | critical_match | 0.5000 | 0.5000 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | critical_match | 0.2500 | 0.1500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3333 | 0.2000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3000 | 0.2000 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.2500 | 0.1000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3000 | 0.2333 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3833 | 0.2500 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3333 | 0.2667 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3167 | 0.2000 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3833 | 0.3167 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.3333 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.7000 | 0.5000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.3966 | 0.3000 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8000 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4310 | 0.3621 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8500 | 0.7333 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.5667 | 0.4333 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.6500 | 0.4000 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.2500 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.6667 | 0.5000 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.7167 | 0.5667 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.8500 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.8333 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.9333 | 0.8329 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.8333 | 0.6833 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.6000 | 0.4000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.6667 | 0.5167 | 0.8000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.6333 | 0.3833 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.7167 | 0.5500 | 0.8667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7333 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | critical_match | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | critical_match | 0.4667 | 0.3333 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | critical_match | 0.8333 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7000 | 0.5667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | critical_match | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | critical_match | 0.5333 | 0.3833 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | critical_match | 0.7500 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.5333 | 0.3667 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | critical_match | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.2833 | 0.1833 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7667 | 0.7000 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8000 | 0.7329 | 0.8833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P2 | critical_match | 0.5167 | 0.3833 | 0.6333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | S3 | critical_match | 0.9333 | 0.8333 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7167 | 0.5667 | 0.8504 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6167 | 0.5000 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | critical_match | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6000 | 0.5167 | 0.6833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3167 | 0.2500 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3500 | 0.2333 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3833 | 0.3000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3500 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3000 | 0.1833 | 0.4167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.3333 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | critical_match | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P1 | critical_match | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | critical_match | 0.1333 | 0.0500 | 0.2333 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -949,102 +949,102 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | full | qwen2.5-7b | P2 | constraint_preserving | 0.3333 | 0.2333 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | full | qwen2.5-7b | S3 | violation | 0.0500 | 0.0000 | 0.1500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | full | qwen2.5-7b | S3 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | violation | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | violation | 0.3000 | 0.1000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.7000 | 0.5000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | violation | 0.6034 | 0.5000 | 0.7000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.3966 | 0.3000 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | violation | 0.2000 | 0.0000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | violation | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | violation | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | violation | 0.5690 | 0.5000 | 0.6379 | 58 | 58 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.4310 | 0.3621 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | violation | 0.1500 | 0.0000 | 0.3500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P0 | violation | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | violation | 0.1500 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | constraint_preserving | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | violation | 0.1500 | 0.0500 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.8500 | 0.7333 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | violation | 0.1167 | 0.0333 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | violation | 0.1833 | 0.0500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | violation | 0.3500 | 0.1500 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | violation | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | violation | 0.4333 | 0.2833 | 0.5667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.5667 | 0.4333 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | violation | 0.3500 | 0.1500 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.6500 | 0.4000 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | violation | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | violation | 0.5000 | 0.2500 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.5000 | 0.2500 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | violation | 0.3333 | 0.1833 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.6667 | 0.5000 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | violation | 0.2833 | 0.1500 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.7167 | 0.5667 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | violation | 0.1500 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | violation | 0.2500 | 0.0500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.6500 | 0.3500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | violation | 0.4667 | 0.3333 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.4500 | 0.2667 | 0.6167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | violation | 0.1667 | 0.0000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.7000 | 0.4500 | 0.9000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | violation | 0.3000 | 0.0500 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | violation | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | violation | 0.3500 | 0.2167 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | violation | 0.3000 | 0.0500 | 0.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | violation | 0.1500 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | violation | 0.4000 | 0.1500 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | violation | 0.2500 | 0.1667 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | violation | 0.1833 | 0.0500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | violation | 0.1500 | 0.0500 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | violation | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.5500 | 0.4333 | 0.6500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | violation | 0.0667 | 0.0000 | 0.1671 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | violation | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | violation | 0.1667 | 0.0500 | 0.3167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.8333 | 0.6833 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | violation | 0.1167 | 0.0500 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.8833 | 0.8000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | violation | 0.0500 | 0.0000 | 0.1167 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | constraint_preserving | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | violation | 0.3500 | 0.1500 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | violation | 0.4000 | 0.2500 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.6000 | 0.4000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | violation | 0.3333 | 0.2000 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.5833 | 0.4000 | 0.7500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | violation | 0.3667 | 0.1500 | 0.6167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.6333 | 0.3833 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | violation | 0.3000 | 0.0500 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | violation | 0.3000 | 0.0500 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | violation | 0.2833 | 0.1333 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.6000 | 0.4167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | violation | 0.2667 | 0.0500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.7333 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | violation | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | violation | 0.3000 | 0.1000 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | violation | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.2500 | 0.1167 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | violation | 0.1667 | 0.0000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.7833 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | violation | 0.3000 | 0.1667 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5254 | 0.3667 | 0.6949 | 59 | 60 | 1 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | violation | 0.0500 | 0.0000 | 0.1500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9333 | 0.8167 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | violation | 0.2500 | 0.0500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | violation | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | violation | 0.4667 | 0.3000 | 0.6167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.3333 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | violation | 0.2500 | 0.0500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.7500 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | violation | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | violation | 0.4667 | 0.3333 | 0.6333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4000 | 0.2667 | 0.5333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | violation | 0.0500 | 0.0000 | 0.1500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | violation | 0.2500 | 0.0500 | 0.4512 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | violation | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | violation | 0.2333 | 0.1667 | 0.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.6833 | 0.6000 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | violation | 0.2667 | 0.0833 | 0.4837 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | violation | 0.2500 | 0.0500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | violation | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | violation | 0.2000 | 0.1167 | 0.2671 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.6667 | 0.5333 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | violation | 0.2500 | 0.0500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P1 | violation | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P2 | violation | 0.4833 | 0.3667 | 0.6167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.3000 | 0.2000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | S3 | violation | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.8833 | 0.7500 | 0.9833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | violation | 0.2833 | 0.1496 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5424 | 0.4000 | 0.6949 | 59 | 60 | 1 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9833 | 0.9500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | violation | 0.1500 | 0.0500 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | violation | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | violation | 0.3833 | 0.2333 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.4000 | 0.2833 | 0.5167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | violation | 0.1500 | 0.0500 | 0.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | violation | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | violation | 0.4000 | 0.3167 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4500 | 0.3500 | 0.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | time_quantity | chip1 | gemma3-4b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | chip1 | gemma3-4b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | chip1 | gemma3-4b | P1 | violation | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -2259,62 +2259,62 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | share_other_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | default_preference_index | 0.2667 | 0.0000 | 0.8000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_A | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_B | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_A | 0.3750 | 0.0000 | 0.7143 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_B | 0.6250 | 0.2857 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_B_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_A | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_B | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_A | 0.3750 | 0.0000 | 0.7143 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_B | 0.6250 | 0.2857 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_B_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_A | 0.6000 | 0.3571 | 0.8753 | 15 | 30 | 15 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_B | 0.4000 | 0.1247 | 0.6429 | 15 | 30 | 15 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_A | 0.5000 | 0.2632 | 0.7500 | 18 | 30 | 12 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_B | 0.5000 | 0.2500 | 0.7368 | 18 | 30 | 12 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | share_A_all | 0.3000 | 0.1667 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_B_all | 0.2000 | 0.0333 | 0.3667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_other_all | 0.4667 | 0.3000 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_B_all | 0.3000 | 0.1333 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_other_all | 0.3667 | 0.2667 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | share_unclear_all | 0.0333 | 0.0000 | 0.1000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | default_preference_index | 0.2000 | 0.0000 | 0.7778 | 15 | 30 | 15 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_A | 0.4500 | 0.0000 | 0.8333 | 20 | 30 | 10 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_B | 0.5500 | 0.1667 | 1.0000 | 20 | 30 | 10 | 10 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | default_preference_index | 0.0000 | 0.0000 | 0.5294 | 18 | 30 | 12 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_A | 0.3913 | 0.0000 | 0.7500 | 23 | 30 | 7 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_B | 0.6087 | 0.2500 | 1.0000 | 23 | 30 | 7 | 10 | 8 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_B_all | 0.3667 | 0.1000 | 0.6667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_other_all | 0.3333 | 0.0667 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_B_all | 0.4667 | 0.2000 | 0.7667 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_other_all | 0.2333 | 0.0333 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | default_preference_index | 0.1000 | 0.0000 | 1.0000 | 20 | 30 | 10 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_A | 0.6000 | 0.0000 | 1.0000 | 5 | 10 | 5 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_B | 0.4000 | 0.0000 | 1.0000 | 5 | 10 | 5 | 10 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | default_preference_index | 0.2174 | 0.0000 | 1.0000 | 23 | 30 | 7 | 10 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_A | 0.5000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_B | 0.5000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_other_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | default_preference_index | 0.2000 | 0.0000 | 1.0000 | 5 | 10 | 5 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_A | 0.6667 | 0.2000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_B | 0.3333 | 0.0000 | 0.8000 | 6 | 10 | 4 | 10 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | default_preference_index | 0.0000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_A | 0.5714 | 0.1667 | 0.8889 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_B | 0.4286 | 0.1111 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_other_all | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | share_unclear_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_A | 0.5000 | 0.4286 | 0.5714 | 18 | 30 | 12 | 10 | 8 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_B | 0.5000 | 0.4286 | 0.5714 | 18 | 30 | 12 | 10 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_A | 0.4500 | 0.3333 | 0.5455 | 20 | 30 | 10 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_B | 0.5500 | 0.4545 | 0.6667 | 20 | 30 | 10 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | share_A_all | 0.3000 | 0.2000 | 0.4000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_B_all | 0.3000 | 0.2000 | 0.4000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_other_all | 0.4000 | 0.2333 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_B_all | 0.3667 | 0.3333 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_other_all | 0.3333 | 0.2000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | default_preference_index | 0.0000 | 0.0000 | 0.1765 | 18 | 30 | 12 | 10 | 8 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_A | 0.6667 | 0.2500 | 1.0000 | 15 | 30 | 15 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_B | 0.3333 | 0.0000 | 0.7500 | 15 | 30 | 15 | 10 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | P2 | default_preference_index | 0.1000 | 0.0000 | 0.3333 | 20 | 30 | 10 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_A | 0.5556 | 0.1667 | 0.9171 | 18 | 30 | 12 | 10 | 6 | 1999 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_B | 0.4444 | 0.0829 | 0.8333 | 18 | 30 | 12 | 10 | 6 | 1999 |
 | speech_act | bare | gpt-6.1-terra | S3 | share_A_all | 0.3333 | 0.1000 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_B_all | 0.1667 | 0.0000 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_other_all | 0.5000 | 0.2000 | 0.8000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_B_all | 0.2667 | 0.0650 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 15 | 30 | 15 | 10 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | default_preference_index | 0.1111 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
 | speech_act | bare | llama3.1-8b | P0 | share_A | 0.6667 | 0.2000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | share_B | 0.3333 | 0.0000 | 0.8000 | 6 | 10 | 4 | 10 | 6 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
@@ -2322,20 +2322,20 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | bare | llama3.1-8b | P0 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_A | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_B | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_A | 0.5000 | 0.1424 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_B | 0.5000 | 0.1429 | 0.8576 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_A | 0.5789 | 0.2628 | 0.8421 | 19 | 30 | 11 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_B | 0.4211 | 0.1579 | 0.7372 | 19 | 30 | 11 | 10 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_A | 0.4783 | 0.1905 | 0.7308 | 23 | 30 | 7 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_B | 0.5217 | 0.2692 | 0.8095 | 23 | 30 | 7 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | share_A_all | 0.3667 | 0.1333 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_B_all | 0.2667 | 0.1000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_other_all | 0.3667 | 0.1333 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_B_all | 0.4000 | 0.2333 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_other_all | 0.2333 | 0.1000 | 0.3667 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | default_preference_index | 0.1579 | 0.0000 | 0.7143 | 19 | 30 | 11 | 10 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | default_preference_index | 0.0435 | 0.0000 | 0.6195 | 23 | 30 | 7 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | share_A | 0.6667 | 0.2000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | share_B | 0.3333 | 0.0000 | 0.8000 | 18 | 30 | 12 | 10 | 6 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
@@ -2343,55 +2343,55 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | bare | llama3.1-8b | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | P0 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 10 | 4 | 10 | 6 | 1999 |
+| speech_act | bare | qwen2.5-7b | P0 | share_A | 0.5714 | 0.1667 | 0.8889 | 7 | 10 | 3 | 10 | 7 | 1999 |
+| speech_act | bare | qwen2.5-7b | P0 | share_B | 0.4286 | 0.1111 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 1999 |
 | speech_act | bare | qwen2.5-7b | P0 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | P1 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | P1 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 10 | 4 | 10 | 6 | 1999 |
+| speech_act | bare | qwen2.5-7b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 1999 |
+| speech_act | bare | qwen2.5-7b | P1 | share_A | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_B | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | P2 | share_A | 0.5500 | 0.2222 | 0.8333 | 20 | 30 | 10 | 10 | 8 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_B | 0.4500 | 0.1667 | 0.7778 | 20 | 30 | 10 | 10 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_A | 0.4583 | 0.1667 | 0.7241 | 24 | 30 | 6 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_B | 0.5417 | 0.2759 | 0.8333 | 24 | 30 | 6 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | share_A_all | 0.3667 | 0.1333 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_B_all | 0.3000 | 0.1000 | 0.5333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_other_all | 0.3333 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_B_all | 0.4333 | 0.2333 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_other_all | 0.2000 | 0.0667 | 0.3333 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | default_preference_index | 0.1000 | 0.0000 | 0.7273 | 20 | 30 | 10 | 10 | 8 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_A | 0.6667 | 0.2500 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | share_B | 0.3333 | 0.0000 | 0.7500 | 18 | 30 | 12 | 10 | 6 | 1999 |
+| speech_act | bare | qwen2.5-7b | P2 | default_preference_index | 0.0833 | 0.0000 | 0.6667 | 24 | 30 | 6 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_A | 0.5714 | 0.1667 | 0.8889 | 21 | 30 | 9 | 10 | 7 | 1999 |
+| speech_act | bare | qwen2.5-7b | S3 | share_B | 0.4286 | 0.1111 | 0.8333 | 21 | 30 | 9 | 10 | 7 | 1999 |
 | speech_act | bare | qwen2.5-7b | S3 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | share_A | 0.5000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | share_B | 0.5000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
+| speech_act | bare | qwen2.5-7b | S3 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 21 | 30 | 9 | 10 | 7 | 1999 |
+| speech_act | noncrit | gemma3-4b | P0 | share_A | 0.4286 | 0.0000 | 0.8000 | 7 | 10 | 3 | 10 | 7 | 1999 |
+| speech_act | noncrit | gemma3-4b | P0 | share_B | 0.5714 | 0.2000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 1999 |
 | speech_act | noncrit | gemma3-4b | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | default_preference_index | 0.0000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P1 | share_A | 0.5714 | 0.2000 | 0.8892 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_B | 0.4286 | 0.1108 | 0.8000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 1999 |
+| speech_act | noncrit | gemma3-4b | P1 | share_A | 0.5000 | 0.1429 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_B | 0.5000 | 0.1429 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_A | 0.5882 | 0.3125 | 0.8333 | 17 | 30 | 13 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_B | 0.4118 | 0.1667 | 0.6875 | 17 | 30 | 13 | 10 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_A | 0.5263 | 0.2667 | 0.7500 | 19 | 30 | 11 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_B | 0.4737 | 0.2500 | 0.7333 | 19 | 30 | 11 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | share_A_all | 0.3333 | 0.1333 | 0.5333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_B_all | 0.2333 | 0.0667 | 0.4000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_other_all | 0.4000 | 0.2333 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_B_all | 0.3000 | 0.1667 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_other_all | 0.3333 | 0.2000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | share_unclear_all | 0.0333 | 0.0000 | 0.1000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | default_preference_index | 0.1765 | 0.0000 | 0.6842 | 17 | 30 | 13 | 10 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | default_preference_index | 0.0526 | 0.0000 | 0.5716 | 19 | 30 | 11 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | share_A | 0.5000 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
 | speech_act | noncrit | gemma3-4b | S3 | share_B | 0.5000 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
 | speech_act | noncrit | gemma3-4b | S3 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
@@ -2413,20 +2413,20 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | gpt-6.1-terra | P1 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | share_unclear_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | default_preference_index | 0.6000 | 0.0000 | 1.0000 | 5 | 10 | 5 | 10 | 5 | 1996 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_A | 0.4762 | 0.3750 | 0.5833 | 21 | 30 | 9 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_B | 0.5238 | 0.4167 | 0.6250 | 21 | 30 | 9 | 10 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_A | 0.4348 | 0.3158 | 0.5417 | 23 | 30 | 7 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_B | 0.5652 | 0.4583 | 0.6842 | 23 | 30 | 7 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | share_A_all | 0.3333 | 0.2000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_B_all | 0.3667 | 0.2333 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_other_all | 0.3000 | 0.1000 | 0.5333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_B_all | 0.4333 | 0.3333 | 0.5333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_other_all | 0.2333 | 0.0667 | 0.4000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | default_preference_index | 0.0476 | 0.0000 | 0.2632 | 21 | 30 | 9 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_A | 0.5000 | 0.1667 | 0.8333 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_B | 0.5000 | 0.1667 | 0.8333 | 18 | 30 | 12 | 10 | 6 | 1999 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | default_preference_index | 0.1304 | 0.0000 | 0.3684 | 23 | 30 | 7 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_A | 0.4286 | 0.1175 | 0.7308 | 21 | 30 | 9 | 10 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_B | 0.5714 | 0.2692 | 0.8825 | 21 | 30 | 9 | 10 | 8 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | share_A_all | 0.3000 | 0.0667 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_B_all | 0.3000 | 0.0667 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_B_all | 0.4000 | 0.1667 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_other_all | 0.3000 | 0.0667 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | default_preference_index | 0.0000 | 0.0000 | 0.8333 | 18 | 30 | 12 | 10 | 6 | 1999 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | default_preference_index | 0.1429 | 0.0000 | 0.7778 | 21 | 30 | 9 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | share_A | 0.6250 | 0.2500 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | share_B | 0.3750 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | share_A_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
@@ -2434,20 +2434,20 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | llama3.1-8b | P0 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_A | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_B | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_A | 0.5000 | 0.1424 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_B | 0.5000 | 0.1429 | 0.8576 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_A | 0.5556 | 0.2220 | 0.8462 | 18 | 30 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_B | 0.4444 | 0.1538 | 0.7780 | 18 | 30 | 12 | 10 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_A | 0.4545 | 0.1664 | 0.7273 | 22 | 30 | 8 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_B | 0.5455 | 0.2727 | 0.8336 | 22 | 30 | 8 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | share_A_all | 0.3333 | 0.1000 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_B_all | 0.2667 | 0.1000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_other_all | 0.4000 | 0.1667 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_B_all | 0.4000 | 0.2000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_other_all | 0.2667 | 0.1333 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | default_preference_index | 0.1111 | 0.0000 | 0.7500 | 18 | 30 | 12 | 10 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | default_preference_index | 0.0909 | 0.0000 | 0.6842 | 22 | 30 | 8 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | share_A | 0.6250 | 0.2500 | 1.0000 | 24 | 30 | 6 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | share_B | 0.3750 | 0.0000 | 0.7500 | 24 | 30 | 6 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | share_A_all | 0.5000 | 0.2000 | 0.8000 | 30 | 30 | 0 | 10 | 10 | 2000 |
@@ -2455,34 +2455,34 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | llama3.1-8b | S3 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 24 | 30 | 6 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_A | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_B | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_A | 0.5000 | 0.1424 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_B | 0.5000 | 0.1429 | 0.8576 | 8 | 10 | 2 | 10 | 8 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 10 | 4 | 10 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_A | 0.5714 | 0.2000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_B | 0.4286 | 0.0000 | 0.8000 | 7 | 10 | 3 | 10 | 7 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_A | 0.5000 | 0.2000 | 0.8095 | 20 | 30 | 10 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_B | 0.5000 | 0.1905 | 0.8000 | 20 | 30 | 10 | 10 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_A | 0.4167 | 0.1538 | 0.6923 | 24 | 30 | 6 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_B | 0.5833 | 0.3077 | 0.8462 | 24 | 30 | 6 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | share_A_all | 0.3333 | 0.1333 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_B_all | 0.3333 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_other_all | 0.3333 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_B_all | 0.4667 | 0.2333 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_other_all | 0.2000 | 0.0667 | 0.3333 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | default_preference_index | 0.0000 | 0.0000 | 0.7143 | 20 | 30 | 10 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_A | 0.5714 | 0.1667 | 1.0000 | 21 | 30 | 9 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_B | 0.4286 | 0.0000 | 0.8333 | 21 | 30 | 9 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | default_preference_index | 0.1667 | 0.0000 | 0.6923 | 24 | 30 | 6 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_A | 0.5000 | 0.1424 | 0.8571 | 24 | 30 | 6 | 10 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_B | 0.5000 | 0.1429 | 0.8576 | 24 | 30 | 6 | 10 | 8 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 21 | 30 | 9 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 24 | 30 | 6 | 10 | 8 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | share_A | 1.0000 | 1.0000 | 1.0000 | 1 | 10 | 9 | 10 | 1 | 1300 |
 | time_quantity | bare | gemma3-4b | P0 | share_B | 0.0000 | 0.0000 | 0.0000 | 1 | 10 | 9 | 10 | 1 | 1300 |
 | time_quantity | bare | gemma3-4b | P0 | share_A_all | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
@@ -2862,21 +2862,21 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | qwen2.5-7b | P2 | critical_match_difference | 0.4000 | 0.3500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | politeness | qwen2.5-7b | S3 | critical_match_difference | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | speech_act | gemma3-4b | P0 | critical_match_difference | 0.5000 | 0.3500 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gemma3-4b | P1 | critical_match_difference | 0.3500 | 0.1000 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | gemma3-4b | P1 | critical_match_difference | 0.4000 | 0.1488 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | speech_act | gemma3-4b | P2 | critical_match_difference | 0.1000 | 0.0333 | 0.1667 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gemma3-4b | S3 | critical_match_difference | 0.5000 | 0.3500 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | gemma3-4b | S3 | critical_match_difference | 0.5500 | 0.4000 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.5000 | 0.2500 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.6000 | 0.4000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | speech_act | gpt-6.1-terra | P2 | critical_match_difference | 0.5000 | 0.4000 | 0.5833 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.5167 | 0.3333 | 0.6833 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.2500 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | P1 | critical_match_difference | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | P2 | critical_match_difference | 0.2667 | 0.1833 | 0.3667 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.2500 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | P2 | critical_match_difference | 0.3333 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.3667 | 0.2333 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.4667 | 0.2833 | 0.6333 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.3000 | 0.0000 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | P1 | critical_match_difference | 0.4000 | 0.2000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | P2 | critical_match_difference | 0.2833 | 0.1833 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.3000 | 0.0000 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.4500 | 0.3000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.2500 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | P2 | critical_match_difference | 0.3500 | 0.2329 | 0.4667 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.4167 | 0.2333 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | time_quantity | gemma3-4b | P0 | critical_match_difference | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | time_quantity | gemma3-4b | P1 | critical_match_difference | 0.8000 | 0.5500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | time_quantity | gemma3-4b | P2 | critical_match_difference | 0.6000 | 0.4167 | 0.7833 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
@@ -2957,22 +2957,22 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | qwen2.5-7b | P1 | critical_match_difference | -0.1000 | -0.2500 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | politeness | qwen2.5-7b | P2 | critical_match_difference | -0.3333 | -0.4504 | -0.2000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | politeness | qwen2.5-7b | S3 | critical_match_difference | -0.0500 | -0.1500 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | P0 | critical_match_difference | 0.0500 | -0.1500 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | P0 | critical_match_difference | 0.1000 | -0.1000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | speech_act | gemma3-4b | P1 | critical_match_difference | 0.0000 | -0.3000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | P2 | critical_match_difference | 0.0833 | -0.0500 | 0.2000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | S3 | critical_match_difference | 0.0333 | -0.1500 | 0.2833 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.1000 | -0.1000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.1000 | -0.1000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | P2 | critical_match_difference | -0.1500 | -0.3667 | 0.0667 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.1333 | -0.0167 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.1000 | -0.2000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | P2 | critical_match_difference | 0.1000 | -0.0333 | 0.2167 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | S3 | critical_match_difference | 0.0833 | -0.1167 | 0.3333 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.1500 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | P2 | critical_match_difference | -0.1667 | -0.3667 | 0.0167 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.1833 | 0.0500 | 0.3333 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.1500 | -0.1000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | speech_act | llama3.1-8b | P1 | critical_match_difference | 0.1000 | -0.1500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | P2 | critical_match_difference | -0.0333 | -0.1833 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.1000 | -0.2000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | P2 | critical_match_difference | -0.0333 | -0.2000 | 0.1667 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.1500 | -0.1000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.1500 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.3000 | -0.0500 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | P2 | critical_match_difference | -0.1333 | -0.2333 | -0.0167 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.2333 | 0.1000 | 0.3833 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | P2 | critical_match_difference | -0.1500 | -0.2500 | -0.0500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.1833 | 0.0500 | 0.3333 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | time_quantity | gemma3-4b | P0 | critical_match_difference | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | time_quantity | gemma3-4b | P1 | critical_match_difference | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | time_quantity | gemma3-4b | P2 | critical_match_difference | 0.1167 | -0.0667 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
@@ -7338,49 +7338,49 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | distinct_critical_values | 1.1000 | 1.0000 | 1.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | coverage_at_3 | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | distinct_critical_values | 2.0000 | 1.6000 | 2.4000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | distinct_critical_values | 2.2000 | 2.0000 | 2.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | distinct_critical_values | 1.1000 | 1.0000 | 1.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | coverage_at_3 | 0.8000 | 0.5000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | distinct_critical_values | 2.4000 | 1.9000 | 2.9000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | distinct_critical_values | 2.6000 | 2.3000 | 2.9000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | coverage_at_3 | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | distinct_critical_values | 1.1000 | 1.0000 | 1.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | distinct_critical_values | 1.6000 | 1.3000 | 1.9000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | distinct_critical_values | 1.8000 | 1.5000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | distinct_critical_values | 1.5000 | 1.2000 | 1.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | distinct_critical_values | 1.7000 | 1.4000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | coverage_at_3 | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | distinct_critical_values | 1.9000 | 1.6000 | 2.2000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | distinct_critical_values | 2.1000 | 2.0000 | 2.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | coverage_at_3 | 0.8000 | 0.5000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | distinct_critical_values | 2.1000 | 1.7000 | 2.5025 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | distinct_critical_values | 2.3000 | 2.0000 | 2.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | distinct_critical_values | 1.2000 | 1.0000 | 1.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | distinct_critical_values | 1.4000 | 1.1000 | 1.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | distinct_critical_values | 1.6000 | 1.2000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | distinct_critical_values | 1.8000 | 1.4000 | 2.2000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | distinct_critical_values | 1.5000 | 1.2000 | 1.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | distinct_critical_values | 1.7000 | 1.4000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
@@ -7704,70 +7704,70 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 10 | 20 | 10 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | extra_actions | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 10 | 20 | 10 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | extra_actions | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | P1 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
+| speech_act | bare | gemma3-4b | S3 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | extra_actions | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | S3 | extra_actions | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
 | speech_act | bare | llama3.1-8b | P0 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | P1 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | bare | qwen2.5-7b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
+| speech_act | bare | qwen2.5-7b | P1 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | extra_actions | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 9 | 20 | 11 | 10 | 9 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
+| speech_act | noncrit | gemma3-4b | P0 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
+| speech_act | noncrit | gemma3-4b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
 | speech_act | noncrit | gpt-6.1-terra | P0 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | extra_actions | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 20 | 15 | 10 | 5 | 1996 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
 | speech_act | noncrit | llama3.1-8b | P0 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | extra_actions | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 9 | 20 | 11 | 10 | 9 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | extra_actions | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 1 | 20 | 19 | 10 | 1 | 1300 |
 | time_quantity | bare | gemma3-4b | P1 | extra_actions | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -7975,38 +7975,38 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 20 | 40 | 20 | 10 | 10 | 2000 |
 | politeness | qwen2.5-7b | S3 | extra_actions | 0.5000 | 0.5000 | 0.5000 | 40 | 40 | 0 | 10 | 10 | 2000 |
 | politeness | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 20 | 40 | 20 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P0 | extra_actions | 0.6750 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 7 | 2000 |
-| speech_act | gemma3-4b | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 7 | 2000 |
-| speech_act | gemma3-4b | P2 | extra_actions | 0.6750 | 0.5500 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 7 | 2000 |
-| speech_act | gemma3-4b | S3 | extra_actions | 0.6750 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 7 | 2000 |
-| speech_act | gpt-6.1-terra | P0 | extra_actions | 0.7000 | 0.5750 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 2000 |
-| speech_act | gpt-6.1-terra | P1 | extra_actions | 0.7250 | 0.6000 | 0.8750 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 11 | 40 | 29 | 10 | 6 | 2000 |
-| speech_act | gpt-6.1-terra | P2 | extra_actions | 0.7000 | 0.5750 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 2000 |
-| speech_act | gpt-6.1-terra | S3 | extra_actions | 0.7250 | 0.5750 | 0.8750 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 11 | 40 | 29 | 10 | 6 | 1999 |
+| speech_act | gemma3-4b | P0 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
+| speech_act | gemma3-4b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 16 | 40 | 24 | 10 | 8 | 2000 |
+| speech_act | gemma3-4b | P2 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
+| speech_act | gemma3-4b | S3 | extra_actions | 0.6500 | 0.5500 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | P0 | extra_actions | 0.6750 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | P1 | extra_actions | 0.7000 | 0.5750 | 0.8256 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 2000 |
+| speech_act | gpt-6.1-terra | P2 | extra_actions | 0.6750 | 0.5750 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | S3 | extra_actions | 0.7000 | 0.5750 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 1999 |
 | speech_act | llama3.1-8b | P0 | extra_actions | 0.6500 | 0.5494 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
 | speech_act | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
-| speech_act | llama3.1-8b | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 7 | 2000 |
-| speech_act | llama3.1-8b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 7 | 2000 |
+| speech_act | llama3.1-8b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 16 | 40 | 24 | 10 | 8 | 2000 |
+| speech_act | llama3.1-8b | P2 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
 | speech_act | llama3.1-8b | S3 | extra_actions | 0.6500 | 0.5494 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
 | speech_act | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
-| speech_act | qwen2.5-7b | P0 | extra_actions | 0.6750 | 0.5500 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 7 | 2000 |
-| speech_act | qwen2.5-7b | P1 | extra_actions | 0.7000 | 0.5750 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 2000 |
-| speech_act | qwen2.5-7b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 7 | 2000 |
-| speech_act | qwen2.5-7b | S3 | extra_actions | 0.6750 | 0.5500 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 7 | 2000 |
+| speech_act | qwen2.5-7b | P0 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
+| speech_act | qwen2.5-7b | P1 | extra_actions | 0.6500 | 0.5500 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
+| speech_act | qwen2.5-7b | P2 | extra_actions | 0.5500 | 0.5000 | 0.6500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 18 | 40 | 22 | 10 | 9 | 2000 |
+| speech_act | qwen2.5-7b | S3 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
+| speech_act | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
 | time_quantity | gemma3-4b | P0 | extra_actions | 0.9250 | 0.8500 | 1.0000 | 40 | 40 | 0 | 10 | 10 | 2000 |
 | time_quantity | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 3 | 40 | 37 | 10 | 3 | 1943 |
 | time_quantity | gemma3-4b | P1 | extra_actions | 0.9500 | 0.8750 | 1.0000 | 40 | 40 | 0 | 10 | 10 | 2000 |
@@ -9654,42 +9654,42 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | input_characters | 19.2000 | 16.8000 | 21.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | keyword_count | 3.2000 | 3.0000 | 3.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | critical_match | 0.2500 | 0.1500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3000 | 0.2333 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3333 | 0.2000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3833 | 0.2500 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3000 | 0.2000 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3333 | 0.2667 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.2500 | 0.1000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -9699,12 +9699,12 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | bare | llama3.1-8b | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3167 | 0.2000 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3833 | 0.3167 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -9714,42 +9714,42 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | bare | llama3.1-8b | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.3333 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.7000 | 0.5000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.3966 | 0.3000 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4310 | 0.3621 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P2 | input_actions | 3.1034 | 3.0000 | 3.3103 | 58 | 58 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P2 | input_characters | 12.5172 | 10.8621 | 14.5862 | 58 | 58 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P2 | keyword_count | 2.1034 | 2.0000 | 2.3103 | 58 | 58 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8000 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gemma3-4b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -9764,7 +9764,7 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | chip1 | gpt-6.1-terra | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8500 | 0.7333 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P2 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -9774,62 +9774,62 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | chip1 | gpt-6.1-terra | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.5667 | 0.4333 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P2 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.6500 | 0.4000 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | llama3.1-8b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.2500 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.6667 | 0.5000 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P2 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.7167 | 0.5667 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | qwen2.5-7b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.8500 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.8333 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.9333 | 0.8329 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gemma3-4b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -9839,12 +9839,12 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | chipall | gpt-6.1-terra | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.8333 | 0.6833 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -9854,137 +9854,137 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | chipall | gpt-6.1-terra | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.6000 | 0.4000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.6667 | 0.5167 | 0.8000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7667 | 0.7000 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.6333 | 0.3833 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | llama3.1-8b | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.7167 | 0.5500 | 0.8667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8000 | 0.7329 | 0.8833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7333 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | qwen2.5-7b | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | critical_match | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | critical_match | 0.4667 | 0.3333 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P2 | critical_match | 0.5167 | 0.3833 | 0.6333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | critical_match | 0.8333 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | S3 | critical_match | 0.9333 | 0.8333 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7000 | 0.5667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7167 | 0.5667 | 0.8504 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | critical_match | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | critical_match | 0.5333 | 0.3833 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6167 | 0.5000 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | critical_match | 0.7500 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | critical_match | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.5333 | 0.3667 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6000 | 0.5167 | 0.6833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | critical_match | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | full | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.2833 | 0.1833 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3167 | 0.2500 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -10004,12 +10004,12 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | gpt-6.1-terra | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3500 | 0.2333 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3833 | 0.3000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3500 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -10019,12 +10019,12 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | llama3.1-8b | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3000 | 0.1833 | 0.4167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -10034,22 +10034,22 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | llama3.1-8b | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.3333 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -11284,86 +11284,86 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P1 | 0.0000 | 0.5000 | 3.2000 | 19.2000 | 3.2000 | False |
 | politeness | noncrit | qwen2.5-7b | P2 | 0.0000 | 0.5000 | 3.2000 | 19.2000 | 3.2000 | False |
 | politeness | noncrit | qwen2.5-7b | S3 | 0.0000 | 0.5000 | 3.2000 | 19.2000 | 3.2000 | False |
-| speech_act | bare | gemma3-4b | P0 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gemma3-4b | P1 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gemma3-4b | P2 | 0.0000 | 0.2500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gemma3-4b | S3 | 0.0000 | 0.3333 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | P0 | 0.0000 | 0.2500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | P1 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | P2 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | S3 | 0.0000 | 0.2500 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gemma3-4b | P0 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gemma3-4b | P1 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gemma3-4b | P2 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gemma3-4b | S3 | 0.0000 | 0.3833 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gpt-6.1-terra | P0 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gpt-6.1-terra | P1 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gpt-6.1-terra | P2 | 0.0000 | 0.3333 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | gpt-6.1-terra | S3 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
 | speech_act | bare | llama3.1-8b | P0 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | llama3.1-8b | P1 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | llama3.1-8b | P2 | 0.0000 | 0.3167 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | llama3.1-8b | P1 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | llama3.1-8b | P2 | 0.0000 | 0.3833 | 2.1000 | 11.4000 | 2.1000 | True |
 | speech_act | bare | llama3.1-8b | S3 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | P0 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | P1 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | P2 | 0.0000 | 0.3333 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | S3 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | chip1 | gemma3-4b | P0 | 1.0000 | 0.8000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gemma3-4b | P1 | 1.0000 | 0.7000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gemma3-4b | P2 | 1.0000 | 0.3966 | 3.1034 | 12.5172 | 2.1034 | True |
-| speech_act | chip1 | gemma3-4b | S3 | 1.0000 | 0.8000 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | bare | qwen2.5-7b | P0 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | qwen2.5-7b | P1 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | qwen2.5-7b | P2 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | bare | qwen2.5-7b | S3 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
+| speech_act | chip1 | gemma3-4b | P0 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | gemma3-4b | P1 | 1.0000 | 0.8000 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | gemma3-4b | P2 | 1.0000 | 0.4310 | 3.1034 | 12.5172 | 2.1034 | True |
+| speech_act | chip1 | gemma3-4b | S3 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
 | speech_act | chip1 | gpt-6.1-terra | P0 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
 | speech_act | chip1 | gpt-6.1-terra | P1 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gpt-6.1-terra | P2 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | gpt-6.1-terra | P2 | 1.0000 | 0.8833 | 3.1000 | 12.4000 | 2.1000 | True |
 | speech_act | chip1 | gpt-6.1-terra | S3 | 1.0000 | 0.8167 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | P0 | 1.0000 | 0.6500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | P1 | 1.0000 | 0.7000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | P2 | 1.0000 | 0.5667 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | S3 | 1.0000 | 0.6500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | P0 | 1.0000 | 0.7500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | P1 | 1.0000 | 0.5000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | P2 | 1.0000 | 0.6667 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | S3 | 1.0000 | 0.7167 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | P0 | 2.2000 | 0.8500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | P1 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | P2 | 2.2000 | 0.5333 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | S3 | 2.2000 | 0.8333 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chip1 | llama3.1-8b | P0 | 1.0000 | 0.7000 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | llama3.1-8b | P1 | 1.0000 | 0.8000 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | llama3.1-8b | P2 | 1.0000 | 0.6500 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | llama3.1-8b | S3 | 1.0000 | 0.7000 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | qwen2.5-7b | P0 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | qwen2.5-7b | P1 | 1.0000 | 0.6000 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | qwen2.5-7b | P2 | 1.0000 | 0.7500 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chip1 | qwen2.5-7b | S3 | 1.0000 | 0.8167 | 3.1000 | 12.4000 | 2.1000 | True |
+| speech_act | chipall | gemma3-4b | P0 | 2.2000 | 0.9500 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | gemma3-4b | P1 | 2.2000 | 0.8500 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | gemma3-4b | P2 | 2.2000 | 0.6333 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | gemma3-4b | S3 | 2.2000 | 0.9333 | 4.3000 | 13.6000 | 2.1000 | True |
 | speech_act | chipall | gpt-6.1-terra | P0 | 2.2000 | 0.9500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gpt-6.1-terra | P1 | 2.2000 | 0.9000 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gpt-6.1-terra | P2 | 2.2000 | 0.8333 | 4.3000 | 13.6000 | 2.1000 | False |
+| speech_act | chipall | gpt-6.1-terra | P1 | 2.2000 | 1.0000 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | gpt-6.1-terra | P2 | 2.2000 | 0.8833 | 4.3000 | 13.6000 | 2.1000 | False |
 | speech_act | chipall | gpt-6.1-terra | S3 | 2.2000 | 0.9500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | llama3.1-8b | P0 | 2.2000 | 0.6500 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | chipall | llama3.1-8b | P1 | 2.2000 | 0.6000 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | chipall | llama3.1-8b | P2 | 2.2000 | 0.6667 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | llama3.1-8b | S3 | 2.2000 | 0.6333 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | chipall | qwen2.5-7b | P0 | 2.2000 | 0.7000 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | chipall | qwen2.5-7b | P1 | 2.2000 | 0.7000 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | qwen2.5-7b | P2 | 2.2000 | 0.7167 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | qwen2.5-7b | S3 | 2.2000 | 0.7333 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | full | gemma3-4b | P0 | 0.0000 | 0.8500 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gemma3-4b | P1 | 0.0000 | 0.7000 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gemma3-4b | P2 | 0.0000 | 0.4667 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gemma3-4b | S3 | 0.0000 | 0.8333 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gpt-6.1-terra | P0 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gpt-6.1-terra | P1 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | gpt-6.1-terra | P2 | 0.0000 | 0.7000 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gpt-6.1-terra | S3 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | llama3.1-8b | P0 | 0.0000 | 0.7500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | llama3.1-8b | P1 | 0.0000 | 0.8000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | llama3.1-8b | P2 | 0.0000 | 0.5333 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | llama3.1-8b | S3 | 0.0000 | 0.7500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | qwen2.5-7b | P0 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | qwen2.5-7b | P1 | 0.0000 | 0.8000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | qwen2.5-7b | P2 | 0.0000 | 0.5333 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | qwen2.5-7b | S3 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | noncrit | gemma3-4b | P0 | 0.0000 | 0.3000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gemma3-4b | P1 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gemma3-4b | P2 | 0.0000 | 0.2833 | 3.1000 | 18.3000 | 3.1000 | True |
+| speech_act | chipall | llama3.1-8b | P0 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | llama3.1-8b | P1 | 2.2000 | 0.7000 | 4.3000 | 13.6000 | 2.1000 | False |
+| speech_act | chipall | llama3.1-8b | P2 | 2.2000 | 0.7667 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | llama3.1-8b | S3 | 2.2000 | 0.7333 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | qwen2.5-7b | P0 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | False |
+| speech_act | chipall | qwen2.5-7b | P1 | 2.2000 | 0.8000 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | qwen2.5-7b | P2 | 2.2000 | 0.8000 | 4.3000 | 13.6000 | 2.1000 | True |
+| speech_act | chipall | qwen2.5-7b | S3 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | False |
+| speech_act | full | gemma3-4b | P0 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | gemma3-4b | P1 | 0.0000 | 0.8000 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | gemma3-4b | P2 | 0.0000 | 0.5167 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | gemma3-4b | S3 | 0.0000 | 0.9333 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | gpt-6.1-terra | P0 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | gpt-6.1-terra | P1 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | gpt-6.1-terra | P2 | 0.0000 | 0.7167 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | gpt-6.1-terra | S3 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | llama3.1-8b | P0 | 0.0000 | 0.8500 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | llama3.1-8b | P1 | 0.0000 | 0.9000 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | llama3.1-8b | P2 | 0.0000 | 0.6167 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | llama3.1-8b | S3 | 0.0000 | 0.8500 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | qwen2.5-7b | P0 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | qwen2.5-7b | P1 | 0.0000 | 0.9000 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | full | qwen2.5-7b | P2 | 0.0000 | 0.6000 | 6.7000 | 34.9500 | 6.7000 | False |
+| speech_act | full | qwen2.5-7b | S3 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
+| speech_act | noncrit | gemma3-4b | P0 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | gemma3-4b | P1 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | gemma3-4b | P2 | 0.0000 | 0.3167 | 3.1000 | 18.3000 | 3.1000 | True |
 | speech_act | noncrit | gemma3-4b | S3 | 0.0000 | 0.3000 | 3.1000 | 18.3000 | 3.1000 | False |
 | speech_act | noncrit | gpt-6.1-terra | P0 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
 | speech_act | noncrit | gpt-6.1-terra | P1 | 0.0000 | 0.2500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 0.0000 | 0.3000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 0.0000 | 0.3833 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
 | speech_act | noncrit | llama3.1-8b | P0 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | llama3.1-8b | P1 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | llama3.1-8b | P2 | 0.0000 | 0.3000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | llama3.1-8b | P1 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | llama3.1-8b | P2 | 0.0000 | 0.3667 | 3.1000 | 18.3000 | 3.1000 | False |
 | speech_act | noncrit | llama3.1-8b | S3 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | P0 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | P1 | 0.0000 | 0.3000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | P2 | 0.0000 | 0.3333 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | S3 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | qwen2.5-7b | P0 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | qwen2.5-7b | P1 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | qwen2.5-7b | P2 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | noncrit | qwen2.5-7b | S3 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
 | time_quantity | bare | gemma3-4b | P0 | 0.0000 | 0.0500 | 2.1000 | 12.2000 | 2.1000 | True |
 | time_quantity | bare | gemma3-4b | P1 | 0.0000 | 0.0000 | 2.1000 | 12.2000 | 2.1000 | True |
 | time_quantity | bare | gemma3-4b | P2 | 0.0000 | 0.1333 | 2.1000 | 12.2000 | 2.1000 | True |
@@ -12099,139 +12099,139 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | politeness | noncrit | qwen2.5-7b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | P2 | critical_match | 0.2500 | 0.1500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3000 | 0.2333 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3333 | 0.2000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3833 | 0.2500 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gemma3-4b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3000 | 0.2000 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3333 | 0.2667 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.2500 | 0.1000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | gpt-6.1-terra | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3167 | 0.2000 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3833 | 0.3167 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | llama3.1-8b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.3333 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | bare | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.7000 | 0.5000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.7000 | 0.5000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.3966 | 0.3000 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.3966 | 0.3000 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8000 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4310 | 0.3621 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.4310 | 0.3621 | 0.5000 | 58 | 58 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | P1 | constraint_preserving | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8500 | 0.7333 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.8500 | 0.7333 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chip1 | gpt-6.1-terra | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.5667 | 0.4333 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.5667 | 0.4333 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.6500 | 0.4000 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.6500 | 0.4000 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.2500 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.5000 | 0.2500 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.6667 | 0.5000 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.6667 | 0.5000 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.7167 | 0.5667 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.7167 | 0.5667 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.8500 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.6500 | 0.3500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.4500 | 0.2667 | 0.6167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.8333 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.7000 | 0.4500 | 0.9000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.5500 | 0.4333 | 0.6500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.9333 | 0.8329 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.8333 | 0.6833 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.8333 | 0.6833 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.8833 | 0.8000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | chipall | gpt-6.1-terra | S3 | constraint_preserving | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.6500 | 0.4000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.6000 | 0.4000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.6000 | 0.4000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.6667 | 0.5167 | 0.8000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.5833 | 0.4000 | 0.7500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.6333 | 0.3833 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.6333 | 0.3833 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.7167 | 0.5500 | 0.8667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.6000 | 0.4167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7333 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.7333 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | critical_match | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.7000 | 0.4500 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | critical_match | 0.4667 | 0.3333 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.2500 | 0.1167 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | critical_match | 0.8333 | 0.6000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.7833 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7000 | 0.5667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5254 | 0.3667 | 0.6949 | 59 | 60 | 1 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9333 | 0.8167 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | critical_match | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | critical_match | 0.5333 | 0.3833 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.3333 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | critical_match | 0.7500 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.7500 | 0.5000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.5333 | 0.3667 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4000 | 0.2667 | 0.5333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | critical_match | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7667 | 0.7000 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.6833 | 0.6000 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8000 | 0.7329 | 0.8833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.6667 | 0.5333 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P2 | critical_match | 0.5167 | 0.3833 | 0.6333 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.3000 | 0.2000 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | S3 | critical_match | 0.9333 | 0.8333 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.8833 | 0.7500 | 0.9833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7167 | 0.5667 | 0.8504 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5424 | 0.4000 | 0.6949 | 59 | 60 | 1 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9833 | 0.9500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6167 | 0.5000 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.4000 | 0.2833 | 0.5167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | critical_match | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6000 | 0.5167 | 0.6833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4500 | 0.3500 | 0.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.2833 | 0.1833 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3167 | 0.2500 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gemma3-4b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
@@ -12239,25 +12239,25 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | speech_act | noncrit | gpt-6.1-terra | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3500 | 0.2333 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3833 | 0.3000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3500 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | gpt-6.1-terra | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3000 | 0.1833 | 0.4167 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | llama3.1-8b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.3333 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | speech_act | noncrit | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | time_quantity | bare | gemma3-4b | P0 | critical_match | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
