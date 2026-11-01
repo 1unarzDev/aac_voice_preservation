@@ -24,9 +24,9 @@ below for reference but are **superseded**.
 |---|---|---|---|
 | 1 | Nov 2-4 (all returned Nov 1) | Part 9 keyword choice, then audits (Parts 4, 11, 5, 6; Part 10; Parts 1-3), then Part 7 writing | 65.2 h (165-220 min each) |
 | between | Nov 1 | collect pairs, fill check files, elicitation generation + judging, draw Part 12 | compute only |
-| 2 | Nov 1-7 (due Nov 7) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
-| between | Nov 7-8 | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
-| 3 (optional) | Nov 8-9 (due Nov 9) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
+| 2 | Nov 1 (due Nov 1, 23:59) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
+| between | Nov 1 (as Stage 2 returns) | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
+| 3 (optional) | Nov 1 (due Nov 1, 23:59) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
 
 **Deadlines.**
 - SE4All @ ICSE'27: evidence freeze Nov 10, submission Nov 13 AoE. Stages 1-2 feed it, and Stage 3 only if it is

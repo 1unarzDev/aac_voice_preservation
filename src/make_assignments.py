@@ -75,8 +75,8 @@ STAGE2_DIR = PKG / "stage2"
 ELIC_DIR = PKG / "elicitation_sets"
 WRITTEN = ROOT / "annotation" / "written"
 DATES = {"stage1": "Mon Nov 2 - Wed Nov 4", "stage1_due": "Wed Nov 4, 23:59", "stage2_open": "Sun Nov 1",
-         "stage2": "Sun Nov 1 - Sat Nov 7", "stage2_due": "Sat Nov 7, 23:59", "stage3_open": "Sun Nov 8",
-         "stage3": "Sun Nov 8 - Mon Nov 9", "stage3_due": "Mon Nov 9, 23:59"}
+         "stage2": "Sun Nov 1", "stage2_due": "Sun Nov 1, 23:59", "stage3_open": "Sun Nov 1",
+         "stage3": "Sun Nov 1", "stage3_due": "Sun Nov 1, 23:59"}   # D-051: all stages compressed to Nov 1
 STAGE3_DIR = PKG / "stage3"
 N_PART13, N_TIEBREAK, TIEBREAK_CAP = 3, 6, 40
 PAIRS_PER_SESSION, CHUNK, N_REPLICA, N_SESSIONS_WRITE = 15, 5, 3, 2
@@ -468,7 +468,7 @@ def check_plan(plan: dict, rows) -> dict:
 
 # ---------------------------------------------------------------- sheets
 RULES = """**Rules (all parts)**
-- Work **alone**. Do not discuss any item with anyone until all stages are finished (Nov 9).
+- Work **alone**. Do not discuss any item with anyone until all stages are finished ({END}).
 - **No AI tools, chatbots, translation tools or search engines** for any part. Your own judgment is the data.
 - Use only the files in `annotation_package/`. Do not open the project repository or any other files.
 - Use the same ID, **{ID}**, everywhere. Do the steps **in the order listed**: the order matters for the study.
@@ -487,7 +487,7 @@ def sheet(plan, rows, tab, a, later: bool = LATER) -> str:
          (f"Expected time: Stage 1 about **{m['stage1']} min** (plus breaks); Stage 2 about 1-2.5 h. " if later else
           f"Expected time: Stage 1 about **{m['stage1']} min**, Stage 2 about **{m['stage2']} min** (plus breaks). ") +
          "Instructions for every part are in `README.md` (section \"Part N\"). Read only the section of the step you are doing.", "",
-         RULES.format(ID=a), "",
+         RULES.format(ID=a, END=DATES["stage3_due"].split(",")[0]), "",
          f"## Stage 1 ({DATES['stage1']}; send all Stage 1 files by {DATES['stage1_due']})", ""]
     r1 = [r for r in rows["1"] if r["annotator"] == a]
     blocks = {"elic": "**A. Keyword choice first** (before you see any other part: please don't open other tools yet).",
@@ -724,7 +724,7 @@ def later_sheet(plan, rows, tab, a, stage: str) -> str | None:
         intro = (f"Only if you can spare about **{tab[a]['stage3']} min**; if not, tell the coordinator by "
                  f"{DATES['stage2_due']} so a reserve can be asked. Re-download `annotation_package.zip` on "
                  f"{DATES['stage3_open']}: your files are in its `stage3/` folder.")
-    L = [title, "", intro, "", RULES.format(ID=a), "", "## Steps (in this order)", ""]
+    L = [title, "", intro, "", RULES.format(ID=a, END=DATES["stage3_due"].split(",")[0]), "", "## Steps (in this order)", ""]
     L += [item_line(r, a) for r in rs]
     L += ["", f"Return: email every CSV above to the coordinator by {DATES[f'stage{stage}_due']} "
           f"(subject `AAC annotation {a} stage {stage}`), with the time you spent and any notes.", "",
