@@ -74,6 +74,8 @@ def guard_part(rep: dict) -> dict:
     out = {"report": {k: g[k] for k in ("population", "P0", "G1", "G1s", "G1_cue", "G1_ambiguous", "G1_all",
                                         "G1s_cue", "G1s_ambiguous", "G1s_all", "cost", "agree_repaired",
                                         "l0_vs_judge")}}
+    current = json.loads(h(ROOT / 'analysis/evidence_c3/current.json').read_text())
+    out['increment_vs_strip'] = current['evidence']['C35']
     sc, pairs = I.guard_frame(ROOT / "runs/guard1")
     h(ROOT / "runs/guard1/scored.parquet"); h(ROOT / "runs/guard1/generations.jsonl")
     j = pairs["G1"]
