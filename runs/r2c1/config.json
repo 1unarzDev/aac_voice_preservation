@@ -1,10 +1,10 @@
 {
   "run_id": "r2c1",
-  "created_utc": "2026-11-01T03:50:00+00:00",
+  "created_utc": "2026-11-01T06:45:45+00:00",
   "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/r2c.jsonl",
   "requests_sha256": "bf14ad6997903f47342634d5b57eacc654a0cac885ff9005b36ce38170595994",
-  "n_requests": 9575,
-  "wall_s": 800.7,
+  "n_requests": 38300,
+  "wall_s": 37.6,
   "models": {
     "gemma3-4b": {
       "name": "gemma3-4b",
@@ -15,6 +15,42 @@
       "quant": "Q4_K_M",
       "gguf": "google_gemma-3-4b-it-Q4_K_M.gguf",
       "sha256": "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94",
+      "concurrency": 8,
+      "supports_seed": true
+    },
+    "gpt-6.1-terra": {
+      "name": "gpt-6.1-terra",
+      "base_url": "https://codex.lunarz.dev/v1",
+      "model": "gpt-6.1-terra",
+      "kind": "api",
+      "role": "under_test",
+      "quant": null,
+      "gguf": null,
+      "sha256": null,
+      "concurrency": 16,
+      "supports_seed": false
+    },
+    "llama3.1-8b": {
+      "name": "llama3.1-8b",
+      "base_url": "http://127.0.0.1:8092/v1",
+      "model": "llama3.1-8b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "concurrency": 8,
+      "supports_seed": true
+    },
+    "qwen2.5-7b": {
+      "name": "qwen2.5-7b",
+      "base_url": "http://127.0.0.1:8091/v1",
+      "model": "qwen2.5-7b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
       "concurrency": 8,
       "supports_seed": true
     }
@@ -74,26 +110,63 @@
   "seed_base": 1000,
   "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
   "retries": 5,
-  "code_sha256": "8a85c3a43ab7330af0cde8dfba20ed4875b61059248a0917c0521cfa8f77e9a6",
+  "code_sha256": "55691a3bf2e7c8bb2ccc0ffb7eb23a5fca06c84127c80ddaef3ab27738c5b7e0",
   "python": "3.12.15",
   "httpx": "0.28.1",
   "throughput": {
+    "qwen2.5-7b": {
+      "requests": 9575,
+      "cached": 9575,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 1
+    },
+    "llama3.1-8b": {
+      "requests": 9575,
+      "cached": 9575,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 1
+    },
     "gemma3-4b": {
       "requests": 9575,
-      "cached": 12,
+      "cached": 9575,
       "errors": 0,
-      "fresh_requests": 9563,
-      "active_s": 800.7,
-      "requests_per_min": 716.6,
-      "outputs_per_min": 1001.8,
-      "completion_tok_per_s": 193.6,
-      "concurrency": 4
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 1
+    },
+    "gpt-6.1-terra": {
+      "requests": 9575,
+      "cached": 9506,
+      "errors": 0,
+      "fresh_requests": 69,
+      "active_s": 35.4,
+      "requests_per_min": 117.0,
+      "outputs_per_min": 178.0,
+      "completion_tok_per_s": 36.4,
+      "concurrency": 16
     }
   },
   "parse_failures": {
-    "gemma3-4b": 12
+    "gemma3-4b": 12,
+    "llama3.1-8b": 4
   },
   "finish_reasons": {
-    "gemma3-4b:stop": 9575
+    "qwen2.5-7b:stop": 9575,
+    "llama3.1-8b:stop": 9575,
+    "gemma3-4b:stop": 9575,
+    "gpt-6.1-terra:stop": 9575
   }
 }
