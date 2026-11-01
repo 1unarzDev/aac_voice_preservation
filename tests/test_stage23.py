@@ -274,7 +274,9 @@ def test_frozen_plan_unchanged():
     tmp = Path(tempfile.mkdtemp(prefix="stage1_"))
     MA.run_stage1(plan["annotators"], out_assign=tmp / "a", out_sheets=tmp / "s", out_stage2=tmp / "st2",
                   written=tmp / "w", elic_assign=tmp / "e.csv", pkg=tmp, quiet=True)
-    assert json.loads((tmp / "a" / "plan.json").read_text()) == plan
+    # "dates" is display text only (Stage 2 was moved to Nov 1 after Stage 1 returned early, D-049); the plan itself is frozen
+    nodates = lambda d: {k: v for k, v in d.items() if k != "dates"}  # noqa: E731
+    assert nodates(json.loads((tmp / "a" / "plan.json").read_text())) == nodates(plan)
     for a in plan["annotators"]:
         assert (tmp / "s" / f"{a}.md").read_text() == (ROOT / "annotation_package/assignments" / f"{a}.md").read_text(), a
     assert (tmp / "a" / "stage1.csv").read_text() == (ROOT / "annotation/assignments/stage1.csv").read_text()
