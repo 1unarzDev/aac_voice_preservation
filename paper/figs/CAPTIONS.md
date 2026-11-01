@@ -6,7 +6,7 @@ CIs are pointwise 95% percentile intervals from 2,000 whole-family bootstrap res
 
 ## fig_pipeline
 
-**Channel-controlled attribution.** Minimal-pair family pol-07, with stored gpt-6.1-terra P0 bare output "I like the medication.". Noncritical input uses the stored order `like new medication`. Bare/noncritical reference match measures a model's chosen reading; the added word is a length control and default-sensitivity diagnostic. Supplied-cue correctness is assessed in chip1/chipall/full. Full means source visible to the generator; extraction remains blind to source, model and channel. Loss, Violation and Assumption have different denominators. This is a selected example, not a typicality claim.
+**Channel-controlled attribution.** Minimal-pair family pol-07, with stored gpt-6.1-terra P0 bare output "I like the medication.". Noncritical input uses the stored order `like new medication`. Bare/noncritical reference match measures a model's chosen reading; the added word is a length control and default-sensitivity diagnostic. Supplied-cue correctness is assessed in chip1/chipall/full. Full means source visible to the generator; extraction remains blind to source, model and channel. Loss, Violation and Assumption have different denominators. Only the bare channel's connector is drawn solid: the shown output came from bare input; the other channels' connectors are faint. The arbiter (J1/J2 disagreements only) sees the visible input. This is a selected example, not a typicality claim.
 
 ## fig_defaults
 
@@ -14,7 +14,7 @@ CIs are pointwise 95% percentile intervals from 2,000 whole-family bootstrap res
 
 ## fig_channel_ladder
 
-**Reference match and supplied-predicate preservation.** P0, 2320 target occurrences (58 families × two targets × five channels × four models). bare: 38.79% [33.84, 43.32]; noncrit: 41.81% [37.07, 45.91]; chip1: 94.83% [91.38, 97.63]; chipall: 95.91% [94.18, 97.41]; full: 97.41% [95.04, 99.14]. Bare/noncritical values are ambiguous reference match; chip1/chipall/full assess supplied cues. The orange dashed line adds joint preservation of scored supplied predicates. joint chip1: 94.83% [91.38, 97.63] (n=464); joint chipall: 92.46% [89.44, 95.26] (n=464); joint full: 96.77% [93.97, 99.14] (n=464). Two refusal/acceptance families are quarantined rather than counted as primary passes.
+**Reference match and supplied-predicate preservation.** P0, 2320 target occurrences (58 families × two targets × five channels × four models). bare: 38.79% [33.84, 43.32]; noncrit: 41.81% [37.07, 45.91]; chip1: 94.83% [91.38, 97.63]; chipall: 95.91% [94.18, 97.41]; full: 97.41% [95.04, 99.14]. Bare/noncritical values are ambiguous reference match (dotted segment, not accuracy); chip1/chipall/full assess supplied cues (solid segment); the pooled line is deliberately not continued across that boundary. The orange dashed line adds joint preservation of scored supplied predicates. joint chip1: 94.83% [91.38, 97.63] (n=464); joint chipall: 92.46% [89.44, 95.26] (n=464); joint full: 96.77% [93.97, 99.14] (n=464). Two refusal/acceptance families are quarantined rather than counted as primary passes.
 
 ## fig_cost_asymmetry
 
@@ -22,7 +22,7 @@ CIs are pointwise 95% percentile intervals from 2,000 whole-family bootstrap res
 
 ## fig_politeness_ratchet
 
-**Full-mode politeness additions and removals.** P0, ten politeness families: plain→polite 22.50% [10.00, 37.50] (9/40), polite→plain 5.00% [0.00, 12.50] (2/40). Per-model addition counts are Qwen 0/10, Llama 1/10, Gemma 6/10, Terra 2/10; these are ten-family intervals. Hedging controls show 0/40 additions and 0/40 removals. Across primary families whose source spec is plain, 10/424 full-mode outputs add politeness. Cached P1 sensitivity remains separate from the primary prompts: 4/40 additions, 6/40 removals.
+**Full-mode politeness additions and removals.** P0, ten politeness families: plain→polite 22.50% [10.00, 37.50] (9/40), polite→plain 5.00% [0.00, 12.50] (2/40). Per-model addition counts are Qwen 0/10, Llama 1/10, Gemma 6/10, Terra 2/10; these are ten-family intervals. Hedging control (certainty families, printed as a note): 0/40 additions, 0/40 removals. Across primary families whose source spec is plain, 10/424 full-mode outputs add politeness. Cached P1 sensitivity is drawn as a separate grey row, not a primary arm: 4/40 additions, 6/40 removals.
 
 ## fig_sets
 

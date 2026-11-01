@@ -890,7 +890,7 @@
   }
  },
  "fig_politeness_ratchet": {
-  "rule": "full channel (user typed the source), P0",
+  "rule": "full channel (user typed the source); P0 primary, P1 cached sensitivity",
   "Politeness": {
    "Pooled": {
     "added to a plain source": {
@@ -898,14 +898,16 @@
      "ci_low": 0.1,
      "ci_high": 0.375,
      "n": 40,
-     "n_families": 10
+     "n_families": 10,
+     "k": 9
     },
     "removed from a polite source": {
      "estimate": 0.05,
      "ci_low": 0.0,
      "ci_high": 0.125,
      "n": 40,
-     "n_families": 10
+     "n_families": 10,
+     "k": 2
     }
    },
    "gpt-6.1-terra": {
@@ -914,14 +916,16 @@
      "ci_low": 0.0,
      "ci_high": 0.5,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 2
     },
     "removed from a polite source": {
      "estimate": 0.0,
      "ci_low": 0.0,
      "ci_high": 0.0,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 0
     }
    },
    "qwen2.5-7b": {
@@ -930,14 +934,16 @@
      "ci_low": 0.0,
      "ci_high": 0.0,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 0
     },
     "removed from a polite source": {
      "estimate": 0.1,
      "ci_low": 0.0,
      "ci_high": 0.3,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 1
     }
    },
    "llama3.1-8b": {
@@ -946,14 +952,16 @@
      "ci_low": 0.0,
      "ci_high": 0.3,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 1
     },
     "removed from a polite source": {
      "estimate": 0.1,
      "ci_low": 0.0,
      "ci_high": 0.3,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 1
     }
    },
    "gemma3-4b": {
@@ -962,98 +970,46 @@
      "ci_low": 0.3,
      "ci_high": 0.9,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 6
     },
     "removed from a polite source": {
      "estimate": 0.0,
      "ci_low": 0.0,
      "ci_high": 0.0,
      "n": 10,
-     "n_families": 10
+     "n_families": 10,
+     "k": 0
+    }
+   },
+   "P1_Pooled": {
+    "added to a plain source": {
+     "estimate": 0.1,
+     "ci_low": 0.025,
+     "ci_high": 0.175,
+     "n": 40,
+     "n_families": 10,
+     "k": 4
+    },
+    "removed from a polite source": {
+     "estimate": 0.15,
+     "ci_low": 0.075,
+     "ci_high": 0.225,
+     "n": 40,
+     "n_families": 10,
+     "k": 6
     }
    }
   },
-  "Hedging": {
-   "Pooled": {
-    "added to a plain source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 40,
-     "n_families": 10
-    },
-    "removed from a hedged source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 40,
-     "n_families": 10
-    }
-   },
-   "gpt-6.1-terra": {
-    "added to a plain source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    },
-    "removed from a hedged source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    }
-   },
-   "qwen2.5-7b": {
-    "added to a plain source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    },
-    "removed from a hedged source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    }
-   },
-   "llama3.1-8b": {
-    "added to a plain source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    },
-    "removed from a hedged source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    }
-   },
-   "gemma3-4b": {
-    "added to a plain source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    },
-    "removed from a hedged source": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "n": 10,
-     "n_families": 10
-    }
-   }
+  "Hedging_control_P0": {
+   "added": [
+    0,
+    40
+   ],
+   "removed": [
+    0,
+    40
+   ]
   },
   "politeness_added_all_plain_sources": {
    "Pooled": 0.02358490566037736,
@@ -1292,8 +1248,8 @@
  },
  "pdf_sizes": {
   "fig_channel_ladder": [
-   6.14,
-   2.64
+   6.37,
+   2.79
   ],
   "fig_cost_asymmetry": [
    3.21,
@@ -1308,8 +1264,8 @@
    1.76
   ],
   "fig_politeness_ratchet": [
-   3.29,
-   2.04
+   3.93,
+   2.49
   ],
   "fig_sets": [
    3.29,

@@ -44,6 +44,7 @@ from matplotlib.patches import FancyBboxPatch  # noqa: E402
 OUT = Path(__file__).resolve().parent
 N_BOOT, SEED = 2000, 20261031
 SINGLE, DOUBLE = 3.3, 7.0
+QUARANTINED_BY_DIM: dict = {}
 
 # ---------------------------------------------------------------- style
 # Reference palette (dataviz skill), validated: blue/orange pass all-pairs CVD
@@ -156,8 +157,12 @@ def load(tables: list[Path], items_glob: str, include_quarantine=False) -> tuple
     raw = pd.concat([pd.read_parquet(t) for t in tables], ignore_index=True)
     raw = raw[raw.channel.isin(CHANNELS)]
     df = A.normalize_table(raw, items)
+    global QUARANTINED_BY_DIM
+    from attribute import quarantined
+    qf = {f for f in raw.family_id.unique() if quarantined(items[f])}
+    QUARANTINED_BY_DIM = pd.Series([items[f]["dimension"] for f in qf], dtype=object).value_counts().to_dict() \
+        if (qf and not include_quarantine) else {}
     if not include_quarantine:
-        from attribute import quarantined
         df = df[~df.family_id.map(lambda f: quarantined(items[f]))].copy()
     df["subdim"] = df.apply(subdim, axis=1)
     df["value"] = df.apply(value_of, axis=1)
@@ -248,8 +253,12 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
             gm = g[g.model == m].groupby("channel").cm.mean().reindex(CHANNELS)
             ax.plot(x + (k - 1.5) * 0.09, gm.values, ls="", marker=MODEL_MARK[m], ms=2.6,
                     mfc="white", mec=MUTED, mew=0.5, zorder=3)
-        ax.fill_between(x, lo, hi, color=BLUE_LT, alpha=0.55, lw=0, zorder=1)
-        ax.plot(x, est, color=BLUE, lw=1.4, marker="o", ms=3.4, mfc=BLUE, mec="white", mew=0.6, zorder=4)
+        for sl, ls_ in ((slice(0, 2), (0, (1.5, 1.2))), (slice(2, 5), "-")):
+            # ambiguous (reference match) and cue-visible (supplied-cue correctness) are
+            # different quantities, so the pooled line is not continued across the boundary
+            ax.fill_between(x[sl], lo[sl], hi[sl], color=BLUE_LT, alpha=0.55, lw=0, zorder=1)
+            ax.plot(x[sl], est[sl], color=BLUE, lw=1.4, ls=ls_, marker="o", ms=3.4, mfc=BLUE,
+                    mec="white", mew=0.6, zorder=4)
         joint = [boot(g[g.channel.eq(ch)], "constraint_preserving")['estimate'] for ch in ['chip1','chipall','full']]
         ax.plot(x[2:], joint, color=ORANGE, lw=0.9, ls='--', marker='s', ms=2.5, zorder=4)
         ax.axhline(0.5, color=INK2, lw=0.5, ls=(0, (2, 1.5)), zorder=1.5)
@@ -260,7 +269,8 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
         ax.set_axisbelow(True)
         ax.tick_params(axis="x", labelsize=5.8)
         ax.axvspan(1.5, 4.5, color="#f3f2ee", lw=0, zorder=-1)
-        ax.set_title(f"{DIM_LABEL[dim]}  ({g.family_id.nunique()} fam.)")
+        q = QUARANTINED_BY_DIM.get(dim, 0)
+        ax.set_title(f"{DIM_LABEL[dim]}  ({g.family_id.nunique()} fam." + (f"; {q} quarantined)" if q else ")"))
         if j % 4 == 0:
             ax.set_ylabel("critical match")
         nums["fig_channel_ladder"][dim] = dict(zip(CHANNELS, [dict(estimate=e, ci_low=l, ci_high=h)
@@ -269,7 +279,7 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     lg.axis("off")
     hs = [Line2D([], [], color=BLUE, lw=1.4, marker="o", ms=3.4, mec="white", mew=0.6),
           plt.Rectangle((0, 0), 1, 1, color=BLUE_LT, alpha=0.55, lw=0)]
-    ls = ["pooled over 4 models", "95% CI (families)"]
+    ls = ["cue visible: critical match,\npooled over 4 models", "95% CI (families)"]
     hs.append(Line2D([], [], color=ORANGE, lw=0.9, ls='--', marker='s', ms=2.5))
     ls.append("joint supplied-predicate pass")
     for m in MODEL_ORDER:
@@ -279,8 +289,10 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     ls.append("critical cue visible")
     hs.append(Line2D([], [], color=INK2, lw=0.5, ls=(0, (2, 1.5))))
     ls.append("50%: bare ceiling (A and B\nget the same input)")
-    lg.legend(hs, ls, loc="center left", bbox_to_anchor=(0.0, 0.4), handlelength=1.6,
-              labelspacing=0.32, fontsize=6)
+    hs.append(Line2D([], [], color=BLUE, lw=1.4, ls=(0, (1.5, 1.2))))
+    ls.append("ambiguous: reference match\n(a default, not accuracy)")
+    lg.legend(hs, ls, loc="center left", bbox_to_anchor=(0.0, 0.36), handlelength=1.6,
+              labelspacing=0.22, fontsize=5.8)
     save(fig, "fig_channel_ladder")
 
 
@@ -379,7 +391,11 @@ def fig_cost_asymmetry(df: pd.DataFrame, nums: dict) -> None:
 
 # ---------------------------------------------------------------- fig 4
 def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
-    f = df[(df.channel == "full") & (df.prompt_id == "P0") & df.valid.astype(bool)].copy()
+    """Lead result. Full channel (the user typed the source). Rows: pooled P0, each model
+    under P0, and the cached P1 (preservation instruction) pooled row as a sensitivity only.
+    Counts are printed beside every row; the hedging control is reported as a note because
+    every hedging cell is zero."""
+    f = df[(df.channel == "full") & df.prompt_id.isin(["P0", "P1"]) & df.valid.astype(bool)].copy()
     spec = [general_spec(items[r.family_id]["variants"][r.variant].get("all_chips", []),
                          items[r.family_id]["variants"][r.variant].get("general_spec"))
             for r in f.itertuples()]
@@ -388,60 +404,63 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
     f["impolite_out"] = (f.politeness == "none").astype(float)
     f["hedged_out"] = (f.certainty == "hedged/uncertain").astype(float)
     f["unhedged_out"] = f.certainty.isin(["plain assertion", "strongly certain/emphatic"]).astype(float)
-    pol = f[f.subdim == "politeness"]
-    cer = f[f.subdim == "certainty"]
-    panels = [
-        ("Politeness",
-         (pol[pol.pol_plain], "polite_out", "added to a plain source"),
-         (pol[~pol.pol_plain], "impolite_out", "removed from a polite source")),
-        ("Hedging",
-         (cer[cer.cv == "plain assertion"], "hedged_out", "added to a plain source"),
-         (cer[cer.cv == "hedged/uncertain"], "unhedged_out", "removed from a hedged source")),
-    ]
-    rows_lbl = ["Pooled"] + [MODEL_LABEL[m] for m in MODEL_ORDER]
-    fig, axes = plt.subplots(1, 2, figsize=(SINGLE - 0.04, 1.8), sharey=True,
-                             gridspec_kw=dict(wspace=0.22))
-    nums["fig_politeness_ratchet"] = {"rule": "full channel (user typed the source), P0"}
-    for ax, (title, add, rem) in zip(axes, panels):
-        rec = {}
-        for i, key in enumerate(["Pooled"] + MODEL_ORDER):
-            pts = []
-            for (frame, col, name), colr, mk, off in ((add, ORANGE, "D", -0.13), (rem, BLUE, "o", 0.13)):
-                g = frame if key == "Pooled" else frame[frame.model == key]
-                r = boot(g, col)
-                pts.append(r["estimate"])
-                ax.plot([r["ci_low"], r["ci_high"]], [i + off, i + off], color=colr, lw=0.7,
-                        solid_capstyle="butt", zorder=2)
-                ax.plot(r["estimate"], i + off, marker=mk, ms=3.6 if mk == "o" else 3.2, color=colr,
-                        mec="white", mew=0.5, zorder=3)
-                rec.setdefault(key, {})[name] = {k: r[k] for k in ("estimate", "ci_low", "ci_high",
-                                                                   "n", "n_families")}
-        ax.axhline(0.5, color=AXIS, lw=0.5)
-        if all(v[n]["estimate"] == 0 for v in rec.values() for n in v):
-            n_add = rec["Pooled"][add[2]]["n"]; n_rem = rec["Pooled"][rem[2]]["n"]
-            ax.text(0.13, 2.5, f"no hedge added\n(0 of {n_add} plain sources)\nor removed\n(0 of {n_rem} hedged sources)",
-                    fontsize=5.8, color=INK2, va="center", ha="left", linespacing=1.2,
-                    bbox=dict(fc="white", ec="none", pad=1))
-        ax.set_yticks(range(5), rows_lbl)
-        [t.set_fontweight("bold") for t in ax.get_yticklabels()[:1]]
-        ax.set_ylim(4.5, -0.6)
-        pct_axis(ax)
-        ax.set_xticks([0, .25, .5, .75, 1], ["0", "", "50", "", "100%"])
-        hgrid(ax)
-        ax.spines["left"].set_visible(False)
-        ax.set_title(title, fontsize=7)
-        ax.set_xlabel("share of outputs", labelpad=1.5)
-        nums["fig_politeness_ratchet"][title] = rec
-    # all-source politeness addition, for the caption
-    allp = f[f.pol_plain]
+    nums["fig_politeness_ratchet"] = {"rule": "full channel (user typed the source); P0 primary, P1 cached sensitivity"}
+    rows = [("P0", "Pooled (P0)", None)] + [("P0", MODEL_LABEL[m], m) for m in MODEL_ORDER] + \
+           [("P1", "Pooled, P1 prompt*", None)]
+    fig, ax = plt.subplots(figsize=(SINGLE, 2.15))
+    rec = {}
+    for i, (pr, lbl, m) in enumerate(rows):
+        g = f[(f.prompt_id == pr) & (f.subdim == "politeness")]
+        if m:
+            g = g[g.model == m]
+        cnt = []
+        for frame, col, colr, mk, off, name in (
+                (g[g.pol_plain], "polite_out", ORANGE, "D", -0.15, "added to a plain source"),
+                (g[~g.pol_plain], "impolite_out", BLUE, "o", 0.15, "removed from a polite source")):
+            r = boot(frame, col)
+            k = int(round(frame[col].sum()))
+            cnt.append(f"{k}/{len(frame)}")
+            ax.plot([r["ci_low"], r["ci_high"]], [i + off, i + off], color=colr, lw=0.8,
+                    solid_capstyle="butt", zorder=2)
+            ax.plot(r["estimate"], i + off, marker=mk, ms=3.6 if mk == "o" else 3.2, color=colr,
+                    mec="white", mew=0.5, zorder=3)
+            rkey = "Pooled" if lbl == "Pooled (P0)" else ("P1_Pooled" if pr == "P1" else m)
+            rec.setdefault(rkey, {})[name] = {kk: r[kk] for kk in ("estimate", "ci_low", "ci_high",
+                                                                  "n", "n_families")} | {"k": k}
+        ax.text(1.03, i - 0.15, cnt[0], color=ORANGE, fontsize=6.3, va="center", ha="left",
+                transform=ax.get_yaxis_transform())
+        ax.text(1.03, i + 0.17, cnt[1], color=BLUE, fontsize=6.3, va="center", ha="left",
+                transform=ax.get_yaxis_transform())
+    ax.axhline(0.5, color=AXIS, lw=0.5)
+    ax.axhline(4.5, color=AXIS, lw=0.5, ls=(0, (2, 1.5)))
+    ax.set_yticks(range(len(rows)), [r[1] for r in rows])
+    labs = ax.get_yticklabels()
+    labs[0].set_fontweight("bold")
+    labs[-1].set_color(MUTED)
+    ax.set_ylim(len(rows) - 0.5, -0.9)
+    pct_axis(ax)
+    hgrid(ax)
+    ax.spines["left"].set_visible(False)
+    ax.set_xlabel("share of full-input politeness targets", labelpad=1.5)
+    # hedging control (certainty families, P0): reported as a note
+    cer = f[(f.prompt_id == "P0") & (f.subdim == "certainty")]
+    ha = cer[cer.cv == "plain assertion"]; hr = cer[cer.cv == "hedged/uncertain"]
+    hk_a, hk_r = int(ha.hedged_out.sum()), int(hr.unhedged_out.sum())
+    nums["fig_politeness_ratchet"]["Politeness"] = rec
+    nums["fig_politeness_ratchet"]["Hedging_control_P0"] = {"added": [hk_a, int(len(ha))],
+                                                            "removed": [hk_r, int(len(hr))]}
+    fig.text(0.02, -0.08, f"Hedging control (certainty families, P0, full input): {hk_a}/{len(ha)} hedges added, "
+             f"{hk_r}/{len(hr)} removed.  *P1 = cached preservation-prompt sensitivity, not a primary arm.",
+             fontsize=5.3, color=INK2, ha="left", va="top", wrap=True)
+    allp = f[(f.prompt_id == "P0") & f.pol_plain]
     nums["fig_politeness_ratchet"]["politeness_added_all_plain_sources"] = {
         k: boot(allp if k == "Pooled" else allp[allp.model == k], "polite_out")["estimate"]
         for k in ["Pooled"] + MODEL_ORDER} | {"n": int(len(allp)), "families": int(allp.family_id.nunique())}
     hs = [Line2D([], [], marker="D", ls="", ms=3.2, color=ORANGE, mec="white", mew=0.5),
           Line2D([], [], marker="o", ls="", ms=3.6, color=BLUE, mec="white", mew=0.5)]
-    fig.legend(hs, ["added to a plain source", "removed from a marked source"],
-               loc="lower center", ncol=2, bbox_to_anchor=(0.55, -0.16), handlelength=1.0,
-               fontsize=6)
+    ax.legend(hs, ["marker added to a plain source", "marker removed from a polite source"],
+              loc="lower left", bbox_to_anchor=(-0.02, 1.0), ncol=2, handlelength=1.0,
+              fontsize=6, columnspacing=0.8, borderaxespad=0.1)
     save(fig, "fig_politeness_ratchet")
 
 
@@ -503,7 +522,7 @@ def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
     nums["fig_pipeline"] = {"example_family": "pol-07", "model": ex.model, "output": ex.text,
                             "polarity": ex.polarity, "agent": ex.agent, "speech_act": ex.speech_act}
     chans = [(name, A.input_text(fam, "A", channel).removeprefix("Keywords: ").removeprefix("The user typed: "))
-             for name, channel in [("bare", "bare"), ("+noncritical", "noncrit"), ("+chip", "chip1"),
+             for name, channel in [("bare", "bare"), ("+word", "noncrit"), ("+chip", "chip1"),
                                    ("+all chips", "chipall"), ("full", "full")]]
     W, H = DOUBLE - 0.22, 1.72
     fig = plt.figure(figsize=(W, H))
@@ -564,7 +583,9 @@ def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
     # 3 LLM (fan-in)
     x3, w3 = xs["llm"], widths["llm"]
     for k, yy in enumerate(ys):
-        ax.plot([x2 + w2, x3], [yy, mid + (2 - k) * 0.06], color=AXIS, lw=0.5, zorder=1)
+        # only the bare channel produced the displayed output; other channels are drawn faint
+        ax.plot([x2 + w2, x3], [yy, mid + (2 - k) * 0.06], color=INK2 if k == 0 else AXIS,
+                lw=0.9 if k == 0 else 0.4, ls="-" if k == 0 else (0, (2, 2)), zorder=1)
     stage(x3, "3  GENERATE")
     box(x3, mid - 0.34, w3, 0.68, fc=INK, ec=INK)
     ax.text(x3 + w3 / 2, mid + 0.13, "LLM", fontsize=7.5, color="white", ha="center", va="center",

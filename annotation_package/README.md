@@ -14,6 +14,8 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
 - **Part 1, `part1_core.json`** (100 sentences): about 45–60 minutes. **Every annotator does this part.** It is the most important.
 - **Part 2, `part2_extraA.json`** (44) and **Part 3, `part3_extraB.json`** (43): optional, about 20–30 minutes each.
   Ideally every annotator does them too; if time is short, split them between annotators.
+- **Part 4, `repair_audit.html`** (40 sentences, two short passes): optional, about 15–20 minutes, only after the
+  other parts. See the Part 4 section below.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -37,8 +39,29 @@ Progress is saved in your browser, but **click "Download CSV" when you finish ea
 - "Added content" is asked last, after the typed keywords are shown: does the sentence add facts, reasons, people,
   places or times that are not in the keywords? Grammar words don't count.
 
+## Part 4 (optional, ~15–20 min): sentence check, `repair_audit.html`
+Do this only **after Parts 1–3** (or the parts you were asked to do), and only if you have time left. It is a
+different, shorter task, and everything it needs is inside the one file. Nothing needs to be loaded.
+
+1. Open `repair_audit.html` in a desktop browser and enter **the same annotator ID** as before. Press `Enter`.
+2. **Pass A (40 sentences, about 6–8 min).** Each sentence is shown alone. Answer: *"Is this a complete, natural
+   sentence a person could send as-is?"* (`1` yes, `2` minor fix needed, `3` no). If you don't answer yes, a note box
+   opens. Type a few words about what is wrong (e.g. "no verb", "wrong pronoun"), then press `Enter`.
+3. **Pass B (the same 40 sentences in a new order, about 8–12 min).** Pass B starts after Pass A is finished, and
+   **Pass A is then locked**. Now you also see what the user selected (keywords plus chips such as `[NOT]`, whose
+   meanings are listed on screen) or the sentence they typed. Answer two questions:
+   - *"Does the sentence say everything the input specifies, and nothing that contradicts it?"* (`1` yes, `2` partly, `3` no)
+   - *"Does it add meaning, certainty, politeness, or a different speaker that the input did not give?"* (`1` yes, `2` no)
+4. Each pass begins with 3 practice items that show feedback. `S` marks a question you can't judge. `Backspace` goes
+   back within a pass. Your progress is saved in the browser, and the time spent on each item is recorded automatically.
+5. Click **Download CSV** at the end. The file is `repair_audit_<ID>.csv`. Send it along with your other files.
+
+Judge each pass on its own. A sentence can be badly formed and still say what the input specified, and the reverse
+can also happen. You will not see which system wrote a sentence or how it was produced. Don't go back to Pass A
+after seeing the inputs; the tool prevents this anyway.
+
 ## Returning your work
-Send the downloaded CSV files, named like `labels_<run>_<ID>.csv`, to the study coordinator. Please also send:
+Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv` for Part 4), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

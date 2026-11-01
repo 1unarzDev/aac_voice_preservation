@@ -442,44 +442,236 @@ put_frac("act_q_to_offer", int((qx.critical == "offer/suggestion").sum()), len(q
 fr = p0[(p0.dimension == "speech_act") & (p0.channel == "full") & (p0.variant_value == "refusal")]
 put_frac("act_full_refusal_kept", int(fr.critical_match.sum()), len(fr), src_main)
 
+# ============================================== REVISION (cycle-1 decision) ===
+# Everything below reads the ACTION-2 refreshed artifacts (shared label resolution,
+# primary exclusion of act-10/act-16). Each block is optional: missing inputs leave the
+# keys undefined and main.tex prints \pending or a red [key].
+def wilson(k, n, z=1.959964):
+    if not n:
+        return np.nan, np.nan
+    ph = k / n
+    den = 1 + z * z / n
+    c = (ph + z * z / (2 * n)) / den
+    h = z * np.sqrt(ph * (1 - ph) / n + z * z / (4 * n * n)) / den
+    return max(0.0, c - h), min(1.0, c + h)
+
+
+def put_wilson(key, k, n, src):
+    put_frac(key, k, n, src)
+    lo, hi = wilson(k, n)
+    put(key + "_lo", lo, src + " (Wilson 95%)")
+    put(key + "_hi", hi, src + " (Wilson 95%)")
+
+
+# ---- counts behind the headline percentages (primary pool)
+for ch in ["bare", "noncrit", "chip1", "chipall", "full"]:
+    q_ = p0[p0.channel == ch]
+    put_frac(f"cm_{ch}", int(q_.critical_match.sum()), len(q_), src_main + f" P0 {ch} critical match")
+put("n_targets_channel", len(p0[p0.channel == "full"]), src_main + " P0 targets per channel", "int")
+
+# ---- E1 rates: negated chip1 targets
+negc = p0[(p0.channel == "chip1") & (p0.dimension == "polarity") & (p0.variant_value == "negated")]
+put_frac("pol_neg_chip1", int(negc.critical_match.sum()), len(negc), src_main + " P0 chip1 negated targets")
+
+# ---- E3 / full-input politeness, per model, P1 cached sensitivity, paired difference
+def pz_dir(frame):
+    pl, po = frame[frame.variant_value == "plain"], frame[frame.variant_value == "polite"]
+    return pl, po, pl.critical == "polite", po.critical == "plain"
+
+
+pzf = d[(d.dimension == "politeness") & (d.channel == "full")]
+for pr in ["P0", "P1"]:
+    pl, po, a, r = pz_dir(pzf[pzf.prompt_id == pr])
+    tag = pr.lower()
+    put_frac(f"{tag}_pz_added", int(a.sum()), len(pl), src_main + f" {pr} full politeness plain targets made polite"
+             + (" (cached P1 sensitivity, not a primary arm; D-010)" if pr == "P1" else ""))
+    put_frac(f"{tag}_pz_removed", int(r.sum()), len(po), src_main + f" {pr} full polite targets made plain")
+    for m in MODELS:
+        put_frac(f"{tag}_pz_added_{SHORT[m]}", int(a[pl.model == m].sum()), int((pl.model == m).sum()), src_main)
+        put_frac(f"{tag}_pz_removed_{SHORT[m]}", int(r[po.model == m].sum()), int((po.model == m).sum()), src_main)
+# paired addition-minus-removal over families (P0)
+pl, po, a, r = pz_dir(pzf[pzf.prompt_id == "P0"])
+fa_ = pd.DataFrame({"family_id": pl.family_id, "v": a.astype(float)}).groupby("family_id").v.agg(["sum", "count"])
+fr_ = pd.DataFrame({"family_id": po.family_id, "v": r.astype(float)}).groupby("family_id").v.agg(["sum", "count"])
+m_ = fa_.add_suffix("_a").join(fr_.add_suffix("_r")).dropna()
+rng = np.random.default_rng(SEED)
+idx = rng.integers(0, len(m_), size=(NBOOT, len(m_)))
+sa, na, sr, nr = (m_[c].to_numpy() for c in ["sum_a", "count_a", "sum_r", "count_r"])
+bs = sa[idx].sum(1) / na[idx].sum(1) - sr[idx].sum(1) / nr[idx].sum(1)
+put("pz_full_asym", sa.sum() / na.sum() - sr.sum() / nr.sum(), src_main + " P0 full: added minus removed", "pp")
+put("pz_full_asym_lo", np.percentile(bs, 2.5), src_main, "pp")
+put("pz_full_asym_hi", np.percentile(bs, 97.5), src_main, "pp")
+put("pz_n_fam", pzf.family_id.nunique(), src_main, "int")
+
+# ---- nominal-cost honesty: bare P0 target misses that chip1 does not repair
+kk = ["family_id", "variant", "model"]
+jj = p0[p0.channel == "bare"][kk + ["critical_match"]].merge(
+    p0[p0.channel == "chip1"][kk + ["critical_match"]], on=kk, suffixes=("_b", "_c"))
+miss = jj[~jj.critical_match_b.astype(bool)]
+put_frac("bare_miss_chip1_fail", int((~miss.critical_match_c.astype(bool)).sum()), len(miss),
+         src_main + " P0 bare target misses whose chip1 output also misses")
+
+# ---- MR1 as default-sensitivity: without time/quantity families (supplied-time words)
+mr1_ntq = mr1[mr1.dimension != "time_quantity"]
+put_frac("mr1_crit_ntq", int(mr1_ntq.inv_crit.sum()), len(mr1_ntq), src_main + " bare vs noncrit, excl. time/quantity")
+put_frac("mr1_crit", int(mr1.inv_crit.sum()), len(mr1), src_main + " bare vs noncrit")
+
+# ---- oracle evidence status (analysis/oracle/*.csv; authored inputs, Wilson CIs)
+OI = ROOT / "analysis/oracle/injection_results.csv"
+if OI.exists():
+    inj = pd.read_csv(OI)
+    ide, mut = inj[inj.model == "identity"], inj[inj.model == "mutant"]
+    put_wilson("or_identity_fa", int((~ide.constraint_preserving.astype(bool)).sum()), len(ide),
+               "analysis/oracle/injection_results.csv identity (contract false alarm)")
+    put_wilson("or_mut_det", int(mut.violation.astype(bool).sum()), len(mut),
+               "analysis/oracle/injection_results.csv scoped mutations detected as Violation")
+OC = ROOT / "analysis/oracle/challenge_results.csv"
+if OC.exists():
+    chl = pd.read_csv(OC)
+    new = chl[chl.role.isin(["control", "mutant"])]
+    mu, co = new[new.role == "mutant"], new[new.role == "control"]
+    srcC_ = "analysis/oracle/challenge_results.csv (new keyed challenges, production rule)"
+    put_wilson("or_new_mut_det", int((~mu.match_prod.astype(bool)).sum()), len(mu), srcC_)
+    put_wilson("or_new_ctrl_fa", int((~co.match_prod.astype(bool)).sum()), len(co), srcC_)
+    put_wilson("or_new_mut_det_raw", int((~mu.match_raw.astype(bool)).sum()), len(mu), srcC_ + " raw rule")
+    am, ac = mu[mu.group == "acceptance"], co[co.group == "acceptance"]
+    put_wilson("or_acc_mut_det", int((~am.match_prod.astype(bool)).sum()), len(am), srcC_ + " acceptance group")
+    put_wilson("or_acc_ctrl_fa", int((~ac.match_prod.astype(bool)).sum()), len(ac), srcC_ + " acceptance group")
+    put("n_groups_challenge", new.group.nunique(), srcC_, "int")
+    r1 = chl[chl.role == "r1"]
+    put_frac("or_r1_label_ok", int(r1.label_ok.astype(bool).sum()), len(r1), "analysis/oracle/challenge_results.csv round-1")
+OS = ROOT / "analysis/oracle/refreshed_summary.json"
+if OS.exists():
+    osum = json.load(open(OS))["primary"]["violation"]
+    put_frac("or_panel_flip", osum["units_flipped"], osum["n_units"], str(OS.relative_to(ROOT)) + " machine panel, not human")
+    put("or_panel_flip_w", osum["weighted_flip"], str(OS.relative_to(ROOT)))
+JV = ROOT / "annotation/judge_validation_main1.json"
+if JV.exists():
+    jv = json.load(open(JV))
+    pan = jv.get("panel") or {}
+    try:
+        kap = {k: v["kappa"] for k, v in pan["judge"].items() if isinstance(v, dict) and "kappa" in v}
+        if kap:
+            put("panel_kappa_min", min(kap.values()), str(JV.relative_to(ROOT)) + " panel (machine)", "f2")
+    except (KeyError, TypeError, AttributeError):
+        pass
+    # HUMAN SLOT: when score_gold.py --human writes a non-null "human" section, its keys
+    # are exported with prefix human_ and the paper's conditional block switches on.
+    hum = jv.get("human")
+    if hum:
+        put("human_ready", 1, str(JV.relative_to(ROOT)) + " human section", "int")
+        for dim, v in (hum.get("judge") or {}).items():
+            if isinstance(v, dict):
+                for fld in ("kappa", "kappa_lo", "kappa_hi", "acc", "n"):
+                    if fld in v and v[fld] is not None:
+                        put(f"human_{dim}_{fld}".replace("/", ""), v[fld], str(JV.relative_to(ROOT)),
+                            "int" if fld == "n" else "f2")
+put("human_return_files", len(glob.glob(str(ROOT / "annotation/returns/*.csv"))), "annotation/returns/*.csv", "int")
+
+# ---- guard + copy baseline (analysis/interventions/report.json, primary 58 families)
+IR = ROOT / "analysis/interventions/report.json"
+if IR.exists():
+    ir = json.load(open(IR))
+    g_ = ir["guard"]
+    srcG = "analysis/interventions/report.json guard (primary 58 families)"
+    cue = g_["G1_cue"]
+    put_frac("g1_fix", round(cue["fix"]["estimate"] * cue["n_bad"]), cue["n_bad"], srcG)
+    put("g1_fix_lo", cue["fix"]["ci_low"], srcG); put("g1_fix_hi", cue["fix"]["ci_high"], srcG)
+    put("g1_remain_k", cue["n_bad"] - round(cue["fix"]["estimate"] * cue["n_bad"]), srcG, "int")
+    put_frac("g1_changed_ok", round(cue["overcorr"]["estimate"] * cue["n_ok"]), cue["n_ok"], srcG + " cue-channel already-correct changed")
+    put_frac("g1_broken", round(cue["broken"]["estimate"] * cue["n_ok"]), cue["n_ok"], srcG + " pass->fail")
+    put_frac("g1s_fix", round(g_["G1s_cue"]["fix"]["estimate"] * cue["n_bad"]), cue["n_bad"], srcG + " strip-only")
+    for arm in ["P0", "G1", "G1s"]:
+        put(f"strict_{arm.lower()}", g_[arm]["sp"]["estimate"], srcG)
+        put(f"strict_{arm.lower()}_lo", g_[arm]["sp"]["ci_low"], srcG)
+        put(f"strict_{arm.lower()}_hi", g_[arm]["sp"]["ci_high"], srcG)
+    put("strict_n", g_["P0"]["sp"]["n"], srcG, "int")
+    put("g1_calls", g_["cost"]["calls_per_input"], srcG, "f3")
+    put("g1_lat", g_["cost"]["lat_per_input"], srcG, "f2")
+    put("g1_flagged_pct", g_["cost"]["flagged"] / g_["cost"]["inputs"], srcG)
+    put("g1_check_ms", g_["cost"]["check_ms"], srcG, "f2")
+    lv = g_["l0_vs_judge"]
+    put("mon_prec", lv["tp"] / (lv["tp"] + lv["fp"]), srcG, "f2")
+    put("mon_rec", lv["tp"] / (lv["tp"] + lv["fn"]), srcG, "f2")
+    cp = ir.get("copy_full_mode")
+    if cp:
+        srcK = "analysis/interventions/report.json copy_full_mode (stored source-identity injections)"
+        put_frac("copy_pass", cp["primary_pass"], cp["primary_n"], srcK)
+        put_frac("copy_pass_all", cp["identity_pass"], cp["identity_n"], srcK)
+        for arm in ["P0", "G1", "G1s"]:
+            a_ = cp["arms"][arm]["contract"]
+            put_frac(f"fullmode_{arm.lower()}", round(a_["estimate"] * a_["n"]), a_["n"], srcK)
+            put(f"fullmode_{arm.lower()}_lo", a_["ci_low"], srcK); put(f"fullmode_{arm.lower()}_hi", a_["ci_high"], srcK)
+
+# ---- Exp C: physical-scenario clustering and paired transitions (fixes the 16-ID cluster)
+if C.exists():
+    gen_ns = {}
+    for line in open(ROOT / "runs/expC1/generations.jsonl"):
+        r_ = json.loads(line)
+        gen_ns[(r_["request_key"], r_["model"])] = r_.get("namespace")
+    cc = c.copy()
+    cc["scenario"] = cc.family_id.str[:5]
+    cc["draw"] = [gen_ns.get((a, b)) for a, b in zip(cc.request_key, cc.model)]
+    put("xc_n_scen", cc.scenario.nunique(), srcC, "int")
+    for dimn, single, tag in [("agent", "actor", "agt"), ("polarity", "pol", "pol")]:
+        x = cc[cc.dimension == dimn]
+        boot_diff(x.assign(family_id=x.scenario), "critical_match", "both", single, f"xc_{tag}_drop_scen", srcC + " clustered by 8 physical scenarios")
+        kk2 = ["family_id", "variant", "model", "draw"]
+        aa = x[x.channel == single][kk2 + ["critical_match"]].merge(
+            x[x.channel == "both"][kk2 + ["critical_match"]], on=kk2, suffixes=("_s", "_b"))
+        put("xc_" + tag + "_pf", int((aa.critical_match_s & ~aa.critical_match_b).sum()), srcC + " pass->fail", "int")
+        put("xc_" + tag + "_fp", int((~aa.critical_match_s & aa.critical_match_b).sum()), srcC + " fail->pass", "int")
+        put("xc_" + tag + "_pass_single", int(aa.critical_match_s.sum()), srcC, "int")
+        put("xc_" + tag + "_aligned", len(aa), srcC, "int")
+        for m in MODELS:
+            put(f"xc_{tag}_pf_{SHORT[m]}", int((aa[aa.model == m].critical_match_s & ~aa[aa.model == m].critical_match_b).sum()), srcC, "int")
+
+# ---- label resolution actually used (shared arbiter > J1/J2 agreement > unknown; no J1 fallback)
+dm = d[d.prompt_id != "P1"]
+put("n_arbiter_rows", int((dm.critical_source == "arbiter").sum()), src_main + " P0/P2/S3 rows resolved by arbiter", "int")
+put("n_arbiter_units", int(dm[dm.critical_source == "arbiter"].drop_duplicates(["text_id", "input_text", "dimension"]).shape[0]),
+    src_main + " distinct (text,input,dimension) units resolved by arbiter", "int")
+put("n_unknown_rows", int(dm.critical.isna().sum()), src_main + " unresolved critical labels", "int")
+
+# ---- coverage@3 counts (bare P2/S3), so the text can print k/n beside the percentage
+for pr in ["P2", "S3"]:
+    for dim in ["polarity"]:
+        x = cov[(cov.prompt_id == pr) & (cov.dimension == dim)]
+        put_frac(f"covk_{pr.lower()}_{DSHORT[dim]}", int(round((x.estimate * x.n).sum())), int(x.n.sum()),
+                 "analysis/main1/coverage.csv (sets)")
+
+# ---- exploratory H1 (cycle-1 hypothesis screen; replication is W-C's job)
+HC = ROOT / "ideas/cycles/c1/hyp_checks.json"
+if HC.exists():
+    hc = json.load(open(HC))
+    h = hc.get("H1/main1/P0/llama3.1-8b")
+    if h:
+        put_frac("h1_llama_plain", int(h["plain"]["k"]), h["plain"]["n"], str(HC.relative_to(ROOT)) + " exploratory")
+        put_frac("h1_llama_polite", int(h["polite"]["k"]), h["polite"]["n"], str(HC.relative_to(ROOT)) + " exploratory")
+
+# ---- round-2 slots: W-B transfer, W-C confirmation, W-D encoding control.
+# A workstream switches on only when its report exists; a sibling headline.json (flat
+# {key: number}) is exported with the prefix wb_/wc_/wd_. No numbers are hand-copied.
+for tag, rels in [("wb", ["analysis/wb/report.md", "analysis/wb/report_wb1i.md"]),
+                  ("wc", ["analysis/r2c/report.md"]), ("wd", ["analysis/r2d/report.md"])]:
+    for rel in rels:
+        rp = ROOT / rel
+        if rp.exists():
+            put(f"{tag}_ready", 1, rel, "int")
+            put(f"{tag}_interim", int("wb1i" in rel), rel, "int")
+            hj = rp.parent / "headline.json"
+            if hj.exists():
+                for k_, v_ in json.load(open(hj)).items():
+                    if isinstance(v_, (int, float)):
+                        put(f"{tag}_{k_}", v_, str(hj.relative_to(ROOT)), "int" if isinstance(v_, int) else "f3")
+            break
+
 # --------------------------------------------------------- examples table ---
-# Declared deterministic rule (also printed in the table caption):
-#   prompt P0; families sorted by family_id; models in the fixed order MODELS;
-#   E1-E3: first polarity family; its negated variant; channels bare / noncrit / chip1; first model.
-#   E4: first politeness family whose plain variant, under `full`, gets an output labelled polite;
-#       first such model in MODELS order.
-#   E5: first speech_act row (family, then variant A<B, then model order) with a chip1 violation.
-#   E6: first politeness plain-target row under chipall that is a violation.
-items = {}
-for line in open(ROOT / "data/items/test.jsonl"):
-    r = json.loads(line)
-    items[r["family_id"]] = r
-texts = {}
-op = ROOT / "runs/main1/outputs.jsonl"
-for line in open(op):
-    r = json.loads(line)
-    texts[r["output_id"]] = r["text"]
-morder = {m: i for i, m in enumerate(MODELS)}
-q = p0.assign(mo=p0.model.map(morder)).sort_values(["family_id", "variant", "mo"])
-
-
-def first(df):
-    return None if df.empty else df.iloc[0]
-
-
-rows = []
-fam_pol = sorted(q[q.dimension == "polarity"].family_id.unique())[0]
-negv = [v for v, s in items[fam_pol]["variants"].items() if s["critical_value"] == "negated"][0]
-for ch_, rel in [("bare", "Ambiguous input"), ("noncrit", "MR1 $+$noncritical word"), ("chip1", "MR2 $+$cue")]:
-    rows.append((rel, first(q[(q.family_id == fam_pol) & (q.variant == negv) & (q.channel == ch_) & (q.model == MODELS[0])])))
-x = q[(q.dimension == "politeness") & (q.channel == "full") & (q.variant_value == "plain") & (q.critical == "polite")]
-rows.append(("MR3 full input", first(x)))
-x = q[(q.dimension == "speech_act") & (q.channel == "chip1") & (q.violation == True)]  # noqa: E712
-rows.append(("MR2 $+$cue", first(x)))
-x = q[(q.dimension == "politeness") & (q.channel == "chipall") & (q.variant_value == "plain") & (q.violation == True)]  # noqa: E712
-rows.append(("All cues", first(x)))
-
-
+# Examples are NOT reselected here. They are the stored occurrences frozen in
+# paper/figs/example_manifest.json (story rules E1-E10, ideas/cycles/c1/story.md). This
+# script re-reads every quoted string from runs/<run>/outputs.jsonl by output_id and
+# aborts on any mismatch, then prints each row with the rate of its declared stratum
+# (as \RES keys, so the rate cannot drift from the macros).
 def tex(s: str) -> str:
     s = str(s).replace("’", "'")
     for a, b in [("\\", r"\textbackslash{}"), ("&", r"\&"), ("%", r"\%"), ("$", r"\$"), ("#", r"\#"),
@@ -489,29 +681,80 @@ def tex(s: str) -> str:
 
 
 def visible(inp: str) -> str:
-    inp = inp.replace("Keywords: ", "").replace("The user typed: ", "typed: ")
+    full = inp.startswith("The user typed: ")
+    inp = inp.replace("Keywords: ", "").replace("The user typed: ", "")
     out = []
     for tok in inp.split(" "):
         out.append(r"\chip{" + tex(tok[1:-1]) + "}" if tok.startswith("[") and tok.endswith("]") else tex(tok))
-    return r"\kw{" + " ".join(out) + "}"
+    return (r"\emph{typed:} " if full else "") + r"\kw{" + " ".join(out) + "}"
 
 
-def verdict(r) -> str:
-    if r.channel in ("bare", "noncrit"):
-        return ("commits: " if r.critical != "unclear/mixed" else "no commitment: ") + tex(r.critical)
-    ok = bool(r.critical_match)
-    return (r"\textsc{pass}" if ok else r"\textsc{fail}") + f" (wants {tex(r.variant_value)}, got {tex(r.critical)})"
+EM = ROOT / "paper/figs/example_manifest.json"
+man = json.load(open(EM))
+occ = defaultdict(list)
+for e in man["examples"]:
+    occ[e["example"]].append(e)
+_out_cache: dict[str, dict] = {}
 
 
-lines = []
-for rel, r in rows:
-    if r is None:
-        continue
-    src_txt = items[r.family_id]["variants"][r.variant]["source"]
-    out_txt = texts.get(r.output_id, r.text)
-    lines.append(f"{rel} & {tex(src_txt)} & {visible(r.input_text)} & \\say{{{tex(out_txt)}}} ({SHORT[r.model]}) & {verdict(r)}\\\\")
+def stored(run: str, oid: str) -> str:
+    if run not in _out_cache:
+        _out_cache[run] = {}
+        for line in open(ROOT / f"runs/{run}/outputs.jsonl"):
+            r = json.loads(line)
+            _out_cache[run].setdefault(r["output_id"], r["text"])
+    return _out_cache[run][oid]
+
+
+n_verified = 0
+for ex_id, es in occ.items():
+    for e in es:
+        o = e["occurrence"]
+        if stored(e["run"], o["output_id"]) != o["text"]:
+            raise SystemExit(f"example {ex_id} {o['output_id']}: manifest text != stored output")
+        n_verified += 1
+put("ex_n_verified", n_verified, str(EM.relative_to(ROOT)) + " strings re-read from runs/*/outputs.jsonl", "int")
+
+
+def q(e):
+    return r"\say{" + tex(e["occurrence"]["text"]) + "}"
+
+
+def meta(e):
+    o = e["occurrence"]
+    return (f"{SHORT[o['model']]}, {tex(o['family_id'])}/{o['variant']}, {o['prompt_id']}, "
+            f"{tex(o['channel'])}; \\texttt{{{o['output_id'][:8]}}}")
+
+
+rows = []
+E = occ
+# E3 (lead): full-input politeness addition
+e = E["E3"][0]
+rows.append(("E3 full input", visible(e["occurrence"]["input_text"]), q(e), meta(e),
+             r"plain$\to$polite \kof{p0_pz_added} (pooled); this model \kof{p0_pz_added_llama}; "
+             r"reverse \kof{p0_pz_removed}"))
+# E1: default, length control, supplied cue
+for e, rate in zip(E["E1"], [r"affirmative in \kof{bare_pol_aff_p0} bare outputs (default, not a failure)",
+                             r"length control / default-sensitivity diagnostic",
+                             r"negated cue kept \kof{pol_neg_chip1}"]):
+    rows.append(("E1 " + e["occurrence"]["channel"], visible(e["occurrence"]["input_text"]), q(e), meta(e), rate))
+# E4: weak question cue
+e = E["E4"][0]
+rows.append(("E4 chip1", visible(e["occurrence"]["input_text"]), q(e), meta(e),
+             r"question kept \kof{act_chip1_question}; became request \kof{act_q_to_req}"))
+# E5 / E6: guard repair and residual
+for tag, rate in [("E5", r"repaired: \kof{g1_fix} cue-channel failures"),
+                  ("E6", r"still failing: \RES{g1_remain_k}/\RES{g1_fix_den}")]:
+    b_, a_ = E[tag][0], E[tag][1]
+    rows.append((tag + r" guard", visible(b_["occurrence"]["input_text"]),
+                 q(b_) + r"\,$\to$\," + q(a_), meta(b_).replace(", P0,", r", P0$\to$G1,"), rate))
+# E10: oracle identity defect (quarantined family; diagnostic only)
+e = E["E10"][0]
+rows.append(("E10 oracle", visible(e["occurrence"]["input_text"]), q(e), meta(e),
+             r"raw oracle failed \RES{id_fail_raw}/\RES{id_n} normalized identity outputs; quarantined"))
+lines = [f"{a} & {b} & {c} & {d} & {e_}\\\\[2pt]" for a, b, c, d, e_ in rows]
 (OUT / "examples_table.tex").write_text(
-    "% generated by make_macros.py -- do not edit\n" + "\n".join(lines) + "\n")
+    "% generated by make_macros.py from paper/figs/example_manifest.json -- do not edit\n" + "\n".join(lines) + "\n")
 
 # ------------------------------------------------------------------ write ---
 def sha(p: Path) -> str:

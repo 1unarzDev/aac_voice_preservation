@@ -10,3 +10,6 @@ Then: generate.py --requests runs/requests/wb1.jsonl --run-id wb1 (all cached, a
 - [ckpt 2] panel merged incl. strict p1g; annotation/wb_audit.json written; wb_report.py works on base data (A, B, strict sensitivity final;
   C waits for restored channel). wb1_gen.sh relaunched with setsid (waiting on GPU lock behind r2c1). After WBFINISHED: assemble
   analysis/wb/report.md = narrative (analysis/wb/narrative.md) + report_tables.md.
+- [ckpt 3] GPU lock held by r2c1 during its terra API wait (~90 min more at 22:5x). Interim run wb1i (base + terra restored) via runs/wb1i_run.sh -> analysis/wb/report_wb1i.md. Final wb1 auto via wb1_finish.sh watcher.
+- [ckpt 4] analysis/wb/report.md currently = interim wb1i (narrative.md + tables). When wb1_finish.sh completes (WBFINISHED in runs/wb1_attr.log)
+  it rewrites analysis/wb/report.md from wb1 (4-model restored); then update the C paragraph in narrative.md and rerun `python src/wb_report.py`.

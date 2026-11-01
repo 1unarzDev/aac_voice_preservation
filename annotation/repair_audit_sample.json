@@ -1,0 +1,98 @@
+{
+  "salt": "repair-audit-2026",
+  "per_model": 5,
+  "per_arm": 20,
+  "mc_reps": 4000,
+  "source": "runs/guard1/scored.parquet (+generations.jsonl), primary families",
+  "arms": {
+    "repaired": {
+      "eligible_units": 122,
+      "eligible_by_model_any": {
+        "gemma3-4b": 62,
+        "gpt-6.1-terra": 23,
+        "llama3.1-8b": 36,
+        "qwen2.5-7b": 19
+      },
+      "eligible_by_channel_group": {
+        "cue": 73,
+        "ambiguous": 49
+      },
+      "eligible_multi_model_units": 14,
+      "selected_by_model": {
+        "gemma3-4b": 5,
+        "gpt-6.1-terra": 5,
+        "llama3.1-8b": 5,
+        "qwen2.5-7b": 5
+      },
+      "selected_by_channel_group": {
+        "cue": 15,
+        "ambiguous": 5
+      },
+      "selected_by_channel": {
+        "chipall": 8,
+        "chip1": 5,
+        "full": 2,
+        "noncrit": 3,
+        "bare": 2
+      },
+      "selected_by_dimension": {
+        "politeness": 10,
+        "speech_act": 4,
+        "time_quantity": 4,
+        "polarity": 1,
+        "certainty": 1
+      },
+      "selected_distinct_families": 20
+    },
+    "control": {
+      "eligible_units": 1041,
+      "eligible_by_model_any": {
+        "gemma3-4b": 387,
+        "gpt-6.1-terra": 411,
+        "llama3.1-8b": 406,
+        "qwen2.5-7b": 416
+      },
+      "eligible_by_channel_group": {
+        "ambiguous": 291,
+        "cue": 750
+      },
+      "eligible_multi_model_units": 296,
+      "selected_by_model": {
+        "gemma3-4b": 5,
+        "gpt-6.1-terra": 5,
+        "llama3.1-8b": 5,
+        "qwen2.5-7b": 5
+      },
+      "selected_by_channel_group": {
+        "cue": 15,
+        "ambiguous": 5
+      },
+      "selected_by_channel": {
+        "chip1": 4,
+        "chipall": 8,
+        "bare": 4,
+        "noncrit": 1,
+        "full": 4
+      },
+      "selected_by_dimension": {
+        "certainty": 3,
+        "speech_act": 5,
+        "polarity": 6,
+        "time_quantity": 3,
+        "politeness": 2,
+        "agent": 1
+      },
+      "selected_distinct_families": 20
+    }
+  },
+  "selected_pi_range": {
+    "repaired": [
+      0.0747,
+      0.496
+    ],
+    "control": [
+      0.0092,
+      0.0505
+    ]
+  }
+}
