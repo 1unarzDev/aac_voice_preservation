@@ -212,7 +212,7 @@ def endpoints(df: pd.DataFrame) -> dict:
     ep["cp2_direction_vs_50pct"] = dirn
     # coverage@3: P2 = 3 suggestions of one response, S3 = 3 samples of one input
     cov = {}
-    multi = df[df["prompt_id"].isin(["P2", "S3"]) & df["valid"]]
+    multi = df[df["prompt_id"].isin(["P2", "S3", "I2", "I2t"]) & df["valid"]]   # I2/I2t: src/interventions.py
     for (m, p, c), g in multi.groupby(["model", "prompt_id", "channel"]):
         hits = []
         for _, s in g.groupby(["family_id", "variant"]):
