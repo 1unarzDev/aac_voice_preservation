@@ -393,15 +393,26 @@
    "n_bad": 181,
    "n_ok": 2219
   },
+  "cost": {
+   "inputs": 1920,
+   "flagged": 170,
+   "calls_per_input": 0.11197916666666667,
+   "calls_per_flagged": 1.2647058823529411,
+   "lat_per_input": 0.18650364583333331,
+   "lat_flagged_median": 1.624,
+   "check_ms": 2.26
+  },
   "agree_repaired": {
    "n": 108,
-   "agree": 0.9537037037037037
+   "agree": 0.9537037037037037,
+   "kappa": 0.868
   },
   "l0_vs_judge": {
    "tp": 89,
    "fp": 19,
    "fn": 4,
-   "tn": 1328
+   "tn": 1328,
+   "kappa": 0.877
   },
   "repaired_raw_agree": [
    "polarity: J1 99/100, J2 99/100, layer0 tie-breaks 0",
@@ -956,6 +967,13 @@
     "n_boot_valid": 2000
    }
   },
+  "cost_I2t": {
+   "sets": 240,
+   "calls_per_set": 1.9541666666666666,
+   "lat_per_set": 3.1030374999999997,
+   "verified": 441,
+   "rewrites": 446
+  },
   "rewrite_check_I2t": {
    "('certainty', 'hedged', True, True)": 224,
    "('polarity', 'negated', True, True)": 210,
@@ -964,6 +982,13 @@
    "('certainty', 'hedged', False, False)": 2,
    "('certainty', 'certain', True, True)": 1,
    "('certainty', 'hedged', False, True)": 5
+  },
+  "cost_I2": {
+   "sets": 240,
+   "calls_per_set": 2.05,
+   "lat_per_set": 3.250495833333333,
+   "verified": 424,
+   "rewrites": 442
   },
   "rewrite_check_I2": {
    "('certainty', 'hedged', True, True)": 212,
@@ -1371,15 +1396,26 @@
     "n_bad": 46,
     "n_ok": 434
    },
+   "cost": {
+    "inputs": 384,
+    "flagged": 41,
+    "calls_per_input": 0.125,
+    "calls_per_flagged": 1.170731707317073,
+    "lat_per_input": 0.15021614583333334,
+    "lat_flagged_median": 1.441,
+    "check_ms": 4.23
+   },
    "agree_repaired": {
     "n": 26,
-    "agree": 0.9230769230769231
+    "agree": 0.9230769230769231,
+    "kappa": 0.755
    },
    "l0_vs_judge": {
     "tp": 22,
     "fp": 4,
     "fn": 2,
-    "tn": 260
+    "tn": 260,
+    "kappa": 0.869
    },
    "repaired_raw_agree": [
     "polarity: J1 24/24, J2 24/24, layer0 tie-breaks 0",
@@ -1934,12 +1970,26 @@
      "n_boot_valid": 2000
     }
    },
+   "cost_I2t": {
+    "sets": 48,
+    "calls_per_set": 1.9375,
+    "lat_per_set": 3.0604583333333335,
+    "verified": 84,
+    "rewrites": 86
+   },
    "rewrite_check_I2t": {
     "('certainty', 'hedged', False, False)": 1,
     "('certainty', 'hedged', True, True)": 44,
     "('polarity', 'negated', True, True)": 38,
     "('polarity', 'negated', False, False)": 1,
     "('certainty', 'hedged', False, True)": 2
+   },
+   "cost_I2": {
+    "sets": 48,
+    "calls_per_set": 2.0,
+    "lat_per_set": 7.156041666666667,
+    "verified": 81,
+    "rewrites": 84
    },
    "rewrite_check_I2": {
     "('certainty', 'hedged', True, True)": 41,

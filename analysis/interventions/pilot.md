@@ -23,6 +23,14 @@ First passes (P0, P2, S3) are the cached generations of the base run.
 | I2 polarity+certainty coverage@3 minus P2 | >= +30 pts | 68.8 [37.5, 100.0] pts | PASS |
 | I2t polarity+certainty coverage@3 minus P2 | >= +30 pts | 68.8 [37.5, 100.0] pts | PASS |
 
+## Summary (held-out test split, 60 families x 4 models)
+
+- **I1 guard, benefit**: strict pass on cue channels 91.7 [87.2, 95.8] -> 97.9 [96.2, 99.7]; critical match 95.1 [91.7, 98.3] -> 98.6 [97.2, 100.0]; contradictions of supplied dimensions 3.8 [1.4, 6.6] -> 0.7 [0.0, 1.7]; politeness additions 2.1 [0.3, 4.5] -> 0.0 [0.0, 0.0]. Fixes 75.0 [58.8, 92.3]% of 24 judged violations (all channels incl. bare/noncrit politeness: 87.0 [73.8, 95.9]%).
+- **I1 guard, cost**: 41/384 inputs flagged; 0.125 extra calls per input (1.17 per flagged input); mean extra latency 0.15 s per input (median 1.44 s per flagged input); layer0 check 4.2 ms. Over-correction: 2.3 [0.4, 5.1]% of 434 already-correct outputs changed, 0.0 [0.0, 0.0]% became judged failures.
+- **G1s strip-only** (0 calls): strict pass 93.8 [89.6, 97.2]; fixes 25.0 [3.7, 50.0]% of cue-channel violations (only politeness ones) and 60.9 [29.3, 80.4]% over all channels; changes 1.8 [0.0, 4.6]% of already-correct outputs (stripping 'please' from the shared bare output also hits the [PLEASE] variant).
+- **I2 set, benefit**: polarity+certainty coverage@3 S3 0.0 [0.0, 0.0], P2 25.0 [0.0, 50.0], I2 93.8 [81.2, 100.0] (I2 - P2 68.8 [37.5, 100.0] pts; I2t 93.8 [81.2, 100.0]). Over all six dimensions: P2 41.7 [20.8, 64.6], I2 54.2 [31.2, 75.0] (12.5 [-12.5, 41.7] pts), I2t 45.8 [25.0, 68.8] (4.2 [-27.1, 37.5] pts).
+- **I2 set, cost**: 2.00 extra calls and 7.16 s extra latency per bare input; 81/84 rewrites layer0-verified; coverage of the dimensions it does not target drops (speech act, politeness; agent too for I2t), see the coverage table.
+
 ## Results
 
 ### Guard (guardpilot): judged outcomes on cue channels (chip1/chipall/full), P0 first pass vs guard
@@ -150,10 +158,6 @@ Per-suggestion additions under bare (% of suggestions; targets A and B both coun
 
 | model | sets | sets changed | rewrites | extra calls / set | layer0-verified rewrites | extra latency s / set (mean) | extra completion tokens / set |
 |---|---|---|---|---|---|---|---|
-| gemma3-4b | 12 | 12 | 21 | 2.00 | 19/21 | 3.38 | 22.8 |
-| gpt-6.1-terra | 12 | 12 | 20 | 1.83 | 20/20 | 3.21 | 37.6 |
-| llama3.1-8b | 12 | 11 | 22 | 2.00 | 22/22 | 5.20 | 19.3 |
-| qwen2.5-7b | 12 | 12 | 23 | 1.92 | 23/23 | 0.46 | 17.8 |
 | all | 48 | 47 | 86 | 1.94 | 84/86 | 3.06 | 24.4 |
 
 I2t rewrites: (dimension, target, judge general label reaches target, layer0 verified) -> count: ('certainty', 'hedged', False, False): 1, ('certainty', 'hedged', False, True): 2, ('certainty', 'hedged', True, True): 44, ('polarity', 'negated', False, False): 1, ('polarity', 'negated', True, True): 38
@@ -163,10 +167,6 @@ I2t rewrites: (dimension, target, judge general label reaches target, layer0 ver
 
 | model | sets | sets changed | rewrites | extra calls / set | layer0-verified rewrites | extra latency s / set (mean) | extra completion tokens / set |
 |---|---|---|---|---|---|---|---|
-| gemma3-4b | 12 | 12 | 21 | 2.00 | 18/21 | 3.35 | 21.8 |
-| gpt-6.1-terra | 12 | 12 | 20 | 2.33 | 20/20 | 15.82 | 88.4 |
-| llama3.1-8b | 12 | 11 | 22 | 1.83 | 22/22 | 5.48 | 18.5 |
-| qwen2.5-7b | 12 | 12 | 21 | 1.83 | 21/21 | 3.97 | 18.2 |
 | all | 48 | 47 | 84 | 2.00 | 81/84 | 7.16 | 36.7 |
 
 I2 rewrites: (dimension, target, judge general label reaches target, layer0 verified) -> count: ('certainty', 'hedged', False, False): 3, ('certainty', 'hedged', False, True): 1, ('certainty', 'hedged', True, True): 41, ('polarity', 'negated', False, True): 1, ('polarity', 'negated', True, True): 38
@@ -206,3 +206,12 @@ Rule: guard categories (a) fixed: P0 judged failure -> G1 strict pass (2 rows); 
    before (P2): ["The pool is closed on Saturday.", "Is the pool open on Saturday?", "We will find another place to swim on Saturday."] -> judge ['A', 'unclear', 'A']  
    after (I2): ["The pool is closed on Saturday.", "Is the pool closed on Saturday? I think it might be.", "We will not find another place to swim on Saturday."] -> judge ['A', 'B', 'A']
 
+
+## Caveats
+
+1. **Monitor and evaluator are independent but correlated.** The guard uses layer0; the endpoint uses the blind LLM judge. They never share calls, but they target the same constructs, and judge.py breaks J1/J2 ties on general dimensions with layer0 (critical labels never use layer0). On the first pass, layer0 flags vs judged failures: TP 22, FP 4, FN 2, TN 260 (kappa 0.869). On the repaired (flagged and regenerated) targets, layer0 'fixed' agrees with judge 'pass' on 92% of n=26 (kappa 0.755); see the per-dimension raw J1/J2-vs-layer0 agreement and the tie-break count in the guard section. A guard fix is therefore partly a fix 'as seen by an extractor of the same kind'; human gold on the repaired items would be the independent check.
+2. **Fluency is not measured.** The extraction judge labels dimensions; it does not score grammaticality, so a repair such as 'Ask you to wear headphones.' (chip echo) counts as a strict pass. 'valid' = non-empty. A fluency/naturalness rating of repaired outputs and I2 rewrites is needed before claiming user benefit.
+3. **What the guard cannot see stays broken.** Unfixed violations concentrate on speech act (refusal without a 'no' formula, '[TELL]' rendered as an imperative) where layer0 is weak or the model resists feedback; the number/tense add-on is lexical and conservative.
+4. **I2 trades coverage between dimensions.** It guarantees polarity and certainty alternatives by replacing up to two P2 slots, which lowers speech-act and politeness coverage (agent too for I2t). Rewritten slots carry a stance commitment by design (a negated or hedged reading), so 'any stance addition' is high for them; hedge added on certainty rewrites is the intended effect, not an error. I2 (in place) was chosen over I2t on the pilot because it preserved agent coverage; both are reported on test.
+5. **Serving deviation.** During these runs an external ollama process (user's, ~10 GB) shared the GPU, so the new guard/rewrite calls of the local models were served with partial CPU offload (NGL 14 qwen/llama, 20 gemma; parts of the pilot ran fully on GPU). First passes are the cached full-GPU generations. Local latencies are therefore upper bounds and only comparable within this report; greedy outputs are not bit-reproducible across serving setups anyway (README: 81-88% agreement).
+6. **Small pilot.** Kill criteria were checked on 12 dev families (24 cue-channel violations, wide CIs) before the test run; the test split confirms them with family-cluster CIs. Bare/noncrit rows are shared by variants A and B and counted once per target, as in attribute.py.

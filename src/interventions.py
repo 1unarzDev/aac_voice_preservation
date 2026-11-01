@@ -599,6 +599,13 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
                      f"{np.median([g['extra_latency_s'] for g in fl]) if fl else 0:.2f} | "
                      f"{np.mean([g['extra_completion_tokens'] for g in gg]):.2f} | "
                      f"{np.median([g['check_ms'] for g in gg]):.1f} |")
+        fl_all = [g for g in gens if g["flags_initial"]]
+        res["cost"] = {"inputs": len(gens), "flagged": len(fl_all),
+                       "calls_per_input": float(np.mean([g["extra_calls"] for g in gens])),
+                       "calls_per_flagged": float(np.mean([g["extra_calls"] for g in fl_all])) if fl_all else 0.0,
+                       "lat_per_input": float(np.mean([g["extra_latency_s"] for g in gens])),
+                       "lat_flagged_median": float(np.median([g["extra_latency_s"] for g in fl_all])) if fl_all else 0.0,
+                       "check_ms": float(np.median([g["check_ms"] for g in gens]))}
         fc = Counter(f.split(":")[0] for g in gens for f in g["flags_initial"])
         L.append(f"\nInitial flag types (unique generations): {dict(fc)}. Still flagged after the guard: "
                  f"{sum(bool(g['flags_final']) for g in gens)} of {sum(bool(g['flags_initial']) for g in gens)} flagged.\n")
@@ -627,7 +634,7 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
                      f"pass {int(rep.j_ok.sum())}; agreement {a}/{len(rep)} = {a/len(rep):.2f}, "
                      f"kappa {_kappa(rep.l0_ok, rep.j_ok)}. Cross-tab (layer0 ok, judge ok): "
                      f"{dict(Counter(zip(rep.l0_ok, rep.j_ok)))}.")
-            res["agree_repaired"] = {"n": len(rep), "agree": a / len(rep)}
+            res["agree_repaired"] = {"n": len(rep), "agree": a / len(rep), "kappa": _kappa(rep.l0_ok, rep.j_ok)}
         # per-dimension agreement on repaired items where the flag named a dimension
         rows = []
         for _, r in rep.iterrows() if len(rep) else []:
@@ -639,7 +646,7 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
             L.append("Judge label of the repaired output on the flagged dimension (layer0 target -> judge value): " +
                      ", ".join(f"{k}: {v}" for k, v in Counter((d, t == jv or (t == 'certain' and jv in CERTAIN))
                                                                for d, t, jv in rows).items()) + " (True = judge agrees target reached).")
-        res["l0_vs_judge"] = {"tp": tp, "fp": fp, "fn": fn, "tn": tn}
+        res["l0_vs_judge"] = {"tp": tp, "fp": fp, "fn": fn, "tn": tn, "kappa": _kappa(x.flag0, x.jfail0)}
         # raw judge variants vs layer0 on the repaired texts (judge.py breaks J1/J2 ties on general
         # dims with layer0, so the final labels are not fully independent of the guard)
         jr = {r["text_id"]: r for r in runio.read_jsonl(run / "judgments.jsonl")}
@@ -745,6 +752,10 @@ def span_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
             for m in sorted({g["model"] for g in i2}) + ["all"]:
                 gg = [g for g in i2 if m == "all" or g["model"] == m]
                 rw = [p for g in gg for p in g["span_plan"] if p.get("rewritten")]
+            if m == "all":
+                res[f"cost_{arm}"] = {"sets": len(gg), "calls_per_set": float(np.mean([g["extra_calls"] for g in gg])),
+                                      "lat_per_set": float(np.mean([g["extra_latency_s"] for g in gg])),
+                                      "verified": sum(bool(p.get("verified")) for p in rw), "rewrites": len(rw)}
                 L.append(f"| {m} | {len(gg)} | {sum(g['changed'] for g in gg)} | {len(rw)} | "
                          f"{np.mean([g['extra_calls'] for g in gg]):.2f} | {sum(bool(p.get('verified')) for p in rw)}/{len(rw)} | "
                          f"{np.mean([g['extra_latency_s'] for g in gg]):.2f} | "
@@ -838,6 +849,64 @@ def kill_table(gres: dict, sres: dict, label: str) -> list[str]:
     return rows
 
 
+def summary(g: dict, s: dict) -> list[str]:
+    c, cs = g.get("cost", {}), s.get("cost_I2", {})
+    pc, al = s["polarity+certainty"], s["all"]
+    return ["## Summary (held-out test split, 60 families x 4 models)\n",
+            f"- **I1 guard, benefit**: strict pass on cue channels {_fmt(g['P0']['sp'])} -> {_fmt(g['G1']['sp'])}; "
+            f"critical match {_fmt(g['P0']['cm'])} -> {_fmt(g['G1']['cm'])}; contradictions of supplied dimensions "
+            f"{_fmt(g['P0']['ct'])} -> {_fmt(g['G1']['ct'])}; politeness additions {_fmt(g['P0']['pol_add'])} -> "
+            f"{_fmt(g['G1']['pol_add'])}. Fixes {_fmt(g['G1_cue']['fix'])}% of {g['G1_cue']['n_bad']} judged violations "
+            f"(all channels incl. bare/noncrit politeness: {_fmt(g['G1_all']['fix'])}%).",
+            f"- **I1 guard, cost**: {c.get('flagged')}/{c.get('inputs')} inputs flagged; {c.get('calls_per_input', 0):.3f} extra "
+            f"calls per input ({c.get('calls_per_flagged', 0):.2f} per flagged input); mean extra latency "
+            f"{c.get('lat_per_input', 0):.2f} s per input (median {c.get('lat_flagged_median', 0):.2f} s per flagged input); "
+            f"layer0 check {c.get('check_ms', 0):.1f} ms. Over-correction: {_fmt(g['G1_all']['overcorr'])}% of "
+            f"{g['G1_all']['n_ok']} already-correct outputs changed, {_fmt(g['G1_all']['broken'])}% became judged failures.",
+            f"- **G1s strip-only** (0 calls): strict pass {_fmt(g['G1s']['sp'])}; fixes {_fmt(g['G1s_cue']['fix'])}% of cue-channel "
+            f"violations (only politeness ones) and {_fmt(g['G1s_all']['fix'])}% over all channels; changes "
+            f"{_fmt(g['G1s_all']['overcorr'])}% of already-correct outputs (stripping 'please' from the shared bare output also "
+            "hits the [PLEASE] variant).",
+            f"- **I2 set, benefit**: polarity+certainty coverage@3 S3 {_fmt(pc['S3'])}, P2 {_fmt(pc['P2'])}, I2 {_fmt(pc['I2'])} "
+            f"(I2 - P2 {_fmt(pc['diff_I2'])} pts; I2t {_fmt(pc['I2t'])}). Over all six dimensions: P2 {_fmt(al['P2'])}, "
+            f"I2 {_fmt(al['I2'])} ({_fmt(al['diff_I2'])} pts), I2t {_fmt(al['I2t'])} ({_fmt(al['diff_I2t'])} pts).",
+            f"- **I2 set, cost**: {cs.get('calls_per_set', 0):.2f} extra calls and {cs.get('lat_per_set', 0):.2f} s extra latency per "
+            f"bare input; {cs.get('verified')}/{cs.get('rewrites')} rewrites layer0-verified; coverage of the dimensions "
+            "it does not target drops (speech act, politeness; agent too for I2t), see the coverage table."]
+
+
+def caveats(g: dict, s: dict) -> list[str]:
+    lv, ar = g.get("l0_vs_judge", {}), g.get("agree_repaired", {})
+    return ["## Caveats\n",
+            f"1. **Monitor and evaluator are independent but correlated.** The guard uses layer0; the endpoint uses the "
+            f"blind LLM judge. They never share calls, but they target the same constructs, and judge.py breaks J1/J2 ties on "
+            f"general dimensions with layer0 (critical labels never use layer0). On the first pass, layer0 flags vs judged "
+            f"failures: TP {lv.get('tp')}, FP {lv.get('fp')}, FN {lv.get('fn')}, TN {lv.get('tn')} (kappa {lv.get('kappa')}). On "
+            f"the repaired (flagged and regenerated) targets, layer0 'fixed' agrees with judge 'pass' on "
+            f"{100*ar.get('agree', float('nan')):.0f}% of n={ar.get('n')} (kappa {ar.get('kappa')}); see the per-dimension raw J1/J2-vs-layer0 "
+            "agreement and the tie-break count in the guard section. A guard fix is therefore partly a fix 'as seen by an "
+            "extractor of the same kind'; human gold on the repaired items would be the independent check.",
+            "2. **Fluency is not measured.** The extraction judge labels dimensions; it does not score grammaticality, so a "
+            "repair such as 'Ask you to wear headphones.' (chip echo) counts as a strict pass. 'valid' = non-empty. A "
+            "fluency/naturalness rating of repaired outputs and I2 rewrites is needed before claiming user benefit.",
+            "3. **What the guard cannot see stays broken.** Unfixed violations concentrate on speech act (refusal without a "
+            "'no' formula, '[TELL]' rendered as an imperative) where layer0 is weak or the model resists feedback; the "
+            "number/tense add-on is lexical and conservative.",
+            "4. **I2 trades coverage between dimensions.** It guarantees polarity and certainty alternatives by replacing up to "
+            "two P2 slots, which lowers speech-act and politeness coverage (agent too for I2t). Rewritten slots carry a "
+            "stance commitment by design (a negated or hedged reading), so 'any stance addition' is high for them; hedge "
+            "added on certainty rewrites is the intended effect, not an error. I2 (in place) was chosen over I2t on the pilot "
+            "because it preserved agent coverage; both are reported on test.",
+            "5. **Serving deviation.** During these runs an external ollama process (user's, ~10 GB) shared the GPU, so the new "
+            "guard/rewrite calls of the local models were served with partial CPU offload (NGL 14 qwen/llama, 20 gemma; parts "
+            "of the pilot ran fully on GPU). First passes are the cached full-GPU generations. Local latencies are therefore "
+            "upper bounds and only comparable within this report; greedy outputs are not bit-reproducible across serving "
+            "setups anyway (README: 81-88% agreement).",
+            "6. **Small pilot.** Kill criteria were checked on 12 dev families (24 cue-channel violations, wide CIs) before the test "
+            "run; the test split confirms them with family-cluster CIs. Bare/noncrit rows are shared by variants A and B and "
+            "counted once per target, as in attribute.py."]
+
+
 def write_report(a) -> None:
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
     groot = lambda r: Path(r) if Path(r).exists() else ROOT / "runs" / r  # noqa: E731
@@ -854,7 +923,9 @@ def write_report(a) -> None:
         L += kill_table(pg, ps, "pilot") + ["", "Same criteria on the held-out test split:\n"]
         summ["pilot"] = {"guard": pg, "span": {k: v for k, v in ps.items() if k != "_sets"}}
     L += kill_table(gres, sres, a.guard) + [""]
+    L += summary(gres, sres) + [""]
     L += ["## Results\n"] + gl + [""] + sl + [""] + examples(groot(a.guard), groot(a.span))
+    L += [""] + caveats(gres, sres)
     out.write_text("\n".join(L) + "\n")
     out.with_suffix(".json").write_text(json.dumps(summ, indent=1, default=str))
     print(f"wrote {out}")
