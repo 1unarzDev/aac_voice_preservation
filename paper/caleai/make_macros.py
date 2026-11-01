@@ -153,6 +153,18 @@ for name, ready in EV["pending"].items():
             put(key, f"{v:.3g}" if isinstance(v, float) else v)
 
 
+# ---------------- fresh W-C confirmation headline contract
+# Import the same flat W-C headline contract as SE4All, independent of whether
+# evidence.json was regenerated after the W-C analysis finished. Unit-scale
+# estimates and bounds remain numeric and get the same three-decimal formatting.
+wc_headline = ROOT / 'analysis/r2c/headline.json'
+if (wc_headline.parent / 'report.md').exists() and wc_headline.exists():
+    put('wc_ready', 1)
+    for key, value in json.loads(wc_headline.read_text()).items():
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            put('wc_' + key, str(value) if isinstance(value, int) else f'{value:.3f}')
+
+
 # ---------------- human gold (W-A): judge vs two human annotators, from score_gold.py --human.
 # Same keys as the SE4All paper (shared score_gold.paper_macros, prefix human_); human_gold_ready
 # switches on the conditional slot whenever the human section exists.
