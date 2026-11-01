@@ -599,9 +599,9 @@ def handout(plan, tab, later: bool = LATER) -> str:
 files from `annotation/` (answer keys, model labels).
 
 **Deadlines**
-- **Stage 1** ({DATES['stage1']}): due **{DATES['stage1_due']}**. Keyword choice first, then checks/labels, then writing:
+- **Stage 1** (handed out for {DATES['stage1']}): **all returned {DATES['stage2_open']}**. Keyword choice first, then checks/labels, then writing:
   the order on the sheet is mandatory. About {min(v['stage1'] for v in tab.values())}-{max(v['stage1'] for v in tab.values())} min each, plus breaks.
-- **Stage 2** (opens **{DATES['stage2_open']}**): due **{DATES['stage2_due']}**. Instructions and files are sent on {DATES['stage2_open']}
+- **Stage 2** (opens **{DATES['stage2_open']}**): due **{DATES['stage2_due']}**. Instructions and files sent {DATES['stage2_open']}
   (annotators re-download the zip).
 - Stage 3 (optional, {DATES['stage3']}) for a few people; instructions later.
 
