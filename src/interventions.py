@@ -495,8 +495,12 @@ def guard_frame(run: Path):
     for f in ("flags_initial", "flags_final", "extra_calls", "extra_latency_s", "extra_completion_tokens",
               "changed", "chosen_attempt", "check_ms", "attempts"):
         sc[f] = [gens.get(k, {}).get(f) for k in sc.request_key]
-    sc["strict_fail"] = [None if (cp is None or pd.isna(cp)) else bool((not cp) or (pa is True))
-                         for cp, pa in zip(sc.constraint_preserving, sc.politeness_added)]
+    # cue channels: not constraint-preserving OR politeness added; ambiguous channels (bare/
+    # noncrit, where only the politeness rule can fire): politeness added
+    sc["strict_fail"] = [(None if pa is None or pd.isna(pa) else bool(pa)) if amb else
+                         None if (cp is None or pd.isna(cp)) else bool((not cp) or (pa is True))
+                         for cp, pa, amb in zip(sc.constraint_preserving, sc.politeness_added,
+                                                sc.channel.isin(["bare", "noncrit"]))]
     sc["pol_add"] = sc.politeness_added.astype("float")
     keys = ["base_key", "family_id", "variant", "channel"]
     wide = sc[sc.prompt_id == "P0"].set_index(keys)
@@ -545,7 +549,7 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
     L.append("| arm | channels | judged violations (P0) | flagged by layer0 | fixed | fix rate | already-correct | changed | over-correction rate | broken (pass->fail) |")
     L.append("|---|---|---|---|---|---|---|---|---|---|")
     for arm, j in pairs.items():
-        for chs, lab in ((CUE, "cue"), (["bare", "noncrit"], "ambiguous")):
+        for chs, lab in ((CUE, "cue"), (["bare", "noncrit"], "ambiguous"), (CUE + ["bare", "noncrit"], "all")):
             x = j[j.channel.isin(chs) & j.valid & j["valid_" + arm]].copy()
             x = x[x.strict_fail.notna() & x["strict_fail_" + arm].notna()]
             if not len(x):
@@ -560,6 +564,23 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
             res[f"{arm}_{lab}"] = {"fix": rf, "overcorr": rc, "broken": rb, "n_bad": len(bad), "n_ok": len(ok)}
             L.append(f"| {arm} | {lab} | {len(bad)} | {int(bad.flag0.sum())} | {int(bad.fixed.sum())} | {_fmt(rf)} | "
                      f"{len(ok)} | {int(ok.chg.sum())} | {_fmt(rc)} | {int(ok.brk.sum())} |")
+    L.append("\nAmbiguous channels: judged violation = politeness added (the only guard rule that applies). "
+             "bare/noncrit outputs are shared by variants A and B and counted once per target.\n")
+    jj = pairs.get("G1")
+    if jj is not None:
+        x = jj[jj.channel.isin(CUE) & jj.valid & jj.strict_fail.notna() & jj.strict_fail_G1.notna()].copy()
+        x["sp0"] = 1 - x.strict_fail.astype(float); x["sp1"] = 1 - x.strict_fail_G1.astype(float)
+        for by in ("model", "channel", "dimension"):
+            L.append(f"\nStrict pass on cue channels by {by} (P0 -> G1; G1s), % [family CI]:\n")
+            L.append(f"| {by} | P0 | G1 | G1s | judged violations P0 | fixed by G1 | n |\n|---|---|---|---|---|---|---|")
+            xs = pairs["G1s"]
+            xs = xs[xs.channel.isin(CUE) & xs.valid & xs.strict_fail_G1s.notna()].copy()
+            xs["sp2"] = 1 - xs.strict_fail_G1s.astype(float)
+            for k, g in x.groupby(by):
+                g2 = xs[xs[by] == k]
+                L.append(f"| {k} | {_fmt(_fb(g, 'sp0', n_boot))} | {_fmt(_fb(g, 'sp1', n_boot))} | "
+                         f"{_fmt(_fb(g2, 'sp2', n_boot))} | {int((g.sp0 == 0).sum())} | "
+                         f"{int(((g.sp0 == 0) & (g.sp1 == 1)).sum())} | {len(g)} |")
     # cost: per guarded generation (unique request, not per target)
     gens = [g for g in runio.read_jsonl(run / "generations.jsonl") if g["prompt_id"] == "G1"]
     if gens:
@@ -596,12 +617,13 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
         L.append(f"First pass, flag (layer0) vs judged failure: TP {tp}, FP {fp}, FN {fn}, TN {tn}; "
                  f"precision {tp/max(tp+fp,1):.2f}, recall {tp/max(tp+fn,1):.2f}, "
                  f"kappa {_kappa(x.flag0, x.jfail0)}.")
-        rep = x[x.changed_G1.astype(bool) & x.strict_fail_G1.notna()].copy()
+        rep = x[x.flag0 & x.strict_fail_G1.notna()].copy()
         if len(rep):
             rep["l0_ok"] = [not f for f in rep.flags_final_G1]
             rep["j_ok"] = ~rep.strict_fail_G1.astype(bool)
             a = int((rep.l0_ok == rep.j_ok).sum())
-            L.append(f"Repaired (changed) items, n={len(rep)}: layer0 says fixed {int(rep.l0_ok.sum())}, judge says "
+            L.append(f"Repaired items (flagged by layer0 and regenerated), n={len(rep)} targets, of which "
+                     f"{int(rep.changed_G1.astype(bool).sum())} changed: layer0 says fixed {int(rep.l0_ok.sum())}, judge says "
                      f"pass {int(rep.j_ok.sum())}; agreement {a}/{len(rep)} = {a/len(rep):.2f}, "
                      f"kappa {_kappa(rep.l0_ok, rep.j_ok)}. Cross-tab (layer0 ok, judge ok): "
                      f"{dict(Counter(zip(rep.l0_ok, rep.j_ok)))}.")
@@ -770,15 +792,55 @@ def examples(guard_run: Path, span_run: Path) -> list[str]:
     return L
 
 
+METHOD = """Method. **I1 commitment guard**: after the P0 generation, the deterministic layer0 extractor (+ a
+number/tense add-on) compares the output with the commitments the user supplied at runtime (chips parsed
+from the visible input; for `full`, layer0 labels of the typed source), and flags a polite marker that was
+not supplied. On a flag, the same conversation gets one feedback turn ("Your sentence must keep: ...")
+and is regenerated, up to 2 times; the returned output is the first unflagged attempt, else the fewest-flag
+attempt (ties -> original). **G1s** = strip-only: deterministic removal of an unsupplied "please", no call.
+**I2 ambiguity-complete set** (bare input): keep P2's top suggestion; for polarity then certainty, if
+layer0 finds no slot holding the alternative reading of the top suggestion, replace slot 3 (then 2) with an
+LLM rewrite carrying that reading, layer0-verified with one feedback retry. I2t rewrites the top suggestion;
+I2 (primary, chosen on the pilot) rewrites the replaced slot's own sentence. Evaluation is by the blind
+LLM extraction judge (gpt-6.1-sol, J1/J2, J1 fallback on disagreement) and deterministic attribution; the
+guard never sees judge labels. CIs: family-cluster percentile bootstrap (src/analyze.family_bootstrap).
+First passes (P0, P2, S3) are the cached generations of the base run."""
+
+
+def kill_table(gres: dict, sres: dict, label: str) -> list[str]:
+    f = gres.get("G1_cue", {}); fa = gres.get("G1_all", {})
+    pc = sres.get("polarity+certainty", {})
+    rows = [f"| criterion ({label}) | threshold | estimate [95% CI] | verdict |", "|---|---|---|---|"]
+    fix = f.get("fix", {"n": 0}); oc = fa.get("overcorr", {"n": 0})
+    rows.append(f"| I1 fix rate of judged violations (cue channels) | >= 30% | {_fmt(fix)} (n={f.get('n_bad')}) | "
+                f"{'PASS' if fix.get('n') and fix['estimate'] >= .30 else 'KILL'} |")
+    rows.append(f"| I1 already-correct outputs changed (all guarded channels) | <= 10% | {_fmt(oc)} (n={fa.get('n_ok')}) | "
+                f"{'PASS' if oc.get('n') and oc['estimate'] <= .10 else 'KILL'} |")
+    for arm in ("I2", "I2t"):
+        d = pc.get(f"diff_{arm}", {"n": 0})
+        rows.append(f"| {arm} polarity+certainty coverage@3 minus P2 | >= +30 pts | {_fmt(d)} pts | "
+                    f"{'PASS' if d.get('n') and d['estimate'] >= .30 else 'KILL'} |")
+    return rows
+
+
 def write_report(a) -> None:
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
     groot = lambda r: Path(r) if Path(r).exists() else ROOT / "runs" / r  # noqa: E731
-    L = [f"# {a.title}\n", f"Generated by `src/interventions.py report --guard {a.guard} --span {a.span}`.\n"]
+    L = [f"# {a.title}\n", f"Generated by `src/interventions.py report --guard {a.guard} --span {a.span}"
+         + (f" --pilot-guard {a.pilot_guard} --pilot-span {a.pilot_span}" if a.pilot_guard else "") + "`.\n",
+         METHOD + "\n"]
     gl, gres = guard_section(groot(a.guard), a.n_boot, a.guard)
     sl, sres = span_section(groot(a.span), a.n_boot, a.span)
-    L += gl + [""] + sl + [""] + examples(groot(a.guard), groot(a.span))
+    summ = {"guard": gres, "span": {k: v for k, v in sres.items() if k != "_sets"}}
+    if a.pilot_guard:
+        _, pg = guard_section(groot(a.pilot_guard), a.n_boot, a.pilot_guard)
+        _, ps = span_section(groot(a.pilot_span), a.n_boot, a.pilot_span)
+        L += ["## Kill criteria\n", "Pilot (dev split, 12 families; full tables in analysis/interventions/pilot.md):\n"]
+        L += kill_table(pg, ps, "pilot") + ["", "Same criteria on the held-out test split:\n"]
+        summ["pilot"] = {"guard": pg, "span": {k: v for k, v in ps.items() if k != "_sets"}}
+    L += kill_table(gres, sres, a.guard) + [""]
+    L += ["## Results\n"] + gl + [""] + sl + [""] + examples(groot(a.guard), groot(a.span))
     out.write_text("\n".join(L) + "\n")
-    summ = {"guard": {k: v for k, v in gres.items()}, "span": {k: v for k, v in sres.items() if k != "_sets"}}
     out.with_suffix(".json").write_text(json.dumps(summ, indent=1, default=str))
     print(f"wrote {out}")
 
@@ -802,6 +864,7 @@ def main() -> int:
     s = sub.add_parser("report")
     s.add_argument("--guard", required=True); s.add_argument("--span", required=True)
     s.add_argument("--out", required=True); s.add_argument("--title", default="Interventions")
+    s.add_argument("--pilot-guard"); s.add_argument("--pilot-span")
     s.add_argument("--n-boot", type=int, default=2000)
     a = ap.parse_args()
     if a.cmd in ("guard", "span"):
