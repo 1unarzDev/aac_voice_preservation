@@ -1,0 +1,77 @@
+% results_macros.tex -- STUB. The analysis pipeline overwrites this file. Do not edit numbers by hand.
+%
+% Contract for the generator:
+%   1. Emit \resultsfinaltrue as the first command once every key used in main.tex is defined.
+%      Then siunitx parses and formats numbers. While the file is false, \num prints its
+%      argument verbatim, and undefined keys show as red [key] tags.
+%   2. Emit one \resdef{<key>}{<plain number>} per key. Use digits, "." and "-" only.
+%      No "%" and no thousands separators; siunitx adds those.
+%   3. Percentages are on a 0-100 scale. Differences are in percentage points.
+%      Each interval key has the suffix _lo/_hi: a 95% family-cluster bootstrap percentile
+%      interval for S2/S3 estimates and a Wilson interval for S1, as stated in main.tex.
+%   4. Write a header comment that records the run id, the analysis code sha and the labels
+%      used (judge final / arbiter / human), so every number traces to claims_ledger.md.
+%
+% Key registry (description -> source). Endpoints are pooled over 4 models unless named,
+% with prompt P0 unless named.
+% --- S1 (AACText; analysis/s1) ---
+%  s1_n_messages            nonempty AACText messages (sent_{train,dev,test}_aac)
+%  s1_loss_any(_lo,_hi)     % messages losing >=1 detected cue, POS-cap4, all dimensions
+%  s1_loss_excl_agent(_lo,_hi)  same, excluding pronoun-agent loss (D-010 headline)
+%  s1_loss_excl_agent_time  same, excluding agent and time
+%  s1_loss_polarity         % messages whose negation cue is lost
+%  s1_loss_speech_act       % messages whose speech-act cue is lost
+%  s1_collision             % messages whose keyword string collides with a differently labeled source
+%  s1_restore_two           % messages whose detected values are restored by <=2 chips
+%  s1_inexpressible         % messages with losses the chip vocabulary cannot express
+% --- S2 design counts ---
+%  n_families_scored        test families in scored dimensions (expected 50)
+%  n_outputs_judged         unique output texts judged
+% --- Assumption / default asymmetry (bare channel) ---
+%  bare_affirm_rate(_lo,_hi)  % definite bare polarity outputs that are affirmative (all prompts)
+%  bare_affirm_n, bare_affirm_den   counts behind bare_affirm_rate
+%  bare_commit_rate(_lo,_hi)  % bare outputs (all scored dims) committing to a definite critical value
+%  bare_neg_offered_p2      % P2 polarity sets containing a negated suggestion
+%  bare_speaker_rate        % bare agent-family outputs with a speaker agent
+%  bare_plain_cert_rate     % bare certainty-family outputs that are plain assertions
+%  bare_please_added        % bare/noncrit outputs adding please or a softener (P0)
+%  action_gap_polarity(_lo,_hi)  paired fidelity gap at bare: affirmative variant minus negated variant (points)
+%  min_actions_neg          minimum tested extra selections at which negated fidelity >= 80% (expect 1)
+%  min_actions_aff          same for the affirmative variant (expect 0)
+%  noncrit_vs_bare(_lo,_hi) difference in critical-match rate, noncrit minus bare (points)
+%  noncrit_rows_differ      % aligned bare/noncrit rows whose critical label differs
+% --- Violation (cue present) ---
+%  chip1_match(_lo,_hi)     polarity critical match with one chip
+%  chip1_match_all(_lo,_hi) critical match with one chip, all scored dimensions
+%  full_match_all(_lo,_hi)  critical match with the full source, all scored dimensions
+%  chip1_vs_full(_lo,_hi)   chip1 minus full (points)
+%  full_politeness_added(_lo,_hi)  % plain-directive full-channel outputs adding please or a softener
+%  full_politeness_added_n, full_politeness_added_den
+%  full_stance_changed      % full-channel outputs changing any explicit general-dimension value
+%  violation_rate_<dim>     % cue-present outputs violating the critical value, per dimension (polarity, agent, certainty, speech_act, politeness)
+% --- Table 3 cells: critical match (%) by dimension x channel, P0, pooled models ---
+%  match_<dim>_<ch>  for dim in {pol, agt, cer, act, pz} and ch in {bare, noncrit, chip1, chipall, full}
+% --- Suggestion sets ---
+%  coverage_p2(_lo,_hi)     % P2 bare sets covering both readings (all scored dims)
+%  coverage_s3(_lo,_hi)     same for 3 sampled outputs (S3)
+%  coverage_p2_pz, coverage_s3_pz      politeness families only
+%  coverage_p2_pol, coverage_s3_pol    polarity families only (expect 0)
+%  p2_additions, s3_additions          % suggestions adding unlicensed content (added_content=yes)
+% --- Cue interaction / encoding (Exp B, Exp C) ---
+%  interaction_drop(_lo,_hi)   drop in [PLAIN] preservation when [ASK]+[YOU] are added (points; model named in text)
+%  interaction_padding_drop    same for inert padding of matched length (control)
+%  interaction_families        number of held-out families that show a >=20-point drop
+%  encoding_alias_delta        critical-match change, alias chips vs original (points)
+%  encoding_nl_delta           critical-match change, natural-language fields vs original (points)
+%  factorial_protected_drop(_lo,_hi)  Exp C: drop in protected-dimension accuracy when the other cue is added
+% --- Oracle validation ---
+%  gold_n                   human-coded outputs (held out)
+%  challenge_n              authored challenge sentences
+%  human_alpha(_lo,_hi)     Krippendorff alpha between human coders (nominal, pre-adjudication)
+%  judge_kappa(_lo,_hi)     judge-vs-adjudicated-human Cohen kappa, critical dimension, held out
+%  judge_kappa_min          lowest per-dimension kappa
+%  judge_sens_violation, judge_spec_violation   judge sensitivity/specificity for Violation events
+%  challenge_acc            % challenge sentences labeled correctly by the final judge pipeline
+%  stale_label_flips        number of headline contrasts that change >=10 points between layer0 and validated labels
+
+\resultsfinalfalse

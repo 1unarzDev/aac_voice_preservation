@@ -1,0 +1,872 @@
+{
+ "run": "main1",
+ "codebook_version": "v0.2 (D-007)",
+ "seed": 20261031,
+ "general_dims": [
+  {
+   "name": "polarity",
+   "definition": "Is the main statement or request negated (not/never/no/don't)? 'mixed/unclear' if both or you cannot tell.",
+   "options": [
+    "affirmative",
+    "negated",
+    "mixed/unclear"
+   ]
+  },
+  {
+   "name": "speech_act",
+   "definition": "What the sentence does: tells (statement), asks for information (question), asks someone to do something (request/command), declines (refusal), proposes or offers (offer/suggestion).",
+   "options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "offer/suggestion",
+    "other"
+   ]
+  },
+  {
+   "name": "agent",
+   "definition": "Who does the main action: the speaker (I), the listener (you), both (we/let's), someone else (third party), or no doer is stated (unspecified).",
+   "options": [
+    "speaker",
+    "addressee",
+    "we/joint",
+    "third party",
+    "unspecified"
+   ]
+  },
+  {
+   "name": "certainty",
+   "definition": "How sure the sentence sounds: plain, hedged (maybe/I think/probably), strongly certain (definitely/really/for sure). Questions and requests: n/a.",
+   "options": [
+    "plain assertion",
+    "hedged/uncertain",
+    "strongly certain/emphatic",
+    "n/a (question/request)"
+   ]
+  },
+  {
+   "name": "politeness",
+   "definition": "Explicit politeness words only: 'please'; a softened request (could you / would you mind / if possible); thanks or apology. Else none.",
+   "options": [
+    "none",
+    "please",
+    "softened request (could you/would you mind)",
+    "thanks/apology"
+   ]
+  }
+ ],
+ "added_content": {
+  "definition": "Does the sentence state a fact, reason, person, place or time that is NOT in the input words? Grammar words and chips' meanings do not count.",
+  "options": [
+   "yes",
+   "no"
+  ]
+ },
+ "practice": [
+  {
+   "item_id": "practice-1",
+   "text": "I don't want to go to the party tonight.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: want go party",
+   "expected": {
+    "critical": "negated",
+    "polarity": "negated",
+    "speech_act": "statement",
+    "agent": "speaker",
+    "certainty": "plain assertion",
+    "politeness": "none",
+    "added_content": "yes"
+   },
+   "feedback": "\"don't\" negates the main verb, so polarity is negated. 'tonight' is a time that is not in the input words, so added content = yes."
+  },
+  {
+   "item_id": "practice-2",
+   "text": "Can you pick me up after work?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: pick up work",
+   "expected": {
+    "critical": "request/command",
+    "polarity": "affirmative",
+    "speech_act": "request/command",
+    "agent": "addressee",
+    "certainty": "n/a (question/request)",
+    "politeness": "none",
+    "added_content": "no"
+   },
+   "feedback": "'Can you ...?' asks the listener to do something: a request, done by the addressee. 'Can you' alone is NOT a polite marker (codebook rule), so politeness = none. Requests get certainty n/a."
+  },
+  {
+   "item_id": "practice-3",
+   "text": "I think the bus might be late today.",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [MAYBE] bus late",
+   "expected": {
+    "critical": "hedged/uncertain",
+    "polarity": "affirmative",
+    "speech_act": "statement",
+    "agent": "third party",
+    "certainty": "hedged/uncertain",
+    "politeness": "none",
+    "added_content": "yes"
+   },
+   "feedback": "'I think' and 'might' are hedges. The bus is the one that is late, so the agent is a third party. 'today' is not in the input: added content = yes."
+  },
+  {
+   "item_id": "practice-4",
+   "text": "Could you please turn the TV down?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] turn tv down",
+   "expected": {
+    "critical": "polite",
+    "polarity": "affirmative",
+    "speech_act": "request/command",
+    "agent": "addressee",
+    "certainty": "n/a (question/request)",
+    "politeness": "please",
+    "added_content": "no"
+   },
+   "feedback": "Both 'could you' and 'please' are present. For the general politeness question pick the highest: please."
+  },
+  {
+   "item_id": "practice-5",
+   "text": "Let's go to the park later.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+    "options": [
+     "past",
+     "now",
+     "later",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: go park",
+   "expected": {
+    "critical": "later",
+    "polarity": "affirmative",
+    "speech_act": "offer/suggestion",
+    "agent": "we/joint",
+    "certainty": "plain assertion",
+    "politeness": "none",
+    "added_content": "yes"
+   },
+   "feedback": "'Let's' is a suggestion done together (we/joint). 'later' places it in the future and is not in the input words, so added content = yes."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "g-9ebfbad469",
+   "text": "I cancelled my therapy session, and now I'm feeling anxious about it.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: I cancelled my therapy session."
+  },
+  {
+   "item_id": "g-98a58361d1",
+   "text": "The instructions are not understood.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] understand instructions"
+  },
+  {
+   "item_id": "g-afe3c9b179",
+   "text": "Please give me a new soap that won't cause a rash.",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: new soap give rash"
+  },
+  {
+   "item_id": "g-6fda90738c",
+   "text": "Can you please repeat the question?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLEASE] repeat question"
+  },
+  {
+   "item_id": "g-1580beb77a",
+   "text": "No, you cannot borrow my car.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [REFUSE] [YOU] borrow car"
+  },
+  {
+   "item_id": "g-3157262c68",
+   "text": "Please let me in on the group chat.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Yes, I'm joining the group chat."
+  },
+  {
+   "item_id": "g-4db3676e9f",
+   "text": "I slept for 8 hours last night.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "four",
+     "nine",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: sleep hours night"
+  },
+  {
+   "item_id": "g-18a0620cf0",
+   "text": "Shall we meet at the cinema later?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Are we still meeting at the cinema?"
+  },
+  {
+   "item_id": "g-e443cbb5ae",
+   "text": "I didn't understand the instructions.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [I] [PAST] understand instructions"
+  },
+  {
+   "item_id": "g-e04d9013b1",
+   "text": "I walk the dog for lunch.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: walk dog lunch"
+  },
+  {
+   "item_id": "g-35cc23f904",
+   "text": "They might be upsetting their friend.",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [MAYBE] [THEY] friend upset"
+  },
+  {
+   "item_id": "g-8cffa848f7",
+   "text": "I feel dizzy now and need medicine.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: normal feel dizzy medicine"
+  },
+  {
+   "item_id": "g-b4549ac183",
+   "text": "I didn't hear you, can you repeat?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: repeat question"
+  },
+  {
+   "item_id": "g-d5b965b836",
+   "text": "Tomorrow, my tax refund will come in.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+    "options": [
+     "past",
+     "now",
+     "later",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: My tax refund arrives tomorrow."
+  },
+  {
+   "item_id": "g-3a0d394b40",
+   "text": "Tonight, I will charge my wheelchair.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: charge wheelchair tonight"
+  },
+  {
+   "item_id": "g-205699fa68",
+   "text": "Please make sure to wear your headphones to enjoy your journey.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [PLEASE] wear headphones"
+  },
+  {
+   "item_id": "g-cd6821efc9",
+   "text": "Can you please give me more time for the test?",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: need time test"
+  },
+  {
+   "item_id": "g-0d763c8d60",
+   "text": "You pay for a taxi to go home.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: home pay taxi"
+  },
+  {
+   "item_id": "g-8d08b33636",
+   "text": "You walked the dog yesterday.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] [PAST] walk dog"
+  },
+  {
+   "item_id": "g-cd2a968934",
+   "text": "Will the ride take 40 minutes?",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "ten",
+     "forty",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [40] ride take minutes"
+  },
+  {
+   "item_id": "g-1809e2238c",
+   "text": "We still owe them a few dollars.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "twenty",
+     "fifty",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: still owe dollars"
+  },
+  {
+   "item_id": "g-0dd54191bb",
+   "text": "I slept for four hours before waking up.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "four",
+     "nine",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] [PAST] [4] sleep hours"
+  },
+  {
+   "item_id": "g-8b20d2b03c",
+   "text": "Can you please pass the sugar?",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "two",
+     "three",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: take sugars"
+  },
+  {
+   "item_id": "g-d2d13af03d",
+   "text": "Could you tell me why I feel dizzy now?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] normal feel dizzy"
+  },
+  {
+   "item_id": "g-7687fd695a",
+   "text": "We are preparing dinner on Friday evening.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: We're cooking dinner on Friday."
+  },
+  {
+   "item_id": "g-5fbb0137cc",
+   "text": "I want to finish knitting my project.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+    "options": [
+     "past",
+     "now",
+     "later",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: finish knitting project"
+  },
+  {
+   "item_id": "g-f792e412e3",
+   "text": "I lost my bank card now, can you help me?",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: I lost my bank card."
+  },
+  {
+   "item_id": "g-03ef35469e",
+   "text": "Who is cooking dinner on Friday?",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: cook dinner friday"
+  },
+  {
+   "item_id": "g-8d07e1d60c",
+   "text": "Please drop me off at the side entrance.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: drop side entrance"
+  },
+  {
+   "item_id": "g-dc7f379b09",
+   "text": "Please save the seat.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: save seat"
+  },
+  {
+   "item_id": "g-edca6195e9",
+   "text": "I tell you to take two sugars.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "two",
+     "three",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] [2] take sugars"
+  },
+  {
+   "item_id": "g-0ceff3887b",
+   "text": "I had headaches when I was six years old.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "three",
+     "six",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] [PAST] [6] have headaches"
+  },
+  {
+   "item_id": "g-38a3a54deb",
+   "text": "I dropped into the entrance.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [PLAIN] drop entrance"
+  },
+  {
+   "item_id": "g-220639bd92",
+   "text": "Is the boss angry about the sales report?",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: boss angry sales report"
+  },
+  {
+   "item_id": "g-25d43ccd35",
+   "text": "Last night, we started the puzzle but didn't complete it.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: We didn't finish the puzzle last night."
+  },
+  {
+   "item_id": "g-6de196019b",
+   "text": "Is it normal to feel dizzy after taking medicine?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: normal feel dizzy medicine"
+  },
+  {
+   "item_id": "g-c8565bd70d",
+   "text": "Do you have the call results?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] call results"
+  },
+  {
+   "item_id": "g-9b38cb22c5",
+   "text": "I started the new job last week.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+    "options": [
+     "past",
+     "now",
+     "later",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] [PAST] start job"
+  },
+  {
+   "item_id": "g-2e01dbb093",
+   "text": "I'm excited to start my new job next week.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+    "options": [
+     "past",
+     "now",
+     "later",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: I start the new job next week."
+  },
+  {
+   "item_id": "g-ba35a7585f",
+   "text": "They have headaches every 6 days.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "What exact number does the sentence state for the main thing? If no number, a vague amount (some, a few) or several numbers = unclear/mixed.",
+    "options": [
+     "three",
+     "six",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [6] have headaches"
+  },
+  {
+   "item_id": "g-685af7e34b",
+   "text": "I definitely tell that I eat dairy.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [I] eat dairy"
+  },
+  {
+   "item_id": "g-ecd75c5eed",
+   "text": "I told you to cancel the session.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] [PAST] cancel session"
+  },
+  {
+   "item_id": "g-85e5bde80a",
+   "text": "Tell them to bring the dog later.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] bring dog"
+  },
+  {
+   "item_id": "g-11edc6ad6b",
+   "text": "They are not telling that the lift is working.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [THEY] lift working"
+  }
+ ],
+ "part": "extraA"
+}
