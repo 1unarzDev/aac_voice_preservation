@@ -101,6 +101,8 @@ for lab, key in (("pc", "polarity+certainty"), ("act", "speech_act"), ("pz", "po
     sc = s["set_counts"][key]
     kn(f"sc_{lab}_p2", sc["p2"], sc["n"]); kn(f"sc_{lab}_i2", sc["i2"], sc["n"])
     kn(f"sc_{lab}_gain", sc["gained"], sc["p2_uncovered"]); kn(f"sc_{lab}_lost", sc["lost"], sc["p2_covered"])
+for _lab, _key in (("pz", "politeness"), ("act", "speech_act"), ("pc", "polarity+certainty")):  # two-decimal views
+    pc(f"s_{_lab}_lossx", sr[_key]["diff_I2"], sign=-1, d=2); pc(f"s_{_lab}_dx", sr[_key]["diff_I2"], d=2)
 pc("s_coll", s["collateral_lost"]); put("s_coll_fam", s["collateral_lost"]["n_families"])
 kn("s_coll_cov", s["collateral_lost_of_covered"]["k"], s["collateral_lost_of_covered"]["n"])
 kn("s_coll_gain", s["collateral_gained"]["k"], s["collateral_gained"]["n"])
@@ -270,6 +272,75 @@ if WD.exists():
         pcu(f"wd_{short}_dboth", W[key + "_damage_minus_both_repeat"], W[key + "_damage_minus_both_repeat_ci_low"],
             W[key + "_damage_minus_both_repeat_ci_high"])
 
+# ---------------- frozen guard transfer to W-C speech act (cycle-3 Action 1; claims ledger C36 "GUARD TRANSFER").
+# Read from analysis/guard_wc/headline.json (written by analysis/guard_wc/analyze.py + close_action1.py from
+# scored.parquet / paired_G1*.parquet). Separate population from the discovery guard result above. Prefix gt_.
+GT = ROOT / "analysis/guard_wc/headline.json"
+if GT.exists():
+    T = json.loads(GT.read_text())
+    assert T["status"] == "complete", T["status"]
+    put("gt_ready", 1)
+    put("gt_fam", T["n_families"]); put("gt_targets", f"{T['n_targets']:,}"); put("gt_unique", f"{T['n_unique']:,}")
+    put("gt_F", f"{T['F']:,}")
+
+    def pcg(k: str, r: dict, d=2) -> None:
+        pc(k, r, d=d)
+        if "k" in r:
+            put(k + "_k", f"{int(round(r['k'])):,}")
+        if "n" in r:
+            put(k + "_n", f"{int(r['n']):,}")
+
+    for arm in ("P0", "G1", "G1s"):
+        a = arm.lower()
+        pcg(f"gt_jp_{a}", T["arms"][arm]["joint_pass"]); pcg(f"gt_sp_{a}", T["arms"][arm]["strict_pass"])
+        pcg(f"gt_pa_{a}", T["arms"][arm]["politeness_added"])
+    for arm in ("G1", "G1s"):
+        a = arm.lower()
+        P = T["paired"][arm]
+        for key, short in (("joint_gain", "jgain"), ("strict_gain", "sgain"), ("strict_repair", "rep"),
+                           ("strict_changed_correct", "cc"), ("strict_pass_to_fail", "pf"),
+                           ("strict_residual", "res"), ("joint_repair", "jrep")):
+            pcg(f"gt_{short}_{a}", P[key])
+        put(f"gt_resflag_{a}_k", P["strict_residual_flagged"]); put(f"gt_resflag_{a}_n", P["strict_residual_targets"])
+        put(f"gt_flagged_{a}", P["initial_flagged_targets"])
+    for end in ("joint", "strict"):
+        cmp_ = T["G1_minus_G1s"][end]
+        pcg(f"gt_cmp_{end}", cmp_["family"])
+        put(f"gt_cmp_{end}_g1only", cmp_["G1_only_pass"]); put(f"gt_cmp_{end}_g1sonly", cmp_["G1s_only_pass"])
+    cr = T["criteria"]
+    put("gt_verdict", "passed" if T["transfer_success"] and all(cr.values()) else "failed")
+    for k, v in cr.items():
+        put("gt_crit_" + k.replace("_", ""), "passes" if v else "fails")
+    put("gt_rep_ge30", "passes" if T["paired"]["G1"]["strict_repair"]["estimate"] >= .30 else "fails")
+    put("gt_cc_le10", "passes" if T["paired"]["G1"]["strict_changed_correct"]["estimate"] <= .10 else "fails")
+    put("gt_usable_validated", "yes" if T.get("usable_repair_validated") else "no")
+    co = T["cost"]
+    put("gt_calls", f"{co['calls_per_input']:.2f}"); put("gt_calls_flag", f"{co['calls_per_flagged']:.2f}")
+    put("gt_gen_calls", f"{co['actual_generation_calls']:,}"); put("gt_gen_cap", f"{co['generation_cap']:,}")
+    put("gt_judge_calls", f"{co['actual_judge_batch_calls']:,}"); put("gt_judge_cap", f"{co['judge_batch_cap']:,}")
+    put("gt_resid_flag_unique", f"{co['residual_flagged_unique']:,}")
+    for m, short in (("qwen2.5-7b", "qwen"), ("gemma3-4b", "gemma"), ("llama3.1-8b", "llama"), ("gpt-6.1-terra", "terra")):
+        pm = T["per_model"][m]["paired"]["G1"]
+        pcg(f"gt_jgain_{short}", pm["joint_gain"]); pcg(f"gt_rep_{short}", pm["strict_repair"])
+    for ch in ("chip1", "chipall", "full"):
+        pch = T["per_channel"][ch]
+        pcg(f"gt_jp_p0_{ch}", pch["arms"]["P0"]["joint_pass"]); pcg(f"gt_jp_g1_{ch}", pch["arms"]["G1"]["joint_pass"])
+    # declared-rule transfer examples: event counts must match the headline counts
+    for ex in json.loads((ROOT / "analysis/guard_wc/examples.json").read_text()):
+        if ex["category"] == "correct-text-changed":
+            assert (ex["event_k"], ex["eligible_n"]) == (T["paired"]["G1"]["strict_changed_correct"]["k"],
+                                                         T["paired"]["G1"]["strict_changed_correct"]["n"])
+            put("gt_ex_cc_model", {"llama3.1-8b": "Llama", "qwen2.5-7b": "Qwen", "gemma3-4b": "Gemma",
+                                   "gpt-6.1-terra": "Terra"}[ex["model"]])
+# discovery guard: strip-only gain over P0 (strict, cue targets) from the C35 pass counts, for the guard display
+_inc = EV["guard"]["increment_vs_strip"]
+put("g_s_gain", f"{100 * (_inc['pass_counts']['G1s'] - _inc['pass_counts']['P0']) / _inc['n']:.2f}")
+put("g_cmp_n", f"{_inc['n']:,}")
+for _arm in ("P0", "G1", "G1s"):  # constraint-preserving = joint supplied-predicate pass (same construct as gt_jp_*)
+    pc(f"g_cpx_{_arm.lower()}", EV["guard"]["report"][_arm]["cp"], d=2)
+_b = EV["guard"]["report"]["G1_cue"]["broken"]
+kn("g_broken_cue", round(_b["estimate"] * _b["n"]), _b["n"])
+
 # Repair audit (Part 4): only if human returns were scored by src/score_repair_audit.py
 if (ROOT / "analysis/repair_audit/summary.json").exists():
     put("repair_audit_ready", 1)
@@ -295,7 +366,10 @@ def esc(v: str) -> str:
     return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus
 
 
-lines = ["% AUTO-GENERATED by make_macros.py from evidence.json -- do not edit by hand."]
+from c3_exports import macros as c3_macros
+for _key, _value in c3_macros().items():
+    put(_key, _value)
+lines = ["% AUTO-GENERATED by make_macros.py from evidence.json + analysis/evidence_c3/current.json -- do not edit by hand."]
 lines += [f"\\resdef{{{k}}}{{{esc(v)}}}" for k, v in sorted(M.items())]
 (HERE / "results_macros.tex").write_text("\n".join(lines) + "\n")
 print(f"wrote {len(M)} macros to", HERE / "results_macros.tex")
