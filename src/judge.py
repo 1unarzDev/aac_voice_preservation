@@ -481,9 +481,12 @@ def main() -> int:
     ap.add_argument("--effort", default="low", choices=["minimal", "low", "medium", "high"])
     ap.add_argument("--variants", default="J1,J2")
     ap.add_argument("--report-only", action="store_true")
+    ap.add_argument("--concurrency", type=int, default=16,
+                    help="max in-flight judge calls (default 16; D-019: <=8 when the endpoint is shared)")
     ap.add_argument("--gold", type=Path, default=None, help="optional hand labels to score")
     a = ap.parse_args()
     run_dir = Path(a.run) if Path(a.run).exists() else ROOT / "runs" / a.run
+    globals()["CONCURRENCY"] = a.concurrency   # read by shared_sem()
     if a.report_only:
         rows = runio.read_jsonl(run_dir / "judgments.jsonl")
     else:

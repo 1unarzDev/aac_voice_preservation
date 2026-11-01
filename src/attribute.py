@@ -24,6 +24,11 @@ Custom channels (D-012, families with `custom_channels`, Exp B/C): the channel's
 cue_in_input = the variant's critical chips are among them, otherwise the channel
 is ambiguous for the critical dimension and scored as Assumption. Standard items
 are scored exactly as before.
+  quarantine_refusal_acceptance  (PREREG_R2 W-A) True for every row of a speech-act
+                     family with a refusal or acceptance variant. These families are
+                     excluded from primary speech-act estimates until the symmetric
+                     refusal/acceptance predicates pass independent checks; report them
+                     as sensitivity only (D-015 acceptance~statement relaxation).
 Critical label source: J1==J2 agreement, else arbiter.jsonl, else (with
 --fallback J1|J2) that variant, else NA (row excluded from rates; counted).
 
@@ -47,6 +52,13 @@ from labels import (EMPH, GENERAL_DIMS, NA_CERTAINTY, critical_match,  # noqa: E
                     dims_in_chips, general_spec, is_unclear)
 
 CUE_CHANNELS = {"chip1", "chipall", "full"}
+QUARANTINE_ACTS = {"refusal", "acceptance"}
+
+
+def quarantined(item: dict) -> bool:
+    """PREREG_R2: refusal/acceptance families are quarantined from primary speech-act estimates."""
+    return item["dimension"] == "speech_act" and any(
+        v["critical_value"] in QUARANTINE_ACTS for v in item["variants"].values())
 AMBIG_CHANNELS = {"bare", "noncrit"}
 
 
@@ -98,8 +110,10 @@ def score(run_dir: Path, items_path=None, fallback: str | None = None) -> pd.Dat
     for o in occ:
         it = items[o["family_id"]]
         var = it["variants"][o["variant"]]
-        other = next(v for k, v in it["variants"].items() if k != o["variant"])
-        vA, vB = it["variants"]["A"]["critical_value"], it["variants"]["B"]["critical_value"]
+        # corpus items (W-B, corpus_item=true) have a single variant A: no pair partner
+        other = next((v for k, v in it["variants"].items() if k != o["variant"]), var)
+        vA = it["variants"]["A"]["critical_value"]
+        vB = it["variants"]["B"]["critical_value"] if "B" in it["variants"] else None
         dim = it["dimension"]
         cust = custom_spec(it, o["variant"], o["channel"]) if it.get("custom_channels") else None
         j = judg.get((o.get("text_id"), o["family_id"], o["input_text"])) if o["valid"] else None
@@ -108,7 +122,8 @@ def score(run_dir: Path, items_path=None, fallback: str | None = None) -> pd.Dat
                                    "variant", "channel", "split", "input_text", "text",
                                    "valid", "parse_ok", "finish_reason")}
         r.update(dimension=dim, variant_value=var["critical_value"],
-                 other_value=other["critical_value"], judged=j is not None)
+                 other_value=other["critical_value"], judged=j is not None,
+                 quarantine_refusal_acceptance=quarantined(it))
 
         crit, src = None, None
         if j is not None:
@@ -136,7 +151,7 @@ def score(run_dir: Path, items_path=None, fallback: str | None = None) -> pd.Dat
             r["chose"] = "unclear"
         elif critical_match(dim, vA, crit):
             r["chose"] = "A"
-        elif critical_match(dim, vB, crit):
+        elif vB is not None and critical_match(dim, vB, crit):
             r["chose"] = "B"
         else:
             r["chose"] = "other"
@@ -197,6 +212,12 @@ def endpoints(df: pd.DataFrame) -> dict:
         for (m, p, c), g in cue.groupby(["model", "prompt_id", "channel"])}
     ep["violation_by_dim"] = {f"{m}|{d}": _rate(g["violation"])
                               for (m, d), g in cue.groupby(["model", "dimension"])}
+    if "quarantine_refusal_acceptance" in df:
+        q = cue[cue["dimension"] == "speech_act"]
+        ep["speech_act_violation_primary_excl_quarantine"] = {
+            f"{m}": _rate(g["violation"]) for m, g in q[~q["quarantine_refusal_acceptance"]].groupby("model")}
+        ep["speech_act_violation_quarantined_only"] = {
+            f"{m}": _rate(g["violation"]) for m, g in q[q["quarantine_refusal_acceptance"]].groupby("model")}
     amb = df[df["ambig_channel"]]
     # A and B share bare/noncrit requests: count each (request, suggestion) once.
     amb1 = amb.drop_duplicates(["request_key", "suggestion_idx", "channel", "family_id"])

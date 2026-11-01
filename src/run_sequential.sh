@@ -3,6 +3,8 @@
 # usage: src/run_sequential.sh <requests.jsonl> <run_id> [models...]   (default: qwen llama gemma; API runs alongside)
 # Reason: 3 concurrent servers (15.2/16.4 GB VRAM) froze the machine on 2026-10-31 (D-008).
 set -u
+# D-019: global GPU lock so only one workstream serves a local model at a time
+exec 9>/tmp/aacv_gpu.lock; flock 9
 req=$1; run=$2; shift 2
 models=${*:-qwen llama gemma}
 declare -A MID=([qwen]=qwen2.5-7b [llama]=llama3.1-8b [gemma]=gemma3-4b)

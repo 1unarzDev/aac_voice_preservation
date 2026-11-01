@@ -1,0 +1,97 @@
+{
+  "run_id": "r2d1",
+  "created_utc": "2026-11-01T02:54:44+00:00",
+  "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/r2d.jsonl",
+  "requests_sha256": "c161f004181e215df0534ea97e0a254ea8111150320c0b157b1c034d32bd5bd1",
+  "n_requests": 2880,
+  "wall_s": 140.1,
+  "models": {
+    "qwen2.5-7b": {
+      "name": "qwen2.5-7b",
+      "base_url": "http://127.0.0.1:8091/v1",
+      "model": "qwen2.5-7b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "concurrency": 8,
+      "supports_seed": true
+    }
+  },
+  "prompts": {
+    "P0": {
+      "prompt_id": "P0",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "ad8e7920bfeba2badf6d831b7923170cabb5fa1841f44b583088c3167481bcf7"
+    },
+    "S3": {
+      "prompt_id": "S3",
+      "template_file": "P0.txt",
+      "temperature": 0.7,
+      "k": 3,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "ad8e7920bfeba2badf6d831b7923170cabb5fa1841f44b583088c3167481bcf7"
+    },
+    "P1": {
+      "prompt_id": "P1",
+      "template_file": "P1.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "6e7daa45372809800621e7b2f4824437285665786dd7f83934caf9158c52a854"
+    },
+    "P2": {
+      "prompt_id": "P2",
+      "template_file": "P2.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 3,
+      "max_tokens": 256,
+      "legend_file": "chip_legend.txt",
+      "sha256": "3947e7a150dad5b9b896b22a6862b15803617061d9c61962a30bc9b76ff82985"
+    },
+    "P0x": {
+      "prompt_id": "P0x",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend_x.txt",
+      "sha256": "06d7cff8cda1c117bb10112ac50979dd11ced98ef5d80bdb64560e8a560cb63d"
+    }
+  },
+  "seed_base": 1000,
+  "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
+  "retries": 5,
+  "code_sha256": "515bbc56ad833933a44997af1ad34eb1cebf13d7b3750a7fc6ef4545aa92a9d4",
+  "python": "3.12.15",
+  "httpx": "0.28.1",
+  "throughput": {
+    "qwen2.5-7b": {
+      "requests": 2880,
+      "cached": 0,
+      "errors": 0,
+      "fresh_requests": 2880,
+      "active_s": 139.9,
+      "requests_per_min": 1234.8,
+      "outputs_per_min": 1234.8,
+      "completion_tok_per_s": 156.8,
+      "concurrency": 4
+    }
+  },
+  "parse_failures": {},
+  "finish_reasons": {
+    "qwen2.5-7b:stop": 2880
+  }
+}

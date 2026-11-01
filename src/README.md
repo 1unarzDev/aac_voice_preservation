@@ -138,10 +138,14 @@ Extra keys on G1/G1s/I2 generation rows: `base_request_key`, `guard_spec`, `flag
 `runs/cache/` (key = sha1(model, tag `I1-guard-v1`/`I2-span-v1`, messages, T=0, seed)).
 `attribute.py` includes `I2` in coverage@3 (no change for older runs).
 ```bash
-src/run_interventions.sh dev0 guardpilot spanpilot         # one local server at a time + terra
-python src/judge.py --run guardpilot && python src/attribute.py --run guardpilot --fallback J1
-python src/judge.py --run spanpilot  && python src/attribute.py --run spanpilot --fallback J1
+src/run_interventions.sh dev0 guardpilot spanpilot         # flock /tmp/aacv_gpu.lock (D-019), one server at a time + terra
+python src/judge.py --run guardpilot --concurrency 8 && python src/attribute.py --run guardpilot --fallback J1
+python src/judge.py --run spanpilot  --concurrency 8 && python src/attribute.py --run spanpilot --fallback J1
 python src/interventions.py report --guard guardpilot --span spanpilot --out analysis/interventions/pilot.md
 # main: base = runs/main1 (test split, cached first pass) -> guard1 / span1 -> analysis/interventions/report.md
 ```
 `dev0` = P0/P2/S3 first pass on `data/items/dev.jsonl` (`build_requests --split dev --prompts P0,P2,S3`).
+VRAM shared with an external process: `NGL_QWEN=14 NGL_LLAMA=14 NGL_GEMMA=20 src/run_interventions.sh ...`
+serves with partial CPU offload (`serve_local.sh` honours `NGL`, default 99 = unchanged). This was used
+for the guard/span calls on 2026-10-31 (the cached first passes were served fully on GPU).
+`judge.py --concurrency N` (default 16, unchanged) caps in-flight judge calls; use <= 8 (D-019).
