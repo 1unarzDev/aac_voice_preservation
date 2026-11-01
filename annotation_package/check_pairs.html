@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check Sentence Pairs (Part 8)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  label { font-weight: 600; }
+  input[type=text] { font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 10em; }
+  textarea { font: inherit; font-size: 1rem; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.4rem; font-weight: 600; padding: 10px 14px; border: 3px solid var(--fg); margin: 4px 0 10px; background: var(--panel); overflow-wrap: anywhere; }
+  .sentence .lab { display: inline-block; min-width: 1.6em; font-weight: 800; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  fieldset.active { border: 4px solid var(--accent); }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  .unsure { font-style: italic; color: var(--muted); }
+  .input-box { padding: 8px 12px; border: 2px dashed var(--fg); margin: 4px 0 8px; overflow-wrap: anywhere; }
+  .input-box .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Check sentence pairs (Part 8)</h1>
+  <div><label for="file">Check file (JSON)</label> <input id="file" type="file" accept=".json,application/json"></div>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Load your check file and enter your annotator ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="itemview" class="hidden">
+        <div id="phasetag" class="tag"></div>
+        <p id="dimline"></p>
+        <div id="contextwrap" class="hidden"><div class="q">Situation:</div><div class="input-box" id="context"></div></div>
+        <div class="q">The two sentences:</div>
+        <div class="sentence" id="sentA"></div>
+        <div class="sentence" id="sentB"></div>
+        <div class="q">Short input versions:</div>
+        <div class="input-box" id="inputbox"></div>
+        <form id="form" onsubmit="return false"></form>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div>
+          <button type="button" id="back">Back (Backspace)</button>
+          <button type="button" id="next" class="primary">Next (Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to judge</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">1</span>–<span class="key">7</span> choose an option for the highlighted question</li>
+        <li><span class="key">S</span> can't judge / skip the highlighted question</li>
+        <li><span class="key">↑</span> <span class="key">↓</span> move between questions</li>
+        <li><span class="key">Tab</span> go to the note box; type your note</li>
+        <li><span class="key">Enter</span> next family (also from the note box)</li>
+        <li><span class="key">Esc</span> leave the note box</li>
+        <li><span class="key">Backspace</span> previous family (outside the note box)</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+/* Items are embedded (no file loading). Blind: no authored values are included. */
+/* Items are loaded from a check file (JSON) made by src/make_check_batches.py. Blind: the file
+   carries no writer values; the loader refuses files with any other field. */
+const ALLOWED_TOP = ["check_id", "tool", "version", "n_items", "exclude", "items"];
+const ALLOWED_ITEM = ["item_id", "dimension", "options", "context", "A", "B", "bare", "noncritical"];
+let DATA = null, ITEMS = [];
+const TOOL = "check_pairs_v1";
+function RUNID() { return TOOL + ":" + (DATA ? DATA.check_id : ""); }
+
+const DIMS = {
+  polarity: {name: "polarity", what: "Is the main thing said negated?",
+    help: "<dl><dt>negated</dt><dd>The main clause is negated: not, n't, never, no, nothing. \"I don't want tea.\"</dd><dt>affirmative</dt><dd>No negation of the main clause. \"I want tea.\"</dd><dt>unclear/mixed</dt><dd>One part negated and one not, or the sentence does not commit.</dd></dl>"},
+  speech_act: {name: "speech act", what: "What does the sentence do?",
+    help: "<dl><dt>statement</dt><dd>Tells something, including \"I want/need X\" and you-subject statements.</dd><dt>question</dt><dd>Asks for information or permission (\"Can I ...?\").</dd><dt>request/command</dt><dd>Asks the listener to do something: imperatives, \"can/could/would you ...?\", any ask with \"please\".</dd><dt>refusal</dt><dd>Declines (\"no thanks\", \"I won't\").</dd><dt>acceptance</dt><dd>Agrees to something (\"Sure, I'll come.\").</dd><dt>offer/suggestion</dt><dd>\"Let's\", \"how about\", \"shall we\", \"do you want to ...?\".</dd><dt>unclear/mixed</dt><dd>Does not commit to one, or commits to two.</dd></dl>"},
+  certainty: {name: "certainty", what: "How sure does the sentence sound?",
+    help: "<dl><dt>plain assertion</dt><dd>No hedge and no booster. \"The bus is late.\"</dd><dt>hedged/uncertain</dt><dd>maybe, might, may, probably, perhaps, I think, I guess, not sure. \"The bus might be late.\"</dd><dt>strongly certain/emphatic</dt><dd>definitely, really, for sure, of course, absolutely.</dd><dt>unclear/mixed</dt><dd>Does not commit to one (e.g. a question).</dd></dl>"},
+  agent: {name: "agent", what: "Who does the main action?",
+    help: "<dl><dt>speaker</dt><dd>I / me, including the speaker's own body (\"my back hurts\"). In \"I want to X\" the doer of X.</dd><dt>addressee</dt><dd>you, including imperatives and \"can you ...?\".</dd><dt>we/joint</dt><dd>we, let's, you and I.</dd><dt>third party</dt><dd>other people and things (my sister, the bus).</dd><dt>unclear/mixed</dt><dd>No doer named, or cannot tell.</dd></dl>"},
+  time_quantity: {name: "time", what: "When does the main event happen?",
+    help: "<dl><dt>past</dt><dd>Already happened. \"I paid the bill yesterday.\"</dd><dt>now</dt><dd>Happening now. \"I'm leaving right now.\"</dd><dt>later</dt><dd>In the future. \"I'll pay the bill later.\"</dd><dt>unclear/mixed</dt><dd>No time is said, or two times.</dd></dl>"},
+  politeness: {name: "politeness", what: "Does it contain an explicit polite word?",
+    help: "<dl><dt>polite</dt><dd>Contains please, could you, would you, would you mind, thank you/thanks or sorry.</dd><dt>plain</dt><dd>None of these. \"Can you ...?\" alone is plain.</dd><dt>unclear/mixed</dt><dd>Cannot tell.</dd></dl>"},
+};
+
+const PRACTICE = [
+  {item_id: "prac-1", practice: true, dimension: "polarity", options: ["negated", "affirmative", "unclear/mixed"], context: null,
+   A: "I don't want tea now.", B: "I want tea now.", bare: "want tea", noncritical: "now",
+   expected: {valA: "negated", valB: "affirmative", bare: "yes", only: "yes"},
+   fb: "A is negated (don't) and B is affirmative. The keywords 'want tea' fit both sentences equally well. Apart from the negation the sentences are the same, so the last answer is 'yes'."},
+  {item_id: "prac-2", practice: true, dimension: "politeness", options: ["polite", "plain", "unclear/mixed"], context: null,
+   A: "Please close the window.", B: "Close the door.", bare: "close window", noncritical: "",
+   expected: {valA: "polite", valB: "plain", bare: "only A", only: "no"},
+   fb: "A has 'please' (polite), B has none (plain). But B is about the door, not the window, so the keywords 'close window' fit only A, and the sentences differ in more than politeness: answer 'no' and note e.g. 'window vs door'."},
+];
+
+const BARE_OPTS = ["yes", "only A", "only B", "neither"];
+function questionsFor(it) {
+  const d = DIMS[it.dimension];
+  return [
+    {dim: "valA", title: "Sentence A: " + d.name, text: d.what + " Choose the value for sentence A.", options: it.options},
+    {dim: "valB", title: "Sentence B: " + d.name, text: d.what + " Choose the value for sentence B.", options: it.options},
+    {dim: "bare", title: "Keywords fit", text: "Could the bare keywords reasonably mean either sentence?", options: BARE_OPTS},
+    {dim: "only", title: "Differ only on " + d.name, text: "Do A and B differ ONLY on " + d.name + " (same people, action, objects, time and other words)?", options: ["yes", "no"]},
+  ];
+}
+const HELP_GEN = "<p>Each family is a pair of sentences, A and B, that should differ in <strong>one</strong> way only (the dimension named above them). Judge the words on the page.</p>" +
+  "<dl><dt>Values</dt><dd>Give each sentence its value on the named dimension. Definitions are below.</dd>" +
+  "<dt>Keywords fit</dt><dd>The bare keywords are what a person might select on a communication device. 'yes' if a person could naturally use these keywords for either sentence. 'only A' or 'only B' if one sentence does not fit (e.g. a keyword is missing from it or contradicts it). 'neither' if neither fits.</dd>" +
+  "<dt>Differ only</dt><dd>'yes' if, apart from the named dimension, A and B mean the same (small grammar changes needed for the switch are fine). 'no' if anything else differs; then write a short note.</dd>" +
+  "<dt>Extra word</dt><dd>The extra word is a content word shared by both sentences. It is shown for completeness; it should not decide the dimension.</dd></dl>";
+
+let S = null;
+let shownAt = null, showingFeedback = false, active = 0;
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+const store = {
+  key(id) { return "checkpairs:v1:" + (DATA ? DATA.check_id : "") + ":" + id; },
+  load(id) { try { const s = localStorage.getItem(this.key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.annot), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function seedOf(str) { let h = 2166136261 >>> 0; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
+function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function shuffled(ids, seedStr) { const a = ids.slice(), r = rng(seedOf(seedStr)); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function newState(id) {
+  return {annot: id, run: RUNID(), check_id: DATA.check_id, phase: "intro", idx: 0, order: shuffled(ITEMS.map(x => x.item_id), id + "|" + DATA.check_id),
+          M: {}, P: {}, started: null};
+}
+let BYID = Object.fromEntries(PRACTICE.map(x => [x.item_id, x]));
+function idHash(id) { return (seedOf(String(id).trim().toUpperCase() + "|hwcheck") >>> 0).toString(16).padStart(8, "0"); }
+function validateData(d) {
+  if (!d || typeof d !== "object" || !Array.isArray(d.items) || !d.items.length || !d.check_id) return "This is not a check file (no check_id or items).";
+  const extraTop = Object.keys(d).filter(k => !ALLOWED_TOP.includes(k));
+  if (extraTop.length) return "This file has fields a blind check file must not have: " + extraTop.join(", ") + ". Ask the coordinator for a new file.";
+  for (const it of d.items) {
+    const extra = Object.keys(it).filter(k => !ALLOWED_ITEM.includes(k));
+    if (extra.length) return "Item " + it.item_id + " has fields a blind check file must not have: " + extra.join(", ") + ".";
+    if (!DIMS[it.dimension]) return "Item " + it.item_id + " has an unknown dimension: " + it.dimension + ".";
+    if (!Array.isArray(it.options) || !it.options.length || it.options.length > 9 || !it.A || !it.B || !it.bare) return "Item " + it.item_id + " is incomplete.";
+  }
+  if (new Set(d.items.map(x => x.item_id)).size !== d.items.length) return "Duplicate item ids in the file.";
+  return null;
+}
+function loadData(d) {
+  const err = validateData(d);
+  if (err) { say(err); return false; }
+  stopClock(); store.save();
+  DATA = d; ITEMS = d.items; S = null;
+  BYID = Object.fromEntries([...ITEMS, ...PRACTICE].map(x => [x.item_id, x]));
+  say("Loaded check file " + d.check_id + " (" + ITEMS.length + " pairs).");
+  if (annotId()) startFor(annotId()); else { renderProgress(); $("annot").focus(); }
+  return true;
+}
+const PHASES = {intro: {intro: true, next: "P"}, P: {practice: true, next: "M"}, M: {next: "done"}, done: {intro: true}};
+function seq(ph) { return ph === "P" ? PRACTICE.map(p => p.item_id) : S.order; }
+function rec(ph, id) { if (!S[ph][id]) S[ph][id] = {answers: {}, unsure: {}, note: "", time_ms: 0}; return S[ph][id]; }
+function needsNote(r) { return r.answers.only === "no"; }
+function complete(ph, id) {
+  const r = S[ph][id]; if (!r) return false;
+  if (!questionsFor(BYID[id]).every(q => r.answers[q.dim] || r.unsure[q.dim])) return false;
+  return !needsNote(r) || r.note.trim().length >= 2;
+}
+function nDone(ph) { return seq(ph).filter(id => complete(ph, id)).length; }
+function stopClock() {
+  if (shownAt !== null && S && !PHASES[S.phase].intro) rec(S.phase, seq(S.phase)[S.idx]).time_ms += Date.now() - shownAt;
+  shownAt = null;
+}
+function renderProgress() {
+  const total = ITEMS.length, done = S ? nDone("M") : 0, pct = total ? Math.round(100 * done / total) : 0;
+  let t = "Enter your annotator ID to begin.";
+  if (S) {
+    const ph = S.phase;
+    t = PHASES[ph].intro ? (ph === "done" ? "Finished" : "Ready to start")
+      : (PHASES[ph].practice ? "Practice: family " : "Family ") + (S.idx + 1) + " of " + seq(ph).length;
+    t += " (" + done + " of " + total + " families complete, " + pct + "%)";
+  }
+  $("progtext").textContent = t;
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+function renderIntro() {
+  const ph = S.phase, v = $("introview");
+  $("itemview").classList.add("hidden"); v.classList.remove("hidden");
+  $("help").innerHTML = HELP_GEN;
+  if (ph === "intro") v.innerHTML = "<h2>Sentence pair check</h2><p>You will see " + ITEMS.length +
+    " families. Each is a pair of sentences, A and B, written by another person to differ in one way only: negation (polarity), what the sentence does (speech act), politeness, certainty, who does it (agent), or time. You also see the short keyword input a person might select.</p>" +
+    "<p>For each family answer four questions: the value of A, the value of B, whether the keywords could mean either sentence, and whether A and B differ only in the named way.</p>" +
+    "<p>First come 2 practice families with feedback. Press <span class='key'>Enter</span> or the button to start.</p><button type='button' class='primary' id='go'>Start practice (Enter)</button>";
+  else v.innerHTML = "<h2>All done. Thank you!</h2><p>Please press <strong>Download CSV</strong> and send the file to the study coordinator.</p>";
+  const go = $("go"); if (go) go.addEventListener("click", advanceIntro);
+  v.focus();
+}
+function advanceIntro() {
+  if (S.phase !== "intro") return;
+  S.phase = "P"; S.idx = 0; active = 0; if (!S.started) S.started = new Date().toISOString(); store.save(); render();
+}
+function render() {
+  if (!S) return;
+  renderProgress();
+  if (PHASES[S.phase].intro) { renderIntro(); return; }
+  const ph = S.phase, id = seq(ph)[S.idx], it = BYID[id], r = rec(ph, id), d = DIMS[it.dimension];
+  $("introview").classList.add("hidden"); $("itemview").classList.remove("hidden");
+  $("help").innerHTML = HELP_GEN + "<h2>" + d.name + "</h2>" + d.help;
+  $("phasetag").textContent = (PHASES[ph].practice ? "Practice (you will see feedback) - " : "") + "Dimension: " + d.name;
+  $("dimline").textContent = "These sentences should differ only in " + d.name + ". " + d.what;
+  $("contextwrap").classList.toggle("hidden", !it.context);
+  $("context").textContent = it.context || "";
+  for (const [k, el] of [["A", "sentA"], ["B", "sentB"]]) {
+    const n = $(el); n.innerHTML = ""; const l = document.createElement("span"); l.className = "lab"; l.textContent = k + ":";
+    n.append(l, document.createTextNode(" " + it[k]));
+  }
+  const box = $("inputbox"); box.innerHTML = "";
+  box.append("Bare keywords: "); const w = document.createElement("span"); w.className = "mono"; w.textContent = it.bare; box.append(w);
+  const br = document.createElement("div"); br.append("Extra (noncritical) word: ");
+  const nw = document.createElement("span"); nw.className = "mono"; nw.textContent = it.noncritical || "(none)"; br.append(nw); box.append(br);
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  const form = $("form"); form.innerHTML = "";
+  questionsFor(it).forEach((q, qi) => {
+    const fs = document.createElement("fieldset"); fs.id = "q" + qi; fs.className = qi === active ? "active" : "";
+    const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + q.title; fs.append(lg);
+    const p = document.createElement("p"); p.className = "q"; p.textContent = q.text; fs.append(p);
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", q.title);
+    q.options.forEach((o, oi) => {
+      const lab = document.createElement("label"); lab.className = "opt" + (r.answers[q.dim] === o ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.value = o; inp.checked = r.answers[q.dim] === o;
+      inp.disabled = showingFeedback; inp.addEventListener("change", () => answer(qi, o));
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(oi + 1);
+      lab.append(inp, k, document.createTextNode(" " + o)); opts.append(lab);
+    });
+    fs.append(opts);
+    if (r.unsure[q.dim]) { const u = document.createElement("p"); u.className = "unsure"; u.textContent = "Marked can't judge / skipped."; fs.append(u); }
+    fs.addEventListener("click", () => { if (active !== qi) { active = qi; render(); } });
+    form.append(fs);
+  });
+  const wrap = document.createElement("div");
+  const lab = document.createElement("label"); lab.htmlFor = "note";
+  lab.textContent = needsNote(r) ? "Note: what else differs between A and B? (required)" : "Optional note";
+  const ta = document.createElement("textarea"); ta.id = "note"; ta.value = r.note; ta.maxLength = 300; ta.disabled = showingFeedback;
+  ta.addEventListener("input", () => { r.note = ta.value; store.save(); renderProgress(); });
+  wrap.append(lab, ta); form.append(wrap);
+  const a = $("q" + active); if (a && a.scrollIntoView) a.scrollIntoView({block: "nearest"});
+  if (shownAt === null) shownAt = Date.now();
+}
+function cur() { const ph = S.phase, id = seq(ph)[S.idx]; return {ph, id, it: BYID[id], r: rec(ph, id), qs: questionsFor(BYID[id])}; }
+function answer(qi, value) {
+  if (showingFeedback) return;
+  const {qs, r} = cur(), q = qs[qi];
+  r.answers[q.dim] = value; delete r.unsure[q.dim];
+  active = Math.min(qi + 1, qs.length - 1);
+  store.save(); render();
+  if (needsNote(r) && !r.note.trim()) { $("note").focus(); say("Type a short note, then press Enter."); }
+}
+function markUnsure() {
+  if (showingFeedback) return;
+  const {qs, r} = cur(), q = qs[active];
+  r.unsure[q.dim] = true; delete r.answers[q.dim];
+  active = Math.min(active + 1, qs.length - 1);
+  store.save(); render();
+}
+function showFeedback(it) {
+  const {r, qs} = cur(), fb = $("feedback"); fb.innerHTML = "";
+  const h = document.createElement("p"); h.innerHTML = "<strong>Feedback.</strong> Press Enter to continue."; fb.append(h);
+  const ul = document.createElement("ul");
+  for (const q of qs) {
+    const exp = it.expected[q.dim], got = r.answers[q.dim] || "(can't judge)";
+    const li = document.createElement("li"); const s = document.createElement("span");
+    s.className = got === exp ? "ok" : "bad"; s.textContent = got === exp ? "Matches" : "Different";
+    li.append(s, document.createTextNode(" - " + q.title + ": you chose " + got + "; suggested answer: " + exp)); ul.append(li);
+  }
+  fb.append(ul);
+  const p = document.createElement("p"); p.textContent = it.fb; fb.append(p);
+  showingFeedback = true; render(); fb.classList.remove("hidden"); fb.focus();
+}
+function next() {
+  if (!S) return;
+  if (PHASES[S.phase].intro) { advanceIntro(); return; }
+  const {ph, id, it, r, qs} = cur();
+  if (!complete(ph, id)) {
+    const miss = qs.findIndex(q => !(r.answers[q.dim] || r.unsure[q.dim]));
+    if (miss >= 0) { active = miss; say("Please answer every question, or press S for can't judge."); render(); return; }
+    say("Please type a short note (a few words) about what else differs."); render(); $("note").focus(); return;
+  }
+  if (it.practice && !showingFeedback) { showFeedback(it); return; }
+  showingFeedback = false; stopClock(); say("");
+  if (S.idx < seq(ph).length - 1) { S.idx++; active = 0; }
+  else if (ph === "M" && nDone("M") < ITEMS.length) { S.idx = seq("M").findIndex(x => !complete("M", x)); active = 0; say("Some families are incomplete."); }
+  else { S.phase = PHASES[ph].next; S.idx = 0; active = 0; }
+  store.save(); render();
+}
+function back() {
+  if (!S || PHASES[S.phase].intro || S.idx === 0) return;
+  showingFeedback = false; stopClock(); S.idx--; active = 0; store.save(); render();
+}
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your annotator ID first."); $("annot").focus(); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["item_id", "annotator", "check_id", "practice", "order", "dimension", "value_A", "value_B", "bare_fits", "differ_only",
+                "unsure", "note", "time_ms", "started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  const row = (it, practice, r, o) => [it.item_id, S.annot, DATA.check_id, practice ? 1 : 0, o, it.dimension,
+    r.answers.valA || "", r.answers.valB || "", r.answers.bare || "", r.answers.only || "",
+    Object.keys(r.unsure).join("|"), r.note.trim(), Math.round(r.time_ms), S.started || "", TOOL, now].map(csvCell).join(",");
+  PRACTICE.forEach((p, i) => { if (S.P[p.item_id]) lines.push(row(p, true, S.P[p.item_id], i + 1)); });
+  for (const it of ITEMS) { const r = S.M[it.item_id]; if (r) lines.push(row(it, false, r, S.order.indexOf(it.item_id) + 1)); }
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "check_pairs_" + DATA.check_id + "_" + S.annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (lines.length - 1) + " rows, " + nDone("M") + " of " + ITEMS.length + " families complete).");
+  return lines.join("\n");
+}
+function startFor(id) {
+  if (!id) { S = null; return; }
+  if (!DATA) { say("Load your check file first (the Check file button)."); $("file").focus(); return; }
+  if ((DATA.exclude || []).includes(idHash(id))) {
+    S = null; renderProgress(); $("itemview").classList.add("hidden");
+    const v = $("introview"); v.classList.remove("hidden");
+    v.innerHTML = "<h2>Please use a different check file</h2><p>This file contains sentence pairs written by annotator " + id.replace(/[<>&"]/g, "") + ". Writers never check their own pairs. Ask the study coordinator for another check file.</p>";
+    say("This check file contains your own pairs."); v.focus(); return;
+  }
+  stopClock(); store.save(); showingFeedback = false;
+  const saved = store.load(id);
+  S = saved && saved.run === RUNID() ? saved : newState(id);
+  active = 0; store.save();
+  say(saved ? "Resumed saved progress for " + id + "." : "Started a new session for " + id + ".");
+  render();
+}
+$("file").addEventListener("change", (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { loadData(JSON.parse(rd.result)); } catch (err) { say("Could not read that file: " + err.message); } };
+  rd.readAsText(f);
+});
+$("annot").addEventListener("change", () => startFor(annotId()));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); startFor(annotId()); const v = $("introview"); if (!v.classList.contains("hidden")) v.focus(); } });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && !PHASES[S.phase].intro && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!S || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.id === "annot" || t.id === "file")) return;
+  if (t && t.tagName === "TEXTAREA") {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); next(); }
+    else if (e.key === "Escape") { e.preventDefault(); t.blur(); $("form").focus(); }
+    return;
+  }
+  if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) { if (e.key === "Enter") { e.preventDefault(); t.click(); } return; }
+  if (PHASES[S.phase].intro) { if (e.key === "Enter") { e.preventDefault(); next(); } return; }
+  const qs = cur().qs;
+  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1; if (n < qs[active].options.length) { e.preventDefault(); answer(active, qs[active].options[n]); } }
+  else if (e.key === "s" || e.key === "S") { e.preventDefault(); markUnsure(); }
+  else if (e.key === "Enter") { e.preventDefault(); next(); }
+  else if (e.key === "Backspace") { e.preventDefault(); back(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, qs.length - 1); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+});
+$("form").tabIndex = -1;
+renderProgress();
+$("annot").focus();
+</script>
+</body>
+</html>

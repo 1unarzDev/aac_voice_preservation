@@ -41,7 +41,7 @@ import models as M  # noqa: E402
 import prompts as P  # noqa: E402
 
 CHANNELS = ["bare", "noncrit", "chip1", "chipall", "full"]
-OPT_IN_SPLITS = {"smoke", "expB", "expC", "wb", "r2", "r2d"}   # never included by default (wb = W-B corpus items; r2/r2d = round-2 W-C/W-D)
+OPT_IN_SPLITS = {"smoke", "expB", "expC", "wb", "r2", "r2d", "hw", "elic"}   # never included by default (wb = W-B corpus items; r2/r2d = round-2 W-C/W-D; hw = human-written B1; elic = B2 elicitation)
 
 
 def custom_spec(fam: dict, vname: str, channel: str) -> dict:
