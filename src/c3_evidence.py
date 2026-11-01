@@ -100,6 +100,8 @@ def reconcile_story():
     # v1: the source whose hash the original manifest recorded, recovered byte-exactly by reversing the
     # post-run assertion patch (analysis/examples/select_story_v1_to_v1.1.patch, `index d381610..16e6fa5`).
     # The patch added three assertion lines after the v1 run; reversing it yields the recorded SHA-256.
+    if not (OUT / 'history_v1.tar.gz').exists():  # internal archive absent from the public tree:
+        return js('analysis/evidence_c3/selector_reconciliation.json')  # reuse the recorded reconciliation
     v1 = (OUT / 'select_story_v1_original.py').read_bytes()
     with tarfile.open(OUT / 'history_v1.tar.gz') as t:
         v11 = t.extractfile(selector_key).read()
@@ -188,10 +190,13 @@ def collect():
     assert (int(m.loc['P0', 'sum']), int(m.loc['P0', 'count'])) == (int(first['P0']['k']), first['P0']['n'])
     frozen = js('analysis/applicability/freeze_manifest.json')
     archive = ROOT / 'analysis/applicability/evidence.tar.gz'
-    assert sha(archive) == frozen['archive_sha256']
-    with tarfile.open(archive) as t:
-        name = next(x for x in t.getnames() if x.endswith('runs/r2c1/scored.parquet'))
-        archived_scored = hashlib.sha256(t.extractfile(name).read()).hexdigest()
+    if archive.exists():  # internal archive; absent from the public tree -> use the recorded hash
+        assert sha(archive) == frozen['archive_sha256']
+        with tarfile.open(archive) as t:
+            name = next(x for x in t.getnames() if x.endswith('runs/r2c1/scored.parquet'))
+            archived_scored = hashlib.sha256(t.extractfile(name).read()).hexdigest()
+    else:
+        archived_scored = frozen['inputs']['runs/r2c1/scored.parquet']
     assert archived_scored == frozen['inputs']['runs/r2c1/scored.parquet']
     assert archived_scored != sha(ROOT / 'runs/r2c1/scored.parquet')
     return {'C35': inc, 'C34_v2': {'ladder': ladder, 'gap': gap},
