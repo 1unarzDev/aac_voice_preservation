@@ -1,9 +1,9 @@
-# Stage 2 task sheet for P12 (Sun Nov 1 - Sat Nov 7; due Sat Nov 7, 23:59)
+# Stage 2 task sheet for P12 (Sun Nov 1; due Sun Nov 1, 23:59)
 
 Download the current `annotation_package.zip`: your files are in its `stage2/` folder. About **66 min**.
 
 **Rules (all parts)**
-- Work **alone**. Do not discuss any item with anyone until all stages are finished (Nov 9).
+- Work **alone**. Do not discuss any item with anyone until all stages are finished (Sun Nov 1).
 - **No AI tools, chatbots, translation tools or search engines** for any part. Your own judgment is the data.
 - Use only the files in `annotation_package/`. Do not open the project repository or any other files.
 - Use the same ID, **P12**, everywhere. Do the steps **in the order listed**: the order matters for the study.
@@ -19,6 +19,6 @@ Download the current `annotation_package.zip`: your files are in its `stage2/` f
 - [ ] **3. Part 8: Check 30 sentence pairs, file 3 of 3** (about 22 min)  
   Open `check_pairs.html`, click **Check file**, choose `stage2/P12_check_3.json`, enter `P12`. README: Part 8. Return: `check_pairs_P12_check_3_P12.csv`.
 
-Return: email every CSV above to the coordinator by Sat Nov 7, 23:59 (subject `AAC annotation P12 stage 2`), with the time you spent and any notes.
+Return: email every CSV above to the coordinator by Sun Nov 1, 23:59 (subject `AAC annotation P12 stage 2`), with the time you spent and any notes.
 
 Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time.

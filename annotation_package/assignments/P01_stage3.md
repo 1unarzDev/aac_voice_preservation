@@ -1,9 +1,9 @@
-# Stage 3 task sheet for P01 (OPTIONAL, Sun Nov 8 - Mon Nov 9; due Mon Nov 9, 23:59)
+# Stage 3 task sheet for P01 (OPTIONAL, Sun Nov 1; due Sun Nov 1, 23:59)
 
-Only if you can spare about **30 min**; if not, tell the coordinator by Sat Nov 7, 23:59 so a reserve can be asked. Re-download `annotation_package.zip` on Sun Nov 8: your files are in its `stage3/` folder.
+Only if you can spare about **30 min**; if not, tell the coordinator by Sun Nov 1, 23:59 so a reserve can be asked. Re-download `annotation_package.zip` on Sun Nov 1: your files are in its `stage3/` folder.
 
 **Rules (all parts)**
-- Work **alone**. Do not discuss any item with anyone until all stages are finished (Nov 9).
+- Work **alone**. Do not discuss any item with anyone until all stages are finished (Sun Nov 1).
 - **No AI tools, chatbots, translation tools or search engines** for any part. Your own judgment is the data.
 - Use only the files in `annotation_package/`. Do not open the project repository or any other files.
 - Use the same ID, **P01**, everywhere. Do the steps **in the order listed**: the order matters for the study.
@@ -13,8 +13,8 @@ Only if you can spare about **30 min**; if not, tell the coordinator by Sat Nov 
 ## Steps (in this order)
 
 - [ ] **1. Part 14: Tie-break checks of sentence pairs (up to 40 pairs; your file may have fewer or none)** (about 30 min)  
-  Open `check_pairs.html`, click **Check file**, choose `stage3/P01_tiebreak.json` (arrives on Sun Nov 8), enter `P01`. Same task as Part 8 (README: Part 8). Your file may be empty: if the tool says "This is not a check file (no check_id or items)", you have no pairs and nothing to do or send. Return: `check_pairs_P01_tiebreak_P01.csv`.
+  Open `check_pairs.html`, click **Check file**, choose `stage3/P01_tiebreak.json` (arrives on Sun Nov 1), enter `P01`. Same task as Part 8 (README: Part 8). Your file may be empty: if the tool says "This is not a check file (no check_id or items)", you have no pairs and nothing to do or send. Return: `check_pairs_P01_tiebreak_P01.csv`.
 
-Return: email every CSV above to the coordinator by Mon Nov 9, 23:59 (subject `AAC annotation P01 stage 3`), with the time you spent and any notes.
+Return: email every CSV above to the coordinator by Sun Nov 1, 23:59 (subject `AAC annotation P01 stage 3`), with the time you spent and any notes.
 
 Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time.

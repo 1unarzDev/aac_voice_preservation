@@ -7,9 +7,9 @@ files from `annotation/` (answer keys, model labels).
 **Deadlines**
 - **Stage 1** (handed out for Mon Nov 2 - Wed Nov 4): **all returned Sun Nov 1**. Keyword choice first, then checks/labels, then writing:
   the order on the sheet is mandatory. About 165-220 min each, plus breaks.
-- **Stage 2** (opens **Sun Nov 1**): due **Sat Nov 7, 23:59**. Instructions and files sent Sun Nov 1
+- **Stage 2** (opens **Sun Nov 1**): due **Sun Nov 1, 23:59**. Instructions and files sent Sun Nov 1
   (annotators re-download the zip).
-- Stage 3 (optional, Sun Nov 8 - Mon Nov 9) for a few people; instructions later.
+- Stage 3 (optional, Sun Nov 1) for a few people; instructions later.
 
 **Return method:** annotators email the CSVs named on their sheet, unchanged, to the coordinator: one email per stage,
 subject `AAC annotation <ID> stage <N>`, with the time spent and any notes. The coordinator saves each file into the
