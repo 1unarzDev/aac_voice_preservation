@@ -1,17 +1,19 @@
 %% main.tex -- SE4All @ ICSE 2027, regular paper (<= 8 pages INCLUDING references; IEEEtran, 10pt,
-%% single-blind). Venue facts and quotes: VENUE.md.
+%% single-blind). Venue facts and quotes: VENUE.md. Revision spec: ideas/cycles/c1/decision.md
+%% ("Specific paper edits -> SE4All"); change log: REVISION_NOTES.md.
 %% Conventions:
-%%  * One sentence per line. A line whose truth depends on a non-final number or on pending
-%%    work ends in " %CHECK". List them: grep -n '%CHECK' main.tex
+%%  * One sentence per line. A line whose truth depends on pending work ends in " %CHECK".
 %%  * Every number comes from results_macros.tex via \RES{key}; regenerate with
 %%    `python paper/se4all/make_macros.py` (repo root, venv active). Never type a result by hand.
 %%    Design constants that are not results (e.g. "five channels", "2,000 resamples") are typed.
-%%  * Framing is SE (requirements, test design, oracle). Do not import the HUMANE draft's framing.
+%%  * Examples come only from paper/figs/example_manifest.json (strings re-verified by make_macros).
+%%  * \pending{...} marks content that must be filled before submission (human gold, W-B/W-C/W-D,
+%%    author/ethics/AI-disclosure facts). Do not submit while any orange tag renders.
 %%
 %% !! GenAI: this draft was produced by an AI writing agent. IEEE requires disclosure of
 %% !! AI-generated text in the Acknowledgment, naming the system and the sections (VENUE.md).
-%% !! ICSE 2027 checks references for fabrication; every entry in refs.bib is lit-verified, and
-%% !! entries tagged VERIFY-NAMES must be completed from their URL before submission.
+%% !! ICSE 2027 checks references for fabrication; entries tagged VERIFY-NAMES in refs.bib must
+%% !! be completed from their URL before submission.
 \documentclass[conference,10pt]{IEEEtran}
 \IEEEoverridecommandlockouts
 \usepackage[T1]{fontenc}
@@ -35,6 +37,7 @@
 \newcommand{\pct}[1]{\RES{#1}\%}
 \newcommand{\kof}[1]{\RES{#1_k}/\RES{#1_den}}
 \newcommand{\ci}[1]{[\RES{#1_lo}, \RES{#1_hi}]}
+\newcommand{\cip}[1]{[\RES{#1_lo}, \RES{#1_hi}]\%}
 
 %% ---------- notation ----------
 \newcommand{\chip}[1]{\texttt{[#1]}}
@@ -42,408 +45,344 @@
 \newcommand{\say}[1]{``#1''}
 \newcommand{\pending}[1]{\textcolor{orange}{[PENDING: #1]}}
 \newcommand{\MR}[1]{MR#1}
-%% figure from the figures specialist (paper/figs/<name>.pdf) or a labelled placeholder
 \newcommand{\figfile}[3]{\IfFileExists{../figs/#1.pdf}{\includegraphics[width=#2]{#1}}{%
   \fbox{\parbox[c][#3][c]{0.92#2}{\centering\scriptsize PLACEHOLDER \texttt{paper/figs/\detokenize{#1}.pdf}}}}}
 
 \begin{document}
 
-\title{Testing What an AAC Expander Is Allowed to Say:\\Input-Conditioned Commitment Contracts for LLM Sentence Expansion}
+\title{Testing What a Sentence Expander Must Preserve:\\Input-Conditioned Requirements and a Tested Oracle for LLM-Based AAC}
 
-%% Single-blind review: names are visible to reviewers. Replace placeholders.
-\author{\IEEEauthorblockN{Author One\pending{names}}
-\IEEEauthorblockA{Affiliation, City, Country\\author.one@example.org}
-\and
-\IEEEauthorblockN{Author Two}
-\IEEEauthorblockA{Affiliation, City, Country\\author.two@example.org}}
+%% Single-blind review: names are visible to reviewers.
+\author{\IEEEauthorblockN{\pending{author names}}
+\IEEEauthorblockA{\pending{affiliations, emails}}}
 
 \maketitle
 
 \begin{abstract}
-Large language models (LLMs) let augmentative and alternative communication (AAC) apps expand a few selected words into a full sentence.
-Such a feature can be fluent and still change what the person said: drop a refusal, change who acts, or add \say{please} to a deliberately plain request.
-There is no single correct output, so the feature lacks testable requirements and a test oracle.
-We specify \emph{commitment contracts}: input-conditioned requirements that state, per meaning dimension, what an expansion must preserve given what its input actually carried.
-We test them with metamorphic relations over controlled input channels (a non-critical word must not change commitments; a cue must restore the cued commitment; a fully typed sentence must survive) and with a partial oracle that extracts labels blind to the input condition and computes verdicts deterministically.
-An identity relation on the oracle itself exposed a specification defect, which we fixed.
-In an audit of four models on \RES{n_fam_test} minimal-pair families, keywords that left polarity open were expanded to the affirmative in \pct{bare_pol_aff_p0} of greedy outputs, so a negated message always needed an extra input action.
-One cue restored most commitments, but models still added politeness to plain sentences typed in full, while removing it rarely.
-We derive requirements and test-design recommendations for AAC developers.
-Human validation of the oracle is in progress. %CHECK
+Given the complete typed sentence \say{Wear headphones for your music.}, an LLM sentence expander for augmentative and alternative communication (AAC) returned \say{Please wear headphones for your music.}
+Across four models and \RES{pz_n_fam} authored directive families, fully typed plain sentences gained a politeness marker in \kof{p0_pz_added} cases, while polite ones lost theirs in \kof{p0_pz_removed}; per model, additions ranged from \kof{p0_pz_added_qwen} to \kof{p0_pz_added_gemma}, and an explicit preservation prompt changed the balance (\kof{p1_pz_added} vs.\ \kof{p1_pz_removed}).
+Such failures are hard to test because expansion has no single correct output, and keywords often leave meaning open.
+We write \emph{input-conditioned} preservation requirements: they score a commitment such as negation, a question, or plainness only when the input supplied it, and report the model's choice as a default when it did not.
+Executable checks over controlled input channels, plus a partial oracle with blind extraction and code-computed verdicts, separate interface loss from model violation.
+We also test the oracle: an identity check exposed a specification defect, and the obvious relaxation then missed keyed statement-substitution mutants, so the affected families are quarantined.
+A developer can act on these checks: exact-copy routing passes all \RES{copy_pass_den} non-quarantined typed sources at zero model calls, and a runtime guard repairs \kof{g1_fix} supplied-cue failures, leaving \RES{g1_remain_k}.
+All rates are machine-scored on constructed items; validation against human labels is in progress. %CHECK
 \end{abstract}
 
 \begin{IEEEkeywords}
-accessibility, AAC, LLM testing, metamorphic testing, test oracle, requirements
+accessibility, AAC, LLM testing, requirements, test oracle, metamorphic testing
 \end{IEEEkeywords}
 
 %% =====================================================================
 \section{Introduction}
 %% =====================================================================
 People who use AAC often compose a message by selecting a few words or symbols, because every selection costs time and effort~\cite{valencia2023less,cai2024speakfaster}.
-Keyword expansion with an LLM is therefore attractive: from \kw{want go party} a model writes a complete sentence~\cite{shen2022kwickchat,cai2024speakfaster}.
-This work is motivated by autistic AAC users,\footnote{We use identity-first language (\say{autistic person}), which many autistic adults prefer; individuals differ, and we respect their choices.} some of whom use AAC all the time and some only when speech is unavailable~\cite{zisk2019aac,donaldson2021everyone}.
-For them, as for any AAC user, an expansion tool is a channel for self-expression.
-If they refuse, speak directly, hedge, or ask rather than tell, those choices should arrive intact.
-We do not assume an \say{autistic style} of language; we only require that choices which a person makes explicit are kept~\cite{frisch2026complicated}.
+LLM keyword expansion turns such a selection into a full sentence~\cite{shen2022kwickchat,cai2024speakfaster}.
+The same feature is sometimes given a sentence the person has already typed in full.
+Fig.~\ref{fig:ratchet} shows what four models did then, on \RES{pz_n_fam} directive families written in plain and polite versions.
+In \kof{p0_pz_added} plain cases the output added a marker such as \say{please}; the reverse happened in \kof{p0_pz_removed} (paired difference \RES{pz_full_asym} points \ci{pz_full_asym}).
+The behavior is concentrated, not universal: Qwen added \kof{p0_pz_added_qwen}, Llama \kof{p0_pz_added_llama}, Gemma \kof{p0_pz_added_gemma}, and gpt-6.1-terra \kof{p0_pz_added_terra}.
+It is also prompt-dependent: under a cached prompt that explicitly forbids added politeness, additions fell to \kof{p1_pz_added} but removals rose to \kof{p1_pz_removed}.
 
-From a software-engineering view, the problem is that this requirement is rarely written down in a testable form.
-Expansion has no single correct output, so exact-match tests are useless, and similarity metrics can miss a dropped negation~\cite{koch2022selfeval}.
-This is the test-oracle problem in a setting where errors are easy to miss: \say{I want to go} is a fluent expansion of \kw{want go}, even when the person meant \say{I don't want to go}.
-A second difficulty is that some errors are not the model's to avoid.
-If compression removed \say{not}, no expander can recover it, and a test that fails the model for it measures the input design, not the model.
+\begin{figure}[t]
+  \centering
+  \figfile{fig_politeness_ratchet}{\columnwidth}{3.0cm}
+  \caption{Full input (the source sentence is visible to the model). Politeness markers added to plain sources versus removed from polite ones, P0 prompt, ten politeness families, 95\% family-bootstrap intervals; counts at right. The P1 row is a cached sensitivity under a preservation instruction (not a primary arm). Zero observed events do not establish zero risk.}
+  \label{fig:ratchet}
+\end{figure}
 
-We treat meaning preservation in AAC expansion as an accessibility requirement that should be specified, tested, and regression-checked like any other.
-Our key idea is to make each requirement \emph{conditional on the input}.
-A \emph{commitment} is an explicit value of a message on one dimension, such as negated polarity or a plain (unsoftened) request.
-A \emph{commitment contract} states what the output must preserve given which commitments the visible input carries, and it states where the input is ambiguous, so that a commitment there is recorded as a default rather than scored as a failure.
+Adding \say{please} need not be an error in general; politeness suggestions can change how writers phrase messages and how they perceive a relationship~\cite{zhang2026politeness,chalfoun2025please}.
+But here the person had already supplied the wording, so a system that rewrites it is speaking for them.
+Contrast \kw{like medication}: these keywords do not say whether the person likes the medication, and every model chose the affirmative.
+No model can be blamed for that guess, but the interface decides who has to pay an extra selection to say \say{don't}.
+Testing such a feature therefore needs requirements that depend on what the input actually carried.
 
-\paragraph*{Contributions}
-\begin{enumerate}
-\item \textbf{Commitment contracts and a channel-controlled harness} (\S\ref{sec:contracts}): executable, input-conditioned requirements for six dimensions, tested by metamorphic relations between controlled input channels of minimal-pair families.
-\item \textbf{A partial test oracle} (\S\ref{sec:oracle}): label extraction that is blind to the input condition by construction, plus deterministic verdicts. A metamorphic relation on the oracle itself found and fixed a specification defect. Validation against human gold labels and authored challenge sentences is in progress; we state the acceptance criteria now. %CHECK
-\item \textbf{An audit of four models} (\S\ref{sec:results}): systematic defaults under ambiguity, an asymmetry in which politeness is added to plain input far more often than removed, the weakest cues, and cue interaction and composition tests.
-\item \textbf{Requirements and test-design recommendations} for teams building LLM features into AAC software (\S\ref{sec:recs}).
-\end{enumerate}
-We ran no study with AAC users, and we make no claims about benefit, effort or user preference.
+We treat meaning preservation in AAC expansion as an accessibility requirement that should be specified, tested and regression-checked.
+We make three contributions.
+(1)~\emph{Input-conditioned requirements} (\S\ref{sec:contracts}): executable checks that score a commitment only when the visible input supplied it, run over controlled input channels of minimal-pair families.
+(2)~\emph{A partial oracle that is itself tested} (\S\ref{sec:oracle}), with a stated failure envelope, including a defect our own repair introduced.
+(3)~\emph{A worked requirement $\to$ check $\to$ developer decision $\to$ failure envelope sequence} (\S\ref{sec:decisions}), including an evaluated runtime guard and an exact-copy baseline.
+We ran no study with AAC users and make no claims about benefit, effort or preference.
+All rates are machine-scored and remain provisional until the human validation in \S\ref{sec:oracle} is complete. %CHECK
 
 %% =====================================================================
 \section{Related Work}
 %% =====================================================================
-\paragraph*{Testing ML and LLM systems}
-CheckList organizes behavioral tests of NLP models as minimum-functionality, invariance and directional tests over linguistic capabilities, including negation and semantic roles~\cite{ribeiro2020checklist}.
-Cho et al.\ catalogue 191 metamorphic relations for LLM-based NLP and evaluate 36 of them on three LLMs, framing them as a response to the oracle problem~\cite{cho2025metamorphic}.
-COLLIE tests compositional constraints in text generation~\cite{yao2024collie}.
-We borrow the invariance and directional patterns but condition them on a channel specification, so the expected relation depends on what the input carried.
-LLM judges agree with people on many tasks but show position, verbosity and self-preference biases~\cite{zheng2023judging,panickssery2024selfpreference}, and learned similarity metrics can ignore negation~\cite{koch2022selfeval}.
-We therefore restrict the judge to extraction, hide the condition from it, and validate it separately.
-Prediction-powered inference shows how a small human-labeled sample can correct automated estimates~\cite{angelopoulos2023ppi}; our gold sample is drawn with known inclusion probabilities to permit such corrections.
-
-\paragraph*{Accessibility in software engineering}
-A systematic review of 94 studies treats accessibility across the whole development life cycle, not only as a final interface audit~\cite{paiva2021accessibility}.
-Most accessibility testing checks whether an interface is perceivable and operable.
-We test a different property of assistive software: whether its generated output keeps the user's meaning, which a conformance check cannot see.
+\paragraph*{Testing LLM systems}
+CheckList organizes behavioral tests into minimum-functionality, invariance and directional tests~\cite{ribeiro2020checklist}; Cho et al.\ catalogue metamorphic relations for LLM-based NLP~\cite{cho2025metamorphic}; COLLIE tests compositional generation constraints~\cite{yao2024collie}.
+Sensei combines a conversational user simulator with a DSL for assertions and metamorphic relations, evaluated on seeded faults and deployed chatbots~\cite{delara2026sensei}.
+Extracting fields, asserting properties and relating test cases are therefore established; we do not claim a new testing technique.
+Our contribution is the AAC input specification: identical keywords for alternative readings, controlled cue availability, and separate treatment of lost information, violated supplied cues and defaults.
+LLM judges show position, verbosity and self-preference biases~\cite{zheng2023judging,panickssery2024selfpreference}, and similarity metrics can miss negation~\cite{koch2022selfeval}; we restrict the judge to blind extraction and test it.
 
 \paragraph*{LLMs in AAC}
-LLM expansion and suggestion tools for AAC include KWickChat~\cite{shen2022kwickchat}, SpeakFaster~\cite{cai2024speakfaster}, and systems studied with AAC users~\cite{valencia2023less}.
-Several give users explicit control over intent: COMPA's intent buttons~\cite{valencia2024compa}, intention choices before expansion for people with aphasia~\cite{mao2025designprobes}, editable stance tags~\cite{xiang2025socializechat}, and personalization with clarification~\cite{pal2026spica}.
-Choudhury et al.\ measure whether affect cues reach generated AAC sentences~\cite{choudhury2025alignment}; Lacosse et al.\ retain function words such as \say{not}~\cite{lacosse2026cognitivesteering}; and Gorenshtein et al.\ benchmark semantic drift, including negation and recipient probes, under simulated decoder errors~\cite{gorenshtein2026intentdrift}.
-AAC users and practitioners raise authorship as a governance concern~\cite{griffiths2024consultation,griffiths2025authorship}.
-Our contribution is not a new control or interface.
-It is test design: requirements that separate what the input never carried from what the model changed, and an oracle whose own errors are tested.
+Expansion and suggestion tools include KWickChat~\cite{shen2022kwickchat}, SpeakFaster~\cite{cai2024speakfaster} and systems studied with AAC users~\cite{valencia2023less}.
+Several expose intent controls: intent buttons~\cite{valencia2024compa}, intention choices for people with aphasia~\cite{mao2025designprobes}, stance tags~\cite{xiang2025socializechat}.
+Lacosse et al.\ keep bracketed function words such as \say{not} and evaluate semantic equivalence~\cite{lacosse2026cognitivesteering}; Choudhury et al.\ test whether affect cues reach the output~\cite{choudhury2025alignment}; Gorenshtein et al.\ benchmark intent drift, including negation, under simulated decoder errors~\cite{gorenshtein2026intentdrift}.
+R-SPEAK was co-designed with people with aphasia and scores relevancy, faithfulness and completeness on real aphasic speech~\cite{altamimi2026rspeak}.
+So AAC generation already has controls and fidelity evaluation; what we add is a conditional specification of \emph{which} commitments are testable under each input, and a test of the oracle.
+Outside AAC, Navneet et al.\ show LLM rewriting can keep semantic similarity while erasing pragmatic markers, and that preservation prompts reduce but do not remove this~\cite{navneet2026voice}; our P1 sensitivity has the same shape.
+Accessibility engineering spans the life cycle, not only interface audits~\cite{paiva2021accessibility}; conformance checks cannot see whether generated output keeps the user's meaning.
 
 %% =====================================================================
-\section{Commitment Contracts}
+\section{Input-Conditioned Requirements}
 \label{sec:contracts}
 %% =====================================================================
 \begin{figure*}[t]
   \centering
-  \figfile{fig_pipeline}{0.95\textwidth}{3.2cm}
-  \caption{Harness. A family has two source variants that share keywords. Each variant is rendered through controlled channels and expanded by the system under test. The oracle extracts labels from the output alone; verdicts are computed from labels, item specification and channel. Metamorphic relations (\MR{1}--\MR{4}) compare channels; \MR{0} tests the oracle.}
+  \figfile{fig_pipeline}{0.97\textwidth}{3.2cm}
+  \caption{Harness, traced for one stored output. Family pol-07 has two source variants that share the keywords. Each variant is rendered through five channels; the shown output (gpt-6.1-terra, P0) came from the \emph{bare} channel only. In \emph{full}, the source is visible to the generator; extraction is always blind to source, model and channel. Verdicts are computed in code from labels, item specification and channel; Loss, Violation and Assumption have separate denominators.}
   \label{fig:pipeline}
 \end{figure*}
 
-\paragraph*{Dimensions and families}
-We consider six dimensions: polarity, agent (who does the main action), certainty, speech act (statement, question, request, refusal, acceptance), politeness, and time or quantity.
-A \emph{family} is a minimal pair of source messages that differ on exactly one critical dimension and share their content words, e.g., \say{I don't like the new medication} and \say{I like the new medication}.
-Both map to the same \emph{bare} keywords (\kw{like medication}), so the bare input cannot distinguish them.
-Each family also names one non-critical content word (\kw{new}) and, for each variant, the commitment \emph{chips} that disambiguate it (\chip{NOT}, \chip{YES}, \chip{?}, \chip{ASK}, \chip{TELL}, \chip{REFUSE}, \chip{MAYBE}, \chip{SURE}, \chip{I}, \chip{YOU}, \chip{PLEASE}, \chip{PLAIN}, and others).
-Every variant needs at least one chip, so the unmarked reading also gets an explicit counter-chip and neither variant passes for free.
-Chips are a test device for supplying a cue; they are not proposed here as an interface.
+\paragraph*{Families and channels}
+A \emph{family} is a minimal pair of authored source messages that share content words and differ on one \emph{critical} dimension: polarity, agent (who acts), certainty, speech act, politeness, or time/quantity.
+For example, \say{I don't like the new medication} and \say{I like the new medication} both compress to \kw{like medication}.
+\RES{n_fam_quarantined} speech-act families (refusal/acceptance) also differ in polarity; they are quarantined from primary results (\S\ref{sec:oracle}).
+Each variant is rendered through five channels (Fig.~\ref{fig:pipeline}): \emph{bare} keywords; \emph{noncrit}, which adds one family-specific content word (\kw{like new medication}); \emph{chip1}, which adds the critical cue as a bracketed tag (\chip{NOT}); \emph{chipall}, with every tag the variant needs; and \emph{full}, the source itself.
+Every variant needs at least one tag, so the unmarked reading gets a counter-tag (e.g., \chip{PLAIN}) and neither variant passes for free.
+Tags are a test device for supplying a cue, not a proposed interface.
 
-\paragraph*{Channels}
-The harness renders every variant through five channels (Table~\ref{tab:channels}).
-The channel fixes, by construction, which commitments the model received.
-This separates three failure sources that a single fidelity score conflates: \emph{Loss} (the channel never carried the value), \emph{Violation} (the channel carried it and the output changed it), and \emph{Assumption} (the channel was ambiguous and the output committed anyway).
-These are explanatory labels with separate denominators, not exclusive causes.
+\paragraph*{Requirements}
+For output $y$ from input $x$ for variant $v$, let $L_d(y)$ be the extracted value on dimension $d$ and $C(x)$ the commitments $x$ carries.
+\textbf{R1} (supplied cue): if $C(x)$ fixes $d$ to $c$, then $L_d(y)$ must be in the admissible set for $c$; otherwise it is a \emph{Violation}.
+\textbf{R2} (full input): if $x$ is the full source, each scored explicit value of the source is kept, including the \emph{absence} of politeness markers.
+\textbf{R3} (ambiguity): if $C(x)$ does not fix $d$, $L_d(y)$ is not pass/fail; a committed value is logged as an \emph{Assumption}, and its direction is reported, because a systematic default decides which reading is free.
+\textbf{R4} (composition): adding a compatible cue for $e$ should not change a satisfied value on $d\neq e$.
+R1, R2 and R4 concern commitments the input supplied.
+R2's plainness clause is a software policy for typed text, not a claim about the author's private intent: absence of \say{please} may or may not be deliberate, and we only require that the system not change it unasked.
+\emph{Loss} names the case in which a channel never carried the value.
+
+\paragraph*{Executable checks}
+\MR{2} (cue restoration) and \MR{3} (full preservation) are target-based contract checks on chip1/chipall and full outputs: they assert R1/R2 on a single output.
+\MR{4} relates a single-cue output to a two-cue output and counts pass$\to$fail transitions (R4).
+\MR{1} compares bare with noncrit.
+Because both inputs leave $d$ open, a changed label is a \emph{default-sensitivity diagnostic}, not a defect; it also serves as a one-selection control when reading the cue effect.
+Treating it as an invariance requirement would need extra applicability assumptions that some words violate (\say{weekend} and \say{tonight} carry time).
+\MR{0} tests the oracle: an unchanged source must pass.
+\paragraph*{What the conditioning changes}
+A reference-fidelity score compares each output with its authored source.
+It would fail \say{I like medication} against \say{I don't like the new medication} although the keywords never carried the negation; our checks record it as an Assumption and charge the interface, not the model (E1).
+Conversely, a similarity score would rate \say{Please wear headphones for your music.} as close to the typed sentence; R2 fails it because the input supplied the plain wording (E3).
+The same output can thus be a default under one channel and a violation under another, which is the distinction a developer needs before deciding what to fix.
+
+With a balanced pair, any bare-channel output matches at most one of the two variants, so 50\% is a design ceiling for paired match, not a target or a prior over real intentions.
+
+%% =====================================================================
+\section{A Partial Oracle and Its Failure Envelope}
+\label{sec:oracle}
+%% =====================================================================
+\begin{figure*}[t]
+  \centering
+  \figfile{fig_channel_ladder}{0.95\textwidth}{3.0cm}
+  \caption{Critical-value match by channel (P0, four models, \RES{n_fam_primary} primary families; speech act shows the 8 non-quarantined families). Dotted segments (bare, +word) are ambiguous: their match is a chosen default bounded by the 50\% paired ceiling, not accuracy. Solid segments assess supplied cues; the dashed orange line adds joint preservation of all scored supplied predicates. Markers: individual models.}
+  \label{fig:ladder}
+\end{figure*}
+
+The oracle decides only whether a fixed set of explicit, text-level values is kept.
+It does not judge fluency, appropriateness, referents or whether anyone would accept the sentence.
+
+\paragraph*{Pipeline as run}
+An extractor (gpt-6.1-sol, a different model from the GPT model under test) sees one output and answers the family's critical question plus five general questions; it never sees source, model, prompt or channel.
+Two prompt variants (J1, J2) differ in wording, option order and item order.
+Critical labels are resolved once per unit (text, visible input, dimension) and shared across runs: a cross-family arbiter (claude-opus-5-5) decides J1/J2 disagreements, otherwise the agreed label wins, otherwise the label is unknown; there is no single-prompt fallback.
+The arbiter sees the output, the codebook and the visible input, so for arbitrated full-channel units it is not blind to the source; this is a disclosed exception to blind extraction.
+In the main run \RES{n_arbiter_rows} scored rows (\RES{n_arbiter_units} units) were arbitrated and \RES{n_unknown_rows} remain unknown.
+General-dimension disagreements are broken by a rule-based extractor (layer0), which the guard in \S\ref{sec:decisions} also uses; this shared component limits their independence.
+Verdicts are computed by code from labels, the item specification and the channel, so a rule change re-scores all outputs without model calls.
+
+\paragraph*{Testing the oracle}
+Table~\ref{tab:oracle} lists the evidence.
+Each of the \RES{or_identity_fa_den} authored test sources was injected as its own full-channel output (identity) and as one hand-written, single-value mutation, frozen before judging.
+A second, hand-written challenge set has four groups of six controls and six one-feature mutants with keys hashed before the first judge call.
+The pre-specified gate (\(\geq\)22/24 mutants detected, \(\leq\)1/24 false alarms) passes when pooled, with no slack.
+The protocol's wording \say{22/24 per new group} is impossible with six mutants per group; we report the pooled reading as an interpretation and show the group that fails it.
+Machine agreement is reported separately and is not an error bound: three machine coders and the judge share two errors on round-1 challenges (\say{I can't wait\ldots} coded negated; \say{a couple of} coded as two).
 
 \begin{table}[t]
-  \caption{Channels for the negated variant of one polarity family.}
-  \label{tab:channels}
+  \caption{Oracle evidence status. Authored inputs, Wilson 95\% intervals; these are minimum-functionality checks on clean sentences, not error rates on model outputs.}
+  \label{tab:oracle}
   \footnotesize
-  \begin{tabularx}{\columnwidth}{@{}lXl@{}}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabularx}{\columnwidth}{@{}Xrr@{}}
     \toprule
-    Channel & Input given to the model & Contract role\\
+    Check & Result & 95\% CI\\
     \midrule
-    bare & \kw{like medication} & ambiguous: record default\\
-    noncrit & \kw{like new medication} & ambiguous, length control\\
-    chip1 & \kw{\chip{NOT} like medication} & critical cue given\\
-    chipall & \kw{\chip{NOT} \chip{TELL} \chip{I} like medication} & all commitments given\\
-    full & \kw{The user typed: I don't like the new medication.} & everything given\\
+    Identity: unchanged source, contract false alarms & \kof{or_identity_fa} & \cip{or_identity_fa}\\
+    Scoped single-value mutation detected & \kof{or_mut_det} & \cip{or_mut_det}\\
+    New keyed mutants detected (pooled gate) & \kof{or_new_mut_det} & \cip{or_new_mut_det}\\
+    New keyed controls, false alarms & \kof{or_new_ctrl_fa} & \cip{or_new_ctrl_fa}\\
+    \quad acceptance group: mutants detected & \kof{or_acc_mut_det} & \cip{or_acc_mut_det}\\
+    \quad same, without the acceptance relaxation & \kof{or_new_mut_det_raw} & (all groups)\\
+    Machine panel: Violation flips (units) & \kof{or_panel_flip} & not a bound\\
+    Human gold, adjudicated (\(\kappa\geq0.6\) gate) & \IfRES{human_ready}{see text}{\textbf{unassessed}} & \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\paragraph*{Contract clauses}
-For an output $y$ produced from input $x$ for variant $v$, let $L_d(y)$ be the extracted value on dimension $d$ and $C(x)$ the set of commitments that $x$ carries.
-\begin{itemize}
-\item[\textbf{R1}] \emph{Cue preservation.} If $C(x)$ fixes $d$ to $c$, then $L_d(y)=c$. A mismatch is a Violation.
-\item[\textbf{R2}] \emph{Full-input preservation.} If $x$ is the full source, every explicit value of the source is kept, including the absence of politeness markers.
-\item[\textbf{R3}] \emph{Ambiguity transparency.} If $C(x)$ does not fix $d$, $L_d(y)$ is not scored as pass or fail. Committed values are logged as Assumptions, and their distribution is reported per family, because a systematic default decides which reading the user gets for free.
-\item[\textbf{R4}] \emph{Non-interference.} Adding a cue for dimension $e$ must not change a satisfied value on $d\neq e$.
-\end{itemize}
+\paragraph*{A defect found, a repair, and its blind spot}
+Before these injections, the identity relation run on stored model outputs found that the original oracle failed \RES{id_fail_raw} of \RES{id_n} case- and punctuation-normalized reproductions of the source, all on one sentence, \say{Yes, you can borrow my car this weekend}, coded \emph{statement} against the target \emph{acceptance} (E10 in Table~\ref{tab:examples}).
+The categories overlap, so the contract demanded a distinction the text need not force.
+We relaxed the rule so that \emph{statement} satisfies an acceptance target.
+The keyed challenges then showed the cost: the relaxed oracle detects \kof{or_acc_mut_det} acceptance mutants and misses both statement substitutions (\say{You borrowed my car this weekend.}), whereas the raw rule detects \kof{or_new_mut_det_raw} new mutants.
+Fixing a false alarm removed fault sensitivity.
+We therefore quarantine both refusal/acceptance families from every primary result (leaving \RES{n_fam_primary} of \RES{n_fam_test} families) and report them only as sensitivity.
+A symmetric acceptance/refusal predicate remains open.
 
-\paragraph*{Metamorphic relations}
-Each clause is tested by a relation between channels of the same variant, so most checks need no reference sentence.
-\MR{1} (\emph{noncritical invariance}): adding the non-critical word must not change $L_d$; it also controls for input length when \MR{2} is evaluated.
-\MR{2} (\emph{cue restoration}): adding the critical chip must move $L_d$ to the cued value (R1).
-\MR{3} (\emph{full preservation}): with the full source, all values must match (R2).
-\MR{4} (\emph{composition}): a cue that passes alone must still pass when a second, compatible cue is added (R4).
-\MR{0} (\emph{oracle identity}): if the output repeats the source verbatim, the verdict must be pass. \MR{0} tests the oracle, not the model.
-Relations are evaluated on extracted labels, never by string comparison, because LLM outputs vary from run to run (\S\ref{sec:threats}).
-
-%% =====================================================================
-\section{A Partial Oracle}
-\label{sec:oracle}
-%% =====================================================================
-The oracle is \emph{partial} by design.
-It decides only whether explicit, text-level commitments are kept, from fixed option sets that always include \say{unclear/mixed}.
-It does not judge fluency, appropriateness, or whether a user would accept the sentence.
-
-\paragraph*{Blind extraction}
-An extractor sees one output sentence and answers the family's critical question plus five general questions (polarity, speech act, agent, certainty, politeness).
-It never sees the source, model, prompt, or channel.
-A second pass shows the visible input and asks only whether the output adds a fact, reason, person, place, or time not in the input.
-A codebook fixes edge cases before scoring: for example, \say{Can you\ldots?} alone is a request without a politeness marker, and \say{Can I\ldots?} is a question.
-Identical texts are labeled once, whatever produced them, so the extractor cannot condition on the source of a text.
-We use gpt-6.1-sol as extractor, a different model from the GPT model under test, with two prompt variants (J1, J2) that differ in wording, option order and item order.
-Final labels require J1$=$J2; otherwise a cross-family arbiter decides.
-In this run, \RES{n_j1_fallback} of \RES{n_rows_main} scored rows fell back to J1 because arbitration had not yet run.\pending{arbiter} %CHECK
-
-\paragraph*{Deterministic verdicts}
-Violation, Assumption and stance additions are computed by a short program from the extracted labels, the family specification and the channel (\S\ref{sec:contracts}).
-Changing a contract rule therefore re-scores all outputs without new model calls, and every verdict can be traced to its labels.
-
-\paragraph*{Testing the oracle}
-We validate the oracle in three ways; only the first two are complete.
-\emph{(i) Identity relation \MR{0}.} Of \RES{id_n} full-channel outputs that repeated the source verbatim (all prompts), the original oracle failed \RES{id_fail_raw}.
-All \RES{id_fail_raw} were \say{acceptance} sources (\say{Yes, I'm joining the group chat.}) that the extractor labeled \say{statement}, which is also a correct description of that sentence. %CHECK
-The fault was in our specification, not in the model under test: the two categories overlap, and the contract demanded a distinction the text does not force.
-We changed the contract so that an acceptance target is satisfied by \say{acceptance} or \say{statement} (\RES{id_fail_fixed} identity failures remain); the original oracle stays reproducible for comparison. %CHECK
-The fix makes the oracle more lenient: an acceptance that loses its \say{Yes} now passes, which we accept as a known blind spot.
-\emph{(ii) Consistency.} J1 and J2 agreed at $\kappa=\RES{jj_kappa_crit}$ on the critical label over \RES{jj_n} units (lowest general dimension $\kappa=\RES{jj_kappa_min_general}$; added content $\kappa=\RES{jj_kappa_added}$).
-This is reliability of one judge model under two prompts, not validity.
-\emph{(iii) Human gold and challenge set.} Two coders independently label \RES{gold_n} held-out outputs from \RES{gold_fams} families, drawn with recorded inclusion probabilities, and \RES{challenge_n} authored challenge sentences (semantic mutations such as a dropped negation, and valid controls such as plain \say{Can you\ldots?}).
-They see exactly what the extractor sees.
-\IfRES{oracle_ready}{%
-Coders agreed at $\alpha=\RES{human_alpha}$; the final pipeline reached $\kappa=\RES{judge_kappa}$ against adjudicated labels (lowest dimension \RES{judge_kappa_min}), with Violation sensitivity \pct{judge_sens_violation} and specificity \pct{judge_spec_violation}, and \pct{challenge_acc} accuracy on challenge sentences. %CHECK
+\paragraph*{Human validation}
+\IfRES{human_ready}{%
+\pending{Insert human results: per-dimension $\kappa$ with CI, positive/negative counts, verdict confusion, natural vs.\ challenge items separately; apply the $\kappa\geq0.6$ gate per dimension and narrow every claim for a failing dimension.} %CHECK
 }{%
-These labels are being collected.\pending{human gold: \RES{human_returns} returns so far}
-The pre-registered acceptance rule is: a dimension's automated labels are used only if $\kappa\geq0.6$ against adjudicated labels on the held-out split, with sensitivity and specificity for Violation reported; otherwise that dimension is reported from human labels only. All model results below are conditional on this check. %CHECK
+Professional annotators are double-coding a 100-item core (76 probability-sampled outputs plus 24 challenge items), blind and independently, with adjudication; returns so far: \RES{human_return_files}.\pending{human gold results}
+A dimension enters a validated headline only if human--pipeline $\kappa\geq0.6$ against adjudicated labels; otherwise it is reported as machine-scored only, and panel consensus never substitutes for human labels. %CHECK
 }
 
 %% =====================================================================
 \section{Audit Setup}
 %% =====================================================================
-\paragraph*{Items}
-The test set has \RES{n_fam_test} families, \RES{n_fam_dim} per dimension, written to a fixed specification and checked by an independent reviewer before generation. %CHECK
-Prompts, codebook and rules were developed on \RES{n_fam_pilot} pilot and \RES{n_fam_dev} development families and frozen before the test run.
-The items are constructed; they are not messages written by AAC users.
-Ambiguity is not an artifact of our probes: on \RES{s1_n} crowd-written fictional AAC messages~\cite{vertanen2011imagination}, a content-word compressor dropped at least one explicit cue in \pct{s1_loss_excl_agent} of messages even when pronoun loss is ignored, by a rule-based detector. %CHECK
-
-\paragraph*{Systems under test}
-Three open models run locally with 4-bit quantization (Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, Gemma-3-4B-it; GGUF Q4\_K\_M via llama.cpp) and one API model (gpt-6.1-terra).
-All prompts describe the task as the sentence-composition feature of an AAC app and include the same chip legend.
-P0 asks for one sentence, decoded greedily; P2 asks for three suggestions that \say{cover the different things the user might mean}; S3 draws three samples from P0 at temperature 0.7.
-The main run has \RES{n_rows_main} scored rows from \RES{n_requests_main} requests and \RES{n_texts_main} distinct texts.
-We report P0 unless stated.
-
-\paragraph*{Follow-up experiments}
-\emph{Exp B} (cue interaction and encoding) uses \RES{xb_n_fam} held-out politeness and speech-act families. It holds the critical chip fixed, crosses the presence of \chip{ASK} and \chip{YOU}, adds two inert spacer tags as a length control, and re-encodes the commitments as transparent aliases (\chip{NO-PLEASE}) or a natural-language \say{Meaning:} line.
-\emph{Exp C} (composition) uses \RES{xc_n_fam} new families that cross \{\chip{YES},\chip{NOT}\} with \{\chip{I},\chip{YOU}\} in plain statements, giving neither, either, or both cues.
-Both run greedy decoding twice under separate cache keys.
-
-\paragraph*{Statistics}
-Outputs within a family are dependent (both variants share a bare request).
-Intervals are 95\% percentile intervals from 2,000 whole-family bootstrap resamples, and A/B-shared requests are counted once for defaults.
-Follow-up experiments have few families; we report counts.
-
-%% =====================================================================
-\section{Results}
-\label{sec:results}
-%% =====================================================================
-
-\subsection{Defaults under ambiguity (R3)}
-Under the bare channel, all greedy polarity outputs were affirmative (\kof{bare_pol_aff_p0}), and \pct{bare_pol_aff_all} across all prompts (\kof{bare_pol_aff_all}).
-Asking for three suggestions that cover different meanings did not fix this: both readings appeared in \pct{cov_p2_pol} of polarity sets, which is low and lower than for politeness (\pct{cov_p2_pz}) or agent (\pct{cov_p2_agt}), against \pct{cov_s3_pol} for three samples; over all dimensions, coverage of both readings was \pct{cov_p2_all} vs.\ \pct{cov_s3_all} (Fig.~\ref{fig:sets}). %CHECK
-
-\begin{figure}[t]
-  \centering
-  \figfile{fig_sets}{\columnwidth}{2.6cm}
-  \caption{Coverage@3: share of bare-channel suggestion sets that contain both readings of the pair. P2 asks for three different meanings; S3 is three samples at temperature 0.7. 95\% family-bootstrap intervals.}
-  \label{fig:sets}
-\end{figure}
-Other dimensions had weaker defaults: the speaker as agent (\pct{bare_modeshare_agt}), a plain assertion (\pct{bare_modeshare_cer} of committed certainty outputs) and a statement (\pct{bare_modeshare_act}).
-Politeness had no strong default under bare input (\pct{bare_modeshare_pz} plain).
-Under R3 these are not failures, but they define who pays.
-Fig.~\ref{fig:cost} prices this.
-Taking each family's default as the reading P0 produced most often, reaching the default reading from bare keywords cost \RES{fcost_p0_def} extra actions on average \ci{fcost_p0_def}, and reaching the other reading cost \RES{fcost_p0_nondef} \ci{fcost_p0_nondef} (\RES{fcost_n_fam} families with a default; one action per chip). %CHECK
-Three suggestions narrowed the gap only slightly (\RES{fcost_p2_def} vs.\ \RES{fcost_p2_nondef}), and not at all for polarity: there, every negated message pays the extra action. %CHECK
-
-\begin{figure}[t]
-  \centering
-  \figfile{fig_cost_asymmetry}{\columnwidth}{2.8cm}
-  \caption{Mean extra input actions to reach each reading of a pair from bare keywords, for the family's default reading and the other reading (P0: one sentence; P2: three suggestions, picking one costs one action). 95\% family-bootstrap intervals. Selections only; reading time is not counted.}
-  \label{fig:cost}
-\end{figure}
-
-\begin{figure*}[t]
-  \centering
-  \figfile{fig_defaults}{0.9\textwidth}{3.0cm}
-  \caption{What models say when the keywords do not decide: share of bare-channel outputs expressing each value (P0, one output per family and model, \RES{bare_commit_n} outputs). Bars: pooled, with 95\% family-bootstrap intervals; markers: individual models; dashed line: 50\%, the balance a minimal pair implies.}
-  \label{fig:defaults}
-\end{figure*}
-
-\subsection{Channel relations (\MR{1}--\MR{3})}
-Table~\ref{tab:verdicts} summarizes the relations per model, and Fig.~\ref{fig:ladder} shows critical-value match by channel.
-\emph{\MR{1} fails at the output level, not in aggregate.}
-Adding the non-critical word changed the aggregate match rate by only \RES{mr1_match_diff} points \ci{mr1_match_diff}.
-Yet only \pct{mr1_inv_crit} of aligned outputs kept their critical label, and only \pct{mr1_inv_all} kept all six labels. %CHECK
-A test suite that checks invariance on aggregate rates would pass a system whose individual outputs move with an irrelevant word.
-\emph{\MR{2} mostly holds.}
-One chip raised critical match from \pct{match_noncrit} (noncrit) to \pct{match_chip1} \ci{match_chip1}, a paired gain of \RES{mr2_gain} points over the length-matched noncritical word.
-Full input reached \pct{match_full}.
-Violations concentrated in speech act (\pct{viol_act} of cue-present outputs) and politeness (\pct{viol_pz}); polarity and agent were almost never violated (\pct{viol_pol}, \pct{viol_agt}).
-Speech-act chips were the weakest cue: \chip{?} produced a question in \kof{act_chip1_question} cases, and the failures turned the question into a request (\say{Can you charge my wheelchair?}) or an offer (\say{Do you want to meet at the cinema?}) in \RES{act_q_to_req_k}+\RES{act_q_to_offer_k} cases. %CHECK
-Refusals typed in full were kept as refusals in only \kof{act_full_refusal_kept} cases. %CHECK
-
-\begin{figure*}[t]
-  \centering
-  \figfile{fig_channel_ladder}{0.9\textwidth}{3.0cm}
-  \caption{Critical-value match by channel and dimension (P0, four models). Bare and noncrit are ambiguous, so their match is bounded by the default and is not an accuracy.}
-  \label{fig:ladder}
-\end{figure*}
-
-\begin{table}[t]
-  \caption{Relation outcomes per model (P0). \MR{1}: outputs whose critical label is unchanged by the noncritical word. \MR{2}, \MR{3}: critical match. Plain kept: plain-source politeness targets kept plain with full input. Exp~B: plain kept with \chip{ASK}\chip{PLAIN} (both prompts, two draws). Exp~C: agent kept when a polarity cue is added.}
-  \label{tab:verdicts}
-  \footnotesize
-  \setlength{\tabcolsep}{3.2pt}
-  \begin{tabular}{@{}lrrrrrr@{}}
-    \toprule
-    Model & \MR{1} & \MR{2} & \MR{3} & Plain kept & Exp B & Exp C\\
-    \midrule
-    Qwen2.5-7B   & \RES{mr1_inv_crit_qwen}  & \RES{match_chip1_qwen}  & \RES{match_full_qwen}  & \kof{pz_plainkept_full_qwen}  & \RES{xbb_plain_ix_qwen}  & \RES{xc_agt_both_qwen}\\
-    Llama-3.1-8B & \RES{mr1_inv_crit_llama} & \RES{match_chip1_llama} & \RES{match_full_llama} & \kof{pz_plainkept_full_llama} & \RES{xbb_plain_ix_llama} & \RES{xc_agt_both_llama}\\
-    Gemma-3-4B   & \RES{mr1_inv_crit_gemma} & \RES{match_chip1_gemma} & \RES{match_full_gemma} & \kof{pz_plainkept_full_gemma} & \RES{xbb_plain_ix_gemma} & \RES{xc_agt_both_gemma}\\
-    gpt-6.1-terra& \RES{mr1_inv_crit_terra} & \RES{match_chip1_terra} & \RES{match_full_terra} & \kof{pz_plainkept_full_terra} & \RES{xbb_plain_ix_terra} & \RES{xc_agt_both_terra}\\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsection{The politeness ratchet (\MR{3}, R2)}
-With the full sentence as input, the model has nothing to expand, yet plain requests became polite in \RES{pz_full_added} of \RES{pz_full_den} plain-source cases, across \RES{pz_full_added_fams} families and \RES{pz_full_added_models} models (\say{Wear headphones for your music.} $\rightarrow$ \say{Please wear headphones for your music.}). %CHECK
-The reverse, polite to plain, happened in \RES{pz_full_removed} of \RES{pz_politekept_full_den}; hedges, in contrast, were neither added (\kof{cer_full_hedge_added}) nor removed (\kof{cer_full_hedge_removed}).
-The rate differed sharply by model: Gemma kept only \kof{pz_plainkept_full_gemma} plain sentences plain, gpt-6.1-terra \kof{pz_plainkept_full_terra}, Llama \kof{pz_plainkept_full_llama}, and Qwen \kof{pz_plainkept_full_qwen} (Fig.~\ref{fig:ratchet}). %CHECK
-An explicit \chip{PLAIN} chip did not fix this: plain was kept in \pct{pz_plainkept_chip1} of chip1 and \pct{pz_plainkept_chipall} of chipall outputs, against \pct{pz_politekept_full} for polite targets with full input. %CHECK
-The edits look small, but they move in one direction, toward a register the person did not choose~\cite{chalfoun2025please,agarwal2025homogenize}.
-
-\begin{figure}[t]
-  \centering
-  \figfile{fig_politeness_ratchet}{\columnwidth}{2.8cm}
-  \caption{With the full sentence as input (P0): share of outputs that add a politeness marker to a plain source vs.\ remove it from a polite one (left; 10 politeness families), and the same for hedges (right; 10 certainty families). Pooled and per model, 95\% family-bootstrap intervals.}
-  \label{fig:ratchet}
-\end{figure}
-
-\subsection{Cue interaction and composition (R4)}
-\IfRES{xb_ready}{%
-In Exp~B, adding \chip{ASK} to \chip{PLAIN} lowered plain preservation from \pct{xbb_plain_icrit} to \pct{xbb_plain_ix} pooled over models and both prompts. %CHECK
-The drop came from two models: Gemma (\pct{xbb_plain_icrit_gemma} to \pct{xbb_plain_ix_gemma}) and Llama (\pct{xbb_plain_icrit_llama} to \pct{xbb_plain_ix_llama}); Qwen and gpt-6.1-terra stayed at \pct{xbb_plain_ix_qwen} and \pct{xbb_plain_ix_terra}. %CHECK
-Gemma kept only half of plain targets plain even with \chip{PLAIN} alone, and inert spacer tags did not help it (\kof{xb_plain_ipad_gemma} kept plain). %CHECK
-Re-encoding the same commitments did not help: critical match was \pct{xb_enc_echips} with chips, \pct{xb_enc_ealias} with aliases and \pct{xb_enc_enl} with a natural-language line (both dimensions, common legend). %CHECK
-}{\pending{Exp B (runs/expB1) not yet scored}}
-\IfRES{xc_ready}{%
-In Exp~C, cues mostly composed.
-Adding an actor cue left polarity unchanged (\pct{xc_pol_single} with the polarity cue alone, \pct{xc_pol_both} with both). %CHECK
-Adding a polarity cue lowered agent accuracy from \pct{xc_agt_single} to \pct{xc_agt_both} (\RES{xc_agt_drop} points \ci{xc_agt_drop}), and Qwen was the only model whose agent accuracy fell (\pct{xc_agt_single_qwen} to \pct{xc_agt_both_qwen}). %CHECK
-This is a bounded null for three models on eight families, and a model-specific counterexample for one; it does not show that cues compose in general.
-}{\pending{Exp C (runs/expC1) not yet scored}}
-
-\subsection{Examples}
-Table~\ref{tab:examples} shows real test triples chosen by a fixed rule, so they are not hand-picked successes or failures.
-
 \begin{table*}[t]
-  \caption{Real triples from the main run (P0). Selection rule (in \texttt{make\_macros.py}): families sorted by id, models in the order Qwen, Llama, Gemma, gpt-6.1-terra. Rows 1--3: first polarity family, negated variant, first model. Row 4: first politeness family whose plain variant gets a polite output with full input. Row 5: first speech-act chip1 violation. Row 6: first politeness chipall violation on a plain target. The source is hidden from the system and the oracle.}
+  \caption{Selected counterexamples, all stored outputs (strings re-read from the run files by \texttt{make\_macros.py}; IDs truncated). Selection rules (P0 unless stated; families by id, models in the order Qwen, Llama, Gemma, Terra): E1 first negated polarity target, its bare/noncrit/chip1 outputs; E3 first plain politeness target made polite under full input; E4 first question target made a request under chip1, quarantine excluded; E5/E6 first failure$\to$pass and failure$\to$failure guard pairs by the intervention report's hash order, quarantine excluded; E10 first raw-oracle failure on a normalized source reproduction (quarantined family, oracle diagnostic only). The right column gives the rate in each rule's eligible stratum; a selected failure is not typical. In \emph{typed} rows the source is visible to the generator; extraction is always blind.}
   \label{tab:examples}
   \footnotesize
-  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.6cm}X>{\raggedright\arraybackslash}p{3.3cm}@{}}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.05cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.5cm}@{}}
     \toprule
-    Relation & Source (hidden) & Visible input & Output (model) & Verdict\\
+    Example & Visible input & Stored output & Model, family, prompt, channel; ID & Eligible-stratum rate\\
     \midrule
     \csname @@input\endcsname examples_table.tex
     \bottomrule
   \end{tabularx}
 \end{table*}
 
-%% =====================================================================
-\section{Requirements and Test Design for AAC Practitioners}
-\label{sec:recs}
-%% =====================================================================
-
-\paragraph*{Write requirements per dimension, conditional on input}
-\say{Preserve the user's meaning} cannot be tested.
-\say{If the input carries \chip{NOT}, the output is negated} can.
-Write R1--R4 for each dimension your interface can express, and state where the input is ambiguous, so that tests do not blame the model for information the interface never collected.
-
-\paragraph*{Test with minimal pairs and channel relations}
-Use pairs that collide on the same keywords, and run every pair through bare, noncritical, cue and full channels.
-The noncritical channel is the length control without which a cue's effect cannot be read.
-Test invariance on individual outputs, not on aggregate rates.
-
-\paragraph*{Test full-input preservation as a defect class}
-An expander that edits a complete sentence is speaking in the person's place.
-Treat added politeness, hedges or certainty on full input as a failing test, and make politeness assistance an opt-in setting.
-
-\paragraph*{Test combinations of controls}
-One chip passing alone does not mean it passes next to another; Exp~B found a control that broke when \chip{ASK} was added.
-Include pairwise cue combinations and a length-matched inert control in the suite.
-
-\paragraph*{Make defaults explicit}
-Report, for each dimension, which reading the system produces from ambiguous input, and what the other reading costs.
-A default that makes negation, questions or plain requests expensive is a product decision and should be documented and reviewed, preferably with AAC users.
-
-\paragraph*{Test the oracle}
-Keep extraction blind to the condition, compute verdicts in code, and run an identity relation and mutation probes against the oracle before trusting its fault counts.
-Our identity relation found a contract defect that model-level tests had reported as model failures.
-
-\paragraph*{Reuse the contracts at run time}
-Because verdicts are computed from extracted labels, the same contracts can serve as a runtime monitor: an app can check a suggestion against the commitments the user entered and flag or regenerate it before it is spoken. Evaluating such a guard, including its latency and false alarms, is future work.
-
-\paragraph*{Plan for nondeterminism}
-Even at temperature 0, outputs differ between runs; compare labels, not strings, and repeat draws for any release gate.
+The test set has \RES{n_fam_test} families (\RES{n_fam_dim} per dimension; time and quantity five each), authored to a fixed specification and verified by an independent reviewer; prompts and codebook were developed on \RES{n_fam_pilot} pilot and \RES{n_fam_dev} development families.
+The items are constructed, not messages written by AAC users.
+Three open models run locally with 4-bit quantization (Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, Gemma-3-4B-it) and one API model (gpt-6.1-terra).
+All prompts describe the sentence-composition feature of an AAC app and include the same tag legend.
+P0 asks for one sentence (greedy); P2 asks for three suggestions that cover different meanings; S3 draws three samples from P0 at temperature 0.7.
+P1, a preservation instruction, was dropped after the pilot (its effect was at our kill line); its cached test outputs are reported only as sensitivity.
+The primary pool has \RES{n_rows_main} scored rows from \RES{n_requests_main} requests (P0/P2/S3); rows are not independent.
+Intervals are 95\% percentile intervals from 2,000 whole-family bootstrap resamples (seed 20261031); A/B-shared bare requests count once for defaults.
+Every displayed example is a stored output selected by a declared rule, shown with the rate of its eligible stratum.
 
 %% =====================================================================
-\section{Threats to Validity and Limitations}
+\section{Results}
+\label{sec:results}
+%% =====================================================================
+\begin{table*}[t]
+  \caption{Requirement $\to$ executable check $\to$ developer decision $\to$ failure envelope. Primary pool (\RES{n_fam_primary} families), machine-scored; guard rates are cue-channel targets.}
+  \label{tab:decisions}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    Requirement & Check and finding & Developer decision (evaluated) & Failure envelope\\
+    \midrule
+    R2: a typed sentence keeps its scored values &
+    \MR{3}: P0 contract pass \kof{fullmode_p0}; plainness lost in \kof{p0_pz_added} directives &
+    Route an explicitly selected full mode to exact copy: \kof{copy_pass} source identities pass, zero model calls. Guard alternative: \kof{fullmode_g1} &
+    Copy applies only when the user declares full mode; it does not detect whether keywords already form a sentence, and expands nothing.\\
+    \addlinespace
+    R1: a supplied cue is honored &
+    \MR{2}: \kof{cm_chip1} chip1 match; cue-channel strict pass (incl.\ no added politeness) \pct{strict_p0} &
+    Runtime guard: rule-based check against supplied cues, one feedback regeneration on a flag. Repairs \kof{g1_fix} \cip{g1_fix} failures; strict pass \pct{strict_p0}$\to$\pct{strict_g1}; \RES{g1_calls} extra calls and \RES{g1_lat}\,s per input in our serving setup. Strip-only baseline repairs \kof{g1s_fix} &
+    \RES{g1_remain_k} failures remain, mostly speech act (E6); \kof{g1_changed_ok} correct outputs changed, \RES{g1_broken_k} became failures; repairs are scored predicates, not fluent speech (\say{Ask you to wear headphones.} passes); monitor and evaluator share layer0.\\
+    \addlinespace
+    Oracle: an unchanged source passes (\MR{0}) &
+    Identity on stored outputs: \RES{id_fail_raw} false fails, one sentence &
+    Relax acceptance; re-test with keyed mutants; on failure (\kof{or_acc_mut_det}), quarantine the two families &
+    Refusal/acceptance unresolved; idiomatic negation and vague quantity are shared machine blind spots; human gate pending.\\
+    \addlinespace
+    R3: defaults are reported &
+    Bare: \kof{bare_pol_aff_p0} affirmative; P2 covers both in \kof{covk_p2_pol} &
+    Document the default and price the other reading; expose a negation control &
+    Nominal selections only: \kof{bare_miss_chip1_fail} misses not repaired by the tag; no user effort measured.\\
+    \bottomrule
+  \end{tabularx}
+\end{table*}
+
+
+\subsection{Full-input preservation (R2)}
+Fig.~\ref{fig:ratchet} gives the result.
+Across all primary families whose source has no politeness marker, \kof{full_pz_added_allfam} full-input outputs added one, so the effect is concentrated in directives.
+Hedges, a parallel stance marker, were neither added (\kof{cer_full_hedge_added}) nor removed (\kof{cer_full_hedge_removed}) in the certainty families.
+Under the joint check of all scored supplied predicates, full input passed \kof{joint_full}; exact copying passes by construction (\S\ref{sec:decisions}).
+
+\subsection{Channel attribution (R1, R3)}
+
+Fig.~\ref{fig:ladder} separates the two kinds of evidence.
+Under bare input, every greedy polarity output was affirmative (\kof{bare_pol_aff_p0}); certainty outputs were unhedged in \kof{bare_modeshare_cer} committed cases, and the speaker was the agent in \kof{bare_modeshare_agt}.
+These are Assumptions (R3), not failures.
+Asking for three different meanings (P2) produced both polarity readings in only \kof{covk_p2_pol} suggestion sets.
+Adding the noncritical word left the critical label unchanged in \kof{mr1_crit} aligned outputs (\kof{mr1_crit_ntq} without the time/quantity families, whose added words can carry time); as a default-sensitivity diagnostic this shows that defaults are unstable, not that the model erred.
+
+Once supplied, cues mostly worked.
+Critical match rose from \kof{cm_noncrit} (noncrit) to \kof{cm_chip1} with one tag, \kof{cm_chipall} with all tags and \kof{cm_full} with full input; all \RES{pol_neg_chip1_den} negated targets were negated with \chip{NOT}.
+The focal check overstates preservation when several cues are present: with all tags, joint preservation of every scored supplied predicate was \kof{joint_chipall} against \kof{cm_chipall} for the focal value.
+Speech act was the weakest cue: \chip{?} kept a question in \kof{act_chip1_question} cases (E4).
+Pricing the default as one selection per tag (P0) gives \RES{fcost_p0_def} \ci{fcost_p0_def} nominal extra selections for the default reading against \RES{fcost_p0_nondef} \ci{fcost_p0_nondef} for the other (\RES{fcost_n_fam} families with an identified default).
+These are nominal: \kof{bare_miss_chip1_fail} bare misses still missed after the tag, and reading or navigation time is not counted.
+
+\subsection{Composition (R4)}
+In a follow-up on \RES{xc_n_scen} new factorial scenarios (two greedy draws), adding a polarity tag never broke a satisfied polarity value (\RES{xc_pol_pf} pass$\to$fail of \RES{xc_pol_pass_single}), but adding it to an actor tag broke \RES{xc_agt_pf} of \RES{xc_agt_pass_single} satisfied agent values (Qwen \RES{xc_agt_pf_qwen}, Llama \RES{xc_agt_pf_llama}, Gemma \RES{xc_agt_pf_gemma}, gpt-6.1-terra \RES{xc_agt_pf_terra}) while repairing \RES{xc_agt_fp}; net change \RES{xc_agt_drop_scen} points \ci{xc_agt_drop_scen}, clustered by scenario.
+Many failures literalize the constant \chip{TELL} tag (\say{I don't tell you to\ldots}), and their scoring depends on a codebook rule for embedded actors, so we read this as an encoding hazard.
+In a second follow-up reusing four politeness test sources, adding \chip{ASK} to \chip{PLAIN} lowered plain preservation from \kof{xbb_plain_icrit} to \kof{xbb_plain_ix} (two prompts, two draws), entirely in Gemma and Llama.
+Greedy re-runs reproduced identical text in only \RES{nd_api_min}--\pct{nd_api_max} (API) and \RES{nd_local_min}--\pct{nd_local_max} (local) of requests, so a matched repeat-disagreement baseline is needed.
+\IfRES{wd_ready}{\pending{W-D (encoding-controlled composition, repeat disagreement) report exists: integrate per its readiness gate; keep the interference claim only if damage exceeds repeat disagreement under \chip{STATEMENT}.}}{\pending{W-D (\chip{TELL} vs.\ \chip{STATEMENT}, protected-cue pass$\to$fail vs.\ same-input repeat disagreement) not yet reported; until it is, we make no general interference claim.}} %CHECK
+
+\subsection{Beyond the discovery items}
+\IfRES{wc_ready}{\pending{W-C confirmatory report exists: replace discovery headlines with its registered contrasts (Holm), per-model counts and effective clusters; report failed contrasts as results.}}{\pending{W-C (240 fresh frozen families) not yet reported.}}
+It also tests, as a pre-specified contrast, an exploratory observation we do not claim here: with all tags, Llama kept the request act for \kof{h1_llama_plain} plain politeness targets against \kof{h1_llama_polite} polite ones.
+\IfRES{wb_ready}{\pending{W-B transfer report exists\IfRES{wb_interim}{ (interim wb1i)}{}: add random and enriched AACText estimates separately, defaults only on confirmed-ambiguous inputs, violations only on supplied commitments, with audit uncertainty.}}{\pending{W-B (160 AACText messages, random and enriched strata) not yet reported.}}
+Until then, the only corpus evidence is that a four-word content compressor dropped at least one explicit cue, by a rule-based detector, in \pct{s1_loss_excl_agent} of \RES{s1_n} crowd-written fictional AAC messages~\cite{vertanen2011imagination}, ignoring pronoun loss. %CHECK
+
+
+
+%% =====================================================================
+\section{From Requirement to Developer Decision}
+\label{sec:decisions}
+%% =====================================================================
+Table~\ref{tab:decisions} shows how each requirement becomes a check, what the check found, what a developer could decide, and what the evidence does not cover.
+
+
+
+The full-mode row is the clearest engineering lesson.
+If an interface lets the person say \say{this is my sentence}, the requirement is met by not generating at all; the remaining question is a product one, whether full mode is offered and discoverable.
+The guard row shows that the same requirements can run at run time, with measured repairs, residual failures and cost.
+The oracle row shows why the checks need their own regression tests: our first repair silently weakened them.
+
+\paragraph*{Recommendations}
+Write each requirement conditional on the input and per dimension; \say{preserve meaning} is not testable, \say{if the input carries \chip{NOT}, the output is negated} is.
+Test with minimal pairs, report joint as well as focal preservation, and keep defaults separate from failures.
+Treat added politeness or certainty on full input as a failing test and make style assistance opt-in.
+Give the oracle identity and keyed-mutation tests, and re-run them after every relaxation.
+Compare labels, not strings, and repeat draws for any release gate.
+
+%% =====================================================================
+\section{Threats to Validity}
 \label{sec:threats}
 %% =====================================================================
-\emph{No users.} We ran no study with AAC users or autistic people, so we cannot speak to benefit, effort, agency, or whether anyone wants a given output.
-Commitments are text-explicit categories; we do not know any author's private intent.
-\emph{Constructed and fictional text.} Probe families are authored, and the corpus estimate uses fictional crowd-written AAC messages with a rule-based detector~\cite{vertanen2011imagination}.
-Neither shows what AAC users actually write or how often each dimension matters.
-\emph{Oracle validity is pending.} The extractor is an LLM; J1/J2 agreement measures consistency, not correctness.
-Until the human gold and challenge results are in, every rate above is conditional on the oracle, and \RES{n_j1_fallback} rows use a single prompt's label. %CHECK
-The \MR{0} fix also makes the oracle more lenient for acceptances.
-\emph{Nondeterminism.} Re-running identical greedy requests gave the same text in only \RES{nd_api_min}--\pct{nd_api_max} of cases for the API model and \RES{nd_local_min}--\pct{nd_local_max} for local models (Exp~B/C draws).
-Our main run uses one cached draw; we repeated only the follow-up experiments. %CHECK
-\emph{Scale.} Ten families per dimension and four models, three of them small and quantized, with fixed prompts and no conversation history, support statements about these systems and items, not population rates.
-Follow-up experiments have four to eight families; their per-model results are counterexamples, not estimates.
-\emph{Cost model.} One action per chip or keyword is a proxy; it omits reading suggestions, navigation and fatigue~\cite{frisch2026complicated}.
+\emph{Construct.} Labels are coarse, text-explicit categories from a codebook; \say{plain} means no explicit marker, and coverage of content, referents, negation scope and certainty degree (emphatic outputs pass a plain target by design) is partial.
+\emph{Oracle.} All rates depend on an LLM extractor that has not yet passed the human gate; machine-panel agreement shares errors.
+\emph{Selection and scale.} Ten authored families per dimension and four fixed models support counterexamples and regression tests, not prevalence; examples were selected after discovery, by declared rules.
+The politeness asymmetry is prompt-dependent (P1) and model-dependent.
+\emph{Follow-ups.} Composition evidence uses eight scenarios and a tag that models literalize.
+\emph{Cost.} Selection counts omit reading, navigation and fatigue~\cite{frisch2026complicated}.
+\emph{Serving.} Guard latency used a local server with partial CPU offload and is not a deployment estimate.
+\emph{No users.} We cannot speak to benefit, agency or whether anyone wants a given output; we do not assume an \say{autistic style} of language~\cite{zisk2019aac,donaldson2021everyone}.
 
 %% =====================================================================
 \section{Conclusion}
 %% =====================================================================
-Meaning preservation in LLM-based AAC can be specified and tested.
-Conditioning requirements on the input separates what the interface never collected from what the model changed, and channel relations test it without reference sentences.
-In our audit, one cue restored most commitments, but models defaulted to the affirmative, rewrote plain requests as polite ones even when typed in full, and had weak speech-act cues.
-Testing the oracle mattered as much as testing the models.
-We release the families, contracts, harness, oracle prompts and analysis code.\pending{repository URL}
+Even a sentence the person typed in full can come back changed.
+Conditioning requirements on what the input carried separates that violation from the guesses an interface forces when it collects less, and turns both into executable checks with a developer decision attached.
+Testing the oracle mattered as much as testing the models: a repair that removed false alarms also removed fault sensitivity.
+We release the families, requirements, harness, oracle tests, stored outputs and analysis code.\pending{repository URL / release snapshot}
 
 \section*{Ethics}
-No data were collected from AAC users. AACText is public under CC BY 4.0.
-Human coders label model outputs under a fixed codebook.\pending{institutional determination; coder compensation}
-Autistic advisers are reviewing the codebook, focusing on added politeness, certainty and directness; we call this a codebook review, not co-design~\cite{jansevanrensburg2026advisory}.\pending{number of advisers, dates, accepted and rejected changes, compensation, credit}
+No data were collected from AAC users; AACText is public under CC BY 4.0.
+Human annotators label model outputs under a fixed codebook.\pending{institutional determination; annotator compensation; adviser participation only as actually completed}
 
 \section*{Acknowledgment}
-\pending{IEEE AI-disclosure: name the AI system(s) used to draft text, figures and code, the sections affected, and the level of use (see VENUE.md). The models under test and the LLM extractor are research instruments and are described in Sections IV--V.}
+\pending{IEEE AI disclosure: name the AI system(s) that drafted text, figures and code, the sections affected and the level of use (VENUE.md). The models under test, the extractor and the arbiter are research instruments described in Sections IV--V.}
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}

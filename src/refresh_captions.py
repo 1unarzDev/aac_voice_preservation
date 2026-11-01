@@ -42,7 +42,9 @@ def main():
         "Bare/noncritical reference match measures a model's chosen reading; the added word is a length control and "
         "default-sensitivity diagnostic. Supplied-cue correctness is assessed in chip1/chipall/full. Full means source "
         "visible to the generator; extraction remains blind to source, model and channel. Loss, Violation and Assumption "
-        "have different denominators. This is a selected example, not a typicality claim.\n",
+        "have different denominators. Only the bare channel's connector is drawn solid: the shown output came from bare input; "
+        "the other channels' connectors are faint. The arbiter (J1/J2 disagreements only) sees the visible input. "
+        "This is a selected example, not a typicality claim.\n",
         "## fig_defaults\n",
         f"**Choices under ambiguous keywords.** P0 bare, {d['n_outputs']} distinct family/model outputs from "
         f"{d['n_families']} primary families. A/B duplicate requests count once. "
@@ -53,7 +55,8 @@ def main():
         f"**Reference match and supplied-predicate preservation.** P0, {ladder['n_outputs']} target occurrences "
         f"({ladder['n_families']} families × two targets × five channels × four models). "
         + "; ".join(f"{ch}: {pct(r)}" for ch,r in ladder['all_dims'].items())
-        + ". Bare/noncritical values are ambiguous reference match; chip1/chipall/full assess supplied cues. "
+        + ". Bare/noncritical values are ambiguous reference match (dotted segment, not accuracy); chip1/chipall/full assess supplied cues "
+        "(solid segment); the pooled line is deliberately not continued across that boundary. "
         "The orange dashed line adds joint preservation of scored supplied predicates. "
         + "; ".join(f"joint {ch}: {pct(r)} (n={r['n']})" for ch,r in ladder['joint_supplied_predicates'].items())
         + ". Two refusal/acceptance families are quarantined rather than counted as primary passes.\n",
@@ -70,11 +73,17 @@ def main():
         "**Full-mode politeness additions and removals.** P0, ten politeness families: plain→polite "
         f"{pct(ratchet['Politeness']['Pooled']['added to a plain source'])} (9/40), polite→plain "
         f"{pct(ratchet['Politeness']['Pooled']['removed from a polite source'])} (2/40). "
-        "Per-model addition counts are Qwen 0/10, Llama 1/10, Gemma 6/10, Terra 2/10; "
-        "these are ten-family intervals. Hedging controls show 0/40 additions and 0/40 removals. "
+        "Per-model addition counts are "
+        + ", ".join(f"{lab} {ratchet['Politeness'][m]['added to a plain source']['k']}/{ratchet['Politeness'][m]['added to a plain source']['n']}"
+                    for lab, m in [("Qwen", "qwen2.5-7b"), ("Llama", "llama3.1-8b"), ("Gemma", "gemma3-4b"), ("Terra", "gpt-6.1-terra")])
+        + "; these are ten-family intervals. Hedging control (certainty families, printed as a note): "
+        f"{ratchet['Hedging_control_P0']['added'][0]}/{ratchet['Hedging_control_P0']['added'][1]} additions, "
+        f"{ratchet['Hedging_control_P0']['removed'][0]}/{ratchet['Hedging_control_P0']['removed'][1]} removals. "
         f"Across primary families whose source spec is plain, {round(ratchet['politeness_added_all_plain_sources']['Pooled']*ratchet['politeness_added_all_plain_sources']['n'])}/"
         f"{ratchet['politeness_added_all_plain_sources']['n']} full-mode outputs add politeness. "
-        "Cached P1 sensitivity remains separate from the primary prompts: 4/40 additions, 6/40 removals.\n",
+        "Cached P1 sensitivity is drawn as a separate grey row, not a primary arm: "
+        f"{ratchet['Politeness']['P1_Pooled']['added to a plain source']['k']}/{ratchet['Politeness']['P1_Pooled']['added to a plain source']['n']} additions, "
+        f"{ratchet['Politeness']['P1_Pooled']['removed from a polite source']['k']}/{ratchet['Politeness']['P1_Pooled']['removed from a polite source']['n']} removals.\n",
         "## fig_sets\n",
         "**Coverage of both authored readings among three suggestions.** Bare, one set per family/model/arm. "
         + "; ".join(f"{pr}: {pct(r)} ({round(r['estimate']*r['n'])}/{r['n']} sets)" for pr,r in sets['pooled'].items())

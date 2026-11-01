@@ -18,6 +18,7 @@ for m in $models; do
   nvidia-smi --query-gpu=memory.used,temperature.gpu --format=csv,noheader
 done
 bash src/stop_local.sh >/dev/null 2>&1
+flock -u 9  # D-028: release GPU lock before waiting on API
 wait $apipid
 python src/generate.py --requests "$req" --run-id "$run" --local-concurrency 1 >/dev/null 2>&1 || true  # assemble from cache (all cached)
 python src/explode.py --run "runs/$run"; python src/explode.py --run "runs/$run" --by-input

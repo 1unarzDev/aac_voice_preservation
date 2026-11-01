@@ -1,0 +1,6 @@
+% LOCAL PREVIEW ONLY. aaai2027.sty stops on any engine other than pdfTeX (\RequirePDFTeX). The project's
+% compiler is Tectonic (XeTeX), so main.tex inputs this shim only when \XeTeXversion is defined. It disables the
+% engine guard and changes nothing else. FINAL SUBMISSION: compile with pdflatex (e.g. Overleaf), where the shim
+% is skipped automatically, and re-check the page count.
+\RequirePackage{iftex}
+\let\RequirePDFTeX\relax

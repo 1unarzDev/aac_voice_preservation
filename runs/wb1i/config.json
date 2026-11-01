@@ -1,0 +1,171 @@
+{
+  "run_id": "wb1i",
+  "created_utc": "2026-11-01T04:00:40+00:00",
+  "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/wb1i.jsonl",
+  "requests_sha256": "655b5112d3dae0d3820ac8ef1ae0b03ac8916cbc52237b517622a84e97e20498",
+  "n_requests": 1395,
+  "wall_s": 0.2,
+  "models": {
+    "gemma3-4b": {
+      "name": "gemma3-4b",
+      "base_url": "http://127.0.0.1:8093/v1",
+      "model": "gemma3-4b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "google_gemma-3-4b-it-Q4_K_M.gguf",
+      "sha256": "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94",
+      "concurrency": 8,
+      "supports_seed": true
+    },
+    "gpt-6.1-terra": {
+      "name": "gpt-6.1-terra",
+      "base_url": "https://codex.lunarz.dev/v1",
+      "model": "gpt-6.1-terra",
+      "kind": "api",
+      "role": "under_test",
+      "quant": null,
+      "gguf": null,
+      "sha256": null,
+      "concurrency": 16,
+      "supports_seed": false
+    },
+    "llama3.1-8b": {
+      "name": "llama3.1-8b",
+      "base_url": "http://127.0.0.1:8092/v1",
+      "model": "llama3.1-8b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "concurrency": 8,
+      "supports_seed": true
+    },
+    "qwen2.5-7b": {
+      "name": "qwen2.5-7b",
+      "base_url": "http://127.0.0.1:8091/v1",
+      "model": "qwen2.5-7b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "concurrency": 8,
+      "supports_seed": true
+    }
+  },
+  "prompts": {
+    "P0": {
+      "prompt_id": "P0",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "ad8e7920bfeba2badf6d831b7923170cabb5fa1841f44b583088c3167481bcf7"
+    },
+    "S3": {
+      "prompt_id": "S3",
+      "template_file": "P0.txt",
+      "temperature": 0.7,
+      "k": 3,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "ad8e7920bfeba2badf6d831b7923170cabb5fa1841f44b583088c3167481bcf7"
+    },
+    "P1": {
+      "prompt_id": "P1",
+      "template_file": "P1.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "6e7daa45372809800621e7b2f4824437285665786dd7f83934caf9158c52a854"
+    },
+    "P2": {
+      "prompt_id": "P2",
+      "template_file": "P2.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 3,
+      "max_tokens": 256,
+      "legend_file": "chip_legend.txt",
+      "sha256": "3947e7a150dad5b9b896b22a6862b15803617061d9c61962a30bc9b76ff82985"
+    },
+    "P0x": {
+      "prompt_id": "P0x",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend_x.txt",
+      "sha256": "06d7cff8cda1c117bb10112ac50979dd11ced98ef5d80bdb64560e8a560cb63d"
+    }
+  },
+  "seed_base": 1000,
+  "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
+  "retries": 5,
+  "code_sha256": "3e9b448be7d44a1caa8c24da9a19983400088f4f59352a8eb548afd528577c11",
+  "python": "3.12.15",
+  "httpx": "0.28.1",
+  "throughput": {
+    "qwen2.5-7b": {
+      "requests": 314,
+      "cached": 314,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 1
+    },
+    "llama3.1-8b": {
+      "requests": 314,
+      "cached": 314,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 1
+    },
+    "gemma3-4b": {
+      "requests": 314,
+      "cached": 314,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 1
+    },
+    "gpt-6.1-terra": {
+      "requests": 453,
+      "cached": 453,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 16
+    }
+  },
+  "parse_failures": {
+    "llama3.1-8b": 1
+  },
+  "finish_reasons": {
+    "qwen2.5-7b:stop": 314,
+    "llama3.1-8b:stop": 314,
+    "gemma3-4b:stop": 314,
+    "gpt-6.1-terra:stop": 453
+  }
+}
