@@ -6,7 +6,7 @@ usage: python src/collect_written_pairs.py [CSV ...]          (default: annotati
 
 Per returned pair row (row_type == pair):
   * keep the latest export of each (writer, dimension, pair_no);
-  * require consent == yes (CC BY 4.0 release), else reject;
+  * require consent == yes (CC BY 4.0 release), or the writer listed in <out>/consent_confirmed.csv, else reject;
   * re-run the writer-tool checks in Python (src/hw_rules.check_pair, the same rules as the page);
   * reject exact duplicates of an earlier pair (same two sentences, either order, any writer);
   * build the family in the project schema: split hw, family_id hw-<pol|act|plt|cer|agt|tim>-NNN,
@@ -181,11 +181,14 @@ def main(argv=None) -> int:
         code, n = fid.split("-")[1], int(fid.split("-")[2])
         next_n[code] = max(next_n[code], n)
     det = load_detector()
+    # Coordinator-confirmed consent (writers whose consent column was lost in format conversion; see the file's note)
+    cpath = out / "consent_confirmed.csv"
+    confirmed = {r["writer"].strip() for r in csv.DictReader(cpath.open())} if cpath.exists() else set()
     accepted, rejected, seen = [], [], {}
     for r in rows:
         dim = r["dimension"]
         why = []
-        if (r.get("consent") or "").strip().lower() != "yes":
+        if (r.get("consent") or "").strip().lower() != "yes" and r["writer"].strip() not in confirmed:
             why.append("no CC BY 4.0 consent")
         pair = tuple(sorted([" ".join(H.toks(r["sentence_A"])), " ".join(H.toks(r["sentence_B"]))]))
         if pair in seen:
