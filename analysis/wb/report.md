@@ -1,9 +1,9 @@
 # W-B corpus transfer (AACText): defaults, violations, restoration
 
-Run: **wb1i** (P0, greedy; qwen2.5-7b, llama3.1-8b, gemma3-4b, gpt-6.1-terra). Protocol: orchestration/PREREG_R2.md W-B.
+Run: **wb1** (P0, greedy; qwen2.5-7b, llama3.1-8b, gemma3-4b, gpt-6.1-terra). Protocol: orchestration/PREREG_R2.md W-B.
 Code: src/wb_sample.py, src/wb_items.py, src/wb_admissibility.py, src/wb_report.py. Status/resume notes: analysis/wb/STATUS.md.
 
-**Run status.** `wb1` is the full design. `wb1i` is an interim run with every POS-cap4 and full output from all 4 models, plus the restored channel for gpt-6.1-terra only. The local models' restored channel was waiting on the GPU lock (D-019), which r2c1 held during its API phase. Sections A and B (POS-cap4/full) are identical in both runs. In the wb1i interim, the section C restoration effect and the "restored" column of B are terra-only. In wb1 they cover 4 models.
+**Run status.** `wb1` is the complete design: 160 messages, 3 channels (139 messages restored), 4 models, 1836 scored rows, 0 invalid. `wb1i` (interim, terra-only restored channel) is superseded and kept only for provenance in analysis/wb/report_wb1i.md.
 
 ## Headline results (numbers from the tables below; 95% message-cluster bootstrap CIs)
 
@@ -15,14 +15,17 @@ Code: src/wb_sample.py, src/wb_items.py, src/wb_admissibility.py, src/wb_report.
 - **Outputs stay within admissible readings.** Values outside both coders' admissible sets are rare: 0.1% random, 1.2% enriched. So the models pick an admissible reading, but systematically the default one.
 
 **B. Violations of supplied commitments.**
-- **POS-cap4, primary panel.** Almost nothing counts as "supplied" (40 output rows from 7 random messages; 84 rows from 16 enriched messages, mostly retained "please"). The POS-cap4 violation estimates are therefore uninformative: 17.5% [0, 43] random, 3.6% [0, 12.5] enriched.
-- **POS-cap4, strict sensitivity.** Under the strict panel (only "likely" readings count), the supplied-commitment violation rate is 9.3% [4.5, 14.7] random and 6.8% [3.0, 11.8] enriched.
-- **Full source.** Violation rates are 4.9% [2.3, 8.0] (random) and 5.7% [3.3, 8.5] (enriched). They are concentrated in agent, speech act and certainty, e.g. a question rewritten as a statement, a plain statement as n/a, or speaker swapped with addressee. Part of this is codebook disagreement between the panel's source coding and the judge's output coding (see caveats).
+- **POS-cap4, primary panel.** Almost nothing counts as "supplied" (40 output rows from 7 random messages; 84 rows from 16 enriched messages, mostly retained "please"). The POS-cap4 violation estimates are therefore uninformative: 17.5% [0, 45] random, 3.6% [0, 11.8] enriched.
+- **POS-cap4, strict sensitivity.** Under the strict panel (only "likely" readings count), the supplied-commitment violation rate is 9.3% [4.2, 14.9] random and 6.8% [3.0, 11.5] enriched.
+- **Full source.** Violation rates are 4.9% [2.3, 8.0] (random) and 5.7% [3.3, 8.6] (enriched). They are concentrated in agent, speech act and certainty, e.g. a question rewritten as a statement, a plain statement as n/a, or speaker swapped with addressee. Part of this is codebook disagreement between the panel's source coding and the judge's output coding (see caveats).
 
-**C. Focal-cue restoration.** Restoration adds the source's focal cue to POS-cap4, as a chip where the vocabulary allows (131 messages) or as the cue word (8 messages).
-- **Interim (wb1i, terra only).** Focal-dimension match rises by **+40.4 pp [+26.3, +54.4] (random, 57 messages)** and **+38.0 pp [+24.1, +51.9] (enriched, 79 messages)**. Restored match is 91.4% (random) and 80.0% (enriched), versus 94.8% / 91.8% for the full source.
-- **Polarity gains most.** POS-cap4 polarity match is 2.5-9.1% (pooled models); terra with restored [NOT] reaches 70-73%. A residual gap to full text remains for enriched polarity and certainty.
-- **Ineligible.** 21 random messages have no lost focal cue (focal_dim = none) and are excluded. See the table for 4-model results when the run is wb1.
+**C. Focal-cue restoration (4 models).** Restoration adds the source's focal cue to POS-cap4, as a chip where the vocabulary allows (131 messages) or as the cue word (8 messages). Pairs are (message, model).
+- **Random sample.** Focal-dimension match rises from 43.6% to 93.1%: **+48.9 pp [+38.1, +59.7]** (59 messages, 231 pairs). This is close to the full-source ceiling of 94.8% (full − restored +1.3 pp [−3.6, +5.9]).
+- **Enriched sample.** Match rises from 36.8% to 74.2%: **+37.1 pp [+24.9, +48.7]** (79 messages, 313 pairs). It remains well below full text (91.8%; full − restored +17.8 pp [+9.2, +26.4]).
+- **By dimension (enriched).** Polarity goes from 2.5% to 64.6% (+62.0 pp, with a residual gap to full of +26.6 pp). Speech act goes from 23.8% to 73.4% (+49.4). Certainty goes from 42.7% to 67.5% (+24.0, CI includes 0). Politeness goes from 78.8% to 91.2% (+12.5; "please" is usually already retained). In the random sample, polarity rises by +76.2 pp and agent by +28.7 pp.
+- **By model.** The effect is consistent: +34.6 to +39.7 pp (enriched) and +40.4 to +57.6 pp (random).
+- **Violations on the restored channel.** The violation rate on the focal commitment is 5.4% [1.8, 10.3] (random) and 19.9% [12.3, 27.5] (enriched). So a supplied chip is often ignored for the harder enriched cues, e.g. [NOT] with three or four keywords and [MAYBE].
+- **Ineligible.** 21 random messages have no lost focal cue (focal_dim = none) and are excluded. Focal critical labels were unresolved (J1 != J2) in 22/1836 rows. They are excluded from the primary table and included in the J1-fallback table.
 
 ## Caveats
 1. **The panel is near-ceiling liberal.** Even with the instruction to list only natural readings, the checklist ("consider each option value") made both codex coders admit almost any value. Ambiguity kappas are low or undefined (-0.01 to 0.79) because prevalence is near 100%, not because the coders disagree (raw agreement 0.86-0.95). The graded strict pass (`p1g`, likely-only) is a sensitivity analysis declared after seeing the primary panel rates but before inspecting any judged output. Under it, polarity is "supplied" (affirmative only) for 97/160 messages. Its A/B estimates are reported separately, and its conclusions match the primary ones (default share 82% / 80%; honours source 56% / 50%).
@@ -31,13 +34,13 @@ Code: src/wb_sample.py, src/wb_items.py, src/wb_admissibility.py, src/wb_report.
 4. **Inclusion probabilities.** Random sample: SRS of the frame (pi = 80/4831). Enriched pools are disjoint by rarest-first priority after removing the random 80 (pi = 20/|pool|, conditional on the random draw). Estimates are unweighted within sample type. The enriched sample is not prevalence-representative and must not be pooled with the random sample.
 5. **Frame exclusions.** The frame excludes messages under 3 words (766), messages with empty POS-cap4 (126) and exact-duplicate texts (419; the first occurrence is kept). The empty-POS-cap4 exclusion is an addition to the brief, made because those messages have no input to expand.
 6. **Overlap with sample400.** 20 W-B ids (10 random, 10 enriched) are also in sample400. The ids are in analysis/wb/sample_manifest.json and data/specs/wb_sample.jsonl (`in_sample400`). W-C was not told anything. W-C seed disjointness from W-B should be verified by an id check against data/specs/wb_sample.jsonl when W-C freezes.
-7. **Restoration details.** The restored chip is the panel source value's chip when it differs from the detector cue. For politeness, a retained "please" makes restoration nearly redundant (+10 pp). Messages with focal_dim = none (21 random) have no restored channel. They are counted as ineligible.
+7. **Restoration details.** The restored chip is the panel source value's chip when it differs from the detector cue. For politeness, a retained "please" makes restoration nearly redundant (+12.5 pp). Messages with focal_dim = none (21 random) have no restored channel. They are counted as ineligible.
 8. **Generation and judging.** Greedy, one draw, P0 only. Unresolved focal critical labels (J1 != J2) are excluded from the primary table and included in the J1-fallback sensitivity table. Their counts are given below.
 
 
 ---
 
-Generated by `python src/wb_report.py` (run wb1i, P0, 4 models). Protocol: orchestration/PREREG_R2.md W-B. All intervals: 95% percentile bootstrap over messages (2000 reps). Random (SRS, pi = 0.0166) and enriched (disjoint cue pools, pi in certainty 0.084, polarity 0.049, politeness 0.038, speech_act 0.011) samples are never pooled.
+Generated by `python src/wb_report.py` (run wb1, P0, 4 models). Protocol: orchestration/PREREG_R2.md W-B. All intervals: 95% percentile bootstrap over messages (2000 reps). Random (SRS, pi = 0.0166) and enriched (disjoint cue pools, pi in certainty 0.084, polarity 0.049, politeness 0.038, speech_act 0.011) samples are never pooled.
 
 ## Sample and denominators
 
@@ -48,11 +51,11 @@ Outputs per sample x channel (one per message x model; invalid = empty/failed ge
 | sample | channel | outputs | valid | critical_resolved |
 |---|---|---|---|---|
 | enriched | full | 320 | 320 | 317 |
-| enriched | pos_cap4 | 308 | 308 | 303 |
-| enriched | restored | 80 | 80 | 80 |
+| enriched | pos_cap4 | 320 | 320 | 315 |
+| enriched | restored | 320 | 320 | 318 |
 | random | full | 320 | 320 | 314 |
 | random | pos_cap4 | 320 | 320 | 318 |
-| random | restored | 59 | 59 | 58 |
+| random | restored | 236 | 236 | 232 |
 
 Panel status of every (message, dimension), POS-cap4 input (both coders): confirmed_ambiguous = both list >=2 values; supplied = both list exactly the source value; coder_disagree = the coders differ; unambiguous_wrong = both unambiguous but not equal to their source value (or source value disputed). Only the first two are eligible for A/B.
 
@@ -137,45 +140,45 @@ By model (random, all dims):
 
 | dim | eligible msgs | committed | takes default | honours source | honours NON-default source | outside admissible |
 |---|---|---|---|---|---|---|
-| polarity | 77 | 298/299 = 99.7% [99.0, 100.0] (77 msgs) | 296/299 = 99.0% [97.7, 100.0] (77 msgs) | 209/299 = 69.9% [59.3, 79.7] (77 msgs) | 2/84 = 2.4% [0.0, 6.0] (21 msgs) | 1/299 = 0.3% [0.0, 1.0] (77 msgs) |
-| speech_act | 73 | 281/283 = 99.3% [98.2, 100.0] (73 msgs) | 193/283 = 68.2% [58.8, 77.4] (73 msgs) | 172/283 = 60.8% [50.5, 71.3] (73 msgs) | 60/146 = 41.1% [27.0, 55.5] (38 msgs) | 1/283 = 0.4% [0.0, 1.1] (73 msgs) |
-| agent | 67 | 239/259 = 92.3% [87.0, 96.9] (67 msgs) | 133/259 = 51.4% [41.0, 61.5] (67 msgs) | 138/257 = 53.7% [43.6, 63.7] (67 msgs) | 65/144 = 45.1% [31.2, 59.0] (36 msgs) | 13/259 = 5.0% [1.5, 10.0] (67 msgs) |
-| certainty | 64 | 247/247 = 100.0% [100.0, 100.0] (64 msgs) | 179/247 = 72.5% [63.2, 81.2] (64 msgs) | 104/247 = 42.1% [31.2, 52.9] (64 msgs) | 37/156 = 23.7% [12.8, 35.3] (39 msgs) | 0/247 = 0.0% [0.0, 0.0] (64 msgs) |
-| politeness | 62 | 239/239 = 100.0% [100.0, 100.0] (62 msgs) | 226/239 = 94.6% [91.3, 97.5] (62 msgs) | 220/239 = 92.1% [86.4, 96.7] (62 msgs) | 4/14 = 28.6% [5.9, 75.0] (5 msgs) | 0/239 = 0.0% [0.0, 0.0] (62 msgs) |
-| ALL | 77 | 1304/1327 = 98.3% [97.1, 99.3] (77 msgs) | 1027/1327 = 77.4% [71.9, 82.2] (77 msgs) | 843/1325 = 63.6% [58.1, 68.5] (77 msgs) | 168/544 = 30.9% [20.7, 41.5] (69 msgs) | 15/1327 = 1.1% [0.3, 2.1] (77 msgs) |
+| polarity | 77 | 307/308 = 99.7% [99.0, 100.0] (77 msgs) | 305/308 = 99.0% [97.7, 100.0] (77 msgs) | 218/308 = 70.8% [60.1, 80.5] (77 msgs) | 2/84 = 2.4% [0.0, 6.0] (21 msgs) | 1/308 = 0.3% [0.0, 1.0] (77 msgs) |
+| speech_act | 73 | 287/292 = 98.3% [95.5, 100.0] (73 msgs) | 199/292 = 68.2% [58.9, 77.1] (73 msgs) | 178/292 = 61.0% [51.0, 71.2] (73 msgs) | 63/152 = 41.4% [27.6, 55.3] (38 msgs) | 3/292 = 1.0% [0.0, 3.1] (73 msgs) |
+| agent | 67 | 248/268 = 92.5% [87.3, 97.0] (67 msgs) | 141/268 = 52.6% [42.2, 62.3] (67 msgs) | 144/266 = 54.1% [44.0, 64.0] (67 msgs) | 65/144 = 45.1% [31.2, 59.0] (36 msgs) | 13/268 = 4.9% [1.5, 9.3] (67 msgs) |
+| certainty | 64 | 256/256 = 100.0% [100.0, 100.0] (64 msgs) | 188/256 = 73.4% [64.5, 82.0] (64 msgs) | 113/256 = 44.1% [33.2, 55.1] (64 msgs) | 37/156 = 23.7% [12.8, 35.3] (39 msgs) | 0/256 = 0.0% [0.0, 0.0] (64 msgs) |
+| politeness | 62 | 248/248 = 100.0% [100.0, 100.0] (62 msgs) | 229/248 = 92.3% [87.5, 96.8] (62 msgs) | 223/248 = 89.9% [83.5, 95.6] (62 msgs) | 7/20 = 35.0% [10.0, 60.0] (5 msgs) | 0/248 = 0.0% [0.0, 0.0] (62 msgs) |
+| ALL | 77 | 1346/1372 = 98.1% [96.9, 99.2] (77 msgs) | 1062/1372 = 77.4% [72.1, 82.1] (77 msgs) | 876/1370 = 63.9% [58.7, 68.7] (77 msgs) | 174/556 = 31.3% [21.2, 41.9] (69 msgs) | 17/1372 = 1.2% [0.4, 2.3] (77 msgs) |
 
 Direction (output value distribution) on confirmed-ambiguous dims, enriched:
 
 | dim | out | n | share |
 |---|---|---|---|
-| agent | addressee | 82 | 0.319 |
-| agent | speaker | 133 | 0.518 |
-| agent | third party | 15 | 0.058 |
-| agent | unspecified | 20 | 0.078 |
-| agent | we/joint | 7 | 0.027 |
-| certainty | hedged/uncertain | 20 | 0.081 |
-| certainty | n/a (question/request) | 48 | 0.194 |
-| certainty | plain assertion | 179 | 0.725 |
-| polarity | affirmative | 296 | 0.99 |
+| agent | addressee | 83 | 0.312 |
+| agent | speaker | 141 | 0.53 |
+| agent | third party | 15 | 0.056 |
+| agent | unspecified | 20 | 0.075 |
+| agent | we/joint | 7 | 0.026 |
+| certainty | hedged/uncertain | 20 | 0.078 |
+| certainty | n/a (question/request) | 48 | 0.188 |
+| certainty | plain assertion | 188 | 0.734 |
+| polarity | affirmative | 305 | 0.99 |
 | polarity | mixed/unclear | 1 | 0.003 |
-| polarity | negated | 2 | 0.007 |
-| politeness | none | 226 | 0.946 |
-| politeness | please | 10 | 0.042 |
-| politeness | thanks/apology | 3 | 0.013 |
-| speech_act | offer/suggestion | 7 | 0.025 |
-| speech_act | other | 2 | 0.007 |
-| speech_act | question | 12 | 0.042 |
-| speech_act | request/command | 69 | 0.244 |
-| speech_act | statement | 193 | 0.682 |
+| polarity | negated | 2 | 0.006 |
+| politeness | none | 229 | 0.923 |
+| politeness | please | 10 | 0.04 |
+| politeness | thanks/apology | 9 | 0.036 |
+| speech_act | offer/suggestion | 7 | 0.024 |
+| speech_act | other | 5 | 0.017 |
+| speech_act | question | 12 | 0.041 |
+| speech_act | request/command | 69 | 0.236 |
+| speech_act | statement | 199 | 0.682 |
 
 By model (enriched, all dims):
 
 | model | takes_default | honours_source |
 |---|---|---|
-| gemma3-4b | 249/328 = 75.9% [69.2, 82.1] (74 msgs) | 204/327 = 62.4% [56.9, 67.9] (74 msgs) |
-| gpt-6.1-terra | 256/343 = 74.6% [67.8, 81.1] (77 msgs) | 227/343 = 66.2% [60.1, 72.1] (77 msgs) |
-| llama3.1-8b | 268/328 = 81.7% [76.1, 86.8] (74 msgs) | 205/328 = 62.5% [56.9, 68.4] (74 msgs) |
-| qwen2.5-7b | 254/328 = 77.4% [71.0, 83.3] (74 msgs) | 207/327 = 63.3% [57.9, 68.8] (74 msgs) |
+| gemma3-4b | 261/343 = 76.1% [69.5, 82.4] (77 msgs) | 215/342 = 62.9% [57.6, 68.0] (77 msgs) |
+| gpt-6.1-terra | 256/343 = 74.6% [67.5, 81.1] (77 msgs) | 227/343 = 66.2% [59.9, 72.3] (77 msgs) |
+| llama3.1-8b | 282/343 = 82.2% [76.8, 87.3] (77 msgs) | 214/343 = 62.4% [56.6, 68.1] (77 msgs) |
+| qwen2.5-7b | 263/343 = 76.7% [70.6, 82.4] (77 msgs) | 220/342 = 64.3% [59.0, 69.6] (77 msgs) |
 
 ## B. Violations of supplied, expressible commitments
 
@@ -185,75 +188,75 @@ POS-cap4: (message, dim) supplied per both coders and source value consensus & e
 
 | dim | POS-cap4 (supplied) | restored (focal) | full |
 |---|---|---|---|
-| polarity | n/a (0) | 1/9 = 11.1% [0.0, 33.3] (9 msgs) | 0/308 = 0.0% [0.0, 0.0] (77 msgs) |
-| speech_act | 3/4 = 75.0% [75.0, 75.0] (1 msgs) | 2/20 = 10.0% [0.0, 25.0] (20 msgs) | 20/318 = 6.3% [2.2, 11.0] (80 msgs) |
-| agent | 1/8 = 12.5% [0.0, 25.0] (2 msgs) | 0/24 = 0.0% [0.0, 0.0] (24 msgs) | 26/280 = 9.3% [3.6, 16.1] (70 msgs) |
-| certainty | 3/12 = 25.0% [0.0, 75.0] (3 msgs) | 0/1 = 0.0% [0.0, 0.0] (1 msgs) | 23/312 = 7.4% [3.2, 12.8] (78 msgs) |
-| politeness | 0/16 = 0.0% [0.0, 0.0] (4 msgs) | 0/1 = 0.0% [0.0, 0.0] (1 msgs) | 6/320 = 1.9% [0.3, 3.8] (80 msgs) |
-| ALL | 7/40 = 17.5% [0.0, 43.2] (7 msgs) | 3/55 = 5.5% [0.0, 12.7] (55 msgs) | 75/1538 = 4.9% [2.3, 8.1] (80 msgs) |
+| polarity | n/a (0) | 1/36 = 2.8% [0.0, 8.3] (9 msgs) | 0/308 = 0.0% [0.0, 0.0] (77 msgs) |
+| speech_act | 3/4 = 75.0% [75.0, 75.0] (1 msgs) | 10/80 = 12.5% [3.8, 23.8] (20 msgs) | 20/318 = 6.3% [2.5, 11.0] (80 msgs) |
+| agent | 1/8 = 12.5% [0.0, 25.0] (2 msgs) | 1/99 = 1.0% [0.0, 3.1] (25 msgs) | 26/280 = 9.3% [3.6, 15.7] (70 msgs) |
+| certainty | 3/12 = 25.0% [0.0, 75.0] (3 msgs) | 0/4 = 0.0% [0.0, 0.0] (1 msgs) | 23/312 = 7.4% [3.2, 12.8] (78 msgs) |
+| politeness | 0/16 = 0.0% [0.0, 0.0] (4 msgs) | 0/4 = 0.0% [0.0, 0.0] (1 msgs) | 6/320 = 1.9% [0.3, 3.8] (80 msgs) |
+| ALL | 7/40 = 17.5% [0.0, 45.0] (7 msgs) | 12/223 = 5.4% [1.8, 10.3] (56 msgs) | 75/1538 = 4.9% [2.3, 8.0] (80 msgs) |
 
 By model (random, all dims):
 
 | model | pos_cap4 | restored | full |
 |---|---|---|---|
-| gemma3-4b | 2/10 = 20.0% [0.0, 54.5] (7 msgs) | n/a (0) | 18/384 = 4.7% [1.8, 8.2] (80 msgs) |
-| gpt-6.1-terra | 0/10 = 0.0% [0.0, 0.0] (7 msgs) | 3/55 = 5.5% [0.0, 12.7] (55 msgs) | 15/385 = 3.9% [1.0, 7.2] (80 msgs) |
-| llama3.1-8b | 2/10 = 20.0% [0.0, 54.5] (7 msgs) | n/a (0) | 28/385 = 7.3% [3.7, 11.5] (80 msgs) |
-| qwen2.5-7b | 3/10 = 30.0% [0.0, 66.7] (7 msgs) | n/a (0) | 14/384 = 3.6% [1.0, 6.8] (80 msgs) |
+| gemma3-4b | 2/10 = 20.0% [0.0, 57.1] (7 msgs) | 3/56 = 5.4% [0.0, 12.5] (56 msgs) | 18/384 = 4.7% [1.8, 8.1] (80 msgs) |
+| gpt-6.1-terra | 0/10 = 0.0% [0.0, 0.0] (7 msgs) | 3/55 = 5.5% [0.0, 10.9] (55 msgs) | 15/385 = 3.9% [1.0, 7.3] (80 msgs) |
+| llama3.1-8b | 2/10 = 20.0% [0.0, 54.5] (7 msgs) | 3/56 = 5.4% [0.0, 12.5] (56 msgs) | 28/385 = 7.3% [3.4, 11.5] (80 msgs) |
+| qwen2.5-7b | 3/10 = 30.0% [0.0, 70.0] (7 msgs) | 3/56 = 5.4% [0.0, 12.5] (56 msgs) | 14/384 = 3.6% [1.0, 6.6] (80 msgs) |
 
 Most frequent violation patterns (random):
 
 | channel | dim | src | out | n |
 |---|---|---|---|---|
 | full | certainty | plain assertion | n/a (question/request) | 10 |
-| full | certainty | n/a (question/request) | plain assertion | 9 |
 | full | agent | addressee | speaker | 9 |
+| full | certainty | n/a (question/request) | plain assertion | 9 |
 | full | agent | speaker | addressee | 8 |
 | full | speech_act | request/command | statement | 7 |
 | full | speech_act | statement | request/command | 7 |
 | full | agent | addressee | unspecified | 5 |
 | full | politeness | none | please | 5 |
 | full | certainty | hedged/uncertain | plain assertion | 4 |
-| full | speech_act | statement | question | 3 |
+| restored | speech_act | statement | question | 4 |
 | pos_cap4 | speech_act | question | statement | 3 |
-| pos_cap4 | certainty | n/a (question/request) | plain assertion | 3 |
+| restored | speech_act | question | request/command | 3 |
 
 ### enriched
 
 | dim | POS-cap4 (supplied) | restored (focal) | full |
 |---|---|---|---|
-| polarity | n/a (0) | 0/11 = 0.0% [0.0, 0.0] (11 msgs) | 2/276 = 0.7% [0.0, 1.8] (69 msgs) |
-| speech_act | n/a (0) | 4/20 = 20.0% [5.0, 40.0] (20 msgs) | 23/296 = 7.8% [3.0, 13.2] (74 msgs) |
-| agent | 3/8 = 37.5% [0.0, 75.0] (2 msgs) | n/a (0) | 30/280 = 10.7% [4.6, 18.2] (70 msgs) |
-| certainty | 0/20 = 0.0% [0.0, 0.0] (5 msgs) | 5/18 = 27.8% [11.1, 50.0] (18 msgs) | 23/312 = 7.4% [2.6, 12.8] (78 msgs) |
-| politeness | 0/56 = 0.0% [0.0, 0.0] (14 msgs) | 1/20 = 5.0% [0.0, 15.0] (20 msgs) | 7/320 = 2.2% [0.3, 5.3] (80 msgs) |
-| ALL | 3/84 = 3.6% [0.0, 12.5] (16 msgs) | 10/69 = 14.5% [7.2, 23.2] (69 msgs) | 85/1484 = 5.7% [3.3, 8.6] (80 msgs) |
+| polarity | n/a (0) | 1/44 = 2.3% [0.0, 6.8] (11 msgs) | 2/276 = 0.7% [0.0, 1.8] (69 msgs) |
+| speech_act | n/a (0) | 22/80 = 27.5% [16.2, 40.0] (20 msgs) | 23/296 = 7.8% [3.0, 13.9] (74 msgs) |
+| agent | 3/8 = 37.5% [0.0, 75.0] (2 msgs) | n/a (0) | 30/280 = 10.7% [4.3, 17.5] (70 msgs) |
+| certainty | 0/20 = 0.0% [0.0, 0.0] (5 msgs) | 25/72 = 34.7% [16.7, 55.6] (18 msgs) | 23/312 = 7.4% [2.9, 13.1] (78 msgs) |
+| politeness | 0/56 = 0.0% [0.0, 0.0] (14 msgs) | 7/80 = 8.8% [0.0, 21.2] (20 msgs) | 7/320 = 2.2% [0.3, 5.3] (80 msgs) |
+| ALL | 3/84 = 3.6% [0.0, 11.8] (16 msgs) | 55/276 = 19.9% [12.3, 27.5] (69 msgs) | 85/1484 = 5.7% [3.3, 8.6] (80 msgs) |
 
 By model (enriched, all dims):
 
 | model | pos_cap4 | restored | full |
 |---|---|---|---|
-| gemma3-4b | 1/21 = 4.8% [0.0, 16.7] (16 msgs) | n/a (0) | 17/371 = 4.6% [2.2, 7.5] (80 msgs) |
-| gpt-6.1-terra | 0/21 = 0.0% [0.0, 0.0] (16 msgs) | 10/69 = 14.5% [7.2, 23.2] (69 msgs) | 16/371 = 4.3% [1.9, 7.1] (80 msgs) |
-| llama3.1-8b | 1/21 = 4.8% [0.0, 15.8] (16 msgs) | n/a (0) | 34/371 = 9.2% [5.1, 13.3] (80 msgs) |
-| qwen2.5-7b | 1/21 = 4.8% [0.0, 15.8] (16 msgs) | n/a (0) | 18/371 = 4.9% [2.4, 8.0] (80 msgs) |
+| gemma3-4b | 1/21 = 4.8% [0.0, 15.8] (16 msgs) | 12/69 = 17.4% [8.7, 26.1] (69 msgs) | 17/371 = 4.6% [2.2, 7.5] (80 msgs) |
+| gpt-6.1-terra | 0/21 = 0.0% [0.0, 0.0] (16 msgs) | 10/69 = 14.5% [7.2, 23.2] (69 msgs) | 16/371 = 4.3% [2.1, 7.0] (80 msgs) |
+| llama3.1-8b | 1/21 = 4.8% [0.0, 15.8] (16 msgs) | 18/69 = 26.1% [15.9, 36.2] (69 msgs) | 34/371 = 9.2% [5.3, 13.5] (80 msgs) |
+| qwen2.5-7b | 1/21 = 4.8% [0.0, 15.8] (16 msgs) | 15/69 = 21.7% [11.6, 31.9] (69 msgs) | 18/371 = 4.9% [2.4, 7.8] (80 msgs) |
 
 Most frequent violation patterns (enriched):
 
 | channel | dim | src | out | n |
 |---|---|---|---|---|
+| restored | certainty | plain assertion | hedged/uncertain | 20 |
 | full | agent | speaker | addressee | 11 |
+| full | speech_act | statement | request/command | 8 |
 | full | agent | speaker | unspecified | 8 |
 | full | certainty | plain assertion | n/a (question/request) | 8 |
-| full | speech_act | statement | request/command | 8 |
+| restored | speech_act | request/command | question | 6 |
 | full | certainty | strongly certain/emphatic | plain assertion | 6 |
-| restored | certainty | plain assertion | hedged/uncertain | 5 |
-| full | agent | third party | unspecified | 4 |
-| full | agent | speaker | third party | 4 |
-| full | speech_act | request/command | statement | 4 |
-| full | politeness | none | thanks/apology | 4 |
-| full | certainty | hedged/uncertain | plain assertion | 4 |
+| restored | speech_act | question | request/command | 6 |
+| restored | speech_act | offer/suggestion | request/command | 5 |
+| restored | speech_act | question | offer/suggestion | 4 |
 | full | speech_act | refusal | statement | 4 |
+| restored | certainty | strongly certain/emphatic | plain assertion | 4 |
 
 ## Sensitivity: strict admissibility (graded pass p1g, only 'likely' readings count)
 
@@ -274,18 +277,18 @@ Same estimands as A and B(POS-cap4) with the panel status recomputed from a sepa
 
 | sample | dim | A: eligible msgs | A: takes default | A: honours source | B: POS-cap4 supplied violation |
 |---|---|---|---|---|---|
-| random | polarity | 13 | 51/52 = 98.1% [94.2, 100.0] (13 msgs) | 27/52 = 51.9% [26.9, 80.8] (13 msgs) | 0/216 = 0.0% [0.0, 0.0] (54 msgs) |
-| random | speech_act | 43 | 142/172 = 82.6% [74.4, 89.5] (43 msgs) | 99/172 = 57.6% [44.8, 70.9] (43 msgs) | 16/72 = 22.2% [8.3, 37.5] (18 msgs) |
-| random | agent | 35 | 100/140 = 71.4% [60.0, 82.1] (35 msgs) | 67/140 = 47.9% [34.3, 61.4] (35 msgs) | 17/68 = 25.0% [10.3, 41.2] (17 msgs) |
-| random | certainty | 43 | 148/172 = 86.0% [79.1, 91.9] (43 msgs) | 93/172 = 54.1% [40.7, 67.4] (43 msgs) | 23/68 = 33.8% [19.1, 50.0] (17 msgs) |
-| random | politeness | 12 | 39/48 = 81.2% [68.8, 93.8] (12 msgs) | 39/48 = 81.2% [68.8, 91.7] (12 msgs) | 1/192 = 0.5% [0.0, 1.6] (48 msgs) |
-| random | ALL | 56 | 480/584 = 82.2% [76.1, 87.8] (56 msgs) | 325/584 = 55.7% [44.7, 65.5] (56 msgs) | 57/616 = 9.3% [4.5, 14.6] (69 msgs) |
-| enriched | polarity | 12 | 48/48 = 100.0% [100.0, 100.0] (12 msgs) | 28/48 = 58.3% [33.3, 83.3] (12 msgs) | 7/163 = 4.3% [0.0, 10.8] (43 msgs) |
-| enriched | speech_act | 35 | 112/140 = 80.0% [69.3, 90.0] (35 msgs) | 63/140 = 45.0% [30.7, 60.7] (35 msgs) | 8/92 = 8.7% [1.1, 19.6] (23 msgs) |
-| enriched | agent | 24 | 61/96 = 63.5% [47.9, 78.2] (24 msgs) | 46/96 = 47.9% [31.2, 63.5] (24 msgs) | 11/89 = 12.4% [2.4, 24.7] (23 msgs) |
-| enriched | certainty | 28 | 89/112 = 79.5% [68.8, 89.3] (28 msgs) | 45/112 = 40.2% [24.1, 56.2] (28 msgs) | 10/90 = 11.1% [2.2, 22.6] (24 msgs) |
-| enriched | politeness | 10 | 38/40 = 95.0% [87.5, 100.0] (10 msgs) | 34/40 = 85.0% [62.5, 100.0] (10 msgs) | 2/184 = 1.1% [0.0, 2.8] (49 msgs) |
-| enriched | ALL | 45 | 348/436 = 79.8% [71.3, 87.2] (45 msgs) | 216/436 = 49.5% [39.5, 59.0] (45 msgs) | 38/618 = 6.1% [2.4, 10.9] (64 msgs) |
+| random | polarity | 13 | 51/52 = 98.1% [94.2, 100.0] (13 msgs) | 27/52 = 51.9% [25.0, 76.9] (13 msgs) | 0/216 = 0.0% [0.0, 0.0] (54 msgs) |
+| random | speech_act | 43 | 142/172 = 82.6% [74.4, 89.5] (43 msgs) | 99/172 = 57.6% [44.8, 70.3] (43 msgs) | 16/72 = 22.2% [8.3, 37.5] (18 msgs) |
+| random | agent | 35 | 100/140 = 71.4% [60.7, 82.1] (35 msgs) | 67/140 = 47.9% [35.0, 61.4] (35 msgs) | 17/68 = 25.0% [8.8, 41.2] (17 msgs) |
+| random | certainty | 43 | 148/172 = 86.0% [79.7, 92.4] (43 msgs) | 93/172 = 54.1% [41.9, 66.3] (43 msgs) | 23/68 = 33.8% [19.1, 50.0] (17 msgs) |
+| random | politeness | 12 | 39/48 = 81.2% [68.8, 91.7] (12 msgs) | 39/48 = 81.2% [68.8, 91.7] (12 msgs) | 1/192 = 0.5% [0.0, 1.6] (48 msgs) |
+| random | ALL | 56 | 480/584 = 82.2% [75.8, 87.5] (56 msgs) | 325/584 = 55.7% [45.0, 65.5] (56 msgs) | 57/616 = 9.3% [4.2, 14.9] (69 msgs) |
+| enriched | polarity | 12 | 48/48 = 100.0% [100.0, 100.0] (12 msgs) | 28/48 = 58.3% [33.3, 83.3] (12 msgs) | 7/172 = 4.1% [0.0, 10.5] (43 msgs) |
+| enriched | speech_act | 35 | 112/140 = 80.0% [69.3, 89.3] (35 msgs) | 63/140 = 45.0% [30.7, 60.0] (35 msgs) | 8/92 = 8.7% [1.1, 18.5] (23 msgs) |
+| enriched | agent | 24 | 61/96 = 63.5% [47.9, 78.1] (24 msgs) | 46/96 = 47.9% [32.3, 63.6] (24 msgs) | 11/92 = 12.0% [2.2, 23.9] (23 msgs) |
+| enriched | certainty | 28 | 89/112 = 79.5% [68.8, 89.3] (28 msgs) | 45/112 = 40.2% [24.1, 56.2] (28 msgs) | 10/96 = 10.4% [2.1, 21.9] (24 msgs) |
+| enriched | politeness | 10 | 38/40 = 95.0% [87.5, 100.0] (10 msgs) | 34/40 = 85.0% [65.0, 97.5] (10 msgs) | 8/196 = 4.1% [0.5, 9.2] (49 msgs) |
+| enriched | ALL | 45 | 348/436 = 79.8% [71.9, 87.1] (45 msgs) | 216/436 = 49.5% [39.9, 58.9] (45 msgs) | 44/648 = 6.8% [3.0, 11.5] (64 msgs) |
 
 ## C. Focal-cue restoration effect (critical question = focal dimension)
 
@@ -295,50 +298,50 @@ Per (message, model): critical_match of the focal critical label (judge J1==J2; 
 
 | sample | subset | focal msgs (ineligible) | POS-cap4 match | restored match | full match | restored - POS-cap4 | full - restored |
 |---|---|---|---|---|---|---|---|
-| random | all focal | 59 (21) | 102/234 = 43.6% [33.3, 53.9] (59 msgs) | 53/58 = 91.4% [82.8, 98.3] (58 msgs) | 218/230 = 94.8% [89.5, 99.1] (58 msgs) | +40.4 pp [+26.3, +54.4] (n=57 pairs, 57 msgs) | +3.6 pp [-3.6, +12.5] (n=56 pairs, 56 msgs) |
-| random | focal ambiguous | 53 (-) | 87/211 = 41.2% [29.9, 51.9] (53 msgs) | 48/53 = 90.6% [83.0, 98.1] (53 msgs) | 194/206 = 94.2% [88.2, 99.0] (52 msgs) | +44.2 pp [+30.8, +57.7] (n=52 pairs, 52 msgs) | +3.9 pp [-5.9, +13.7] (n=51 pairs, 51 msgs) |
-| random | focal=polarity | 11 (-) | 4/44 = 9.1% [0.0, 27.3] (11 msgs) | 8/11 = 72.7% [45.5, 100.0] (11 msgs) | 42/44 = 95.5% [86.4, 100.0] (11 msgs) | +63.6 pp [+36.4, +90.9] (n=11 pairs, 11 msgs) | +27.3 pp [+0.0, +54.5] (n=11 pairs, 11 msgs) |
-| random | focal=speech_act | 20 (-) | 21/80 = 26.2% [12.5, 42.5] (20 msgs) | 18/20 = 90.0% [75.0, 100.0] (20 msgs) | 72/79 = 91.1% [77.9, 100.0] (20 msgs) | +45.0 pp [+20.0, +70.0] (n=20 pairs, 20 msgs) | +0.0 pp [-15.8, +15.8] (n=19 pairs, 19 msgs) |
-| random | focal=agent | 26 (-) | 72/102 = 70.6% [57.8, 82.5] (26 msgs) | 25/25 = 100.0% [100.0, 100.0] (25 msgs) | 96/99 = 97.0% [90.7, 100.0] (25 msgs) | +25.0 pp [+8.3, +41.8] (n=24 pairs, 24 msgs) | -4.2 pp [-12.5, +0.0] (n=24 pairs, 24 msgs) |
-| random | focal=certainty | 1 (-) | 1/4 = 25.0% [25.0, 25.0] (1 msgs) | 1/1 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +100.0 pp [+100.0, +100.0] (n=1 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=1 pairs, 1 msgs) |
-| random | focal=politeness | 1 (-) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 1/1 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +0.0 pp [+0.0, +0.0] (n=1 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=1 pairs, 1 msgs) |
-| enriched | all focal | 80 (0) | 110/303 = 36.3% [26.9, 46.7] (79 msgs) | 64/80 = 80.0% [71.2, 87.5] (80 msgs) | 291/317 = 91.8% [86.1, 96.2] (80 msgs) | +38.0 pp [+24.1, +51.9] (n=79 pairs, 79 msgs) | +15.2 pp [+6.3, +24.1] (n=79 pairs, 79 msgs) |
-| enriched | focal ambiguous | 66 (-) | 57/250 = 22.8% [14.3, 32.0] (65 msgs) | 50/66 = 75.8% [65.2, 86.4] (66 msgs) | 237/261 = 90.8% [84.6, 96.2] (66 msgs) | +46.2 pp [+30.7, +60.0] (n=65 pairs, 65 msgs) | +18.5 pp [+7.7, +29.2] (n=65 pairs, 65 msgs) |
-| enriched | focal=polarity | 20 (-) | 2/80 = 2.5% [0.0, 6.2] (20 msgs) | 14/20 = 70.0% [50.0, 90.0] (20 msgs) | 73/80 = 91.2% [80.0, 98.8] (20 msgs) | +60.0 pp [+40.0, +80.0] (n=20 pairs, 20 msgs) | +25.0 pp [+0.0, +45.0] (n=20 pairs, 20 msgs) |
-| enriched | focal=speech_act | 20 (-) | 19/80 = 23.8% [8.8, 40.0] (20 msgs) | 16/20 = 80.0% [60.0, 95.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +45.0 pp [+20.0, +70.0] (n=20 pairs, 20 msgs) | +15.0 pp [+0.0, +30.0] (n=20 pairs, 20 msgs) |
-| enriched | focal=certainty | 20 (-) | 32/75 = 42.7% [22.7, 64.9] (19 msgs) | 15/20 = 75.0% [55.0, 90.0] (20 msgs) | 70/77 = 90.9% [77.3, 100.0] (20 msgs) | +36.8 pp [+0.0, +73.7] (n=19 pairs, 19 msgs) | +21.1 pp [+0.0, +42.2] (n=19 pairs, 19 msgs) |
-| enriched | focal=politeness | 20 (-) | 57/68 = 83.8% [66.2, 98.5] (20 msgs) | 19/20 = 95.0% [85.0, 100.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +10.0 pp [+0.0, +25.0] (n=20 pairs, 20 msgs) | +0.0 pp [+0.0, +0.0] (n=20 pairs, 20 msgs) |
+| random | all focal | 59 (21) | 102/234 = 43.6% [32.8, 53.9] (59 msgs) | 216/232 = 93.1% [87.5, 97.8] (59 msgs) | 218/230 = 94.8% [89.0, 99.1] (58 msgs) | +48.9 pp [+38.1, +59.7] (n=231 pairs, 59 msgs) | +1.3 pp [-3.6, +5.9] (n=226 pairs, 58 msgs) |
+| random | focal ambiguous | 53 (-) | 87/211 = 41.2% [30.7, 53.1] (53 msgs) | 194/210 = 92.4% [85.8, 97.2] (53 msgs) | 194/206 = 94.2% [88.2, 99.0] (52 msgs) | +50.7 pp [+38.5, +61.9] (n=209 pairs, 53 msgs) | +1.5 pp [-4.4, +6.8] (n=204 pairs, 52 msgs) |
+| random | focal=polarity | 11 (-) | 4/44 = 9.1% [0.0, 27.3] (11 msgs) | 36/42 = 85.7% [64.3, 100.0] (11 msgs) | 42/44 = 95.5% [86.4, 100.0] (11 msgs) | +76.2 pp [+50.0, +97.6] (n=42 pairs, 11 msgs) | +9.5 pp [+2.2, +21.1] (n=42 pairs, 11 msgs) |
+| random | focal=speech_act | 20 (-) | 21/80 = 26.2% [12.5, 42.5] (20 msgs) | 70/80 = 87.5% [75.0, 96.2] (20 msgs) | 72/79 = 91.1% [77.9, 100.0] (20 msgs) | +61.3 pp [+40.0, +77.5] (n=80 pairs, 20 msgs) | +2.5 pp [-7.7, +11.4] (n=79 pairs, 20 msgs) |
+| random | focal=agent | 26 (-) | 72/102 = 70.6% [58.4, 83.0] (26 msgs) | 102/102 = 100.0% [100.0, 100.0] (26 msgs) | 96/99 = 97.0% [90.7, 100.0] (25 msgs) | +28.7 pp [+16.8, +41.7] (n=101 pairs, 26 msgs) | -3.1 pp [-9.7, +0.0] (n=97 pairs, 25 msgs) |
+| random | focal=certainty | 1 (-) | 1/4 = 25.0% [25.0, 25.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +75.0 pp [+75.0, +75.0] (n=4 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=4 pairs, 1 msgs) |
+| random | focal=politeness | 1 (-) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +0.0 pp [+0.0, +0.0] (n=4 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=4 pairs, 1 msgs) |
+| enriched | all focal | 80 (0) | 116/315 = 36.8% [27.7, 46.5] (79 msgs) | 236/318 = 74.2% [66.0, 81.8] (80 msgs) | 291/317 = 91.8% [86.1, 96.2] (80 msgs) | +37.1 pp [+24.9, +48.7] (n=313 pairs, 79 msgs) | +17.8 pp [+9.2, +26.4] (n=315 pairs, 80 msgs) |
+| enriched | focal ambiguous | 66 (-) | 60/259 = 23.2% [14.6, 32.6] (65 msgs) | 180/262 = 68.7% [59.5, 77.3] (66 msgs) | 237/261 = 90.8% [84.3, 96.2] (66 msgs) | +45.1 pp [+31.0, +58.2] (n=257 pairs, 65 msgs) | +22.4 pp [+12.3, +32.8] (n=259 pairs, 66 msgs) |
+| enriched | focal=polarity | 20 (-) | 2/80 = 2.5% [0.0, 6.2] (20 msgs) | 51/79 = 64.6% [45.6, 82.3] (20 msgs) | 73/80 = 91.2% [80.0, 98.8] (20 msgs) | +62.0 pp [+44.3, +79.2] (n=79 pairs, 20 msgs) | +26.6 pp [+5.1, +48.7] (n=79 pairs, 20 msgs) |
+| enriched | focal=speech_act | 20 (-) | 19/80 = 23.8% [8.8, 40.0] (20 msgs) | 58/79 = 73.4% [60.8, 85.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +49.4 pp [+32.5, +65.8] (n=79 pairs, 20 msgs) | +19.0 pp [+8.8, +30.4] (n=79 pairs, 20 msgs) |
+| enriched | focal=certainty | 20 (-) | 32/75 = 42.7% [21.1, 64.9] (19 msgs) | 54/80 = 67.5% [48.8, 85.0] (20 msgs) | 70/77 = 90.9% [77.3, 100.0] (20 msgs) | +24.0 pp [-10.5, +57.3] (n=75 pairs, 19 msgs) | +24.7 pp [+1.3, +46.2] (n=77 pairs, 20 msgs) |
+| enriched | focal=politeness | 20 (-) | 63/80 = 78.8% [62.5, 92.5] (20 msgs) | 73/80 = 91.2% [78.8, 100.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +12.5 pp [+0.0, +27.5] (n=80 pairs, 20 msgs) | +1.2 pp [-5.0, +7.5] (n=80 pairs, 20 msgs) |
 
 By model:
 
 | sample | model | pos_cap4 | restored | effect |
 |---|---|---|---|---|
-| enriched | gemma3-4b | 27/75 = 36.0% [24.0, 46.7] (75 msgs) | n/a (0) | n/a (0) |
-| enriched | gpt-6.1-terra | 33/79 = 41.8% [30.4, 51.9] (79 msgs) | 64/80 = 80.0% [70.0, 88.8] (80 msgs) | +38.0 pp [+24.1, +50.6] (n=79 pairs, 79 msgs) |
-| enriched | llama3.1-8b | 25/75 = 33.3% [22.7, 44.0] (75 msgs) | n/a (0) | n/a (0) |
-| enriched | qwen2.5-7b | 25/74 = 33.8% [24.3, 44.6] (74 msgs) | n/a (0) | n/a (0) |
-| random | gemma3-4b | 27/59 = 45.8% [33.9, 59.3] (59 msgs) | n/a (0) | n/a (0) |
+| enriched | gemma3-4b | 29/79 = 36.7% [26.6, 46.8] (79 msgs) | 61/79 = 77.2% [67.1, 86.1] (79 msgs) | +39.7 pp [+26.9, +52.6] (n=78 pairs, 78 msgs) |
+| enriched | gpt-6.1-terra | 33/79 = 41.8% [30.4, 51.9] (79 msgs) | 64/80 = 80.0% [71.2, 87.5] (80 msgs) | +38.0 pp [+25.3, +51.9] (n=79 pairs, 79 msgs) |
+| enriched | llama3.1-8b | 26/79 = 32.9% [22.8, 43.1] (79 msgs) | 54/79 = 68.4% [58.2, 78.5] (79 msgs) | +34.6 pp [+21.8, +48.7] (n=78 pairs, 78 msgs) |
+| enriched | qwen2.5-7b | 28/78 = 35.9% [25.6, 47.4] (78 msgs) | 57/80 = 71.2% [61.3, 81.2] (80 msgs) | +35.9 pp [+23.1, +48.7] (n=78 pairs, 78 msgs) |
+| random | gemma3-4b | 27/59 = 45.8% [33.9, 59.3] (59 msgs) | 54/57 = 94.7% [87.7, 100.0] (57 msgs) | +47.4 pp [+33.3, +59.6] (n=57 pairs, 57 msgs) |
 | random | gpt-6.1-terra | 29/57 = 50.9% [38.6, 63.2] (57 msgs) | 53/58 = 91.4% [82.8, 98.3] (58 msgs) | +40.4 pp [+26.3, +54.4] (n=57 pairs, 57 msgs) |
-| random | llama3.1-8b | 25/59 = 42.4% [30.5, 54.2] (59 msgs) | n/a (0) | n/a (0) |
-| random | qwen2.5-7b | 21/59 = 35.6% [23.7, 47.5] (59 msgs) | n/a (0) | n/a (0) |
+| random | llama3.1-8b | 25/59 = 42.4% [28.8, 55.9] (59 msgs) | 54/58 = 93.1% [86.2, 98.3] (58 msgs) | +50.0 pp [+36.2, +63.8] (n=58 pairs, 58 msgs) |
+| random | qwen2.5-7b | 21/59 = 35.6% [23.7, 47.5] (59 msgs) | 55/59 = 93.2% [86.4, 98.3] (59 msgs) | +57.6 pp [+44.1, +71.2] (n=59 pairs, 59 msgs) |
 
 ### critical labels: J1 fallback on disagreement (sensitivity)
 
 | sample | subset | focal msgs (ineligible) | POS-cap4 match | restored match | full match | restored - POS-cap4 | full - restored |
 |---|---|---|---|---|---|---|---|
-| random | all focal | 59 (21) | 102/236 = 43.2% [32.6, 53.8] (59 msgs) | 54/59 = 91.5% [84.7, 98.3] (59 msgs) | 223/236 = 94.5% [89.0, 99.2] (59 msgs) | +42.4 pp [+28.8, +55.9] (n=59 pairs, 59 msgs) | +5.1 pp [-3.4, +13.6] (n=59 pairs, 59 msgs) |
-| random | focal ambiguous | 53 (-) | 87/212 = 41.0% [30.2, 52.4] (53 msgs) | 48/53 = 90.6% [81.1, 98.1] (53 msgs) | 199/212 = 93.9% [87.3, 99.1] (53 msgs) | +45.3 pp [+30.2, +58.5] (n=53 pairs, 53 msgs) | +5.7 pp [-3.8, +15.1] (n=53 pairs, 53 msgs) |
-| random | focal=polarity | 11 (-) | 4/44 = 9.1% [0.0, 27.3] (11 msgs) | 8/11 = 72.7% [45.5, 100.0] (11 msgs) | 42/44 = 95.5% [86.4, 100.0] (11 msgs) | +63.6 pp [+36.4, +90.9] (n=11 pairs, 11 msgs) | +27.3 pp [+0.0, +54.5] (n=11 pairs, 11 msgs) |
-| random | focal=speech_act | 20 (-) | 21/80 = 26.2% [12.5, 41.2] (20 msgs) | 18/20 = 90.0% [75.0, 100.0] (20 msgs) | 73/80 = 91.2% [77.5, 100.0] (20 msgs) | +45.0 pp [+19.9, +70.0] (n=20 pairs, 20 msgs) | +5.0 pp [-10.0, +25.0] (n=20 pairs, 20 msgs) |
-| random | focal=agent | 26 (-) | 72/104 = 69.2% [56.7, 81.7] (26 msgs) | 26/26 = 100.0% [100.0, 100.0] (26 msgs) | 100/104 = 96.2% [88.5, 100.0] (26 msgs) | +30.8 pp [+15.4, +50.0] (n=26 pairs, 26 msgs) | -3.8 pp [-11.5, +0.0] (n=26 pairs, 26 msgs) |
-| random | focal=certainty | 1 (-) | 1/4 = 25.0% [25.0, 25.0] (1 msgs) | 1/1 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +100.0 pp [+100.0, +100.0] (n=1 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=1 pairs, 1 msgs) |
-| random | focal=politeness | 1 (-) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 1/1 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +0.0 pp [+0.0, +0.0] (n=1 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=1 pairs, 1 msgs) |
-| enriched | all focal | 80 (0) | 110/308 = 35.7% [26.1, 45.9] (80 msgs) | 64/80 = 80.0% [70.0, 88.8] (80 msgs) | 292/320 = 91.2% [85.6, 96.2] (80 msgs) | +38.8 pp [+25.0, +52.5] (n=80 pairs, 80 msgs) | +13.8 pp [+3.8, +23.8] (n=80 pairs, 80 msgs) |
-| enriched | focal ambiguous | 66 (-) | 57/255 = 22.4% [14.3, 31.4] (66 msgs) | 50/66 = 75.8% [65.2, 86.4] (66 msgs) | 238/264 = 90.2% [83.3, 96.2] (66 msgs) | +47.0 pp [+31.8, +62.1] (n=66 pairs, 66 msgs) | +16.7 pp [+6.1, +28.8] (n=66 pairs, 66 msgs) |
-| enriched | focal=polarity | 20 (-) | 2/80 = 2.5% [0.0, 6.2] (20 msgs) | 14/20 = 70.0% [50.0, 90.0] (20 msgs) | 73/80 = 91.2% [80.0, 98.8] (20 msgs) | +60.0 pp [+40.0, +80.0] (n=20 pairs, 20 msgs) | +25.0 pp [+0.0, +50.0] (n=20 pairs, 20 msgs) |
-| enriched | focal=speech_act | 20 (-) | 19/80 = 23.8% [10.0, 40.0] (20 msgs) | 16/20 = 80.0% [60.0, 95.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +45.0 pp [+20.0, +70.0] (n=20 pairs, 20 msgs) | +15.0 pp [+0.0, +30.0] (n=20 pairs, 20 msgs) |
-| enriched | focal=certainty | 20 (-) | 32/80 = 40.0% [20.0, 61.3] (20 msgs) | 15/20 = 75.0% [55.0, 90.0] (20 msgs) | 71/80 = 88.8% [73.8, 100.0] (20 msgs) | +40.0 pp [+5.0, +75.0] (n=20 pairs, 20 msgs) | +15.0 pp [-10.0, +40.0] (n=20 pairs, 20 msgs) |
-| enriched | focal=politeness | 20 (-) | 57/68 = 83.8% [67.6, 98.2] (20 msgs) | 19/20 = 95.0% [85.0, 100.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +10.0 pp [+0.0, +25.0] (n=20 pairs, 20 msgs) | +0.0 pp [+0.0, +0.0] (n=20 pairs, 20 msgs) |
+| random | all focal | 59 (21) | 102/236 = 43.2% [33.1, 53.8] (59 msgs) | 219/236 = 92.8% [86.9, 97.0] (59 msgs) | 223/236 = 94.5% [88.5, 99.2] (59 msgs) | +49.6 pp [+38.6, +60.2] (n=236 pairs, 59 msgs) | +1.7 pp [-3.8, +6.8] (n=236 pairs, 59 msgs) |
+| random | focal ambiguous | 53 (-) | 87/212 = 41.0% [30.7, 52.4] (53 msgs) | 195/212 = 92.0% [85.8, 97.2] (53 msgs) | 199/212 = 93.9% [87.3, 99.1] (53 msgs) | +50.9 pp [+39.2, +62.3] (n=212 pairs, 53 msgs) | +1.9 pp [-4.7, +7.5] (n=212 pairs, 53 msgs) |
+| random | focal=polarity | 11 (-) | 4/44 = 9.1% [0.0, 27.3] (11 msgs) | 37/44 = 84.1% [63.6, 100.0] (11 msgs) | 42/44 = 95.5% [86.4, 100.0] (11 msgs) | +75.0 pp [+50.0, +95.5] (n=44 pairs, 11 msgs) | +11.4 pp [+0.0, +22.7] (n=44 pairs, 11 msgs) |
+| random | focal=speech_act | 20 (-) | 21/80 = 26.2% [12.5, 41.2] (20 msgs) | 70/80 = 87.5% [75.0, 96.2] (20 msgs) | 73/80 = 91.2% [77.5, 100.0] (20 msgs) | +61.3 pp [+38.8, +78.8] (n=80 pairs, 20 msgs) | +3.8 pp [-7.5, +12.5] (n=80 pairs, 20 msgs) |
+| random | focal=agent | 26 (-) | 72/104 = 69.2% [56.7, 80.8] (26 msgs) | 104/104 = 100.0% [100.0, 100.0] (26 msgs) | 100/104 = 96.2% [88.5, 100.0] (26 msgs) | +30.8 pp [+19.2, +43.3] (n=104 pairs, 26 msgs) | -3.8 pp [-11.5, +0.0] (n=104 pairs, 26 msgs) |
+| random | focal=certainty | 1 (-) | 1/4 = 25.0% [25.0, 25.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +75.0 pp [+75.0, +75.0] (n=4 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=4 pairs, 1 msgs) |
+| random | focal=politeness | 1 (-) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | 4/4 = 100.0% [100.0, 100.0] (1 msgs) | +0.0 pp [+0.0, +0.0] (n=4 pairs, 1 msgs) | +0.0 pp [+0.0, +0.0] (n=4 pairs, 1 msgs) |
+| enriched | all focal | 80 (0) | 116/320 = 36.2% [26.6, 46.6] (80 msgs) | 236/320 = 73.8% [65.9, 81.9] (80 msgs) | 292/320 = 91.2% [84.7, 96.3] (80 msgs) | +37.5 pp [+25.6, +48.8] (n=320 pairs, 80 msgs) | +17.5 pp [+8.8, +26.9] (n=320 pairs, 80 msgs) |
+| enriched | focal ambiguous | 66 (-) | 60/264 = 22.7% [14.4, 32.2] (66 msgs) | 180/264 = 68.2% [59.1, 77.3] (66 msgs) | 238/264 = 90.2% [83.0, 96.2] (66 msgs) | +45.5 pp [+32.2, +58.0] (n=264 pairs, 66 msgs) | +22.0 pp [+11.7, +33.0] (n=264 pairs, 66 msgs) |
+| enriched | focal=polarity | 20 (-) | 2/80 = 2.5% [0.0, 6.2] (20 msgs) | 51/80 = 63.7% [43.8, 81.2] (20 msgs) | 73/80 = 91.2% [80.0, 98.8] (20 msgs) | +61.3 pp [+43.8, +78.8] (n=80 pairs, 20 msgs) | +27.5 pp [+5.0, +48.8] (n=80 pairs, 20 msgs) |
+| enriched | focal=speech_act | 20 (-) | 19/80 = 23.8% [8.8, 40.0] (20 msgs) | 58/80 = 72.5% [60.0, 83.8] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +48.8 pp [+32.5, +63.7] (n=80 pairs, 20 msgs) | +20.0 pp [+8.8, +31.2] (n=80 pairs, 20 msgs) |
+| enriched | focal=certainty | 20 (-) | 32/80 = 40.0% [20.0, 61.3] (20 msgs) | 54/80 = 67.5% [48.8, 85.0] (20 msgs) | 71/80 = 88.8% [73.8, 100.0] (20 msgs) | +27.5 pp [-6.2, +58.8] (n=80 pairs, 20 msgs) | +21.2 pp [-3.8, +46.2] (n=80 pairs, 20 msgs) |
+| enriched | focal=politeness | 20 (-) | 63/80 = 78.8% [62.5, 93.8] (20 msgs) | 73/80 = 91.2% [78.8, 100.0] (20 msgs) | 74/80 = 92.5% [81.2, 100.0] (20 msgs) | +12.5 pp [+0.0, +27.5] (n=80 pairs, 20 msgs) | +1.2 pp [-5.0, +7.5] (n=80 pairs, 20 msgs) |
 
-Unresolved focal critical labels (J1 != J2): 17 of 1407 valid output rows.
+Unresolved focal critical labels (J1 != J2): 22 of 1836 valid output rows.
 
