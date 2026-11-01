@@ -1,0 +1,137 @@
+{
+  "n": 139,
+  "verdicts": {
+    "compatible": 105,
+    "unknown": 15,
+    "compatible_but_coarser": 8,
+    "conflicting": 7,
+    "unchanged_noop": 4
+  },
+  "verdict_by_mode": [
+    {
+      "mode": "chip",
+      "verdict": "compatible",
+      "n": 102
+    },
+    {
+      "mode": "chip",
+      "verdict": "compatible_but_coarser",
+      "n": 8
+    },
+    {
+      "mode": "chip",
+      "verdict": "conflicting",
+      "n": 7
+    },
+    {
+      "mode": "chip",
+      "verdict": "unknown",
+      "n": 14
+    },
+    {
+      "mode": "word",
+      "verdict": "compatible",
+      "n": 3
+    },
+    {
+      "mode": "word",
+      "verdict": "unchanged_noop",
+      "n": 4
+    },
+    {
+      "mode": "word",
+      "verdict": "unknown",
+      "n": 1
+    }
+  ],
+  "agrees_with_audit": 139,
+  "accepted_set_agrees_with_audit": 139,
+  "known_conflicts_rejected": 7,
+  "known_conflicts": 7,
+  "sure_granularity_flagged": 8,
+  "sure_cases": 8,
+  "coarse_certified": 0,
+  "word_cases": [
+    {
+      "family_id": "wb-aactext-dev-00292",
+      "rendered_input": "Keywords: could you make call",
+      "claimed_value": "softened request (could you/would you mind)",
+      "verdict": "compatible",
+      "relation": "compatible",
+      "audit_status": "aligned"
+    },
+    {
+      "family_id": "wb-aactext-test-00375",
+      "rendered_input": "Keywords: feel sorry",
+      "claimed_value": "none",
+      "verdict": "unchanged_noop",
+      "relation": "unknown",
+      "audit_status": "unknown_word"
+    },
+    {
+      "family_id": "wb-aactext-test-00467",
+      "rendered_input": "Keywords: would you type email",
+      "claimed_value": "softened request (could you/would you mind)",
+      "verdict": "compatible",
+      "relation": "compatible",
+      "audit_status": "aligned"
+    },
+    {
+      "family_id": "wb-aactext-train-00651",
+      "rendered_input": "Keywords: thanks get wishes",
+      "claimed_value": "thanks/apology",
+      "verdict": "unchanged_noop",
+      "relation": "compatible",
+      "audit_status": "aligned"
+    },
+    {
+      "family_id": "wb-aactext-train-01531",
+      "rendered_input": "Keywords: how cheap",
+      "claimed_value": "statement",
+      "verdict": "unknown",
+      "relation": "unknown",
+      "audit_status": "unknown_word"
+    },
+    {
+      "family_id": "wb-aactext-train-03131",
+      "rendered_input": "Keywords: thank care love",
+      "claimed_value": "thanks/apology",
+      "verdict": "unchanged_noop",
+      "relation": "compatible",
+      "audit_status": "aligned"
+    },
+    {
+      "family_id": "wb-aactext-train-03837",
+      "rendered_input": "Keywords: thanks saying tat",
+      "claimed_value": "thanks/apology",
+      "verdict": "unchanged_noop",
+      "relation": "compatible",
+      "audit_status": "aligned"
+    },
+    {
+      "family_id": "wb-aactext-train-05007",
+      "rendered_input": "Keywords: sorry messages short",
+      "claimed_value": "thanks/apology",
+      "verdict": "compatible",
+      "relation": "compatible",
+      "audit_status": "aligned"
+    }
+  ],
+  "unknown_reasons": {
+    "unknown_reference": 9,
+    "unknown_source_consensus": 5,
+    "unknown_word": 1
+  },
+  "certified": 105,
+  "hidden_metadata_warnings": 7,
+  "input_sha256": {
+    "data/items/wb.jsonl": "2205171a2bb2444bb16668bedd4fa92611caba8318c1a2a695af45a1a56a0e91",
+    "runs/requests/wb1.jsonl": "a6e157aa5bcd380e3525fdc3480e4899a1b1a64dcaf3b7ef20da0380b11feb17",
+    "runs/wb1/outputs.jsonl": "c1e1e0ec7c49ce2f0cbc33bf71bb2f0a0ca374a537443e92cf87532d34dfcfeb",
+    "analysis/wb/contract_audit_inventory.csv": "86b24986b163aeaf429290800e17c2ae982cf8e0236c07733521716ad295f1f9",
+    "analysis/wb/contract_audit.json": "313d7d29a1d3e478c2e08dd78230642ee925a1dfa30d051ff313ca8a49eb6b85"
+  },
+  "inputs_unchanged": true,
+  "generation_calls": 0,
+  "judge_calls": 0
+}

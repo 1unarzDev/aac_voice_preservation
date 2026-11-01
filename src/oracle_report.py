@@ -442,6 +442,8 @@ def main():
     outro = (OUT / "report_outro.md").read_text() if (OUT / "report_outro.md").exists() else ""
     quar = quarantine()
     (OUT / "report.md").write_text("\n".join([intro] + inj + chl + pl + vl + quar + [outro]) + "\n")
+    from evidence_status import annotate_report
+    annotate_report(OUT / 'report.md')
     print("\n".join(inj + chl + pl + vl + quar))
 
 

@@ -67,7 +67,13 @@ def main():
     tables = {run: pd.read_parquet(ROOT / f"runs/{run}/scored.parquet") for run in ['main1','guard1','span1']}
     d = nums['fig_defaults']; ladder = nums['fig_channel_ladder']; cost = nums['fig_cost_asymmetry']
     sets = nums['fig_sets']; ratchet = nums['fig_politeness_ratchet']; pipeline = nums['fig_pipeline']
-    lines = ["# Figure captions (refreshed ACTION 2)\n",
+    lines = ["# Shared figure captions (cycle-3 Action 3; discovery tables retained)\n",
+        "**Version routing:** [current evidence map](../../analysis/EVIDENCE_MAP.md) is authoritative for population/status. "
+        "Discovery figures below use main1 shared-label resolution; `r2c/CAPTIONS.md` and its figures use current arbitrated W-C. "
+        "C30/C36 applicability keeps its explicitly frozen **pre-arbitration protocol-masked** snapshot; do not substitute current W-C labels. "
+        "W-D, the W-B contract audit and the accepted guard transfer (C37) remain separate populations. "
+        "Current c3 exact examples: `ideas/cycles/c3/story_evidence.v2.json`, mirrored in `example_manifest_c3.json`; "
+        "original manifest and historical discovery captions/tables are preserved.\n",
         "Generated from `runs/main1/scored.parquet` with `annotation/label_resolution.jsonl` by "
         "`paper/figs/make_figs.py` and `src/refresh_captions.py`. Original captions and numbers remain in "
         "`analysis/evidence_prev/paper/figs/`. The generated figure numbers, macros and example manifest share this scoring version. "
@@ -134,6 +140,36 @@ def main():
         f"Polarity P2 is {pct(sets['by_dim']['polarity']['P2'])} (10/40), after propagating the arbiter to "
         "span1. This is authored-pair coverage under machine labels, not coverage of all admissible meanings.\n"]
     lines.append(wb_contract_caption())
+    current = json.loads((ROOT / 'analysis/evidence_c3/current.json').read_text())
+    V = current['displayed_values']   # formatted once from source files by src/c3_evidence.py
+    lines += ["## Discovery guard comparator (C35; cycle-3 current display)\n",
+              f"P0 / zero-call strip-only G1s / regeneration G1 strict passes: {V['disc_pass']} cue target occurrences. "
+              f"Paired G1−G1s **{V['c35']}**, 58 family clusters, {V['c35_disc']} passes; no missing matched targets. "
+              "These discordances compare G1 with G1s; they are not newly broken P0-correct outputs. "
+              "Exploratory stored-configuration comparison; 10,000 whole-family joint resamples, seed 20261101. "
+              f"No causal feedback or usable-repair claim. Repairs {V['repairs']}, residual {V['residual']}; "
+              f"changed-correct {V['changed_all']} all channels and {V['changed_cue']} cue channels. "
+              f"Costs use {V['cost_inputs']}; pass rates use cue target occurrences.\n",
+              "## Current W-C and applicability displays\n",
+              f"C34 v2 (completed): speech-act chip1 {V['c34_chip']}, full {V['c34_full']}; gap {V['c34_gap']}. "
+              f"C11: question failures {V['c11']}, specifically requests {V['c11_req']}. "
+              "C30 remains the older complete-matched **pre-arbitration protocol-masked** derivative; do not substitute current W-C labels. "
+              f"C36 first-output companion: {V['c36']}. This equalizes inspected slots only, not prompt/temperature/generation. "
+              f"The c3:S4 appointment menu illustrates exact partner-source reproduction, {V['c31']}; "
+              "it is not the C30 category-mismatch endpoint. Retain all six strings. "
+              "Guard fragment c3:S9 is a selected counterexample (exact Ask-you prefix 4/63 scored repairs), "
+              "not a measured fluency prevalence. The human gate does not validate repaired quality. "
+              "All examples are post-outcome selections with declared rules and adjacent rates.\n",
+              "## Guard transfer to W-C (C37; separate frozen population)\n",
+              f"Frozen guard on {V['gt_inv']}. PASS on all fixed criteria, accepted with qualifications "
+              f"(`analysis/guard_wc/ACCEPTANCE.md`): joint-pass gain {V['gt_gain']}; strict repairs {V['gt_repair']}; "
+              f"initially correct texts changed {V['gt_changed']}; pass→fail {V['gt_p2f']}; residual strict failures {V['gt_resid']}. "
+              f"Comparator G1−G1s {V['gt_cmp']}. Cost {V['gt_calls']}. 10,000 whole-family resamples, seed 20261101. "
+              "Machine-scored partial predicate; repaired-text quality unvalidated; not a discovery replication.\n",
+              "## W-B restoration contract and R5 builder check\n",
+              f"Definite chip/source conflicts {V['wb_conf']}. R5 validator replay of the restored inputs: {V['r5']}. "
+              "Coarser = the cue (e.g. [SURE]) cannot supply the finer source distinction; unknown is never certified. "
+              "See `analysis/r5_validator/README.md`.\n"]
     (directory / "CAPTIONS.md").write_text("\n".join(lines) + "\n")
 
     examples = []
@@ -177,6 +213,13 @@ def main():
             return [clean_json(v) for v in value]
         return None if isinstance(value, float) and not math.isfinite(value) else value
     (directory / "example_manifest.json").write_text(json.dumps(clean_json(manifest), indent=2, default=str, allow_nan=False) + "\n")
+    c3 = json.loads((ROOT / 'ideas/cycles/c3/story_evidence.v2.json').read_text())
+    mirror = dict(namespace='c3', source_manifest='ideas/cycles/c3/story_evidence.v2.json',
+                  source_sha256=sha(ROOT / 'ideas/cycles/c3/story_evidence.v2.json'),
+                  reconciliation='analysis/evidence_c3/selector_reconciliation.json',
+                  status='retrospective verified replay; not prospective selection or typicality',
+                  cards=c3['cards'], verified_occurrences=c3['verified_occurrences'])
+    (directory / 'example_manifest_c3.json').write_text(json.dumps(mirror, ensure_ascii=False, indent=2) + '\n')
     print(f"refreshed captions and {len(output)} selected example occurrences")
 
 

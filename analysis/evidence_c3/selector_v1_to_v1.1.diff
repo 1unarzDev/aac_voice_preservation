@@ -1,0 +1,12 @@
+--- v1_original_hash_ab30b3
++++ v1.1_committed_a9d996
+@@ -64,6 +64,9 @@
+     row = wp[(wp.output_id == ex['output_id']) & (wp.family_id == ex['family_id']) &
+              (wp.variant == ex['variant']) & (wp.channel == ex['channel'])].iloc[0]
+     rr = ex['rate']
++    eligible = wp[wp.dimension.eq('politeness') & wp.channel.eq('full') & wp.cv.eq('plain')] if cid == 'S1' else wp[wp.dimension.eq('speech_act') & wp.channel.eq('chip1') & wp.cv.eq('question')]
++    assert int((eligible.critical_match == False).sum()) == int(rr['sum'])
++    assert int(eligible.critical_match.notna().sum()) == int(rr['n'])
+     card(cid, 'Reuse analysis/r2c/examples.json SHA256-minimum rule: ' + ex['rule'],
+          ex['source'], [occurrence('r2c1', row)],
+          {'manifest_event': rate(rr['sum'], rr['n']), 'manifest_rate_with_ci': rr})

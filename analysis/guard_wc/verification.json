@@ -6,7 +6,7 @@
     "unchanged guard return/tie rule and monitor-only retries",
     "actual HTTP/logical/cache call accounting",
     "generation starts after freeze",
-    "API <=8, judge <=12, local <=4 concurrency",
+    "historical launch concurrency: generation API <=8, judge <=12, local <=4",
     "local model inference windows do not overlap",
     "frozen P0 texts/labels retained",
     "no J1/J2 fallback",
@@ -18,12 +18,15 @@
     "judge": 207
   },
   "peak_http_concurrency_by_model": {
-    "gemma3-4b": 4,
-    "gpt-6.1-terra": 8,
-    "gpt-6.1-sol": 12,
+    "llama3.1-8b": 4,
     "qwen2.5-7b": 4,
-    "llama3.1-8b": 4
+    "gpt-6.1-sol": 12,
+    "gpt-6.1-terra": 8,
+    "gemma3-4b": 4
   },
   "logical_guard_attempts": 766,
-  "checked_epoch": 1793561892.8718588
+  "current_api_concurrency_limit_8_met": false,
+  "inherited_concurrency_deviation_disclosed": true,
+  "closure_comparator_verified": true,
+  "checked_epoch": 1793562343.7845023
 }

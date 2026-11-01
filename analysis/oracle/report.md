@@ -1,5 +1,9 @@
 # W-A oracle validation report (PREREG_R2)
 
+<!-- CURRENT_H7_STATUS -->
+**D-031 supersession (cycle-3 Action 3, 2026-11-01).** The earlier main1 human extraction gate H7 **passed**. Two annotators labeled 187 items (100 double-coded core, 87 single-coded extras); held-out `sampled_test/final` κ=0.906–0.972, lowest lower 95% bound 0.813, n=107–121 across seven fields. Violation agreement 96/99 [91.5, 99.0]%, κ=0.916; both positive 22, judge-only 1, human-only 2, both negative 74. Plurality reference, ties/unsure excluded; converted human labels, no per-item times; no adjudication. This supersedes every historical “human pending”, “zero human returns”, and “human gate not evaluable” statement below **only for that earlier extraction inventory**. Historical machine-panel tables remain unchanged. Humans corrected the shared “can’t wait” error; they did not resolve every shared key departure (D-033). H7 does not validate repaired-text completeness, complete meaning, W-B admissibility, or every new W-C/W-D/guard-transfer boundary. Evidence: [human validation JSON](../../annotation/judge_validation_main1.json), [gate log](../oracle/human_gate.log), [current evidence map](../EVIDENCE_MAP.md). Inline “→ D-031” pointers mark each stale prose statement; historical table cells (e.g. “not evaluable, 0 human returns”, “human gate pending”) are kept verbatim as the pre-H7 record.
+<!-- END_CURRENT_H7_STATUS -->
+
 Date: 2026-11-01. Author: W-A oracle validation engineer (Claude). No GPU servers were started. The judge ran at
 concurrency 8: 30 API calls, 1 transient failure that was retried. The production judge (gpt-6.1-sol, J1+J2,
 effort low), the layer0 tiebreak, the extraction calls are historical. ACTION 2 refresh uses shared arbiter > agreement > unknown resolution and primary quarantine exclusions; no new judge calls were made.
@@ -144,7 +148,7 @@ New challenges, keyed general-dimension disagreements (not part of the gate):
 
 ## 4. Codex annotator panel vs the production judge (main1 gold, 163 sampled + 24 round-1 challenges)
 
-Panel: C-gpt-5.6-sol, C-gpt-6-astra, C-gpt-6-luna (machine annotators; none is the judge gpt-6.1-sol or the tested gpt-6.1-terra). **This is machine-machine agreement, not human validation. The PREREG kappa>=0.6 gate applies to human gold only, and no human returns exist yet (annotation/returns/ is absent).** Production labels: J1==J2, else the arbiter (13 sampled critical labels were null in gold_key_main1.csv and are now filled from runs/main1/arbiter.jsonl), general dims use the layer0 tiebreak. Labels the panel member listed in `unsure_dims` are treated as missing, which matches the annotate.html export. Majority means at least 2 of 3 members, and more than half of the non-missing votes. Design weights are 1/pi from gold_key_main1.csv (Horvitz-Thompson); weighted CIs use the Kish effective n. Challenge items have no pi and are scored unweighted, in a separate subset.
+Panel: C-gpt-5.6-sol, C-gpt-6-astra, C-gpt-6-luna (machine annotators; none is the judge gpt-6.1-sol or the tested gpt-6.1-terra). **This is machine-machine agreement, not human validation. The PREREG kappa>=0.6 gate applies to human gold only, and no human returns exist yet (annotation/returns/ is absent).** *[→ D-031: superseded for the earlier main1 inventory; H7 passed, see notice at top]* Production labels: J1==J2, else the arbiter (13 sampled critical labels were null in gold_key_main1.csv and are now filled from runs/main1/arbiter.jsonl), general dims use the layer0 tiebreak. Labels the panel member listed in `unsure_dims` are treated as missing, which matches the annotate.html export. Majority means at least 2 of 3 members, and more than half of the non-missing votes. Design weights are 1/pi from gold_key_main1.csv (Horvitz-Thompson); weighted CIs use the Kish effective n. Challenge items have no pi and are scored unweighted, in a separate subset.
 
 Data notes: {"critical_off_option_dropped:C-gpt-6-luna": 28, "out_of_schema:politeness=plain": 2, "out_of_schema:speech_act=acceptance": 3, "rows_with_extra_columns": 43, "unsure:added_content": 10, "unsure:agent": 19, "unsure:certainty": 7, "unsure:critical": 3, "unsure:polarity": 3, "unsure:politeness": 2, "unsure:speech_act": 15}. The 43 rows with an extra column are all of C_gpt-6-luna_extraB.csv, which has one surplus empty field after added_content. The label columns parse correctly. Out-of-schema general labels are kept as given (speech_act=acceptance, politeness=plain) and count as disagreements.
 
@@ -467,9 +471,9 @@ Licensed now (machine evidence; describe it as such):
   either labeller is right.
 
 Not licensed:
-- **"Validated against human gold" or "passes the kappa >= .6 gate."** There are zero human returns. Every panel
+- **"Validated against human gold" or "passes the kappa >= .6 gate."** There are zero human returns. *[→ D-031: superseded for the earlier main1 inventory; H7 passed, see notice at top]* Every panel
   number is machine-machine agreement among GPT-family models, which share the codebook and probably some errors
-  (finding 3). Per PREREG, headline automated claims stay provisional until the human double-coding of gold_core
+  (finding 3). Per PREREG, headline automated claims stay provisional until the human double-coding of gold_core *[→ D-031: superseded for the earlier main1 inventory; H7 passed, see notice at top]*
   arrives. Then run `score_gold.py --human annotation/returns/*.csv --panel ...`. The gate is evaluated only in the
   human section.
 - **Any primary speech-act claim that uses the refusal/acceptance families**, including the "5/8 refusals survive"
@@ -484,7 +488,7 @@ Not licensed:
 - **Idiomatic negation and vague quantity.** On ch-08 ("can't wait") and ch-22 ("a couple of") both the judge and
   the panel disagree with the key. Treat them as known oracle blind spots.
 
-Remaining W-A work: human double-coding of gold_core (100 items) with `score_gold.py --human`; a symmetric
+Remaining W-A work: human double-coding of gold_core (100 items) with `score_gold.py --human`; *[→ D-031: superseded for the earlier main1 inventory; H7 passed, see notice at top]* a symmetric
 acceptance/refusal predicate, or a separate response-particle feature, that passes both the statement-substitution
 mutants and the identity relation using J1 or J2 alone; and an added-content tiebreak policy.
 
