@@ -1,0 +1,268 @@
+[
+  {
+    "family_id": "r2pol-041",
+    "variant": "A",
+    "model": "qwen2.5-7b",
+    "prompt_id": "P0",
+    "channel": "bare",
+    "request_key": "138981ded38924390dbb8defde61d211032dc56a",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "5e4759a231df5d70",
+    "text_id": "a03fb8e1499cca9a",
+    "text": "The parcel has arrived.",
+    "input_text": "Keywords: parcel arrive",
+    "source": "The parcel has arrived at the office.",
+    "category": "Bare affirmative default",
+    "selection_sha256": "008acd142612fa70a8b9337e908dfea55d68cede82d98fb68d4193a0224550fe",
+    "rule": "P0 bare polarity; affirmative event; shared A/B target deduplicated",
+    "rate": {
+      "estimate": 0.990625,
+      "ci_low": 0.978125,
+      "ci_high": 1.0,
+      "n": 320,
+      "n_total": 320,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 79,
+      "n_clusters_observed": 79,
+      "n_families": 80,
+      "n_clusters_effective": 78.04878048780488,
+      "sum": 317.0
+    }
+  },
+  {
+    "family_id": "r2plt-015",
+    "variant": "B",
+    "model": "gemma3-4b",
+    "prompt_id": "P0",
+    "channel": "full",
+    "request_key": "fb09efcadce06832c3fd5d742f055c3fca07a2ea",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "968b8cae25e89374",
+    "text_id": "ecde046dd9b71d51",
+    "text": "Please open this pickle jar for me.",
+    "input_text": "The user typed: Open this pickle jar for me.",
+    "source": "Open this pickle jar for me.",
+    "category": "Full-input politeness addition",
+    "selection_sha256": "039c91334c4aef94ba0ec5b258daa146b4e3ea4d948b296fc263e35a002d2969",
+    "rule": "P0 full politeness plain targets, known critical label; plain\u2192polite event",
+    "rate": {
+      "estimate": 0.08125,
+      "ci_low": 0.053125,
+      "ci_high": 0.1125,
+      "n": 320,
+      "n_total": 320,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 80,
+      "n_clusters_observed": 80,
+      "n_families": 80,
+      "n_clusters_effective": 80.0,
+      "sum": 26.0
+    }
+  },
+  {
+    "family_id": "r2act-049",
+    "variant": "B",
+    "model": "llama3.1-8b",
+    "prompt_id": "P0",
+    "channel": "chip1",
+    "request_key": "d3904742b4afbd83ab296b2f953f723cab6dc82e",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "7d7ecf9fb02fd2b8",
+    "text_id": "d0ef4488521fb1fb",
+    "text": "Can you sign for this parcel?",
+    "input_text": "Keywords: [?] parcel signature",
+    "source": "Does the parcel from the bank need a signature?",
+    "category": "Question cue failure",
+    "selection_sha256": "0005e72df97ed061f7d519c31d024b834dac4f5d1637968b7e513d26b6b1f5fc",
+    "rule": "P0 question chip1 targets with observed match; failure event",
+    "rate": {
+      "estimate": 0.2780487804878049,
+      "ci_low": 0.1885235172946528,
+      "ci_high": 0.3738738738738739,
+      "n": 205,
+      "n_total": 205,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 37,
+      "n_clusters_observed": 37,
+      "n_families": 52,
+      "n_clusters_effective": 25.05963029218843,
+      "sum": 57.0
+    }
+  },
+  {
+    "family_id": "r2plt-037",
+    "variant": "A",
+    "model": "llama3.1-8b",
+    "prompt_id": "P0",
+    "channel": "chipall",
+    "request_key": "19205a04a44c7d89e7ac9bd5d46f8a81861ce796",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "2747480bf0fc6292",
+    "text_id": "11869b4da3c1439b",
+    "text": "You bring salt.",
+    "input_text": "Keywords: [ASK] [YOU] [PLAIN] bring salt",
+    "source": "Can you bring me some salt for the chicken?",
+    "category": "H1 Llama plain request loss",
+    "selection_sha256": "07a1fdc63ccd13791ff1b98760b98ada28cab5c0ce15a71b38c7b3290cf9d70d",
+    "rule": "Frozen H1 eligible Llama P0 plain chipall; non-request event",
+    "rate": {
+      "estimate": 0.8783783783783784,
+      "ci_low": 0.7972972972972973,
+      "ci_high": 0.9459459459459459,
+      "n": 74,
+      "n_total": 74,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 74,
+      "n_clusters_observed": 74,
+      "n_families": 74,
+      "n_clusters_effective": 74.0,
+      "sum": 65.0
+    }
+  },
+  {
+    "family_id": "r2pol-019",
+    "variant": "A",
+    "model": "gpt-6.1-terra",
+    "prompt_id": "P2",
+    "channel": "bare",
+    "request_key": "c82c570235b4ac73508500bf37788ec5e58ff7fb",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "4c0ede18d421991b",
+    "text_id": "3898197fd1118acf",
+    "text": "I want to be left alone.",
+    "input_text": "Keywords: want left alone",
+    "source": "I don't want to be left alone tonight.",
+    "category": "P2 coverage miss polarity",
+    "selection_sha256": "015b5f0f4a048c5ed6bc6e29a2c2b2e6e9acd98f1a8e874e14f83d26c60e35cd",
+    "rule": "P2 bare sets with known coverage; event=the set misses at least one pair value; complete stored set displayed and first slot identifies the occurrence",
+    "rate": {
+      "estimate": 0.921875,
+      "ci_low": 0.8860759493670886,
+      "ci_high": 0.9556962025316456,
+      "n": 320,
+      "n_total": 320,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 79,
+      "n_clusters_observed": 79,
+      "n_families": 80,
+      "n_clusters_effective": 78.04878048780488,
+      "sum": 295.0
+    },
+    "output_set": [
+      {
+        "output_id": "4c0ede18d421991b",
+        "text": "I want to be left alone."
+      },
+      {
+        "output_id": "2de7e6d81ab4c0b2",
+        "text": "Do you want me to leave you alone?"
+      },
+      {
+        "output_id": "41773db03dcf2c33",
+        "text": "I wish they would leave me alone."
+      }
+    ]
+  },
+  {
+    "family_id": "r2act-028",
+    "variant": "A",
+    "model": "llama3.1-8b",
+    "prompt_id": "P2",
+    "channel": "bare",
+    "request_key": "19a008662844362d9db032227c219f140a70c990",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "3eaf2a52c1fbe3c6",
+    "text_id": "91c95dd4a9827e3c",
+    "text": "Can you please increase the volume?",
+    "input_text": "Keywords: increase volume",
+    "source": "Did you increase the volume of the TV?",
+    "category": "P2 coverage miss speech_act",
+    "selection_sha256": "04a97034927917a1322de1bda6048281dd2f315268355a75e3b10ee4157b6a9a",
+    "rule": "P2 bare sets with known coverage; event=the set misses at least one pair value; complete stored set displayed and first slot identifies the occurrence",
+    "rate": {
+      "estimate": 0.46774193548387094,
+      "ci_low": 0.38368580060422963,
+      "ci_high": 0.5541804990861278,
+      "n": 310,
+      "n_total": 310,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 55,
+      "n_clusters_observed": 55,
+      "n_families": 78,
+      "n_clusters_effective": 33.06951135581556,
+      "sum": 145.0
+    },
+    "output_set": [
+      {
+        "output_id": "3eaf2a52c1fbe3c6",
+        "text": "Can you please increase the volume?"
+      },
+      {
+        "output_id": "e1aa530fabd7df25",
+        "text": "I want to increase the volume"
+      },
+      {
+        "output_id": "d0a0902b2afb1b10",
+        "text": "We need to increase the volume now"
+      }
+    ]
+  },
+  {
+    "family_id": "r2plt-007",
+    "variant": "A",
+    "model": "llama3.1-8b",
+    "prompt_id": "P2",
+    "channel": "bare",
+    "request_key": "8a22f7132051067fa8591d9eb4ef7623b07608e2",
+    "sample_idx": 0,
+    "suggestion_idx": 0,
+    "output_id": "2b203d5b57d8ca45",
+    "text_id": "5564b63a51d3ec59",
+    "text": "I need you to pick up clothes cleaners.",
+    "input_text": "Keywords: pick up clothes cleaners",
+    "source": "Please pick up my clothes from the dry cleaners.",
+    "category": "P2 coverage miss politeness",
+    "selection_sha256": "040e0c188bdea2c16c1f1b811405c6b1ba0ea1f121bf4df460f9db2c26be6d3f",
+    "rule": "P2 bare sets with known coverage; event=the set misses at least one pair value; complete stored set displayed and first slot identifies the occurrence",
+    "rate": {
+      "estimate": 0.30625,
+      "ci_low": 0.253125,
+      "ci_high": 0.359375,
+      "n": 320,
+      "n_total": 320,
+      "n_missing": 0,
+      "n_boot_valid": 10000,
+      "n_clusters": 80,
+      "n_clusters_observed": 80,
+      "n_families": 80,
+      "n_clusters_effective": 80.0,
+      "sum": 98.0
+    },
+    "output_set": [
+      {
+        "output_id": "2b203d5b57d8ca45",
+        "text": "I need you to pick up clothes cleaners."
+      },
+      {
+        "output_id": "fd3f572b881335db",
+        "text": "Can you pick up clothes cleaners for me?"
+      },
+      {
+        "output_id": "387c4cced4399ea9",
+        "text": "I want to pick up clothes cleaners myself."
+      }
+    ]
+  }
+]

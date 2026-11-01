@@ -1,8 +1,8 @@
 # W-C publication figures
 
-All six figures are available as vector PDF and 600-dpi PNG. Inputs: runs/r2c1/scored.parquet and data/items/r2_c1.jsonl / r2_c2.jsonl. P0 primary outcomes; 238 families after D-018 exclusions. Bars/lines pool the four fixed models; open markers show individual models where indicated. All intervals are pointwise 95% percentile CIs from 10,000 recorded seed/construction-cluster resamples, seed 20261031. Fallback critical J1/J2 labels are unresolved, not definitive labels.
+All six figures are available as vector PDF and 600-dpi PNG. Inputs: runs/r2c1/scored.parquet and data/items/r2_c1.jsonl / r2_c2.jsonl. P0 primary outcomes; 238 families after D-018 exclusions. Bars/lines pool the four fixed models; open markers show individual models where indicated. All intervals are pointwise 95% percentile CIs from 10,000 recorded seed/construction-cluster resamples, seed 20261031. Critical J1/J2 disagreements were resolved by the post-hoc cross-family arbiter (259 scored rows; analysis/r2c/arbitration.md); 0 fallback rows remain.
 
-Provenance qualification: 48 generation requests reuse caches older than the final item freeze, including 12 primary requests. All primary generation timestamps postdate the PREREG mtime; the final item freeze did not precede every cached generation. No claim of an unqualified wholly fresh confirmation. The production scoring fallback has no completed arbiter file. Registered contrasts, missingness, Holm inference and sensitivity analyses are in analysis/r2c/report.md and primary.json.
+Provenance qualification: 48 generation requests reuse caches older than the final item freeze, including 12 primary requests. All primary generation timestamps postdate the PREREG mtime; the final item freeze did not precede every cached generation. No claim of an unqualified wholly fresh confirmation. The production scoring fallback was replaced by post-hoc arbitration (unknown-masked snapshot: analysis/r2c/snapshot_unknown_masked/). Registered contrasts, missingness, Holm inference and sensitivity analyses are in analysis/r2c/report.md and primary.json.
 
 ## fig_defaults
 

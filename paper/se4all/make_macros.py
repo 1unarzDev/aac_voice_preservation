@@ -58,6 +58,14 @@ def put(key: str, value, src: str, fmt: str = "pct"):
         s = f"{int(round(value)):,}"
     elif fmt == "f2":
         s = f"{value:.2f}"
+    elif fmt == "pct2":
+        s = f"{100 * value:.2f}"
+    elif fmt == "pp2":
+        s = f"{100 * value:.2f}".replace("-", "$-$")
+    elif fmt == "p4":
+        s = f"{value:.4f}".lstrip("0")
+    elif fmt == "f1":
+        s = f"{value:.1f}"
     elif fmt == "f3":
         s = f"{value:.3f}"
     else:
@@ -662,6 +670,201 @@ for tag, rels in [("wb", ["analysis/wb/report.md", "analysis/wb/report_wb1i.md"]
                         put(f"{tag}_{k_}", v_, str(hj.relative_to(ROOT)), "int" if isinstance(v_, int) else "f3")
             break
 
+# ================================================================ cycle 2 ===
+# Manuscript-formatted macros for the cycle-2 rewrite (ideas/cycles/c2/decision.md, ACTION 4).
+# Every value is read from a frozen analysis file; nothing is typed. Keys are prefixed c2:
+#   wc*  W-C arbitrated analysis (analysis/r2c/*; 10,000 cluster resamples, seed 20261031)
+#   wd*  W-D (analysis/r2d/headline.json) and its C32 decomposition (analysis/applicability)
+#   wb*  W-B original tables + contract audit (analysis/wb/*)
+#   ap*  applicability exploratory checks (analysis/applicability/results.json)
+R2C = ROOT / "analysis/r2c"
+if (R2C / "primary.json").exists():
+    srcP = "analysis/r2c/primary.json (arbitrated)"
+    prim = json.load(open(R2C / "primary.json"))["primaries"]
+    hd = json.load(open(R2C / "headline.json"))
+    for k_ in ["P1", "P2", "P3"]:
+        p_ = prim[k_]
+        t = "wc" + k_.lower()
+        put(t, p_["estimate"], srcP, "pp2")
+        put(t + "_lo", p_["ci_low"], srcP, "pp2")
+        put(t + "_hi", p_["ci_high"], srcP, "pp2")
+        put(t + "_n", p_["n"], srcP, "int")
+        put(t + "_ntot", p_["n_total"], srcP, "int")
+        put(t + "_cl", p_["n_clusters"], srcP, "int")
+        put(t + "_eff", p_["n_clusters_effective"], srcP, "f1")
+        put(t + "_holm", p_["p_holm"], srcP, "p4")
+        put(t + "_reject", int(bool(p_["reject_holm_005"])), srcP, "int")
+    put("wcp1_sum", prim["P1"]["sum"], srcP, "int")
+    put("wc_n_reject", sum(bool(prim[k_]["reject_holm_005"]) for k_ in prim), srcP, "int")
+    # P3 directional share and all-output view (fig_numbers / headline)
+    put("wcaff", hd["bare_affirmative_share"], "analysis/r2c/headline.json", "pct2")
+    put("wcaff_lo", hd["bare_affirmative_share_ci_low"], "analysis/r2c/headline.json", "pct2")
+    put("wcaff_hi", hd["bare_affirmative_share_ci_high"], "analysis/r2c/headline.json", "pct2")
+    put("wcaff_k", round(hd["bare_affirmative_share"] * hd["bare_affirmative_share_n"]), "analysis/r2c/headline.json", "int")
+    put("wcaff_n", hd["bare_affirmative_share_n"], "analysis/r2c/headline.json", "int")
+    put("wcaff_ntot", hd["bare_affirmative_share_n_total"], "analysis/r2c/headline.json", "int")
+    # politeness addition/removal
+    for side in ["addition", "removal"]:
+        a_ = prim["P2"][side]
+        t = "wcpz" + side[:3]
+        put(t, a_["estimate"], srcP, "pct2"); put(t + "_lo", a_["ci_low"], srcP, "pct2"); put(t + "_hi", a_["ci_high"], srcP, "pct2")
+        put(t + "_k", a_["sum"], srcP, "int"); put(t + "_n", a_["n"], srcP, "int")
+    pm = pd.read_csv(R2C / "politeness_direction_by_model.csv")
+    for m in MODELS:
+        for cv, t in [("plain", "add"), ("polite", "rem")]:
+            r_ = pm[(pm.model == m) & (pm.cv == cv)].iloc[0]
+            put(f"wcpz{t}_{SHORT[m]}_k", r_["sum"], "analysis/r2c/politeness_direction_by_model.csv", "int")
+            put(f"wcpz{t}_{SHORT[m]}_n", r_["n"], "analysis/r2c/politeness_direction_by_model.csv", "int")
+    # inventory and qualifications
+    put("wc_n_fam", hd["n_families"], "analysis/r2c/headline.json", "int")
+    put("wc_n_fam_incl", hd["n_families_inclusive"], "analysis/r2c/headline.json", "int")
+    put("wc_n_models", hd["n_models"], "analysis/r2c/headline.json", "int")
+    put("wc_prefreeze", hd["pre_freeze_cache_requests"], "analysis/r2c/headline.json", "int")
+    put("wc_arb_rows", hd["arbiter_resolved_rows"], "analysis/r2c/headline.json", "int")
+    put("wc_unadj_rows", hd["unadjudicated_fallback_rows"], "analysis/r2c/headline.json", "int")
+    inv = json.load(open(R2C / "arbiter_inventory.json"))
+    put("wc_arb_units", len(inv["a_units"]), "analysis/r2c/arbiter_inventory.json", "int")
+    pc = pd.read_csv(R2C / "primary_pre_freeze_cache.csv")
+    put("wc_prefreeze_primary", pc.request_key.nunique() if "request_key" in pc else len(pc),
+        "analysis/r2c/primary_pre_freeze_cache.csv", "int")
+    # pre-arbitration (unknown-masked) P1, printed beside the arbitrated value
+    sens = pd.read_csv(R2C / "primary_sensitivity.csv")
+    def sens_row(name, c):
+        return sens[(sens.sensitivity == name) & (sens.contrast == c)].iloc[0]
+    for name, t in [("unknown_masked_pre_arbitration", "wcp1_um"), ("exclude_any_pre_freeze_cache_family", "wcp1_xc")]:
+        s_ = sens_row(name, "P1")
+        put(t, s_["estimate"], "analysis/r2c/primary_sensitivity.csv " + name, "pp2")
+        put(t + "_lo", s_["ci_low"], "analysis/r2c/primary_sensitivity.csv " + name, "pp2")
+        put(t + "_hi", s_["ci_high"], "analysis/r2c/primary_sensitivity.csv " + name, "pp2")
+        put(t + "_n", s_["n"], "analysis/r2c/primary_sensitivity.csv " + name, "int")
+    # channel ladder (critical match and joint supplied-predicate pass)
+    lad = pd.read_csv(R2C / "channel_ladder.csv")
+    for dim in ["polarity", "speech_act", "politeness"]:
+        for ch in ["bare", "noncrit", "chip1", "chipall", "full"]:
+            for met, t in [("critical_match", "m"), ("constraint_preserving", "j")]:
+                r_ = lad[(lad.dimension == dim) & (lad.channel == ch) & (lad.metric == met)]
+                if len(r_) and pd.notna(r_.iloc[0].estimate):
+                    r_ = r_.iloc[0]
+                    key = f"wc{t}_{DSHORT[dim]}_{ch}"
+                    put(key, r_.estimate, "analysis/r2c/channel_ladder.csv", "pct2")
+                    put(key + "_lo", r_.ci_low, "analysis/r2c/channel_ladder.csv", "pct2")
+                    put(key + "_hi", r_.ci_high, "analysis/r2c/channel_ladder.csv", "pct2")
+                    put(key + "_n", r_.n, "analysis/r2c/channel_ladder.csv", "int")
+    cd_ = pd.read_csv(R2C / "channel_differences.csv")
+    r_ = cd_[(cd_.dimension == "speech_act") & (cd_.metric == "chip1-full")].iloc[0]
+    put("wc_act_chip1_full", r_.estimate, "analysis/r2c/channel_differences.csv", "pp2")
+    put("wc_act_chip1_full_lo", r_.ci_low, "analysis/r2c/channel_differences.csv", "pp2")
+    put("wc_act_chip1_full_hi", r_.ci_high, "analysis/r2c/channel_differences.csv", "pp2")
+    put("wc_act_chip1_full_n", r_.n, "analysis/r2c/channel_differences.csv", "int")
+    put("wc_act_chip1_full_cl", r_.n_clusters, "analysis/r2c/channel_differences.csv", "int")
+    # question chip1 failures (S5 stratum) and negated chip1 matches (S2 stratum)
+    cv_ = pd.read_csv(R2C / "cue_value_match.csv")
+    q_ = cv_[(cv_.dimension == "speech_act") & (cv_.cv == "question")].iloc[0]
+    put("wc_qfail_k", q_.n - q_["sum"], "analysis/r2c/cue_value_match.csv (question chip1)", "int")
+    put("wc_qfail_n", q_.n, "analysis/r2c/cue_value_match.csv (question chip1)", "int")
+    put("wc_qfail", 1 - q_.estimate, "analysis/r2c/cue_value_match.csv (question chip1)", "pct2")
+    put("wc_qfail_lo", 1 - q_.ci_high, "analysis/r2c/cue_value_match.csv (question chip1)", "pct2")
+    put("wc_qfail_hi", 1 - q_.ci_low, "analysis/r2c/cue_value_match.csv (question chip1)", "pct2")
+    put("wc_qfail_cl", q_.n_clusters, "analysis/r2c/cue_value_match.csv (question chip1)", "int")
+    tr = pd.read_csv(R2C / "speech_act_transitions.csv")
+    put("wc_q2req_k", int(tr[(tr.cv == "question") & (tr.crit == "request/command")].n.sum()),
+        "analysis/r2c/speech_act_transitions.csv (chip1)", "int")
+    n_ = cv_[(cv_.dimension == "polarity") & (cv_.cv == "negated")].iloc[0]
+    put("wc_negchip_k", n_["sum"], "analysis/r2c/cue_value_match.csv", "int")
+    put("wc_negchip_n", n_.n, "analysis/r2c/cue_value_match.csv", "int")
+    put("wc_negchip", n_.estimate, "analysis/r2c/cue_value_match.csv", "pct2")
+    put("wc_negchip_lo", n_.ci_low, "analysis/r2c/cue_value_match.csv", "pct2")
+    put("wc_negchip_hi", n_.ci_high, "analysis/r2c/cue_value_match.csv", "pct2")
+    # coverage@3 polarity (bare)
+    for pr in ["p2", "s3"]:
+        b_ = f"coverage_polarity_{pr}"
+        put(f"wccov_{pr}_k", round(hd[b_] * hd[b_ + "_n"]), "analysis/r2c/headline.json", "int")
+        put(f"wccov_{pr}_n", hd[b_ + "_n"], "analysis/r2c/headline.json", "int")
+    # C17 secondary replication (Llama request retention)
+
+R2D = ROOT / "analysis/r2d/headline.json"
+if R2D.exists():
+    wd = json.load(open(R2D))
+    srcD = "analysis/r2d/headline.json"
+    put("wd_n_scen", wd["n_clusters"], srcD, "int")
+    put("wd_n_requests", wd["n_requests"], srcD, "int")
+    b_ = "statement_polarity_llama_"
+    put("wdll_k", wd[b_ + "damage_k"], srcD, "int"); put("wdll_n", wd[b_ + "damage_n"], srcD, "int")
+    put("wdll_scen", wd[b_ + "damage_n_event_clusters"], srcD, "int")
+    put("wdll_rep_k", wd[b_ + "repeat_disagreement_k"], srcD, "int"); put("wdll_rep_n", wd[b_ + "repeat_disagreement_n"], srcD, "int")
+    put("wdll_brep_k", wd[b_ + "both_repeat_disagreement_k"], srcD, "int"); put("wdll_brep_n", wd[b_ + "both_repeat_disagreement_n"], srcD, "int")
+    for t, key in [("wdll_d", "damage_minus_repeat"), ("wdll_db", "damage_minus_both_repeat")]:
+        put(t, wd[b_ + key], srcD, "pp2"); put(t + "_lo", wd[b_ + key + "_ci_low"], srcD, "pp2"); put(t + "_hi", wd[b_ + key + "_ci_high"], srcD, "pp2")
+    b_ = "tell_agent_qwen_"
+    put("wdqa_k", wd[b_ + "damage_k"], srcD, "int"); put("wdqa_n", wd[b_ + "damage_n"], srcD, "int")
+    put("wdqa_scen", wd[b_ + "damage_n_event_clusters"], srcD, "int")
+    sb_ = "statement_agent_qwen_damage_k"
+    put("wdqa_stmt_k", wd[sb_], srcD, "int")
+    # other models' STATEMENT polarity damage (expected zero; printed from file)
+    put("wd_stmt_pol_other_k", sum(wd[f"statement_polarity_{m}_damage_k"] for m in ["qwen", "gemma", "terra"]
+                                   if f"statement_polarity_{m}_damage_k" in wd), srcD, "int")
+    sc2 = pd.read_parquet(ROOT / "runs/r2d1/scored.parquet", columns=["critical_source"])
+    put("wd_j1_rows", int((sc2.critical_source == "J1").sum()), "runs/r2d1/scored.parquet J1-fallback critical rows", "int")
+    put("wd_rows", len(sc2), "runs/r2d1/scored.parquet", "int")
+AP = ROOT / "analysis/applicability/results.json"
+if AP.exists():
+    ap = json.load(open(AP))
+    srcA = "analysis/applicability/results.json (exploratory, seed 20261101)"
+    h2 = ap["preserved"]["H2"]
+    put("wd_notyou_k", h2["NOT|YOU"]["k"], srcA, "int"); put("wd_notyou_n", h2["NOT|YOU"]["n"], srcA, "int")
+    put("wd_other_k", h2["other"]["k"], srcA, "int"); put("wd_other_n", h2["other"]["n"], srcA, "int")
+    put("wd_negabs_k", h2["among_damage"]["negation_absent"]["k"], srcA, "int")
+    xp = ap["preserved"]["H1/exact_partner"]
+    put("ap_xp_p2_k", xp["P2"]["k"], srcA, "int"); put("ap_xp_p2_n", xp["P2"]["n"], srcA, "int")
+    put("ap_xp_s3_k", xp["S3"]["k"], srcA, "int"); put("ap_xp_s3_n", xp["S3"]["n"], srcA, "int")
+    put("ap_xp_d", xp["P2_minus_S3"]["estimate"], srcA, "pp2")
+    put("ap_xp_d_lo", xp["P2_minus_S3"]["lo"], srcA, "pp2"); put("ap_xp_d_hi", xp["P2_minus_S3"]["hi"], srcA, "pp2")
+    put("ap_xp_cl", xp["P2_minus_S3"]["clusters"], srcA, "int")
+
+WBE = ROOT / "analysis/wb/estimates.csv"
+WBA = ROOT / "analysis/wb/contract_audit.json"
+if WBE.exists() and WBA.exists():
+    we = pd.read_csv(WBE)
+    srcWB = "analysis/wb/estimates.csv (original tables, 2,000 message resamples)"
+    def wrow(an, sample, metric, dim="ALL"):
+        return we[(we.analysis == an) & (we["sample"] == sample) & (we.metric == metric) & (we.dim == dim) & (we.model == "pooled")].iloc[0]
+    for smp, t in [("random", "r"), ("enriched", "e")]:
+        r_ = wrow("A_default", smp, "takes_default")
+        put(f"wb{t}_def", r_.est, srcWB); put(f"wb{t}_def_lo", r_.lo, srcWB); put(f"wb{t}_def_hi", r_.hi, srcWB)
+        r_ = wrow("A_default", smp, "honour_nondefault")
+        put(f"wb{t}_hnd", r_.est, srcWB); put(f"wb{t}_hnd_lo", r_.lo, srcWB); put(f"wb{t}_hnd_hi", r_.hi, srcWB)
+        r_ = wrow("B_violation", smp, "full")
+        put(f"wb{t}_vfull", r_.est, srcWB); put(f"wb{t}_vfull_lo", r_.lo, srcWB); put(f"wb{t}_vfull_hi", r_.hi, srcWB)
+        put(f"wb{t}_vfull_k", r_.k, srcWB, "int"); put(f"wb{t}_vfull_n", r_.n, srcWB, "int")
+        r_ = wrow("C_restoration_agree", smp, "restored-pos_cap4", dim="all focal")
+        put(f"wb{t}_gain", r_.est, srcWB, "pp"); put(f"wb{t}_gain_lo", r_.lo, srcWB, "pp"); put(f"wb{t}_gain_hi", r_.hi, srcWB, "pp")
+    ca = json.load(open(WBA))
+    srcCA = "analysis/wb/contract_audit.json (10,000 message resamples, seed 20261101)"
+    st = ca["inventory"]["statuses"]
+    put("wb_msgs_restored", ca["inventory"]["messages"], srcCA, "int")
+    put("wb_outputs_restored", ca["inventory"]["outputs"], srcCA, "int")
+    put("wb_conflicts", st["definite_conflict"], srcCA, "int")
+    put("wb_aligned", st["aligned"], srcCA, "int")
+    put("wb_unknown", st["unknown_reference"] + st["unknown_source_consensus"] + st["unknown_word"], srcCA, "int")
+    put("wb_maybe_k", ca["example"]["k"], srcCA, "int"); put("wb_maybe_n", ca["example"]["n"], srcCA, "int")
+    put("wb_maybe_msgs", ca["example"]["message_clusters"], srcCA, "int")
+    est_ = pd.DataFrame(ca["estimates"])
+    for smp, t in [("random", "r"), ("enriched", "e")]:
+        r_ = est_[(est_["sample"] == smp) & (est_.subset == "all_restored") & (est_.dim == "ALL") & (est_.model == "pooled")
+                  & (est_.metric == "actual_input_general_match")].iloc[0]
+        put(f"wb{t}_actual_k", r_.k, srcCA, "int"); put(f"wb{t}_actual_n", r_.n, srcCA, "int")
+        put(f"wb{t}_actual", r_.estimate, srcCA)
+        lo_, hi_ = (r_.ci95 if "ci95" in r_ and isinstance(r_.ci95, list) else (r_.get("ci_low"), r_.get("ci_high")))
+        put(f"wb{t}_actual_lo", lo_, srcCA); put(f"wb{t}_actual_hi", hi_, srcCA)
+    for row in ca["polarity_denominators"]:
+        t = ("wbr" if row["sample"] == "random" else "wbe") + ("_nondef" if row["stratum"] == "non_default" else "_neg")
+        put(t + "_k", row["k"], srcCA, "int"); put(t + "_n", row["n"], srcCA, "int")
+    put("wb_human_fields", ca["human"]["wb_human_fields_filled"], srcCA, "int")
+    put("wb_human_items", ca["human"]["wb_audit_items"], srcCA, "int")
+for sub in ["returns_wc", "returns_wb", "returns_repair"]:
+    put(f"n_{sub}", len([p for p in glob.glob(str(ROOT / f"annotation/{sub}/*")) if not p.endswith(".gitkeep")]),
+        f"annotation/{sub}/ (completed return files)", "int")
+
 # --------------------------------------------------------- examples table ---
 # Examples are NOT reselected here. They are the stored occurrences frozen in
 # paper/figs/example_manifest.json (story rules E1-E10, ideas/cycles/c1/story.md). This
@@ -751,6 +954,95 @@ rows.append(("E10 oracle", visible(e["occurrence"]["input_text"]), q(e), meta(e)
 lines = [f"{a} & {b} & {c} & {d} & {e_}\\\\[2pt]" for a, b, c, d, e_ in rows]
 (OUT / "examples_table.tex").write_text(
     "% generated by make_macros.py from paper/figs/example_manifest.json -- do not edit\n" + "\n".join(lines) + "\n")
+
+# ------------------------------------------------- cycle-2 gallery (Fig. 1) ---
+# Cards S1, S2, S5, S7, S9 from ideas/cycles/c2/story_evidence.json (declared rules in story.md)
+# plus the E10 oracle inset from paper/figs/example_manifest.json. Every (output_id, visible
+# input, text) triple is re-read from runs/<run>/outputs.jsonl; any mismatch aborts.
+SE = ROOT / "ideas/cycles/c2/story_evidence.json"
+_occ_cache: dict[str, set] = {}
+
+
+def stored_triple(run, oid, inp, txt):
+    if run not in _occ_cache:
+        _occ_cache[run] = set()
+        for line in open(ROOT / f"runs/{run}/outputs.jsonl"):
+            r = json.loads(line)
+            _occ_cache[run].add((r["output_id"], r.get("input_text"), r["text"]))
+    return (oid, inp, txt) in _occ_cache[run]
+
+
+if SE.exists():
+    cards = {c["id"]: c for c in json.load(open(SE))["cards"]}
+    n_gal = 0
+    for cid in ["S1", "S2", "S5", "S7", "S9"]:
+        for o in cards[cid]["outputs"]:
+            if not stored_triple(o["run"], o["output_id"], o["input_text"], o["text"]):
+                raise SystemExit(f"gallery {cid} {o['output_id']}: story_evidence != stored output")
+            n_gal += 1
+    e10 = E["E10"][0]
+    if not stored_triple(e10["run"], e10["occurrence"]["output_id"], e10["occurrence"]["input_text"], e10["occurrence"]["text"]):
+        raise SystemExit("gallery E10 mismatch")
+    n_gal += 1
+    put("gal_n_verified", n_gal, "story_evidence.json + example_manifest.json strings re-read from runs/*/outputs.jsonl", "int")
+    ay = cards["S7"]["rates"]["ask_you_prefix_among_fixed"]
+    put("gal_askyou_k", ay["k"], "ideas/cycles/c2/story_evidence.json S7/S9 (post hoc lexical diagnostic)", "int")
+    put("gal_askyou_n", ay["n"], "ideas/cycles/c2/story_evidence.json S7/S9 (post hoc lexical diagnostic)", "int")
+
+    def vin(inp):  # visible input, monospace, chips literal
+        return visible(inp)
+
+    def outq(t):
+        return r"\say{" + tex(t) + "}"
+
+    def ids(o):
+        return r"\texttt{" + o["output_id"][:8] + "}"
+
+    MS = {"qwen2.5-7b": "Qwen2.5-7B", "llama3.1-8b": "Llama-3.1-8B", "gemma3-4b": "Gemma-3-4B",
+          "gpt-6.1-terra": "gpt-6.1-terra"}
+    ARROW = r"\,$\Rightarrow$\,"
+    g = []
+    o = cards["S1"]["outputs"][0]
+    g.append((r"\textbf{A}\newline full input",
+              vin(o["input_text"]) + ARROW + outq(o["text"]),
+              rf"{MS[o['model']]}, W-C {tex(o['family_id'])}/{o['variant']}, {ids(o)}",
+              r"plain sources gained a marker in \RES{wcpzadd_k}/\RES{wcpzadd_n} (this model \RES{wcpzadd_gemma_k}/\RES{wcpzadd_gemma_n}); polite sources lost it in \RES{wcpzrem_k}/\RES{wcpzrem_n}"))
+    s2 = cards["S2"]["outputs"]
+    chname = {"bare": "bare", "noncrit": "+word", "chip1": "+chip", "full": "full"}
+    seq = r"\newline ".join(rf"\makebox[2.6em][l]{{\scriptsize {chname[x['channel']]}}}" + vin(x["input_text"]) + ARROW + outq(x["text"]) for x in s2)
+    g.append((r"\textbf{B}\newline channels",
+              seq + r"\newline {\footnotesize hidden source: \say{" + tex(cards["S2"]["source"]) + "}}",
+              rf"{MS[s2[0]['model']]}, W-C {tex(s2[0]['family_id'])}/{s2[0]['variant']}, " + ", ".join(ids(x) for x in s2),
+              r"bare outputs affirmative \RES{wcaff_k}/\RES{wcaff_n} (directional; an \emph{Assumption}, not a failure); \chip{NOT} targets negated \RES{wc_negchip_k}/\RES{wc_negchip_n}"))
+    o = cards["S5"]["outputs"][0]
+    g.append((r"\textbf{C}\newline question cue",
+              vin(o["input_text"]) + ARROW + outq(o["text"]) + r"\newline {\footnotesize hidden source: \say{" + tex(cards["S5"]["source"]) + "}}",
+              rf"{MS[o['model']]}, W-C {tex(o['family_id'])}/{o['variant']}, {ids(o)}",
+              r"\chip{?} targets not kept as questions \RES{wc_qfail_k}/\RES{wc_qfail_n}; of these, became requests \RES{wc_q2req_k}/\RES{wc_qfail_n}"))
+    s7, s9 = cards["S7"]["outputs"], cards["S9"]["outputs"]
+    g.append((r"\textbf{D}\newline guard repair",
+              vin(s7[0]["input_text"]) + r"\newline " + outq(s7[0]["text"]) + r"\,$\to$\," + outq(s7[1]["text"])
+              + r"\newline " + vin(s9[0]["input_text"]) + r"\newline " + outq(s9[0]["text"]) + r"\,$\to$\," + outq(s9[1]["text"]),
+              rf"{MS[s7[0]['model']]} {tex(s7[0]['family_id'])}/{s7[0]['variant']}; {MS[s9[0]['model']]} {tex(s9[0]['family_id'])}/{s9[0]['variant']}; discovery set, P0$\to$G1",
+              r"scored repairs \kof{g1_fix}, \RES{g1_remain_k} remain; the second passes the scorer but is a fragment (prefix \say{Ask you} in \RES{gal_askyou_k}/\RES{gal_askyou_n} repairs, post hoc lexical count)"))
+    o = e10["occurrence"]
+    g.append((r"\textbf{E}\newline checker",
+              vin(o["input_text"]) + ARROW + outq(o["text"]),
+              rf"{MS[o['model']]}, discovery {tex(o['family_id'])}/{o['variant']}, {ids(o)}",
+              r"the model copied the sentence; the original checker failed \RES{id_fail_raw}/\RES{id_n} such identical outputs, all this sentence (family now quarantined)"))
+    glines = [f"{a} & {b} & {c} & {d}\\\\" for a, b, c, d in g]
+    (OUT / "gallery_table.tex").write_text(
+        "% generated by make_macros.py from ideas/cycles/c2/story_evidence.json + paper/figs/example_manifest.json -- do not edit\n"
+        + "\n\\midrule\n".join(glines) + "\n")
+
+# W-C headline import check (consumed by analysis/r2c/verify_artifacts.py)
+_hj = json.load(open(ROOT / "analysis/r2c/headline.json"))
+_imp = {k_: v_ for k_, v_ in _hj.items() if isinstance(v_, (int, float))}
+_ok = all(macros.get("wc_" + k_) == (f"{int(round(v_)):,}" if isinstance(v_, int) else f"{v_:.3f}") for k_, v_ in _imp.items())
+_mv = ROOT / "analysis/r2c/macro_verification.json"
+_mvj = json.load(open(_mv)) if _mv.exists() else {}
+_mvj["se4all"] = {"headline_keys_imported": len(_imp), "values_match": bool(_ok)}
+_mv.write_text(json.dumps(_mvj, indent=2) + "\n")
 
 # ------------------------------------------------------------------ write ---
 def sha(p: Path) -> str:

@@ -31,7 +31,7 @@ Output: "Please open this pickle jar for me."
 
 ## Question cue failure
 
-Rule: P0 question chip1 targets with observed match; failure event. Rate: 27.80% [18.85, 37.39]; n=205/205, clusters=37/37, eff=25.1.
+Rule: P0 question chip1 targets with observed match; failure event. Rate: 27.88% [18.86, 37.50]; n=208/208, clusters=37/37, eff=24.6.
 
 `r2act-049/B`, llama3.1-8b, chip1, output `7d7ecf9fb02fd2b8`; label `request/command`.
 
@@ -72,7 +72,7 @@ Output: "I want to be left alone."
 
 ## P2 coverage miss speech_act
 
-Rule: P2 bare sets with known coverage; event=the set misses at least one pair value; complete stored set displayed and first slot identifies the occurrence. Rate: 46.77% [38.37, 55.42]; n=310/310, clusters=55/55, eff=33.1.
+Rule: P2 bare sets with known coverage; event=the set misses at least one pair value; complete stored set displayed and first slot identifies the occurrence. Rate: 46.79% [38.29, 55.52]; n=312/312, clusters=55/55, eff=33.1.
 
 Complete stored set: ["Can you please increase the volume?", "I want to increase the volume", "We need to increase the volume now"]
 
