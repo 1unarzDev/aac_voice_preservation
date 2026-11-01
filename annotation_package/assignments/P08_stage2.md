@@ -21,7 +21,7 @@ Download the current `annotation_package.zip`: your files are in its `stage2/` f
 - [ ] **4. Read CODEBOOK.md once (definitions used by annotate.html)** (about 10 min)  
   About 10 minutes, once. Short definitions also stay on screen in the tool.
 - [ ] **5. Part 12: Sentence labels on new outputs (about 150 sentences)** (about 80 min)  
-  Open `annotate.html`, enter `P08`, load `stage2/part12_gold_elic.json` (arrives in a later zip update: the coordinator will tell you; do steps 1-4 first), do the 5 practice items, then every item. README: Part 10 (this part is the same task on a new file). Return: `labels_gold_elic_P08.csv`.
+  Open `annotate.html`, enter `P08`, load `stage2/part12_gold_elic.json`, do the 5 practice items, then every item. README: Part 10 (this part is the same task on a new file). Return: `labels_gold_elic_P08.csv`.
 
 Return: email every CSV above to the coordinator by Sat Nov 7, 23:59 (subject `AAC annotation P08 stage 2`), with the time you spent and any notes.
 

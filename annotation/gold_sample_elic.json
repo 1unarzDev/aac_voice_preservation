@@ -1,0 +1,121 @@
+{
+ "name": "elic",
+ "seed": 20261105,
+ "allocation": {
+  "human": 150
+ },
+ "run": "elic1",
+ "frame_units_before_exclusions": 7980,
+ "exclusions": {
+  "excluded_set": 2013,
+  "coder_keywords": 0
+ },
+ "part12_coders": [
+  "P03",
+  "P08",
+  "P13",
+  "P19"
+ ],
+ "excluded_sets": [
+  "s01",
+  "s02",
+  "s03",
+  "s04"
+ ],
+ "strata": "run x dimension x production critical label (DISAGREE if J1!=J2) x group (human|pos_cap4)",
+ "weights": "w=(1+3*J1/J2 disagreement+2*positive)/sqrt(stratum size); Poisson PPS per group; fixed sha1 unit order, one seeded uniform per unit",
+ "groups": {
+  "human": {
+   "frame": {
+    "n": 4220,
+    "disagree": 594,
+    "positive": 4144,
+    "by_dimension": {
+     "agent": 605,
+     "certainty": 625,
+     "polarity": 927,
+     "politeness": 734,
+     "speech_act": 1329
+    },
+    "by_model": {
+     "gemma3-4b": 1204,
+     "gpt-6.1-terra": 991,
+     "llama3.1-8b": 1375,
+     "qwen2.5-7b": 650
+    },
+    "by_stratum": {
+     "elic1|agent|DISAGREE|human": 21,
+     "elic1|agent|addressee|human": 101,
+     "elic1|agent|speaker|human": 278,
+     "elic1|agent|third party|human": 103,
+     "elic1|agent|unclear/mixed|human": 71,
+     "elic1|agent|we/joint|human": 31,
+     "elic1|certainty|DISAGREE|human": 21,
+     "elic1|certainty|hedged/uncertain|human": 176,
+     "elic1|certainty|plain assertion|human": 282,
+     "elic1|certainty|strongly certain/emphatic|human": 75,
+     "elic1|certainty|unclear/mixed|human": 71,
+     "elic1|polarity|DISAGREE|human": 14,
+     "elic1|polarity|affirmative|human": 337,
+     "elic1|polarity|negated|human": 516,
+     "elic1|polarity|unclear/mixed|human": 60,
+     "elic1|politeness|plain|human": 343,
+     "elic1|politeness|polite|human": 391,
+     "elic1|speech_act|DISAGREE|human": 20,
+     "elic1|speech_act|offer/suggestion|human": 35,
+     "elic1|speech_act|question|human": 345,
+     "elic1|speech_act|request/command|human": 314,
+     "elic1|speech_act|statement|human": 588,
+     "elic1|speech_act|unclear/mixed|human": 27
+    }
+   },
+   "sample": {
+    "n": 161,
+    "disagree": 49,
+    "positive": 160,
+    "by_dimension": {
+     "agent": 41,
+     "certainty": 25,
+     "polarity": 27,
+     "politeness": 24,
+     "speech_act": 44
+    },
+    "by_model": {
+     "gemma3-4b": 50,
+     "gpt-6.1-terra": 31,
+     "llama3.1-8b": 44,
+     "qwen2.5-7b": 36
+    },
+    "by_stratum": {
+     "elic1|agent|DISAGREE|human": 4,
+     "elic1|agent|addressee|human": 8,
+     "elic1|agent|speaker|human": 12,
+     "elic1|agent|third party|human": 8,
+     "elic1|agent|unclear/mixed|human": 3,
+     "elic1|agent|we/joint|human": 6,
+     "elic1|certainty|DISAGREE|human": 4,
+     "elic1|certainty|hedged/uncertain|human": 4,
+     "elic1|certainty|plain assertion|human": 8,
+     "elic1|certainty|strongly certain/emphatic|human": 6,
+     "elic1|certainty|unclear/mixed|human": 3,
+     "elic1|polarity|DISAGREE|human": 1,
+     "elic1|polarity|affirmative|human": 10,
+     "elic1|polarity|negated|human": 13,
+     "elic1|polarity|unclear/mixed|human": 3,
+     "elic1|politeness|plain|human": 16,
+     "elic1|politeness|polite|human": 8,
+     "elic1|speech_act|DISAGREE|human": 8,
+     "elic1|speech_act|offer/suggestion|human": 4,
+     "elic1|speech_act|question|human": 9,
+     "elic1|speech_act|request/command|human": 6,
+     "elic1|speech_act|statement|human": 14,
+     "elic1|speech_act|unclear/mixed|human": 3
+    }
+   },
+   "expected_n": 150.0
+  }
+ },
+ "sample_total": 161,
+ "key_sha256": "1d9217ffe91d89d70e3504cac7b02d82471f343548dd2f55dcd6876d9b4b3fb8",
+ "part_sha256": "aff15e3f90875ce54fb26bbcec58471c712fffc3b47f9216e1fe3a4f97be92df"
+}
