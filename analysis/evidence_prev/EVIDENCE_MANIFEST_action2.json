@@ -1,0 +1,2271 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-01T03:57:28.553549+00:00",
+  "command": "python src/freeze_evidence.py --commands analysis/refresh_commands.json",
+  "scope_runs": [
+    "pilot1",
+    "main1",
+    "guard1",
+    "span1",
+    "expB1",
+    "expC1",
+    "oracle_inject",
+    "oracle_challenges"
+  ],
+  "excluded_runs": [
+    "r2c1",
+    "r2d1",
+    "wb1"
+  ],
+  "provenance_note": "null producing_command = historical command not recorded; source files are inputs",
+  "files": [
+    {
+      "path": "analysis/EVIDENCE_MANIFEST_prev.json",
+      "sha256": "482bf7f7f4bec3c138436043e36e6b8e70ebd5a710a001c3c6c43173c44dcd4e",
+      "mtime": "2026-11-01T03:42:37.198523+00:00",
+      "mtime_ns": 1793504557198522783,
+      "size_bytes": 60399,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/changed_endpoints.csv",
+      "sha256": "fc1a83e6e3d20ecb29ea4fbd999d65d961ec863698b957010387953923ff8b00",
+      "mtime": "2026-11-01T03:55:52.243998+00:00",
+      "mtime_ns": 1793505352243997457,
+      "size_bytes": 2321010,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py"
+    },
+    {
+      "path": "analysis/changed_labels.csv",
+      "sha256": "5983e86a64e07339d50796b8f0f68dbed8336ca6badae773c97fd8015d3db7d8",
+      "mtime": "2026-11-01T03:55:51.871000+00:00",
+      "mtime_ns": 1793505351870999624,
+      "size_bytes": 34762,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py"
+    },
+    {
+      "path": "analysis/interventions/pilot.json",
+      "sha256": "327ce97a083864ef04434534ce4ee80150612140e86793ba7c13b092713623ee",
+      "mtime": "2026-11-01T02:55:28.562824+00:00",
+      "mtime_ns": 1793501728562824413,
+      "size_bytes": 20004,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/interventions/pilot.md",
+      "sha256": "3fe64ac58a8fd3df08705bbaa7d61d410a916142bd40515b295b1262d1a3f313",
+      "mtime": "2026-11-01T02:55:28.561726+00:00",
+      "mtime_ns": 1793501728561725501,
+      "size_bytes": 19438,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/interventions/report.json",
+      "sha256": "790f5c687bbaace23092799f34f07cb1a37fb53a97ce5953f19c09098edcab99",
+      "mtime": "2026-11-01T03:55:12.498544+00:00",
+      "mtime_ns": 1793505312498543525,
+      "size_bytes": 45767,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/interventions.py report --guard guard1 --span span1 --out analysis/interventions/report.md --title 'Interventions (refreshed ACTION 2)'"
+    },
+    {
+      "path": "analysis/interventions/report.md",
+      "sha256": "7e96ed4281f61ae21f9a5589f59152c4ac1b0b7da4db015d584360c2b3d3dcc9",
+      "mtime": "2026-11-01T03:55:12.497343+00:00",
+      "mtime_ns": 1793505312497342617,
+      "size_bytes": 32858,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/interventions.py report --guard guard1 --span span1 --out analysis/interventions/report.md --title 'Interventions (refreshed ACTION 2)'"
+    },
+    {
+      "path": "analysis/label_resolution_summary.json",
+      "sha256": "645a825d22c33d20f557749339f7923d7e8b6b4ca6d15c47e70359332819ed8b",
+      "mtime": "2026-11-01T03:45:05.932166+00:00",
+      "mtime_ns": 1793504705932165516,
+      "size_bytes": 304,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/resolve_labels.py"
+    },
+    {
+      "path": "analysis/label_sensitivity.csv",
+      "sha256": "8945cca1d7ab8d4ef58832b75358b88ce10ff187c2bd6bfd6109df08b961e896",
+      "mtime": "2026-11-01T03:55:51.885000+00:00",
+      "mtime_ns": 1793505351884999543,
+      "size_bytes": 214493,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py"
+    },
+    {
+      "path": "analysis/main1/F1_attribution.pdf",
+      "sha256": "f3605db0d1e297a10fade23e971f3b1e21ef2b82684a55b330af6324747c5328",
+      "mtime": "2026-11-01T03:46:32.225496+00:00",
+      "mtime_ns": 1793504792225495744,
+      "size_bytes": 21029,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F1_attribution.png",
+      "sha256": "2cfaf96c3c6ff79aed4ad6811a6e0fccb0a0d3fdfab74e7912f81c079f41d37a",
+      "mtime": "2026-11-01T03:46:32.857491+00:00",
+      "mtime_ns": 1793504792857491401,
+      "size_bytes": 268733,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F2_defaults.pdf",
+      "sha256": "a89236d12fb5ddc74ccf4ba0d73ca01ee9b55574d0ced414525d93ef382fafcf",
+      "mtime": "2026-11-01T03:46:33.257489+00:00",
+      "mtime_ns": 1793504793257488652,
+      "size_bytes": 13613,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F2_defaults.png",
+      "sha256": "165be3ae862fc8c8f8207e8f7d448788c429a86b7c8ddc4cf824d15ff892e28e",
+      "mtime": "2026-11-01T03:46:33.615486+00:00",
+      "mtime_ns": 1793504793615486193,
+      "size_bytes": 122051,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F3_pareto.pdf",
+      "sha256": "df3e145b676928661a2a40a9c1cc0267e36c688aef35ea86e965e38c6cef6386",
+      "mtime": "2026-11-01T03:46:34.904477+00:00",
+      "mtime_ns": 1793504794904477341,
+      "size_bytes": 21885,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F3_pareto.png",
+      "sha256": "95bfd7f7a4b280ec034d77114eb7182f056beac219ba835d80dbea5e079ebcf0",
+      "mtime": "2026-11-01T03:46:35.740472+00:00",
+      "mtime_ns": 1793504795740471603,
+      "size_bytes": 289458,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F4_coverage.pdf",
+      "sha256": "8de9379272f2a0c6adbfa443ecb24d3b680230e1f515a108b6fa0a06501ec037",
+      "mtime": "2026-11-01T03:46:36.534466+00:00",
+      "mtime_ns": 1793504796534466155,
+      "size_bytes": 19032,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F4_coverage.png",
+      "sha256": "16e6cb145b0d06d59e16802acbd0ea354fbbe46d333221a14f13fba2b50925d7",
+      "mtime": "2026-11-01T03:46:36.989463+00:00",
+      "mtime_ns": 1793504796989463033,
+      "size_bytes": 217748,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F5_stance.pdf",
+      "sha256": "3d204ac38859f36a95fdc98fc4226eed53e8fd9d137cf15a7223503f154948bb",
+      "mtime": "2026-11-01T03:46:37.518265+00:00",
+      "mtime_ns": 1793504797518264982,
+      "size_bytes": 28216,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/F5_stance.png",
+      "sha256": "a5f5d7689461a12fd11b45a5c159a895f589c3fbf70913fa413e3e05d4bc3246",
+      "mtime": "2026-11-01T03:46:37.854457+00:00",
+      "mtime_ns": 1793504797854457102,
+      "size_bytes": 131701,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/commitment.csv",
+      "sha256": "a1d15e20c4554ed890eca0164cf318ca1b06edd37cc601c535780496ebc47499",
+      "mtime": "2026-11-01T03:46:28.964518+00:00",
+      "mtime_ns": 1793504788964518176,
+      "size_bytes": 15324,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/coverage.csv",
+      "sha256": "caa68a38892837e350f6fa4c17d3cae9ac26ec71b3c066079d791fb8c8a07322",
+      "mtime": "2026-11-01T03:46:28.993518+00:00",
+      "mtime_ns": 1793504788993517976,
+      "size_bytes": 23365,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/critical_match.csv",
+      "sha256": "e08d13f5d9e07ecb9b84657cd80854c6b42872075133d6e6907afc0ec5bc19fe",
+      "mtime": "2026-11-01T03:46:28.961910+00:00",
+      "mtime_ns": 1793504788961909725,
+      "size_bytes": 41042,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/cue_endpoints.csv",
+      "sha256": "77b2e0a79631bd95e7d27e89e7430cc73fda3e60bb01ec8555329b80374cd67c",
+      "mtime": "2026-11-01T03:46:28.963518+00:00",
+      "mtime_ns": 1793504788963518183,
+      "size_bytes": 50135,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/direction.csv",
+      "sha256": "07207cb49f23344d0fdac76c91f80e57e4faa6c86c154ee6680069e4ea38b6f6",
+      "mtime": "2026-11-01T03:46:28.971518+00:00",
+      "mtime_ns": 1793504788971518128,
+      "size_bytes": 120797,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/direction_values.csv",
+      "sha256": "29205202a461092badf118a4b0e82c6ba6b114e99de67b8cca1f525b66415b5c",
+      "mtime": "2026-11-01T03:46:28.972518+00:00",
+      "mtime_ns": 1793504788972518121,
+      "size_bytes": 2150,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/examples.md",
+      "sha256": "7bbf5a354e2ced4d18e3e649c288e1cc2294ed78ed90118c9027b1a5fbf26310",
+      "mtime": "2026-11-01T03:46:29.650247+00:00",
+      "mtime_ns": 1793504789650247274,
+      "size_bytes": 13967,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/fidelity_cost.csv",
+      "sha256": "42edbe30f0fed573f16049e6712b5a822a37c0819ccc41632f2f5fa95f513c64",
+      "mtime": "2026-11-01T03:46:29.004518+00:00",
+      "mtime_ns": 1793504789004517900,
+      "size_bytes": 190805,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/label_counts.csv",
+      "sha256": "03e24fd5f05fc182bece119b18e788723edbaaf712595c5d88cfb8b3bb8a3aae",
+      "mtime": "2026-11-01T03:46:29.006518+00:00",
+      "mtime_ns": 1793504789006517886,
+      "size_bytes": 20780,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/metadata.json",
+      "sha256": "22b3587db88eb86c424dc4f6bf0cde094af9c25725778ba73c7aa310e071b5e8",
+      "mtime": "2026-11-01T03:46:29.652635+00:00",
+      "mtime_ns": 1793504789652635339,
+      "size_bytes": 1359,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/paired_differences.csv",
+      "sha256": "c6bc11e2c209dc46bf3a28cfdb44c19eb037006d0e2a16a5cfdc5867cd87a1bc",
+      "mtime": "2026-11-01T03:46:28.973518+00:00",
+      "mtime_ns": 1793504788973518114,
+      "size_bytes": 21742,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/pareto.csv",
+      "sha256": "71eff1e6d7c06b046fd7091e63a16f336466678aad9883ad2f410622d8fd8270",
+      "mtime": "2026-11-01T03:46:29.008518+00:00",
+      "mtime_ns": 1793504789008517873,
+      "size_bytes": 30187,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/reaching_cost.csv",
+      "sha256": "ce1b544f623c69421a7f996e0d0aadf163830c390f3b25fe44dee74a63f1f978",
+      "mtime": "2026-11-01T03:46:28.994518+00:00",
+      "mtime_ns": 1793504788994517969,
+      "size_bytes": 31696,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/reaching_cost_by_model.csv",
+      "sha256": "3405f5623dc00c5e3abdd88b4fcd47af7eb2e9dfe86f646f506cbb1ffb66d970",
+      "mtime": "2026-11-01T03:46:28.997438+00:00",
+      "mtime_ns": 1793504788997437703,
+      "size_bytes": 14820,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/report.md",
+      "sha256": "23c5d65a6eeb8fa282ba3874530e6b778e7b9ac31ebe70173264183c26352374",
+      "mtime": "2026-11-01T03:46:38.062456+00:00",
+      "mtime_ns": 1793504798062455676,
+      "size_bytes": 1498891,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/scored.parquet",
+      "sha256": "56de497acd2243de00696e842ca5f8754558c15349d757741aecd8e1dc1008b7",
+      "mtime": "2026-11-01T03:45:50.786783+00:00",
+      "mtime_ns": 1793504750786783336,
+      "size_bytes": 1137651,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/sensitivity_quarantine_refusal_acceptance.csv",
+      "sha256": "6ca9f64ec4ba078335eecb9b44b5a6e5d0cbd03e895c683a2be2e0d88dea9a1a",
+      "mtime": "2026-11-01T03:46:29.017518+00:00",
+      "mtime_ns": 1793504789017517811,
+      "size_bytes": 75352,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/sensitivity_without_act01_act02.csv",
+      "sha256": "b27739135154459874675a884de861433481e87ed1ac7aa90129baac5ad2bc72",
+      "mtime": "2026-11-01T03:46:29.013518+00:00",
+      "mtime_ns": 1793504789013517838,
+      "size_bytes": 81568,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/stance_additions.csv",
+      "sha256": "c0cb1b7db8f690014ace84950f9cc63298d915deb0ce41c1d2dfdcab2f721189",
+      "mtime": "2026-11-01T03:46:28.980518+00:00",
+      "mtime_ns": 1793504788980518066,
+      "size_bytes": 134484,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/stance_overall.csv",
+      "sha256": "0b1526176645dbd9f82dcbdd27e065a1ffdc44cc4017774ce84b076478ad5c89",
+      "mtime": "2026-11-01T03:46:28.982518+00:00",
+      "mtime_ns": 1793504788982518052,
+      "size_bytes": 29935,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/suggestion_additions.csv",
+      "sha256": "d8925512a5b24182854915753aac2a7c4b48e3f5797ba241e7ba6af177bfc0f6",
+      "mtime": "2026-11-01T03:46:28.991518+00:00",
+      "mtime_ns": 1793504788991517989,
+      "size_bytes": 192613,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1/suggestion_sets.csv",
+      "sha256": "55b43846bde43284bfaae6897ae34372ec0bcfc28ab4e298d39e72d93a2e5e54",
+      "mtime": "2026-11-01T03:46:29.033518+00:00",
+      "mtime_ns": 1793504789033517701,
+      "size_bytes": 713716,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F1_attribution.pdf",
+      "sha256": "232a9ab685892a57b63cc87014a5bc49d0b4c55e4fc2e3b4b035fb544d767338",
+      "mtime": "2026-11-01T03:47:20.605512+00:00",
+      "mtime_ns": 1793504840605511685,
+      "size_bytes": 20925,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F1_attribution.png",
+      "sha256": "2845675d1aeeaf909425eab29eec60f8c1facbe643eca2201466b4431fb3cab4",
+      "mtime": "2026-11-01T03:47:21.104163+00:00",
+      "mtime_ns": 1793504841104163386,
+      "size_bytes": 270620,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F2_defaults.pdf",
+      "sha256": "eb73aeb4f6ed2bf5f48b2f657b87929793832f19afd8979e8938cee89c82751c",
+      "mtime": "2026-11-01T03:47:21.524161+00:00",
+      "mtime_ns": 1793504841524160561,
+      "size_bytes": 13619,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F2_defaults.png",
+      "sha256": "e9d36e36f7e0c49100269878b47a4d738a0f2957eb0ad21686d7eaa8c3728527",
+      "mtime": "2026-11-01T03:47:21.822159+00:00",
+      "mtime_ns": 1793504841822158556,
+      "size_bytes": 121975,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F3_pareto.pdf",
+      "sha256": "90b8f893ab53dcbe42fdd60f9940da981a13f498f46bc17366b7b54a95c0292b",
+      "mtime": "2026-11-01T03:47:23.007151+00:00",
+      "mtime_ns": 1793504843007150588,
+      "size_bytes": 21890,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F3_pareto.png",
+      "sha256": "885124b094dc0649e31bb146ab85e04d33d6b7b63259f7f11516becaa9dbb1dc",
+      "mtime": "2026-11-01T03:47:23.904145+00:00",
+      "mtime_ns": 1793504843904144559,
+      "size_bytes": 288915,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F4_coverage.pdf",
+      "sha256": "34c4331d9e80183abb96cab0bbe94d0f93eccbad70591a4b840f02206a17ab4a",
+      "mtime": "2026-11-01T03:47:25.025137+00:00",
+      "mtime_ns": 1793504845025137027,
+      "size_bytes": 19036,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F4_coverage.png",
+      "sha256": "5b54e7b36d11b47d57a64408bc9e75f88f1461a32fbe280ab4b071f4b48fb4d1",
+      "mtime": "2026-11-01T03:47:25.716132+00:00",
+      "mtime_ns": 1793504845716132387,
+      "size_bytes": 217484,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F5_stance.pdf",
+      "sha256": "fc4715022fcf8b8a7964f93de4745b969257e3b77494d0aa768c2c8139188c8c",
+      "mtime": "2026-11-01T03:47:26.614126+00:00",
+      "mtime_ns": 1793504846614126358,
+      "size_bytes": 28210,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/F5_stance.png",
+      "sha256": "43578781d4f6c455da585f793423007411c6e075fb8eea89c9c3818fcd03690f",
+      "mtime": "2026-11-01T03:47:27.063123+00:00",
+      "mtime_ns": 1793504847063123344,
+      "size_bytes": 131673,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/commitment.csv",
+      "sha256": "1dc7f8858622a3d63e9584f7084b153e85dceebd7471868332735f3635a7ed7f",
+      "mtime": "2026-11-01T03:47:17.673187+00:00",
+      "mtime_ns": 1793504837673186486,
+      "size_bytes": 15442,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/coverage.csv",
+      "sha256": "6411449dc98d5962526dd97f8f73e4447c26f072690afe63f264976bb2319dff",
+      "mtime": "2026-11-01T03:47:17.696186+00:00",
+      "mtime_ns": 1793504837696186331,
+      "size_bytes": 23469,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/critical_match.csv",
+      "sha256": "72c0e1efcfc430c492fbdc05bfd6b944733fb66f82a0799292bf5e34e0c12fa4",
+      "mtime": "2026-11-01T03:47:17.669187+00:00",
+      "mtime_ns": 1793504837669186513,
+      "size_bytes": 41236,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/cue_endpoints.csv",
+      "sha256": "b2fbec8029cfe10e806060b91277c1c1c0c042d35c174eccc5b9143f62dcbb2d",
+      "mtime": "2026-11-01T03:47:17.672186+00:00",
+      "mtime_ns": 1793504837672186493,
+      "size_bytes": 50410,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/direction.csv",
+      "sha256": "91c84ffd1e034906d424537aadbb46356ae12bc369506fa1960bf1f7ba108a34",
+      "mtime": "2026-11-01T03:47:17.678186+00:00",
+      "mtime_ns": 1793504837678186453,
+      "size_bytes": 121481,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/direction_values.csv",
+      "sha256": "042c78de98a3a1ad1845c80ca11f05f05ac409f340e12765b42cfa79f3c25e68",
+      "mtime": "2026-11-01T03:47:17.679163+00:00",
+      "mtime_ns": 1793504837679162591,
+      "size_bytes": 2224,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/examples.md",
+      "sha256": "bb11de734521f6b8fac60990503337afa74a6490247fdb2a6c44875b95b85271",
+      "mtime": "2026-11-01T03:47:18.454181+00:00",
+      "mtime_ns": 1793504838454181225,
+      "size_bytes": 14010,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/fidelity_cost.csv",
+      "sha256": "163c8b2ae6cb738c69ddd800a734db77d83dcdf0fd8028bb914ce763725c7086",
+      "mtime": "2026-11-01T03:47:17.708186+00:00",
+      "mtime_ns": 1793504837708186250,
+      "size_bytes": 190470,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/label_counts.csv",
+      "sha256": "beadc95459b5a84f3cbb544505f4500b4a94264d0fc056fe4506d56605f769af",
+      "mtime": "2026-11-01T03:47:17.711186+00:00",
+      "mtime_ns": 1793504837711186230,
+      "size_bytes": 20860,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/metadata.json",
+      "sha256": "378a452320d01f3e7357b160a54fe3934d8aa40e93795ad097835ce89989b89e",
+      "mtime": "2026-11-01T03:47:18.457788+00:00",
+      "mtime_ns": 1793504838457787482,
+      "size_bytes": 1358,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/paired_differences.csv",
+      "sha256": "f74fda0ee7427f58d0eeab0885ef647d7bb65eaa5a407233ce70e23cb47a057d",
+      "mtime": "2026-11-01T03:47:17.680187+00:00",
+      "mtime_ns": 1793504837680186439,
+      "size_bytes": 21837,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/pareto.csv",
+      "sha256": "8fbaaa8b333e7a798684b4b8bdba8ee45c17e47860f40ce712bbfb68c32804c5",
+      "mtime": "2026-11-01T03:47:17.714186+00:00",
+      "mtime_ns": 1793504837714186210,
+      "size_bytes": 29675,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/reaching_cost.csv",
+      "sha256": "1714188f571afe7753619be486da6989423a10c82512af4539e245e6456d519b",
+      "mtime": "2026-11-01T03:47:17.698186+00:00",
+      "mtime_ns": 1793504837698186318,
+      "size_bytes": 31680,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/reaching_cost_by_model.csv",
+      "sha256": "61d21ef5ad675859753de4dadf5b803919d31e0924b61bf584e9a78c00d0a23e",
+      "mtime": "2026-11-01T03:47:17.699186+00:00",
+      "mtime_ns": 1793504837699186311,
+      "size_bytes": 14848,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/report.md",
+      "sha256": "0b1e191a122105b2d83fdb0ea05cabf46fec6cdaa07301715a5d00dd058c3273",
+      "mtime": "2026-11-01T03:47:27.271122+00:00",
+      "mtime_ns": 1793504847271121949,
+      "size_bytes": 1502670,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/scored.parquet",
+      "sha256": "bd298387a859d72cd6effc49b98692d457b8a1a0431d32d6a25c9a1ed068863b",
+      "mtime": "2026-11-01T03:46:39.600445+00:00",
+      "mtime_ns": 1793504799600445136,
+      "size_bytes": 1177066,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/sensitivity_quarantine_refusal_acceptance.csv",
+      "sha256": "6ca9f64ec4ba078335eecb9b44b5a6e5d0cbd03e895c683a2be2e0d88dea9a1a",
+      "mtime": "2026-11-01T03:47:17.724186+00:00",
+      "mtime_ns": 1793504837724186143,
+      "size_bytes": 75352,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/sensitivity_without_act01_act02.csv",
+      "sha256": "d426bbc6e0d5dfc7cb5c6e774395a939151afb7bd99e3ae40e46c16a90052952",
+      "mtime": "2026-11-01T03:47:17.719186+00:00",
+      "mtime_ns": 1793504837719186176,
+      "size_bytes": 81894,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/stance_additions.csv",
+      "sha256": "cc90ac7f935acadd2b82dd326f47590decdf5106efb71e5c75502aefd6d97ba8",
+      "mtime": "2026-11-01T03:47:17.684186+00:00",
+      "mtime_ns": 1793504837684186412,
+      "size_bytes": 135264,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/stance_overall.csv",
+      "sha256": "96abe1f9d9b478b49b2ebaeae21f46a7b850799f2e9d4b63bd2decd76d081c87",
+      "mtime": "2026-11-01T03:47:17.686186+00:00",
+      "mtime_ns": 1793504837686186399,
+      "size_bytes": 29161,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/suggestion_additions.csv",
+      "sha256": "6c630f7f2b6a2768b4912321be610eba1672ac3e1970e9e4e428c8acbed24cd7",
+      "mtime": "2026-11-01T03:47:17.694186+00:00",
+      "mtime_ns": 1793504837694186345,
+      "size_bytes": 193248,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/main1_quarantine_inclusive/suggestion_sets.csv",
+      "sha256": "09846ca6bc85a0d24f0a64a46ca9afa64d4e5a58ef91ba12ecb7b97ff223e1e6",
+      "mtime": "2026-11-01T03:47:17.738186+00:00",
+      "mtime_ns": 1793504837738186049,
+      "size_bytes": 738368,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/analyze.py --table runs/main1/scored.parquet --tag main1_quarantine_inclusive --include-quarantine"
+    },
+    {
+      "path": "analysis/oracle/challenge_keys_frozen.sha256",
+      "sha256": "32a5411d19594db7323923dea8e162c0f6861e8b6b6d02362a3bf075984d01e4",
+      "mtime": "2026-11-01T02:40:14.030915+00:00",
+      "mtime_ns": 1793500814030915358,
+      "size_bytes": 420,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/challenge_results.csv",
+      "sha256": "0e20763de6737d4bb1f7ac1afdfca14ffb629a3e5e70dda0387bf30d01e92704",
+      "mtime": "2026-11-01T03:47:39.022351+00:00",
+      "mtime_ns": 1793504859022351377,
+      "size_bytes": 10621,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/injection_results.csv",
+      "sha256": "50f75ee0960013e3ec10eeed752960e06dc58a9bc856d64fa712f71f0b17273b",
+      "mtime": "2026-11-01T03:47:39.006043+00:00",
+      "mtime_ns": 1793504859006043392,
+      "size_bytes": 49015,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/judge_run.log",
+      "sha256": "57d490f11fbf80e35615fd4e60511c2ad04df485ba6ef1d10623399f94c9fa58",
+      "mtime": "2026-11-01T02:56:06.461816+00:00",
+      "mtime_ns": 1793501766461815821,
+      "size_bytes": 1285,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/refreshed_summary.json",
+      "sha256": "cfe4bbb154747026e0689f86e69cff5c7137e7d773895f92c386b0e5aff95952",
+      "mtime": "2026-11-01T03:47:41.196348+00:00",
+      "mtime_ns": 1793504861196347846,
+      "size_bytes": 1364,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/oracle_report.py"
+    },
+    {
+      "path": "analysis/oracle/report.md",
+      "sha256": "0540c043fc93d44636d214741812511a101f430a625259d89128c6a5cd8b5712",
+      "mtime": "2026-11-01T03:47:41.258026+00:00",
+      "mtime_ns": 1793504861258025934,
+      "size_bytes": 41531,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/oracle_report.py"
+    },
+    {
+      "path": "analysis/oracle/report_intro.md",
+      "sha256": "e2b2688adb572391891cbbf9d2a364a861b002985e51c14d54cba2571c6ecd4d",
+      "mtime": "2026-11-01T03:02:36.843409+00:00",
+      "mtime_ns": 1793502156843409076,
+      "size_bytes": 6126,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/report_outro.md",
+      "sha256": "a9bb0c951336291aca5f3191f17f14a8c301d4b8e4be90ea56f98de5fe19495a",
+      "mtime": "2026-11-01T03:02:36.853409+00:00",
+      "mtime_ns": 1793502156853408749,
+      "size_bytes": 4188,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/sections.json",
+      "sha256": "4d751619a8aba99d19e50a9e1e9eab08b24d542ed2362154547f553e4fe14b11",
+      "mtime": "2026-11-01T02:59:46.062595+00:00",
+      "mtime_ns": 1793501986062594594,
+      "size_bytes": 23789,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/source_mutations.jsonl",
+      "sha256": "7ebb5ed038be148730ab76744ad791045b7ef2fca88d72e8f5d2e0bbdb13431e",
+      "mtime": "2026-11-01T02:40:14.027234+00:00",
+      "mtime_ns": 1793500814027234405,
+      "size_bytes": 31156,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/oracle/verdict_validation.csv",
+      "sha256": "cb4e3a566737a65abf998c0db84fc8b8489d4b38b056ca3f8bb31b8f8a9f97af",
+      "mtime": "2026-11-01T03:47:39.691039+00:00",
+      "mtime_ns": 1793504859691038819,
+      "size_bytes": 55312,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/oracle_report.py"
+    },
+    {
+      "path": "analysis/oracle/verdict_validation_inclusive.csv",
+      "sha256": "753af79492986ae6ed2225f2067e8dd906a5cb4b8288def59d0539e14caabcd4",
+      "mtime": "2026-11-01T03:47:41.118029+00:00",
+      "mtime_ns": 1793504861118029295,
+      "size_bytes": 57909,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/oracle_report.py"
+    },
+    {
+      "path": "analysis/oracle/verdict_validation_sens_sol_astra.csv",
+      "sha256": "b155ceefbfe5637998921543d1254911b97f2f09cf61aa9dea3479aaae250b82",
+      "mtime": "2026-11-01T03:47:40.460055+00:00",
+      "mtime_ns": 1793504860460055357,
+      "size_bytes": 55094,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/oracle_report.py"
+    },
+    {
+      "path": "analysis/pilot/G1_prelim_layer0.md",
+      "sha256": "2e871dbe063090bf7316f9270c071cc0f856cc959abc9e9cce3c10efd4ee72f4",
+      "mtime": "2026-11-01T01:16:14.652358+00:00",
+      "mtime_ns": 1793495774652357724,
+      "size_bytes": 1153,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/reconciliation.json",
+      "sha256": "740aa2630c858377696472d32e778f59c7b860729d470d0873ae610204f7826d",
+      "mtime": "2026-11-01T03:55:52.273049+00:00",
+      "mtime_ns": 1793505352273049213,
+      "size_bytes": 3303,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py"
+    },
+    {
+      "path": "analysis/reconciliation.md",
+      "sha256": "2efbe733dfc5b1fc743304715fb61a438f0d81bd98341dcaf758f1ddf47c8af0",
+      "mtime": "2026-11-01T03:55:52.271997+00:00",
+      "mtime_ns": 1793505352271997294,
+      "size_bytes": 2381167,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py"
+    },
+    {
+      "path": "analysis/refresh_commands.json",
+      "sha256": "c1ace706755d4f56e79d88c4afeb8f773f3e605674e81b18e46f523da45acb18",
+      "mtime": "2026-11-01T03:57:28.461301+00:00",
+      "mtime_ns": 1793505448461300734,
+      "size_bytes": 22217,
+      "producing_command": null
+    },
+    {
+      "path": "analysis/verify_reconciliation.json",
+      "sha256": "df68fad334ac0027ec62fa8d71fac6f89cb2a0c635a77ad6834efe1a4a46242f",
+      "mtime": "2026-11-01T03:57:28.219899+00:00",
+      "mtime_ns": 1793505448219899192,
+      "size_bytes": 558,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/verify_reconciliation.py"
+    },
+    {
+      "path": "annotation/CB_rules.md",
+      "sha256": "fb93e95e82abcdd8737bb62f4b57b9971831d1be6235eca05e2bf7a385bf7d23",
+      "mtime": "2026-11-01T01:19:46.779418+00:00",
+      "mtime_ns": 1793495986779417663,
+      "size_bytes": 1595,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/CODEBOOK.md",
+      "sha256": "f33f7afac16e2377fba3b7c68ddd2007b4a624d09dbb04e0932543cc2b3108a9",
+      "mtime": "2026-11-01T02:18:04.493623+00:00",
+      "mtime_ns": 1793499484493623358,
+      "size_bytes": 10924,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/HUMAN_ANNOTATION.md",
+      "sha256": "72b905a76a42a8273f712613c9d69cb9f2a95aa80f3cd018f2d7acb2d5d2ecdc",
+      "mtime": "2026-11-01T01:59:22.557585+00:00",
+      "mtime_ns": 1793498362557584815,
+      "size_bytes": 2767,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/challenge_items.jsonl",
+      "sha256": "c5d697330d81f7b7afd0dfbc1c8670ec828abf2ff613708524bc8f5f5fee60c2",
+      "mtime": "2026-11-01T01:39:57.170043+00:00",
+      "mtime_ns": 1793497197170043085,
+      "size_bytes": 4386,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/challenge_items_r2.jsonl",
+      "sha256": "99b146fcc9819afc33f2d4b15955b44d8d41e139ce2ef708cbe53d0bca4a2fab",
+      "mtime": "2026-11-01T02:38:52.469049+00:00",
+      "mtime_ns": 1793500732469049453,
+      "size_bytes": 26212,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/codexpanel_validation_main1_gpt56sol.csv",
+      "sha256": "7e986e2805afb1f39fe7f6e8698844d9b923a2fd03359f6ed21c32b78f839563",
+      "mtime": "2026-11-01T02:33:45.175343+00:00",
+      "mtime_ns": 1793500425175343027,
+      "size_bytes": 2584,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/codexpanel_validation_main1_gpt56sol.json",
+      "sha256": "d9046694b9cbd8b68745cdbd76f3a44c0566b6505607b832014158b4d563dc2e",
+      "mtime": "2026-11-01T02:33:45.175080+00:00",
+      "mtime_ns": 1793500425175080006,
+      "size_bytes": 149889,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_core.json",
+      "sha256": "591b753f1753116c1b26b68ecbaebf04ba93777528d3ec80af619b83cdb30291",
+      "mtime": "2026-11-01T01:58:31.912404+00:00",
+      "mtime_ns": 1793498311912403618,
+      "size_bytes": 62400,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_extraA.json",
+      "sha256": "47cd820619a6d89e115ad13d780a4bf1190eb98b8593795d67efa5e75b909f81",
+      "mtime": "2026-11-01T01:58:18.582009+00:00",
+      "mtime_ns": 1793498298582008815,
+      "size_bytes": 30899,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_extraB.json",
+      "sha256": "27153f4379ed0879b27169aa93811d04f65cc27857848655cb662f6087b8621b",
+      "mtime": "2026-11-01T01:58:18.582368+00:00",
+      "mtime_ns": 1793498298582368420,
+      "size_bytes": 29796,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_items_fixture.json",
+      "sha256": "725616b81638eb89d33f82a7a2a1f7f7e7ecdb6ba104f584dc0f54363fff0d13",
+      "mtime": "2026-11-01T01:22:23.298248+00:00",
+      "mtime_ns": 1793496143298247648,
+      "size_bytes": 24104,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_items_main1.json",
+      "sha256": "6a5d782db23a959c63d2012748cc4c73aac25f92e1211401109ce3d2e9a41273",
+      "mtime": "2026-11-01T01:58:08.428666+00:00",
+      "mtime_ns": 1793498288428666226,
+      "size_bytes": 97615,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_items_pilot1.json",
+      "sha256": "2a09f7321b159085aa45a307e789edf66e30c98e596afae83cf444aa07a768f8",
+      "mtime": "2026-11-01T01:37:34.665516+00:00",
+      "mtime_ns": 1793497054665516054,
+      "size_bytes": 95996,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_key_fixture.csv",
+      "sha256": "fe5ff548cde2117c25bf25136d1e0f208f1393aba447f81835bff417e97bc324",
+      "mtime": "2026-11-01T01:22:23.298264+00:00",
+      "mtime_ns": 1793496143298264259,
+      "size_bytes": 15260,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_key_main1.csv",
+      "sha256": "d98edfb1501b4850f6b89fcdcf06586869fc06fd3301b21916a145732a305455",
+      "mtime": "2026-11-01T01:58:08.429331+00:00",
+      "mtime_ns": 1793498288429330685,
+      "size_bytes": 76568,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/gold_key_pilot1.csv",
+      "sha256": "6739d00728dff5854607c553497bfb3fea84e3e577330599237d318267b44094",
+      "mtime": "2026-11-01T01:37:34.665880+00:00",
+      "mtime_ns": 1793497054665879615,
+      "size_bytes": 76049,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/judge_validation_main1.csv",
+      "sha256": "39aae35c6cb3fdb197924cb49adc1b4577271f9f53d3b3c481413813ebe49575",
+      "mtime": "2026-11-01T03:00:51.555187+00:00",
+      "mtime_ns": 1793502051555186670,
+      "size_bytes": 13638,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/judge_validation_main1.json",
+      "sha256": "9856e5b14d4457ab37deae7d7f1cf1d17a15612d78fbf59b165ea308802da9b2",
+      "mtime": "2026-11-01T03:00:51.551327+00:00",
+      "mtime_ns": 1793502051551326778,
+      "size_bytes": 510796,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/judge_validation_main1_sens_sol_astra.csv",
+      "sha256": "a45290679f6d5913caa190aa6c713c78f471c3c1d0ad5bd351c91ce4c1ddea4c",
+      "mtime": "2026-11-01T03:01:10.057590+00:00",
+      "mtime_ns": 1793502070057590296,
+      "size_bytes": 13428,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/judge_validation_main1_sens_sol_astra.json",
+      "sha256": "b69edb0ba87ad85129368f5233c80fc640ef4cc61423f05b0ddc70ceebc58cc5",
+      "mtime": "2026-11-01T03:01:10.056604+00:00",
+      "mtime_ns": 1793502070056603737,
+      "size_bytes": 489624,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/label_resolution.jsonl",
+      "sha256": "6adfc648a60f8a9e0e09fef6b633a151d06467a9d3c18f1587f17525aa9ab5de",
+      "mtime": "2026-11-01T03:45:05.929101+00:00",
+      "mtime_ns": 1793504705929101233,
+      "size_bytes": 5196484,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/resolve_labels.py"
+    },
+    {
+      "path": "annotation/package_challenge_id_map.csv",
+      "sha256": "0d1256b26fd623f96bd43c0736a87962133a7789f10bdcd6675226d6d33541a5",
+      "mtime": "2026-11-01T03:43:14.604579+00:00",
+      "mtime_ns": 1793504594604578629,
+      "size_bytes": 510,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/panel_majority_main1.csv",
+      "sha256": "88ac51b311aebc250d984640424684745ac4a05e6cf1e03484e606c3d217101a",
+      "mtime": "2026-11-01T03:00:51.512188+00:00",
+      "mtime_ns": 1793502051512188359,
+      "size_bytes": 118988,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/panel_majority_main1_sens_sol_astra.csv",
+      "sha256": "8a743ee82592a90c5d43b80114ce1ac84bfea90e8237b8586773f9da616b9885",
+      "mtime": "2026-11-01T03:01:10.024473+00:00",
+      "mtime_ns": 1793502070024472626,
+      "size_bytes": 85955,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-5.6-sol.csv",
+      "sha256": "725d08bdc8db4a782596e6f908412f347cb2fed5e1eaef87b84aa47d0f08d8f1",
+      "mtime": "2026-11-01T02:28:37.646887+00:00",
+      "mtime_ns": 1793500117646887088,
+      "size_bytes": 26582,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-6-astra_core.csv",
+      "sha256": "9e3b70869a191b0e176b400aa9680af4320d12d9b3786193c32fdae519d748d0",
+      "mtime": "2026-11-01T02:34:45.395492+00:00",
+      "mtime_ns": 1793500485395491748,
+      "size_bytes": 15091,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-6-astra_extraA.csv",
+      "sha256": "76b851c4b1243bb200bee47fe45d810878dbe686408f2167d2c8158bc805ed8c",
+      "mtime": "2026-11-01T02:34:25.386945+00:00",
+      "mtime_ns": 1793500465386945294,
+      "size_bytes": 6894,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-6-astra_extraB.csv",
+      "sha256": "c82952adf3d861847c6a0d37c6f1da678a64796cbde33a0cd24393031f2e407f",
+      "mtime": "2026-11-01T02:34:22.514013+00:00",
+      "mtime_ns": 1793500462514012466,
+      "size_bytes": 6738,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-6-luna_core.csv",
+      "sha256": "487dc82017d1368e57da68cf1911255e030233b9d6a84d7f8bd6fcd270fa5c93",
+      "mtime": "2026-11-01T02:34:26.376922+00:00",
+      "mtime_ns": 1793500466376922268,
+      "size_bytes": 14794,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-6-luna_extraA.csv",
+      "sha256": "d691f80d4865b466dfb2272bae8c5f4b990de4f24eead70e0e66b807fec0ce58",
+      "mtime": "2026-11-01T02:34:57.964184+00:00",
+      "mtime_ns": 1793500497964183517,
+      "size_bytes": 6383,
+      "producing_command": null
+    },
+    {
+      "path": "annotation/returns_codex/C_gpt-6-luna_extraB.csv",
+      "sha256": "983fe73aee85c29925bc968327e7ca4d0ca8f6f119c24f0b134696cae0c0d145",
+      "mtime": "2026-11-01T02:34:31.519264+00:00",
+      "mtime_ns": 1793500471519263773,
+      "size_bytes": 6319,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/dev.jsonl",
+      "sha256": "c1feee535e20175b64a286c5267dd40334df76f542aea446c763672b7a8841e4",
+      "mtime": "2026-11-01T01:19:46.756928+00:00",
+      "mtime_ns": 1793495986756927762,
+      "size_bytes": 7702,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/expB.jsonl",
+      "sha256": "4c919747cc41b5a8e992a472840036c2d130ca0de1d17f9df3dc43b6c7def4e6",
+      "mtime": "2026-11-01T01:45:06.514555+00:00",
+      "mtime_ns": 1793497506514554524,
+      "size_bytes": 21250,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/expC.jsonl",
+      "sha256": "b0b83b7448fbca3f18478dfc390638384ede0d96cc33ab55b2ab6de07ae3d2a1",
+      "mtime": "2026-11-01T01:45:06.514879+00:00",
+      "mtime_ns": 1793497506514878756,
+      "size_bytes": 49964,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/pilot.jsonl",
+      "sha256": "1c06b9867f233096b95c6cfd2ab4424b728cecaf28b03f32b770f4926f0c5361",
+      "mtime": "2026-11-01T01:03:45.004954+00:00",
+      "mtime_ns": 1793495025004953947,
+      "size_bytes": 18018,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/r2_c1.jsonl",
+      "sha256": "3ca2e1a6109abd423981ca15263d47165d4648fe12b42adf1a3402cc911f6061",
+      "mtime": "2026-11-01T02:51:25.239824+00:00",
+      "mtime_ns": 1793501485239823960,
+      "size_bytes": 115440,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/r2_c2.jsonl",
+      "sha256": "457eea54566154bc33f1fbab88245d704cbb4693d6ba887691a1a4dd32578821",
+      "mtime": "2026-11-01T02:50:21.220901+00:00",
+      "mtime_ns": 1793501421220901094,
+      "size_bytes": 73760,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/r2_d.jsonl",
+      "sha256": "fc866866c9e94cfc8a01bbf1bb2ce040ad834b71ce087d1f9ae1e00c65d6142a",
+      "mtime": "2026-11-01T02:50:21.275202+00:00",
+      "mtime_ns": 1793501421275201466,
+      "size_bytes": 920528,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/smoke.jsonl",
+      "sha256": "f73851499ded57ab67141717bead3602c468359f231ce59dd9506494fbd5cdd2",
+      "mtime": "2026-11-01T01:03:48.584966+00:00",
+      "mtime_ns": 1793495028584966390,
+      "size_bytes": 1246,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/test.jsonl",
+      "sha256": "f98d7f81828fb86879745ef191758eb4f795bb9d8ec507b5adcf4a40fe01e6d0",
+      "mtime": "2026-11-01T01:19:46.757050+00:00",
+      "mtime_ns": 1793495986757050312,
+      "size_bytes": 39813,
+      "producing_command": null
+    },
+    {
+      "path": "data/items/wb.jsonl",
+      "sha256": "2205171a2bb2444bb16668bedd4fa92611caba8318c1a2a695af45a1a56a0e91",
+      "mtime": "2026-11-01T02:59:51.245688+00:00",
+      "mtime_ns": 1793501991245687806,
+      "size_bytes": 198807,
+      "producing_command": null
+    },
+    {
+      "path": "ideas/cycles/c1/decision.md",
+      "sha256": "0d43b9456db5fd08d25b5b90285d94ab2205286f0cb2dc2d84e79eeff86c5278",
+      "mtime": "2026-11-01T03:38:51.337122+00:00",
+      "mtime_ns": 1793504331337122481,
+      "size_bytes": 26149,
+      "producing_command": null
+    },
+    {
+      "path": "orchestration/BRIEF.md",
+      "sha256": "ce2c37cc50bc9650e492966bd3dea201e37f0fd11fd1a88a3853a85ff3b7e7ca",
+      "mtime": "2026-11-01T00:57:32.990357+00:00",
+      "mtime_ns": 1793494652990356908,
+      "size_bytes": 1937,
+      "producing_command": null
+    },
+    {
+      "path": "orchestration/claims_ledger.md",
+      "sha256": "f03e991ab8ca3787098bd7bace2e2dcc974f687149199be2bcb5228c414312f6",
+      "mtime": "2026-11-01T03:55:52.257997+00:00",
+      "mtime_ns": 1793505352257997376,
+      "size_bytes": 7354,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py"
+    },
+    {
+      "path": "orchestration/decision_log.md",
+      "sha256": "04c37156e9a29aa714fd17b2611b4383388dd29e39be98ef12d1b44ed275d439",
+      "mtime": "2026-11-01T03:43:30.479803+00:00",
+      "mtime_ns": 1793504610479803304,
+      "size_bytes": 9314,
+      "producing_command": null
+    },
+    {
+      "path": "paper/figs/CAPTIONS.md",
+      "sha256": "6aaeea1703ed1cfb41fb9454b0cef9b2037376da016556a5d72b01ae27b6547c",
+      "mtime": "2026-11-01T03:55:40.524868+00:00",
+      "mtime_ns": 1793505340524867841,
+      "size_bytes": 4493,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_captions.py"
+    },
+    {
+      "path": "paper/figs/example_manifest.json",
+      "sha256": "fbc979fed0c0d6df58987720b515ab9916aadde21893d821a933004a98e741e8",
+      "mtime": "2026-11-01T03:55:40.758723+00:00",
+      "mtime_ns": 1793505340758722775,
+      "size_bytes": 90939,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_captions.py"
+    },
+    {
+      "path": "paper/figs/fig_channel_ladder.pdf",
+      "sha256": "1a6f48849f1f08ae9b7a8c504a94fce62443c01dd428f23dc624cdce1b7bb962",
+      "mtime": "2026-11-01T03:55:15.802210+00:00",
+      "mtime_ns": 1793505315802209899,
+      "size_bytes": 38421,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_channel_ladder.png",
+      "sha256": "7d92a23abce16cd7f2a8cb1724dc7d47225223187db5d3ee5904e22aafb83c7c",
+      "mtime": "2026-11-01T03:55:16.115208+00:00",
+      "mtime_ns": 1793505316115208068,
+      "size_bytes": 422371,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_cost_asymmetry.pdf",
+      "sha256": "2579616d2e404967609d97de0be86d1e55df9390a94eea61c08562dddeb636d8",
+      "mtime": "2026-11-01T03:55:20.442183+00:00",
+      "mtime_ns": 1793505320442182769,
+      "size_bytes": 21431,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_cost_asymmetry.png",
+      "sha256": "77d855127550184c2ff821b831d12915bf334b5b3dc5bdeeba07944978e69bc9",
+      "mtime": "2026-11-01T03:55:20.552881+00:00",
+      "mtime_ns": 1793505320552881360,
+      "size_bytes": 120783,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_defaults.pdf",
+      "sha256": "0777fb3e1a10f7e028e8e86faa87f17e529a202dbf7d4a81af9ffe416ed88897",
+      "mtime": "2026-11-01T03:55:14.732216+00:00",
+      "mtime_ns": 1793505314732216159,
+      "size_bytes": 37806,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_defaults.png",
+      "sha256": "499e729507e3351e30e707cc486f2c13607c1bff8bd139ce44e77a2eb977815e",
+      "mtime": "2026-11-01T03:55:15.114214+00:00",
+      "mtime_ns": 1793505315114213924,
+      "size_bytes": 484020,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_numbers.json",
+      "sha256": "2a6e76c94889112781425e3ff19bf73fec1e3e2f82f078d5fc8478ee110a5691",
+      "mtime": "2026-11-01T03:55:25.508241+00:00",
+      "mtime_ns": 1793505325508241181,
+      "size_bytes": 24994,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_pipeline.pdf",
+      "sha256": "dce5eb72d1803354c87d871ee9b8e2ecc1a804d166a51e48b5df3d892a6e9613",
+      "mtime": "2026-11-01T03:55:25.282155+00:00",
+      "mtime_ns": 1793505325282154495,
+      "size_bytes": 37820,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_pipeline.png",
+      "sha256": "75baffba0649f34463c7f76bb2e9b408689a03b2c248142e2fb7c67b5ba65ded",
+      "mtime": "2026-11-01T03:55:25.506153+00:00",
+      "mtime_ns": 1793505325506153187,
+      "size_bytes": 348320,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_politeness_ratchet.pdf",
+      "sha256": "b1cb8e2859cd7a34f8b6eadaabe6d8090b9fbc6e304ed3ae111dcb9c1531051d",
+      "mtime": "2026-11-01T03:55:20.938180+00:00",
+      "mtime_ns": 1793505320938179870,
+      "size_bytes": 26855,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_politeness_ratchet.png",
+      "sha256": "0cd1031b669be658b7184dd92a864dfaf290e98e73bb9c0ba02f98a12c6c426e",
+      "mtime": "2026-11-01T03:55:21.056179+00:00",
+      "mtime_ns": 1793505321056179181,
+      "size_bytes": 143962,
+      "producing_command": null
+    },
+    {
+      "path": "paper/figs/fig_sets.pdf",
+      "sha256": "535bc64a2cae16be1c4f67e12f3b0edffe221f5db124ec74e593d781e44ffaa7",
+      "mtime": "2026-11-01T03:55:24.838157+00:00",
+      "mtime_ns": 1793505324838157088,
+      "size_bytes": 25351,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/fig_sets.png",
+      "sha256": "5106e8c1f22793cf0cfacbe4cf7ec668af9ce380dda48bf53ec43eec90344ea8",
+      "mtime": "2026-11-01T03:55:24.947156+00:00",
+      "mtime_ns": 1793505324947156451,
+      "size_bytes": 169382,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/make_figs.py",
+      "sha256": "f0668d697ef3018a23c760b462ba20ea03ea23adad37f7ba2c2763ac4cdc722f",
+      "mtime": "2026-11-01T03:54:03.892634+00:00",
+      "mtime_ns": 1793505243892633586,
+      "size_bytes": 34456,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_channel_ladder.pdf",
+      "sha256": "21d27a475ff5d10da0d0a654c36cb45709500c294bc064c5b57abfb9ef06736e",
+      "mtime": "2026-11-01T03:55:28.854134+00:00",
+      "mtime_ns": 1793505328854133645,
+      "size_bytes": 38004,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_channel_ladder.png",
+      "sha256": "20c81020d65d1df98958070f7aeb70af5276a437f9d3fc6632c182bd5a6fc995",
+      "mtime": "2026-11-01T03:55:29.228132+00:00",
+      "mtime_ns": 1793505329228131463,
+      "size_bytes": 421182,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_cost_asymmetry.pdf",
+      "sha256": "3d80109a1f3abdb25546f486b7e79d0188f70ba8ea979f07edb5b03af258c548",
+      "mtime": "2026-11-01T03:55:33.538106+00:00",
+      "mtime_ns": 1793505333538106326,
+      "size_bytes": 21455,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_cost_asymmetry.png",
+      "sha256": "ebc0dd7fd0b6a73f57e9ad2a4424a3352b0024cb3af8f9d6ccc52883a2ab7bc5",
+      "mtime": "2026-11-01T03:55:33.654106+00:00",
+      "mtime_ns": 1793505333654105649,
+      "size_bytes": 120734,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_defaults.pdf",
+      "sha256": "9550d436e3926c93778419189cca567d4a501b5431c5bbacf2d69b612b9090ac",
+      "mtime": "2026-11-01T03:55:27.746140+00:00",
+      "mtime_ns": 1793505327746140111,
+      "size_bytes": 38504,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_defaults.png",
+      "sha256": "b560aad3d9d85165503d0822acdef04a78a3649cb41f731e4c18d75c255bbf00",
+      "mtime": "2026-11-01T03:55:28.143138+00:00",
+      "mtime_ns": 1793505328143137794,
+      "size_bytes": 506273,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_numbers.json",
+      "sha256": "419e340603795d2e9c08f11401d3c161fbc51a13da613d05e7e91878654b169a",
+      "mtime": "2026-11-01T03:55:39.119805+00:00",
+      "mtime_ns": 1793505339119805150,
+      "size_bytes": 25377,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_pipeline.pdf",
+      "sha256": "2021880819026563b9ece7d3e7fa498ce0954405f0c7da9bc55f76cb50da44b9",
+      "mtime": "2026-11-01T03:55:38.894075+00:00",
+      "mtime_ns": 1793505338894075115,
+      "size_bytes": 37820,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_pipeline.png",
+      "sha256": "75baffba0649f34463c7f76bb2e9b408689a03b2c248142e2fb7c67b5ba65ded",
+      "mtime": "2026-11-01T03:55:39.117074+00:00",
+      "mtime_ns": 1793505339117073817,
+      "size_bytes": 348320,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_politeness_ratchet.pdf",
+      "sha256": "3fdf43f11c0740f13b70b9c2ef071fe4453061b045b360db5a7dc2d6cb65fa65",
+      "mtime": "2026-11-01T03:55:34.286102+00:00",
+      "mtime_ns": 1793505334286101965,
+      "size_bytes": 26855,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_politeness_ratchet.png",
+      "sha256": "0cd1031b669be658b7184dd92a864dfaf290e98e73bb9c0ba02f98a12c6c426e",
+      "mtime": "2026-11-01T03:55:34.403101+00:00",
+      "mtime_ns": 1793505334403101283,
+      "size_bytes": 143962,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_sets.pdf",
+      "sha256": "0aecc1dd0248571c11306a388b063f32146b830c53214c0bb6bfe9b420915b77",
+      "mtime": "2026-11-01T03:55:38.459078+00:00",
+      "mtime_ns": 1793505338459077649,
+      "size_bytes": 25467,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/figs/quarantine_inclusive/fig_sets.png",
+      "sha256": "863b17b092f40beea05d7e713c32ce31a59d419e8b7e6462edd4e6e852b1800b",
+      "mtime": "2026-11-01T03:55:38.569077+00:00",
+      "mtime_ns": 1793505338569077009,
+      "size_bytes": 170612,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py --include-quarantine --out paper/figs/quarantine_inclusive"
+    },
+    {
+      "path": "paper/se4all/examples_table.tex",
+      "sha256": "548fe922889e369e59fad4588aec2c5cd917427f96cdc8fac7a6bd8e226e3b18",
+      "mtime": "2026-11-01T03:55:40.076360+00:00",
+      "mtime_ns": 1793505340076360093,
+      "size_bytes": 1067,
+      "producing_command": null
+    },
+    {
+      "path": "paper/se4all/make_macros.py",
+      "sha256": "eb711d5db041ccccd2b832518e74b7925a20062d54d440a6aa58d36579b5f5f9",
+      "mtime": "2026-11-01T03:54:03.892634+00:00",
+      "mtime_ns": 1793505243892633586,
+      "size_bytes": 28446,
+      "producing_command": null
+    },
+    {
+      "path": "paper/se4all/results_macros.tex",
+      "sha256": "5d4b5650485907dfdf7a0efc0951fe76038a1dd6d7c0c0c6606c29041e4beaf6",
+      "mtime": "2026-11-01T03:55:40.081337+00:00",
+      "mtime_ns": 1793505340081336810,
+      "size_bytes": 66660,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/se4all/make_macros.py"
+    },
+    {
+      "path": "prompts/P0.txt",
+      "sha256": "fc6e519cac02fe869194d59d12af84e3dc85260fc597cf1e9c8d0eb59e8a3be9",
+      "mtime": "2026-11-01T01:03:55.792621+00:00",
+      "mtime_ns": 1793495035792621205,
+      "size_bytes": 268,
+      "producing_command": null
+    },
+    {
+      "path": "prompts/P1.txt",
+      "sha256": "76977770273a9ea1d1c079240154ac4d41293b91accf84a3b3805b93f3d946eb",
+      "mtime": "2026-11-01T01:03:55.793531+00:00",
+      "mtime_ns": 1793495035793531376,
+      "size_bytes": 706,
+      "producing_command": null
+    },
+    {
+      "path": "prompts/P2.txt",
+      "sha256": "d84578d56e42c966224fb974a929300124b6b94eba027d82266c135efdd7ccbe",
+      "mtime": "2026-11-01T01:03:55.794368+00:00",
+      "mtime_ns": 1793495035794368384,
+      "size_bytes": 417,
+      "producing_command": null
+    },
+    {
+      "path": "prompts/chip_legend.txt",
+      "sha256": "1455fe64f9d3ed555ad873e88f4f9b70c3cfdc09fea82ea6c4b226491ae13dc1",
+      "mtime": "2026-11-01T01:07:45.612986+00:00",
+      "mtime_ns": 1793495265612985908,
+      "size_bytes": 433,
+      "producing_command": null
+    },
+    {
+      "path": "prompts/chip_legend_x.txt",
+      "sha256": "3ee238f814bd730b946d1e6ec322651072c7685c0b564786ab811fa8f3d1f0eb",
+      "mtime": "2026-11-01T01:42:16.033587+00:00",
+      "mtime_ns": 1793497336033586989,
+      "size_bytes": 868,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/arbiter.jsonl",
+      "sha256": "03b49c0e0c1ca09fa4ee406a2bab084fa81a376c3883bd27e144579050a3ec5e",
+      "mtime": "2026-11-01T02:15:58.614390+00:00",
+      "mtime_ns": 1793499358614390331,
+      "size_bytes": 1157,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/config.json",
+      "sha256": "142001ae35908ef82c996845db2c4c56edd44ce96ef466260788b89260bdefd0",
+      "mtime": "2026-11-01T01:48:42.379330+00:00",
+      "mtime_ns": 1793497722379330303,
+      "size_bytes": 4732,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/endpoints.json",
+      "sha256": "037745212b7d728efb1e8e02eb12e932c381bc15ecb8e49506c73f646c59ebe3",
+      "mtime": "2026-11-01T03:55:06.854367+00:00",
+      "mtime_ns": 1793505306854366486,
+      "size_bytes": 12621,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/expB1/generations.jsonl",
+      "sha256": "81dc90d73f68f7e1a13cf77bb485ef64be1958a5598b6ec349ec4917ee09ecb7",
+      "mtime": "2026-11-01T01:48:42.374812+00:00",
+      "mtime_ns": 1793497722374812387,
+      "size_bytes": 1570807,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/judge_report.json",
+      "sha256": "701748789dcce035183a46f4545eff4d99e4af8ea339f4649fbafc8e344749bf",
+      "mtime": "2026-11-01T01:58:03.058340+00:00",
+      "mtime_ns": 1793498283058340191,
+      "size_bytes": 1479,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/judgments.jsonl",
+      "sha256": "748f942b0ec7db746a9accb73c08f03a2a6d0959739333d7a5e92ee4eb96330a",
+      "mtime": "2026-11-01T01:58:02.937323+00:00",
+      "mtime_ns": 1793498282937322649,
+      "size_bytes": 634206,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/outputs.jsonl",
+      "sha256": "d62924eefbadae78d1e3741fe0820ba0a8e78386dba6957a15939ee9bcbb4cb6",
+      "mtime": "2026-11-01T01:50:41.395668+00:00",
+      "mtime_ns": 1793497841395667695,
+      "size_bytes": 926167,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expB1/scored.parquet",
+      "sha256": "e4af778ec5620cb90a977d91df70ff7daadcb22600cb6386788cfc8120d6e7f4",
+      "mtime": "2026-11-01T03:45:25.065965+00:00",
+      "mtime_ns": 1793504725065964741,
+      "size_bytes": 150004,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run expB1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/expB1/scored_prev.parquet",
+      "sha256": "def55957941733731906a2ca3c940b315466ccdd129a223615d5c11aae6c7556",
+      "mtime": "2026-11-01T02:16:19.366977+00:00",
+      "mtime_ns": 1793499379366976877,
+      "size_bytes": 149349,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_evidence.py --stage labels (shutil.copy2; pre-refresh backup)"
+    },
+    {
+      "path": "runs/expB1/scored_raw_oracle.parquet",
+      "sha256": "3626df87a3596d9710cf6081bf388296db4b4160b6dc687be03295136e368b6e",
+      "mtime": "2026-11-01T02:03:52.611609+00:00",
+      "mtime_ns": 1793498632611608819,
+      "size_bytes": 149350,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/arbiter.jsonl",
+      "sha256": "e67f4bf6337a74cea38fa456e1a8d518e8b6ff14a7541a84320a2e27aa338a2e",
+      "mtime": "2026-11-01T02:15:58.634887+00:00",
+      "mtime_ns": 1793499358634886583,
+      "size_bytes": 8857,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/config.json",
+      "sha256": "d2994494ff24e32e0db81daa1c4a3b36093cc4bccda79dd411896a7ac4b20738",
+      "mtime": "2026-11-01T01:50:15.443321+00:00",
+      "mtime_ns": 1793497815443321196,
+      "size_bytes": 4731,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/endpoints.json",
+      "sha256": "664c76f5aff5eeaecc80ae521886dfbb63d5e96ced8f596981007a90c0b62ec5",
+      "mtime": "2026-11-01T03:55:06.897769+00:00",
+      "mtime_ns": 1793505306897769362,
+      "size_bytes": 7611,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/expC1/generations.jsonl",
+      "sha256": "e356877df5b24e96318116117da7e421213f969b17c2ece3d3490c795df2886f",
+      "mtime": "2026-11-01T01:50:15.440625+00:00",
+      "mtime_ns": 1793497815440625215,
+      "size_bytes": 671479,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/judge_report.json",
+      "sha256": "80b972171986c05bed0c3597859c30b46e82405cb47e0a5866cf80ac36d70fa7",
+      "mtime": "2026-11-01T02:02:56.137608+00:00",
+      "mtime_ns": 1793498576137607490,
+      "size_bytes": 1465,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/judgments.jsonl",
+      "sha256": "3f8952b6905400076c8b9731280f6b3ec2c990bcf0341d08494db10e9143168f",
+      "mtime": "2026-11-01T02:02:56.007577+00:00",
+      "mtime_ns": 1793498576007576661,
+      "size_bytes": 1049003,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/outputs.jsonl",
+      "sha256": "7551883491c636483f7f285b5d850c772a4f2fd155a2ddd4b28f8340f349ce58",
+      "mtime": "2026-11-01T01:50:41.433666+00:00",
+      "mtime_ns": 1793497841433666356,
+      "size_bytes": 1044278,
+      "producing_command": null
+    },
+    {
+      "path": "runs/expC1/scored.parquet",
+      "sha256": "0c5807d6d39967cbe8940f72ac777d57476b75b42d26a4c035f761f6df684f87",
+      "mtime": "2026-11-01T03:45:28.316942+00:00",
+      "mtime_ns": 1793504728316941685,
+      "size_bytes": 90661,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run expC1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/expC1/scored_prev.parquet",
+      "sha256": "ced30d3e487cfbb1f3461830bc0adefd659b312f520e06d2055c9196a5e1020c",
+      "mtime": "2026-11-01T02:16:20.469004+00:00",
+      "mtime_ns": 1793499380469004292,
+      "size_bytes": 90016,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_evidence.py --stage labels (shutil.copy2; pre-refresh backup)"
+    },
+    {
+      "path": "runs/expC1/scored_raw_oracle.parquet",
+      "sha256": "c88034730341c2ef868211a16121d594a8ebf941e48bd72d46c35df83f6f2035",
+      "mtime": "2026-11-01T02:03:54.635334+00:00",
+      "mtime_ns": 1793498634635333953,
+      "size_bytes": 89795,
+      "producing_command": null
+    },
+    {
+      "path": "runs/guard1/config.json",
+      "sha256": "6a8731c53d51469c2a666b66f482d7246c705027dee258fd95df1ea1509eca4d",
+      "mtime": "2026-11-01T02:39:40.080294+00:00",
+      "mtime_ns": 1793500780080294012,
+      "size_bytes": 404,
+      "producing_command": null
+    },
+    {
+      "path": "runs/guard1/endpoints.json",
+      "sha256": "b4a5f177f6ff2824724fb722377b46a3bf7da47583f1575e8ab52acf4af5570f",
+      "mtime": "2026-11-01T03:55:05.886924+00:00",
+      "mtime_ns": 1793505305886923788,
+      "size_bytes": 21272,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/guard1/generations.jsonl",
+      "sha256": "dd388035d762944f845618fec1318d81addb5dc550ebafb592dcb13bb89e9e8e",
+      "mtime": "2026-11-01T02:39:40.078184+00:00",
+      "mtime_ns": 1793500780078184042,
+      "size_bytes": 7494502,
+      "producing_command": null
+    },
+    {
+      "path": "runs/guard1/judge_report.json",
+      "sha256": "d9a4bd878527be3e2b7f9f62d20a9fe9333cdcde22e74fc12678f95da61bab7c",
+      "mtime": "2026-11-01T02:40:30.336306+00:00",
+      "mtime_ns": 1793500830336305612,
+      "size_bytes": 1788,
+      "producing_command": null
+    },
+    {
+      "path": "runs/guard1/judgments.jsonl",
+      "sha256": "77b9969ebedcfe67c51cf6097ed0ebb5642d3e5a09c23d8c7870bd2d40f05114",
+      "mtime": "2026-11-01T02:40:30.129801+00:00",
+      "mtime_ns": 1793500830129800955,
+      "size_bytes": 1609232,
+      "producing_command": null
+    },
+    {
+      "path": "runs/guard1/outputs.jsonl",
+      "sha256": "6756b69f5f62e910d6163c296670d053699fa500ba5c2be8cc53ce0d50234c04",
+      "mtime": "2026-11-01T02:39:40.411181+00:00",
+      "mtime_ns": 1793500780411181224,
+      "size_bytes": 3514561,
+      "producing_command": null
+    },
+    {
+      "path": "runs/guard1/scored.parquet",
+      "sha256": "e647f767dfc1cccccb633add58aade764d93aeb5108eaf6052231ff822cdf772",
+      "mtime": "2026-11-01T03:45:17.296020+00:00",
+      "mtime_ns": 1793504717296020000,
+      "size_bytes": 465441,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run guard1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/guard1/scored_prev.parquet",
+      "sha256": "7f8b9a777d7e5d236d4713c5c86607722a21d1b06d9675078823a677a789763d",
+      "mtime": "2026-11-01T02:54:05.419653+00:00",
+      "mtime_ns": 1793501645419652848,
+      "size_bytes": 465433,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_evidence.py --stage labels (shutil.copy2; pre-refresh backup)"
+    },
+    {
+      "path": "runs/main1/arbiter.jsonl",
+      "sha256": "75856a865a33467069971af88ed2f8b8f6543bd600af305f9eef8787c0c23286",
+      "mtime": "2026-11-01T02:15:58.471369+00:00",
+      "mtime_ns": 1793499358471368735,
+      "size_bytes": 30407,
+      "producing_command": null
+    },
+    {
+      "path": "runs/main1/config.json",
+      "sha256": "4654b89118556faaa3470829ea38a9b694d31a0a1f9caf147c940c44a492a249",
+      "mtime": "2026-11-01T01:33:53.367396+00:00",
+      "mtime_ns": 1793496833367396444,
+      "size_bytes": 4334,
+      "producing_command": null
+    },
+    {
+      "path": "runs/main1/endpoints.json",
+      "sha256": "c96a501479fec8b615cf8005d702ab1edbc4b0657a5764419dbf2371ef602202",
+      "mtime": "2026-11-01T03:55:05.752170+00:00",
+      "mtime_ns": 1793505305752169827,
+      "size_bytes": 34999,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/main1/generations.jsonl",
+      "sha256": "b2820a1d5ed14b8098afc6ec123dfc055415646aa559b8501c5107f807372872",
+      "mtime": "2026-11-01T01:33:53.350397+00:00",
+      "mtime_ns": 1793496833350396611,
+      "size_bytes": 11709028,
+      "producing_command": null
+    },
+    {
+      "path": "runs/main1/judge_report.json",
+      "sha256": "1215c396b4f4d843e8b240fc165fd8046be31163fb193a6661f34d95de3dc082",
+      "mtime": "2026-11-01T01:56:56.972979+00:00",
+      "mtime_ns": 1793498216972978598,
+      "size_bytes": 1810,
+      "producing_command": null
+    },
+    {
+      "path": "runs/main1/judgments.jsonl",
+      "sha256": "e2da92e63ab56b7bdfb97e81aebba1c18b4076f6911e5c66dac28277a0600247",
+      "mtime": "2026-11-01T01:56:56.663355+00:00",
+      "mtime_ns": 1793498216663354873,
+      "size_bytes": 8618021,
+      "producing_command": null
+    },
+    {
+      "path": "runs/main1/outputs.jsonl",
+      "sha256": "0b5b28ddc33a395c230e0efc9a22b17619da605a4cb6d6a24fd64e2fd8ece82a",
+      "mtime": "2026-11-01T01:33:53.957391+00:00",
+      "mtime_ns": 1793496833957390654,
+      "size_bytes": 9427453,
+      "producing_command": null
+    },
+    {
+      "path": "runs/main1/scored.parquet",
+      "sha256": "2ee9fd9dd224f53b28c2538b65fe6a87830a2edf945e8d023e63902c5f72761f",
+      "mtime": "2026-11-01T03:45:12.444781+00:00",
+      "mtime_ns": 1793504712444780851,
+      "size_bytes": 1162540,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run main1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/main1/scored_prev.parquet",
+      "sha256": "2ee9fd9dd224f53b28c2538b65fe6a87830a2edf945e8d023e63902c5f72761f",
+      "mtime": "2026-11-01T02:43:00.019089+00:00",
+      "mtime_ns": 1793500980019088866,
+      "size_bytes": 1162540,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_evidence.py --stage labels (shutil.copy2; pre-refresh backup)"
+    },
+    {
+      "path": "runs/main1/scored_raw_oracle.parquet",
+      "sha256": "31388594336415ab1ebf9b617e097296991e94652b7ec5db5cdd9a0e579f7889",
+      "mtime": "2026-11-01T02:03:46.434818+00:00",
+      "mtime_ns": 1793498626434817435,
+      "size_bytes": 1161767,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_challenges/arbiter.jsonl",
+      "sha256": "50a34f4657752cd73476972e06a79592b9d9ae4c87c288cdce98e8a585054f26",
+      "mtime": "2026-11-01T02:59:19.739018+00:00",
+      "mtime_ns": 1793501959739018295,
+      "size_bytes": 440,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_challenges/config.json",
+      "sha256": "72030458a7abbe032400e6cd7576dd74fe5468e7e319fe9daea18560f31c73d4",
+      "mtime": "2026-11-01T02:40:40.875335+00:00",
+      "mtime_ns": 1793500840875334705,
+      "size_bytes": 87,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_challenges/judgments.jsonl",
+      "sha256": "d108ab55ddb30b2d9d0d87114a12040fb5b77d7efd2bf527d87ba7b137b61799",
+      "mtime": "2026-11-01T02:56:06.458026+00:00",
+      "mtime_ns": 1793501766458025931,
+      "size_bytes": 83603,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_challenges/outputs.jsonl",
+      "sha256": "54bbe613223d62b10a9dae880113a232dfcf3a53adad0f7bd91bdddaef87543b",
+      "mtime": "2026-11-01T02:40:40.875043+00:00",
+      "mtime_ns": 1793500840875042976,
+      "size_bytes": 31455,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_inject/arbiter.jsonl",
+      "sha256": "d49e03f0e977a52d763ab8bca86d8d949ffce9fbb01adb5e9c45f0abd6495ab6",
+      "mtime": "2026-11-01T02:59:19.738132+00:00",
+      "mtime_ns": 1793501959738132172,
+      "size_bytes": 927,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_inject/config.json",
+      "sha256": "efd340d86393fde81864e92094cdddef91ebb55d14de75aec5662f8998ba240e",
+      "mtime": "2026-11-01T02:40:40.873584+00:00",
+      "mtime_ns": 1793500840873583808,
+      "size_bytes": 139,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_inject/endpoints.json",
+      "sha256": "81be1ba6ca129a96a9e68b4c98c718ceec84b8ebeef500f5e07fc3968d606c11",
+      "mtime": "2026-11-01T03:55:06.923653+00:00",
+      "mtime_ns": 1793505306923653226,
+      "size_bytes": 3519,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/oracle_inject/judgments.jsonl",
+      "sha256": "6bbb045ace286b96427f5619c205a3a6c961438feef702c345cf121885c04e6f",
+      "mtime": "2026-11-01T02:51:19.320797+00:00",
+      "mtime_ns": 1793501479320797156,
+      "size_bytes": 280842,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_inject/outputs.jsonl",
+      "sha256": "b876f0673ea2b88274e44dcb4a0155c7abb550e6ed911e8922c31759fe62f1e5",
+      "mtime": "2026-11-01T02:40:40.872729+00:00",
+      "mtime_ns": 1793500840872729082,
+      "size_bytes": 111775,
+      "producing_command": null
+    },
+    {
+      "path": "runs/oracle_inject/scored.parquet",
+      "sha256": "51030d0a8a7dd03a43ceeeddba3b44f99d097c94797d463dd8c8ae5eb506d5f5",
+      "mtime": "2026-11-01T03:45:29.805931+00:00",
+      "mtime_ns": 1793504729805931137,
+      "size_bytes": 61862,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run oracle_inject --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/pilot1/arbiter.jsonl",
+      "sha256": "94de1903f7e8459b23b61e7170c0bbdffc942d97b722417840f9d42a88d65532",
+      "mtime": "2026-11-01T02:15:58.660463+00:00",
+      "mtime_ns": 1793499358660463158,
+      "size_bytes": 18967,
+      "producing_command": null
+    },
+    {
+      "path": "runs/pilot1/config.json",
+      "sha256": "c7b2e88ea2e0b376f38782f4488c0bab3dedaa571b66ab93e70fa3da18bc4044",
+      "mtime": "2026-11-01T01:15:11.124408+00:00",
+      "mtime_ns": 1793495711124408100,
+      "size_bytes": 4291,
+      "producing_command": null
+    },
+    {
+      "path": "runs/pilot1/endpoints.json",
+      "sha256": "36ded7741da3a5cd6bf9c8d3c21810ab300c10f5b37a1fba1d6fc065dc8f972d",
+      "mtime": "2026-11-01T03:55:03.759092+00:00",
+      "mtime_ns": 1793505303759091879,
+      "size_bytes": 34639,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/pilot1/generations.jsonl",
+      "sha256": "1e4bd4277541933c99332d5e172e8d966907d616e9bd626a260b656d888ce5d1",
+      "mtime": "2026-11-01T01:15:11.116690+00:00",
+      "mtime_ns": 1793495711116690105,
+      "size_bytes": 4773953,
+      "producing_command": null
+    },
+    {
+      "path": "runs/pilot1/judge_report.json",
+      "sha256": "380de005f1b2efd1defdbf600b6a1c4f0e5de73c5c2e1715458691d107b258c8",
+      "mtime": "2026-11-01T01:43:34.497047+00:00",
+      "mtime_ns": 1793497414497046699,
+      "size_bytes": 1802,
+      "producing_command": null
+    },
+    {
+      "path": "runs/pilot1/judgments.jsonl",
+      "sha256": "4ac81e54b5433ac05904c636f568d409910177a0983beb5f465f204ea0417d43",
+      "mtime": "2026-11-01T01:43:34.283256+00:00",
+      "mtime_ns": 1793497414283256366,
+      "size_bytes": 3458896,
+      "producing_command": null
+    },
+    {
+      "path": "runs/pilot1/outputs.jsonl",
+      "sha256": "a51ae23b76caa0295b83f23c6a5cd6ebef0b524783f1b1e66fce33ed24452ff7",
+      "mtime": "2026-11-01T01:15:24.198684+00:00",
+      "mtime_ns": 1793495724198684440,
+      "size_bytes": 3791492,
+      "producing_command": null
+    },
+    {
+      "path": "runs/pilot1/scored.parquet",
+      "sha256": "1d854aa0d30f50cdd340e0bff397974d3f4113ec7bea964c3cf8614071675681",
+      "mtime": "2026-11-01T03:45:08.775081+00:00",
+      "mtime_ns": 1793504708775080850,
+      "size_bytes": 487191,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run pilot1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/pilot1/scored_prev.parquet",
+      "sha256": "d08619c211300b6d3e8864efc267eeab68aebf4b7f32f84c178723d1194da89b",
+      "mtime": "2026-11-01T02:16:21.732036+00:00",
+      "mtime_ns": 1793499381732035722,
+      "size_bytes": 486505,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_evidence.py --stage labels (shutil.copy2; pre-refresh backup)"
+    },
+    {
+      "path": "runs/pilot1/scored_raw_oracle.parquet",
+      "sha256": "ae4fed71c7e114521fccc4df274331d088dd04289d2c9e2202684dcc2d73c162",
+      "mtime": "2026-11-01T02:03:50.171493+00:00",
+      "mtime_ns": 1793498630171492695,
+      "size_bytes": 486460,
+      "producing_command": null
+    },
+    {
+      "path": "runs/span1/config.json",
+      "sha256": "dfef05b5d901a75ed9b3741d1f9009ca49c4fff658378102d56bea7b4e0a53b9",
+      "mtime": "2026-11-01T02:39:40.530855+00:00",
+      "mtime_ns": 1793500780530854630,
+      "size_bytes": 411,
+      "producing_command": null
+    },
+    {
+      "path": "runs/span1/endpoints.json",
+      "sha256": "1c3b98a8c4dc26f1c1500fbc81e77e068030144748cd4200824dda19fc83ba91",
+      "mtime": "2026-11-01T03:55:06.808830+00:00",
+      "mtime_ns": 1793505306808830260,
+      "size_bytes": 16751,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/reconcile_evidence.py --endpoints-only"
+    },
+    {
+      "path": "runs/span1/generations.jsonl",
+      "sha256": "f9508d418a4ee20d3d96f281d1674cbcbcd8f7ad51feac1fe54f8adc7577ed6d",
+      "mtime": "2026-11-01T02:39:40.530180+00:00",
+      "mtime_ns": 1793500780530180216,
+      "size_bytes": 1813399,
+      "producing_command": null
+    },
+    {
+      "path": "runs/span1/judge_report.json",
+      "sha256": "d9d0d2204672c39a9403aa54b651499592e0b72d968c83ebc468c036baf95b97",
+      "mtime": "2026-11-01T02:53:45.881301+00:00",
+      "mtime_ns": 1793501625881300850,
+      "size_bytes": 1788,
+      "producing_command": null
+    },
+    {
+      "path": "runs/span1/judgments.jsonl",
+      "sha256": "0225c95fc1b511b7d6b450061315e8371d1d6f9719860ef4b146e605f8d90b74",
+      "mtime": "2026-11-01T02:53:44.676535+00:00",
+      "mtime_ns": 1793501624676535275,
+      "size_bytes": 1959886,
+      "producing_command": null
+    },
+    {
+      "path": "runs/span1/outputs.jsonl",
+      "sha256": "f8ceb8059e554d0f01cba9ca3d35709be34068ba3e7681b533cbf1bf67cbef28",
+      "mtime": "2026-11-01T02:39:40.690179+00:00",
+      "mtime_ns": 1793500780690178862,
+      "size_bytes": 2755006,
+      "producing_command": null
+    },
+    {
+      "path": "runs/span1/scored.parquet",
+      "sha256": "fff300839a763d1270216e6f507eff4220957aa35b125ac83f235d22b0e51481",
+      "mtime": "2026-11-01T03:45:20.230999+00:00",
+      "mtime_ns": 1793504720230999101,
+      "size_bytes": 248834,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run span1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "runs/span1/scored_prev.parquet",
+      "sha256": "06bc69fd40a537235b38c49428f9919ca42ff47ba956f7b8a67a08a3a35b60e3",
+      "mtime": "2026-11-01T02:54:12.794695+00:00",
+      "mtime_ns": 1793501652794695306,
+      "size_bytes": 248448,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/refresh_evidence.py --stage labels (shutil.copy2; pre-refresh backup)"
+    },
+    {
+      "path": "src/agree_stats.py",
+      "sha256": "095014aa0d931f264402d30b1f2851328b5be377a343c32cfeb4dca6d82ba0ad",
+      "mtime": "2026-11-01T01:09:29.094111+00:00",
+      "mtime_ns": 1793495369094111262,
+      "size_bytes": 1437,
+      "producing_command": null
+    },
+    {
+      "path": "src/analyze.py",
+      "sha256": "bee9ca0c0ea297e8535f9bf7d54d66c6ac812884ed54bef2d85b9ec5fde57f82",
+      "mtime": "2026-11-01T03:43:21.986397+00:00",
+      "mtime_ns": 1793504601986396821,
+      "size_bytes": 35308,
+      "producing_command": null
+    },
+    {
+      "path": "src/attribute.py",
+      "sha256": "5507f0f65c472ed7282647ea9f7fe8b7edcf0866c829ef296febb6c8d967d1b4",
+      "mtime": "2026-11-01T03:47:59.133909+00:00",
+      "mtime_ns": 1793504879133909526,
+      "size_bytes": 16158,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "src/authoring/build_dev_test.py",
+      "sha256": "b8bcde1660369c92f88e243336a0dcecbd0f168979a1e5b49982a47ca3742d31",
+      "mtime": "2026-11-01T01:19:46.743613+00:00",
+      "mtime_ns": 1793495986743613084,
+      "size_bytes": 25822,
+      "producing_command": null
+    },
+    {
+      "path": "src/authoring/build_r2_c1.py",
+      "sha256": "f71cccfe73442d1b59213fe8acf702ab12241728baacc7068595fccdb14ce202",
+      "mtime": "2026-11-01T02:51:25.213612+00:00",
+      "mtime_ns": 1793501485213612436,
+      "size_bytes": 46602,
+      "producing_command": null
+    },
+    {
+      "path": "src/authoring/build_r2_c2.py",
+      "sha256": "073813af3d3a5bede3e1c7e1c095f40ed30c0397c3d56b94ea7c7b610f0c5050",
+      "mtime": "2026-11-01T02:50:21.186384+00:00",
+      "mtime_ns": 1793501421186383698,
+      "size_bytes": 26541,
+      "producing_command": null
+    },
+    {
+      "path": "src/authoring/build_r2_d.py",
+      "sha256": "830a3b358dfaa20bc22106efbd506d7ffbc5699408e2b2cc9d47c91900691356",
+      "mtime": "2026-11-01T02:50:21.186599+00:00",
+      "mtime_ns": 1793501421186599126,
+      "size_bytes": 11728,
+      "producing_command": null
+    },
+    {
+      "path": "src/build_requests.py",
+      "sha256": "237116731ac7438dec2385cfa74ada151c774e220e8c086763d8c9b8dffc3c02",
+      "mtime": "2026-11-01T02:50:32.179203+00:00",
+      "mtime_ns": 1793501432179202609,
+      "size_bytes": 10582,
+      "producing_command": null
+    },
+    {
+      "path": "src/explode.py",
+      "sha256": "580665db818b2f619eec99f37e36e133c3981ff9e350e74a0c49a6661d139c9e",
+      "mtime": "2026-11-01T01:44:22.817445+00:00",
+      "mtime_ns": 1793497462817444968,
+      "size_bytes": 4051,
+      "producing_command": null
+    },
+    {
+      "path": "src/figs.py",
+      "sha256": "bf97ecb1e29836906868c663b6c2324079cd87047facb2f68582a002161208dc",
+      "mtime": "2026-11-01T01:29:33.142968+00:00",
+      "mtime_ns": 1793496573142968187,
+      "size_bytes": 9293,
+      "producing_command": null
+    },
+    {
+      "path": "src/freeze_evidence.py",
+      "sha256": "4809324c07aeaa7f47ad84c8c14cb0fd95660af785816e0459c2df87a24e85bd",
+      "mtime": "2026-11-01T03:55:02.430288+00:00",
+      "mtime_ns": 1793505302430288221,
+      "size_bytes": 4146,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run span1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "src/generate.py",
+      "sha256": "e2a06e8bcb04ce8fcf66485240a23bea72d7f57c4fb47bb10e2f3289f0ecf04c",
+      "mtime": "2026-11-01T01:05:08.131743+00:00",
+      "mtime_ns": 1793495108131742883,
+      "size_bytes": 12654,
+      "producing_command": null
+    },
+    {
+      "path": "src/gpu_watchdog.sh",
+      "sha256": "c46e6e6b737dc58e30514c2f0e6952245d6482ca1fc532d61749a674ef3f707c",
+      "mtime": "2026-11-01T01:14:49.274264+00:00",
+      "mtime_ns": 1793495689274264049,
+      "size_bytes": 537,
+      "producing_command": null
+    },
+    {
+      "path": "src/interventions.py",
+      "sha256": "2a7f69e5e09b46cdf1e2ce974ea72b678c971eca48a21be6be51def1005195b0",
+      "mtime": "2026-11-01T03:47:59.132910+00:00",
+      "mtime_ns": 1793504879132909533,
+      "size_bytes": 64062,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "src/judge.py",
+      "sha256": "f941fcdf733b2ba8143169f8f7634946c07b5ae000303e0c197dcec1b5fea881",
+      "mtime": "2026-11-01T02:37:45.928710+00:00",
+      "mtime_ns": 1793500665928709389,
+      "size_bytes": 29653,
+      "producing_command": null
+    },
+    {
+      "path": "src/labels.py",
+      "sha256": "21469d818bd1436ba1f10db0bb0a766d3471e9b89d51d38549eede9236ff6a9c",
+      "mtime": "2026-11-01T02:03:44.213882+00:00",
+      "mtime_ns": 1793498624213881990,
+      "size_bytes": 5812,
+      "producing_command": null
+    },
+    {
+      "path": "src/layer0.py",
+      "sha256": "20bee4aab3377527254aa7f89f4efadaa5a8c6c72f4aefaaf0a0366271a44c76",
+      "mtime": "2026-11-01T01:21:11.208618+00:00",
+      "mtime_ns": 1793496071208618288,
+      "size_bytes": 18496,
+      "producing_command": null
+    },
+    {
+      "path": "src/make_followup_items.py",
+      "sha256": "3361c9afb3b7028453583cf07b3f8543dd1e61cf8ef27098bd88f01218ef33b1",
+      "mtime": "2026-11-01T01:45:01.383372+00:00",
+      "mtime_ns": 1793497501383372221,
+      "size_bytes": 8495,
+      "producing_command": null
+    },
+    {
+      "path": "src/make_gold.py",
+      "sha256": "1618377015b49e5f10f30969accd6fb65256a39cad6f1f285095bbd23c3c9737",
+      "mtime": "2026-11-01T01:20:22.798496+00:00",
+      "mtime_ns": 1793496022798496211,
+      "size_bytes": 10458,
+      "producing_command": null
+    },
+    {
+      "path": "src/models.py",
+      "sha256": "1ad40e1e9332e54bdba28ff0dac3c9fd55a51a0fb964abe5892f8d8b7eb3abe5",
+      "mtime": "2026-11-01T01:02:08.218695+00:00",
+      "mtime_ns": 1793494928218695131,
+      "size_bytes": 4867,
+      "producing_command": null
+    },
+    {
+      "path": "src/oracle_report.py",
+      "sha256": "179edde396109b64ccbf5cc7f5079e1b5dd4c488f7964520e9dafd4faf2b42d6",
+      "mtime": "2026-11-01T03:45:49.474792+00:00",
+      "mtime_ns": 1793504749474792535,
+      "size_bytes": 31460,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python src/attribute.py --run span1 --resolution annotation/label_resolution.jsonl"
+    },
+    {
+      "path": "src/oracle_wa.py",
+      "sha256": "4a0041c2be9b91fdb0c0a6e2b42554b780c0cc0f39819b064d6dcf8255774ae8",
+      "mtime": "2026-11-01T02:45:30.142582+00:00",
+      "mtime_ns": 1793501130142582374,
+      "size_bytes": 7460,
+      "producing_command": null
+    },
+    {
+      "path": "src/prompts.py",
+      "sha256": "5885478d8e339cf0860f22524ad58aa9f9d1878d858e2a85e3dfa398ffa43c1d",
+      "mtime": "2026-11-01T01:43:35.101285+00:00",
+      "mtime_ns": 1793497415101284993,
+      "size_bytes": 5215,
+      "producing_command": null
+    },
+    {
+      "path": "src/reconcile_evidence.py",
+      "sha256": "d53e7b75075d5f75503ce289d19a3ee0b898ff9826eadac0edae37c899e69f0a",
+      "mtime": "2026-11-01T03:55:02.430288+00:00",
+      "mtime_ns": 1793505302430288221,
+      "size_bytes": 17369,
+      "producing_command": "/home/lunarz/aac-voice-preservation/.venv/bin/python paper/figs/make_figs.py"
+    },
+    {
+      "path": "src/refresh_captions.py",
+      "sha256": "327fff05583fe99245eff97b38928b5e12ed9696f7b000ecd75663876b31f6c2",
+      "mtime": "2026-11-01T03:55:02.430288+00:00",
+      "mtime_ns": 1793505302430288221,
+      "size_bytes": 9514,
+      "producing_command": null
+    },
+    {
+      "path": "src/refresh_evidence.py",
+      "sha256": "66ff3a51489a1ea409ae57ad240a59ff7484a6e9cde1fb10f2d5ffc260de21b4",
+      "mtime": "2026-11-01T03:57:26.736453+00:00",
+      "mtime_ns": 1793505446736452837,
+      "size_bytes": 5689,
+      "producing_command": null
+    },
+    {
+      "path": "src/resolve_labels.py",
+      "sha256": "f5b98718889955681a35999e978d5df3390467849b95c0911169e6bd4b604c33",
+      "mtime": "2026-11-01T03:42:52.278095+00:00",
+      "mtime_ns": 1793504572278095274,
+      "size_bytes": 3362,
+      "producing_command": null
+    },
+    {
+      "path": "src/run_interventions.sh",
+      "sha256": "873481404c6c8a1d56f3444721e3d95bcbd8e7aa1832343495b346e4f4ceceb1",
+      "mtime": "2026-11-01T02:37:38.362083+00:00",
+      "mtime_ns": 1793500658362083090,
+      "size_bytes": 1891,
+      "producing_command": null
+    },
+    {
+      "path": "src/run_sequential.sh",
+      "sha256": "2f3837f4f839471b5aba018017f66307a179d59d7237734d14dac671803c7467",
+      "mtime": "2026-11-01T02:35:07.696893+00:00",
+      "mtime_ns": 1793500507696893433,
+      "size_bytes": 1394,
+      "producing_command": null
+    },
+    {
+      "path": "src/runio.py",
+      "sha256": "c8c3d745672b276426503f114fbbac0a87c264115f7ec52d7ff8f7a1c73cdc78",
+      "mtime": "2026-11-01T01:16:11.086848+00:00",
+      "mtime_ns": 1793495771086847988,
+      "size_bytes": 5868,
+      "producing_command": null
+    },
+    {
+      "path": "src/s1_analyze.py",
+      "sha256": "ac33625ad52bad1299dc711f4565f5cd6b67f67f97458e367d6c2e346ea731b7",
+      "mtime": "2026-11-01T01:07:53.434931+00:00",
+      "mtime_ns": 1793495273434931063,
+      "size_bytes": 29415,
+      "producing_command": null
+    },
+    {
+      "path": "src/s1_cues.py",
+      "sha256": "9fca45ea66329c5da88f5f3f7d7885cb0f0936078406d8b349208262cc317a41",
+      "mtime": "2026-11-01T01:05:46.171250+00:00",
+      "mtime_ns": 1793495146171249786,
+      "size_bytes": 18291,
+      "producing_command": null
+    },
+    {
+      "path": "src/s1_verify.py",
+      "sha256": "62229df452e5655300c32d3feccc41768cd8d21dbb5f523af2fe5d6bf9f5e8d3",
+      "mtime": "2026-11-01T01:06:32.423763+00:00",
+      "mtime_ns": 1793495192423762743,
+      "size_bytes": 5853,
+      "producing_command": null
+    },
+    {
+      "path": "src/score_gold.py",
+      "sha256": "5718f8097a32bc38b690d89f03895d7c2ec90f6d3fb17cd12c41229c119c8565",
+      "mtime": "2026-11-01T03:00:28.422209+00:00",
+      "mtime_ns": 1793502028422208533,
+      "size_bytes": 22253,
+      "producing_command": null
+    },
+    {
+      "path": "src/serve_local.sh",
+      "sha256": "9e65ddff2f32b6a11c757c652ce02cbf6d46e825a060423a0e4fb1be69136cbe",
+      "mtime": "2026-11-01T02:28:35.197021+00:00",
+      "mtime_ns": 1793500115197021399,
+      "size_bytes": 2708,
+      "producing_command": null
+    },
+    {
+      "path": "src/stop_local.sh",
+      "sha256": "3fb0dbcb5f6e0e7e8da2bb3737b60126fd323462cfa1bf82b07adfcb970a176a",
+      "mtime": "2026-11-01T01:00:22.618994+00:00",
+      "mtime_ns": 1793494822618993625,
+      "size_bytes": 258,
+      "producing_command": null
+    },
+    {
+      "path": "src/validate_items.py",
+      "sha256": "2f0dfe50692fd9a5020fc4a766a144651337f4ddf980cbaf0b89d799224c3944",
+      "mtime": "2026-11-01T02:45:04.961419+00:00",
+      "mtime_ns": 1793501104961419154,
+      "size_bytes": 20138,
+      "producing_command": null
+    },
+    {
+      "path": "src/verify_reconciliation.py",
+      "sha256": "ee803fc6d182ffc21521eea33eb15481fffdc6c6f4ad3ed74568823526d9f7e2",
+      "mtime": "2026-11-01T03:57:26.736453+00:00",
+      "mtime_ns": 1793505446736452837,
+      "size_bytes": 5597,
+      "producing_command": null
+    },
+    {
+      "path": "tests/make_fixture.py",
+      "sha256": "7b9cf2263d409ee9ae3e683da6c54cdf1f95b29661093a401b0063efbad7d432",
+      "mtime": "2026-11-01T01:20:56.746909+00:00",
+      "mtime_ns": 1793496056746908721,
+      "size_bytes": 15214,
+      "producing_command": null
+    },
+    {
+      "path": "tests/test_analyze.py",
+      "sha256": "7712f67dfc0f12d7a9a5fe2be2f3e28177173de189cfa853372893f31e268dbc",
+      "mtime": "2026-11-01T01:29:33.142968+00:00",
+      "mtime_ns": 1793496573142968187,
+      "size_bytes": 7664,
+      "producing_command": null
+    },
+    {
+      "path": "tests/test_layer0.py",
+      "sha256": "9fbf95b61d03c4969004ceb971be9eabdaf94d65f30ff7753aa8a3438812a6af",
+      "mtime": "2026-11-01T01:20:56.746870+00:00",
+      "mtime_ns": 1793496056746870135,
+      "size_bytes": 3634,
+      "producing_command": null
+    },
+    {
+      "path": "tests/test_resolution.py",
+      "sha256": "2f5db43ac667a5a8695857103cb1007bd14571df6d2fc83ef537d5cb0b7c152c",
+      "mtime": "2026-11-01T03:45:58.544729+00:00",
+      "mtime_ns": 1793504758544729066,
+      "size_bytes": 3847,
+      "producing_command": null
+    }
+  ]
+}

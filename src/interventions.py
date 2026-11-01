@@ -957,6 +957,8 @@ def write_report(a) -> None:
     L += ["\n## Sensitivity: including quarantined families (60-family design)\n"] + igl + isl
     L += [""] + caveats(gres, sres)
     out.write_text("\n".join(L) + "\n")
+    from evidence_status import annotate_report
+    annotate_report(out)
     out.with_suffix(".json").write_text(json.dumps(summ, indent=1, default=str))
     print(f"wrote {out}")
 

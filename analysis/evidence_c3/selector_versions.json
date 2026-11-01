@@ -1,0 +1,77 @@
+{
+  "status": "retrospective provenance reconciliation; selection rules unchanged; not a prospective freeze",
+  "versions": [
+    {
+      "version": "v1",
+      "sha256": "ab30b3a772a715b9d80c3b050b8c0c1683e315ae5f36903dc6c3059dfa49a89d",
+      "git_blob": "d381610683cbbe2d5c0354213c91754671156627",
+      "source": "analysis/evidence_c3/select_story_v1_original.py",
+      "recovered_from": "orchestration/status/c3_story.log (reverse of the post-run assertion patch)",
+      "produced": "ideas/cycles/c3/story_evidence.json",
+      "manifest_sha256": "4f82defc516a62051b547ade7e9e45c26cf02ee2fa38a434eea5dcf9f636e9a1"
+    },
+    {
+      "version": "v1.1",
+      "sha256": "a9d996a00379d0a9a43f06441ffc4fe3c4b0ea95d984a1b79a890abf94ffe786",
+      "git_blob": "16e6fa528a0897e0f70ed1a637c67afeaeefebc1",
+      "source": "git 9a61459:ideas/cycles/c3/select_story.py (also analysis/evidence_c3/history_v1.tar.gz)",
+      "change": "adds 3 lines: recomputes S1/S5 eligible counts and asserts them against the W-C manifest rates; no selection expression changed",
+      "produced": null
+    },
+    {
+      "version": "v2",
+      "sha256": "549409f6d87bc2aaccb0f4d9b3f0c52347739b057048e3c3ae368a3f3a998d57",
+      "git_blob": "a71e3be71186af79dcd609884e6ced2778a28fb1",
+      "source": "ideas/cycles/c3/select_story.py",
+      "change": "adds argparse --out so a replay cannot overwrite the v1 manifest; no selection expression changed",
+      "produced": "ideas/cycles/c3/story_evidence.v2.json",
+      "manifest_sha256": "150a367dff2facd3dc7378767e50831577822047e9a744b1fc04102d1f598fc7"
+    }
+  ],
+  "diffs": {
+    "v1_to_v1.1": {
+      "path": "analysis/evidence_c3/selector_v1_to_v1.1.diff",
+      "added": [
+        "    eligible = wp[wp.dimension.eq('politeness') & wp.channel.eq('full') & wp.cv.eq('plain')] if cid == 'S1' else wp[wp.dimension.eq('speech_act') & wp.channel.eq('chip1') & wp.cv.eq('question')]",
+        "    assert int((eligible.critical_match == False).sum()) == int(rr['sum'])",
+        "    assert int(eligible.critical_match.notna().sum()) == int(rr['n'])"
+      ],
+      "removed": []
+    },
+    "v1.1_to_v2": {
+      "path": "analysis/evidence_c3/selector_v1.1_to_v2.diff",
+      "added": [
+        "import argparse",
+        "parser = argparse.ArgumentParser(description=__doc__)",
+        "parser.add_argument('--out', type=Path, default=Path(__file__).with_name('story_evidence.json'))",
+        "destination = parser.parse_args().out",
+        "destination.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n')"
+      ],
+      "removed": [
+        "Path(__file__).with_name('story_evidence.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\\n')"
+      ]
+    }
+  },
+  "cards_rules_rates_equal": true,
+  "verified_occurrences": 31,
+  "changed_input_hashes": {
+    "analysis/interventions/report.md": {
+      "v1": "7e96ed4281f61ae21f9a5589f59152c4ac1b0b7da4db015d584360c2b3d3dcc9",
+      "v2": "b959c1c813c799a0e16827d38be0c71581f4e27b54c6bed998285064a0c70889"
+    },
+    "ideas/cycles/c3/select_story.py": {
+      "v1": "ab30b3a772a715b9d80c3b050b8c0c1683e315ae5f36903dc6c3059dfa49a89d",
+      "v2": "549409f6d87bc2aaccb0f4d9b3f0c52347739b057048e3c3ae368a3f3a998d57"
+    },
+    "src/interventions.py": {
+      "v1": "2a7f69e5e09b46cdf1e2ce974ea72b678c971eca48a21be6be51def1005195b0",
+      "v2": "c82c2fe19e414a3dc7fb261dde3cc392c966d0facf9970199d02bce69e706bcf"
+    }
+  },
+  "changed_input_reason": {
+    "ideas/cycles/c3/select_story.py": "v1 → v2 source versions above",
+    "src/interventions.py": "report-status hook only (annotate_report); scoring/policy byte-identical otherwise",
+    "analysis/interventions/report.md": "D-031 supersession notice and inline pointers; historical tables unchanged"
+  },
+  "namespace": "c3:S4 is the appointment P2/S3 menu; c2:S4 is the accident sequence"
+}

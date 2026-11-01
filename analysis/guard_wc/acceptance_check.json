@@ -1,0 +1,198 @@
+{
+  "frozen_limits": {
+    "retry_generation_http": 2000,
+    "judge_batch_http": 400,
+    "wall_clock_h": 4.0,
+    "api_generation_concurrency": 8,
+    "api_generation_concurrency_ceiling": 12,
+    "judge_concurrency": 12,
+    "local_slots": 4
+  },
+  "calls": {
+    "retry_generation_http": 766,
+    "retry_generation_success": 726,
+    "retry_generation_failed": 40,
+    "logical_guard_attempts": 766,
+    "judge_batch_http": 207,
+    "judge_batch_success": 34,
+    "judge_batch_failed": 173,
+    "by_kind_status": {
+      "generation/200": 726,
+      "generation/429": 20,
+      "generation/502": 15,
+      "generation/524": 5,
+      "judge/200": 34,
+      "judge/429": 165,
+      "judge/503": 5,
+      "judge/524": 3
+    },
+    "total_instrumented_http": 973,
+    "generation_records": 5544,
+    "admission": {
+      "created_utc": "2026-11-01T18:28:32.106254+00:00",
+      "n_families": 78,
+      "n_targets": 1872,
+      "n_unique": 1848,
+      "F": 508,
+      "max_guard_calls": 1016,
+      "generation_cap": 2000,
+      "judge_batch_cap": 400,
+      "wall_cap_s": 14400,
+      "formula_judge_batches": 164,
+      "flags_by_model": {
+        "llama3.1-8b": 185,
+        "gemma3-4b": 177,
+        "qwen2.5-7b": 84,
+        "gpt-6.1-terra": 62
+      },
+      "admitted": true
+    },
+    "within_retry_cap": true,
+    "within_2F": true,
+    "within_judge_cap": true
+  },
+  "figure_937": {
+    "quoted_in": [
+      "orchestration/decision_log.md D-042 (\"Action-6 generation complete (937 calls)\")",
+      "ideas/cycles/c3/decision.md Action 1 (\"reuse 937 completed calls\")"
+    ],
+    "reproduced_exactly": false,
+    "retry_generation_http": 766,
+    "instrumented_http_before_resume": 936,
+    "instrumented_breakdown_before_resume": {
+      "generation": 766,
+      "judge": 170
+    },
+    "note": "No stored count equals 937. Generation used 766 HTTP calls; 766 generation + 170 failed pre-resume judge batches = 936 instrumented calls. 937 is most plausibly that pre-resume all-call total off by one (or including one uninstrumented request); it is not a generation count."
+  },
+  "concurrency": {
+    "peaks_by_kind_model": {
+      "generation/gemma3-4b": 4,
+      "generation/gpt-6.1-terra": 8,
+      "generation/llama3.1-8b": 4,
+      "generation/qwen2.5-7b": 4,
+      "judge/gpt-6.1-sol": 12
+    },
+    "api_generation_peak": 8,
+    "judge_peak": 12,
+    "judge_peak_pre_resume": 12,
+    "judge_peak_resume": 12,
+    "local_peak_max": 4,
+    "local_server_windows_nonoverlapping": true,
+    "local_windows_s_from_launch": {
+      "qwen2.5-7b": [
+        5.4,
+        16.9
+      ],
+      "llama3.1-8b": [
+        22.7,
+        41.2
+      ],
+      "gemma3-4b": [
+        46.8,
+        67.6
+      ]
+    },
+    "within_frozen": true,
+    "within_later_operational_api_limit_8": false
+  },
+  "wall_clock": {
+    "launch_utc": "2026-11-01T18:31:49+00:00",
+    "deadline_utc": "2026-11-01T22:31:49+00:00",
+    "first_call_utc": "2026-11-01T18:31:50+00:00",
+    "last_call_end_utc": "2026-11-01T19:31:53+00:00",
+    "last_call_end_h_after_launch": 1.0009,
+    "all_calls_inside_window": true,
+    "resume_first_judge_utc": "2026-11-01T19:29:01+00:00",
+    "freeze_written_before_launch": true
+  },
+  "uninstrumented_http": {
+    "source": "orchestration/guard_wc_resume.sh readiness probe (\"hi\" to gpt-6.1-sol)",
+    "seconds_from_gate_to_first_resumed_judge": 61.4,
+    "inferred_probe_calls": 1,
+    "counted_in_budget": false
+  },
+  "baseline_parity": {
+    "before_resume": {
+      "value_differences": {
+        "text": 0,
+        "crit": 0,
+        "polarity": 0,
+        "speech_act": 0,
+        "agent": 0,
+        "certainty": 0,
+        "politeness": 0,
+        "constraint_preserving": 0
+      },
+      "constraint_preserving_dtype": {
+        "baseline": "bool",
+        "p0": "object"
+      },
+      "original_assertion_holds": false,
+      "missing_constraint_preserving_by_arm": {
+        "G1": 164,
+        "G1s": 82,
+        "P0": 0
+      }
+    },
+    "after_resume": {
+      "value_differences": {
+        "text": 0,
+        "crit": 0,
+        "polarity": 0,
+        "speech_act": 0,
+        "agent": 0,
+        "certainty": 0,
+        "politeness": 0,
+        "constraint_preserving": 0
+      },
+      "constraint_preserving_dtype": {
+        "baseline": "bool",
+        "p0": "bool"
+      },
+      "original_assertion_holds": true,
+      "missing_constraint_preserving_by_arm": {
+        "G1": 0,
+        "G1s": 0,
+        "P0": 0
+      }
+    },
+    "explanation": "Before the resume, judgments were missing for changed G1/G1s texts, so the whole-frame constraint_preserving column held None and became dtype object; the P0 slice inherited that dtype. pandas .equals is dtype-sensitive, so the assertion failed although no P0 value differed. After judging completed, the column is all-known bool and the original assertion holds unchanged."
+  },
+  "result_hash_mismatches": [],
+  "headline_arithmetic": {
+    "G1": {
+      "p0_joint": 0.7879273504273504,
+      "arm_joint": 0.8862179487179487,
+      "joint_gain": 0.09829059829059829,
+      "strict_repair_k": 251,
+      "strict_repair_n": 478,
+      "changed_correct_k": 26,
+      "changed_correct_n": 1394,
+      "pass_to_fail_k": 0,
+      "strict_residual_k": 227
+    },
+    "G1s": {
+      "p0_joint": 0.7879273504273504,
+      "arm_joint": 0.8226495726495726,
+      "joint_gain": 0.034722222222222224,
+      "strict_repair_k": 136,
+      "strict_repair_n": 478,
+      "changed_correct_k": 0,
+      "changed_correct_n": 1394,
+      "pass_to_fail_k": 0,
+      "strict_residual_k": 342
+    }
+  },
+  "criteria_recomputed": {
+    "repair_ge_30": true,
+    "changed_correct_le_10": true,
+    "joint_gain_lower_gt_0": true
+  },
+  "verify_results": {
+    "passed": true,
+    "closure_comparator_verified": true,
+    "current_api_concurrency_limit_8_met": false
+  },
+  "verdict": "ACCEPT WITH QUALIFICATIONS"
+}

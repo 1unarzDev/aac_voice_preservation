@@ -1,4 +1,8 @@
-"""Hash the ACTION 2 evidence inventory; never inspect in-progress R2/W-B runs.
+"""Hash the evidence inventory (scope action2: discovery only; scope c3: all current evidence).
+
+Scope c3 (cycle-3 Action 3) adds the completed W-C/W-D/W-B runs, the guard transfer, applicability,
+evidence map and R5 artifacts. Target-paper sources (paper/se4all, paper/caleai) are excluded because they
+are edited concurrently; writers rebuild them from the inventoried inputs.
 
 Historical producing commands are unknown unless recorded in --commands. Unknown
 is explicit (null), never inferred from a file's name. --snapshot copies every
@@ -18,7 +22,17 @@ RUNS = ("pilot1", "main1", "guard1", "span1", "expB1", "expC1",
         "oracle_inject", "oracle_challenges")
 
 
-def inventory():
+C3_RUNS = ("r2c1", "r2d1", "wb1", "guard_wc")
+C3_ANALYSIS = ("r2c", "r2d", "wb", "applicability", "guard_wc", "evidence_c3", "r5_validator")
+C3_EXTRA = ("analysis/EVIDENCE_MAP.md", "orchestration/evidence_map.md", "orchestration/PREREG_R2.md",
+            "orchestration/SPEC.md", "ideas/cycles/c2/decision.md", "ideas/cycles/c3/decision.md",
+            "ideas/cycles/c3/select_story.py", "ideas/cycles/c3/story_evidence.json",
+            "ideas/cycles/c3/story_evidence.v2.json", "ideas/cycles/c3/synth_checks.py",
+            "ideas/cycles/c3/synth_checks.json", "data/items/wb.jsonl", "data/specs/wb_sample.jsonl",
+            "runs/requests/wb1.jsonl")
+
+
+def inventory(scope="action2"):
     paths = set()
     for run in RUNS:
         for pattern in ("scored*.parquet", "judgments.jsonl", "arbiter.jsonl", "outputs.jsonl",
@@ -40,6 +54,16 @@ def inventory():
         p = ROOT / "analysis" / name
         if p.exists():
             paths.add(p)
+    if scope == "c3":
+        paths = {p for p in paths if not p.is_relative_to(ROOT / "paper/se4all")}
+        for run in C3_RUNS:
+            for pattern in ("scored*.parquet", "judgments.jsonl", "arbiter.jsonl", "outputs.jsonl",
+                            "generations.jsonl", "config.json", "logical_calls.jsonl", "judge_calls.jsonl"):
+                paths.update((ROOT / "runs" / run).glob(pattern))
+        for directory in C3_ANALYSIS:
+            paths.update(p for p in (ROOT / "analysis" / directory).rglob("*")
+                         if p.is_file() and "__pycache__" not in p.parts)
+        paths.update(ROOT / x for x in C3_EXTRA if (ROOT / x).exists())
     return sorted(paths)
 
 
@@ -48,10 +72,11 @@ def main():
     ap.add_argument("--out", type=Path, default=ROOT / "analysis/EVIDENCE_MANIFEST.json")
     ap.add_argument("--commands", type=Path)
     ap.add_argument("--snapshot", type=Path)
+    ap.add_argument("--scope", choices=["action2", "c3"], default="action2")
     a = ap.parse_args()
     commands = json.loads(a.commands.read_text()) if a.commands else {}
     records = []
-    for p in inventory():
+    for p in inventory(a.scope):
         rel = str(p.relative_to(ROOT))
         before = p.stat()
         data = p.read_bytes()
@@ -68,9 +93,14 @@ def main():
                             mtime=datetime.fromtimestamp(before.st_mtime, timezone.utc).isoformat(),
                             mtime_ns=before.st_mtime_ns, size_bytes=len(data),
                             producing_command=commands.get(rel)))
-    result = dict(schema_version=1, created_at=datetime.now(timezone.utc).isoformat(),
-                  command="python src/freeze_evidence.py" + (f" --commands {a.commands}" if a.commands else ""),
-                  scope_runs=list(RUNS), excluded_runs=["r2c1", "r2d1", "wb1"],
+    c3 = a.scope == "c3"
+    result = dict(schema_version=2 if c3 else 1, scope=a.scope, created_at=datetime.now(timezone.utc).isoformat(),
+                  command="python src/freeze_evidence.py" + (f" --commands {a.commands}" if a.commands else "")
+                  + (" --scope c3" if c3 else ""),
+                  scope_runs=list(RUNS) + (list(C3_RUNS) if c3 else []),
+                  excluded_runs=[] if c3 else ["r2c1", "r2d1", "wb1"],
+                  excluded_paths=["paper/se4all/*", "paper/caleai/*"] if c3 else [],
+                  previous_manifest="analysis/evidence_prev/EVIDENCE_MANIFEST_action2.json" if c3 else None,
                   provenance_note="null producing_command = historical command not recorded; source files are inputs",
                   files=records)
     a.out.parent.mkdir(parents=True, exist_ok=True)
