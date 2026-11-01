@@ -1,0 +1,29 @@
+check,passed,detail
+main_subject_after_conditional,True,"{'polarity': 'negated', 'speech_act': 'statement', 'agent': 'speaker', 'certainty': 'hedged/uncertain', 'time': ['future', 'present'], 'quantity': ['two'], 'politeness': 'softened request'}"
+longest_match_contracted_hedge,True,"[{'token_ids': [0, 1, 2, 3, 4], 'text': ""If you do n't mind""}, {'token_ids': [6, 7], 'text': 'I think'}, {'token_ids': [9], 'text': 'might'}]"
+hedge_nonoverlap,True,"[{'token_ids': [0, 1, 2, 3, 4], 'text': ""If you do n't mind""}, {'token_ids': [6, 7], 'text': 'I think'}, {'token_ids': [9], 'text': 'might'}]"
+number_word,True,"{'polarity': 'negated', 'speech_act': 'statement', 'agent': 'speaker', 'certainty': 'hedged/uncertain', 'time': ['future', 'present'], 'quantity': ['two'], 'politeness': 'softened request'}"
+light_contraction,True,"{'words': ['not', 'mind', 'think', 'want', 'two', 'glasses', 'tomorrow'], 'token_ids': [3, 4, 7, 10, 11, 12, 13]}"
+tense:I wasn't feeling well.,True,['past']
+tense:I will be waiting.,True,['future']
+tense:Do not go.,True,[]
+speech:Are you hungry?,True,question
+speech:When will you call me?,True,question
+speech:Could you help me?,True,request/command
+speech:I don't want to go.,True,refusal
+digit_quantity,True,"{'polarity': 'affirmative', 'speech_act': 'request/command', 'agent': 'unspecified', 'certainty': 'n/a (question/request)', 'time': [], 'quantity': ['3'], 'politeness': 'none'}"
+quantity_has_no_SPEC_chip,True,"{'chips': [], 'covered_chip_count': 0, 'min_chips': None, 'unrestorable': ['quantity:3'], 'fully_restorable': False}"
+repeated_surface_not_false_survival,True,Only the wrong occurrence was retained.
+one_chip_per_category_not_occurrence,True,"{'chips': ['[PAST]'], 'covered_chip_count': 1, 'min_chips': 1, 'unrestorable': [], 'fully_restorable': True}"
+no_explicit_loss_zero_chips,True,"{'chips': [], 'covered_chip_count': 0, 'min_chips': 0, 'unrestorable': [], 'fully_restorable': True}"
+wilson_zero_endpoint,True,"0.0, 0.2775327998628892"
+legacy_compressor_all_messages,True,n=6142; mismatches=[]
+sample400_unique_IDs,True,n=400
+all_message_compressor_pairs,True,rows=18426
+aggregate_reconciliation:pos_cap4,True,4602 == 4602
+chip_distribution_reconciliation:pos_cap4,True,n=6142
+aggregate_reconciliation:pos_uncapped,True,4812 == 4812
+chip_distribution_reconciliation:pos_uncapped,True,n=6142
+aggregate_reconciliation:light,True,4488 == 4488
+chip_distribution_reconciliation:light,True,n=6142
+sample_text_and_split_integrity,True,400 original IDs/text/splits

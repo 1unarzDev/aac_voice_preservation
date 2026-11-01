@@ -1,0 +1,213 @@
+# hedges.txt — hedge lexicon for the D5 hedge-rate feature
+#
+# Matching is case-insensitive, whitespace-normalised, on word boundaries.
+# Multi-word entries are matched as contiguous token sequences.
+# Longest match wins; each matched span is counted once.
+# hedge_rate = (matched hedge tokens) / (total tokens)
+#
+# ---------------------------------------------------------------------------
+# SOURCES
+#
+# [H05] Hyland, K. (2005). Metadiscourse: Exploring Interaction in Writing.
+#       London: Continuum. Appendix (interactional metadiscourse: hedges).
+#       The single most widely reused published hedge list; Hyland's
+#       interpersonal model is the dominant framework in metadiscourse work
+#       and hedges are its most-studied category.
+#
+# [H98] Hyland, K. (1998). Hedging in Scientific Research Articles.
+#       Amsterdam: John Benjamins. Ch. 5, taxonomy of hedging devices
+#       (accuracy-oriented / writer-oriented / reader-oriented).
+#
+# [HO90] Holmes, J. (1990). Hedges and boosters in women's and men's speech.
+#       Language & Communication, 10(3), 185-205.
+#       Source for CONVERSATIONAL hedges (pragmatic particles, tag-like
+#       softeners) that the academic-register lists above do not cover.
+#
+# [HO84] Holmes, J. (1984). Modifying illocutionary force.
+#       Journal of Pragmatics, 8(3), 345-365. Attenuation devices.
+#
+# [L73] Lakoff, G. (1973). Hedges: A study in meaning criteria and the logic
+#       of fuzzy concepts. Journal of Philosophical Logic, 2(4), 458-508.
+#       Origin of the term; approximators / fuzzy-category markers.
+#
+# [BL87] Brown, P. & Levinson, S. (1987). Politeness: Some Universals in
+#       Language Usage. Cambridge UP. Negative-politeness mitigation:
+#       apologies, deference forms, minimising expressions.
+#
+# NOTE ON REGISTER FIT: [H05]/[H98] are drawn from academic prose. This
+# corpus is short conversational/AAC utterances, so entries below are the
+# intersection of those lists with items attested in conversational hedging
+# work [HO84][HO90][BL87]. Section 7 marks the small number of entries that
+# are conversational variants not appearing verbatim in any of the above;
+# they are flagged so a reviewer can exclude them and re-run.
+# ---------------------------------------------------------------------------
+
+# --- 1. Epistemic modal verbs [H05][H98] ---
+may
+might
+could
+would
+should
+can
+
+# --- 2. Epistemic lexical verbs [H05][H98] ---
+appear
+appears
+appeared
+assume
+assumed
+believe
+believes
+believed
+estimate
+estimated
+feel
+feels
+guess
+indicate
+indicates
+seem
+seems
+seemed
+speculate
+suggest
+suggests
+suppose
+supposed
+suspect
+tend
+tends
+tended
+think
+thinks
+thought
+
+# --- 3. Epistemic adverbs [H05][H98][HO90] ---
+apparently
+arguably
+conceivably
+essentially
+evidently
+generally
+largely
+likely
+mainly
+maybe
+often
+ostensibly
+perhaps
+plausibly
+possibly
+presumably
+probably
+purportedly
+relatively
+seemingly
+somehow
+somewhat
+sometimes
+typically
+unlikely
+usually
+virtually
+
+# --- 4. Epistemic adjectives / nouns [H05][H98] ---
+apparent
+assumption
+claim
+doubt
+estimate
+likelihood
+possibility
+possible
+postulate
+probable
+probability
+tendency
+uncertain
+unclear
+
+# --- 5. Approximators / fuzzy-category markers [L73][HO90] ---
+about
+almost
+approximately
+around
+fairly
+kind of
+more or less
+partially
+partly
+pretty much
+quite
+rather
+roughly
+sort of
+a bit
+a little
+a touch
+a couple of
+or so
+or something
+ish
+
+# --- 6. Downtoners, minimisers, deference forms [BL87][HO84] ---
+just
+merely
+only
+simply
+slightly
+barely
+hardly
+sorry
+if possible
+if you like
+if you want
+if you don't mind
+if that's okay
+if that's alright
+if that works
+if you get a chance
+when you get a chance
+whenever you get a chance
+no rush
+no pressure
+would you mind
+do you mind
+i wonder
+i wondered
+i was wondering
+i'm not sure
+i am not sure
+not entirely sure
+not totally sure
+i could be wrong
+correct me if i'm wrong
+to be fair
+in my opinion
+as far as i know
+i think
+i'd say
+i would say
+i'd imagine
+it seems to me
+i mean
+you know
+sort of like
+if i'm honest
+
+# --- 7. Conversational variants NOT verbatim in the cited lists ---
+#     (morphological/contracted variants of items above, plus AAC-frequent
+#      spoken softeners. Flagged so this block can be excluded and the
+#      analysis re-run against the strictly-cited subset.)
+#     [EXT] = extension
+dunno            # [EXT] contracted form of "don't know"
+prolly           # [EXT] contracted "probably"
+kinda            # [EXT] contracted "kind of"
+sorta            # [EXT] contracted "sort of"
+lil              # [EXT] contracted "little"
+i guess          # [EXT] cf. "guess" §2
+i suppose        # [EXT] cf. "suppose" §2
+i believe        # [EXT] cf. "believe" §2
+i feel like      # [EXT] cf. "feel" §2
+maybe just       # [EXT] compound of §3 + §6
+just maybe       # [EXT] compound of §3 + §6

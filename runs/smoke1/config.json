@@ -1,0 +1,155 @@
+{
+  "run_id": "smoke1",
+  "created_utc": "2026-11-01T01:07:10+00:00",
+  "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/smoke.jsonl",
+  "requests_sha256": "725a6b54a571458cde11cd540c175c8a1ffe7d35d692781ed3b9c9e6c75b0d63",
+  "n_requests": 384,
+  "wall_s": 0.0,
+  "models": {
+    "gemma3-4b": {
+      "name": "gemma3-4b",
+      "base_url": "http://127.0.0.1:8093/v1",
+      "model": "gemma3-4b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "google_gemma-3-4b-it-Q4_K_M.gguf",
+      "sha256": "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94",
+      "concurrency": 8,
+      "supports_seed": true
+    },
+    "gpt-6.1-terra": {
+      "name": "gpt-6.1-terra",
+      "base_url": "https://codex.lunarz.dev/v1",
+      "model": "gpt-6.1-terra",
+      "kind": "api",
+      "role": "under_test",
+      "quant": null,
+      "gguf": null,
+      "sha256": null,
+      "concurrency": 16,
+      "supports_seed": false
+    },
+    "llama3.1-8b": {
+      "name": "llama3.1-8b",
+      "base_url": "http://127.0.0.1:8092/v1",
+      "model": "llama3.1-8b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "concurrency": 8,
+      "supports_seed": true
+    },
+    "qwen2.5-7b": {
+      "name": "qwen2.5-7b",
+      "base_url": "http://127.0.0.1:8091/v1",
+      "model": "qwen2.5-7b",
+      "kind": "local",
+      "role": "under_test",
+      "quant": "Q4_K_M",
+      "gguf": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "concurrency": 8,
+      "supports_seed": true
+    }
+  },
+  "prompts": {
+    "P0": {
+      "prompt_id": "P0",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "sha256": "17518fd4aa31c011047e1ddab8a25e8f5f60e3407a95ec9234827cdd0f6f9072"
+    },
+    "S3": {
+      "prompt_id": "S3",
+      "template_file": "P0.txt",
+      "temperature": 0.7,
+      "k": 3,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "sha256": "17518fd4aa31c011047e1ddab8a25e8f5f60e3407a95ec9234827cdd0f6f9072"
+    },
+    "P1": {
+      "prompt_id": "P1",
+      "template_file": "P1.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "sha256": "4cebe8c5c36f401dc76d89c85889daa6a2ef048d4a7f5337c2d6a49d1357ac6f"
+    },
+    "P2": {
+      "prompt_id": "P2",
+      "template_file": "P2.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 3,
+      "max_tokens": 256,
+      "sha256": "62c093fa21d59484565b912c46546927de13d50e4c55a399a4d25542d1dde9ee"
+    }
+  },
+  "seed_base": 1000,
+  "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
+  "retries": 5,
+  "code_sha256": "6abc66bb1ce0447322be2e27a7245f765957c2a3eb211d978644923210c496b8",
+  "python": "3.12.15",
+  "httpx": "0.28.1",
+  "throughput": {
+    "qwen2.5-7b": {
+      "requests": 96,
+      "cached": 96,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 8
+    },
+    "llama3.1-8b": {
+      "requests": 96,
+      "cached": 96,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 8
+    },
+    "gemma3-4b": {
+      "requests": 96,
+      "cached": 96,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 8
+    },
+    "gpt-6.1-terra": {
+      "requests": 96,
+      "cached": 96,
+      "errors": 0,
+      "fresh_requests": 0,
+      "active_s": 0.0,
+      "requests_per_min": null,
+      "outputs_per_min": null,
+      "completion_tok_per_s": null,
+      "concurrency": 16
+    }
+  },
+  "parse_failures": {},
+  "finish_reasons": {
+    "qwen2.5-7b:stop": 96,
+    "llama3.1-8b:stop": 96,
+    "gemma3-4b:stop": 96,
+    "gpt-6.1-terra:stop": 96
+  }
+}
