@@ -8,7 +8,7 @@ This is the single optional CALE-AI guard-transfer experiment, launched early un
 
 FREEZE.md and its SHA256 `987f464b0432119986b60f1b49c38c0e6b5f4423b888ca80a9e6bd812a873cd8` precede all retry requests; launch_manifest.json freezes the adapter/analysis code. Frozen inputs, first passes and labels are byte-preserved under frozen/. 78 speech-act families, two variants, four fixed models, three cue channels (chip1/chipall/full): **1,872 target occurrences / 1,848 unique requests**. D-018 excludes r2act-078/079. **F=508; 2F=1,016 ≤2,000**, so the full design was admitted; the memo judge formula gives 164 initial batches before cache reuse.
 
-G1 and G1s call the unchanged src/interventions.py policy functions. G1 uses at most two monitor-triggered retries; first unflagged else fewest flags, earliest on ties. G1s only strips unsupplied please/pls/plz. The monitor never sees evaluation labels. Generation uses temperature 0, local seed 1000, 96 tokens; local serving is one llama.cpp server at a time under flock /tmp/aacv_gpu.lock, 4 slots × 1024 context, NGL=99; API concurrency 8 and judge concurrency 12. All long work launched with setsid nohup.
+G1 and G1s call the unchanged src/interventions.py policy functions. G1 uses at most two monitor-triggered retries; first unflagged else fewest flags, earliest on ties. G1s only strips unsupplied please/pls/plz. The monitor never sees evaluation labels. Generation uses temperature 0, local seed 1000, 96 tokens; local serving is one llama.cpp server at a time under flock /tmp/aacv_gpu.lock, 4 slots × 1024 context, NGL=99; Historical generation API concurrency 8 and inherited judge concurrency 12; the latter exceeds the current user limit of 8 and is disclosed below. Closure makes no API calls. All long work launched with setsid nohup.
 
 Primary joint pass is the existing analyze.normalize_table constraint-preserving endpoint: focal value and all other scored supplied predicates, with missing needed labels unknown unless a known failure dominates. Strict pass also prohibits politeness addition and supplies the earlier guard's repair/changed-correct criteria. Numbers below are machine-scored partial predicates. Neither sentence completeness nor full meaning nor communicative usefulness is certified.
 
@@ -61,7 +61,7 @@ Full per-model/channel endpoint, harm and missingness estimates: stratified_effe
 
 Frozen P0 labels are retained exactly. An unchanged output reuses its baseline labels. Existing W-C arbitration may be reused only on the same production A-unit (text ID, critical dimension and options). All new critical J1/J2 disagreements are recorded in unresolved.jsonl and receive no J1 fallback or new arbitration. General labels retain production J1/J2 agreement, otherwise the existing layer0 tie-break; agreement-only sensitivity below removes this source of dependence. Known contradictions dominate missingness; unknowns are never silently promoted to passes.
 
-New unresolved critical J-units: **10**; distinct A-units: **10**. The target counts below may repeat an extraction decision.
+Critical disagreements without a run-local arbiter entry: **10 J-units / 10 A-units**; every affected selected output reuses an already arbitrated frozen baseline label (see closure audit). The target counts below may repeat an extraction decision.
 
 - P0: critical unknown 0; joint unknown 0; strict unknown 0; invalid 0.
 - G1: critical unknown 0; joint unknown 0; strict unknown 0; invalid 0.
@@ -77,7 +77,7 @@ W-C's early-cache and post-outcome baseline arbitration qualifications travel wi
 
 G1 residual flags: **226/1,848 unique returned requests**. Among 227 known residual strict target failures, **215** remain flagged; 226/1,872 returned target occurrences carry any flag. Flags are monitor diagnostics, not measured warning benefit.
 
-Actual HTTP calls: **766 generation** / 2,000; **207 judge batches** / 400 (all failures/retries included); **0 new arbitration**. Logical guard attempts 766, cache hits 0, logical errors 40. Actual extra calls/input 0.4145, /flagged input 1.5079. Elapsed through analysis 3605.3 s / 14,400 s.
+Actual HTTP calls: **766 generation** / 2,000; **207 judge batches** / 400 (all failures/retries included); **0 new arbitration**. Logical guard attempts 766, cache hits 0, logical errors 40. Actual extra calls/input 0.4145, /flagged input 1.5079. Elapsed at analysis start 3605.3 s; completed-artifact commit bounds full elapsed at 3624.1 s / 14,400 s (closure audit below).
 
 | model | inputs | initially flagged | logical attempts / actual calls | residual flagged unique | extra stored latency s/input | flagged median s | monitor median ms |
 |---|---|---|---|---|---|---|---|
@@ -102,5 +102,58 @@ Each row below is the first SHA256([base_request_key, family, variant, channel])
 
 audit_sample.csv applies the pre-frozen text-hash selection to 20 distinct changed G1 texts and 20 unchanged baseline-correct controls (all eligible counts and memberships in audit_manifest.json). HUMAN fields are empty; selection is deterministic, not a probability sample, and no representative usable-repair percentage follows. No human time was allocated or consumed by this run.
 
-Reproduce locally: `OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/guard_wc/analyze.py --exit-code 0`. Do not rerun prepare.py or launch to manufacture a retrospective freeze. Frozen inputs and wrapper code hashes are recorded before launch; final output hashes are in result_hashes.json. paired_G1/G1s.parquet retain all target transitions; scored.parquet retains all three arms; residual flags and attempt traces are in runs/guard_wc/generations.jsonl. Resource records include every HTTP attempt without secrets.
+Reproduce the closed result locally: `OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/guard_wc/close_action1.py`. The original analyzer and its launch hash remain unchanged; closure uses the completed resume snapshot and its recorded completion time. Do not rerun prepare.py or launch to manufacture a retrospective freeze. Frozen inputs and wrapper code hashes are recorded before launch; final output hashes are in result_hashes.json. paired_G1/G1s.parquet retain all target transitions; scored.parquet retains all three arms; residual flags and attempt traces are in runs/guard_wc/generations.jsonl. Resource records count instrumented generator retries and judge batches; availability-probe traffic is disclosed separately below.
 
+
+## Cycle-3 Action 1 closure audit (2026-11-01)
+
+This closure consumes the existing completed resume after `RESUMEDONE`; it performs **0 generation / 0 judge / 0 arbiter calls**, starts no GPU server, and changes neither the frozen baseline, arbitration, inventory, policy nor launch budget. The automatically produced resume report and numeric files are preserved under `closure_inputs/`, with hashes in its manifest.
+
+### Baseline parity and the earlier completion marker
+
+`baseline_parity_columns.csv` compares all 1,872 P0 rows by model/family/variant/channel, before and after the resume, against `baseline_scored.parquet`: **zero differences** in text, critical label, all five general labels and normalized joint pass. `baseline_parity_diff.csv` is the empty row/column value diff. The historical failing table is byte-preserved from git `9a61459` as `closure_inputs/before_resume_scored.parquet`. The minimized failure is pandas `Series.equals`: identical P0 values had dtype `bool` in the baseline and `object` in the combined table because other arms had nulls. Value comparison with explicit null normalization passes; the frozen code is preserved rather than retrospectively changing its hash.
+
+The earlier `GUARD_WC_COMPLETE` marker meant the shell commands returned, not that labels or analysis were complete. The original judge logged 170 failed HTTP attempts, zero successful batches, and 166 A / 240 B uncached units still missing per prompt. Its driver nevertheless returned successfully; the EXIT-trap analysis failed its dtype-sensitive parity assertion. That table had G1 critical/joint/strict labels for only **1,708/1,872** targets and G1s for **1,790/1,872**. Neither marker nor the partial parquet established evaluated transfer. The resume logged zero uncached units still missing in all four passes, and all three arms now have **1,872/1,872** known critical/joint/strict outcomes.
+
+### Direct comparator and joint-preservation harms
+
+| arm | joint passes / planned | strict passes / planned | unknown joint / strict |
+|---|---|---|---|
+| P0 | 1475/1872 | 1394/1872 | 0 / 0 |
+| G1s | 1540/1872 | 1530/1872 | 0 / 0 |
+| G1 | 1659/1872 | 1645/1872 | 0 / 0 |
+
+
+| endpoint, G1−G1s | paired gain, pp [95% family CI] | G1-only / G1s-only passes | recorded-cluster CI, pp |
+|---|---|---|---|
+| joint | 6.36 [5.29, 7.48] | 123 / 4 | [5.28, 7.50] |
+| strict | 6.14 [4.91, 7.43] | 128 / 13 | [4.86, 7.48] |
+
+All 1,872 identical target occurrences are paired; 78 whole-family clusters and 55 recorded seed/construction clusters, 10,000 resamples, seed 20261101. This compares stored configurations; it does not isolate a causal contribution of feedback.
+
+| arm | joint failures repaired | joint-correct texts changed | joint pass→fail |
+|---|---|---|---|
+| G1 | 184/397; 46.35 [41.96, 50.86] (n=397/397) | 93/1475; 6.31 [5.02, 7.68] (n=1475/1475) | 0/1475; 0.00 [0.00, 0.00] (n=1475/1475) |
+| G1s | 67/397; 16.88 [14.93, 18.75] (n=397/397) | 73/1475; 4.95 [3.82, 6.17] (n=1475/1475) | 2/1475; 0.14 [0.00, 0.34] (n=1475/1475) |
+
+The two G1s joint pass→fail outcomes arise among initially joint-correct outputs; those outputs were already strict failures because of added politeness. Thus zero strict pass→fail and two joint pass→fail for G1s are compatible. All repair/change rates above count target occurrences, with deduplicated request-level resource units kept separate.
+
+### Resolution and general-label dependence
+
+All **10** rows in the run-local unresolved extraction list concern selected outcomes with frozen first-pass label reuse (**26 arm/target rows**; `unresolved_reconciliation.csv`). Their baseline arbitration remains authoritative. There are **zero new changed-output unresolved critical labels** in the selected returns and zero new arbiter calls. Do not call these ten new unresolved treated outputs, or substitute J1 for them.
+
+`general_label_disagreements.csv` enumerates **49 target×arm×dimension fields** where the production rule can use L0. The agreement-only sensitivity actually removes these fields and recomputes the endpoint; it changes **zero joint outcomes**. Disagreements on the focal dimension are handled by the critical label, while unsupplied/unscored predicates and known failures can leave the joint endpoint unchanged. Identical sensitivity estimates do not imply universal judge agreement.
+
+### Calls, elapsed time and deviations
+
+The shared, never-reset SQLite counter records **766 generation HTTP calls (726 successful, 40 failed)** and **207 judge-batch HTTP calls (34 successful, 173 failed)**, **973 instrumented HTTP calls total**. Generation logical attempts are 766 with zero cache hits. The pre-resume database contains 766 generation plus 170 failed judge calls (936 instrumented calls). The decision memo’s “937 generation calls” is unsupported by generation traces or the HTTP counter; it is not used as the generator denominator. The resume shell also makes an uninstrumented availability probe before judging; no probe attempt ledger exists, so its exact HTTP count is unknown. It is not a generator retry or a judge batch. No claim of complete endpoint-wide HTTP accounting is made.
+
+Original launch: **2026-11-01T18:31:49.902116+00:00**. The original 3605.3 s cost measurement was taken at analysis start, not completion. Git commit `55d85db2e41f2a37e821ee740736e3be7b2e6a70` contains the exact completed report, headline and result hashes by **2026-11-01T19:32:14+00:00**, bounding full elapsed at **3624.1 s**, including the rate-limit wait and analysis, before the unchanged **2026-11-01T22:31:49.902116+00:00** deadline. Last instrumented response: **2026-11-01T19:31:53.199104+00:00**. All recorded responses completed before analysis. Resource caps 2,000 generation / 400 judge batches / 14,400 s were met; subsequent CPU-only auditing does not reset or extend the experiment.
+
+**Concurrency deviation:** the inherited, already completed resume reached **12 concurrent judge HTTP requests**. That follows its original launch configuration but exceeds this task’s current ≤8 API instruction. It is disclosed rather than hidden; this closure sends no API requests and does not relaunch any work. This deviation is separate from the frozen call/time transfer criteria.
+
+### Verdict and reproduction
+
+**The completed fixed inventory meets all frozen scored-transfer criteria within its original call/time budget.** The observed call failures, rate-limit interruption and inherited concurrency deviation remain disclosed. This is scored partial-predicate transfer on the fixed roster, with W-C’s early-cache and post-outcome arbitration qualifications. It supplies no independent usable-repair, fluency, deployment or human-effect evidence. No paper or claims-ledger promotion is performed by this action.
+
+Reproduce: `OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/guard_wc/close_action1.py`, then `OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/guard_wc/verify_results.py`. Closure verifies immutable hashes, the historical dtype regression, both baseline comparisons, inventory and arithmetic, frozen-label reuse, selected examples and category minima, general-label sensitivity and actual HTTP timestamps. It retains the recorded completion time so later read-only reproduction cannot turn an on-time experiment into an artificial timeout.
