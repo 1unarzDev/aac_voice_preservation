@@ -31,6 +31,8 @@ are scored exactly as before.
                      as sensitivity only (D-015 acceptance~statement relaxation).
 Critical label source: J1==J2 agreement, else arbiter.jsonl, else (with
 --fallback J1|J2) that variant, else NA (row excluded from rates; counted).
+With --resolution, the supplied cross-run (text_id, input_text, dimension) table
+is authoritative: arbiter > agreement > unknown, overriding all local fallback.
 
   python src/attribute.py --run pilot1            # writes scored.parquet + endpoints.json
   python src/attribute.py --run fixture --fallback J1
@@ -254,8 +256,13 @@ def endpoints(df: pd.DataFrame, include_quarantine: bool = False) -> dict:
         hits = []
         for _, s in g.groupby(["family_id", "variant"]):
             ch = set(s["chose"].dropna())
-            hits.append(("A" in ch) and ("B" in ch))
-        cov[f"{m}|{p}|{c}"] = {"coverage@3": round(sum(hits) / len(hits), 3), "n_sets": len(hits)}
+            covered = {"A", "B"} <= ch
+            unknown = bool((s.valid & s.critical.isna()).any())
+            hits.append(True if covered else None if unknown else False)
+        observed = [v for v in hits if v is not None]
+        cov[f"{m}|{p}|{c}"] = {"coverage@3": round(sum(observed) / len(observed), 3) if observed else None,
+                                "n_sets": len(hits), "n_observed": len(observed),
+                                "n_unresolved": len(hits) - len(observed)}
     ep["coverage_at_3"] = cov
     ep["stance_additions"] = {
         f"{m}|{p}": {k: _rate(g[k])["rate"] for k in

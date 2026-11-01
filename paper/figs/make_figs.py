@@ -236,6 +236,8 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     for ch in CHANNELS:
         pooled_all[ch] = {k: boot(d[d.channel == ch], "cm")[k] for k in ("estimate", "ci_low", "ci_high")}
     nums["fig_channel_ladder"]["all_dims"] = pooled_all
+    nums["fig_channel_ladder"]["joint_supplied_predicates"] = {
+        ch: boot(d[d.channel.eq(ch)], "constraint_preserving") for ch in ['chip1', 'chipall', 'full']}
     for j, (ax, dim) in enumerate(zip(axes, DIMS)):
         g = d[d.subdim == dim]
         est, lo, hi = [], [], []
@@ -248,6 +250,8 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
                     mfc="white", mec=MUTED, mew=0.5, zorder=3)
         ax.fill_between(x, lo, hi, color=BLUE_LT, alpha=0.55, lw=0, zorder=1)
         ax.plot(x, est, color=BLUE, lw=1.4, marker="o", ms=3.4, mfc=BLUE, mec="white", mew=0.6, zorder=4)
+        joint = [boot(g[g.channel.eq(ch)], "constraint_preserving")['estimate'] for ch in ['chip1','chipall','full']]
+        ax.plot(x[2:], joint, color=ORANGE, lw=0.9, ls='--', marker='s', ms=2.5, zorder=4)
         ax.axhline(0.5, color=INK2, lw=0.5, ls=(0, (2, 1.5)), zorder=1.5)
         pct_axis(ax, "y")
         ax.set_xticks(x, [CH_LABEL[c] for c in CHANNELS])
@@ -266,6 +270,8 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     hs = [Line2D([], [], color=BLUE, lw=1.4, marker="o", ms=3.4, mec="white", mew=0.6),
           plt.Rectangle((0, 0), 1, 1, color=BLUE_LT, alpha=0.55, lw=0)]
     ls = ["pooled over 4 models", "95% CI (families)"]
+    hs.append(Line2D([], [], color=ORANGE, lw=0.9, ls='--', marker='s', ms=2.5))
+    ls.append("joint supplied-predicate pass")
     for m in MODEL_ORDER:
         hs.append(Line2D([], [], marker=MODEL_MARK[m], ls="", ms=3, mfc="white", mec=MUTED, mew=0.5))
         ls.append(MODEL_LABEL[m])
@@ -345,7 +351,7 @@ def fig_cost_asymmetry(df: pd.DataFrame, nums: dict) -> None:
         hgrid(ax)
         ax.spines["left"].set_visible(False)
         ax.set_title(title, fontsize=7)
-        ax.set_xlabel("extra input actions", labelpad=1.5)
+        ax.set_xlabel("nominal extra selections", labelpad=1.5)
     hs = [Line2D([], [], marker="o", ls="", ms=3.6, color=BLUE, mec="white", mew=0.5),
           Line2D([], [], marker="D", ls="", ms=3.2, color=ORANGE, mec="white", mew=0.5)]
     fig.legend(hs, ["default reading (most common under bare)", "non-default reading"],
@@ -496,11 +502,9 @@ def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
     ex = ex[ex.model == MODEL_ORDER[0]].iloc[0]
     nums["fig_pipeline"] = {"example_family": "pol-07", "model": ex.model, "output": ex.text,
                             "polarity": ex.polarity, "agent": ex.agent, "speech_act": ex.speech_act}
-    bare, nc = fam["bare"], fam["noncritical"]
-    chans = [("bare", bare), ("+noncritical", f"{bare} {nc}"),
-             ("+chip", f"{' '.join(va['chips'])} {bare}"),
-             ("+all chips", f"{' '.join(va['all_chips'])} {bare}"),
-             ("full", va["source"])]
+    chans = [(name, A.input_text(fam, "A", channel).removeprefix("Keywords: ").removeprefix("The user typed: "))
+             for name, channel in [("bare", "bare"), ("+noncritical", "noncrit"), ("+chip", "chip1"),
+                                   ("+all chips", "chipall"), ("full", "full")]]
     W, H = DOUBLE - 0.22, 1.72
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])

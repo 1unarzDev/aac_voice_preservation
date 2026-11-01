@@ -2,7 +2,7 @@
 
 Date: 2026-11-01. Author: W-A oracle validation engineer (Claude). No GPU servers were started. The judge ran at
 concurrency 8: 30 API calls, 1 transient failure that was retried. The production judge (gpt-6.1-sol, J1+J2,
-effort low), the layer0 tiebreak, the arbiter rule and src/attribute.py are unchanged.
+effort low), the layer0 tiebreak, the extraction calls are historical. ACTION 2 refresh uses shared arbiter > agreement > unknown resolution and primary quarantine exclusions; no new judge calls were made.
 
 Reproduce:
 ```
@@ -26,7 +26,7 @@ python src/oracle_report.py
 | Same, raw rule (no D-015 relaxation) | 24/24 detected, 0/24 false alarms | pass |
 | Round-1 challenges, critical label = key | 22/24 [0.74, 0.98] | none set |
 | Judge vs codex-panel majority, kappa (sampled, unweighted / design-weighted) | critical .97/.98; polarity 1.0/1.0; speech_act .95/.97; agent .96/.97; certainty .91/.97; politeness .96/.97; added_content .76/.80 | kappa >= .6 vs **human** gold: **not evaluable, 0 human returns** |
-| Contract verdicts recomputed from panel labels | Violation flips in 2/105 units (1.3% weighted); constraint_preserving 4/105 (2.7%); Assumption 1/58 (0.4%) | none set |
+| Contract verdicts recomputed from panel labels (primary, excluding quarantine) | violation: 2/99 units (1.37% weighted); constraint_preserving: 4/99 units (2.77% weighted); assumption: 1/57 units (0.41% weighted) | machine agreement only; human gate pending |
 
 Four findings matter most:
 
@@ -73,7 +73,6 @@ added-content pass). Keys and the 120 source mutations were hashed before the fi
   change, or a mood change.
 - mitigation (politeness). 3 polite controls (could you, please, sorry) whose mutants remove the marker; 3 plain
   controls (imperative, CB-2 can-you, statement) whose mutants add please / would you mind / thanks.
-
 ## 2. Identity and scoped-mutation injection (120 test sources)
 
 Every source sentence of data/items/test.jsonl was given to the production judge as if it were the `full`-channel output for its own source (input `The user typed: <source>`), then scored by the unchanged src/attribute.py (J1/J2, layer0 tiebreak for general dims, arbiter for critical J1!=J2). One hand-written, scoped mutation per source (analysis/oracle/source_mutations.jsonl, frozen before judging) flips the critical value and is scored against the *unmutated* source's contract. 17/120 mutations coincide with the family's partner source (minimal pairs admit few other scoped flips); the rest are new wordings.
@@ -373,6 +372,48 @@ Critical confusion matrices by family dimension (rows = panel majority, columns 
 
 ### Reference: panel majority (3 members)
 
+Each sampled gold unit (text, family, visible input) maps to one or more scored occurrences in runs/main1/scored.parquet: different variants share bare/noncrit inputs, and models and prompts can produce the same text. For every occurrence I recomputed Violation (cue channels), Assumption (bare/noncrit) and constraint_preserving (cue channels) twice. The first run used the production judge labels; recomputing them reproduces the stored production verdicts exactly ({'ok': 993}). The second run used panel-majority labels for the critical and general dims. A verdict *flips* when the two runs give different non-missing values. When the panel has no majority on a needed label, that verdict is unresolved, not a flip. Production semantics ignore a missing general label; the `strict` columns in the CSV treat it as unresolved instead.
+
+| verdict | occurrences (both defined) | unresolved (no panel majority) | occurrence flips | units with >=1 flip | units flipped, design-weighted | judge T/panel T | judge T/panel F | judge F/panel T | judge F/panel F | judge sens vs panel | judge spec vs panel |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| violation | 144 | 0 | 3/144 [0.01, 0.06] | 2/99 [0.01, 0.07] | 0.014 | 25 | 1 | 2 | 116 | 25/27 [0.77, 0.98] | 116/117 [0.95, 1.00] |
+| assumption | 187 | 0 | 2/187 [0.00, 0.04] | 1/57 [0.00, 0.09] | 0.004 | 151 | 2 | 0 | 34 | 151/151 [0.97, 1.00] | 34/36 [0.82, 0.98] |
+| constraint_preserving | 144 | 0 | 5/144 [0.01, 0.08] | 4/99 [0.02, 0.10] | 0.028 | 105 | 2 | 3 | 34 | 105/108 [0.92, 0.99] | 34/36 [0.82, 0.98] |
+
+Flipped units (5 distinct gold units, 7 occurrences). By family dimension: {'certainty': 3, 'agent': 1, 'time_quantity': 1}.
+
+| item | family | channel | text | judge crit | panel crit | judge V/A/CP | panel V/A/CP |
+|---|---|---|---|---|---|---|---|
+| g-1888f32ca6 | cer-08 | chipall | We are waiting because the train is cancelled. | plain assertion | plain assertion | False/None/False | False/None/True |
+| g-f792e412e3 | cer-09 | full | I lost my bank card now, can you help me? | plain assertion | plain assertion | False/None/False | False/None/True |
+| g-1846e404da | agt-13 | chip1 | I tell the manager to stop the noise. | speaker | third party | False/None/True | True/None/False |
+| g-5f2523000a | cer-13 | chip1 | I must have broken my ankle because I fell now. | hedged/uncertain | strongly certain/emphatic | True/None/False | False/None/True |
+| g-5fbb0137cc | tq-08 | noncrit | I want to finish knitting my project. | now | unclear/mixed | None/True/None | None/False/None |
+
+### Reference: gpt-5.6-sol + gpt-6-astra agreement (sensitivity)
+
+Each sampled gold unit (text, family, visible input) maps to one or more scored occurrences in runs/main1/scored.parquet: different variants share bare/noncrit inputs, and models and prompts can produce the same text. For every occurrence I recomputed Violation (cue channels), Assumption (bare/noncrit) and constraint_preserving (cue channels) twice. The first run used the production judge labels; recomputing them reproduces the stored production verdicts exactly ({'ok': 993}). The second run used panel-majority labels for the critical and general dims. A verdict *flips* when the two runs give different non-missing values. When the panel has no majority on a needed label, that verdict is unresolved, not a flip. Production semantics ignore a missing general label; the `strict` columns in the CSV treat it as unresolved instead.
+
+| verdict | occurrences (both defined) | unresolved (no panel majority) | occurrence flips | units with >=1 flip | units flipped, design-weighted | judge T/panel T | judge T/panel F | judge F/panel T | judge F/panel F | judge sens vs panel | judge spec vs panel |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| violation | 141 | 3 | 3/141 [0.01, 0.06] | 2/96 [0.01, 0.07] | 0.014 | 25 | 1 | 2 | 113 | 25/27 [0.77, 0.98] | 113/114 [0.95, 1.00] |
+| assumption | 179 | 8 | 2/179 [0.00, 0.04] | 1/54 [0.00, 0.10] | 0.004 | 145 | 2 | 0 | 32 | 145/145 [0.97, 1.00] | 32/34 [0.81, 0.98] |
+| constraint_preserving | 141 | 3 | 7/141 [0.02, 0.10] | 6/96 [0.03, 0.13] | 0.038 | 102 | 2 | 5 | 32 | 102/107 [0.90, 0.98] | 32/34 [0.81, 0.98] |
+
+Flipped units (7 distinct gold units, 9 occurrences). By family dimension: {'certainty': 3, 'polarity': 2, 'agent': 1, 'time_quantity': 1}.
+
+| item | family | channel | text | judge crit | panel crit | judge V/A/CP | panel V/A/CP |
+|---|---|---|---|---|---|---|---|
+| g-1888f32ca6 | cer-08 | chipall | We are waiting because the train is cancelled. | plain assertion | plain assertion | False/None/False | False/None/True |
+| g-f792e412e3 | cer-09 | full | I lost my bank card now, can you help me? | plain assertion | plain assertion | False/None/False | False/None/True |
+| g-34d17550ef | pol-08 | full | There is no lift available now. | negated | negated | False/None/False | False/None/True |
+| g-1846e404da | agt-13 | chip1 | I tell the manager to stop the noise. | speaker | third party | False/None/True | True/None/False |
+| g-5f2523000a | cer-13 | chip1 | I must have broken my ankle because I fell now. | hedged/uncertain | strongly certain/emphatic | True/None/False | False/None/True |
+| g-5fbb0137cc | tq-08 | noncrit | I want to finish knitting my project. | now | unclear/mixed | None/True/None | None/False/None |
+| g-c7324ee764 | pol-14 | full | I'm disappointed that my older brother isn't coming to my graduation. | negated | negated | False/None/False | False/None/True |
+
+### Reference: panel majority, quarantine-inclusive sensitivity
+
 Each sampled gold unit (text, family, visible input) maps to one or more scored occurrences in runs/main1/scored.parquet: different variants share bare/noncrit inputs, and models and prompts can produce the same text. For every occurrence I recomputed Violation (cue channels), Assumption (bare/noncrit) and constraint_preserving (cue channels) twice. The first run used the production judge labels; recomputing them reproduces the stored production verdicts exactly ({'ok': 1041}). The second run used panel-majority labels for the critical and general dims. A verdict *flips* when the two runs give different non-missing values. When the panel has no majority on a needed label, that verdict is unresolved, not a flip. Production semantics ignore a missing general label; the `strict` columns in the CSV treat it as unresolved instead.
 
 | verdict | occurrences (both defined) | unresolved (no panel majority) | occurrence flips | units with >=1 flip | units flipped, design-weighted | judge T/panel T | judge T/panel F | judge F/panel T | judge F/panel F | judge sens vs panel | judge spec vs panel |
@@ -391,31 +432,9 @@ Flipped units (5 distinct gold units, 7 occurrences). By family dimension: {'cer
 | g-5f2523000a | cer-13 | chip1 | I must have broken my ankle because I fell now. | hedged/uncertain | strongly certain/emphatic | True/None/False | False/None/True |
 | g-5fbb0137cc | tq-08 | noncrit | I want to finish knitting my project. | now | unclear/mixed | None/True/None | None/False/None |
 
-### Reference: gpt-5.6-sol + gpt-6-astra agreement (sensitivity)
-
-Each sampled gold unit (text, family, visible input) maps to one or more scored occurrences in runs/main1/scored.parquet: different variants share bare/noncrit inputs, and models and prompts can produce the same text. For every occurrence I recomputed Violation (cue channels), Assumption (bare/noncrit) and constraint_preserving (cue channels) twice. The first run used the production judge labels; recomputing them reproduces the stored production verdicts exactly ({'ok': 1041}). The second run used panel-majority labels for the critical and general dims. A verdict *flips* when the two runs give different non-missing values. When the panel has no majority on a needed label, that verdict is unresolved, not a flip. Production semantics ignore a missing general label; the `strict` columns in the CSV treat it as unresolved instead.
-
-| verdict | occurrences (both defined) | unresolved (no panel majority) | occurrence flips | units with >=1 flip | units flipped, design-weighted | judge T/panel T | judge T/panel F | judge F/panel T | judge F/panel F | judge sens vs panel | judge spec vs panel |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| violation | 155 | 3 | 3/155 [0.01, 0.06] | 2/102 [0.01, 0.07] | 0.013 | 26 | 1 | 2 | 126 | 26/28 [0.77, 0.98] | 126/127 [0.96, 1.00] |
-| assumption | 181 | 8 | 2/181 [0.00, 0.04] | 1/55 [0.00, 0.10] | 0.004 | 147 | 2 | 0 | 32 | 147/147 [0.97, 1.00] | 32/34 [0.81, 0.98] |
-| constraint_preserving | 155 | 3 | 7/155 [0.02, 0.09] | 6/102 [0.03, 0.12] | 0.037 | 115 | 2 | 5 | 33 | 115/120 [0.91, 0.98] | 33/35 [0.81, 0.98] |
-
-Flipped units (7 distinct gold units, 9 occurrences). By family dimension: {'certainty': 3, 'polarity': 2, 'agent': 1, 'time_quantity': 1}.
-
-| item | family | channel | text | judge crit | panel crit | judge V/A/CP | panel V/A/CP |
-|---|---|---|---|---|---|---|---|
-| g-1888f32ca6 | cer-08 | chipall | We are waiting because the train is cancelled. | plain assertion | plain assertion | False/None/False | False/None/True |
-| g-f792e412e3 | cer-09 | full | I lost my bank card now, can you help me? | plain assertion | plain assertion | False/None/False | False/None/True |
-| g-34d17550ef | pol-08 | full | There is no lift available now. | negated | negated | False/None/False | False/None/True |
-| g-1846e404da | agt-13 | chip1 | I tell the manager to stop the noise. | speaker | third party | False/None/True | True/None/False |
-| g-5f2523000a | cer-13 | chip1 | I must have broken my ankle because I fell now. | hedged/uncertain | strongly certain/emphatic | True/None/False | False/None/True |
-| g-5fbb0137cc | tq-08 | noncrit | I want to finish knitting my project. | now | unclear/mixed | None/True/None | None/False/None |
-| g-c7324ee764 | pol-14 | full | I'm disappointed that my older brother isn't coming to my graduation. | negated | negated | False/None/False | False/None/True |
-
 ## 6. Refusal/acceptance quarantine
 
-src/attribute.py now writes `quarantine_refusal_acceptance` (True for every row of a speech-act family with a refusal or acceptance variant: act-10, act-16 in main1). runs/main1/scored.parquet was regenerated; all 60 pre-existing columns are byte-identical. src/analyze.py writes analysis/main1/sensitivity_quarantine_refusal_acceptance.csv. All 17 pre-existing analysis/main1 CSVs reproduce byte-for-byte. The primary speech-act estimate is `primary_excl_quarantine` (8 families).
+src/attribute.py now writes `quarantine_refusal_acceptance` (True for every row of a speech-act family with a refusal or acceptance variant: act-10, act-16 in main1). runs/main1/scored.parquet was regenerated; critical labels use annotation/label_resolution.jsonl across all refreshed runs. Old tables are preserved as scored_prev.parquet; analysis/reconciliation.md lists changed endpoints. src/analyze.py writes analysis/main1/sensitivity_quarantine_refusal_acceptance.csv; headline analyses now exclude quarantine throughout (58 families, including 8 speech-act families). The full 60-family analysis is retained in analysis/main1_quarantine_inclusive.
 
 P0 speech-act critical match / constraint_preserving (pooled over 4 models; mean of model estimates):
 

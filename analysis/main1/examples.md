@@ -244,15 +244,15 @@ Rule: seed=20261031; sort eligible rows by SHA256(seed, family/variant/channel/m
 
 ### assumption-default
 
-- `act-11/A` · qwen2.5-7b · P2 · noncrit · label source agree
-  - Source: "Are you charging my wheelchair tonight?"
-  - Visible input: "Keywords: charge wheelchair tonight"
-  - Output: "Could you charge my wheelchair for me tonight?"
-
-- `act-12/B` · llama3.1-8b · S3 · noncrit · label source agree
+- `act-12/B` · gpt-6.1-terra · P2 · bare · label source agree
   - Source: "Is it normal to feel dizzy after this medicine?"
-  - Visible input: "Keywords: normal feel dizzy medicine"
-  - Output: "I feel dizzy and need some medicine."
+  - Visible input: "Keywords: normal feel dizzy"
+  - Output: "I feel dizzy, but otherwise normal."
+
+- `act-14/B` · gpt-6.1-terra · S3 · noncrit · label source agree
+  - Source: "We're still meeting at the cinema."
+  - Visible input: "Keywords: still meet cinema"
+  - Output: "Are we still meeting at the cinema?"
 
 
 ### violation-with-cue
@@ -262,10 +262,10 @@ Rule: seed=20261031; sort eligible rows by SHA256(seed, family/variant/channel/m
   - Visible input: "Keywords: [TELL] skip lunch"
   - Output: "Tell me about skipping lunch."
 
-- `act-16/A` · qwen2.5-7b · P2 · chip1 · label source agree
-  - Source: "No, you can't borrow my car this weekend."
-  - Visible input: "Keywords: [REFUSE] borrow car"
-  - Output: "I'm sorry, but I can't borrow my car right now."
+- `act-07/B` · llama3.1-8b · S3 · chip1 · label source agree
+  - Source: "I'm bringing my dog tomorrow."
+  - Visible input: "Keywords: [TELL] bring dog"
+  - Output: "Bring the dog."
 
 
 ### chip-repair success
@@ -287,15 +287,15 @@ Rule: seed=20261031; sort eligible rows by SHA256(seed, family/variant/channel/m
 
 ### spanning-set miss
 
-- `act-16/A` · llama3.1-8b · P2 · noncrit · label source agree
-  - Source: "No, you can't borrow my car this weekend."
-  - Visible input: "Keywords: borrow car weekend"
-  - Output: ["I want to borrow your car this weekend.", "Can I borrow your car this weekend?", "I must borrow your car this weekend."]
-
 - `act-07/A` · llama3.1-8b · P2 · bare · label source agree
   - Source: "Can I bring my dog tomorrow?"
   - Visible input: "Keywords: bring dog"
   - Output: ["I want to bring the dog.", "Can you bring the dog?", "I must bring the dog."]
+
+- `act-12/B` · qwen2.5-7b · P2 · noncrit · label source agree
+  - Source: "Is it normal to feel dizzy after this medicine?"
+  - Visible input: "Keywords: normal feel dizzy medicine"
+  - Output: ["I feel a bit dizzy and need some medicine.", "The medicine usually helps when I feel dizzy.", "I am dizzy now and want to take some medicine."]
 
 
 ## time_quantity

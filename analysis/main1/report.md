@@ -1,8 +1,8 @@
 # Analysis: main1
 
-Input: `runs/main1/scored.parquet`. 60 families; 19,198 target rows; 15,422 distinct output occurrences within channels; 0 unresolved critical labels; 0 non-completions.
+Input: `runs/main1/scored.parquet`. 58 families; 18,558 target rows; 14,910 distinct output occurrences within channels; 0 unresolved critical labels; 0 non-completions.
 
-Label sources: {'agree': 18998, 'arbiter': 200}. Validity: {'supplied': 19198}.
+Label sources: {'agree': 18392, 'arbiter': 166}. Validity: {'supplied': 18558}.
 
 ## Selected headline estimates
 
@@ -26,10 +26,10 @@ Entries are estimate [95% CI]; n = observed denominator, f = observed families. 
 | politeness | gpt-6.1-terra | 0.900 [0.750, 1.000]; n=20, f=10 | 0.900 [0.750, 1.000]; n=20, f=10 | 0.500 [0.200, 0.800]; n=10, f=10 | 0.800 [0.500, 1.000]; n=10, f=10 | 0.200 [0.000, 0.500]; n=10, f=10 |
 | politeness | llama3.1-8b | 0.950 [0.850, 1.000]; n=20, f=10 | 0.900 [0.750, 1.000]; n=20, f=10 | 0.500 [0.200, 0.800]; n=10, f=10 | 0.600 [0.300, 0.900]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
 | politeness | qwen2.5-7b | 1.000 [1.000, 1.000]; n=20, f=10 | 0.950 [0.850, 1.000]; n=20, f=10 | 0.600 [0.300, 0.900]; n=10, f=10 | 0.400 [0.100, 0.700]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
-| speech_act | gemma3-4b | 0.850 [0.650, 1.000]; n=20, f=10 | 0.950 [0.850, 1.000]; n=20, f=10 | 0.375 [0.000, 0.714]; n=8, f=8 | 0.300 [0.000, 0.600]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
-| speech_act | gpt-6.1-terra | 0.850 [0.650, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 0.500 [0.000, 1.000]; n=6, f=6 | 0.800 [0.500, 1.000]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
-| speech_act | llama3.1-8b | 0.700 [0.450, 0.950]; n=20, f=10 | 0.850 [0.700, 0.950]; n=20, f=10 | 0.667 [0.200, 1.000]; n=6, f=6 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
-| speech_act | qwen2.5-7b | 0.850 [0.700, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 0.571 [0.167, 0.889]; n=7, f=7 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
+| speech_act | gemma3-4b | 0.875 [0.625, 1.000]; n=16, f=8 | 1.000 [1.000, 1.000]; n=16, f=8 | 0.429 [0.000, 0.833]; n=7, f=7 | 0.375 [0.125, 0.750]; n=8, f=8 | 0.000 [0.000, 0.000]; n=8, f=8 |
+| speech_act | gpt-6.1-terra | 0.875 [0.625, 1.000]; n=16, f=8 | 1.000 [1.000, 1.000]; n=16, f=8 | 0.600 [0.000, 1.000]; n=5, f=5 | 1.000 [1.000, 1.000]; n=8, f=8 | 0.125 [0.000, 0.375]; n=8, f=8 |
+| speech_act | llama3.1-8b | 0.688 [0.375, 0.938]; n=16, f=8 | 0.938 [0.812, 1.000]; n=16, f=8 | 0.667 [0.250, 1.000]; n=6, f=6 | 0.250 [0.000, 0.625]; n=8, f=8 | 0.000 [0.000, 0.000]; n=8, f=8 |
+| speech_act | qwen2.5-7b | 0.812 [0.625, 0.938]; n=16, f=8 | 1.000 [1.000, 1.000]; n=16, f=8 | 0.667 [0.250, 1.000]; n=6, f=6 | 0.250 [0.000, 0.625]; n=8, f=8 | 0.000 [0.000, 0.000]; n=8, f=8 |
 | time_quantity | gemma3-4b | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=1, f=1 | 0.000 [0.000, 0.000]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
 | time_quantity | gpt-6.1-terra | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=3, f=3 | 0.200 [0.000, 0.500]; n=10, f=10 | 0.100 [0.000, 0.300]; n=10, f=10 |
 | time_quantity | llama3.1-8b | 0.950 [0.850, 1.000]; n=20, f=10 | 1.000 [1.000, 1.000]; n=20, f=10 | 0.500 [0.000, 1.000]; n=2, f=2 | 0.000 [0.000, 0.000]; n=10, f=10 | 0.000 [0.000, 0.000]; n=10, f=10 |
@@ -53,7 +53,7 @@ Extra actions to reach each target reading: 0 if top-1 matches, 1 if present amo
 
 Input actions = whitespace keyword count + chip selections; full = source whitespace word count. Input characters = number of visible word characters including inter-word spaces + chip selections; rendering prefixes and chip token spelling are excluded. Pareto flags compare channel means within dimension/model/prompt and do not test statistical dominance.
 
-Figures F1/F2/F3/F5 use P0 when present (otherwise the first available prompt, excluding P1 when possible); F4 compares P2/S3. P1 is retained as pilot-only sensitivity output per D-010; it is not a recommended paper condition. All prompt-specific numbers are in the tables below. Main match/assumption analyses include act-01/act-02; sensitivity_without_act01_act02.csv excludes those frozen pilot speech-act families (D-009). sensitivity_quarantine_refusal_acceptance.csv reports speech-act estimates with and without the refusal/acceptance families (column quarantine_refusal_acceptance; PREREG_R2 W-A): the primary speech-act estimate is primary_excl_quarantine. Pilot layer0 time/quantity labels are unavailable; no time/quantity inference should be made.
+Figures F1/F2/F3/F5 use P0 when present (otherwise the first available prompt, excluding P1 when possible); F4 compares P2/S3. P1 is retained as pilot-only sensitivity output per D-010; it is not a recommended paper condition. All prompt-specific numbers are in the tables below. Main match/assumption analyses include act-01/act-02; sensitivity_without_act01_act02.csv excludes those frozen pilot speech-act families (D-009). sensitivity_quarantine_refusal_acceptance.csv reports speech-act estimates with and without the refusal/acceptance families (column quarantine_refusal_acceptance; PREREG_R2 W-A): the primary speech-act estimate is primary_excl_quarantine. All headline tables and figures exclude quarantined families unless --include-quarantine is explicitly supplied for sensitivity. Pilot layer0 time/quantity labels are unavailable; no time/quantity inference should be made.
 
 ## Artifacts
 
@@ -390,86 +390,86 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | P2 | critical_match | 0.5000 | 0.5000 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3000 | 0.2333 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3833 | 0.2500 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3333 | 0.2667 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3833 | 0.3167 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4483 | 0.3704 | 0.5333 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.9333 | 0.8329 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.9000 | 0.8333 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7833 | 0.7167 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8167 | 0.7500 | 0.8833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | critical_match | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | critical_match | 0.9333 | 0.8333 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7167 | 0.5667 | 0.8504 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6167 | 0.5000 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | critical_match | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6167 | 0.5167 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3167 | 0.2500 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3833 | 0.3000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3500 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3125 | 0.2500 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | critical_match | 0.4167 | 0.2917 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3125 | 0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3750 | 0.3333 | 0.4172 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3125 | 0.1250 | 0.4375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3958 | 0.3125 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4167 | 0.3333 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4783 | 0.3810 | 0.5625 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8750 | 0.6250 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.9167 | 0.8333 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8750 | 0.7083 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.6875 | 0.3750 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.7500 | 0.5625 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6250 | 0.4792 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.6875 | 0.3750 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8125 | 0.6250 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7708 | 0.6458 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.7708 | 0.6042 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6250 | 0.5417 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.9375 | 0.8750 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.6875 | 0.5000 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7917 | 0.7083 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7292 | 0.4792 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8333 | 0.7500 | 0.9167 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | critical_match | 0.5208 | 0.3750 | 0.6667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.6458 | 0.5000 | 0.7917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | critical_match | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6042 | 0.4583 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | critical_match | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6458 | 0.5625 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3542 | 0.2917 | 0.4167 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.3125 | 0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.4375 | 0.3750 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3750 | 0.2708 | 0.4583 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3750 | 0.2500 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4167 | 0.3333 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4375 | 0.3125 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | critical_match | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P1 | critical_match | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | critical_match | 0.1333 | 0.0500 | 0.2333 | 60 | 60 | 0 | 10 | 10 | 2000 |
@@ -949,102 +949,102 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | full | qwen2.5-7b | P2 | constraint_preserving | 0.3333 | 0.2333 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | full | qwen2.5-7b | S3 | violation | 0.0500 | 0.0000 | 0.1500 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | full | qwen2.5-7b | S3 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | violation | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | violation | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | violation | 0.5517 | 0.4667 | 0.6296 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.4483 | 0.3704 | 0.5333 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | violation | 0.1500 | 0.0000 | 0.3500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | violation | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | violation | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | violation | 0.1167 | 0.0333 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | violation | 0.1833 | 0.0500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | violation | 0.3000 | 0.0500 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | violation | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | violation | 0.3500 | 0.2167 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | violation | 0.3000 | 0.0500 | 0.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | violation | 0.1500 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | violation | 0.4000 | 0.1500 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | violation | 0.2500 | 0.1667 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | violation | 0.1833 | 0.0500 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | violation | 0.1500 | 0.0500 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | violation | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.5500 | 0.4333 | 0.6500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | violation | 0.0667 | 0.0000 | 0.1671 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | violation | 0.1000 | 0.0333 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.9000 | 0.8333 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | violation | 0.0500 | 0.0000 | 0.1167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | constraint_preserving | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | violation | 0.2500 | 0.0500 | 0.4512 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | violation | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | violation | 0.2167 | 0.1500 | 0.2833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.7000 | 0.6167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | violation | 0.2667 | 0.0833 | 0.4837 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | violation | 0.2500 | 0.0500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | violation | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | violation | 0.1833 | 0.1167 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.6833 | 0.5500 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | violation | 0.2500 | 0.0500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | violation | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | violation | 0.2000 | 0.0500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | violation | 0.4667 | 0.3333 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.3167 | 0.2000 | 0.4167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | violation | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.8833 | 0.7500 | 0.9833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | violation | 0.2833 | 0.1496 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5424 | 0.4000 | 0.6949 | 59 | 60 | 1 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9833 | 0.9500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | violation | 0.1500 | 0.0500 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | violation | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | violation | 0.3833 | 0.2333 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.4000 | 0.2833 | 0.5167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | violation | 0.1500 | 0.0500 | 0.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | violation | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | violation | 0.3833 | 0.3000 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4667 | 0.3500 | 0.5833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | violation | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | violation | 0.2500 | 0.0625 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | violation | 0.5217 | 0.4375 | 0.6190 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.4783 | 0.3810 | 0.5625 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | violation | 0.1250 | 0.0000 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8750 | 0.6250 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | violation | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | constraint_preserving | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | violation | 0.1250 | 0.0000 | 0.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | violation | 0.0833 | 0.0208 | 0.1667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.9167 | 0.8333 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | violation | 0.1250 | 0.0000 | 0.2917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | constraint_preserving | 0.8750 | 0.7083 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | violation | 0.3125 | 0.0625 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.6875 | 0.3750 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | violation | 0.2500 | 0.0625 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.7500 | 0.5625 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | violation | 0.3750 | 0.2292 | 0.5208 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.6250 | 0.4792 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | violation | 0.3125 | 0.0625 | 0.6250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.6875 | 0.3750 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | violation | 0.1875 | 0.0625 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.8125 | 0.6250 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | violation | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | violation | 0.2292 | 0.1250 | 0.3542 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.7708 | 0.6458 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | violation | 0.2292 | 0.0625 | 0.3958 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.7708 | 0.6042 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | violation | 0.0625 | 0.0000 | 0.1875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.8125 | 0.5625 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | violation | 0.3750 | 0.2708 | 0.4583 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.5625 | 0.4375 | 0.6875 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | violation | 0.0625 | 0.0208 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.9375 | 0.8750 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | violation | 0.2500 | 0.0625 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | violation | 0.3125 | 0.1250 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.6875 | 0.5000 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | violation | 0.2083 | 0.1250 | 0.2917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.7292 | 0.6250 | 0.8333 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | violation | 0.2708 | 0.0625 | 0.5208 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.7292 | 0.4792 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | violation | 0.1250 | 0.0000 | 0.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | violation | 0.1250 | 0.0000 | 0.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | violation | 0.1667 | 0.0833 | 0.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.7083 | 0.5417 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | violation | 0.1250 | 0.0000 | 0.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | violation | 0.1250 | 0.0000 | 0.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | violation | 0.4792 | 0.3333 | 0.6250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.3125 | 0.1875 | 0.4375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | violation | 0.3542 | 0.2083 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5106 | 0.3617 | 0.6596 | 47 | 48 | 1 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9792 | 0.9375 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | violation | 0.0625 | 0.0000 | 0.1875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | violation | 0.3958 | 0.2292 | 0.5417 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.3958 | 0.2911 | 0.5208 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | violation | 0.0625 | 0.0000 | 0.1875 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | violation | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | violation | 0.3542 | 0.2708 | 0.4375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4792 | 0.3750 | 0.5833 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | violation | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
 | time_quantity | chip1 | gemma3-4b | P0 | violation | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | chip1 | gemma3-4b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | chip1 | gemma3-4b | P1 | violation | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -1284,38 +1284,38 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | commitment | 0.9667 | 0.9000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | commitment | 0.8000 | 0.5000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | commitment | 0.9667 | 0.9000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | commitment | 0.8000 | 0.5000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | commitment | 0.8750 | 0.6250 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | commitment | 0.8750 | 0.6250 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | commitment | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | commitment | 1.0000 | 1.0000 | 1.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | commitment | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P1 | commitment | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | commitment | 0.4000 | 0.1333 | 0.6667 | 30 | 30 | 0 | 10 | 10 | 2000 |
@@ -2259,230 +2259,230 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | share_other_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | default_preference_index | 0.2667 | 0.0000 | 0.8000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_A | 0.3750 | 0.0000 | 0.7143 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_B | 0.6250 | 0.2857 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_B_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_A | 0.3750 | 0.0000 | 0.7143 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_B | 0.6250 | 0.2857 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_B_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_A | 0.5000 | 0.2632 | 0.7500 | 18 | 30 | 12 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_B | 0.5000 | 0.2500 | 0.7368 | 18 | 30 | 12 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_A_all | 0.3000 | 0.1667 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_B_all | 0.3000 | 0.1333 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_other_all | 0.3667 | 0.2667 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | share_unclear_all | 0.0333 | 0.0000 | 0.1000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | default_preference_index | 0.0000 | 0.0000 | 0.5294 | 18 | 30 | 12 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_A | 0.3913 | 0.0000 | 0.7500 | 23 | 30 | 7 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_B | 0.6087 | 0.2500 | 1.0000 | 23 | 30 | 7 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_B_all | 0.4667 | 0.2000 | 0.7667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_other_all | 0.2333 | 0.0333 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | default_preference_index | 0.2174 | 0.0000 | 1.0000 | 23 | 30 | 7 | 10 | 8 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_A | 0.5000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_B | 0.5000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | default_preference_index | 0.0000 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_A | 0.5714 | 0.1667 | 0.8889 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_B | 0.4286 | 0.1111 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_other_all | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | share_unclear_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_A | 0.4500 | 0.3333 | 0.5455 | 20 | 30 | 10 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_B | 0.5500 | 0.4545 | 0.6667 | 20 | 30 | 10 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_A_all | 0.3000 | 0.2000 | 0.4000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_B_all | 0.3667 | 0.3333 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_other_all | 0.3333 | 0.2000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | default_preference_index | 0.1000 | 0.0000 | 0.3333 | 20 | 30 | 10 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_A | 0.5556 | 0.1667 | 0.9171 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_B | 0.4444 | 0.0829 | 0.8333 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_A_all | 0.3333 | 0.1000 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_B_all | 0.2667 | 0.0650 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | default_preference_index | 0.1111 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | bare | llama3.1-8b | P0 | share_A | 0.6667 | 0.2000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | share_B | 0.3333 | 0.0000 | 0.8000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 10 | 4 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_A | 0.5000 | 0.1424 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_B | 0.5000 | 0.1429 | 0.8576 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_A | 0.4783 | 0.1905 | 0.7308 | 23 | 30 | 7 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_B | 0.5217 | 0.2692 | 0.8095 | 23 | 30 | 7 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_A_all | 0.3667 | 0.1333 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_B_all | 0.4000 | 0.2333 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_other_all | 0.2333 | 0.1000 | 0.3667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | default_preference_index | 0.0435 | 0.0000 | 0.6195 | 23 | 30 | 7 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | share_A | 0.6667 | 0.2000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | share_B | 0.3333 | 0.0000 | 0.8000 | 18 | 30 | 12 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | share_B_all | 0.2000 | 0.0000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_A | 0.5714 | 0.1667 | 0.8889 | 7 | 10 | 3 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | P0 | share_B | 0.4286 | 0.1111 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | P0 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | P1 | share_A | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_B | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_A | 0.4583 | 0.1667 | 0.7241 | 24 | 30 | 6 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_B | 0.5417 | 0.2759 | 0.8333 | 24 | 30 | 6 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_A_all | 0.3667 | 0.1333 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_B_all | 0.4333 | 0.2333 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_other_all | 0.2000 | 0.0667 | 0.3333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | default_preference_index | 0.0833 | 0.0000 | 0.6667 | 24 | 30 | 6 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_A | 0.5714 | 0.1667 | 0.8889 | 21 | 30 | 9 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | share_B | 0.4286 | 0.1111 | 0.8333 | 21 | 30 | 9 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_B_all | 0.3000 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 21 | 30 | 9 | 10 | 7 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | share_A | 0.4286 | 0.0000 | 0.8000 | 7 | 10 | 3 | 10 | 7 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | share_B | 0.5714 | 0.2000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | share_other_all | 0.3000 | 0.1000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 1999 |
-| speech_act | noncrit | gemma3-4b | P1 | share_A | 0.5000 | 0.1429 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_B | 0.5000 | 0.1429 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_A | 0.5263 | 0.2667 | 0.7500 | 19 | 30 | 11 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_B | 0.4737 | 0.2500 | 0.7333 | 19 | 30 | 11 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_A_all | 0.3333 | 0.1333 | 0.5333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_B_all | 0.3000 | 0.1667 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_other_all | 0.3333 | 0.2000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | share_unclear_all | 0.0333 | 0.0000 | 0.1000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | default_preference_index | 0.0526 | 0.0000 | 0.5716 | 19 | 30 | 11 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | share_A | 0.5000 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | S3 | share_B | 0.5000 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | S3 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | share_other_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | default_preference_index | 0.0000 | 0.0000 | 1.0000 | 18 | 30 | 12 | 10 | 6 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | share_A | 0.4286 | 0.0000 | 0.8333 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | share_B | 0.5714 | 0.1667 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | share_A_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | share_A | 0.8000 | 0.3333 | 1.0000 | 5 | 10 | 5 | 10 | 5 | 1996 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | share_B | 0.2000 | 0.0000 | 0.6667 | 5 | 10 | 5 | 10 | 5 | 1996 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | share_B_all | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | share_unclear_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | default_preference_index | 0.6000 | 0.0000 | 1.0000 | 5 | 10 | 5 | 10 | 5 | 1996 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_A | 0.4348 | 0.3158 | 0.5417 | 23 | 30 | 7 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_B | 0.5652 | 0.4583 | 0.6842 | 23 | 30 | 7 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_A_all | 0.3333 | 0.2000 | 0.4667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_B_all | 0.4333 | 0.3333 | 0.5333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_other_all | 0.2333 | 0.0667 | 0.4000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | default_preference_index | 0.1304 | 0.0000 | 0.3684 | 23 | 30 | 7 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_A | 0.4286 | 0.1175 | 0.7308 | 21 | 30 | 9 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_B | 0.5714 | 0.2692 | 0.8825 | 21 | 30 | 9 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_A_all | 0.3000 | 0.0667 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_B_all | 0.4000 | 0.1667 | 0.6333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_other_all | 0.3000 | 0.0667 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | default_preference_index | 0.1429 | 0.0000 | 0.7778 | 21 | 30 | 9 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | share_A | 0.6250 | 0.2500 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | share_B | 0.3750 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | share_A_all | 0.5000 | 0.2000 | 0.8000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_A | 0.5000 | 0.1424 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_B | 0.5000 | 0.1429 | 0.8576 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_A | 0.4545 | 0.1664 | 0.7273 | 22 | 30 | 8 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_B | 0.5455 | 0.2727 | 0.8336 | 22 | 30 | 8 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_A_all | 0.3333 | 0.1000 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_B_all | 0.4000 | 0.2000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_other_all | 0.2667 | 0.1333 | 0.4333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | default_preference_index | 0.0909 | 0.0000 | 0.6842 | 22 | 30 | 8 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | share_A | 0.6250 | 0.2500 | 1.0000 | 24 | 30 | 6 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | share_B | 0.3750 | 0.0000 | 0.7500 | 24 | 30 | 6 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | share_A_all | 0.5000 | 0.2000 | 0.8000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | default_preference_index | 0.2500 | 0.0000 | 1.0000 | 24 | 30 | 6 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_A | 0.5000 | 0.1424 | 0.8571 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_B | 0.5000 | 0.1429 | 0.8576 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 8 | 10 | 2 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_A | 0.5714 | 0.2000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_B | 0.4286 | 0.0000 | 0.8000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_B_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_other_all | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 10 | 3 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_A | 0.4167 | 0.1538 | 0.6923 | 24 | 30 | 6 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_B | 0.5833 | 0.3077 | 0.8462 | 24 | 30 | 6 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_A_all | 0.3333 | 0.1333 | 0.5667 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_B_all | 0.4667 | 0.2333 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_other_all | 0.2000 | 0.0667 | 0.3333 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | default_preference_index | 0.1667 | 0.0000 | 0.6923 | 24 | 30 | 6 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_A | 0.5000 | 0.1424 | 0.8571 | 24 | 30 | 6 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_B | 0.5000 | 0.1429 | 0.8576 | 24 | 30 | 6 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_A_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_B_all | 0.4000 | 0.1000 | 0.7000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_other_all | 0.2000 | 0.0000 | 0.5000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 30 | 30 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | default_preference_index | 0.0000 | 0.0000 | 0.7500 | 24 | 30 | 6 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_A | 0.4286 | 0.0000 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_B | 0.5714 | 0.1667 | 1.0000 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_B_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_A | 0.4286 | 0.0000 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_B | 0.5714 | 0.1667 | 1.0000 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_B_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_A | 0.6000 | 0.3529 | 0.8574 | 15 | 24 | 9 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_B | 0.4000 | 0.1426 | 0.6471 | 15 | 24 | 9 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_A_all | 0.3750 | 0.2500 | 0.5000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_B_all | 0.2500 | 0.0833 | 0.4583 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_other_all | 0.3750 | 0.2500 | 0.5000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | default_preference_index | 0.2000 | 0.0000 | 0.7148 | 15 | 24 | 9 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_A | 0.4500 | 0.0000 | 0.8333 | 20 | 24 | 4 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_B | 0.5500 | 0.1667 | 1.0000 | 20 | 24 | 4 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_B_all | 0.4583 | 0.1250 | 0.7917 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_other_all | 0.1667 | 0.0000 | 0.4167 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | default_preference_index | 0.1000 | 0.0000 | 1.0000 | 20 | 24 | 4 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_A | 0.6000 | 0.0000 | 1.0000 | 5 | 8 | 3 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_B | 0.4000 | 0.0000 | 1.0000 | 5 | 8 | 3 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_other_all | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | default_preference_index | 0.2000 | 0.0000 | 1.0000 | 5 | 8 | 3 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | share_unclear_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_A | 0.5000 | 0.4211 | 0.5789 | 18 | 24 | 6 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_B | 0.5000 | 0.4211 | 0.5789 | 18 | 24 | 6 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_A_all | 0.3750 | 0.3333 | 0.4583 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_B_all | 0.3750 | 0.3333 | 0.4583 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_other_all | 0.2500 | 0.1656 | 0.3333 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | default_preference_index | 0.0000 | 0.0000 | 0.1579 | 18 | 24 | 6 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_A | 0.6667 | 0.2500 | 1.0000 | 15 | 24 | 9 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_B | 0.3333 | 0.0000 | 0.7500 | 15 | 24 | 9 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_A_all | 0.4167 | 0.1250 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_B_all | 0.2083 | 0.0000 | 0.5000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_other_all | 0.3750 | 0.1250 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 15 | 24 | 9 | 8 | 5 | 1999 |
+| speech_act | bare | llama3.1-8b | P0 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_A | 0.5714 | 0.1667 | 0.8750 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_B | 0.4286 | 0.1250 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | default_preference_index | 0.1429 | 0.0000 | 0.7500 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_A | 0.5789 | 0.2632 | 0.8421 | 19 | 24 | 5 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_B | 0.4211 | 0.1579 | 0.7368 | 19 | 24 | 5 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_A_all | 0.4583 | 0.1667 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_B_all | 0.3333 | 0.1250 | 0.5417 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_other_all | 0.2083 | 0.0417 | 0.3750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | default_preference_index | 0.1579 | 0.0000 | 0.7000 | 19 | 24 | 5 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | share_A | 0.6667 | 0.2500 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | share_B | 0.3333 | 0.0000 | 0.7500 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_A | 0.6667 | 0.2848 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_B | 0.3333 | 0.0000 | 0.7152 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_A | 0.5500 | 0.2353 | 0.8235 | 20 | 24 | 4 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_B | 0.4500 | 0.1765 | 0.7647 | 20 | 24 | 4 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_A_all | 0.4583 | 0.1667 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_B_all | 0.3750 | 0.1667 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_other_all | 0.1667 | 0.0417 | 0.3333 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | default_preference_index | 0.1000 | 0.0000 | 0.7000 | 20 | 24 | 4 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_A | 0.6667 | 0.2500 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_B | 0.3333 | 0.0000 | 0.7500 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_A | 0.5000 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_B | 0.5000 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_B_all | 0.3750 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | default_preference_index | 0.0000 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_A | 0.5714 | 0.1667 | 0.8750 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_B | 0.4286 | 0.1250 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | default_preference_index | 0.1429 | 0.0000 | 0.7500 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_A | 0.5882 | 0.3333 | 0.8235 | 17 | 24 | 7 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_B | 0.4118 | 0.1765 | 0.6667 | 17 | 24 | 7 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_A_all | 0.4167 | 0.2083 | 0.5833 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_B_all | 0.2917 | 0.1250 | 0.5000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_other_all | 0.2917 | 0.1667 | 0.4167 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | default_preference_index | 0.1765 | 0.0000 | 0.6471 | 17 | 24 | 7 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | share_A | 0.5000 | 0.0000 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | share_B | 0.5000 | 0.0000 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | share_B_all | 0.3750 | 0.0000 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | default_preference_index | 0.0000 | 0.0000 | 1.0000 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | share_A | 0.4286 | 0.0000 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | share_B | 0.5714 | 0.1667 | 1.0000 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | share_A_all | 0.3750 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | share_B_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | default_preference_index | 0.1429 | 0.0000 | 1.0000 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | share_A | 0.8000 | 0.3333 | 1.0000 | 5 | 8 | 3 | 8 | 5 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | share_B | 0.2000 | 0.0000 | 0.6667 | 5 | 8 | 3 | 8 | 5 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | share_B_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | share_unclear_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | default_preference_index | 0.6000 | 0.0000 | 1.0000 | 5 | 8 | 3 | 8 | 5 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_A | 0.4762 | 0.3810 | 0.5789 | 21 | 24 | 3 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_B | 0.5238 | 0.4211 | 0.6190 | 21 | 24 | 3 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_A_all | 0.4167 | 0.3333 | 0.5417 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_B_all | 0.4583 | 0.3333 | 0.5833 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_other_all | 0.1250 | 0.0417 | 0.2500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | default_preference_index | 0.0476 | 0.0000 | 0.2381 | 21 | 24 | 3 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_A | 0.5000 | 0.1667 | 0.8333 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_B | 0.5000 | 0.1667 | 0.8333 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_A_all | 0.3750 | 0.0833 | 0.6667 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_B_all | 0.3750 | 0.0833 | 0.6667 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_other_all | 0.2500 | 0.0000 | 0.6250 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | default_preference_index | 0.0000 | 0.0000 | 0.7778 | 18 | 24 | 6 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | share_A | 0.6250 | 0.2500 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | share_B | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | share_A_all | 0.6250 | 0.2500 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | share_other_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | default_preference_index | 0.2500 | 0.0000 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_A | 0.5714 | 0.1667 | 0.8750 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_B | 0.4286 | 0.1250 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | default_preference_index | 0.1429 | 0.0000 | 0.7500 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_A | 0.5556 | 0.2222 | 0.8421 | 18 | 24 | 6 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_B | 0.4444 | 0.1579 | 0.7778 | 18 | 24 | 6 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_A_all | 0.4167 | 0.1667 | 0.7083 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_B_all | 0.3333 | 0.1250 | 0.5833 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_other_all | 0.2500 | 0.0833 | 0.4583 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | default_preference_index | 0.1111 | 0.0000 | 0.7143 | 18 | 24 | 6 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | share_A | 0.6250 | 0.2500 | 0.8750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | share_B | 0.3750 | 0.1250 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | share_A_all | 0.6250 | 0.2500 | 0.8750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | share_other_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | default_preference_index | 0.2500 | 0.0000 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_A | 0.5714 | 0.1667 | 0.8750 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_B | 0.4286 | 0.1250 | 0.8333 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | default_preference_index | 0.1429 | 0.0000 | 0.7500 | 7 | 8 | 1 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_A | 0.6667 | 0.2500 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_B | 0.3333 | 0.0000 | 0.7500 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_B_all | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_other_all | 0.2500 | 0.0000 | 0.5000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | default_preference_index | 0.3333 | 0.0000 | 1.0000 | 6 | 8 | 2 | 8 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_A | 0.5000 | 0.2000 | 0.8000 | 20 | 24 | 4 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_B | 0.5000 | 0.2000 | 0.8000 | 20 | 24 | 4 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_A_all | 0.4167 | 0.1667 | 0.6667 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_B_all | 0.4167 | 0.1667 | 0.7083 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_other_all | 0.1667 | 0.0000 | 0.3333 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | default_preference_index | 0.0000 | 0.0000 | 0.6842 | 20 | 24 | 4 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_A | 0.5714 | 0.1667 | 0.8750 | 21 | 24 | 3 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_B | 0.4286 | 0.1250 | 0.8333 | 21 | 24 | 3 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_A_all | 0.5000 | 0.1250 | 0.8750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_B_all | 0.3750 | 0.1250 | 0.7500 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_other_all | 0.1250 | 0.0000 | 0.3750 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | share_unclear_all | 0.0000 | 0.0000 | 0.0000 | 24 | 24 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | default_preference_index | 0.1429 | 0.0000 | 0.7500 | 21 | 24 | 3 | 8 | 7 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | share_A | 1.0000 | 1.0000 | 1.0000 | 1 | 10 | 9 | 10 | 1 | 1300 |
 | time_quantity | bare | gemma3-4b | P0 | share_B | 0.0000 | 0.0000 | 0.0000 | 1 | 10 | 9 | 10 | 1 | 1300 |
 | time_quantity | bare | gemma3-4b | P0 | share_A_all | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
@@ -2714,7 +2714,7 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 
 ## direction values
 
-[direction_values.csv](direction_values.csv) · 60 rows
+[direction_values.csv](direction_values.csv) · 58 rows
 
 
 <details><summary>All numbers (NA = unobserved / not applicable)</summary>
@@ -2725,13 +2725,11 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | act-07 | speech_act | question | statement |
 | act-08 | speech_act | statement | question |
 | act-09 | speech_act | request/command | statement |
-| act-10 | speech_act | refusal | acceptance |
 | act-11 | speech_act | question | request/command |
 | act-12 | speech_act | statement | question |
 | act-13 | speech_act | statement | question |
 | act-14 | speech_act | question | statement |
 | act-15 | speech_act | statement | question |
-| act-16 | speech_act | refusal | acceptance |
 | agt-07 | agent | addressee | speaker |
 | agt-08 | agent | third party | speaker |
 | agt-09 | agent | speaker | addressee |
@@ -2861,22 +2859,22 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | qwen2.5-7b | P1 | critical_match_difference | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | politeness | qwen2.5-7b | P2 | critical_match_difference | 0.4000 | 0.3500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | politeness | qwen2.5-7b | S3 | critical_match_difference | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gemma3-4b | P0 | critical_match_difference | 0.5000 | 0.3500 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gemma3-4b | P1 | critical_match_difference | 0.4000 | 0.1488 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gemma3-4b | P2 | critical_match_difference | 0.1167 | 0.0333 | 0.1833 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gemma3-4b | S3 | critical_match_difference | 0.5500 | 0.4000 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.5000 | 0.2500 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gpt-6.1-terra | P2 | critical_match_difference | 0.5000 | 0.4000 | 0.5833 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.4667 | 0.2833 | 0.6333 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.3000 | 0.0000 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | P1 | critical_match_difference | 0.4000 | 0.2000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | P2 | critical_match_difference | 0.2833 | 0.1833 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.3000 | 0.0000 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.4500 | 0.3000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.2500 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | P2 | critical_match_difference | 0.3500 | 0.2329 | 0.4667 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
-| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.4167 | 0.2333 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
+| speech_act | gemma3-4b | P0 | critical_match_difference | 0.5000 | 0.3125 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gemma3-4b | P1 | critical_match_difference | 0.3125 | 0.0000 | 0.5641 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gemma3-4b | P2 | critical_match_difference | 0.1042 | 0.0000 | 0.1875 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gemma3-4b | S3 | critical_match_difference | 0.5000 | 0.3125 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.4375 | 0.1250 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gpt-6.1-terra | P2 | critical_match_difference | 0.4792 | 0.3750 | 0.5833 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.5000 | 0.2708 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.1875 | -0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | P1 | critical_match_difference | 0.3125 | 0.1250 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | P2 | critical_match_difference | 0.2500 | 0.1667 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.1875 | -0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.1250 | -0.1250 | 0.3125 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | P2 | critical_match_difference | 0.3542 | 0.1875 | 0.5208 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
+| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.3333 | 0.1667 | 0.4583 | 16 | 16 | 0 | 8 | 8 | 2000 | chip1-minus-noncrit |
 | time_quantity | gemma3-4b | P0 | critical_match_difference | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | time_quantity | gemma3-4b | P1 | critical_match_difference | 0.8000 | 0.5500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
 | time_quantity | gemma3-4b | P2 | critical_match_difference | 0.6333 | 0.4500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 | chip1-minus-noncrit |
@@ -2957,22 +2955,22 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | qwen2.5-7b | P1 | critical_match_difference | -0.1000 | -0.2500 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | politeness | qwen2.5-7b | P2 | critical_match_difference | -0.3167 | -0.4500 | -0.2000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | politeness | qwen2.5-7b | S3 | critical_match_difference | -0.0500 | -0.1500 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | P0 | critical_match_difference | 0.1000 | -0.1000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | P1 | critical_match_difference | 0.0000 | -0.3000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | P2 | critical_match_difference | 0.1000 | -0.0667 | 0.2504 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gemma3-4b | S3 | critical_match_difference | 0.0833 | -0.1167 | 0.3333 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.1500 | 0.0000 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | P2 | critical_match_difference | -0.1667 | -0.3667 | 0.0167 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.1833 | 0.0500 | 0.3333 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.1500 | -0.1000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | P1 | critical_match_difference | 0.1000 | -0.1500 | 0.3500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | P2 | critical_match_difference | -0.0333 | -0.2000 | 0.1667 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.1500 | -0.1000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.1500 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.3000 | -0.0500 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | P2 | critical_match_difference | -0.1333 | -0.2333 | -0.0167 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
-| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.1833 | 0.0500 | 0.3333 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | P0 | critical_match_difference | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | P1 | critical_match_difference | 0.1250 | -0.1875 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | P2 | critical_match_difference | 0.0625 | -0.1250 | 0.2292 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gemma3-4b | S3 | critical_match_difference | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | P0 | critical_match_difference | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | P1 | critical_match_difference | 0.1250 | 0.0000 | 0.3125 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | P2 | critical_match_difference | -0.2708 | -0.4583 | -0.0833 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | gpt-6.1-terra | S3 | critical_match_difference | 0.1250 | 0.0000 | 0.2917 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | P0 | critical_match_difference | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | P1 | critical_match_difference | 0.2500 | 0.0625 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | P2 | critical_match_difference | -0.0208 | -0.2083 | 0.1875 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | llama3.1-8b | S3 | critical_match_difference | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | P0 | critical_match_difference | 0.1875 | 0.0625 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | P1 | critical_match_difference | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | P2 | critical_match_difference | -0.1250 | -0.2292 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
+| speech_act | qwen2.5-7b | S3 | critical_match_difference | 0.2292 | 0.0625 | 0.3958 | 16 | 16 | 0 | 8 | 8 | 2000 | full-minus-chip1 |
 | time_quantity | gemma3-4b | P0 | critical_match_difference | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | time_quantity | gemma3-4b | P1 | critical_match_difference | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
 | time_quantity | gemma3-4b | P2 | critical_match_difference | 0.0833 | -0.0837 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 | full-minus-chip1 |
@@ -4028,262 +4026,262 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | politeness_added | 0.3333 | 0.0667 | 0.6333 | 30 | 60 | 30 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | certainty_raised | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | politeness | noncrit | qwen2.5-7b | S3 | added_content | 0.1034 | 0.0000 | 0.2667 | 58 | 60 | 2 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | P0 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | P0 | added_content | 0.1429 | 0.0000 | 0.4444 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | addition_polarity | 0.2000 | 0.0500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | addition_agent | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | addition_certainty | 0.2500 | 0.0000 | 0.6154 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | added_content | 0.1250 | 0.0000 | 0.3750 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | addition_polarity | 0.1500 | 0.0333 | 0.3167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | addition_speech_act | 0.7000 | 0.6333 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | addition_agent | 0.7037 | 0.5833 | 0.8333 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 18 | 60 | 42 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | addition_politeness | 0.2667 | 0.1667 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | politeness_added | 0.2667 | 0.1667 | 0.3333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 18 | 60 | 42 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | added_content | 0.7143 | 0.5714 | 0.8571 | 56 | 60 | 4 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | addition_speech_act | 0.6167 | 0.5167 | 0.7500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 21 | 60 | 39 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | addition_politeness | 0.2000 | 0.0333 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | politeness_added | 0.2000 | 0.0333 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 21 | 60 | 39 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | added_content | 0.1429 | 0.0000 | 0.4444 | 42 | 60 | 18 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | addition_agent | 0.5556 | 0.2222 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | P0 | added_content | 0.2500 | 0.0000 | 0.5714 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | addition_agent | 0.8889 | 0.6667 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 11 | 20 | 9 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 11 | 20 | 9 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | addition_polarity | 0.1333 | 0.0333 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | addition_speech_act | 0.6667 | 0.6000 | 0.7333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | addition_agent | 0.5926 | 0.4815 | 0.6667 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 13 | 60 | 47 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | addition_politeness | 0.1667 | 0.0667 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | politeness_added | 0.1667 | 0.0667 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 13 | 60 | 47 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | added_content | 0.2857 | 0.0690 | 0.5388 | 56 | 60 | 4 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | addition_agent | 0.5185 | 0.2222 | 0.8148 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 20 | 60 | 40 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 20 | 60 | 40 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | added_content | 0.2222 | 0.0000 | 0.5014 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | addition_polarity | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | added_content | 0.2222 | 0.0000 | 0.5556 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | addition_polarity | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | addition_agent | 0.3333 | 0.1000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | added_content | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | addition_polarity | 0.1667 | 0.0500 | 0.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | addition_speech_act | 0.6167 | 0.5500 | 0.6833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | addition_agent | 0.6667 | 0.4444 | 0.8667 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 24 | 60 | 36 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | addition_politeness | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | politeness_added | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 24 | 60 | 36 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | added_content | 0.2500 | 0.0995 | 0.4286 | 56 | 60 | 4 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 21 | 60 | 39 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 21 | 60 | 39 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | added_content | 0.2963 | 0.1071 | 0.5357 | 54 | 60 | 6 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | P0 | added_content | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | addition_agent | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1991 |
-| speech_act | bare | qwen2.5-7b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1991 |
-| speech_act | bare | qwen2.5-7b | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | addition_polarity | 0.1333 | 0.0000 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | addition_speech_act | 0.6000 | 0.5333 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | addition_agent | 0.6667 | 0.5667 | 0.7667 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | addition_certainty | 0.0400 | 0.0000 | 0.1291 | 25 | 60 | 35 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | addition_politeness | 0.1000 | 0.0333 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | politeness_added | 0.1000 | 0.0333 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 25 | 60 | 35 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | added_content | 0.8000 | 0.6667 | 0.9333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 24 | 60 | 36 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | addition_politeness | 0.0333 | 0.0000 | 0.1000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | politeness_added | 0.0333 | 0.0000 | 0.1000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 24 | 60 | 36 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | added_content | 0.3000 | 0.0000 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | added_content | 0.1667 | 0.0000 | 0.5000 | 12 | 20 | 8 | 10 | 6 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | addition_certainty | 0.2857 | 0.0000 | 0.6667 | 7 | 20 | 13 | 10 | 6 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | addition_polarity | 0.1333 | 0.0000 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | addition_speech_act | 0.6833 | 0.6167 | 0.7500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | addition_agent | 0.5556 | 0.4074 | 0.7083 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | addition_certainty | 0.2000 | 0.0000 | 0.5000 | 15 | 60 | 45 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | addition_politeness | 0.4333 | 0.3333 | 0.5333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | politeness_added | 0.4333 | 0.3333 | 0.5333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 15 | 60 | 45 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | added_content | 0.5357 | 0.3103 | 0.7586 | 56 | 60 | 4 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 15 | 60 | 45 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | addition_politeness | 0.3000 | 0.0000 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | politeness_added | 0.3000 | 0.0000 | 0.6000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 15 | 60 | 45 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | added_content | 0.1364 | 0.0000 | 0.4091 | 44 | 60 | 16 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | addition_agent | 0.4444 | 0.1111 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 3 | 1942 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 3 | 1942 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | added_content | 0.0000 | 0.0000 | 0.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | addition_speech_act | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | addition_agent | 0.8889 | 0.6667 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | addition_speech_act | 0.6167 | 0.5333 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | addition_agent | 0.5926 | 0.5000 | 0.6667 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 14 | 60 | 46 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | addition_politeness | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | politeness_added | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 14 | 60 | 46 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | added_content | 0.1111 | 0.0000 | 0.2222 | 54 | 60 | 6 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | addition_speech_act | 0.6500 | 0.5333 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | addition_agent | 0.4074 | 0.1429 | 0.7037 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 11 | 60 | 49 | 10 | 5 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | addition_politeness | 0.0333 | 0.0000 | 0.1000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | politeness_added | 0.0333 | 0.0000 | 0.1000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 11 | 60 | 49 | 10 | 5 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | added_content | 0.0000 | 0.0000 | 0.0000 | 48 | 60 | 12 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | addition_agent | 0.2222 | 0.0000 | 0.5000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | added_content | 0.1111 | 0.0000 | 0.3333 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | addition_agent | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | added_content | 0.1111 | 0.0000 | 0.3750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | addition_polarity | 0.1333 | 0.0333 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | addition_speech_act | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | addition_agent | 0.6296 | 0.4286 | 0.8148 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | addition_certainty | 0.0417 | 0.0000 | 0.1364 | 24 | 60 | 36 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | addition_politeness | 0.1000 | 0.0000 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | politeness_added | 0.1000 | 0.0000 | 0.2000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 24 | 60 | 36 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | added_content | 0.1667 | 0.0000 | 0.4286 | 48 | 60 | 12 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | addition_polarity | 0.1333 | 0.0333 | 0.2667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | addition_agent | 0.2593 | 0.0000 | 0.5556 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 18 | 60 | 42 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 18 | 60 | 42 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | added_content | 0.1111 | 0.0000 | 0.2500 | 54 | 60 | 6 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | added_content | 0.2500 | 0.0000 | 0.5714 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | addition_agent | 0.5556 | 0.2222 | 0.8753 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 1996 |
-| speech_act | noncrit | qwen2.5-7b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 1996 |
-| speech_act | noncrit | qwen2.5-7b | P1 | added_content | 0.1111 | 0.0000 | 0.3333 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | addition_speech_act | 0.6000 | 0.5333 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | addition_agent | 0.6296 | 0.5185 | 0.7619 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 26 | 60 | 34 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | addition_politeness | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | politeness_added | 0.0667 | 0.0000 | 0.1667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 26 | 60 | 34 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | added_content | 0.4643 | 0.2333 | 0.7143 | 56 | 60 | 4 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 54 | 60 | 6 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 27 | 60 | 33 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 27 | 60 | 33 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | added_content | 0.2500 | 0.0000 | 0.5714 | 48 | 60 | 12 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | P0 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | P0 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | addition_agent | 0.5714 | 0.1667 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | added_content | 0.1667 | 0.0000 | 0.5000 | 12 | 16 | 4 | 8 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | addition_polarity | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | addition_speech_act | 0.6875 | 0.6250 | 0.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | addition_agent | 0.7143 | 0.5556 | 0.8667 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 12 | 48 | 36 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | addition_politeness | 0.2500 | 0.1250 | 0.3333 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | politeness_added | 0.2500 | 0.1250 | 0.3333 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 12 | 48 | 36 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | added_content | 0.7391 | 0.5652 | 0.9130 | 46 | 48 | 2 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | addition_speech_act | 0.5833 | 0.5000 | 0.7083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 15 | 48 | 33 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | addition_politeness | 0.2083 | 0.0000 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | politeness_added | 0.2083 | 0.0000 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 15 | 48 | 33 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | added_content | 0.2000 | 0.0000 | 0.6000 | 30 | 48 | 18 | 8 | 5 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | P0 | added_content | 0.1667 | 0.0000 | 0.5000 | 12 | 16 | 4 | 8 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | addition_agent | 0.8571 | 0.5714 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | addition_polarity | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | addition_speech_act | 0.6250 | 0.5828 | 0.6667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | addition_agent | 0.5714 | 0.4444 | 0.6667 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 48 | 39 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | addition_politeness | 0.1667 | 0.0417 | 0.2917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | politeness_added | 0.1667 | 0.0417 | 0.2917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 48 | 39 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | added_content | 0.2273 | 0.0435 | 0.5000 | 44 | 48 | 4 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | addition_agent | 0.5238 | 0.1667 | 0.8571 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 14 | 48 | 34 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 14 | 48 | 34 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | added_content | 0.1429 | 0.0000 | 0.4286 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | added_content | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | addition_agent | 0.2857 | 0.0000 | 0.6260 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | added_content | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | addition_polarity | 0.0833 | 0.0000 | 0.2083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | addition_speech_act | 0.6042 | 0.5208 | 0.6875 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | addition_agent | 0.5714 | 0.3333 | 0.7778 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 16 | 48 | 32 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | addition_politeness | 0.0833 | 0.0000 | 0.1667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | politeness_added | 0.0833 | 0.0000 | 0.1667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 16 | 48 | 32 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | added_content | 0.3043 | 0.1250 | 0.5000 | 46 | 48 | 2 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 21 | 48 | 27 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 21 | 48 | 27 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | added_content | 0.3333 | 0.0909 | 0.5909 | 42 | 48 | 6 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | added_content | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | addition_agent | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1967 |
+| speech_act | bare | qwen2.5-7b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1967 |
+| speech_act | bare | qwen2.5-7b | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 12 | 16 | 4 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | addition_polarity | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | addition_speech_act | 0.5833 | 0.5208 | 0.6667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | addition_agent | 0.6667 | 0.5238 | 0.8000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | addition_certainty | 0.0588 | 0.0000 | 0.1765 | 17 | 48 | 31 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | addition_politeness | 0.0833 | 0.0000 | 0.2083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | politeness_added | 0.0833 | 0.0000 | 0.2083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 17 | 48 | 31 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | added_content | 0.8750 | 0.7500 | 0.9583 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 18 | 48 | 30 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | addition_politeness | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | politeness_added | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 18 | 48 | 30 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | added_content | 0.3750 | 0.1250 | 0.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | P0 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | P0 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 1999 |
+| speech_act | noncrit | gemma3-4b | P1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | addition_agent | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1997 |
+| speech_act | noncrit | gemma3-4b | P1 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1997 |
+| speech_act | noncrit | gemma3-4b | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 10 | 16 | 6 | 8 | 5 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | addition_polarity | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | addition_speech_act | 0.6458 | 0.5833 | 0.7083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | addition_agent | 0.6190 | 0.4583 | 0.7778 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | addition_certainty | 0.0909 | 0.0000 | 0.2727 | 11 | 48 | 37 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | addition_politeness | 0.4167 | 0.3333 | 0.5417 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | politeness_added | 0.4167 | 0.3333 | 0.5417 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 11 | 48 | 37 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | added_content | 0.6087 | 0.3750 | 0.8573 | 46 | 48 | 2 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 15 | 48 | 33 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 15 | 48 | 33 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | added_content | 0.1875 | 0.0000 | 0.5714 | 32 | 48 | 16 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | addition_agent | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1944 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1944 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | addition_agent | 0.8571 | 0.5714 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | addition_speech_act | 0.5625 | 0.5208 | 0.6250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | addition_agent | 0.5714 | 0.4444 | 0.6667 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 10 | 48 | 38 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | addition_politeness | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | politeness_added | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 10 | 48 | 38 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | added_content | 0.0909 | 0.0000 | 0.2273 | 44 | 48 | 4 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | addition_agent | 0.3810 | 0.0952 | 0.7143 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 48 | 43 | 8 | 3 | 1944 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | addition_politeness | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | politeness_added | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 48 | 43 | 8 | 3 | 1944 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | added_content | 0.0000 | 0.0000 | 0.0000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | addition_speech_act | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | addition_agent | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | addition_agent | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | added_content | 0.1429 | 0.0000 | 0.5000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | addition_polarity | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | addition_speech_act | 0.6250 | 0.5417 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | addition_agent | 0.6190 | 0.3887 | 0.8095 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | addition_certainty | 0.0625 | 0.0000 | 0.1818 | 16 | 48 | 32 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | addition_politeness | 0.1250 | 0.0417 | 0.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | politeness_added | 0.1250 | 0.0417 | 0.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 16 | 48 | 32 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | added_content | 0.1818 | 0.0000 | 0.5000 | 44 | 48 | 4 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | addition_polarity | 0.0417 | 0.0000 | 0.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | addition_speech_act | 0.5000 | 0.5000 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | addition_agent | 0.1905 | 0.0000 | 0.5000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 18 | 48 | 30 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 18 | 48 | 30 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | added_content | 0.1429 | 0.0417 | 0.3125 | 42 | 48 | 6 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | added_content | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | addition_speech_act | 0.6250 | 0.5000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | addition_agent | 0.5714 | 0.1667 | 0.8781 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1993 |
+| speech_act | noncrit | qwen2.5-7b | P1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1993 |
+| speech_act | noncrit | qwen2.5-7b | P1 | added_content | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | addition_speech_act | 0.5833 | 0.5000 | 0.6667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | addition_agent | 0.5714 | 0.4444 | 0.6667 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 18 | 48 | 30 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | addition_politeness | 0.0833 | 0.0000 | 0.2083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | politeness_added | 0.0833 | 0.0000 | 0.2083 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 18 | 48 | 30 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | added_content | 0.4348 | 0.1739 | 0.7083 | 46 | 48 | 2 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 42 | 48 | 6 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 21 | 48 | 27 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 21 | 48 | 27 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | added_content | 0.2857 | 0.0000 | 0.6250 | 42 | 48 | 6 | 8 | 7 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | addition_speech_act | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | addition_agent | 0.4000 | 0.1000 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -4555,262 +4553,262 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 
 | channel | model | prompt_id | metric | estimate | ci_low | ci_high | n | n_total | n_missing | n_families | n_families_observed | n_boot_valid |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| bare | gemma3-4b | P0 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P0 | addition_speech_act | 0.3500 | 0.2417 | 0.4667 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P0 | addition_agent | 0.3983 | 0.2833 | 0.5170 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | gemma3-4b | P0 | addition_certainty | 0.1231 | 0.0545 | 0.1970 | 65 | 120 | 55 | 60 | 35 | 2000 |
-| bare | gemma3-4b | P0 | addition_politeness | 0.2500 | 0.1583 | 0.3500 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P0 | politeness_added | 0.2273 | 0.1261 | 0.3421 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P0 | certainty_raised | 0.1231 | 0.0545 | 0.1970 | 65 | 120 | 55 | 60 | 35 | 2000 |
-| bare | gemma3-4b | P0 | added_content | 0.1458 | 0.0545 | 0.2500 | 96 | 120 | 24 | 60 | 48 | 2000 |
-| bare | gemma3-4b | P1 | addition_polarity | 0.1333 | 0.0750 | 0.1917 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P1 | addition_speech_act | 0.2833 | 0.1833 | 0.3917 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P1 | addition_agent | 0.4915 | 0.3644 | 0.6167 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | gemma3-4b | P1 | addition_certainty | 0.1579 | 0.0854 | 0.2432 | 76 | 120 | 44 | 60 | 41 | 2000 |
-| bare | gemma3-4b | P1 | addition_politeness | 0.1833 | 0.1083 | 0.2667 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P1 | politeness_added | 0.1545 | 0.0734 | 0.2500 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P1 | certainty_raised | 0.1316 | 0.0676 | 0.2025 | 76 | 120 | 44 | 60 | 41 | 2000 |
-| bare | gemma3-4b | P1 | added_content | 0.0926 | 0.0189 | 0.1731 | 108 | 120 | 12 | 60 | 54 | 2000 |
-| bare | gemma3-4b | P2 | addition_polarity | 0.1508 | 0.0950 | 0.2111 | 358 | 360 | 2 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P2 | addition_speech_act | 0.4722 | 0.4194 | 0.5278 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P2 | addition_agent | 0.6278 | 0.5734 | 0.6798 | 352 | 360 | 8 | 60 | 59 | 2000 |
-| bare | gemma3-4b | P2 | addition_certainty | 0.1524 | 0.0869 | 0.2199 | 164 | 360 | 196 | 60 | 49 | 2000 |
-| bare | gemma3-4b | P2 | addition_politeness | 0.3333 | 0.2944 | 0.3750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P2 | politeness_added | 0.3091 | 0.2673 | 0.3517 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | gemma3-4b | P2 | certainty_raised | 0.1037 | 0.0500 | 0.1677 | 164 | 360 | 196 | 60 | 49 | 2000 |
-| bare | gemma3-4b | P2 | added_content | 0.7619 | 0.6970 | 0.8221 | 336 | 360 | 24 | 60 | 60 | 2000 |
-| bare | gemma3-4b | S3 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | S3 | addition_speech_act | 0.3250 | 0.2222 | 0.4361 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | S3 | addition_agent | 0.3983 | 0.2833 | 0.5170 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| bare | gemma3-4b | S3 | addition_certainty | 0.1307 | 0.0625 | 0.2057 | 199 | 360 | 161 | 60 | 36 | 2000 |
-| bare | gemma3-4b | S3 | addition_politeness | 0.2556 | 0.1666 | 0.3501 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gemma3-4b | S3 | politeness_added | 0.2455 | 0.1454 | 0.3546 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | gemma3-4b | S3 | certainty_raised | 0.1307 | 0.0625 | 0.2057 | 199 | 360 | 161 | 60 | 36 | 2000 |
-| bare | gemma3-4b | S3 | added_content | 0.1946 | 0.0935 | 0.3007 | 298 | 360 | 62 | 60 | 51 | 2000 |
-| bare | gpt-6.1-terra | P0 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P0 | addition_speech_act | 0.3000 | 0.1917 | 0.4167 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P0 | addition_agent | 0.2881 | 0.1833 | 0.4000 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | gpt-6.1-terra | P0 | addition_certainty | 0.1304 | 0.0667 | 0.2059 | 69 | 120 | 51 | 60 | 37 | 2000 |
-| bare | gpt-6.1-terra | P0 | addition_politeness | 0.1167 | 0.0583 | 0.1833 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P0 | politeness_added | 0.0727 | 0.0182 | 0.1402 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P0 | certainty_raised | 0.1304 | 0.0667 | 0.2059 | 69 | 120 | 51 | 60 | 37 | 2000 |
-| bare | gpt-6.1-terra | P0 | added_content | 0.1481 | 0.0556 | 0.2453 | 108 | 120 | 12 | 60 | 54 | 2000 |
-| bare | gpt-6.1-terra | P1 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P1 | addition_speech_act | 0.2583 | 0.1583 | 0.3583 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P1 | addition_agent | 0.6441 | 0.5167 | 0.7586 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | gpt-6.1-terra | P1 | addition_certainty | 0.1235 | 0.0625 | 0.1899 | 81 | 120 | 39 | 60 | 44 | 2000 |
-| bare | gpt-6.1-terra | P1 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P1 | certainty_raised | 0.1235 | 0.0625 | 0.1899 | 81 | 120 | 39 | 60 | 44 | 2000 |
-| bare | gpt-6.1-terra | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | gpt-6.1-terra | P2 | addition_polarity | 0.1333 | 0.0806 | 0.1889 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P2 | addition_speech_act | 0.5333 | 0.4917 | 0.5750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P2 | addition_agent | 0.5113 | 0.4500 | 0.5763 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| bare | gpt-6.1-terra | P2 | addition_certainty | 0.1095 | 0.0548 | 0.1761 | 137 | 360 | 223 | 60 | 49 | 2000 |
-| bare | gpt-6.1-terra | P2 | addition_politeness | 0.1833 | 0.1333 | 0.2361 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P2 | politeness_added | 0.1333 | 0.0936 | 0.1756 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | P2 | certainty_raised | 0.0949 | 0.0431 | 0.1569 | 137 | 360 | 223 | 60 | 49 | 2000 |
-| bare | gpt-6.1-terra | P2 | added_content | 0.3025 | 0.2061 | 0.3987 | 324 | 360 | 36 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | S3 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | S3 | addition_speech_act | 0.2778 | 0.1806 | 0.3833 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | S3 | addition_agent | 0.2571 | 0.1638 | 0.3559 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| bare | gpt-6.1-terra | S3 | addition_certainty | 0.1262 | 0.0635 | 0.1981 | 214 | 360 | 146 | 60 | 41 | 2000 |
-| bare | gpt-6.1-terra | S3 | addition_politeness | 0.0944 | 0.0500 | 0.1472 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | S3 | politeness_added | 0.0545 | 0.0203 | 0.1003 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | gpt-6.1-terra | S3 | certainty_raised | 0.1262 | 0.0635 | 0.1981 | 214 | 360 | 146 | 60 | 41 | 2000 |
-| bare | gpt-6.1-terra | S3 | added_content | 0.1625 | 0.0774 | 0.2561 | 320 | 360 | 40 | 60 | 55 | 2000 |
-| bare | llama3.1-8b | P0 | addition_polarity | 0.1333 | 0.0750 | 0.2000 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P0 | addition_speech_act | 0.2167 | 0.1250 | 0.3167 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P0 | addition_agent | 0.3534 | 0.2417 | 0.4655 | 116 | 120 | 4 | 60 | 58 | 2000 |
-| bare | llama3.1-8b | P0 | addition_certainty | 0.1325 | 0.0625 | 0.2135 | 83 | 120 | 37 | 60 | 45 | 2000 |
-| bare | llama3.1-8b | P0 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P0 | politeness_added | 0.0364 | 0.0087 | 0.0834 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P0 | certainty_raised | 0.1084 | 0.0513 | 0.1733 | 83 | 120 | 37 | 60 | 45 | 2000 |
-| bare | llama3.1-8b | P0 | added_content | 0.1875 | 0.0833 | 0.3077 | 96 | 120 | 24 | 60 | 48 | 2000 |
-| bare | llama3.1-8b | P1 | addition_polarity | 0.1333 | 0.0750 | 0.2000 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P1 | addition_speech_act | 0.2333 | 0.1417 | 0.3417 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P1 | addition_agent | 0.3305 | 0.2250 | 0.4407 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | llama3.1-8b | P1 | addition_certainty | 0.1149 | 0.0581 | 0.1778 | 87 | 120 | 33 | 60 | 47 | 2000 |
-| bare | llama3.1-8b | P1 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P1 | certainty_raised | 0.1149 | 0.0581 | 0.1778 | 87 | 120 | 33 | 60 | 47 | 2000 |
-| bare | llama3.1-8b | P1 | added_content | 0.0588 | 0.0000 | 0.1273 | 102 | 120 | 18 | 60 | 51 | 2000 |
-| bare | llama3.1-8b | P2 | addition_polarity | 0.1333 | 0.0778 | 0.1917 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P2 | addition_speech_act | 0.3639 | 0.3000 | 0.4278 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P2 | addition_agent | 0.5565 | 0.4885 | 0.6243 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| bare | llama3.1-8b | P2 | addition_certainty | 0.1400 | 0.0769 | 0.2083 | 200 | 360 | 160 | 60 | 49 | 2000 |
-| bare | llama3.1-8b | P2 | addition_politeness | 0.1389 | 0.0889 | 0.1917 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P2 | politeness_added | 0.0788 | 0.0446 | 0.1173 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | P2 | certainty_raised | 0.1250 | 0.0653 | 0.1916 | 200 | 360 | 160 | 60 | 49 | 2000 |
-| bare | llama3.1-8b | P2 | added_content | 0.3889 | 0.2857 | 0.4910 | 324 | 360 | 36 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | S3 | addition_polarity | 0.1222 | 0.0694 | 0.1806 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | S3 | addition_speech_act | 0.2333 | 0.1417 | 0.3333 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | S3 | addition_agent | 0.3892 | 0.2807 | 0.5028 | 352 | 360 | 8 | 60 | 59 | 2000 |
-| bare | llama3.1-8b | S3 | addition_certainty | 0.1165 | 0.0575 | 0.1809 | 249 | 360 | 111 | 60 | 45 | 2000 |
-| bare | llama3.1-8b | S3 | addition_politeness | 0.0889 | 0.0444 | 0.1417 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | S3 | politeness_added | 0.0394 | 0.0093 | 0.0818 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | llama3.1-8b | S3 | certainty_raised | 0.1084 | 0.0513 | 0.1733 | 249 | 360 | 111 | 60 | 45 | 2000 |
-| bare | llama3.1-8b | S3 | added_content | 0.2467 | 0.1556 | 0.3423 | 300 | 360 | 60 | 60 | 55 | 2000 |
-| bare | qwen2.5-7b | P0 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P0 | addition_speech_act | 0.2250 | 0.1333 | 0.3250 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P0 | addition_agent | 0.3729 | 0.2583 | 0.4833 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | qwen2.5-7b | P0 | addition_certainty | 0.1220 | 0.0625 | 0.1883 | 82 | 120 | 38 | 60 | 44 | 2000 |
-| bare | qwen2.5-7b | P0 | addition_politeness | 0.1000 | 0.0500 | 0.1583 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P0 | politeness_added | 0.0636 | 0.0179 | 0.1227 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P0 | certainty_raised | 0.1220 | 0.0625 | 0.1883 | 82 | 120 | 38 | 60 | 44 | 2000 |
-| bare | qwen2.5-7b | P0 | added_content | 0.2982 | 0.1754 | 0.4152 | 114 | 120 | 6 | 60 | 57 | 2000 |
-| bare | qwen2.5-7b | P1 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P1 | addition_speech_act | 0.3917 | 0.2750 | 0.5000 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P1 | addition_agent | 0.4153 | 0.3000 | 0.5333 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| bare | qwen2.5-7b | P1 | addition_certainty | 0.1636 | 0.0800 | 0.2501 | 55 | 120 | 65 | 60 | 29 | 2000 |
-| bare | qwen2.5-7b | P1 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P1 | certainty_raised | 0.1636 | 0.0800 | 0.2501 | 55 | 120 | 65 | 60 | 29 | 2000 |
-| bare | qwen2.5-7b | P1 | added_content | 0.1404 | 0.0536 | 0.2373 | 114 | 120 | 6 | 60 | 57 | 2000 |
-| bare | qwen2.5-7b | P2 | addition_polarity | 0.1278 | 0.0722 | 0.1834 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P2 | addition_speech_act | 0.3556 | 0.2806 | 0.4417 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P2 | addition_agent | 0.5763 | 0.5083 | 0.6413 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| bare | qwen2.5-7b | P2 | addition_certainty | 0.1448 | 0.0860 | 0.2078 | 221 | 360 | 139 | 60 | 49 | 2000 |
-| bare | qwen2.5-7b | P2 | addition_politeness | 0.1222 | 0.0750 | 0.1778 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P2 | politeness_added | 0.0545 | 0.0263 | 0.0871 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | P2 | certainty_raised | 0.1267 | 0.0676 | 0.1946 | 221 | 360 | 139 | 60 | 49 | 2000 |
-| bare | qwen2.5-7b | P2 | added_content | 0.7500 | 0.6647 | 0.8259 | 344 | 360 | 16 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | S3 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | S3 | addition_speech_act | 0.2472 | 0.1556 | 0.3473 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | S3 | addition_agent | 0.3785 | 0.2666 | 0.4944 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| bare | qwen2.5-7b | S3 | addition_certainty | 0.1198 | 0.0606 | 0.1864 | 242 | 360 | 118 | 60 | 44 | 2000 |
-| bare | qwen2.5-7b | S3 | addition_politeness | 0.1167 | 0.0638 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | S3 | politeness_added | 0.0758 | 0.0298 | 0.1333 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| bare | qwen2.5-7b | S3 | certainty_raised | 0.1198 | 0.0606 | 0.1864 | 242 | 360 | 118 | 60 | 44 | 2000 |
-| bare | qwen2.5-7b | S3 | added_content | 0.3114 | 0.1930 | 0.4278 | 334 | 360 | 26 | 60 | 56 | 2000 |
-| noncrit | gemma3-4b | P0 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P0 | addition_speech_act | 0.3167 | 0.2167 | 0.4250 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P0 | addition_agent | 0.3559 | 0.2458 | 0.4667 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | gemma3-4b | P0 | addition_certainty | 0.1286 | 0.0615 | 0.2029 | 70 | 120 | 50 | 60 | 38 | 2000 |
-| noncrit | gemma3-4b | P0 | addition_politeness | 0.2417 | 0.1500 | 0.3333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P0 | politeness_added | 0.2182 | 0.1182 | 0.3243 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P0 | certainty_raised | 0.1286 | 0.0615 | 0.2029 | 70 | 120 | 50 | 60 | 38 | 2000 |
-| noncrit | gemma3-4b | P0 | added_content | 0.1633 | 0.0652 | 0.2709 | 98 | 120 | 22 | 60 | 49 | 2000 |
-| noncrit | gemma3-4b | P1 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P1 | addition_speech_act | 0.2333 | 0.1417 | 0.3333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P1 | addition_agent | 0.4831 | 0.3583 | 0.6083 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | gemma3-4b | P1 | addition_certainty | 0.1519 | 0.0822 | 0.2329 | 79 | 120 | 41 | 60 | 42 | 2000 |
-| noncrit | gemma3-4b | P1 | addition_politeness | 0.1833 | 0.1083 | 0.2667 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P1 | politeness_added | 0.1636 | 0.0789 | 0.2548 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P1 | certainty_raised | 0.1266 | 0.0658 | 0.1954 | 79 | 120 | 41 | 60 | 42 | 2000 |
-| noncrit | gemma3-4b | P1 | added_content | 0.1273 | 0.0536 | 0.2182 | 110 | 120 | 10 | 60 | 55 | 2000 |
-| noncrit | gemma3-4b | P2 | addition_polarity | 0.1556 | 0.1000 | 0.2139 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P2 | addition_speech_act | 0.4917 | 0.4444 | 0.5417 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P2 | addition_agent | 0.5776 | 0.5260 | 0.6265 | 348 | 360 | 12 | 60 | 59 | 2000 |
-| noncrit | gemma3-4b | P2 | addition_certainty | 0.1656 | 0.0972 | 0.2397 | 157 | 360 | 203 | 60 | 49 | 2000 |
-| noncrit | gemma3-4b | P2 | addition_politeness | 0.3611 | 0.3194 | 0.4056 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P2 | politeness_added | 0.3424 | 0.2979 | 0.3884 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | P2 | certainty_raised | 0.1146 | 0.0563 | 0.1793 | 157 | 360 | 203 | 60 | 49 | 2000 |
-| noncrit | gemma3-4b | P2 | added_content | 0.6807 | 0.5939 | 0.7607 | 332 | 360 | 28 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | S3 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | S3 | addition_speech_act | 0.3222 | 0.2167 | 0.4333 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | S3 | addition_agent | 0.3588 | 0.2515 | 0.4708 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | gemma3-4b | S3 | addition_certainty | 0.1343 | 0.0645 | 0.2113 | 201 | 360 | 159 | 60 | 36 | 2000 |
-| noncrit | gemma3-4b | S3 | addition_politeness | 0.2667 | 0.1667 | 0.3667 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | S3 | politeness_added | 0.2515 | 0.1468 | 0.3648 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | gemma3-4b | S3 | certainty_raised | 0.1343 | 0.0645 | 0.2113 | 201 | 360 | 159 | 60 | 36 | 2000 |
-| noncrit | gemma3-4b | S3 | added_content | 0.1946 | 0.0959 | 0.3022 | 298 | 360 | 62 | 60 | 51 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | addition_speech_act | 0.2083 | 0.1167 | 0.3083 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | addition_agent | 0.2288 | 0.1356 | 0.3276 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | addition_certainty | 0.1333 | 0.0685 | 0.2059 | 75 | 120 | 45 | 60 | 39 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | addition_politeness | 0.1167 | 0.0583 | 0.1833 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | politeness_added | 0.0818 | 0.0268 | 0.1518 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | certainty_raised | 0.1333 | 0.0685 | 0.2059 | 75 | 120 | 45 | 60 | 39 | 2000 |
-| noncrit | gpt-6.1-terra | P0 | added_content | 0.0893 | 0.0182 | 0.1724 | 112 | 120 | 8 | 60 | 56 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | addition_speech_act | 0.2458 | 0.1466 | 0.3534 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | addition_agent | 0.7034 | 0.5776 | 0.8167 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | addition_certainty | 0.1220 | 0.0625 | 0.1905 | 82 | 120 | 38 | 60 | 44 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | certainty_raised | 0.1220 | 0.0625 | 0.1905 | 82 | 120 | 38 | 60 | 44 | 2000 |
-| noncrit | gpt-6.1-terra | P1 | added_content | 0.0250 | 0.0000 | 0.0667 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | addition_polarity | 0.1222 | 0.0722 | 0.1778 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | addition_speech_act | 0.5472 | 0.5056 | 0.5861 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | addition_agent | 0.4605 | 0.3879 | 0.5283 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | addition_certainty | 0.1016 | 0.0504 | 0.1641 | 128 | 360 | 232 | 60 | 49 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | addition_politeness | 0.1611 | 0.1083 | 0.2139 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | politeness_added | 0.1121 | 0.0731 | 0.1526 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | certainty_raised | 0.0859 | 0.0400 | 0.1450 | 128 | 360 | 232 | 60 | 49 | 2000 |
-| noncrit | gpt-6.1-terra | P2 | added_content | 0.2478 | 0.1761 | 0.3234 | 335 | 360 | 25 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | addition_polarity | 0.1111 | 0.0583 | 0.1639 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | addition_speech_act | 0.2083 | 0.1250 | 0.3000 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | addition_agent | 0.2203 | 0.1379 | 0.3107 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | addition_certainty | 0.1289 | 0.0664 | 0.2000 | 225 | 360 | 135 | 60 | 42 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | addition_politeness | 0.0889 | 0.0444 | 0.1417 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | politeness_added | 0.0636 | 0.0270 | 0.1122 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | certainty_raised | 0.1289 | 0.0664 | 0.2000 | 225 | 360 | 135 | 60 | 42 | 2000 |
-| noncrit | gpt-6.1-terra | S3 | added_content | 0.0952 | 0.0296 | 0.1737 | 336 | 360 | 24 | 60 | 58 | 2000 |
-| noncrit | llama3.1-8b | P0 | addition_polarity | 0.1333 | 0.0750 | 0.2000 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P0 | addition_speech_act | 0.1833 | 0.1000 | 0.2750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P0 | addition_agent | 0.2881 | 0.1897 | 0.3898 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | llama3.1-8b | P0 | addition_certainty | 0.1429 | 0.0737 | 0.2239 | 84 | 120 | 36 | 60 | 45 | 2000 |
-| noncrit | llama3.1-8b | P0 | addition_politeness | 0.1167 | 0.0583 | 0.1833 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P0 | politeness_added | 0.0727 | 0.0185 | 0.1376 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P0 | certainty_raised | 0.1190 | 0.0615 | 0.1852 | 84 | 120 | 36 | 60 | 45 | 2000 |
-| noncrit | llama3.1-8b | P0 | added_content | 0.2455 | 0.1363 | 0.3571 | 110 | 120 | 10 | 60 | 55 | 2000 |
-| noncrit | llama3.1-8b | P1 | addition_polarity | 0.1000 | 0.0581 | 0.1500 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P1 | addition_speech_act | 0.2583 | 0.1667 | 0.3750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P1 | addition_agent | 0.3390 | 0.2328 | 0.4483 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | llama3.1-8b | P1 | addition_certainty | 0.1364 | 0.0690 | 0.2118 | 88 | 120 | 32 | 60 | 48 | 2000 |
-| noncrit | llama3.1-8b | P1 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P1 | certainty_raised | 0.1136 | 0.0575 | 0.1765 | 88 | 120 | 32 | 60 | 48 | 2000 |
-| noncrit | llama3.1-8b | P1 | added_content | 0.1731 | 0.0741 | 0.2857 | 104 | 120 | 16 | 60 | 52 | 2000 |
-| noncrit | llama3.1-8b | P2 | addition_polarity | 0.1389 | 0.0861 | 0.1944 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P2 | addition_speech_act | 0.3444 | 0.2805 | 0.4167 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P2 | addition_agent | 0.4407 | 0.3626 | 0.5195 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | llama3.1-8b | P2 | addition_certainty | 0.1557 | 0.0889 | 0.2315 | 212 | 360 | 148 | 60 | 49 | 2000 |
-| noncrit | llama3.1-8b | P2 | addition_politeness | 0.1500 | 0.1000 | 0.2028 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P2 | politeness_added | 0.1000 | 0.0619 | 0.1394 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | P2 | certainty_raised | 0.1038 | 0.0526 | 0.1623 | 212 | 360 | 148 | 60 | 49 | 2000 |
-| noncrit | llama3.1-8b | P2 | added_content | 0.3344 | 0.2321 | 0.4400 | 305 | 360 | 55 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | S3 | addition_polarity | 0.1167 | 0.0694 | 0.1694 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | S3 | addition_speech_act | 0.2056 | 0.1194 | 0.3000 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | S3 | addition_agent | 0.2938 | 0.1977 | 0.3917 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | llama3.1-8b | S3 | addition_certainty | 0.1270 | 0.0694 | 0.1938 | 252 | 360 | 108 | 60 | 45 | 2000 |
-| noncrit | llama3.1-8b | S3 | addition_politeness | 0.1167 | 0.0583 | 0.1833 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | S3 | politeness_added | 0.0636 | 0.0177 | 0.1262 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | llama3.1-8b | S3 | certainty_raised | 0.1151 | 0.0588 | 0.1818 | 252 | 360 | 108 | 60 | 45 | 2000 |
-| noncrit | llama3.1-8b | S3 | added_content | 0.2485 | 0.1566 | 0.3459 | 330 | 360 | 30 | 60 | 59 | 2000 |
-| noncrit | qwen2.5-7b | P0 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P0 | addition_speech_act | 0.1833 | 0.1000 | 0.2833 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P0 | addition_agent | 0.3051 | 0.1949 | 0.4138 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | qwen2.5-7b | P0 | addition_certainty | 0.1124 | 0.0568 | 0.1744 | 89 | 120 | 31 | 60 | 48 | 2000 |
-| noncrit | qwen2.5-7b | P0 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P0 | politeness_added | 0.0273 | 0.0000 | 0.0654 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P0 | certainty_raised | 0.1124 | 0.0568 | 0.1744 | 89 | 120 | 31 | 60 | 48 | 2000 |
-| noncrit | qwen2.5-7b | P0 | added_content | 0.2321 | 0.1250 | 0.3455 | 112 | 120 | 8 | 60 | 56 | 2000 |
-| noncrit | qwen2.5-7b | P1 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P1 | addition_speech_act | 0.3475 | 0.2414 | 0.4655 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | qwen2.5-7b | P1 | addition_agent | 0.3983 | 0.2881 | 0.5169 | 118 | 120 | 2 | 60 | 59 | 2000 |
-| noncrit | qwen2.5-7b | P1 | addition_certainty | 0.1500 | 0.0769 | 0.2322 | 60 | 120 | 60 | 60 | 33 | 2000 |
-| noncrit | qwen2.5-7b | P1 | addition_politeness | 0.1000 | 0.0500 | 0.1583 | 120 | 120 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P1 | politeness_added | 0.0273 | 0.0000 | 0.0721 | 110 | 120 | 10 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P1 | certainty_raised | 0.1500 | 0.0769 | 0.2322 | 60 | 120 | 60 | 60 | 33 | 2000 |
-| noncrit | qwen2.5-7b | P1 | added_content | 0.1552 | 0.0690 | 0.2542 | 116 | 120 | 4 | 60 | 58 | 2000 |
-| noncrit | qwen2.5-7b | P2 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P2 | addition_speech_act | 0.2889 | 0.2167 | 0.3722 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P2 | addition_agent | 0.5254 | 0.4528 | 0.5977 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | qwen2.5-7b | P2 | addition_certainty | 0.1208 | 0.0672 | 0.1834 | 240 | 360 | 120 | 60 | 49 | 2000 |
-| noncrit | qwen2.5-7b | P2 | addition_politeness | 0.1028 | 0.0583 | 0.1583 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P2 | politeness_added | 0.0455 | 0.0206 | 0.0769 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | P2 | certainty_raised | 0.1125 | 0.0566 | 0.1767 | 240 | 360 | 120 | 60 | 49 | 2000 |
-| noncrit | qwen2.5-7b | P2 | added_content | 0.5614 | 0.4709 | 0.6552 | 342 | 360 | 18 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | S3 | addition_polarity | 0.1167 | 0.0583 | 0.1750 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | S3 | addition_speech_act | 0.1778 | 0.1000 | 0.2722 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | S3 | addition_agent | 0.2938 | 0.1901 | 0.3983 | 354 | 360 | 6 | 60 | 59 | 2000 |
-| noncrit | qwen2.5-7b | S3 | addition_certainty | 0.1124 | 0.0568 | 0.1744 | 267 | 360 | 93 | 60 | 48 | 2000 |
-| noncrit | qwen2.5-7b | S3 | addition_politeness | 0.0833 | 0.0417 | 0.1333 | 360 | 360 | 0 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | S3 | politeness_added | 0.0303 | 0.0029 | 0.0679 | 330 | 360 | 30 | 60 | 60 | 2000 |
-| noncrit | qwen2.5-7b | S3 | certainty_raised | 0.1124 | 0.0568 | 0.1744 | 267 | 360 | 93 | 60 | 48 | 2000 |
-| noncrit | qwen2.5-7b | S3 | added_content | 0.2455 | 0.1509 | 0.3491 | 334 | 360 | 26 | 60 | 57 | 2000 |
+| bare | gemma3-4b | P0 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P0 | addition_speech_act | 0.3362 | 0.2241 | 0.4485 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P0 | addition_agent | 0.3947 | 0.2806 | 0.5175 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | gemma3-4b | P0 | addition_certainty | 0.1270 | 0.0535 | 0.2116 | 63 | 116 | 53 | 58 | 34 | 2000 |
+| bare | gemma3-4b | P0 | addition_politeness | 0.2586 | 0.1638 | 0.3621 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P0 | politeness_added | 0.2358 | 0.1321 | 0.3530 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P0 | certainty_raised | 0.1270 | 0.0535 | 0.2116 | 63 | 116 | 53 | 58 | 34 | 2000 |
+| bare | gemma3-4b | P0 | added_content | 0.1522 | 0.0625 | 0.2609 | 92 | 116 | 24 | 58 | 46 | 2000 |
+| bare | gemma3-4b | P1 | addition_polarity | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P1 | addition_speech_act | 0.2672 | 0.1724 | 0.3709 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P1 | addition_agent | 0.4912 | 0.3750 | 0.6207 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | gemma3-4b | P1 | addition_certainty | 0.1351 | 0.0649 | 0.2106 | 74 | 116 | 42 | 58 | 40 | 2000 |
+| bare | gemma3-4b | P1 | addition_politeness | 0.1724 | 0.0948 | 0.2586 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P1 | politeness_added | 0.1415 | 0.0642 | 0.2342 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P1 | certainty_raised | 0.1351 | 0.0649 | 0.2106 | 74 | 116 | 42 | 58 | 40 | 2000 |
+| bare | gemma3-4b | P1 | added_content | 0.0962 | 0.0196 | 0.1818 | 104 | 116 | 12 | 58 | 52 | 2000 |
+| bare | gemma3-4b | P2 | addition_polarity | 0.1358 | 0.0805 | 0.1966 | 346 | 348 | 2 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P2 | addition_speech_act | 0.4626 | 0.4052 | 0.5172 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P2 | addition_agent | 0.6265 | 0.5727 | 0.6801 | 340 | 348 | 8 | 58 | 57 | 2000 |
+| bare | gemma3-4b | P2 | addition_certainty | 0.1582 | 0.0884 | 0.2353 | 158 | 348 | 190 | 58 | 47 | 2000 |
+| bare | gemma3-4b | P2 | addition_politeness | 0.3333 | 0.2902 | 0.3736 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P2 | politeness_added | 0.3082 | 0.2636 | 0.3522 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | gemma3-4b | P2 | certainty_raised | 0.1076 | 0.0484 | 0.1773 | 158 | 348 | 190 | 58 | 47 | 2000 |
+| bare | gemma3-4b | P2 | added_content | 0.7669 | 0.6975 | 0.8313 | 326 | 348 | 22 | 58 | 58 | 2000 |
+| bare | gemma3-4b | S3 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | S3 | addition_speech_act | 0.3103 | 0.2040 | 0.4225 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | S3 | addition_agent | 0.3947 | 0.2806 | 0.5175 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| bare | gemma3-4b | S3 | addition_certainty | 0.1347 | 0.0613 | 0.2182 | 193 | 348 | 155 | 58 | 35 | 2000 |
+| bare | gemma3-4b | S3 | addition_politeness | 0.2586 | 0.1638 | 0.3563 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gemma3-4b | S3 | politeness_added | 0.2484 | 0.1468 | 0.3585 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | gemma3-4b | S3 | certainty_raised | 0.1347 | 0.0613 | 0.2182 | 193 | 348 | 155 | 58 | 35 | 2000 |
+| bare | gemma3-4b | S3 | added_content | 0.2028 | 0.0987 | 0.3125 | 286 | 348 | 62 | 58 | 49 | 2000 |
+| bare | gpt-6.1-terra | P0 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P0 | addition_speech_act | 0.2845 | 0.1810 | 0.3966 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P0 | addition_agent | 0.2807 | 0.1754 | 0.3947 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | gpt-6.1-terra | P0 | addition_certainty | 0.1343 | 0.0625 | 0.2167 | 67 | 116 | 49 | 58 | 36 | 2000 |
+| bare | gpt-6.1-terra | P0 | addition_politeness | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P0 | politeness_added | 0.0755 | 0.0187 | 0.1442 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P0 | certainty_raised | 0.1343 | 0.0625 | 0.2167 | 67 | 116 | 49 | 58 | 36 | 2000 |
+| bare | gpt-6.1-terra | P0 | added_content | 0.1346 | 0.0545 | 0.2353 | 104 | 116 | 12 | 58 | 52 | 2000 |
+| bare | gpt-6.1-terra | P1 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P1 | addition_speech_act | 0.2414 | 0.1466 | 0.3448 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P1 | addition_agent | 0.6316 | 0.5000 | 0.7544 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | gpt-6.1-terra | P1 | addition_certainty | 0.1299 | 0.0641 | 0.2051 | 77 | 116 | 39 | 58 | 42 | 2000 |
+| bare | gpt-6.1-terra | P1 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P1 | certainty_raised | 0.1299 | 0.0641 | 0.2051 | 77 | 116 | 39 | 58 | 42 | 2000 |
+| bare | gpt-6.1-terra | P1 | added_content | 0.0000 | 0.0000 | 0.0000 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | gpt-6.1-terra | P2 | addition_polarity | 0.1207 | 0.0690 | 0.1753 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P2 | addition_speech_act | 0.5230 | 0.4799 | 0.5661 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P2 | addition_agent | 0.5058 | 0.4444 | 0.5702 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| bare | gpt-6.1-terra | P2 | addition_certainty | 0.1128 | 0.0500 | 0.1852 | 133 | 348 | 215 | 58 | 47 | 2000 |
+| bare | gpt-6.1-terra | P2 | addition_politeness | 0.1839 | 0.1322 | 0.2356 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P2 | politeness_added | 0.1321 | 0.0912 | 0.1751 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | P2 | certainty_raised | 0.0977 | 0.0400 | 0.1630 | 133 | 348 | 215 | 58 | 47 | 2000 |
+| bare | gpt-6.1-terra | P2 | added_content | 0.2949 | 0.2013 | 0.3924 | 312 | 348 | 36 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | S3 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | S3 | addition_speech_act | 0.2615 | 0.1667 | 0.3593 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | S3 | addition_agent | 0.2485 | 0.1579 | 0.3506 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| bare | gpt-6.1-terra | S3 | addition_certainty | 0.1298 | 0.0606 | 0.2069 | 208 | 348 | 140 | 58 | 40 | 2000 |
+| bare | gpt-6.1-terra | S3 | addition_politeness | 0.0977 | 0.0517 | 0.1494 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | S3 | politeness_added | 0.0566 | 0.0212 | 0.1031 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | gpt-6.1-terra | S3 | certainty_raised | 0.1298 | 0.0606 | 0.2069 | 208 | 348 | 140 | 58 | 40 | 2000 |
+| bare | gpt-6.1-terra | S3 | added_content | 0.1494 | 0.0637 | 0.2452 | 308 | 348 | 40 | 58 | 53 | 2000 |
+| bare | llama3.1-8b | P0 | addition_polarity | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P0 | addition_speech_act | 0.1897 | 0.1034 | 0.2845 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P0 | addition_agent | 0.3482 | 0.2364 | 0.4657 | 112 | 116 | 4 | 58 | 56 | 2000 |
+| bare | llama3.1-8b | P0 | addition_certainty | 0.1325 | 0.0610 | 0.2133 | 83 | 116 | 33 | 58 | 45 | 2000 |
+| bare | llama3.1-8b | P0 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P0 | politeness_added | 0.0377 | 0.0089 | 0.0808 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P0 | certainty_raised | 0.1084 | 0.0476 | 0.1765 | 83 | 116 | 33 | 58 | 45 | 2000 |
+| bare | llama3.1-8b | P0 | added_content | 0.1957 | 0.0851 | 0.3191 | 92 | 116 | 24 | 58 | 46 | 2000 |
+| bare | llama3.1-8b | P1 | addition_polarity | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P1 | addition_speech_act | 0.2155 | 0.1293 | 0.3190 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P1 | addition_agent | 0.3246 | 0.2143 | 0.4386 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | llama3.1-8b | P1 | addition_certainty | 0.1176 | 0.0568 | 0.1861 | 85 | 116 | 31 | 58 | 46 | 2000 |
+| bare | llama3.1-8b | P1 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P1 | certainty_raised | 0.1176 | 0.0568 | 0.1861 | 85 | 116 | 31 | 58 | 46 | 2000 |
+| bare | llama3.1-8b | P1 | added_content | 0.0612 | 0.0000 | 0.1373 | 98 | 116 | 18 | 58 | 49 | 2000 |
+| bare | llama3.1-8b | P2 | addition_polarity | 0.1207 | 0.0661 | 0.1782 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P2 | addition_speech_act | 0.3534 | 0.2902 | 0.4138 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P2 | addition_agent | 0.5409 | 0.4741 | 0.6111 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| bare | llama3.1-8b | P2 | addition_certainty | 0.1458 | 0.0765 | 0.2183 | 192 | 348 | 156 | 58 | 47 | 2000 |
+| bare | llama3.1-8b | P2 | addition_politeness | 0.1437 | 0.0948 | 0.1954 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P2 | politeness_added | 0.0818 | 0.0489 | 0.1186 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | P2 | certainty_raised | 0.1302 | 0.0643 | 0.2000 | 192 | 348 | 156 | 58 | 47 | 2000 |
+| bare | llama3.1-8b | P2 | added_content | 0.4013 | 0.2949 | 0.5064 | 314 | 348 | 34 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | S3 | addition_polarity | 0.1092 | 0.0575 | 0.1667 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | S3 | addition_speech_act | 0.2069 | 0.1178 | 0.3047 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | S3 | addition_agent | 0.3853 | 0.2724 | 0.5029 | 340 | 348 | 8 | 58 | 57 | 2000 |
+| bare | llama3.1-8b | S3 | addition_certainty | 0.1165 | 0.0556 | 0.1852 | 249 | 348 | 99 | 58 | 45 | 2000 |
+| bare | llama3.1-8b | S3 | addition_politeness | 0.0920 | 0.0431 | 0.1437 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | S3 | politeness_added | 0.0409 | 0.0092 | 0.0833 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | llama3.1-8b | S3 | certainty_raised | 0.1084 | 0.0476 | 0.1765 | 249 | 348 | 99 | 58 | 45 | 2000 |
+| bare | llama3.1-8b | S3 | added_content | 0.2500 | 0.1571 | 0.3501 | 288 | 348 | 60 | 58 | 53 | 2000 |
+| bare | qwen2.5-7b | P0 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P0 | addition_speech_act | 0.2069 | 0.1207 | 0.3103 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P0 | addition_agent | 0.3684 | 0.2585 | 0.4914 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | qwen2.5-7b | P0 | addition_certainty | 0.1250 | 0.0597 | 0.1975 | 80 | 116 | 36 | 58 | 43 | 2000 |
+| bare | qwen2.5-7b | P0 | addition_politeness | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P0 | politeness_added | 0.0660 | 0.0182 | 0.1238 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P0 | certainty_raised | 0.1250 | 0.0597 | 0.1975 | 80 | 116 | 36 | 58 | 43 | 2000 |
+| bare | qwen2.5-7b | P0 | added_content | 0.3091 | 0.1887 | 0.4340 | 110 | 116 | 6 | 58 | 55 | 2000 |
+| bare | qwen2.5-7b | P1 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P1 | addition_speech_act | 0.3793 | 0.2672 | 0.5000 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P1 | addition_agent | 0.4123 | 0.2982 | 0.5439 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| bare | qwen2.5-7b | P1 | addition_certainty | 0.1698 | 0.0784 | 0.2679 | 53 | 116 | 63 | 58 | 28 | 2000 |
+| bare | qwen2.5-7b | P1 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P1 | certainty_raised | 0.1698 | 0.0784 | 0.2679 | 53 | 116 | 63 | 58 | 28 | 2000 |
+| bare | qwen2.5-7b | P1 | added_content | 0.1455 | 0.0556 | 0.2414 | 110 | 116 | 6 | 58 | 55 | 2000 |
+| bare | qwen2.5-7b | P2 | addition_polarity | 0.1149 | 0.0632 | 0.1753 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P2 | addition_speech_act | 0.3448 | 0.2672 | 0.4253 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P2 | addition_agent | 0.5731 | 0.5000 | 0.6433 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| bare | qwen2.5-7b | P2 | addition_certainty | 0.1502 | 0.0879 | 0.2213 | 213 | 348 | 135 | 58 | 47 | 2000 |
+| bare | qwen2.5-7b | P2 | addition_politeness | 0.1207 | 0.0718 | 0.1724 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P2 | politeness_added | 0.0503 | 0.0218 | 0.0809 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | P2 | certainty_raised | 0.1315 | 0.0666 | 0.2048 | 213 | 348 | 135 | 58 | 47 | 2000 |
+| bare | qwen2.5-7b | P2 | added_content | 0.7590 | 0.6766 | 0.8373 | 332 | 348 | 16 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | S3 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | S3 | addition_speech_act | 0.2299 | 0.1379 | 0.3305 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | S3 | addition_agent | 0.3743 | 0.2644 | 0.4914 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| bare | qwen2.5-7b | S3 | addition_certainty | 0.1229 | 0.0579 | 0.1952 | 236 | 348 | 112 | 58 | 43 | 2000 |
+| bare | qwen2.5-7b | S3 | addition_politeness | 0.1207 | 0.0632 | 0.1839 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | S3 | politeness_added | 0.0786 | 0.0283 | 0.1359 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| bare | qwen2.5-7b | S3 | certainty_raised | 0.1229 | 0.0579 | 0.1952 | 236 | 348 | 112 | 58 | 43 | 2000 |
+| bare | qwen2.5-7b | S3 | added_content | 0.3230 | 0.2036 | 0.4431 | 322 | 348 | 26 | 58 | 54 | 2000 |
+| noncrit | gemma3-4b | P0 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P0 | addition_speech_act | 0.3017 | 0.1983 | 0.4138 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P0 | addition_agent | 0.3509 | 0.2455 | 0.4655 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | gemma3-4b | P0 | addition_certainty | 0.1324 | 0.0625 | 0.2121 | 68 | 116 | 48 | 58 | 37 | 2000 |
+| noncrit | gemma3-4b | P0 | addition_politeness | 0.2328 | 0.1466 | 0.3362 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P0 | politeness_added | 0.2075 | 0.1121 | 0.3174 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P0 | certainty_raised | 0.1324 | 0.0625 | 0.2121 | 68 | 116 | 48 | 58 | 37 | 2000 |
+| noncrit | gemma3-4b | P0 | added_content | 0.1667 | 0.0666 | 0.2767 | 96 | 116 | 20 | 58 | 48 | 2000 |
+| noncrit | gemma3-4b | P1 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P1 | addition_speech_act | 0.2155 | 0.1207 | 0.3103 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P1 | addition_agent | 0.4825 | 0.3684 | 0.6071 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | gemma3-4b | P1 | addition_certainty | 0.1299 | 0.0625 | 0.2029 | 77 | 116 | 39 | 58 | 41 | 2000 |
+| noncrit | gemma3-4b | P1 | addition_politeness | 0.1724 | 0.0948 | 0.2586 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P1 | politeness_added | 0.1509 | 0.0721 | 0.2427 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P1 | certainty_raised | 0.1299 | 0.0625 | 0.2029 | 77 | 116 | 39 | 58 | 41 | 2000 |
+| noncrit | gemma3-4b | P1 | added_content | 0.1321 | 0.0535 | 0.2245 | 106 | 116 | 10 | 58 | 53 | 2000 |
+| noncrit | gemma3-4b | P2 | addition_polarity | 0.1437 | 0.0891 | 0.2040 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P2 | addition_speech_act | 0.4799 | 0.4310 | 0.5287 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P2 | addition_agent | 0.5863 | 0.5355 | 0.6387 | 336 | 348 | 12 | 58 | 57 | 2000 |
+| noncrit | gemma3-4b | P2 | addition_certainty | 0.1569 | 0.0875 | 0.2313 | 153 | 348 | 195 | 58 | 47 | 2000 |
+| noncrit | gemma3-4b | P2 | addition_politeness | 0.3563 | 0.3132 | 0.3994 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P2 | politeness_added | 0.3365 | 0.2925 | 0.3827 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | P2 | certainty_raised | 0.1176 | 0.0549 | 0.1861 | 153 | 348 | 195 | 58 | 47 | 2000 |
+| noncrit | gemma3-4b | P2 | added_content | 0.6957 | 0.6121 | 0.7784 | 322 | 348 | 26 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | S3 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | S3 | addition_speech_act | 0.2989 | 0.1925 | 0.4138 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | S3 | addition_agent | 0.3538 | 0.2471 | 0.4702 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | gemma3-4b | S3 | addition_certainty | 0.1343 | 0.0625 | 0.2154 | 201 | 348 | 147 | 58 | 36 | 2000 |
+| noncrit | gemma3-4b | S3 | addition_politeness | 0.2414 | 0.1466 | 0.3448 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | S3 | politeness_added | 0.2233 | 0.1218 | 0.3399 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | gemma3-4b | S3 | certainty_raised | 0.1343 | 0.0625 | 0.2154 | 201 | 348 | 147 | 58 | 36 | 2000 |
+| noncrit | gemma3-4b | S3 | added_content | 0.2028 | 0.0987 | 0.3161 | 286 | 348 | 62 | 58 | 49 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | addition_speech_act | 0.1810 | 0.1034 | 0.2759 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | addition_agent | 0.2193 | 0.1316 | 0.3214 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | addition_certainty | 0.1333 | 0.0649 | 0.2090 | 75 | 116 | 41 | 58 | 39 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | addition_politeness | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | politeness_added | 0.0849 | 0.0278 | 0.1600 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | certainty_raised | 0.1333 | 0.0649 | 0.2090 | 75 | 116 | 41 | 58 | 39 | 2000 |
+| noncrit | gpt-6.1-terra | P0 | added_content | 0.0926 | 0.0192 | 0.1731 | 108 | 116 | 8 | 58 | 54 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | addition_speech_act | 0.2193 | 0.1293 | 0.3276 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | addition_agent | 0.6930 | 0.5714 | 0.8036 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | addition_certainty | 0.1250 | 0.0617 | 0.1975 | 80 | 116 | 36 | 58 | 43 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | certainty_raised | 0.1250 | 0.0617 | 0.1975 | 80 | 116 | 36 | 58 | 43 | 2000 |
+| noncrit | gpt-6.1-terra | P1 | added_content | 0.0259 | 0.0000 | 0.0690 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | addition_polarity | 0.1092 | 0.0575 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | addition_speech_act | 0.5374 | 0.4971 | 0.5747 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | addition_agent | 0.4532 | 0.3848 | 0.5259 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | addition_certainty | 0.1048 | 0.0488 | 0.1742 | 124 | 348 | 224 | 58 | 47 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | addition_politeness | 0.1609 | 0.1092 | 0.2126 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | politeness_added | 0.1101 | 0.0723 | 0.1495 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | certainty_raised | 0.0887 | 0.0373 | 0.1515 | 124 | 348 | 224 | 58 | 47 | 2000 |
+| noncrit | gpt-6.1-terra | P2 | added_content | 0.2492 | 0.1761 | 0.3313 | 325 | 348 | 23 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | addition_polarity | 0.0977 | 0.0517 | 0.1494 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | addition_speech_act | 0.1897 | 0.1092 | 0.2788 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | addition_agent | 0.2105 | 0.1322 | 0.3012 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | addition_certainty | 0.1324 | 0.0628 | 0.2072 | 219 | 348 | 129 | 58 | 40 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | addition_politeness | 0.0920 | 0.0431 | 0.1437 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | politeness_added | 0.0660 | 0.0273 | 0.1133 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | certainty_raised | 0.1324 | 0.0628 | 0.2072 | 219 | 348 | 129 | 58 | 40 | 2000 |
+| noncrit | gpt-6.1-terra | S3 | added_content | 0.0970 | 0.0314 | 0.1765 | 330 | 348 | 18 | 58 | 56 | 2000 |
+| noncrit | llama3.1-8b | P0 | addition_polarity | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P0 | addition_speech_act | 0.1552 | 0.0776 | 0.2414 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P0 | addition_agent | 0.2807 | 0.1818 | 0.3879 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | llama3.1-8b | P0 | addition_certainty | 0.1429 | 0.0706 | 0.2210 | 84 | 116 | 32 | 58 | 45 | 2000 |
+| noncrit | llama3.1-8b | P0 | addition_politeness | 0.1207 | 0.0603 | 0.1897 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P0 | politeness_added | 0.0755 | 0.0189 | 0.1456 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P0 | certainty_raised | 0.1190 | 0.0575 | 0.1875 | 84 | 116 | 32 | 58 | 45 | 2000 |
+| noncrit | llama3.1-8b | P0 | added_content | 0.2547 | 0.1415 | 0.3774 | 106 | 116 | 10 | 58 | 53 | 2000 |
+| noncrit | llama3.1-8b | P1 | addition_polarity | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P1 | addition_speech_act | 0.2414 | 0.1466 | 0.3534 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P1 | addition_agent | 0.3333 | 0.2321 | 0.4474 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | llama3.1-8b | P1 | addition_certainty | 0.1395 | 0.0689 | 0.2184 | 86 | 116 | 30 | 58 | 47 | 2000 |
+| noncrit | llama3.1-8b | P1 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P1 | certainty_raised | 0.1163 | 0.0556 | 0.1829 | 86 | 116 | 30 | 58 | 47 | 2000 |
+| noncrit | llama3.1-8b | P1 | added_content | 0.1800 | 0.0800 | 0.2955 | 100 | 116 | 16 | 58 | 50 | 2000 |
+| noncrit | llama3.1-8b | P2 | addition_polarity | 0.1264 | 0.0747 | 0.1839 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P2 | addition_speech_act | 0.3333 | 0.2701 | 0.3994 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P2 | addition_agent | 0.4327 | 0.3567 | 0.5086 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | llama3.1-8b | P2 | addition_certainty | 0.1618 | 0.0876 | 0.2395 | 204 | 348 | 144 | 58 | 47 | 2000 |
+| noncrit | llama3.1-8b | P2 | addition_politeness | 0.1552 | 0.1034 | 0.2098 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P2 | politeness_added | 0.1038 | 0.0654 | 0.1460 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | P2 | certainty_raised | 0.1078 | 0.0500 | 0.1699 | 204 | 348 | 144 | 58 | 47 | 2000 |
+| noncrit | llama3.1-8b | P2 | added_content | 0.3389 | 0.2357 | 0.4430 | 301 | 348 | 47 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | S3 | addition_polarity | 0.1034 | 0.0546 | 0.1552 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | S3 | addition_speech_act | 0.1782 | 0.0948 | 0.2701 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | S3 | addition_agent | 0.2865 | 0.1964 | 0.3851 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | llama3.1-8b | S3 | addition_certainty | 0.1270 | 0.0649 | 0.1970 | 252 | 348 | 96 | 58 | 45 | 2000 |
+| noncrit | llama3.1-8b | S3 | addition_politeness | 0.1207 | 0.0603 | 0.1897 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | S3 | politeness_added | 0.0660 | 0.0182 | 0.1334 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | llama3.1-8b | S3 | certainty_raised | 0.1151 | 0.0543 | 0.1828 | 252 | 348 | 96 | 58 | 45 | 2000 |
+| noncrit | llama3.1-8b | S3 | added_content | 0.2579 | 0.1657 | 0.3606 | 318 | 348 | 30 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | P0 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P0 | addition_speech_act | 0.1638 | 0.0776 | 0.2500 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P0 | addition_agent | 0.2982 | 0.1983 | 0.4052 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | P0 | addition_certainty | 0.1149 | 0.0556 | 0.1809 | 87 | 116 | 29 | 58 | 47 | 2000 |
+| noncrit | qwen2.5-7b | P0 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P0 | politeness_added | 0.0283 | 0.0000 | 0.0660 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P0 | certainty_raised | 0.1149 | 0.0556 | 0.1809 | 87 | 116 | 29 | 58 | 47 | 2000 |
+| noncrit | qwen2.5-7b | P0 | added_content | 0.2364 | 0.1273 | 0.3519 | 110 | 116 | 6 | 58 | 55 | 2000 |
+| noncrit | qwen2.5-7b | P1 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P1 | addition_speech_act | 0.3333 | 0.2241 | 0.4554 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | P1 | addition_agent | 0.3947 | 0.2807 | 0.5172 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | P1 | addition_certainty | 0.1552 | 0.0741 | 0.2456 | 58 | 116 | 58 | 58 | 32 | 2000 |
+| noncrit | qwen2.5-7b | P1 | addition_politeness | 0.1034 | 0.0517 | 0.1638 | 116 | 116 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P1 | politeness_added | 0.0283 | 0.0000 | 0.0755 | 106 | 116 | 10 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P1 | certainty_raised | 0.1552 | 0.0741 | 0.2456 | 58 | 116 | 58 | 58 | 32 | 2000 |
+| noncrit | qwen2.5-7b | P1 | added_content | 0.1579 | 0.0702 | 0.2586 | 114 | 116 | 2 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | P2 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P2 | addition_speech_act | 0.2759 | 0.1954 | 0.3506 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P2 | addition_agent | 0.5146 | 0.4405 | 0.5819 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | P2 | addition_certainty | 0.1250 | 0.0635 | 0.1940 | 232 | 348 | 116 | 58 | 47 | 2000 |
+| noncrit | qwen2.5-7b | P2 | addition_politeness | 0.1063 | 0.0575 | 0.1580 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P2 | politeness_added | 0.0472 | 0.0216 | 0.0800 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | P2 | certainty_raised | 0.1164 | 0.0562 | 0.1829 | 232 | 348 | 116 | 58 | 47 | 2000 |
+| noncrit | qwen2.5-7b | P2 | added_content | 0.5602 | 0.4691 | 0.6568 | 332 | 348 | 16 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | S3 | addition_polarity | 0.1034 | 0.0517 | 0.1638 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | S3 | addition_speech_act | 0.1580 | 0.0776 | 0.2443 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | S3 | addition_agent | 0.2865 | 0.1901 | 0.3899 | 342 | 348 | 6 | 58 | 57 | 2000 |
+| noncrit | qwen2.5-7b | S3 | addition_certainty | 0.1149 | 0.0556 | 0.1809 | 261 | 348 | 87 | 58 | 47 | 2000 |
+| noncrit | qwen2.5-7b | S3 | addition_politeness | 0.0862 | 0.0431 | 0.1379 | 348 | 348 | 0 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | S3 | politeness_added | 0.0314 | 0.0031 | 0.0680 | 318 | 348 | 30 | 58 | 58 | 2000 |
+| noncrit | qwen2.5-7b | S3 | certainty_raised | 0.1149 | 0.0556 | 0.1809 | 261 | 348 | 87 | 58 | 47 | 2000 |
+| noncrit | qwen2.5-7b | S3 | added_content | 0.2500 | 0.1570 | 0.3519 | 328 | 348 | 20 | 58 | 56 | 2000 |
 
 
 </details>
@@ -6362,390 +6360,390 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | 3 | politeness_added | 0.4000 | 0.1000 | 0.7000 | 10 | 20 | 10 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | 3 | certainty_raised | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
 | politeness | noncrit | qwen2.5-7b | S3 | 3 | added_content | 0.0000 | 0.0000 | 0.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 1 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 1 | addition_agent | 0.6667 | 0.3333 | 0.9000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | gemma3-4b | P2 | 1 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 1 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | gemma3-4b | P2 | 1 | added_content | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 2 | addition_polarity | 0.1500 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 2 | addition_speech_act | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 2 | addition_agent | 0.6667 | 0.3750 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 20 | 16 | 10 | 3 | 1947 |
-| speech_act | bare | gemma3-4b | P2 | 2 | addition_politeness | 0.4000 | 0.1000 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 2 | politeness_added | 0.4000 | 0.1000 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 20 | 16 | 10 | 3 | 1947 |
-| speech_act | bare | gemma3-4b | P2 | 2 | added_content | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 3 | addition_polarity | 0.2000 | 0.0500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 3 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 3 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 1996 |
-| speech_act | bare | gemma3-4b | P2 | 3 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 3 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 1996 |
-| speech_act | bare | gemma3-4b | P2 | 3 | added_content | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 1 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | 1 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 1 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | 1 | added_content | 0.1429 | 0.0000 | 0.4444 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 2 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | 2 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 2 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | 2 | added_content | 0.1429 | 0.0000 | 0.4444 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 3 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | 3 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 3 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | 3 | added_content | 0.1429 | 0.0000 | 0.4444 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_speech_act | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_agent | 0.6667 | 0.3750 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | P2 | 1 | added_content | 0.4444 | 0.1111 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_agent | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1988 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1988 |
-| speech_act | bare | gpt-6.1-terra | P2 | 2 | added_content | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_polarity | 0.2000 | 0.0500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 2 | 1788 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_politeness | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | politeness_added | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 2 | 1788 |
-| speech_act | bare | gpt-6.1-terra | P2 | 3 | added_content | 0.2222 | 0.0000 | 0.5000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_agent | 0.5556 | 0.2222 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | 1 | added_content | 0.2222 | 0.0000 | 0.5014 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_agent | 0.4444 | 0.1247 | 0.7500 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 1996 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 1996 |
-| speech_act | bare | gpt-6.1-terra | S3 | 2 | added_content | 0.2222 | 0.0000 | 0.5014 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_agent | 0.5556 | 0.2222 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | bare | gpt-6.1-terra | S3 | 3 | added_content | 0.2222 | 0.0000 | 0.5014 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 1 | added_content | 0.1111 | 0.0000 | 0.3750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | addition_polarity | 0.3000 | 0.0500 | 0.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | addition_speech_act | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | addition_agent | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 10 | 20 | 10 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 10 | 20 | 10 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 2 | added_content | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 5 | 1999 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 5 | 1999 |
-| speech_act | bare | llama3.1-8b | P2 | 3 | added_content | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 1 | added_content | 0.3333 | 0.1000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 2 | added_content | 0.2222 | 0.0000 | 0.5556 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | 3 | added_content | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_speech_act | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_agent | 0.5556 | 0.2222 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 11 | 20 | 9 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 11 | 20 | 9 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 1 | added_content | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_polarity | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_agent | 0.7778 | 0.4444 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_certainty | 0.1250 | 0.0000 | 0.4286 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 2 | added_content | 0.9000 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 5 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | 3 | added_content | 0.7000 | 0.4000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | 1 | added_content | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | 2 | added_content | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | S3 | 3 | added_content | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_agent | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 1 | added_content | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_speech_act | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_agent | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_certainty | 1.0000 | 1.0000 | 1.0000 | 3 | 20 | 17 | 10 | 2 | 1772 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_politeness | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | politeness_added | 0.8000 | 0.5000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 2 | 1772 |
-| speech_act | noncrit | gemma3-4b | P2 | 2 | added_content | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_polarity | 0.2000 | 0.0000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_agent | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 3 | 1926 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_politeness | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | politeness_added | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 3 | 1926 |
-| speech_act | noncrit | gemma3-4b | P2 | 3 | added_content | 0.4444 | 0.1111 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_politeness | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | politeness_added | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | 1 | added_content | 0.1250 | 0.0000 | 0.4000 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_politeness | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | politeness_added | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | 2 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_politeness | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | politeness_added | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | noncrit | gemma3-4b | S3 | 3 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_agent | 0.3333 | 0.1000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1988 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1988 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | added_content | 0.0000 | 0.0000 | 0.0000 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_agent | 0.6667 | 0.3333 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 20 | 16 | 10 | 4 | 1986 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 20 | 16 | 10 | 4 | 1986 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | added_content | 0.0000 | 0.0000 | 0.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_speech_act | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1982 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 20 | 15 | 10 | 4 | 1982 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | added_content | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_speech_act | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_agent | 0.3333 | 0.1000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 1 | 20 | 19 | 10 | 1 | 1313 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 1 | 20 | 19 | 10 | 1 | 1313 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | added_content | 0.0000 | 0.0000 | 0.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_agent | 0.5556 | 0.2222 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 5 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 5 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 20 | 6 | 10 | 7 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_speech_act | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_agent | 0.3333 | 0.1000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 2 | 1796 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 20 | 17 | 10 | 2 | 1796 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | added_content | 0.0000 | 0.0000 | 0.0000 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 1 | added_content | 0.1250 | 0.0000 | 0.4000 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_polarity | 0.2000 | 0.0500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_agent | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 1999 |
-| speech_act | noncrit | llama3.1-8b | P2 | 2 | added_content | 0.1111 | 0.0000 | 0.3333 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_certainty | 0.1250 | 0.0000 | 0.5000 | 8 | 20 | 12 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | 3 | added_content | 0.2857 | 0.0000 | 0.6667 | 14 | 20 | 6 | 10 | 7 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_agent | 0.3333 | 0.0000 | 0.6667 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 1 | added_content | 0.0000 | 0.0000 | 0.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_agent | 0.2222 | 0.0000 | 0.5000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 2 | added_content | 0.0000 | 0.0000 | 0.0000 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_polarity | 0.2000 | 0.0500 | 0.4012 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_agent | 0.2222 | 0.0000 | 0.5000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_politeness | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | politeness_added | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | 3 | added_content | 0.3000 | 0.0000 | 0.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_speech_act | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_agent | 0.5556 | 0.2222 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 11 | 20 | 9 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 11 | 20 | 9 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 1 | added_content | 0.2222 | 0.0000 | 0.5000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_agent | 0.7778 | 0.5000 | 1.0000 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 8 | 20 | 12 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 2 | added_content | 0.5556 | 0.2493 | 0.8750 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_speech_act | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_agent | 0.5556 | 0.2222 | 0.8889 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_politeness | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | politeness_added | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 20 | 13 | 10 | 6 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 3 | added_content | 0.6000 | 0.3000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 1 | added_content | 0.2500 | 0.0000 | 0.5714 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 2 | added_content | 0.2500 | 0.0000 | 0.5714 | 16 | 20 | 4 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_polarity | 0.1000 | 0.0000 | 0.2500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_speech_act | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_agent | 0.4444 | 0.1250 | 0.7778 | 18 | 20 | 2 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 9 | 20 | 11 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 3 | added_content | 0.2500 | 0.0000 | 0.5714 | 16 | 20 | 4 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | addition_agent | 0.8571 | 0.5714 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 1 | added_content | 0.7500 | 0.3750 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 2 | addition_speech_act | 0.8125 | 0.6250 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 2 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 2 | 16 | 14 | 8 | 2 | 1809 |
+| speech_act | bare | gemma3-4b | P2 | 2 | addition_politeness | 0.3750 | 0.0000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 2 | politeness_added | 0.3750 | 0.0000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 2 | 16 | 14 | 8 | 2 | 1809 |
+| speech_act | bare | gemma3-4b | P2 | 2 | added_content | 0.6250 | 0.2500 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 3 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1984 |
+| speech_act | bare | gemma3-4b | P2 | 3 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 3 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1984 |
+| speech_act | bare | gemma3-4b | P2 | 3 | added_content | 0.8571 | 0.5714 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 1 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | 1 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 1 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | 1 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 2 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 2 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | 2 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 2 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | 2 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gemma3-4b | S3 | 3 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | P2 | 1 | added_content | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_agent | 0.4286 | 0.1219 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1941 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1941 |
+| speech_act | bare | gpt-6.1-terra | P2 | 2 | added_content | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1322 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | addition_politeness | 0.3750 | 0.0000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | politeness_added | 0.3750 | 0.0000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1322 |
+| speech_act | bare | gpt-6.1-terra | P2 | 3 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | 1 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_agent | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1984 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1984 |
+| speech_act | bare | gpt-6.1-terra | S3 | 2 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | bare | gpt-6.1-terra | S3 | 3 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | addition_agent | 0.7143 | 0.3333 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 1 | added_content | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | addition_polarity | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | addition_agent | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 2 | added_content | 0.3750 | 0.0000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | addition_agent | 0.5714 | 0.1667 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1955 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1955 |
+| speech_act | bare | llama3.1-8b | P2 | 3 | added_content | 0.3750 | 0.1250 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 1 | added_content | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 2 | added_content | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | 3 | added_content | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 1 | added_content | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_agent | 0.8571 | 0.5714 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_certainty | 0.1667 | 0.0000 | 0.5000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 2 | added_content | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1996 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1996 |
+| speech_act | bare | qwen2.5-7b | P2 | 3 | added_content | 0.7500 | 0.3750 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 1 | added_content | 0.3750 | 0.1250 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 2 | added_content | 0.3750 | 0.1250 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | 3 | added_content | 0.3750 | 0.1250 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_agent | 0.7143 | 0.3333 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 1 | added_content | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_speech_act | 0.7500 | 0.5625 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_agent | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_certainty | 1.0000 | 1.0000 | 1.0000 | 1 | 16 | 15 | 8 | 1 | 1333 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | addition_politeness | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | politeness_added | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1333 |
+| speech_act | noncrit | gemma3-4b | P2 | 2 | added_content | 0.4286 | 0.0000 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_agent | 0.7143 | 0.3333 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1940 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1940 |
+| speech_act | noncrit | gemma3-4b | P2 | 3 | added_content | 0.5000 | 0.1250 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | 1 | added_content | 0.1667 | 0.0000 | 0.5000 | 12 | 16 | 4 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | 2 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 1999 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 1998 |
+| speech_act | noncrit | gemma3-4b | S3 | 3 | added_content | 0.2000 | 0.0000 | 0.6000 | 10 | 16 | 6 | 8 | 5 | 1999 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_agent | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1947 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1947 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 1 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_agent | 0.7143 | 0.3750 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1993 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1993 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 2 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_speech_act | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_agent | 0.7143 | 0.3333 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1957 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1957 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 3 | added_content | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_agent | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1268 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1268 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 1 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1944 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 3 | 16 | 13 | 8 | 3 | 1944 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 2 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_agent | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1268 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 1 | 16 | 15 | 8 | 1 | 1268 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 3 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_agent | 0.7143 | 0.3333 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 1 | added_content | 0.1429 | 0.0000 | 0.5000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_speech_act | 0.6250 | 0.5000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_agent | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 2 | added_content | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_speech_act | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_agent | 0.8571 | 0.5714 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_certainty | 0.2500 | 0.0000 | 0.8000 | 4 | 16 | 12 | 8 | 4 | 1992 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 4 | 16 | 12 | 8 | 4 | 1992 |
+| speech_act | noncrit | llama3.1-8b | P2 | 3 | added_content | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_speech_act | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_agent | 0.2857 | 0.0000 | 0.6667 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 1 | added_content | 0.0000 | 0.0000 | 0.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_speech_act | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_agent | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 2 | added_content | 0.0000 | 0.0000 | 0.0000 | 12 | 16 | 4 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_polarity | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_speech_act | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_agent | 0.1429 | 0.0000 | 0.4286 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | addition_politeness | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | politeness_added | 0.1250 | 0.0000 | 0.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | 3 | added_content | 0.3750 | 0.1250 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_agent | 0.5714 | 0.1667 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 1 | added_content | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_agent | 0.7143 | 0.3333 | 1.0000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 2 | added_content | 0.5714 | 0.2000 | 0.8750 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_speech_act | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_agent | 0.4286 | 0.1250 | 0.8333 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | addition_politeness | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | politeness_added | 0.2500 | 0.0000 | 0.6250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 5 | 16 | 11 | 8 | 5 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 3 | added_content | 0.5000 | 0.1250 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 1 | added_content | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 2 | added_content | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_polarity | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_speech_act | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_agent | 0.4286 | 0.1250 | 0.8000 | 14 | 16 | 2 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_certainty | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | addition_politeness | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | politeness_added | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | certainty_raised | 0.0000 | 0.0000 | 0.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 3 | added_content | 0.2857 | 0.0000 | 0.6250 | 14 | 16 | 2 | 8 | 7 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | 1 | addition_polarity | 0.1000 | 0.0000 | 0.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | 1 | addition_speech_act | 0.2000 | 0.0000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | 1 | addition_agent | 0.4000 | 0.1000 | 0.7000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -7337,54 +7335,54 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | coverage_at_3 | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | distinct_critical_values | 1.1000 | 1.0000 | 1.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | coverage_at_3 | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | distinct_critical_values | 2.2000 | 2.0000 | 2.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | distinct_critical_values | 1.1000 | 1.0000 | 1.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | coverage_at_3 | 0.8000 | 0.5000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | distinct_critical_values | 2.6000 | 2.3000 | 2.9000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | coverage_at_3 | 0.1000 | 0.0000 | 0.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | distinct_critical_values | 1.1000 | 1.0000 | 1.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | distinct_critical_values | 1.8000 | 1.5000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | distinct_critical_values | 1.7000 | 1.4000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | coverage_at_3 | 0.3000 | 0.0000 | 0.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | distinct_critical_values | 2.1000 | 2.0000 | 2.3000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | coverage_at_3 | 0.8000 | 0.5000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | distinct_critical_values | 2.3000 | 2.0000 | 2.6000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | distinct_critical_values | 1.4000 | 1.1000 | 1.7000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | distinct_critical_values | 1.8000 | 1.4000 | 2.2000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | coverage_at_3 | 0.2000 | 0.0000 | 0.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | distinct_critical_values | 1.7000 | 1.4000 | 2.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | coverage_at_3 | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | distinct_critical_values | 2.2500 | 2.0000 | 2.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | distinct_critical_values | 1.1250 | 1.0000 | 1.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | coverage_at_3 | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | distinct_critical_values | 2.7500 | 2.4969 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | coverage_at_3 | 0.1250 | 0.0000 | 0.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | distinct_critical_values | 1.1250 | 1.0000 | 1.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | coverage_at_3 | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | distinct_critical_values | 1.7500 | 1.4969 | 2.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | coverage_at_3 | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | distinct_critical_values | 1.6250 | 1.3750 | 1.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | coverage_at_3 | 0.3750 | 0.1250 | 0.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | distinct_critical_values | 2.1250 | 2.0000 | 2.3750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | coverage_at_3 | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | distinct_critical_values | 2.3750 | 2.1250 | 2.7500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | coverage_at_3 | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | distinct_critical_values | 1.2500 | 1.0000 | 1.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | coverage_at_3 | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | distinct_critical_values | 1.7500 | 1.2500 | 2.2500 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | coverage_at_3 | 0.2500 | 0.0000 | 0.6250 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | distinct_critical_values | 1.6250 | 1.2500 | 1.8750 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | distinct_critical_values | 1.0000 | 1.0000 | 1.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 8 | 8 | 0 | 8 | 8 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | coverage_at_3 | 0.0000 | 0.0000 | 0.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | distinct_critical_values | 0.9000 | 0.3000 | 1.5000 | 10 | 10 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P2 | n_suggestions | 3.0000 | 3.0000 | 3.0000 | 10 | 10 | 0 | 10 | 10 | 2000 |
@@ -7704,70 +7702,70 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 10 | 20 | 10 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | extra_actions | 0.5000 | 0.5000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 10 | 20 | 10 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
-| speech_act | bare | gemma3-4b | S3 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | extra_actions | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 20 | 15 | 10 | 5 | 1998 |
-| speech_act | bare | gpt-6.1-terra | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | bare | llama3.1-8b | P0 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
-| speech_act | bare | qwen2.5-7b | P1 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | extra_actions | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 9 | 20 | 11 | 10 | 9 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
-| speech_act | noncrit | gemma3-4b | P0 | extra_actions | 0.6500 | 0.5500 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 1999 |
-| speech_act | noncrit | gemma3-4b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | extra_actions | 0.7500 | 0.6000 | 0.9000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 20 | 15 | 10 | 5 | 1996 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | extra_actions | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 20 | 14 | 10 | 6 | 1999 |
-| speech_act | noncrit | llama3.1-8b | P0 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | extra_actions | 0.6500 | 0.5000 | 0.8000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 20 | 13 | 10 | 7 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | extra_actions | 0.5500 | 0.5000 | 0.6500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 9 | 20 | 11 | 10 | 9 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 20 | 12 | 10 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | extra_actions | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 16 | 11 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | P1 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | extra_actions | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 16 | 11 | 8 | 5 | 1999 |
+| speech_act | bare | gpt-6.1-terra | S3 | extra_actions | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 16 | 11 | 8 | 5 | 1999 |
+| speech_act | bare | llama3.1-8b | P0 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | extra_actions | 0.6875 | 0.5625 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 5 | 16 | 11 | 8 | 5 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | extra_actions | 0.6250 | 0.5000 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | extra_actions | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 16 | 8 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | extra_actions | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 8 | 16 | 8 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | extra_actions | 0.6250 | 0.5000 | 0.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 6 | 16 | 10 | 8 | 6 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 7 | 16 | 9 | 8 | 7 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | extra_actions | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 1 | 20 | 19 | 10 | 1 | 1300 |
 | time_quantity | bare | gemma3-4b | P1 | extra_actions | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -7975,38 +7973,38 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 20 | 40 | 20 | 10 | 10 | 2000 |
 | politeness | qwen2.5-7b | S3 | extra_actions | 0.5000 | 0.5000 | 0.5000 | 40 | 40 | 0 | 10 | 10 | 2000 |
 | politeness | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 20 | 40 | 20 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P0 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
-| speech_act | gemma3-4b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 16 | 40 | 24 | 10 | 8 | 2000 |
-| speech_act | gemma3-4b | P2 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
-| speech_act | gemma3-4b | S3 | extra_actions | 0.6500 | 0.5500 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
-| speech_act | gpt-6.1-terra | P0 | extra_actions | 0.6750 | 0.5500 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 8 | 2000 |
-| speech_act | gpt-6.1-terra | P1 | extra_actions | 0.7000 | 0.5750 | 0.8256 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 2000 |
-| speech_act | gpt-6.1-terra | P2 | extra_actions | 0.6750 | 0.5750 | 0.8000 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 40 | 27 | 10 | 8 | 2000 |
-| speech_act | gpt-6.1-terra | S3 | extra_actions | 0.7000 | 0.5750 | 0.8250 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 40 | 28 | 10 | 7 | 1999 |
-| speech_act | llama3.1-8b | P0 | extra_actions | 0.6500 | 0.5494 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
-| speech_act | llama3.1-8b | P1 | extra_actions | 0.6000 | 0.5000 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 16 | 40 | 24 | 10 | 8 | 2000 |
-| speech_act | llama3.1-8b | P2 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
-| speech_act | llama3.1-8b | S3 | extra_actions | 0.6500 | 0.5494 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
-| speech_act | qwen2.5-7b | P0 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
-| speech_act | qwen2.5-7b | P1 | extra_actions | 0.6500 | 0.5500 | 0.7750 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 40 | 26 | 10 | 8 | 2000 |
-| speech_act | qwen2.5-7b | P2 | extra_actions | 0.5500 | 0.5000 | 0.6500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 18 | 40 | 22 | 10 | 9 | 2000 |
-| speech_act | qwen2.5-7b | S3 | extra_actions | 0.6250 | 0.5250 | 0.7500 | 40 | 40 | 0 | 10 | 10 | 2000 |
-| speech_act | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 15 | 40 | 25 | 10 | 8 | 2000 |
+| speech_act | gemma3-4b | P0 | extra_actions | 0.5938 | 0.5000 | 0.7188 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 32 | 19 | 8 | 7 | 2000 |
+| speech_act | gemma3-4b | P1 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gemma3-4b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 32 | 18 | 8 | 7 | 2000 |
+| speech_act | gemma3-4b | P2 | extra_actions | 0.5938 | 0.5000 | 0.7188 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gemma3-4b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 32 | 19 | 8 | 7 | 2000 |
+| speech_act | gemma3-4b | S3 | extra_actions | 0.5938 | 0.5000 | 0.7188 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gemma3-4b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 32 | 19 | 8 | 7 | 2000 |
+| speech_act | gpt-6.1-terra | P0 | extra_actions | 0.6250 | 0.5312 | 0.7500 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 32 | 20 | 8 | 7 | 2000 |
+| speech_act | gpt-6.1-terra | P1 | extra_actions | 0.6562 | 0.5312 | 0.8125 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 11 | 32 | 21 | 8 | 6 | 2000 |
+| speech_act | gpt-6.1-terra | P2 | extra_actions | 0.6250 | 0.5312 | 0.7500 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 32 | 20 | 8 | 7 | 2000 |
+| speech_act | gpt-6.1-terra | S3 | extra_actions | 0.6562 | 0.5312 | 0.8125 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | gpt-6.1-terra | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 11 | 32 | 21 | 8 | 6 | 2000 |
+| speech_act | llama3.1-8b | P0 | extra_actions | 0.5625 | 0.5000 | 0.6562 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | llama3.1-8b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 32 | 18 | 8 | 8 | 2000 |
+| speech_act | llama3.1-8b | P1 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | llama3.1-8b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 32 | 18 | 8 | 7 | 2000 |
+| speech_act | llama3.1-8b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | llama3.1-8b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 32 | 18 | 8 | 7 | 2000 |
+| speech_act | llama3.1-8b | S3 | extra_actions | 0.5625 | 0.5000 | 0.6562 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | llama3.1-8b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 32 | 18 | 8 | 8 | 2000 |
+| speech_act | qwen2.5-7b | P0 | extra_actions | 0.5938 | 0.5000 | 0.7188 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | qwen2.5-7b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 32 | 19 | 8 | 7 | 2000 |
+| speech_act | qwen2.5-7b | P1 | extra_actions | 0.6250 | 0.5312 | 0.7500 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | qwen2.5-7b | P1 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 12 | 32 | 20 | 8 | 7 | 2000 |
+| speech_act | qwen2.5-7b | P2 | extra_actions | 0.5625 | 0.5000 | 0.6875 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | qwen2.5-7b | P2 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 14 | 32 | 18 | 8 | 7 | 2000 |
+| speech_act | qwen2.5-7b | S3 | extra_actions | 0.5938 | 0.5000 | 0.7188 | 32 | 32 | 0 | 8 | 8 | 2000 |
+| speech_act | qwen2.5-7b | S3 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 13 | 32 | 19 | 8 | 7 | 2000 |
 | time_quantity | gemma3-4b | P0 | extra_actions | 0.9500 | 0.8750 | 1.0000 | 40 | 40 | 0 | 10 | 10 | 2000 |
 | time_quantity | gemma3-4b | P0 | nondefault_extra_actions | 1.0000 | 1.0000 | 1.0000 | 2 | 40 | 38 | 10 | 2 | 1793 |
 | time_quantity | gemma3-4b | P1 | extra_actions | 0.9500 | 0.8750 | 1.0000 | 40 | 40 | 0 | 10 | 10 | 2000 |
@@ -9654,406 +9652,406 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | S3 | input_characters | 19.2000 | 16.8000 | 21.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | keyword_count | 3.2000 | 3.0000 | 3.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3000 | 0.2333 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3833 | 0.2500 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3333 | 0.2667 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3833 | 0.3167 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | input_characters | 11.4000 | 9.8000 | 13.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | input_actions | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | input_characters | 11.4000 | 9.8000 | 13.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4483 | 0.3704 | 0.5333 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | input_actions | 3.1034 | 3.0000 | 3.3103 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | input_characters | 12.5172 | 10.8621 | 14.5862 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | keyword_count | 2.1034 | 2.0000 | 2.3103 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | input_characters | 12.4000 | 10.8000 | 14.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | input_characters | 12.4000 | 10.8000 | 14.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.9333 | 0.8329 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.9000 | 0.8333 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7833 | 0.7167 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | input_actions | 4.3000 | 4.1000 | 4.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | input_characters | 13.6000 | 12.0000 | 15.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | chip_count | 2.2000 | 1.8500 | 2.5500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8167 | 0.7500 | 0.8833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | input_actions | 4.3000 | 4.1000 | 4.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | input_characters | 13.6000 | 12.0000 | 15.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | keyword_count | 2.1000 | 2.0000 | 2.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | chip_count | 2.2000 | 1.8500 | 2.5500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | critical_match | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | critical_match | 0.9333 | 0.8333 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7167 | 0.5667 | 0.8504 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6167 | 0.5000 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | critical_match | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | input_actions | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | input_characters | 34.9500 | 30.8987 | 38.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6167 | 0.5167 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | input_actions | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | input_characters | 34.9500 | 30.8987 | 38.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | keyword_count | 6.7000 | 5.9000 | 7.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3167 | 0.2500 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3833 | 0.3000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3500 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | input_actions | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | input_characters | 18.3000 | 16.1000 | 21.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | input_actions | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | input_characters | 18.3000 | 16.1000 | 21.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | keyword_count | 3.1000 | 3.0000 | 3.3000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3125 | 0.2500 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | critical_match | 0.4167 | 0.2917 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3125 | 0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3750 | 0.3333 | 0.4172 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3125 | 0.1250 | 0.4375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3958 | 0.3125 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | input_actions | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | input_characters | 11.8750 | 9.8750 | 14.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4167 | 0.3333 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | input_actions | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | input_characters | 11.8750 | 9.8750 | 14.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4783 | 0.3810 | 0.5625 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | input_actions | 3.1304 | 3.0000 | 3.3913 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | input_characters | 13.0435 | 11.0443 | 15.3754 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | keyword_count | 2.1304 | 2.0000 | 2.3913 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8750 | 0.6250 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.9167 | 0.8333 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8750 | 0.7083 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.6875 | 0.3750 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.7500 | 0.5625 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6250 | 0.4792 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.6875 | 0.3750 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8125 | 0.6250 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | input_characters | 12.8750 | 10.8750 | 15.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | chip_count | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7708 | 0.6458 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.7708 | 0.6042 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | input_characters | 12.8750 | 10.8750 | 15.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | chip_count | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6250 | 0.5417 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.9375 | 0.8750 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.6875 | 0.5000 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7917 | 0.7083 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7292 | 0.4792 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | input_actions | 4.1250 | 4.0000 | 4.3125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | input_characters | 13.8750 | 11.9359 | 16.1250 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | chip_count | 2.0000 | 1.6875 | 2.2500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8333 | 0.7500 | 0.9167 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | input_actions | 4.1250 | 4.0000 | 4.3125 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | input_characters | 13.8750 | 11.9359 | 16.1250 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | keyword_count | 2.1250 | 2.0000 | 2.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | chip_count | 2.0000 | 1.6875 | 2.2500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | critical_match | 0.5208 | 0.3750 | 0.6667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.6458 | 0.5000 | 0.7917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | critical_match | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6042 | 0.4583 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | critical_match | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | input_actions | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | input_characters | 34.4375 | 29.6250 | 39.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6458 | 0.5625 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | input_actions | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | input_characters | 34.4375 | 29.6250 | 39.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | keyword_count | 6.5625 | 5.6875 | 7.5625 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3542 | 0.2917 | 0.4167 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.3125 | 0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.4375 | 0.3750 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3750 | 0.2708 | 0.4583 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3750 | 0.2500 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | input_actions | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | input_characters | 18.7500 | 16.1250 | 21.7500 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | chip_count | 0.0000 | 0.0000 | 0.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4167 | 0.3333 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4375 | 0.3125 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | input_actions | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | input_characters | 18.7500 | 16.1250 | 21.7500 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | keyword_count | 3.1250 | 3.0000 | 3.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | chip_count | 0.0000 | 0.0000 | 0.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | critical_match | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | input_actions | 2.1000 | 2.0000 | 2.3000 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | input_characters | 12.2000 | 11.0000 | 13.6000 | 20 | 20 | 0 | 10 | 10 | 2000 |
@@ -10789,86 +10787,86 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P1 | 20 | 10 | 20 | 20 |
 | politeness | noncrit | qwen2.5-7b | P2 | 60 | 10 | 60 | 60 |
 | politeness | noncrit | qwen2.5-7b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | bare | gemma3-4b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | bare | gemma3-4b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | bare | gemma3-4b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | bare | gemma3-4b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | bare | gpt-6.1-terra | P0 | 20 | 10 | 20 | 20 |
-| speech_act | bare | gpt-6.1-terra | P1 | 20 | 10 | 20 | 20 |
-| speech_act | bare | gpt-6.1-terra | P2 | 60 | 10 | 60 | 60 |
-| speech_act | bare | gpt-6.1-terra | S3 | 60 | 10 | 60 | 60 |
-| speech_act | bare | llama3.1-8b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | bare | llama3.1-8b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | bare | llama3.1-8b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | bare | llama3.1-8b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | bare | qwen2.5-7b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | bare | qwen2.5-7b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | bare | qwen2.5-7b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | bare | qwen2.5-7b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | gemma3-4b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | gemma3-4b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | gemma3-4b | P2 | 58 | 10 | 58 | 58 |
-| speech_act | chip1 | gemma3-4b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | llama3.1-8b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | llama3.1-8b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | llama3.1-8b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | llama3.1-8b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | qwen2.5-7b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | qwen2.5-7b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chip1 | qwen2.5-7b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chip1 | qwen2.5-7b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | gemma3-4b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | gemma3-4b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | gemma3-4b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | gemma3-4b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | gpt-6.1-terra | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | gpt-6.1-terra | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | gpt-6.1-terra | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | gpt-6.1-terra | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | llama3.1-8b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | llama3.1-8b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | llama3.1-8b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | llama3.1-8b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | qwen2.5-7b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | qwen2.5-7b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | chipall | qwen2.5-7b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | chipall | qwen2.5-7b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | full | gemma3-4b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | full | gemma3-4b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | full | gemma3-4b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | full | gemma3-4b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | full | gpt-6.1-terra | P0 | 20 | 10 | 20 | 20 |
-| speech_act | full | gpt-6.1-terra | P1 | 20 | 10 | 20 | 20 |
-| speech_act | full | gpt-6.1-terra | P2 | 60 | 10 | 60 | 60 |
-| speech_act | full | gpt-6.1-terra | S3 | 60 | 10 | 60 | 60 |
-| speech_act | full | llama3.1-8b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | full | llama3.1-8b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | full | llama3.1-8b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | full | llama3.1-8b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | full | qwen2.5-7b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | full | qwen2.5-7b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | full | qwen2.5-7b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | full | qwen2.5-7b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | gemma3-4b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | gemma3-4b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | gemma3-4b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | gemma3-4b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | llama3.1-8b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | llama3.1-8b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | llama3.1-8b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | llama3.1-8b | S3 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | qwen2.5-7b | P0 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | qwen2.5-7b | P1 | 20 | 10 | 20 | 20 |
-| speech_act | noncrit | qwen2.5-7b | P2 | 60 | 10 | 60 | 60 |
-| speech_act | noncrit | qwen2.5-7b | S3 | 60 | 10 | 60 | 60 |
+| speech_act | bare | gemma3-4b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | bare | gemma3-4b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | bare | gemma3-4b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | bare | gemma3-4b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | bare | gpt-6.1-terra | P0 | 16 | 8 | 16 | 16 |
+| speech_act | bare | gpt-6.1-terra | P1 | 16 | 8 | 16 | 16 |
+| speech_act | bare | gpt-6.1-terra | P2 | 48 | 8 | 48 | 48 |
+| speech_act | bare | gpt-6.1-terra | S3 | 48 | 8 | 48 | 48 |
+| speech_act | bare | llama3.1-8b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | bare | llama3.1-8b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | bare | llama3.1-8b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | bare | llama3.1-8b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | bare | qwen2.5-7b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | bare | qwen2.5-7b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | bare | qwen2.5-7b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | bare | qwen2.5-7b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | gemma3-4b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | gemma3-4b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | gemma3-4b | P2 | 46 | 8 | 46 | 46 |
+| speech_act | chip1 | gemma3-4b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | llama3.1-8b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | llama3.1-8b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | llama3.1-8b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | llama3.1-8b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | qwen2.5-7b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | qwen2.5-7b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chip1 | qwen2.5-7b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chip1 | qwen2.5-7b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | gemma3-4b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | gemma3-4b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | gemma3-4b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | gemma3-4b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | gpt-6.1-terra | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | gpt-6.1-terra | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | gpt-6.1-terra | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | gpt-6.1-terra | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | llama3.1-8b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | llama3.1-8b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | llama3.1-8b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | llama3.1-8b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | qwen2.5-7b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | qwen2.5-7b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | chipall | qwen2.5-7b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | chipall | qwen2.5-7b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | full | gemma3-4b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | full | gemma3-4b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | full | gemma3-4b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | full | gemma3-4b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | full | gpt-6.1-terra | P0 | 16 | 8 | 16 | 16 |
+| speech_act | full | gpt-6.1-terra | P1 | 16 | 8 | 16 | 16 |
+| speech_act | full | gpt-6.1-terra | P2 | 48 | 8 | 48 | 48 |
+| speech_act | full | gpt-6.1-terra | S3 | 48 | 8 | 48 | 48 |
+| speech_act | full | llama3.1-8b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | full | llama3.1-8b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | full | llama3.1-8b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | full | llama3.1-8b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | full | qwen2.5-7b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | full | qwen2.5-7b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | full | qwen2.5-7b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | full | qwen2.5-7b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | gemma3-4b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | gemma3-4b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | gemma3-4b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | gemma3-4b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | llama3.1-8b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | llama3.1-8b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | llama3.1-8b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | llama3.1-8b | S3 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | qwen2.5-7b | P0 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | qwen2.5-7b | P1 | 16 | 8 | 16 | 16 |
+| speech_act | noncrit | qwen2.5-7b | P2 | 48 | 8 | 48 | 48 |
+| speech_act | noncrit | qwen2.5-7b | S3 | 48 | 8 | 48 | 48 |
 | time_quantity | bare | gemma3-4b | P0 | 20 | 10 | 20 | 20 |
 | time_quantity | bare | gemma3-4b | P1 | 20 | 10 | 20 | 20 |
 | time_quantity | bare | gemma3-4b | P2 | 60 | 10 | 60 | 60 |
@@ -11284,86 +11282,86 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P1 | 0.0000 | 0.5000 | 3.2000 | 19.2000 | 3.2000 | False |
 | politeness | noncrit | qwen2.5-7b | P2 | 0.0000 | 0.5000 | 3.2000 | 19.2000 | 3.2000 | False |
 | politeness | noncrit | qwen2.5-7b | S3 | 0.0000 | 0.5000 | 3.2000 | 19.2000 | 3.2000 | False |
-| speech_act | bare | gemma3-4b | P0 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gemma3-4b | P1 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gemma3-4b | P2 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gemma3-4b | S3 | 0.0000 | 0.3833 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | P0 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | P1 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | P2 | 0.0000 | 0.3333 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | gpt-6.1-terra | S3 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | llama3.1-8b | P0 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | llama3.1-8b | P1 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | llama3.1-8b | P2 | 0.0000 | 0.3833 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | llama3.1-8b | S3 | 0.0000 | 0.3000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | P0 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | P1 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | P2 | 0.0000 | 0.4000 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | bare | qwen2.5-7b | S3 | 0.0000 | 0.3500 | 2.1000 | 11.4000 | 2.1000 | True |
-| speech_act | chip1 | gemma3-4b | P0 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gemma3-4b | P1 | 1.0000 | 0.8000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gemma3-4b | P2 | 1.0000 | 0.4483 | 3.1034 | 12.5172 | 2.1034 | True |
-| speech_act | chip1 | gemma3-4b | S3 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gpt-6.1-terra | P0 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gpt-6.1-terra | P1 | 1.0000 | 0.9000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gpt-6.1-terra | P2 | 1.0000 | 0.8833 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | gpt-6.1-terra | S3 | 1.0000 | 0.8167 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | P0 | 1.0000 | 0.7000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | P1 | 1.0000 | 0.8000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | P2 | 1.0000 | 0.6500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | llama3.1-8b | S3 | 1.0000 | 0.7000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | P0 | 1.0000 | 0.8500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | P1 | 1.0000 | 0.6000 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | P2 | 1.0000 | 0.7500 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chip1 | qwen2.5-7b | S3 | 1.0000 | 0.8167 | 3.1000 | 12.4000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | P0 | 2.2000 | 0.9500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | P1 | 2.2000 | 0.8500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | P2 | 2.2000 | 0.6333 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gemma3-4b | S3 | 2.2000 | 0.9333 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gpt-6.1-terra | P0 | 2.2000 | 0.9500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gpt-6.1-terra | P1 | 2.2000 | 1.0000 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gpt-6.1-terra | P2 | 2.2000 | 0.9000 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | gpt-6.1-terra | S3 | 2.2000 | 0.9500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | llama3.1-8b | P0 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | llama3.1-8b | P1 | 2.2000 | 0.7000 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | chipall | llama3.1-8b | P2 | 2.2000 | 0.7833 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | llama3.1-8b | S3 | 2.2000 | 0.7333 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | qwen2.5-7b | P0 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | chipall | qwen2.5-7b | P1 | 2.2000 | 0.8000 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | qwen2.5-7b | P2 | 2.2000 | 0.8167 | 4.3000 | 13.6000 | 2.1000 | True |
-| speech_act | chipall | qwen2.5-7b | S3 | 2.2000 | 0.7500 | 4.3000 | 13.6000 | 2.1000 | False |
-| speech_act | full | gemma3-4b | P0 | 0.0000 | 0.9500 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gemma3-4b | P1 | 0.0000 | 0.8000 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gemma3-4b | P2 | 0.0000 | 0.5333 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gemma3-4b | S3 | 0.0000 | 0.9333 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gpt-6.1-terra | P0 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | gpt-6.1-terra | P1 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gpt-6.1-terra | P2 | 0.0000 | 0.7167 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | gpt-6.1-terra | S3 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | llama3.1-8b | P0 | 0.0000 | 0.8500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | llama3.1-8b | P1 | 0.0000 | 0.9000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | llama3.1-8b | P2 | 0.0000 | 0.6167 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | llama3.1-8b | S3 | 0.0000 | 0.8500 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | qwen2.5-7b | P0 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | qwen2.5-7b | P1 | 0.0000 | 0.9000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | full | qwen2.5-7b | P2 | 0.0000 | 0.6167 | 6.7000 | 34.9500 | 6.7000 | False |
-| speech_act | full | qwen2.5-7b | S3 | 0.0000 | 1.0000 | 6.7000 | 34.9500 | 6.7000 | True |
-| speech_act | noncrit | gemma3-4b | P0 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gemma3-4b | P1 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gemma3-4b | P2 | 0.0000 | 0.3167 | 3.1000 | 18.3000 | 3.1000 | True |
-| speech_act | noncrit | gemma3-4b | S3 | 0.0000 | 0.3000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gpt-6.1-terra | P0 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gpt-6.1-terra | P1 | 0.0000 | 0.2500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gpt-6.1-terra | P2 | 0.0000 | 0.3833 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | gpt-6.1-terra | S3 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | llama3.1-8b | P0 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | llama3.1-8b | P1 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | llama3.1-8b | P2 | 0.0000 | 0.3667 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | llama3.1-8b | S3 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | P0 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | P1 | 0.0000 | 0.3500 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | P2 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
-| speech_act | noncrit | qwen2.5-7b | S3 | 0.0000 | 0.4000 | 3.1000 | 18.3000 | 3.1000 | False |
+| speech_act | bare | gemma3-4b | P0 | 0.0000 | 0.4375 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gemma3-4b | P1 | 0.0000 | 0.4375 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gemma3-4b | P2 | 0.0000 | 0.3125 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gemma3-4b | S3 | 0.0000 | 0.4167 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gpt-6.1-terra | P0 | 0.0000 | 0.3125 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gpt-6.1-terra | P1 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gpt-6.1-terra | P2 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | gpt-6.1-terra | S3 | 0.0000 | 0.3125 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | llama3.1-8b | P0 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | llama3.1-8b | P1 | 0.0000 | 0.4375 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | llama3.1-8b | P2 | 0.0000 | 0.3958 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | llama3.1-8b | S3 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | qwen2.5-7b | P0 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | qwen2.5-7b | P1 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | qwen2.5-7b | P2 | 0.0000 | 0.4167 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | bare | qwen2.5-7b | S3 | 0.0000 | 0.3750 | 2.1250 | 11.8750 | 2.1250 | True |
+| speech_act | chip1 | gemma3-4b | P0 | 1.0000 | 0.8750 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | gemma3-4b | P1 | 1.0000 | 0.7500 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | gemma3-4b | P2 | 1.0000 | 0.4783 | 3.1304 | 13.0435 | 2.1304 | True |
+| speech_act | chip1 | gemma3-4b | S3 | 1.0000 | 0.8750 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | gpt-6.1-terra | P0 | 1.0000 | 0.8750 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | gpt-6.1-terra | P1 | 1.0000 | 0.8750 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | gpt-6.1-terra | P2 | 1.0000 | 0.9167 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | gpt-6.1-terra | S3 | 1.0000 | 0.8750 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | llama3.1-8b | P0 | 1.0000 | 0.6875 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | llama3.1-8b | P1 | 1.0000 | 0.7500 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | llama3.1-8b | P2 | 1.0000 | 0.6250 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | llama3.1-8b | S3 | 1.0000 | 0.6875 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | qwen2.5-7b | P0 | 1.0000 | 0.8125 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | qwen2.5-7b | P1 | 1.0000 | 0.5000 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | qwen2.5-7b | P2 | 1.0000 | 0.7708 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chip1 | qwen2.5-7b | S3 | 1.0000 | 0.7708 | 3.1250 | 12.8750 | 2.1250 | True |
+| speech_act | chipall | gemma3-4b | P0 | 2.0000 | 1.0000 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gemma3-4b | P1 | 2.0000 | 0.9375 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gemma3-4b | P2 | 2.0000 | 0.6250 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gemma3-4b | S3 | 2.0000 | 1.0000 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gpt-6.1-terra | P0 | 2.0000 | 1.0000 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gpt-6.1-terra | P1 | 2.0000 | 1.0000 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gpt-6.1-terra | P2 | 2.0000 | 0.9375 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | gpt-6.1-terra | S3 | 2.0000 | 1.0000 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | llama3.1-8b | P0 | 2.0000 | 0.7500 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | llama3.1-8b | P1 | 2.0000 | 0.6875 | 4.1250 | 13.8750 | 2.1250 | False |
+| speech_act | chipall | llama3.1-8b | P2 | 2.0000 | 0.7917 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | llama3.1-8b | S3 | 2.0000 | 0.7292 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | qwen2.5-7b | P0 | 2.0000 | 0.8750 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | qwen2.5-7b | P1 | 2.0000 | 0.8750 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | qwen2.5-7b | P2 | 2.0000 | 0.8333 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | chipall | qwen2.5-7b | S3 | 2.0000 | 0.8750 | 4.1250 | 13.8750 | 2.1250 | True |
+| speech_act | full | gemma3-4b | P0 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gemma3-4b | P1 | 0.0000 | 0.8750 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gemma3-4b | P2 | 0.0000 | 0.5208 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gemma3-4b | S3 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gpt-6.1-terra | P0 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gpt-6.1-terra | P1 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gpt-6.1-terra | P2 | 0.0000 | 0.6458 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | gpt-6.1-terra | S3 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | llama3.1-8b | P0 | 0.0000 | 0.9375 | 6.5625 | 34.4375 | 6.5625 | True |
+| speech_act | full | llama3.1-8b | P1 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | True |
+| speech_act | full | llama3.1-8b | P2 | 0.0000 | 0.6042 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | llama3.1-8b | S3 | 0.0000 | 0.9375 | 6.5625 | 34.4375 | 6.5625 | True |
+| speech_act | full | qwen2.5-7b | P0 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | True |
+| speech_act | full | qwen2.5-7b | P1 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | True |
+| speech_act | full | qwen2.5-7b | P2 | 0.0000 | 0.6458 | 6.5625 | 34.4375 | 6.5625 | False |
+| speech_act | full | qwen2.5-7b | S3 | 0.0000 | 1.0000 | 6.5625 | 34.4375 | 6.5625 | True |
+| speech_act | noncrit | gemma3-4b | P0 | 0.0000 | 0.3750 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | gemma3-4b | P1 | 0.0000 | 0.4375 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | gemma3-4b | P2 | 0.0000 | 0.3542 | 3.1250 | 18.7500 | 3.1250 | True |
+| speech_act | noncrit | gemma3-4b | S3 | 0.0000 | 0.3750 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | gpt-6.1-terra | P0 | 0.0000 | 0.4375 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | gpt-6.1-terra | P1 | 0.0000 | 0.3125 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | gpt-6.1-terra | P2 | 0.0000 | 0.4375 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | gpt-6.1-terra | S3 | 0.0000 | 0.3750 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | llama3.1-8b | P0 | 0.0000 | 0.5000 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | llama3.1-8b | P1 | 0.0000 | 0.4375 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | llama3.1-8b | P2 | 0.0000 | 0.3750 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | llama3.1-8b | S3 | 0.0000 | 0.5000 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | qwen2.5-7b | P0 | 0.0000 | 0.4375 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | qwen2.5-7b | P1 | 0.0000 | 0.3750 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | qwen2.5-7b | P2 | 0.0000 | 0.4167 | 3.1250 | 18.7500 | 3.1250 | False |
+| speech_act | noncrit | qwen2.5-7b | S3 | 0.0000 | 0.4375 | 3.1250 | 18.7500 | 3.1250 | False |
 | time_quantity | bare | gemma3-4b | P0 | 0.0000 | 0.0500 | 2.1000 | 12.2000 | 2.1000 | True |
 | time_quantity | bare | gemma3-4b | P1 | 0.0000 | 0.0000 | 2.1000 | 12.2000 | 2.1000 | True |
 | time_quantity | bare | gemma3-4b | P2 | 0.0000 | 0.1333 | 2.1000 | 12.2000 | 2.1000 | True |
@@ -12099,166 +12097,166 @@ Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion
 | politeness | noncrit | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
 | politeness | noncrit | qwen2.5-7b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
 | politeness | noncrit | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3000 | 0.2333 | 0.3667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gemma3-4b | S3 | critical_match | 0.3833 | 0.2500 | 0.4833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gemma3-4b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3333 | 0.2667 | 0.4000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | gpt-6.1-terra | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3000 | 0.1500 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3833 | 0.3167 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | llama3.1-8b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3500 | 0.2000 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | bare | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4483 | 0.3704 | 0.5333 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.4483 | 0.3704 | 0.5333 | 58 | 58 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P0 | constraint_preserving | 0.8500 | 0.6500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.8833 | 0.8000 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | gpt-6.1-terra | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.6500 | 0.5167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.7000 | 0.4500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.8500 | 0.7000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.6000 | 0.3000 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.7500 | 0.6667 | 0.8333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.8167 | 0.6667 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6333 | 0.5667 | 0.7167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.5500 | 0.4333 | 0.6500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | critical_match | 0.9333 | 0.8329 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P0 | constraint_preserving | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.9000 | 0.8333 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.9000 | 0.8333 | 0.9667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | gpt-6.1-terra | S3 | constraint_preserving | 0.9500 | 0.8833 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5488 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.7000 | 0.5500 | 0.8500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7833 | 0.7167 | 0.8500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.7000 | 0.6167 | 0.7833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.7333 | 0.5163 | 0.9167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8167 | 0.7500 | 0.8833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.6833 | 0.5500 | 0.8167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.7500 | 0.5500 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | critical_match | 0.9500 | 0.8500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | critical_match | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.8000 | 0.6500 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | critical_match | 0.5333 | 0.4000 | 0.6667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.3167 | 0.2000 | 0.4167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | critical_match | 0.9333 | 0.8333 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.8833 | 0.7500 | 0.9833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.7167 | 0.5667 | 0.8504 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5424 | 0.4000 | 0.6949 | 59 | 60 | 1 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9833 | 0.9500 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | critical_match | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6167 | 0.5000 | 0.7667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.4000 | 0.2833 | 0.5167 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | critical_match | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.8500 | 0.7000 | 0.9500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | critical_match | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 0.9000 | 0.7500 | 1.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6167 | 0.5167 | 0.7000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4667 | 0.3500 | 0.5833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3500 | 0.2000 | 0.4500 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3167 | 0.2500 | 0.3833 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3000 | 0.1500 | 0.4500 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gemma3-4b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.2500 | 0.1000 | 0.4000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.3833 | 0.3000 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3500 | 0.2167 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | gpt-6.1-terra | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3667 | 0.2833 | 0.4333 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | llama3.1-8b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4000 | 0.2500 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3500 | 0.2000 | 0.5000 | 20 | 20 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P1 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4000 | 0.3333 | 0.4667 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
-| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4000 | 0.2500 | 0.5000 | 60 | 60 | 0 | 10 | 10 | 2000 |
-| speech_act | noncrit | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 60 | 60 | 10 | 0 | 0 |
+| speech_act | bare | gemma3-4b | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | gemma3-4b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | gemma3-4b | P2 | critical_match | 0.3125 | 0.2500 | 0.3750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | gemma3-4b | S3 | critical_match | 0.4167 | 0.2917 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gemma3-4b | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | gpt-6.1-terra | P0 | critical_match | 0.3125 | 0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | gpt-6.1-terra | P1 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | gpt-6.1-terra | P2 | critical_match | 0.3750 | 0.3333 | 0.4172 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | gpt-6.1-terra | S3 | critical_match | 0.3125 | 0.1250 | 0.4375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | gpt-6.1-terra | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | llama3.1-8b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | llama3.1-8b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | llama3.1-8b | P2 | critical_match | 0.3958 | 0.3125 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | llama3.1-8b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | llama3.1-8b | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | qwen2.5-7b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | qwen2.5-7b | P1 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | bare | qwen2.5-7b | P2 | critical_match | 0.4167 | 0.3333 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | bare | qwen2.5-7b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | bare | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | chip1 | gemma3-4b | P0 | critical_match | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P0 | constraint_preserving | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | critical_match | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P1 | constraint_preserving | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | critical_match | 0.4783 | 0.3810 | 0.5625 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | P2 | constraint_preserving | 0.4783 | 0.3810 | 0.5625 | 46 | 46 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | critical_match | 0.8750 | 0.6250 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gemma3-4b | S3 | constraint_preserving | 0.8750 | 0.6250 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | critical_match | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P0 | constraint_preserving | 0.8750 | 0.6250 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P1 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | critical_match | 0.9167 | 0.8333 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | P2 | constraint_preserving | 0.9167 | 0.8333 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | critical_match | 0.8750 | 0.7083 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | gpt-6.1-terra | S3 | constraint_preserving | 0.8750 | 0.7083 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | critical_match | 0.6875 | 0.3750 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P0 | constraint_preserving | 0.6875 | 0.3750 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | critical_match | 0.7500 | 0.5625 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P1 | constraint_preserving | 0.7500 | 0.5625 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | critical_match | 0.6250 | 0.4792 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | P2 | constraint_preserving | 0.6250 | 0.4792 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | critical_match | 0.6875 | 0.3750 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | llama3.1-8b | S3 | constraint_preserving | 0.6875 | 0.3750 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | critical_match | 0.8125 | 0.6250 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P0 | constraint_preserving | 0.8125 | 0.6250 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | critical_match | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P1 | constraint_preserving | 0.5000 | 0.1875 | 0.8125 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | critical_match | 0.7708 | 0.6458 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | P2 | constraint_preserving | 0.7708 | 0.6458 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | critical_match | 0.7708 | 0.6042 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chip1 | qwen2.5-7b | S3 | constraint_preserving | 0.7708 | 0.6042 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P0 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | critical_match | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P1 | constraint_preserving | 0.8125 | 0.5625 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | critical_match | 0.6250 | 0.5417 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | P2 | constraint_preserving | 0.5625 | 0.4375 | 0.6875 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gemma3-4b | S3 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | critical_match | 0.9375 | 0.8750 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | P2 | constraint_preserving | 0.9375 | 0.8750 | 0.9792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | gpt-6.1-terra | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | critical_match | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P0 | constraint_preserving | 0.7500 | 0.5000 | 0.9375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | critical_match | 0.6875 | 0.5000 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P1 | constraint_preserving | 0.6875 | 0.5000 | 0.8750 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | critical_match | 0.7917 | 0.7083 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | P2 | constraint_preserving | 0.7292 | 0.6250 | 0.8333 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | critical_match | 0.7292 | 0.4792 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | llama3.1-8b | S3 | constraint_preserving | 0.7292 | 0.4792 | 0.9375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P0 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P1 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | critical_match | 0.8333 | 0.7500 | 0.9167 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | P2 | constraint_preserving | 0.7083 | 0.5417 | 0.8750 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | critical_match | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | chipall | qwen2.5-7b | S3 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P0 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | critical_match | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P1 | constraint_preserving | 0.8750 | 0.6875 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | critical_match | 0.5208 | 0.3750 | 0.6667 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | P2 | constraint_preserving | 0.3125 | 0.1875 | 0.4375 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gemma3-4b | S3 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | critical_match | 0.6458 | 0.5000 | 0.7917 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | P2 | constraint_preserving | 0.5106 | 0.3617 | 0.6596 | 47 | 48 | 1 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | gpt-6.1-terra | S3 | constraint_preserving | 0.9792 | 0.9375 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | critical_match | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P0 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | critical_match | 0.6042 | 0.4583 | 0.7708 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | P2 | constraint_preserving | 0.3958 | 0.2911 | 0.5208 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | critical_match | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | llama3.1-8b | S3 | constraint_preserving | 0.9375 | 0.8125 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P0 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | critical_match | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P1 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | critical_match | 0.6458 | 0.5625 | 0.7292 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | P2 | constraint_preserving | 0.4792 | 0.3750 | 0.5833 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | critical_match | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | full | qwen2.5-7b | S3 | constraint_preserving | 1.0000 | 1.0000 | 1.0000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | critical_match | 0.3750 | 0.1875 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | gemma3-4b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | gemma3-4b | P2 | critical_match | 0.3542 | 0.2917 | 0.4167 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | gemma3-4b | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gemma3-4b | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | critical_match | 0.3125 | 0.1250 | 0.4375 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | critical_match | 0.4375 | 0.3750 | 0.4792 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | critical_match | 0.3750 | 0.1875 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | gpt-6.1-terra | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | llama3.1-8b | P0 | critical_match | 0.5000 | 0.5000 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | llama3.1-8b | P1 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | llama3.1-8b | P2 | critical_match | 0.3750 | 0.2708 | 0.4583 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | llama3.1-8b | S3 | critical_match | 0.5000 | 0.5000 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | llama3.1-8b | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | qwen2.5-7b | P0 | critical_match | 0.4375 | 0.3125 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P0 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | qwen2.5-7b | P1 | critical_match | 0.3750 | 0.2500 | 0.5000 | 16 | 16 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P1 | constraint_preserving | NA | NA | NA | 0 | 16 | 16 | 8 | 0 | 0 |
+| speech_act | noncrit | qwen2.5-7b | P2 | critical_match | 0.4167 | 0.3333 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | P2 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
+| speech_act | noncrit | qwen2.5-7b | S3 | critical_match | 0.4375 | 0.3125 | 0.5000 | 48 | 48 | 0 | 8 | 8 | 2000 |
+| speech_act | noncrit | qwen2.5-7b | S3 | constraint_preserving | NA | NA | NA | 0 | 48 | 48 | 8 | 0 | 0 |
 | time_quantity | bare | gemma3-4b | P0 | critical_match | 0.0500 | 0.0000 | 0.1500 | 20 | 20 | 0 | 10 | 10 | 2000 |
 | time_quantity | bare | gemma3-4b | P0 | constraint_preserving | NA | NA | NA | 0 | 20 | 20 | 10 | 0 | 0 |
 | time_quantity | bare | gemma3-4b | P1 | critical_match | 0.0000 | 0.0000 | 0.0000 | 20 | 20 | 0 | 10 | 10 | 2000 |

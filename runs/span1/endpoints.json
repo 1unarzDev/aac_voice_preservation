@@ -1,76 +1,76 @@
 {
- "n_rows": 5760,
+ "n_rows": 5568,
  "n_invalid": 0,
- "n_critical_unresolved": 0,
- "n_families": 60,
+ "n_critical_unresolved": 28,
+ "n_families": 58,
  "cp1_constraint_preserving": {},
  "violation_by_dim": {},
  "speech_act_violation_primary_excl_quarantine": {},
  "speech_act_violation_quarantined_only": {},
  "cp2_commitment": {
   "gemma3-4b|I2|bare": {
-   "rate": 0.85,
-   "n": 180
+   "rate": 0.844,
+   "n": 173
   },
   "gemma3-4b|I2t|bare": {
-   "rate": 0.872,
-   "n": 180
+   "rate": 0.871,
+   "n": 171
   },
   "gemma3-4b|P2|bare": {
    "rate": 0.822,
-   "n": 180
+   "n": 174
   },
   "gemma3-4b|S3|bare": {
-   "rate": 0.844,
-   "n": 180
+   "rate": 0.839,
+   "n": 174
   },
   "gpt-6.1-terra|I2|bare": {
-   "rate": 0.828,
-   "n": 180
+   "rate": 0.822,
+   "n": 174
   },
   "gpt-6.1-terra|I2t|bare": {
-   "rate": 0.9,
-   "n": 180
+   "rate": 0.896,
+   "n": 173
   },
   "gpt-6.1-terra|P2|bare": {
-   "rate": 0.789,
-   "n": 180
+   "rate": 0.776,
+   "n": 174
   },
   "gpt-6.1-terra|S3|bare": {
-   "rate": 0.883,
-   "n": 180
+   "rate": 0.879,
+   "n": 174
   },
   "llama3.1-8b|I2|bare": {
-   "rate": 0.906,
-   "n": 180
+   "rate": 0.9,
+   "n": 170
   },
   "llama3.1-8b|I2t|bare": {
-   "rate": 0.906,
-   "n": 180
+   "rate": 0.901,
+   "n": 172
   },
   "llama3.1-8b|P2|bare": {
-   "rate": 0.867,
-   "n": 180
+   "rate": 0.862,
+   "n": 174
   },
   "llama3.1-8b|S3|bare": {
-   "rate": 0.889,
-   "n": 180
+   "rate": 0.885,
+   "n": 174
   },
   "qwen2.5-7b|I2|bare": {
-   "rate": 0.878,
-   "n": 180
+   "rate": 0.872,
+   "n": 172
   },
   "qwen2.5-7b|I2t|bare": {
-   "rate": 0.906,
-   "n": 180
+   "rate": 0.902,
+   "n": 173
   },
   "qwen2.5-7b|P2|bare": {
-   "rate": 0.872,
-   "n": 180
+   "rate": 0.862,
+   "n": 174
   },
   "qwen2.5-7b|S3|bare": {
-   "rate": 0.889,
-   "n": 180
+   "rate": 0.885,
+   "n": 174
   }
  },
  "cp2_direction_vs_50pct": {
@@ -87,10 +87,10 @@
    "share_A": 0.52
   },
   "gemma3-4b|polarity": {
-   "A": 57,
-   "B": 63,
+   "A": 60,
+   "B": 60,
    "other": 0,
-   "share_A": 0.475
+   "share_A": 0.5
   },
   "gemma3-4b|politeness": {
    "A": 59,
@@ -100,15 +100,15 @@
   },
   "gemma3-4b|speech_act": {
    "A": 40,
-   "B": 44,
-   "other": 35,
-   "share_A": 0.476
+   "B": 30,
+   "other": 26,
+   "share_A": 0.571
   },
   "gemma3-4b|time_quantity": {
-   "A": 9,
-   "B": 13,
-   "other": 16,
-   "share_A": 0.409
+   "A": 8,
+   "B": 12,
+   "other": 15,
+   "share_A": 0.4
   },
   "gpt-6.1-terra|agent": {
    "A": 25,
@@ -136,15 +136,15 @@
   },
   "gpt-6.1-terra|speech_act": {
    "A": 37,
-   "B": 37,
-   "other": 46,
-   "share_A": 0.5
+   "B": 27,
+   "other": 32,
+   "share_A": 0.578
   },
   "gpt-6.1-terra|time_quantity": {
    "A": 14,
-   "B": 19,
-   "other": 8,
-   "share_A": 0.424
+   "B": 18,
+   "other": 7,
+   "share_A": 0.438
   },
   "llama3.1-8b|agent": {
    "A": 39,
@@ -153,8 +153,8 @@
    "share_A": 0.39
   },
   "llama3.1-8b|certainty": {
-   "A": 59,
-   "B": 53,
+   "A": 58,
+   "B": 52,
    "other": 0,
    "share_A": 0.527
   },
@@ -172,15 +172,15 @@
   },
   "llama3.1-8b|speech_act": {
    "A": 47,
-   "B": 43,
-   "other": 30,
-   "share_A": 0.522
+   "B": 32,
+   "other": 17,
+   "share_A": 0.595
   },
   "llama3.1-8b|time_quantity": {
    "A": 16,
-   "B": 12,
-   "other": 23,
-   "share_A": 0.571
+   "B": 9,
+   "other": 22,
+   "share_A": 0.64
   },
   "qwen2.5-7b|agent": {
    "A": 39,
@@ -207,196 +207,663 @@
    "share_A": 0.517
   },
   "qwen2.5-7b|speech_act": {
-   "A": 46,
-   "B": 48,
-   "other": 26,
-   "share_A": 0.489
+   "A": 44,
+   "B": 31,
+   "other": 19,
+   "share_A": 0.587
   },
   "qwen2.5-7b|time_quantity": {
-   "A": 11,
+   "A": 10,
    "B": 24,
-   "other": 15,
-   "share_A": 0.314
+   "other": 14,
+   "share_A": 0.294
   }
  },
  "coverage_at_3": {
   "gemma3-4b|I2|bare": {
-   "coverage@3": 0.45,
-   "n_sets": 120
+   "coverage@3": 0.491,
+   "n_sets": 116,
+   "n_observed": 114,
+   "n_unresolved": 2
   },
   "gemma3-4b|I2t|bare": {
-   "coverage@3": 0.383,
-   "n_sets": 120
+   "coverage@3": 0.429,
+   "n_sets": 116,
+   "n_observed": 112,
+   "n_unresolved": 4
   },
   "gemma3-4b|P2|bare": {
-   "coverage@3": 0.367,
-   "n_sets": 120
+   "coverage@3": 0.397,
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "gemma3-4b|S3|bare": {
    "coverage@3": 0.017,
-   "n_sets": 120
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "gpt-6.1-terra|I2|bare": {
-   "coverage@3": 0.633,
-   "n_sets": 120
+   "coverage@3": 0.655,
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "gpt-6.1-terra|I2t|bare": {
-   "coverage@3": 0.467,
-   "n_sets": 120
+   "coverage@3": 0.491,
+   "n_sets": 116,
+   "n_observed": 114,
+   "n_unresolved": 2
   },
   "gpt-6.1-terra|P2|bare": {
-   "coverage@3": 0.467,
-   "n_sets": 120
+   "coverage@3": 0.483,
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "gpt-6.1-terra|S3|bare": {
-   "coverage@3": 0.1,
-   "n_sets": 120
+   "coverage@3": 0.103,
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "llama3.1-8b|I2|bare": {
-   "coverage@3": 0.433,
-   "n_sets": 120
+   "coverage@3": 0.464,
+   "n_sets": 116,
+   "n_observed": 112,
+   "n_unresolved": 4
   },
   "llama3.1-8b|I2t|bare": {
-   "coverage@3": 0.35,
-   "n_sets": 120
+   "coverage@3": 0.375,
+   "n_sets": 116,
+   "n_observed": 112,
+   "n_unresolved": 4
   },
   "llama3.1-8b|P2|bare": {
-   "coverage@3": 0.25,
-   "n_sets": 120
+   "coverage@3": 0.259,
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "llama3.1-8b|S3|bare": {
    "coverage@3": 0.017,
-   "n_sets": 120
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "qwen2.5-7b|I2|bare": {
-   "coverage@3": 0.417,
-   "n_sets": 120
+   "coverage@3": 0.446,
+   "n_sets": 116,
+   "n_observed": 112,
+   "n_unresolved": 4
   },
   "qwen2.5-7b|I2t|bare": {
-   "coverage@3": 0.333,
-   "n_sets": 120
+   "coverage@3": 0.351,
+   "n_sets": 116,
+   "n_observed": 114,
+   "n_unresolved": 2
   },
   "qwen2.5-7b|P2|bare": {
-   "coverage@3": 0.2,
-   "n_sets": 120
+   "coverage@3": 0.207,
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   },
   "qwen2.5-7b|S3|bare": {
    "coverage@3": 0.017,
-   "n_sets": 120
+   "n_sets": 116,
+   "n_observed": 116,
+   "n_unresolved": 0
   }
  },
  "stance_additions": {
   "gemma3-4b|I2": {
-   "any_stance_addition": 0.778,
-   "politeness_added": 0.1,
-   "hedge_added": 0.242,
+   "any_stance_addition": 0.773,
+   "politeness_added": 0.098,
+   "hedge_added": 0.244,
    "emphatic_added": 0.0,
-   "added_content": 0.644
+   "added_content": 0.649
   },
   "gemma3-4b|I2t": {
-   "any_stance_addition": 0.736,
-   "politeness_added": 0.083,
-   "hedge_added": 0.294,
+   "any_stance_addition": 0.73,
+   "politeness_added": 0.08,
+   "hedge_added": 0.299,
    "emphatic_added": 0.0,
-   "added_content": 0.694
+   "added_content": 0.69
   },
   "gemma3-4b|P2": {
-   "any_stance_addition": 0.675,
-   "politeness_added": 0.283,
-   "hedge_added": 0.028,
+   "any_stance_addition": 0.667,
+   "politeness_added": 0.282,
+   "hedge_added": 0.029,
    "emphatic_added": 0.0,
-   "added_content": 0.711
+   "added_content": 0.718
   },
   "gemma3-4b|S3": {
-   "any_stance_addition": 0.408,
-   "politeness_added": 0.225,
+   "any_stance_addition": 0.397,
+   "politeness_added": 0.227,
    "hedge_added": 0.0,
    "emphatic_added": 0.0,
-   "added_content": 0.178
+   "added_content": 0.184
   },
   "gpt-6.1-terra|I2": {
-   "any_stance_addition": 0.703,
-   "politeness_added": 0.061,
-   "hedge_added": 0.3,
+   "any_stance_addition": 0.693,
+   "politeness_added": 0.063,
+   "hedge_added": 0.299,
    "emphatic_added": 0.0,
-   "added_content": 0.278
+   "added_content": 0.27
   },
   "gpt-6.1-terra|I2t": {
-   "any_stance_addition": 0.656,
-   "politeness_added": 0.042,
-   "hedge_added": 0.286,
+   "any_stance_addition": 0.644,
+   "politeness_added": 0.043,
+   "hedge_added": 0.284,
    "emphatic_added": 0.0,
-   "added_content": 0.222
+   "added_content": 0.213
   },
   "gpt-6.1-terra|P2": {
-   "any_stance_addition": 0.597,
-   "politeness_added": 0.122,
+   "any_stance_addition": 0.586,
+   "politeness_added": 0.121,
    "hedge_added": 0.006,
    "emphatic_added": 0.0,
-   "added_content": 0.278
+   "added_content": 0.27
   },
   "gpt-6.1-terra|S3": {
-   "any_stance_addition": 0.292,
-   "politeness_added": 0.05,
+   "any_stance_addition": 0.276,
+   "politeness_added": 0.052,
    "hedge_added": 0.0,
    "emphatic_added": 0.0,
-   "added_content": 0.161
+   "added_content": 0.149
   },
   "llama3.1-8b|I2": {
-   "any_stance_addition": 0.706,
+   "any_stance_addition": 0.695,
    "politeness_added": 0.003,
-   "hedge_added": 0.3,
+   "hedge_added": 0.299,
    "emphatic_added": 0.0,
-   "added_content": 0.328
+   "added_content": 0.339
   },
   "llama3.1-8b|I2t": {
-   "any_stance_addition": 0.689,
+   "any_stance_addition": 0.678,
    "politeness_added": 0.003,
-   "hedge_added": 0.308,
+   "hedge_added": 0.307,
    "emphatic_added": 0.0,
-   "added_content": 0.267
+   "added_content": 0.276
   },
   "llama3.1-8b|P2": {
-   "any_stance_addition": 0.583,
-   "politeness_added": 0.072,
-   "hedge_added": 0.008,
+   "any_stance_addition": 0.569,
+   "politeness_added": 0.075,
+   "hedge_added": 0.009,
    "emphatic_added": 0.006,
-   "added_content": 0.356
+   "added_content": 0.368
   },
   "llama3.1-8b|S3": {
-   "any_stance_addition": 0.342,
-   "politeness_added": 0.036,
+   "any_stance_addition": 0.328,
+   "politeness_added": 0.037,
    "hedge_added": 0.006,
    "emphatic_added": 0.0,
-   "added_content": 0.217
+   "added_content": 0.218
   },
   "qwen2.5-7b|I2": {
-   "any_stance_addition": 0.747,
-   "politeness_added": 0.014,
-   "hedge_added": 0.297,
+   "any_stance_addition": 0.741,
+   "politeness_added": 0.009,
+   "hedge_added": 0.302,
    "emphatic_added": 0.017,
-   "added_content": 0.689
+   "added_content": 0.695
   },
   "qwen2.5-7b|I2t": {
-   "any_stance_addition": 0.694,
+   "any_stance_addition": 0.69,
    "politeness_added": 0.0,
-   "hedge_added": 0.3,
+   "hedge_added": 0.299,
    "emphatic_added": 0.011,
-   "added_content": 0.656
+   "added_content": 0.661
   },
   "qwen2.5-7b|P2": {
-   "any_stance_addition": 0.578,
-   "politeness_added": 0.05,
+   "any_stance_addition": 0.566,
+   "politeness_added": 0.046,
    "hedge_added": 0.017,
    "emphatic_added": 0.017,
-   "added_content": 0.717
+   "added_content": 0.724
   },
   "qwen2.5-7b|S3": {
-   "any_stance_addition": 0.347,
-   "politeness_added": 0.069,
+   "any_stance_addition": 0.333,
+   "politeness_added": 0.072,
    "hedge_added": 0.0,
    "emphatic_added": 0.0,
-   "added_content": 0.306
+   "added_content": 0.316
+  }
+ },
+ "population": "primary: excludes refusal/acceptance families (D-024)",
+ "sensitivity_including_quarantine": {
+  "n_rows": 5760,
+  "n_invalid": 0,
+  "n_critical_unresolved": 28,
+  "n_families": 60,
+  "cp1_constraint_preserving": {},
+  "violation_by_dim": {},
+  "speech_act_violation_primary_excl_quarantine": {},
+  "speech_act_violation_quarantined_only": {},
+  "cp2_commitment": {
+   "gemma3-4b|I2|bare": {
+    "rate": 0.849,
+    "n": 179
+   },
+   "gemma3-4b|I2t|bare": {
+    "rate": 0.876,
+    "n": 177
+   },
+   "gemma3-4b|P2|bare": {
+    "rate": 0.822,
+    "n": 180
+   },
+   "gemma3-4b|S3|bare": {
+    "rate": 0.844,
+    "n": 180
+   },
+   "gpt-6.1-terra|I2|bare": {
+    "rate": 0.828,
+    "n": 180
+   },
+   "gpt-6.1-terra|I2t|bare": {
+    "rate": 0.899,
+    "n": 179
+   },
+   "gpt-6.1-terra|P2|bare": {
+    "rate": 0.783,
+    "n": 180
+   },
+   "gpt-6.1-terra|S3|bare": {
+    "rate": 0.883,
+    "n": 180
+   },
+   "llama3.1-8b|I2|bare": {
+    "rate": 0.903,
+    "n": 176
+   },
+   "llama3.1-8b|I2t|bare": {
+    "rate": 0.904,
+    "n": 178
+   },
+   "llama3.1-8b|P2|bare": {
+    "rate": 0.867,
+    "n": 180
+   },
+   "llama3.1-8b|S3|bare": {
+    "rate": 0.889,
+    "n": 180
+   },
+   "qwen2.5-7b|I2|bare": {
+    "rate": 0.876,
+    "n": 178
+   },
+   "qwen2.5-7b|I2t|bare": {
+    "rate": 0.905,
+    "n": 179
+   },
+   "qwen2.5-7b|P2|bare": {
+    "rate": 0.867,
+    "n": 180
+   },
+   "qwen2.5-7b|S3|bare": {
+    "rate": 0.889,
+    "n": 180
+   }
+  },
+  "cp2_direction_vs_50pct": {
+   "gemma3-4b|agent": {
+    "A": 37,
+    "B": 53,
+    "other": 25,
+    "share_A": 0.411
+   },
+   "gemma3-4b|certainty": {
+    "A": 51,
+    "B": 47,
+    "other": 0,
+    "share_A": 0.52
+   },
+   "gemma3-4b|polarity": {
+    "A": 60,
+    "B": 60,
+    "other": 0,
+    "share_A": 0.5
+   },
+   "gemma3-4b|politeness": {
+    "A": 59,
+    "B": 61,
+    "other": 0,
+    "share_A": 0.492
+   },
+   "gemma3-4b|speech_act": {
+    "A": 40,
+    "B": 44,
+    "other": 35,
+    "share_A": 0.476
+   },
+   "gemma3-4b|time_quantity": {
+    "A": 8,
+    "B": 12,
+    "other": 15,
+    "share_A": 0.4
+   },
+   "gpt-6.1-terra|agent": {
+    "A": 25,
+    "B": 70,
+    "other": 21,
+    "share_A": 0.263
+   },
+   "gpt-6.1-terra|certainty": {
+    "A": 49,
+    "B": 46,
+    "other": 0,
+    "share_A": 0.516
+   },
+   "gpt-6.1-terra|polarity": {
+    "A": 57,
+    "B": 63,
+    "other": 0,
+    "share_A": 0.475
+   },
+   "gpt-6.1-terra|politeness": {
+    "A": 57,
+    "B": 63,
+    "other": 0,
+    "share_A": 0.475
+   },
+   "gpt-6.1-terra|speech_act": {
+    "A": 37,
+    "B": 37,
+    "other": 46,
+    "share_A": 0.5
+   },
+   "gpt-6.1-terra|time_quantity": {
+    "A": 14,
+    "B": 18,
+    "other": 7,
+    "share_A": 0.438
+   },
+   "llama3.1-8b|agent": {
+    "A": 39,
+    "B": 61,
+    "other": 19,
+    "share_A": 0.39
+   },
+   "llama3.1-8b|certainty": {
+    "A": 58,
+    "B": 52,
+    "other": 0,
+    "share_A": 0.527
+   },
+   "llama3.1-8b|polarity": {
+    "A": 59,
+    "B": 61,
+    "other": 0,
+    "share_A": 0.492
+   },
+   "llama3.1-8b|politeness": {
+    "A": 55,
+    "B": 65,
+    "other": 0,
+    "share_A": 0.458
+   },
+   "llama3.1-8b|speech_act": {
+    "A": 47,
+    "B": 43,
+    "other": 30,
+    "share_A": 0.522
+   },
+   "llama3.1-8b|time_quantity": {
+    "A": 16,
+    "B": 9,
+    "other": 22,
+    "share_A": 0.64
+   },
+   "qwen2.5-7b|agent": {
+    "A": 39,
+    "B": 51,
+    "other": 28,
+    "share_A": 0.433
+   },
+   "qwen2.5-7b|certainty": {
+    "A": 63,
+    "B": 47,
+    "other": 0,
+    "share_A": 0.573
+   },
+   "qwen2.5-7b|polarity": {
+    "A": 59,
+    "B": 61,
+    "other": 0,
+    "share_A": 0.492
+   },
+   "qwen2.5-7b|politeness": {
+    "A": 62,
+    "B": 58,
+    "other": 0,
+    "share_A": 0.517
+   },
+   "qwen2.5-7b|speech_act": {
+    "A": 44,
+    "B": 48,
+    "other": 26,
+    "share_A": 0.478
+   },
+   "qwen2.5-7b|time_quantity": {
+    "A": 10,
+    "B": 24,
+    "other": 14,
+    "share_A": 0.294
+   }
+  },
+  "coverage_at_3": {
+   "gemma3-4b|I2|bare": {
+    "coverage@3": 0.475,
+    "n_sets": 120,
+    "n_observed": 118,
+    "n_unresolved": 2
+   },
+   "gemma3-4b|I2t|bare": {
+    "coverage@3": 0.414,
+    "n_sets": 120,
+    "n_observed": 116,
+    "n_unresolved": 4
+   },
+   "gemma3-4b|P2|bare": {
+    "coverage@3": 0.383,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "gemma3-4b|S3|bare": {
+    "coverage@3": 0.017,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "gpt-6.1-terra|I2|bare": {
+    "coverage@3": 0.633,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "gpt-6.1-terra|I2t|bare": {
+    "coverage@3": 0.475,
+    "n_sets": 120,
+    "n_observed": 118,
+    "n_unresolved": 2
+   },
+   "gpt-6.1-terra|P2|bare": {
+    "coverage@3": 0.467,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "gpt-6.1-terra|S3|bare": {
+    "coverage@3": 0.1,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "llama3.1-8b|I2|bare": {
+    "coverage@3": 0.448,
+    "n_sets": 120,
+    "n_observed": 116,
+    "n_unresolved": 4
+   },
+   "llama3.1-8b|I2t|bare": {
+    "coverage@3": 0.362,
+    "n_sets": 120,
+    "n_observed": 116,
+    "n_unresolved": 4
+   },
+   "llama3.1-8b|P2|bare": {
+    "coverage@3": 0.25,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "llama3.1-8b|S3|bare": {
+    "coverage@3": 0.017,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "qwen2.5-7b|I2|bare": {
+    "coverage@3": 0.431,
+    "n_sets": 120,
+    "n_observed": 116,
+    "n_unresolved": 4
+   },
+   "qwen2.5-7b|I2t|bare": {
+    "coverage@3": 0.339,
+    "n_sets": 120,
+    "n_observed": 118,
+    "n_unresolved": 2
+   },
+   "qwen2.5-7b|P2|bare": {
+    "coverage@3": 0.2,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   },
+   "qwen2.5-7b|S3|bare": {
+    "coverage@3": 0.017,
+    "n_sets": 120,
+    "n_observed": 120,
+    "n_unresolved": 0
+   }
+  },
+  "stance_additions": {
+   "gemma3-4b|I2": {
+    "any_stance_addition": 0.778,
+    "politeness_added": 0.1,
+    "hedge_added": 0.242,
+    "emphatic_added": 0.0,
+    "added_content": 0.644
+   },
+   "gemma3-4b|I2t": {
+    "any_stance_addition": 0.736,
+    "politeness_added": 0.083,
+    "hedge_added": 0.294,
+    "emphatic_added": 0.0,
+    "added_content": 0.694
+   },
+   "gemma3-4b|P2": {
+    "any_stance_addition": 0.675,
+    "politeness_added": 0.283,
+    "hedge_added": 0.028,
+    "emphatic_added": 0.0,
+    "added_content": 0.711
+   },
+   "gemma3-4b|S3": {
+    "any_stance_addition": 0.408,
+    "politeness_added": 0.225,
+    "hedge_added": 0.0,
+    "emphatic_added": 0.0,
+    "added_content": 0.178
+   },
+   "gpt-6.1-terra|I2": {
+    "any_stance_addition": 0.703,
+    "politeness_added": 0.061,
+    "hedge_added": 0.3,
+    "emphatic_added": 0.0,
+    "added_content": 0.278
+   },
+   "gpt-6.1-terra|I2t": {
+    "any_stance_addition": 0.656,
+    "politeness_added": 0.042,
+    "hedge_added": 0.286,
+    "emphatic_added": 0.0,
+    "added_content": 0.222
+   },
+   "gpt-6.1-terra|P2": {
+    "any_stance_addition": 0.597,
+    "politeness_added": 0.122,
+    "hedge_added": 0.006,
+    "emphatic_added": 0.0,
+    "added_content": 0.278
+   },
+   "gpt-6.1-terra|S3": {
+    "any_stance_addition": 0.292,
+    "politeness_added": 0.05,
+    "hedge_added": 0.0,
+    "emphatic_added": 0.0,
+    "added_content": 0.161
+   },
+   "llama3.1-8b|I2": {
+    "any_stance_addition": 0.706,
+    "politeness_added": 0.003,
+    "hedge_added": 0.3,
+    "emphatic_added": 0.0,
+    "added_content": 0.328
+   },
+   "llama3.1-8b|I2t": {
+    "any_stance_addition": 0.689,
+    "politeness_added": 0.003,
+    "hedge_added": 0.308,
+    "emphatic_added": 0.0,
+    "added_content": 0.267
+   },
+   "llama3.1-8b|P2": {
+    "any_stance_addition": 0.583,
+    "politeness_added": 0.072,
+    "hedge_added": 0.008,
+    "emphatic_added": 0.006,
+    "added_content": 0.356
+   },
+   "llama3.1-8b|S3": {
+    "any_stance_addition": 0.342,
+    "politeness_added": 0.036,
+    "hedge_added": 0.006,
+    "emphatic_added": 0.0,
+    "added_content": 0.217
+   },
+   "qwen2.5-7b|I2": {
+    "any_stance_addition": 0.747,
+    "politeness_added": 0.014,
+    "hedge_added": 0.297,
+    "emphatic_added": 0.017,
+    "added_content": 0.689
+   },
+   "qwen2.5-7b|I2t": {
+    "any_stance_addition": 0.694,
+    "politeness_added": 0.0,
+    "hedge_added": 0.3,
+    "emphatic_added": 0.011,
+    "added_content": 0.656
+   },
+   "qwen2.5-7b|P2": {
+    "any_stance_addition": 0.578,
+    "politeness_added": 0.05,
+    "hedge_added": 0.017,
+    "emphatic_added": 0.017,
+    "added_content": 0.717
+   },
+   "qwen2.5-7b|S3": {
+    "any_stance_addition": 0.347,
+    "politeness_added": 0.069,
+    "hedge_added": 0.0,
+    "emphatic_added": 0.0,
+    "added_content": 0.306
+   }
   }
  }
 }

@@ -24,19 +24,19 @@ def inventory():
         for pattern in ("scored*.parquet", "judgments.jsonl", "arbiter.jsonl", "outputs.jsonl",
                         "generations.jsonl", "config.json", "endpoints.json", "judge_report.json"):
             paths.update((ROOT / "runs" / run).glob(pattern))
-    for pattern in ("src/**/*.py", "src/**/*.sh", "prompts/*", "data/items/*.jsonl",
+    for pattern in ("src/**/*.py", "src/**/*.sh", "tests/**/*.py", "prompts/*", "data/items/*.jsonl",
                     "annotation/*.md", "annotation/*.json", "annotation/*.jsonl", "annotation/*.csv",
-                    "annotation/returns*/*.csv", "paper/figs/*", "paper/se4all/*.py",
+                    "annotation/returns*/*.csv", "paper/figs/**/*", "paper/se4all/*.py",
                     "paper/se4all/*macros*", "paper/se4all/*examples*", "paper/se4all/*numbers*",
                     "orchestration/BRIEF.md", "orchestration/decision_log.md",
                     "orchestration/claims_ledger.md", "ideas/cycles/c1/decision.md"):
         paths.update(p for p in ROOT.glob(pattern) if p.is_file() and "__pycache__" not in p.parts
                      and not p.name.startswith("wb_"))
-    for directory in ("main1", "pilot", "oracle", "interventions"):
+    for directory in ("main1", "main1_quarantine_inclusive", "pilot", "oracle", "interventions"):
         paths.update(p for p in (ROOT / "analysis" / directory).rglob("*") if p.is_file())
-    for name in ("reconciliation.md", "reconciliation.json", "changed_endpoints.csv",
+    for name in ("EVIDENCE_MANIFEST_prev.json", "reconciliation.md", "reconciliation.json", "changed_endpoints.csv",
                  "changed_labels.csv", "label_resolution_summary.json", "refresh_commands.json",
-                 "refresh_evidence.sh", "verify_reconciliation.json"):
+                 "label_sensitivity.csv", "verify_reconciliation.json"):
         p = ROOT / "analysis" / name
         if p.exists():
             paths.add(p)

@@ -1,0 +1,79 @@
+{
+  "run_summary": [
+    {
+      "run": "pilot1",
+      "rows": 7680,
+      "critical_changed": 0,
+      "unresolved": 0
+    },
+    {
+      "run": "main1",
+      "rows": 19198,
+      "critical_changed": 0,
+      "unresolved": 0
+    },
+    {
+      "run": "guard1",
+      "rows": 7200,
+      "critical_changed": 21,
+      "unresolved": 0
+    },
+    {
+      "run": "span1",
+      "rows": 5760,
+      "critical_changed": 38,
+      "unresolved": 28
+    },
+    {
+      "run": "expB1",
+      "rows": 1792,
+      "critical_changed": 0,
+      "unresolved": 0
+    },
+    {
+      "run": "expC1",
+      "rows": 2048,
+      "critical_changed": 0,
+      "unresolved": 0
+    }
+  ],
+  "changed_endpoint_fields": 14581,
+  "changed_label_fields": 297,
+  "claims": [
+    {
+      "id": "C7",
+      "estimate": "gemma3-4b: additions 6/10 = 60.00%, removals 0/10 = 0.00%; gpt-6.1-terra: additions 2/10 = 20.00%, removals 0/10 = 0.00%; llama3.1-8b: additions 1/10 = 10.00%, removals 1/10 = 10.00%; qwen2.5-7b: additions 0/10 = 0.00%, removals 1/10 = 10.00%",
+      "status": "politeness family denominators corrected to 10/model/direction; machine-scored"
+    },
+    {
+      "id": "C8",
+      "estimate": "polarity affirmative: 40/40 = 100.00%; certainty plain assertion: 36/40 = 90.00%; agent speaker: 27/40 = 67.50%",
+      "status": "primary 58-family pool; these dimension-specific results unchanged"
+    },
+    {
+      "id": "C11",
+      "estimate": "question: 22/28 = 78.57%; request/command: 6/8 = 75.00%",
+      "status": "8 speech-act families, primary excludes act-10/act-16; automated provisional"
+    },
+    {
+      "id": "C13",
+      "estimate": "Guard fixes 63/80 = 78.75% [68.35, 88.89] (n=80); strict pass 94.25% [91.88, 96.34] (n=1392) -> 98.78% [97.92, 99.50] (n=1392); already-correct changed (all channels) 2.27% [1.10, 3.60] (n=2154); pass->fail 0.00% [0.00, 0.00] (n=2154); cost 0.104 calls/input, 0.172 s/input. Inclusive sensitivity fix 72.04% [59.61, 84.21] (n=93)",
+      "status": "primary 58 families; predicate repair, fluency unassessed; human gate pending"
+    },
+    {
+      "id": "C14",
+      "estimate": "polarity+certainty S3: 1.25% [0.00, 3.75] (n=80); polarity+certainty P2: 18.75% [10.00, 28.75] (n=80); polarity+certainty I2: 97.50% [93.75, 100.00] (n=80); paired I2-P2 all dimensions 17.62 pp [3.96, 31.58] (n=227); speech-act delta -25.81 pp [-40.62, -9.68] (n=31); politeness delta -35.00 pp [-57.50, -15.00] (n=40). Inclusive all-dim delta 17.02 pp [4.21, 30.25] (n=235)",
+      "status": "primary 58 families; unresolved sets excluded and paired denominators retained; machine-scored"
+    },
+    {
+      "id": "C15",
+      "estimate": "TP=77, FP=19, FN=3, TN=1293; precision 0.8021, recall 0.9625, kappa 0.867",
+      "status": "primary 58 families; monitor/evaluator dependence caveat retained"
+    },
+    {
+      "id": "C16",
+      "estimate": "Identity 0/120 false alarms; scoped mutations 120/120 detected; new mutants 22/24, controls 0/24 false alarms; primary panel Violation flips 2/99 units, 1.37% design-weighted. Exact-copy full-mode baseline 120/120 partial-contract passes (116/116 outside quarantine)",
+      "status": "oracle diagnostics include quarantine to expose failure envelope; model endpoints exclude quarantine; machine panel != human validation"
+    }
+  ]
+}
