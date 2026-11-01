@@ -246,6 +246,17 @@ def panel():
                      "challenge acc (n)": f"{mc.get('acc')} ({mc.get('n')})" if mc else ""})
     w("### 4a. Judge (final) vs panel majority, sampled items\n")
     table(rows, list(rows[0]))
+    S = json.loads((ROOT / "annotation/judge_validation_main1_sens_sol_astra.json").read_text())["panel"]
+    w("Sensitivity: the reference is gpt-5.6-sol + gpt-6-astra only (both must agree). gpt-6-luna is dropped because "
+      "its core file gave 28 critical answers that are not options of the item (dropped as invalid above) and has "
+      "low agreement with every other rater on general dims (core file only, see 4b).\n")
+    rows = []
+    for d in DIMS:
+        m, m2 = P["judge"][d].get("sampled/final", {}), S["judge"][d].get("sampled/final", {})
+        rows.append({"dimension": d, "3-member majority: n / kappa / kappa_w": f"{m.get('n')} / {m.get('kappa')} / {m.get('kappa_w')}",
+                     "sol+astra agree: n / kappa / kappa_w": f"{m2.get('n')} / {m2.get('kappa')} {m2.get('kappa_ci')} / {m2.get('kappa_w')}",
+                     "sol~astra alpha": S["alpha_nominal"][d]["alpha"]})
+    table(rows, list(rows[0]))
     w("### 4b. Pairwise raw agreement / Cohen kappa (sampled items)\n")
     pairs = sorted({k.split("|")[0] for d in DIMS for k in P["pairwise"][d] if k.endswith("|sampled")})
     rows = []
@@ -307,10 +318,10 @@ def panel():
 
 # ------------------------------------------------------------------- verdicts
 
-def verdicts():
+def verdicts(tag="", title="panel majority (3 members)"):
     items = runio.load_items(ROOT / "data/items/test.jsonl")
     key = {r["item_id"]: r for r in csv.DictReader(open(ROOT / "annotation/gold_key_main1.csv"))}
-    maj = {r["item_id"]: r for r in csv.DictReader(open(ROOT / "annotation/panel_majority_main1.csv"))}
+    maj = {r["item_id"]: r for r in csv.DictReader(open(ROOT / f"annotation/panel_majority_main1{tag}.csv"))}
     sc = pd.read_parquet(ROOT / "runs/main1/scored.parquet")
     sc = sc[sc.judged]
     by = defaultdict(list)
@@ -340,8 +351,8 @@ def verdicts():
                 rec[f"judge_{v}"], rec[f"panel_{v}"], rec[f"panel_strict_{v}"] = vj[v], vp[v], vps[v]
             recs.append(rec)
     df = pd.DataFrame(recs)
-    df.to_csv(OUT / "verdict_validation.csv", index=False)
-    w("## 5. Contract-verdict validation (gold items, main1)\n")
+    df.to_csv(OUT / f"verdict_validation{tag}.csv", index=False)
+    w(f"### Reference: {title}\n")
     w("Each sampled gold unit (text, family, visible input) maps to one or more scored occurrences in "
       "runs/main1/scored.parquet: different variants share bare/noncrit inputs, and models and prompts can produce "
       "the same text. For every occurrence I recomputed Violation (cue channels), Assumption (bare/noncrit) and "
@@ -393,10 +404,50 @@ def main():
     chl = list(L); L.clear()
     P = panel()
     pl = list(L); L.clear()
-    vd = verdicts()
+    w("## 5. Contract-verdict validation (gold items, main1)\n")
+    verdicts()
+    verdicts("_sens_sol_astra", "gpt-5.6-sol + gpt-6-astra agreement (sensitivity)")
     vl = list(L); L.clear()
-    (OUT / "sections.json").write_text(json.dumps({"injection": inj, "challenges": chl, "panel": pl, "verdicts": vl}))
-    print("\n".join(inj + chl + pl + vl))
+    intro = (OUT / "report_intro.md").read_text() if (OUT / "report_intro.md").exists() else ""
+    outro = (OUT / "report_outro.md").read_text() if (OUT / "report_outro.md").exists() else ""
+    quar = quarantine()
+    (OUT / "report.md").write_text("\n".join([intro] + inj + chl + pl + vl + quar + [outro]) + "\n")
+    print("\n".join(inj + chl + pl + vl + quar))
+
+
+def quarantine():
+    t = pd.read_csv(ROOT / "analysis/main1/sensitivity_quarantine_refusal_acceptance.csv")
+    raw = pd.read_parquet(ROOT / "runs/main1/scored_raw_oracle.parquet")
+    out = ["## 6. Refusal/acceptance quarantine\n",
+           "src/attribute.py now writes `quarantine_refusal_acceptance` (True for every row of a speech-act family "
+           "with a refusal or acceptance variant: act-10, act-16 in main1). runs/main1/scored.parquet was regenerated; "
+           "all 60 pre-existing columns are byte-identical. src/analyze.py writes "
+           "analysis/main1/sensitivity_quarantine_refusal_acceptance.csv. All 17 pre-existing analysis/main1 CSVs "
+           "reproduce byte-for-byte. The primary speech-act estimate is `primary_excl_quarantine` (8 families).\n",
+           "P0 speech-act critical match / constraint_preserving (pooled over 4 models; mean of model estimates):\n"]
+    q = t[(t.prompt_id == "P0")]
+    rows = []
+    for ch in ["bare", "noncrit", "chip1", "chipall", "full"]:
+        r = {"channel": ch}
+        for sub in ["all_speech_act_families", "primary_excl_quarantine", "quarantined_only"]:
+            for met in ["critical_match", "constraint_preserving"]:
+                x = q[(q.channel == ch) & (q.subset == sub) & (q.metric == met)].estimate
+                if x.notna().any():
+                    r[f"{sub} {met}"] = f"{x.mean():.3f}"
+        rows.append(r)
+    cols = ["channel"] + [c for c in rows[-1] if c != "channel"]
+    out.append("| " + " | ".join(cols) + " |")
+    out.append("|" + "---|" * len(cols))
+    for r in rows:
+        out.append("| " + " | ".join(r.get(c, "") for c in cols) + " |")
+    rq = raw[raw.family_id.isin(["act-10", "act-16"]) & (raw.prompt_id == "P0") & raw.channel.isin(["full"])]
+    pq = pd.read_parquet(ROOT / "runs/main1/scored.parquet")
+    pq = pq[pq.family_id.isin(["act-10", "act-16"]) & (pq.prompt_id == "P0") & pq.channel.isin(["full"])]
+    out.append("")
+    out.append(f"Quarantined families, P0 full channel, critical match: production (relaxed) "
+               f"{int(pq.critical_match.sum())}/{len(pq)}, raw oracle {int(rq.critical_match.sum())}/{len(rq)}. "
+               "These numbers are sensitivity-only and cannot carry a headline.\n")
+    return out
 
 
 if __name__ == "__main__":

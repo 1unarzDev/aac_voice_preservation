@@ -1,20 +1,20 @@
 {
   "run_id": "r2d1",
-  "created_utc": "2026-11-01T02:57:11+00:00",
+  "created_utc": "2026-11-01T03:01:21+00:00",
   "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/r2d.jsonl",
   "requests_sha256": "c161f004181e215df0534ea97e0a254ea8111150320c0b157b1c034d32bd5bd1",
   "n_requests": 2880,
-  "wall_s": 139.7,
+  "wall_s": 242.0,
   "models": {
-    "llama3.1-8b": {
-      "name": "llama3.1-8b",
-      "base_url": "http://127.0.0.1:8092/v1",
-      "model": "llama3.1-8b",
+    "gemma3-4b": {
+      "name": "gemma3-4b",
+      "base_url": "http://127.0.0.1:8093/v1",
+      "model": "gemma3-4b",
       "kind": "local",
       "role": "under_test",
       "quant": "Q4_K_M",
-      "gguf": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
-      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
+      "gguf": "google_gemma-3-4b-it-Q4_K_M.gguf",
+      "sha256": "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94",
       "concurrency": 8,
       "supports_seed": true
     }
@@ -74,24 +74,24 @@
   "seed_base": 1000,
   "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
   "retries": 5,
-  "code_sha256": "7404da4635491247804367cc983737dc9f387b9720e032cb362bc31a9fb5d9b2",
+  "code_sha256": "7d903a7ee95ebeec9ff5560f1c884d04dabcf1deebce2402cf1fc341be1d0e91",
   "python": "3.12.15",
   "httpx": "0.28.1",
   "throughput": {
-    "llama3.1-8b": {
+    "gemma3-4b": {
       "requests": 2880,
       "cached": 0,
       "errors": 0,
       "fresh_requests": 2880,
-      "active_s": 139.7,
-      "requests_per_min": 1237.2,
-      "outputs_per_min": 1237.2,
-      "completion_tok_per_s": 144.4,
+      "active_s": 241.9,
+      "requests_per_min": 714.4,
+      "outputs_per_min": 714.4,
+      "completion_tok_per_s": 87.7,
       "concurrency": 4
     }
   },
   "parse_failures": {},
   "finish_reasons": {
-    "llama3.1-8b:stop": 2880
+    "gemma3-4b:stop": 2880
   }
 }

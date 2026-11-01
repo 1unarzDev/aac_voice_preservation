@@ -93,6 +93,12 @@ def load():
     panel = {p["id"]: p for p in map(json.loads, (ROOT / "annotation/wb_admissibility/panel.jsonl").open())}
     sc = pd.read_parquet(ROOT / "runs/wb1/scored.parquet")
     sc = sc[sc["family_id"].isin(items)].copy()
+    fbp = ROOT / "runs/wb1/scored_fallbackJ1.parquet"
+    if fbp.exists():   # attribute.py --fallback J1, copied aside (sensitivity)
+        fb = pd.read_parquet(fbp)[["output_id", "family_id", "channel", "critical_match"]]
+        fb = fb.dropna(subset=["output_id"]).drop_duplicates(["output_id", "family_id", "channel"])
+        sc = sc.merge(fb.rename(columns={"critical_match": "critical_match_fb"}),
+                      on=["output_id", "family_id", "channel"], how="left")
     sc["msg"] = sc["family_id"]
     sc["sample"] = sc["family_id"].map(lambda f: items[f]["sample"])
     sc["stratum"] = sc["family_id"].map(lambda f: items[f]["stratum"])
@@ -112,6 +118,7 @@ def long_dims(sc, items, panel):
             src = e["source_value"]
             rows.append(dict(msg=r.family_id, sample=r.sample, stratum=r.stratum, model=r.model,
                              channel=r.channel, valid=r.valid, dim=d, status=e["status"],
+                             status_strict=e.get("status_strict"),
                              src=src, out=out, focal=it["focal_dim"] == d,
                              admissible_union=set(e["values_1"]) | set(e["values_2"]),
                              expressible=src is not None and src not in NONCOMMIT))
@@ -229,6 +236,28 @@ def main() -> int:
         ex = Bv[(Bv["sample"] == samp) & (Bv["violation"] == True)]  # noqa: E712
         vc = ex.groupby(["channel", "dim", "src", "out"]).size().rename("n").reset_index().sort_values("n", ascending=False)
         md += [f"Most frequent violation patterns ({samp}):", "", vc.head(12).to_markdown(index=False), ""]
+
+    # ---------- sensitivity: strict (likely-only) admissibility from the graded pass p1g
+    if L["status_strict"].notna().any():
+        md += ["## Sensitivity: strict admissibility (graded pass p1g, only 'likely' readings count)", "",
+               "Same estimands as A and B(POS-cap4) with the panel status recomputed from a separate graded "
+               "source-blind pass in which each reading is tagged likely/possible (declared after the primary "
+               "pass showed near-ceiling ambiguity, before any judged output was inspected).", ""]
+        st2 = (L.drop_duplicates(["msg", "dim"]).groupby(["sample", "dim", "status_strict"]).size()
+               .unstack(fill_value=0))
+        md += [st2.to_markdown(), ""]
+        md += ["| sample | dim | A: eligible msgs | A: takes default | A: honours source | B: POS-cap4 supplied violation |",
+               "|---|---|---|---|---|---|"]
+        for samp in ("random", "enriched"):
+            for d in DIMS + ["ALL"]:
+                sel = (L["sample"] == samp) & (L["channel"] == "pos_cap4") & ((L["dim"] == d) if d != "ALL" else True)
+                a_ = L[sel & (L["status_strict"] == "confirmed_ambiguous")]
+                b_ = L[sel & (L["status_strict"] == "supplied") & L["expressible"]]
+                ra, rh, rb = boot(a_, "takes_default"), boot(a_, "honour"), boot(b_, "violation")
+                md.append(f"| {samp} | {d} | {a_['msg'].nunique()} | {fmt(ra)} | {fmt(rh)} | {fmt(rb)} |")
+                for name, v in (("takes_default", ra), ("honour", rh), ("violation_pos_cap4", rb)):
+                    csv.append(dict(analysis="S_strict", sample=samp, dim=d, model="pooled", metric=name, **v))
+        md.append("")
 
     # ---------- C. restoration
     md += ["## C. Focal-cue restoration effect (critical question = focal dimension)", "",

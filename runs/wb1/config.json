@@ -1,23 +1,11 @@
 {
   "run_id": "wb1",
-  "created_utc": "2026-11-01T02:48:15+00:00",
-  "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/wb1_base.jsonl",
-  "requests_sha256": "d25eed5a4eb4b9594903f4f3341ca10fb9fc4d0ef1cd9a000cbd4a1fe0673409",
-  "n_requests": 1272,
-  "wall_s": 0.1,
+  "created_utc": "2026-11-01T03:11:15+00:00",
+  "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/wb1.jsonl",
+  "requests_sha256": "a6e157aa5bcd380e3525fdc3480e4899a1b1a64dcaf3b7ef20da0380b11feb17",
+  "n_requests": 453,
+  "wall_s": 678.9,
   "models": {
-    "gemma3-4b": {
-      "name": "gemma3-4b",
-      "base_url": "http://127.0.0.1:8093/v1",
-      "model": "gemma3-4b",
-      "kind": "local",
-      "role": "under_test",
-      "quant": "Q4_K_M",
-      "gguf": "google_gemma-3-4b-it-Q4_K_M.gguf",
-      "sha256": "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94",
-      "concurrency": 8,
-      "supports_seed": true
-    },
     "gpt-6.1-terra": {
       "name": "gpt-6.1-terra",
       "base_url": "https://codex.lunarz.dev/v1",
@@ -29,30 +17,6 @@
       "sha256": null,
       "concurrency": 16,
       "supports_seed": false
-    },
-    "llama3.1-8b": {
-      "name": "llama3.1-8b",
-      "base_url": "http://127.0.0.1:8092/v1",
-      "model": "llama3.1-8b",
-      "kind": "local",
-      "role": "under_test",
-      "quant": "Q4_K_M",
-      "gguf": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
-      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
-      "concurrency": 8,
-      "supports_seed": true
-    },
-    "qwen2.5-7b": {
-      "name": "qwen2.5-7b",
-      "base_url": "http://127.0.0.1:8091/v1",
-      "model": "qwen2.5-7b",
-      "kind": "local",
-      "role": "under_test",
-      "quant": "Q4_K_M",
-      "gguf": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
-      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
-      "concurrency": 8,
-      "supports_seed": true
     }
   },
   "prompts": {
@@ -110,62 +74,24 @@
   "seed_base": 1000,
   "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
   "retries": 5,
-  "code_sha256": "1e74e7b1a1cb202194c4e866000a024f268f8f69d3636fe7069c81c927846f31",
+  "code_sha256": "c1e02de7494c48beab9b938e140826766388628a5d5d9b6cb3d189c8042149e4",
   "python": "3.12.15",
   "httpx": "0.28.1",
   "throughput": {
-    "qwen2.5-7b": {
-      "requests": 318,
-      "cached": 318,
-      "errors": 0,
-      "fresh_requests": 0,
-      "active_s": 0.0,
-      "requests_per_min": null,
-      "outputs_per_min": null,
-      "completion_tok_per_s": null,
-      "concurrency": 1
-    },
-    "llama3.1-8b": {
-      "requests": 318,
-      "cached": 318,
-      "errors": 0,
-      "fresh_requests": 0,
-      "active_s": 0.0,
-      "requests_per_min": null,
-      "outputs_per_min": null,
-      "completion_tok_per_s": null,
-      "concurrency": 1
-    },
-    "gemma3-4b": {
-      "requests": 318,
-      "cached": 318,
-      "errors": 0,
-      "fresh_requests": 0,
-      "active_s": 0.0,
-      "requests_per_min": null,
-      "outputs_per_min": null,
-      "completion_tok_per_s": null,
-      "concurrency": 1
-    },
     "gpt-6.1-terra": {
-      "requests": 318,
+      "requests": 453,
       "cached": 318,
       "errors": 0,
-      "fresh_requests": 0,
-      "active_s": 0.0,
-      "requests_per_min": null,
-      "outputs_per_min": null,
-      "completion_tok_per_s": null,
-      "concurrency": 16
+      "fresh_requests": 135,
+      "active_s": 678.7,
+      "requests_per_min": 11.9,
+      "outputs_per_min": 11.9,
+      "completion_tok_per_s": 2.5,
+      "concurrency": 8
     }
   },
-  "parse_failures": {
-    "llama3.1-8b": 1
-  },
+  "parse_failures": {},
   "finish_reasons": {
-    "qwen2.5-7b:stop": 318,
-    "llama3.1-8b:stop": 318,
-    "gemma3-4b:stop": 318,
-    "gpt-6.1-terra:stop": 318
+    "gpt-6.1-terra:stop": 453
   }
 }
