@@ -1,18 +1,16 @@
 %% main.tex -- SE4All @ ICSE 2027, regular paper (<= 8 pages INCLUDING references; IEEEtran, 10pt,
-%% single-blind). Venue facts and quotes: VENUE.md. Revision spec: ideas/cycles/c3/decision.md
-%% ("Specific paper edits -> SE4All", ACTION 4); change log: REVISION_NOTES.md.
+%% single-blind).
 %% Conventions:
 %%  * One sentence per line.
 %%  * Every number comes from results_macros.tex via \RES{key}; regenerate with
 %%    `python paper/se4all/make_macros.py` (repo root, venv active). Never type a result by hand.
 %%    Design constants that are not results (e.g. "five channels", "10,000 resamples") are typed.
-%%  * Example strings (Figs. 1, 2, 5) come from ideas/cycles/c3/story_evidence.v2.json and
+%%  * Example strings (Figs. 1, 2, 5) come from analysis/examples/story_evidence.v2.json and
 %%    paper/figs/example_manifest.json and are re-read from runs/*/outputs.jsonl by make_macros.py
 %%    (gallery_table.tex, checker_table.tex, guard_table.tex). Inputs are shown verbatim, wrappers included.
 %%  * \pending{...} remains ONLY for author, ethics and AI-disclosure facts the authors must supply.
 %%
-%% !! GenAI: this draft was produced by an AI writing agent. IEEE requires disclosure of
-%% !! AI-generated text in the Acknowledgment, naming the system and the sections (VENUE.md).
+%% !! IEEE requires disclosure of AI-generated text in the Acknowledgment, naming the system and the sections.
 \documentclass[conference,10pt]{IEEEtran}
 \IEEEoverridecommandlockouts
 \usepackage[T1]{fontenc}
@@ -86,7 +84,7 @@ People who use AAC often compose a message by selecting a few words or symbols, 
     \csname @@input\endcsname gallery_table.tex
     \bottomrule
   \end{tabularx}
-  \caption{Selected stored counterexamples, verbatim: each input is the exact string sent to the model, including its \texttt{Keywords:} or \texttt{The user typed:} wrapper. All are constructed test items, not messages from AAC users. Card~1 is the first bare negated polarity target in family, variant and fixed model order; cards 2 and 3 have the minimum SHA-256 over the stored event key among plain$\to$polite additions and among question-cue failures. Selection is conditioned on the displayed event, so the examples are not typical; the right column gives the rate in each stratum. The hidden source was not visible to the model. Rules, model, family and output IDs: \texttt{ideas/cycles/c3/story\_evidence.v2.json}.}
+  \caption{Selected stored counterexamples, verbatim: each input is the exact string sent to the model, including its \texttt{Keywords:} or \texttt{The user typed:} wrapper. All are constructed test items, not messages from AAC users. Card~1 is the first bare negated polarity target in family, variant and fixed model order; cards 2 and 3 have the minimum SHA-256 over the stored event key among plain$\to$polite additions and among question-cue failures. Selection is conditioned on the displayed event, so the examples are not typical; the right column gives the rate in each stratum. The hidden source was not visible to the model. Rules, model, family and output IDs: \texttt{analysis/examples/story\_evidence.v2.json}.}
   \label{fig:gallery}
 \end{figure*}
 LLM keyword expansion turns such a selection into a sentence~\cite{shen2022kwickchat,cai2024speakfaster}; some systems also let the person send a sentence directly~\cite{tang2026throat}.

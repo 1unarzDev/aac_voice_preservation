@@ -1,4 +1,4 @@
-"""W-A oracle validation (PREREG_R2): identity + scoped-mutation injection, challenge judging.
+"""W-A oracle validation (round-2 protocol): identity + scoped-mutation injection, challenge judging.
 
   python src/oracle_wa.py prepare      # build runs/oracle_inject and runs/oracle_challenges
   python src/oracle_wa.py judge        # production judge (J1+J2, layer0 tiebreak), concurrency 8
@@ -102,7 +102,7 @@ def arbiter_todo() -> None:
 # ------------------------------------------------------------------ contract verdicts
 
 def crit_match(dim, value, label, raw=False):
-    """labels.critical_match; raw=True reproduces ORACLE_RAW=1 (no D-015 acceptance relaxation)."""
+    """labels.critical_match; raw=True reproduces ORACLE_RAW=1 (no acceptance~statement relaxation)."""
     from labels import EMPH, PLAIN_A, critical_match
     if label is None:
         return None

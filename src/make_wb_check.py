@@ -1,7 +1,7 @@
 """Part 6 W-B corpus check: embed the 20 W-B audit messages in the offline two-pass tool.
 
-Spec: orchestration/PREREG_R2.md W-B ("coders see the compressed input first ... humans
-audit 20"); ideas/cycles/c2/decision.md action 3. 0 generation, 0 judge calls.
+Spec: round-2 protocol, W-B ("coders see the compressed input first ... humans
+audit 20"). 0 generation, 0 judge calls.
 
 Sample: the 20 messages already frozen in annotation/wb_audit.json by
 `src/wb_admissibility.py audit` (random.Random(20261108).sample(panel, 20) over all 160

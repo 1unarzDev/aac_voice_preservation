@@ -1,4 +1,4 @@
-"""Deterministic attribution (SPEC "Deterministic attribution" + "Endpoints", D-007).
+"""Deterministic attribution (SPEC "Deterministic attribution" + "Endpoints").
 
 Joins occurrences (explode.py outputs.jsonl), non-completions (generations.jsonl),
 judgments.jsonl, an optional arbiter.jsonl and the item specs. No model is called here:
@@ -7,7 +7,7 @@ the item spec and the channel.
 
 Per occurrence (one row per generation x suggestion x target in scored.parquet):
   cue_in_input       channel in {chip1, chipall, full}
-  critical_match     extracted critical honours the variant value (D-007: on certainty,
+  critical_match     extracted critical honours the variant value (on certainty,
                      plain OR emphatic honour 'plain assertion')
   violation          cue_in_input & valid & critical known & not critical_match
   assumption         channel in {bare, noncrit} & valid & critical committed (not unclear)
@@ -19,16 +19,16 @@ Per occurrence (one row per generation x suggestion x target in scored.parquet):
   politeness_added / hedge_added / emphatic_added   directed stance additions
   constraint_preserving  (co-primary 1, cue channels) valid & critical_match &
                      no contra_<d>; non-completion = False; unknown critical = NA
-Custom channels (D-012, families with `custom_channels`, Exp B/C): the channel's
+Custom channels (families with `custom_channels`, Exp B/C): the channel's
 `commitments` (build_requests.custom_spec) replace the chip1/chipall lookup;
 cue_in_input = the variant's critical chips are among them, otherwise the channel
 is ambiguous for the critical dimension and scored as Assumption. Standard items
 are scored exactly as before.
-  quarantine_refusal_acceptance  (PREREG_R2 W-A) True for every row of a speech-act
+  quarantine_refusal_acceptance  (round-2 W-A) True for every row of a speech-act
                      family with a refusal or acceptance variant. These families are
                      excluded from primary speech-act estimates until the symmetric
                      refusal/acceptance predicates pass independent checks; report them
-                     as sensitivity only (D-015 acceptance~statement relaxation).
+                     as sensitivity only (acceptance~statement relaxation).
 Critical label source: J1==J2 agreement, else arbiter.jsonl, else (with
 --fallback J1|J2) that variant, else NA (row excluded from rates; counted).
 With --resolution, the supplied cross-run (text_id, input_text, dimension) table
@@ -58,7 +58,7 @@ QUARANTINE_ACTS = {"refusal", "acceptance"}
 
 
 def quarantined(item: dict) -> bool:
-    """PREREG_R2: refusal/acceptance families are quarantined from primary speech-act estimates."""
+    """Round-2 protocol: refusal/acceptance families are quarantined from primary speech-act estimates."""
     return item["dimension"] == "speech_act" and any(
         v["critical_value"] in QUARANTINE_ACTS for v in item["variants"].values())
 AMBIG_CHANNELS = {"bare", "noncrit"}
@@ -112,7 +112,7 @@ def score(run_dir: Path, items_path=None, fallback: str | None = None,
             if key in resolved:
                 raise ValueError(f"Duplicate resolution key: {key}")
             resolved[key] = entry
-    # layer0 on the SOURCE sentences: reference for 'emphatic added' (D-007)
+    # layer0 on the SOURCE sentences: reference for 'emphatic added'
     srcs = sorted({v["source"] for it in items.values() for v in it["variants"].values()})
     src_l0 = dict(zip(srcs, layer0.label_many(srcs)))
 

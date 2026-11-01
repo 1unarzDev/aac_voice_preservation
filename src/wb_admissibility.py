@@ -1,4 +1,4 @@
-"""W-B source-blind admissibility coding by the codex annotator panel (PREREG_R2 W-B).
+"""W-B source-blind admissibility coding by the codex annotator panel (round-2 W-B).
 
 Two independent codex models code every message in two SEPARATE calls:
   pass 1 (source-blind): coder sees ONLY the POS-cap4 keywords. Per dimension it lists every

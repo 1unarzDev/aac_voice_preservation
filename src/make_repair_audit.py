@@ -1,6 +1,6 @@
 """Part 4 repair audit: freeze the hash-ordered sample and embed it in the offline tool.
 
-Spec: ideas/cycles/c1/decision.md action 7. 0 generation, 0 judge calls.
+0 generation, 0 judge calls.
 
 Units (one per distinct text, text_id = explode.py's sha1 of the normalised text; each
 text_id in guard1 belongs to exactly one visible input):

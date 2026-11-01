@@ -51,7 +51,7 @@ BATCH = 25
 CONCURRENCY = 16
 MAX_TRIES = 5
 
-# Critical-dimension questions, mirrored in annotation/CODEBOOK.md (decision_log D-007).
+# Critical-dimension questions, mirrored in annotation/CODEBOOK.md.
 CRITICAL_Q = {
     "polarity": "Is the main thing the sentence says negated (not/never/no/don't) or "
                 "affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
@@ -482,7 +482,7 @@ def main() -> int:
     ap.add_argument("--variants", default="J1,J2")
     ap.add_argument("--report-only", action="store_true")
     ap.add_argument("--concurrency", type=int, default=16,
-                    help="max in-flight judge calls (default 16; D-019: <=8 when the endpoint is shared)")
+                    help="max in-flight judge calls (default 16; <=8 when the endpoint is shared)")
     ap.add_argument("--gold", type=Path, default=None, help="optional hand labels to score")
     a = ap.parse_args()
     run_dir = Path(a.run) if Path(a.run).exists() else ROOT / "runs" / a.run

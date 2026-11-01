@@ -112,7 +112,7 @@ def main():
                     sensitivities.append(dict(run=run, population=population, source=source, dimension=dim,
                         prompt_id=prompt, channel=channel, k=int(values.sum()), n=len(values),
                         n_missing=len(g)-len(values), rate=float(values.mean()) if len(values) else None))
-            # Raw D-015 predicate, evaluated on the same authoritative labels.
+            # Raw (unrelaxed) predicate, evaluated on the same authoritative labels.
             raw = df.copy()
             raw["match"] = [None if pd.isna(c) else (c in {"plain assertion", "strongly certain/emphatic"}
                               if d == "certainty" and v == "plain assertion" else c == v)
@@ -209,10 +209,11 @@ def main():
     for cid, estimate, status in entries:
         evidence = "analysis/oracle/report.md" if cid == "C16" else "analysis/interventions/report.md" if cid in ['C13','C14','C15'] else "runs/main1/scored.parquet; analysis/label_sensitivity.csv"
         ledger_rows.append(f"| {cid} | Refreshed ACTION 2: {cid} evidence and status | {evidence}; analysis/reconciliation.md | {estimate} | **refreshed**; {status} |")
+    # Optional internal claims ledger (not part of the public release); skipped when absent.
     ledger = ROOT / "orchestration/claims_ledger.md"
-    existing = ledger.read_text()
+    existing = ledger.read_text() if ledger.exists() else None
     marker = "<!-- ACTION2_REFRESHED -->"
-    if marker not in existing:
+    if existing is not None and marker not in existing:
         with ledger.open("a") as fh:
             fh.write("\n" + marker + "\n\nEarlier rows above retain their historical estimates/statuses. "
                      "The following entries supersede them for the reconciled snapshot; 'refreshed' does not mean human-validated.\n\n"

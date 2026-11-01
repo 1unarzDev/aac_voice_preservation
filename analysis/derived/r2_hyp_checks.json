@@ -1,0 +1,1257 @@
+{
+  "seed": 20261101,
+  "n_boot": 10000,
+  "inputs": {
+    "data/items/r2_c1.jsonl": "3ca2e1a6109abd423981ca15263d47165d4648fe12b42adf1a3402cc911f6061",
+    "data/items/r2_c2.jsonl": "457eea54566154bc33f1fbab88245d704cbb4693d6ba887691a1a4dd32578821",
+    "runs/r2c1/scored.parquet": "e6b3f157be563bca85742175d7aba9c4bb879a8b16341933ec4ed8e16fd032a6",
+    "runs/r2c1/outputs.jsonl": "b62d4935ae8387c6af13dc4c0852401c1ff5e32abdae482c916b5ec0d8011390",
+    "analysis/r2d/transitions.parquet": "50142375f8b684f05ee0a98304f1e2d62d5279b661c3dcc9dc80715348378981",
+    "runs/r2d1/scored.parquet": "52b772982d0d053742162006d5445aba7aedfea00be98f2ec06a704febb55066",
+    "runs/r2d1/outputs.jsonl": "aa09dbe0493d41a5171ad96d21c76e8399ceff1fcc592a8dbe7893bc925998ea",
+    "data/items/wb.jsonl": "2205171a2bb2444bb16668bedd4fa92611caba8318c1a2a695af45a1a56a0e91",
+    "runs/wb1/scored.parquet": "fc2bc22cf6e88d87242d6bf14e57e3522f97d0a61512441246da853cc2194dfb",
+    "analysis/wb/long_dims.csv.gz": "77605ca468041dcdcba9cd49a966176117632e08d5b415ad8871e568a02d9c05",
+    "runs/wb1/outputs.jsonl": "c1e1e0ec7c49ce2f0cbc33bf71bb2f0a0ca374a537443e92cf87532d34dfcfeb",
+    "analysis/r2c/h1_eligibility.csv": "fb8fafc23d3ab2ece376ca4e95628256238adf7c08d4451be4d5210efb29a9f2",
+    "annotation/judge_validation_main1.json": "77a0dd8ba8f97806ff9e7e678734be91f7ed33b45204d19b83024b502280dad1",
+    "analysis/oracle/human_gate.log": "5acc0840326d6dc8705a59ef84d44a19a69d56e0bbdfba35eeb07239d4b4833e"
+  },
+  "results": {
+    "H1/chip1": {
+      "P0": {
+        "k": 223.0,
+        "n": 1844,
+        "clusters": 210,
+        "estimate": 0.12093275488069415,
+        "lo": 0.09751842648965722,
+        "hi": 0.1448171631390137
+      },
+      "P2": {
+        "k": 713.0,
+        "n": 1844,
+        "clusters": 210,
+        "estimate": 0.3866594360086768,
+        "lo": 0.3546824873749136,
+        "hi": 0.41887093496818817
+      },
+      "S3": {
+        "k": 238.0,
+        "n": 1844,
+        "clusters": 210,
+        "estimate": 0.12906724511930587,
+        "lo": 0.10361044851284805,
+        "hi": 0.15595375113779122
+      },
+      "P2_minus_S3": {
+        "estimate": 0.2575921908893709,
+        "lo": 0.2368715083798883,
+        "hi": 0.27881630377590133,
+        "clusters": 210,
+        "n_boot_valid": 10000
+      },
+      "P2_minus_P0": {
+        "estimate": 0.26572668112798264,
+        "lo": 0.24436725479209287,
+        "hi": 0.2872292665692953,
+        "clusters": 210,
+        "n_boot_valid": 10000
+      },
+      "available_targets": 1904,
+      "by_dimension": {
+        "polarity": {
+          "P0": {
+            "k": 5.0,
+            "n": 631,
+            "clusters": 79,
+            "estimate": 0.00792393026941363,
+            "lo": 0.001564945226917058,
+            "hi": 0.01729559748427673
+          },
+          "P2": {
+            "k": 131.0,
+            "n": 631,
+            "clusters": 79,
+            "estimate": 0.2076069730586371,
+            "lo": 0.18210850081000698,
+            "hi": 0.23407895267274043
+          },
+          "S3": {
+            "k": 8.0,
+            "n": 631,
+            "clusters": 79,
+            "estimate": 0.012678288431061807,
+            "lo": 0.0046801872074883,
+            "hi": 0.022508038585209004
+          }
+        },
+        "politeness": {
+          "P0": {
+            "k": 66.0,
+            "n": 625,
+            "clusters": 80,
+            "estimate": 0.1056,
+            "lo": 0.0861244019138756,
+            "hi": 0.12580645161290321
+          },
+          "P2": {
+            "k": 242.0,
+            "n": 625,
+            "clusters": 80,
+            "estimate": 0.3872,
+            "lo": 0.3536977491961415,
+            "hi": 0.42038216560509556
+          },
+          "S3": {
+            "k": 68.0,
+            "n": 625,
+            "clusters": 80,
+            "estimate": 0.1088,
+            "lo": 0.08917197452229299,
+            "hi": 0.1296
+          }
+        },
+        "speech_act": {
+          "P0": {
+            "k": 152.0,
+            "n": 588,
+            "clusters": 55,
+            "estimate": 0.2585034013605442,
+            "lo": 0.21503391410569628,
+            "hi": 0.30114583972039977
+          },
+          "P2": {
+            "k": 340.0,
+            "n": 588,
+            "clusters": 55,
+            "estimate": 0.5782312925170068,
+            "lo": 0.5311933702534157,
+            "hi": 0.6195657291410791
+          },
+          "S3": {
+            "k": 162.0,
+            "n": 588,
+            "clusters": 55,
+            "estimate": 0.2755102040816326,
+            "lo": 0.22813521446201054,
+            "hi": 0.32203465227094513
+          }
+        }
+      },
+      "by_model": {
+        "gemma3-4b": {
+          "P2": {
+            "k": 316.0,
+            "n": 453,
+            "clusters": 208,
+            "estimate": 0.6975717439293598,
+            "lo": 0.6551724137931034,
+            "hi": 0.7377784552845528
+          },
+          "S3": {
+            "k": 84.0,
+            "n": 453,
+            "clusters": 208,
+            "estimate": 0.18543046357615894,
+            "lo": 0.15098258816803675,
+            "hi": 0.21951219512195122
+          },
+          "delta": {
+            "estimate": 0.5121412803532008,
+            "lo": 0.466824508985218,
+            "hi": 0.5566610645405915,
+            "clusters": 208,
+            "n_boot_valid": 10000
+          }
+        },
+        "gpt-6.1-terra": {
+          "P2": {
+            "k": 49.0,
+            "n": 475,
+            "clusters": 210,
+            "estimate": 0.1031578947368421,
+            "lo": 0.07531268277320377,
+            "hi": 0.1314294950738916
+          },
+          "S3": {
+            "k": 19.0,
+            "n": 475,
+            "clusters": 210,
+            "estimate": 0.04,
+            "lo": 0.02159827213822894,
+            "hi": 0.059324131565698913
+          },
+          "delta": {
+            "estimate": 0.06315789473684211,
+            "lo": 0.03887479518879869,
+            "hi": 0.08952046535879554,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "llama3.1-8b": {
+          "P2": {
+            "k": 216.0,
+            "n": 464,
+            "clusters": 210,
+            "estimate": 0.46551724137931033,
+            "lo": 0.4035476718403548,
+            "hi": 0.5271170095934796
+          },
+          "S3": {
+            "k": 79.0,
+            "n": 464,
+            "clusters": 210,
+            "estimate": 0.17025862068965517,
+            "lo": 0.13033472232556986,
+            "hi": 0.21106910684002259
+          },
+          "delta": {
+            "estimate": 0.29525862068965514,
+            "lo": 0.24728850325379612,
+            "hi": 0.34334863527279613,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "qwen2.5-7b": {
+          "P2": {
+            "k": 132.0,
+            "n": 452,
+            "clusters": 210,
+            "estimate": 0.2920353982300885,
+            "lo": 0.24941176470588236,
+            "hi": 0.33469451398022826
+          },
+          "S3": {
+            "k": 56.0,
+            "n": 452,
+            "clusters": 210,
+            "estimate": 0.12389380530973451,
+            "lo": 0.08388138090560537,
+            "hi": 0.1680855649303008
+          },
+          "delta": {
+            "estimate": 0.168141592920354,
+            "lo": 0.12184599926927293,
+            "hi": 0.21551819923371648,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        }
+      }
+    },
+    "H1/chipall": {
+      "P0": {
+        "k": 245.0,
+        "n": 1854,
+        "clusters": 210,
+        "estimate": 0.13214670981661272,
+        "lo": 0.10951307449566378,
+        "hi": 0.15549899779013382
+      },
+      "P2": {
+        "k": 694.0,
+        "n": 1854,
+        "clusters": 210,
+        "estimate": 0.3743257820927724,
+        "lo": 0.3492998722709504,
+        "hi": 0.4007372301211164
+      },
+      "S3": {
+        "k": 268.0,
+        "n": 1854,
+        "clusters": 210,
+        "estimate": 0.14455231930960086,
+        "lo": 0.12134825263236178,
+        "hi": 0.16876839085399042
+      },
+      "P2_minus_S3": {
+        "estimate": 0.22977346278317154,
+        "lo": 0.21377386051241393,
+        "hi": 0.24640887151284743,
+        "clusters": 210,
+        "n_boot_valid": 10000
+      },
+      "P2_minus_P0": {
+        "estimate": 0.24217907227615967,
+        "lo": 0.22633940582497974,
+        "hi": 0.2589815225567535,
+        "clusters": 210,
+        "n_boot_valid": 10000
+      },
+      "available_targets": 1904,
+      "by_dimension": {
+        "polarity": {
+          "P0": {
+            "k": 23.0,
+            "n": 633,
+            "clusters": 79,
+            "estimate": 0.036334913112164295,
+            "lo": 0.0218408736349454,
+            "hi": 0.0528
+          },
+          "P2": {
+            "k": 158.0,
+            "n": 633,
+            "clusters": 79,
+            "estimate": 0.24960505529225907,
+            "lo": 0.2272,
+            "hi": 0.272
+          },
+          "S3": {
+            "k": 32.0,
+            "n": 633,
+            "clusters": 79,
+            "estimate": 0.05055292259083728,
+            "lo": 0.03379416282642089,
+            "hi": 0.06929133858267716
+          }
+        },
+        "politeness": {
+          "P0": {
+            "k": 81.0,
+            "n": 634,
+            "clusters": 80,
+            "estimate": 0.1277602523659306,
+            "lo": 0.11755485893416928,
+            "hi": 0.1383147853736089
+          },
+          "P2": {
+            "k": 237.0,
+            "n": 634,
+            "clusters": 80,
+            "estimate": 0.37381703470031546,
+            "lo": 0.34488188976377954,
+            "hi": 0.40378624124216994
+          },
+          "S3": {
+            "k": 84.0,
+            "n": 634,
+            "clusters": 80,
+            "estimate": 0.13249211356466878,
+            "lo": 0.12321788987396654,
+            "hi": 0.14240506329113925
+          }
+        },
+        "speech_act": {
+          "P0": {
+            "k": 141.0,
+            "n": 587,
+            "clusters": 55,
+            "estimate": 0.2402044293015332,
+            "lo": 0.18525519848771266,
+            "hi": 0.29037527398911334
+          },
+          "P2": {
+            "k": 299.0,
+            "n": 587,
+            "clusters": 55,
+            "estimate": 0.5093696763202725,
+            "lo": 0.454706775363969,
+            "hi": 0.5628936023991004
+          },
+          "S3": {
+            "k": 152.0,
+            "n": 587,
+            "clusters": 55,
+            "estimate": 0.25894378194207834,
+            "lo": 0.2020490409216617,
+            "hi": 0.31170573600766444
+          }
+        }
+      },
+      "by_model": {
+        "gemma3-4b": {
+          "P2": {
+            "k": 300.0,
+            "n": 463,
+            "clusters": 210,
+            "estimate": 0.6479481641468683,
+            "lo": 0.6136852799518363,
+            "hi": 0.6826381900065416
+          },
+          "S3": {
+            "k": 124.0,
+            "n": 463,
+            "clusters": 210,
+            "estimate": 0.2678185745140389,
+            "lo": 0.23175631111578424,
+            "hi": 0.3031688804554079
+          },
+          "delta": {
+            "estimate": 0.3801295896328294,
+            "lo": 0.3418798449612403,
+            "hi": 0.41832877694243936,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "gpt-6.1-terra": {
+          "P2": {
+            "k": 41.0,
+            "n": 473,
+            "clusters": 210,
+            "estimate": 0.08668076109936575,
+            "lo": 0.0603448275862069,
+            "hi": 0.11496746203904555
+          },
+          "S3": {
+            "k": 17.0,
+            "n": 473,
+            "clusters": 210,
+            "estimate": 0.035940803382663845,
+            "lo": 0.016985138004246284,
+            "hi": 0.0574468085106383
+          },
+          "delta": {
+            "estimate": 0.0507399577167019,
+            "lo": 0.031914893617021274,
+            "hi": 0.07143212155637597,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "llama3.1-8b": {
+          "P2": {
+            "k": 191.0,
+            "n": 459,
+            "clusters": 210,
+            "estimate": 0.41612200435729846,
+            "lo": 0.3658510802867014,
+            "hi": 0.4678111587982833
+          },
+          "S3": {
+            "k": 99.0,
+            "n": 459,
+            "clusters": 210,
+            "estimate": 0.21568627450980393,
+            "lo": 0.16431841046277668,
+            "hi": 0.268344961676482
+          },
+          "delta": {
+            "estimate": 0.20043572984749453,
+            "lo": 0.16176386841752646,
+            "hi": 0.2416869715650203,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "qwen2.5-7b": {
+          "P2": {
+            "k": 162.0,
+            "n": 459,
+            "clusters": 210,
+            "estimate": 0.35294117647058826,
+            "lo": 0.31521739130434784,
+            "hi": 0.3920017621145374
+          },
+          "S3": {
+            "k": 28.0,
+            "n": 459,
+            "clusters": 210,
+            "estimate": 0.06100217864923747,
+            "lo": 0.03325942350332594,
+            "hi": 0.0944125381428465
+          },
+          "delta": {
+            "estimate": 0.2919389978213508,
+            "lo": 0.2505542018956653,
+            "hi": 0.3325942350332594,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        }
+      }
+    },
+    "H1/full": {
+      "P0": {
+        "k": 38.0,
+        "n": 1850,
+        "clusters": 210,
+        "estimate": 0.02054054054054054,
+        "lo": 0.014084125967928785,
+        "hi": 0.027593269082176283
+      },
+      "P2": {
+        "k": 1161.0,
+        "n": 1850,
+        "clusters": 210,
+        "estimate": 0.6275675675675676,
+        "lo": 0.598882365937569,
+        "hi": 0.6553288858047083
+      },
+      "S3": {
+        "k": 50.0,
+        "n": 1850,
+        "clusters": 210,
+        "estimate": 0.02702702702702703,
+        "lo": 0.019401330376940133,
+        "hi": 0.035434568038150135
+      },
+      "P2_minus_S3": {
+        "estimate": 0.6005405405405406,
+        "lo": 0.5731089167184383,
+        "hi": 0.6269578819049811,
+        "clusters": 210,
+        "n_boot_valid": 10000
+      },
+      "P2_minus_P0": {
+        "estimate": 0.607027027027027,
+        "lo": 0.5793561641497854,
+        "hi": 0.6341207349081365,
+        "clusters": 210,
+        "n_boot_valid": 10000
+      },
+      "available_targets": 1904,
+      "by_dimension": {
+        "polarity": {
+          "P0": {
+            "k": 1.0,
+            "n": 622,
+            "clusters": 79,
+            "estimate": 0.001607717041800643,
+            "lo": 0.0,
+            "hi": 0.004909983633387889
+          },
+          "P2": {
+            "k": 303.0,
+            "n": 622,
+            "clusters": 79,
+            "estimate": 0.4871382636655949,
+            "lo": 0.4473673547726691,
+            "hi": 0.528
+          },
+          "S3": {
+            "k": 3.0,
+            "n": 622,
+            "clusters": 79,
+            "estimate": 0.00482315112540193,
+            "lo": 0.0,
+            "hi": 0.011217948717948718
+          }
+        },
+        "politeness": {
+          "P0": {
+            "k": 32.0,
+            "n": 628,
+            "clusters": 80,
+            "estimate": 0.050955414012738856,
+            "lo": 0.03508771929824561,
+            "hi": 0.06782334384858044
+          },
+          "P2": {
+            "k": 444.0,
+            "n": 628,
+            "clusters": 80,
+            "estimate": 0.7070063694267515,
+            "lo": 0.6751592356687898,
+            "hi": 0.7389240506329114
+          },
+          "S3": {
+            "k": 39.0,
+            "n": 628,
+            "clusters": 80,
+            "estimate": 0.06210191082802548,
+            "lo": 0.0430622009569378,
+            "hi": 0.08240887480190175
+          }
+        },
+        "speech_act": {
+          "P0": {
+            "k": 5.0,
+            "n": 600,
+            "clusters": 55,
+            "estimate": 0.008333333333333333,
+            "lo": 0.0018214936247723133,
+            "hi": 0.016181375288119016
+          },
+          "P2": {
+            "k": 414.0,
+            "n": 600,
+            "clusters": 55,
+            "estimate": 0.69,
+            "lo": 0.6347561262477499,
+            "hi": 0.7462457343120887
+          },
+          "S3": {
+            "k": 8.0,
+            "n": 600,
+            "clusters": 55,
+            "estimate": 0.013333333333333334,
+            "lo": 0.00487012987012987,
+            "hi": 0.022916666666666665
+          }
+        }
+      },
+      "by_model": {
+        "gemma3-4b": {
+          "P2": {
+            "k": 341.0,
+            "n": 455,
+            "clusters": 209,
+            "estimate": 0.7494505494505495,
+            "lo": 0.7130429983683655,
+            "hi": 0.7849923045443222
+          },
+          "S3": {
+            "k": 23.0,
+            "n": 455,
+            "clusters": 209,
+            "estimate": 0.05054945054945055,
+            "lo": 0.03167420814479638,
+            "hi": 0.07158836689038031
+          },
+          "delta": {
+            "estimate": 0.6989010989010989,
+            "lo": 0.6595744680851064,
+            "hi": 0.7370689655172413,
+            "clusters": 209,
+            "n_boot_valid": 10000
+          }
+        },
+        "gpt-6.1-terra": {
+          "P2": {
+            "k": 247.0,
+            "n": 464,
+            "clusters": 210,
+            "estimate": 0.5323275862068966,
+            "lo": 0.4805491990846682,
+            "hi": 0.5838818860877684
+          },
+          "S3": {
+            "k": 8.0,
+            "n": 464,
+            "clusters": 210,
+            "estimate": 0.017241379310344827,
+            "lo": 0.0064794816414686825,
+            "hi": 0.029885794282345994
+          },
+          "delta": {
+            "estimate": 0.5150862068965517,
+            "lo": 0.4634146341463415,
+            "hi": 0.56866548094404,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "llama3.1-8b": {
+          "P2": {
+            "k": 309.0,
+            "n": 473,
+            "clusters": 210,
+            "estimate": 0.653276955602537,
+            "lo": 0.6088888888888889,
+            "hi": 0.6970972436923132
+          },
+          "S3": {
+            "k": 14.0,
+            "n": 473,
+            "clusters": 210,
+            "estimate": 0.02959830866807611,
+            "lo": 0.014988492651768884,
+            "hi": 0.046052631578947366
+          },
+          "delta": {
+            "estimate": 0.6236786469344608,
+            "lo": 0.5781559735812575,
+            "hi": 0.6700616214817535,
+            "clusters": 210,
+            "n_boot_valid": 10000
+          }
+        },
+        "qwen2.5-7b": {
+          "P2": {
+            "k": 264.0,
+            "n": 458,
+            "clusters": 208,
+            "estimate": 0.5764192139737991,
+            "lo": 0.5282608695652173,
+            "hi": 0.6252676659528907
+          },
+          "S3": {
+            "k": 5.0,
+            "n": 458,
+            "clusters": 208,
+            "estimate": 0.010917030567685589,
+            "lo": 0.0022171722622294607,
+            "hi": 0.021226540279613824
+          },
+          "delta": {
+            "estimate": 0.5655021834061136,
+            "lo": 0.5182648401826484,
+            "hi": 0.6125591663461822,
+            "clusters": 208,
+            "n_boot_valid": 10000
+          }
+        }
+      },
+      "family_only_delta": {
+        "k": 1111.0,
+        "n": 1850,
+        "clusters": 238,
+        "estimate": 0.6005405405405405,
+        "lo": 0.5760865151479485,
+        "hi": 0.625879805089334
+      },
+      "leave_one_cluster_out_delta_range": [
+        0.5959318306761957,
+        0.6033916849015317
+      ],
+      "by_slot": {
+        "0": {
+          "k": 539.0,
+          "n": 1850,
+          "clusters": 210,
+          "estimate": 0.2913513513513514,
+          "lo": 0.2692302665969681,
+          "hi": 0.3136597332483709
+        },
+        "1": {
+          "k": 626.0,
+          "n": 1850,
+          "clusters": 210,
+          "estimate": 0.33837837837837836,
+          "lo": 0.31269958627006883,
+          "hi": 0.36354583700603554
+        },
+        "2": {
+          "k": 628.0,
+          "n": 1850,
+          "clusters": 210,
+          "estimate": 0.33945945945945943,
+          "lo": 0.3137343856041293,
+          "hi": 0.3645661750127557
+        }
+      },
+      "example_stratum": {
+        "k": 502.0,
+        "n": 1866,
+        "clusters": 79,
+        "estimate": 0.2690246516613076,
+        "lo": 0.243300095040878,
+        "hi": 0.2954548484848485
+      },
+      "all_target_missingness_bound_P2_minus_S3": [
+        0.6024159663865546,
+        0.6118697478991596
+      ],
+      "exclude_early_cache_families_delta": {
+        "estimate": 0.5992239467849223,
+        "lo": 0.5712759253144875,
+        "hi": 0.6264214481644426,
+        "clusters": 204,
+        "n_boot_valid": 10000
+      }
+    },
+    "H1/exact_partner": {
+      "P0": {
+        "k": 1.0,
+        "n": 639,
+        "clusters": 79,
+        "estimate": 0.001564945226917058,
+        "lo": 0.0,
+        "hi": 0.004761904761904762
+      },
+      "P2": {
+        "k": 21.0,
+        "n": 639,
+        "clusters": 79,
+        "estimate": 0.03286384976525822,
+        "lo": 0.018779342723004695,
+        "hi": 0.048513302034428794
+      },
+      "S3": {
+        "k": 2.0,
+        "n": 639,
+        "clusters": 79,
+        "estimate": 0.003129890453834116,
+        "lo": 0.0,
+        "hi": 0.00792393026941363
+      },
+      "P2_minus_S3": {
+        "estimate": 0.029733959311424103,
+        "lo": 0.015455950540958267,
+        "hi": 0.04538341158059468,
+        "clusters": 79,
+        "n_boot_valid": 10000
+      }
+    },
+    "H2": {
+      "NOT|YOU": {
+        "k": 55.0,
+        "n": 160,
+        "clusters": 80,
+        "estimate": 0.34375,
+        "lo": 0.24375,
+        "hi": 0.44375
+      },
+      "other": {
+        "k": 0.0,
+        "n": 480,
+        "clusters": 80,
+        "estimate": 0.0,
+        "lo": 0.0,
+        "hi": 0.0
+      },
+      "delta": {
+        "estimate": 0.34375,
+        "lo": 0.24375,
+        "hi": 0.44375,
+        "clusters": 80,
+        "n_boot_valid": 10000
+      },
+      "cell_counts": {
+        "NOT|I": {
+          "sum": 0,
+          "size": 160
+        },
+        "NOT|YOU": {
+          "sum": 55,
+          "size": 160
+        },
+        "YES|I": {
+          "sum": 0,
+          "size": 160
+        },
+        "YES|YOU": {
+          "sum": 0,
+          "size": 160
+        }
+      },
+      "among_damage": {
+        "negation_absent": {
+          "k": 55.0,
+          "n": 55,
+          "clusters": 30,
+          "estimate": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "nonstatement": {
+          "k": 0.0,
+          "n": 55,
+          "clusters": 30,
+          "estimate": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        }
+      },
+      "after_acts": {
+        "statement": 55
+      },
+      "damage_scenarios": 30,
+      "damage_by_draw": {
+        "d1": {
+          "sum": 29,
+          "size": 80
+        },
+        "d2": {
+          "sum": 26,
+          "size": 80
+        }
+      },
+      "raw_judge_agree_at_both_ends": 640
+    },
+    "H3": {
+      "certainty_source_failure": {
+        "k": 26.0,
+        "n": 80,
+        "clusters": 20,
+        "estimate": 0.325,
+        "lo": 0.15,
+        "hi": 0.5125
+      },
+      "conflict_source_failure": {
+        "k": 20.0,
+        "n": 20,
+        "clusters": 5,
+        "estimate": 1.0,
+        "lo": 1.0,
+        "hi": 1.0
+      },
+      "aligned_source_failure": {
+        "k": 6.0,
+        "n": 60,
+        "clusters": 15,
+        "estimate": 0.1,
+        "lo": 0.016666666666666666,
+        "hi": 0.2
+      },
+      "all_restorations_audit": {
+        "aligned": 115,
+        "unexpressible_reference": 9,
+        "word_needs_audit": 8,
+        "definite_conflict": 7
+      },
+      "additional_definite_conflicts": [
+        {
+          "family_id": "wb-aactext-train-03985",
+          "sample": "enriched",
+          "dim": "speech_act",
+          "source_value": "offer/suggestion",
+          "actual_cue": "[?]",
+          "mode": "chip",
+          "status": "definite_conflict",
+          "source": "how about some help there buddy?"
+        },
+        {
+          "family_id": "wb-aactext-train-00249",
+          "sample": "enriched",
+          "dim": "speech_act",
+          "source_value": "offer/suggestion",
+          "actual_cue": "[ASK]",
+          "mode": "chip",
+          "status": "definite_conflict",
+          "source": "Let's get coffee."
+        }
+      ],
+      "conflict_honours_actual_chip": {
+        "k": 20.0,
+        "n": 20,
+        "clusters": 5,
+        "estimate": 1.0,
+        "lo": 1.0,
+        "hi": 1.0
+      },
+      "general_certainty": {
+        "recorded": {
+          "k": 25.0,
+          "n": 72,
+          "clusters": 18,
+          "estimate": 0.3472222222222222,
+          "lo": 0.1527777777777778,
+          "hi": 0.5555555555555556
+        },
+        "aligned_only": {
+          "k": 5.0,
+          "n": 52,
+          "clusters": 13,
+          "estimate": 0.09615384615384616,
+          "lo": 0.0,
+          "hi": 0.19230769230769232
+        }
+      },
+      "conflict_sources": [
+        {
+          "family_id": "wb-aactext-test-00113",
+          "source": "An extra pillow would be nice.",
+          "source_value": "plain assertion",
+          "restoration": {
+            "mode": "chip",
+            "cue": "[MAYBE]",
+            "detector_value": "hedged/uncertain"
+          }
+        },
+        {
+          "family_id": "wb-aactext-test-00508",
+          "source": "I would have loved to go but the rain kept me inside all weekend.",
+          "source_value": "plain assertion",
+          "restoration": {
+            "mode": "chip",
+            "cue": "[MAYBE]",
+            "detector_value": "hedged/uncertain"
+          }
+        },
+        {
+          "family_id": "wb-aactext-train-01930",
+          "source": "i will tell you as soon as possible",
+          "source_value": "plain assertion",
+          "restoration": {
+            "mode": "chip",
+            "cue": "[MAYBE]",
+            "detector_value": "hedged/uncertain"
+          }
+        },
+        {
+          "family_id": "wb-aactext-train-02253",
+          "source": "I don't wish to file any compensation claim and it was my fault too.",
+          "source_value": "plain assertion",
+          "restoration": {
+            "mode": "chip",
+            "cue": "[MAYBE]",
+            "detector_value": "hedged/uncertain"
+          }
+        },
+        {
+          "family_id": "wb-aactext-train-04637",
+          "source": "i wish i could type.",
+          "source_value": "plain assertion",
+          "restoration": {
+            "mode": "chip",
+            "cue": "[MAYBE]",
+            "detector_value": "hedged/uncertain"
+          }
+        }
+      ]
+    },
+    "H3/enriched": {
+      "recorded": {
+        "k": 82.0,
+        "n": 318,
+        "clusters": 80,
+        "estimate": 0.2578616352201258,
+        "lo": 0.18037974683544303,
+        "hi": 0.34069400630914826
+      },
+      "aligned_only": {
+        "k": 62.0,
+        "n": 298,
+        "clusters": 75,
+        "estimate": 0.2080536912751678,
+        "lo": 0.13804713804713806,
+        "hi": 0.2833333333333333
+      },
+      "recorded_minus_aligned": {
+        "estimate": 0.049807943944957994,
+        "lo": 0.010071154898741108,
+        "hi": 0.09818560246142707,
+        "clusters": 80,
+        "n_boot_valid": 10000
+      }
+    },
+    "H3/random": {
+      "recorded": {
+        "k": 16.0,
+        "n": 232,
+        "clusters": 59,
+        "estimate": 0.06896551724137931,
+        "lo": 0.021739130434782608,
+        "hi": 0.125
+      },
+      "aligned_only": {
+        "k": 16.0,
+        "n": 232,
+        "clusters": 59,
+        "estimate": 0.06896551724137931,
+        "lo": 0.021739130434782608,
+        "hi": 0.125
+      },
+      "recorded_minus_aligned": {
+        "estimate": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "clusters": 59,
+        "n_boot_valid": 10000
+      }
+    },
+    "H3/general/enriched": {
+      "recorded": {
+        "k": 55.0,
+        "n": 276,
+        "clusters": 69,
+        "estimate": 0.19927536231884058,
+        "lo": 0.12681159420289856,
+        "hi": 0.27898550724637683
+      },
+      "aligned_only": {
+        "k": 35.0,
+        "n": 256,
+        "clusters": 64,
+        "estimate": 0.13671875,
+        "lo": 0.08203125,
+        "hi": 0.19921875
+      },
+      "recorded_minus_aligned": {
+        "estimate": 0.06255661231884058,
+        "lo": 0.012681159420289856,
+        "hi": 0.12097764676983541,
+        "clusters": 69,
+        "n_boot_valid": 10000
+      }
+    },
+    "H3/general/random": {
+      "recorded": {
+        "k": 12.0,
+        "n": 223,
+        "clusters": 56,
+        "estimate": 0.053811659192825115,
+        "lo": 0.017857142857142856,
+        "hi": 0.10267857142857142
+      },
+      "aligned_only": {
+        "k": 12.0,
+        "n": 223,
+        "clusters": 56,
+        "estimate": 0.053811659192825115,
+        "lo": 0.017857142857142856,
+        "hi": 0.10267857142857142
+      },
+      "recorded_minus_aligned": {
+        "estimate": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "clusters": 56,
+        "n_boot_valid": 10000
+      }
+    },
+    "H4": {
+      "family_counts": {
+        "imperative": 60,
+        "modal": 14
+      },
+      "pooled": {
+        "imperative": {
+          "k": 24.0,
+          "n": 240,
+          "clusters": 60,
+          "estimate": 0.1,
+          "lo": 0.0625,
+          "hi": 0.14166666666666666
+        },
+        "modal": {
+          "k": 1.0,
+          "n": 56,
+          "clusters": 14,
+          "estimate": 0.017857142857142856,
+          "lo": 0.0,
+          "hi": 0.05357142857142857
+        }
+      },
+      "pooled_delta": {
+        "estimate": 0.08214285714285716,
+        "lo": 0.026785714285714288,
+        "hi": 0.13306451612903225,
+        "clusters": 74,
+        "n_boot_valid": 10000
+      },
+      "by_model": {
+        "gemma3-4b": {
+          "arms": {
+            "imperative": {
+              "k": 18.0,
+              "n": 60,
+              "clusters": 60,
+              "estimate": 0.3,
+              "lo": 0.18333333333333332,
+              "hi": 0.4166666666666667
+            },
+            "modal": {
+              "k": 1.0,
+              "n": 14,
+              "clusters": 14,
+              "estimate": 0.07142857142857142,
+              "lo": 0.0,
+              "hi": 0.21428571428571427
+            }
+          },
+          "delta": {
+            "estimate": 0.22857142857142856,
+            "lo": 0.024193548387096753,
+            "hi": 0.39344262295081966,
+            "clusters": 74,
+            "n_boot_valid": 10000
+          }
+        },
+        "gpt-6.1-terra": {
+          "arms": {
+            "imperative": {
+              "k": 5.0,
+              "n": 60,
+              "clusters": 60,
+              "estimate": 0.08333333333333333,
+              "lo": 0.016666666666666666,
+              "hi": 0.15
+            },
+            "modal": {
+              "k": 0.0,
+              "n": 14,
+              "clusters": 14,
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "delta": {
+            "estimate": 0.08333333333333333,
+            "lo": 0.01694915254237288,
+            "hi": 0.15874741200828132,
+            "clusters": 74,
+            "n_boot_valid": 10000
+          }
+        },
+        "llama3.1-8b": {
+          "arms": {
+            "imperative": {
+              "k": 1.0,
+              "n": 60,
+              "clusters": 60,
+              "estimate": 0.016666666666666666,
+              "lo": 0.0,
+              "hi": 0.05
+            },
+            "modal": {
+              "k": 0.0,
+              "n": 14,
+              "clusters": 14,
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "delta": {
+            "estimate": 0.016666666666666666,
+            "lo": 0.0,
+            "hi": 0.05263157894736842,
+            "clusters": 74,
+            "n_boot_valid": 10000
+          }
+        },
+        "qwen2.5-7b": {
+          "arms": {
+            "imperative": {
+              "k": 0.0,
+              "n": 60,
+              "clusters": 60,
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "modal": {
+              "k": 0.0,
+              "n": 14,
+              "clusters": 14,
+              "estimate": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            }
+          },
+          "delta": {
+            "estimate": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "clusters": 74,
+            "n_boot_valid": 10000
+          }
+        }
+      },
+      "seeded_only": {
+        "arms": {
+          "imperative": {
+            "k": 7.0,
+            "n": 112,
+            "clusters": 28,
+            "estimate": 0.0625,
+            "lo": 0.026785714285714284,
+            "hi": 0.10714285714285714
+          },
+          "modal": {
+            "k": 1.0,
+            "n": 44,
+            "clusters": 11,
+            "estimate": 0.022727272727272728,
+            "lo": 0.0,
+            "hi": 0.06818181818181818
+          }
+        },
+        "delta": {
+          "estimate": 0.03977272727272727,
+          "lo": -0.022227011494252866,
+          "hi": 0.09524684873949567,
+          "clusters": 39,
+          "n_boot_valid": 10000
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
-"""Builder for data/items/r2_d.jsonl: W-D encoding-controlled composition (PREREG_R2), 80 scenarios r2d-001..080.
+"""Builder for data/items/r2_d.jsonl: W-D encoding-controlled composition (round 2), 80 scenarios r2d-001..080.
 
 All scenarios were hand-written by the item author (Claude); no LLM API was used. Edit here, not the JSONL.
     python3 src/authoring/build_r2_d.py && python3 src/validate_items.py data/items/r2_d.jsonl
 
-Representation is exactly that of data/items/expC.jsonl (src/make_followup_items.py, D-012): each scenario
+Representation is exactly that of data/items/expC.jsonl (src/make_followup_items.py): each scenario
 is a {YES,NOT} x {I,YOU} factorial of plain statements, split into 4 standard A/B records
 (polarity at I, polarity at YOU, agent at YES, agent at NOT) with custom channels neither / pol / actor / both.
 New in W-D: every channel exists in two encodings of the constant speech-act chip,

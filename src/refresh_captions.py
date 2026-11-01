@@ -8,6 +8,7 @@ import math
 import pandas as pd
 
 from analyze import family_bootstrap
+from provenance_paths import MAIN1_HYP_EXAMPLES, MAIN1_STORY, STORY_V2
 from runio import ROOT
 
 
@@ -44,7 +45,7 @@ def wb_contract_caption():
         return ""
     audit = json.loads(path.read_text())
     assert audit['inventory']['messages'] == 139 and audit['inventory']['outputs'] == 556
-    return ("## W-B restoration contract status (cycle-2 Action 1)\n\n"
+    return ("## W-B restoration contract status\n\n"
             "**Source match and actual-input fidelity are separate endpoints.** Complete audit: 139 messages / 556 stored outputs; "
             "131 chip mappings and eight word inputs. Seven definite chip/source conflicts preclude a model-ignored-the-source-cue "
             "attribution on their 28 outputs. Five certainty conflicts: 20/20 source failures honour visible `[MAYBE]`. "
@@ -67,12 +68,12 @@ def main():
     tables = {run: pd.read_parquet(ROOT / f"runs/{run}/scored.parquet") for run in ['main1','guard1','span1']}
     d = nums['fig_defaults']; ladder = nums['fig_channel_ladder']; cost = nums['fig_cost_asymmetry']
     sets = nums['fig_sets']; ratchet = nums['fig_politeness_ratchet']; pipeline = nums['fig_pipeline']
-    lines = ["# Shared figure captions (cycle-3 Action 3; discovery tables retained)\n",
+    lines = ["# Shared figure captions (discovery tables retained)\n",
         "**Version routing:** [current evidence map](../../analysis/EVIDENCE_MAP.md) is authoritative for population/status. "
         "Discovery figures below use main1 shared-label resolution; `r2c/CAPTIONS.md` and its figures use current arbitrated W-C. "
         "C30/C36 applicability keeps its explicitly frozen **pre-arbitration protocol-masked** snapshot; do not substitute current W-C labels. "
         "W-D, the W-B contract audit and the accepted guard transfer (C37) remain separate populations. "
-        "Current c3 exact examples: `ideas/cycles/c3/story_evidence.v2.json`, mirrored in `example_manifest_c3.json`; "
+        f"Current exact examples: `{STORY_V2}`, mirrored in `example_manifest_c3.json`; "
         "original manifest and historical discovery captions/tables are preserved.\n",
         "Generated from `runs/main1/scored.parquet` with `annotation/label_resolution.jsonl` by "
         "`paper/figs/make_figs.py` and `src/refresh_captions.py`. Original captions and numbers remain in "
@@ -142,7 +143,7 @@ def main():
     lines.append(wb_contract_caption())
     current = json.loads((ROOT / 'analysis/evidence_c3/current.json').read_text())
     V = current['displayed_values']   # formatted once from source files by src/c3_evidence.py
-    lines += ["## Discovery guard comparator (C35; cycle-3 current display)\n",
+    lines += ["## Discovery guard comparator (C35; current display)\n",
               f"P0 / zero-call strip-only G1s / regeneration G1 strict passes: {V['disc_pass']} cue target occurrences. "
               f"Paired G1−G1s **{V['c35']}**, 58 family clusters, {V['c35_disc']} passes; no missing matched targets. "
               "These discordances compare G1 with G1s; they are not newly broken P0-correct outputs. "
@@ -173,10 +174,10 @@ def main():
     (directory / "CAPTIONS.md").write_text("\n".join(lines) + "\n")
 
     examples = []
-    story = json.loads((ROOT / "ideas/cycles/c1/story_evidence.json").read_text())
+    story = json.loads((ROOT / MAIN1_STORY).read_text())
     for card in story['examples']:
         examples.extend((card['id'], record['run'], record) for record in card['outputs'])
-    for record in json.loads((ROOT / "ideas/cycles/c1/hyp_examples.json").read_text()):
+    for record in json.loads((ROOT / MAIN1_HYP_EXAMPLES).read_text()):
         examples.append((record['label'], record['stored_file'].split('/')[1], record))
     output = []
     for label, run, reference in examples:
@@ -204,7 +205,7 @@ def main():
     manifest = dict(label_resolution="annotation/label_resolution.jsonl", resolution_sha256=sha(ROOT / "annotation/label_resolution.jsonl"),
                     scored_sha256={run:sha(ROOT / f"runs/{run}/scored.parquet") for run in tables},
                     selection="Existing story gallery and hypothesis examples, unchanged exact strings and declared order; no reselection",
-                    source_manifests=['ideas/cycles/c1/story_evidence.json','ideas/cycles/c1/hyp_examples.json'],
+                    source_manifests=[MAIN1_STORY, MAIN1_HYP_EXAMPLES],
                     n_boot=2000, seed=20261031, examples=output)
     def clean_json(value):
         if isinstance(value, dict):
@@ -213,9 +214,9 @@ def main():
             return [clean_json(v) for v in value]
         return None if isinstance(value, float) and not math.isfinite(value) else value
     (directory / "example_manifest.json").write_text(json.dumps(clean_json(manifest), indent=2, default=str, allow_nan=False) + "\n")
-    c3 = json.loads((ROOT / 'ideas/cycles/c3/story_evidence.v2.json').read_text())
-    mirror = dict(namespace='c3', source_manifest='ideas/cycles/c3/story_evidence.v2.json',
-                  source_sha256=sha(ROOT / 'ideas/cycles/c3/story_evidence.v2.json'),
+    c3 = json.loads((ROOT / STORY_V2).read_text())
+    mirror = dict(namespace='c3', source_manifest=STORY_V2,
+                  source_sha256=sha(ROOT / STORY_V2),
                   reconciliation='analysis/evidence_c3/selector_reconciliation.json',
                   status='retrospective verified replay; not prospective selection or typicality',
                   cards=c3['cards'], verified_occurrences=c3['verified_occurrences'])

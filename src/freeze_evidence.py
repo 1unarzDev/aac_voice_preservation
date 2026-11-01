@@ -1,6 +1,6 @@
 """Hash the evidence inventory (scope action2: discovery only; scope c3: all current evidence).
 
-Scope c3 (cycle-3 Action 3) adds the completed W-C/W-D/W-B runs, the guard transfer, applicability,
+Scope c3 adds the completed W-C/W-D/W-B runs, the guard transfer, applicability,
 evidence map and R5 artifacts. Target-paper sources (paper/se4all, paper/caleai) are excluded because they
 are edited concurrently; writers rebuild them from the inventoried inputs.
 
@@ -24,11 +24,10 @@ RUNS = ("pilot1", "main1", "guard1", "span1", "expB1", "expC1",
 
 C3_RUNS = ("r2c1", "r2d1", "wb1", "guard_wc")
 C3_ANALYSIS = ("r2c", "r2d", "wb", "applicability", "guard_wc", "evidence_c3", "r5_validator")
-C3_EXTRA = ("analysis/EVIDENCE_MAP.md", "orchestration/evidence_map.md", "orchestration/PREREG_R2.md",
-            "orchestration/SPEC.md", "ideas/cycles/c2/decision.md", "ideas/cycles/c3/decision.md",
-            "ideas/cycles/c3/select_story.py", "ideas/cycles/c3/story_evidence.json",
-            "ideas/cycles/c3/story_evidence.v2.json", "ideas/cycles/c3/synth_checks.py",
-            "ideas/cycles/c3/synth_checks.json", "data/items/wb.jsonl", "data/specs/wb_sample.jsonl",
+C3_EXTRA = ("analysis/EVIDENCE_MAP.md", "analysis/examples/select_story.py",
+            "analysis/examples/story_evidence.v1.json", "analysis/examples/story_evidence.v2.json",
+            "analysis/derived/guard_increment_checks.py", "analysis/derived/guard_increment_checks.json",
+            "data/items/wb.jsonl", "data/specs/wb_sample.jsonl",
             "runs/requests/wb1.jsonl")
 
 
@@ -41,9 +40,7 @@ def inventory(scope="action2"):
     for pattern in ("src/**/*.py", "src/**/*.sh", "tests/**/*.py", "prompts/*", "data/items/*.jsonl",
                     "annotation/*.md", "annotation/*.json", "annotation/*.jsonl", "annotation/*.csv",
                     "annotation/returns*/*.csv", "paper/figs/**/*", "paper/se4all/*.py",
-                    "paper/se4all/*macros*", "paper/se4all/*examples*", "paper/se4all/*numbers*",
-                    "orchestration/BRIEF.md", "orchestration/decision_log.md",
-                    "orchestration/claims_ledger.md", "ideas/cycles/c1/decision.md"):
+                    "paper/se4all/*macros*", "paper/se4all/*examples*", "paper/se4all/*numbers*"):
         paths.update(p for p in ROOT.glob(pattern) if p.is_file() and "__pycache__" not in p.parts
                      and not p.name.startswith("wb_"))
     for directory in ("main1", "main1_quarantine_inclusive", "pilot", "oracle", "interventions"):

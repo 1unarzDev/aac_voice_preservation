@@ -1,4 +1,4 @@
-"""Build analysis/oracle/report.md (PREREG_R2 W-A) from frozen keys and production labels.
+"""Build analysis/oracle/report.md (round-2 W-A) from frozen keys and production labels.
 
   python src/oracle_report.py
 

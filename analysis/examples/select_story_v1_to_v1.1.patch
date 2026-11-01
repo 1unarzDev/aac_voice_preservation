@@ -1,0 +1,15 @@
+diff --git a/analysis/examples/select_story.py b/analysis/examples/select_story.py
+index d381610683cbbe2d5c0354213c91754671156627..16e6fa528a0897e0f70ed1a637c67afeaeefebc1
+--- a/analysis/examples/select_story.py
++++ b/analysis/examples/select_story.py
+@@ -64,6 +64,9 @@
+     row = wp[(wp.output_id == ex['output_id']) & (wp.family_id == ex['family_id']) &
+              (wp.variant == ex['variant']) & (wp.channel == ex['channel'])].iloc[0]
+     rr = ex['rate']
++    eligible = wp[wp.dimension.eq('politeness') & wp.channel.eq('full') & wp.cv.eq('plain')] if cid == 'S1' else wp[wp.dimension.eq('speech_act') & wp.channel.eq('chip1') & wp.cv.eq('question')]
++    assert int((eligible.critical_match == False).sum()) == int(rr['sum'])
++    assert int(eligible.critical_match.notna().sum()) == int(rr['n'])
+     card(cid, 'Reuse analysis/r2c/examples.json SHA256-minimum rule: ' + ex['rule'],
+          ex['source'], [occurrence('r2c1', row)],
+          {'manifest_event': rate(rr['sum'], rr['n']), 'manifest_rate_with_ci': rr})
+

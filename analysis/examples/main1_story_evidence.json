@@ -1,0 +1,656 @@
+{
+  "date": "2026-10-31",
+  "scope": "Exploratory gallery; machine-scored rates; human gate pending",
+  "sha256": {
+    "data/items/test.jsonl": "f98d7f81828fb86879745ef191758eb4f795bb9d8ec507b5adcf4a40fe01e6d0",
+    "src/interventions.py": "b86627405d67e683adad147c894bb853aa4ed34a8ce42d4cf67e32afb6109dd4",
+    "runs/main1/scored.parquet": "2ee9fd9dd224f53b28c2538b65fe6a87830a2edf945e8d023e63902c5f72761f",
+    "runs/main1/outputs.jsonl": "0b5b28ddc33a395c230e0efc9a22b17619da605a4cb6d6a24fd64e2fd8ece82a",
+    "runs/guard1/scored.parquet": "7f8b9a777d7e5d236d4713c5c86607722a21d1b06d9675078823a677a789763d",
+    "runs/guard1/outputs.jsonl": "6756b69f5f62e910d6163c296670d053699fa500ba5c2be8cc53ce0d50234c04",
+    "runs/span1/scored.parquet": "06bc69fd40a537235b38c49428f9919ca42ff47ba956f7b8a67a08a3a35b60e3",
+    "runs/span1/outputs.jsonl": "f8ceb8059e554d0f01cba9ca3d35709be34068ba3e7681b533cbf1bf67cbef28",
+    "runs/main1/scored_raw_oracle.parquet": "31388594336415ab1ebf9b617e097296991e94652b7ec5db5cdd9a0e579f7889"
+  },
+  "rates": {
+    "bare_polarity_affirmative": {
+      "n": 40,
+      "denominator": 40,
+      "percent": 100.0
+    },
+    "polarity_chip_match": {
+      "n": 80,
+      "denominator": 80,
+      "percent": 100.0
+    },
+    "bare_certainty_plain": {
+      "n": 36,
+      "denominator": 40,
+      "percent": 90.0
+    },
+    "bare_certainty_hedged": {
+      "n": 0,
+      "denominator": 40,
+      "percent": 0.0
+    },
+    "hedged_chip_match": {
+      "n": 39,
+      "denominator": 40,
+      "percent": 97.5
+    },
+    "full_plain_to_polite": {
+      "n": 9,
+      "denominator": 40,
+      "percent": 22.5
+    },
+    "full_polite_to_plain": {
+      "n": 2,
+      "denominator": 40,
+      "percent": 5.0
+    },
+    "full_plain_to_polite_all_families": {
+      "n": 10,
+      "denominator": 440,
+      "percent": 2.273
+    },
+    "full_hedges_removed": {
+      "n": 0,
+      "denominator": 40,
+      "percent": 0.0
+    },
+    "question_chip_to_request": {
+      "n": 3,
+      "denominator": 28,
+      "percent": 10.714
+    },
+    "question_chip_nonquestion": {
+      "n": 6,
+      "denominator": 28,
+      "percent": 21.429
+    },
+    "speech_chip_match_excl_quarantine": {
+      "n": 52,
+      "denominator": 64,
+      "percent": 81.25
+    },
+    "plain_chip_to_polite": {
+      "n": 8,
+      "denominator": 40,
+      "percent": 20.0
+    },
+    "guard_fixed_excl_quarantine": {
+      "n": 63,
+      "denominator": 80,
+      "percent": 78.75
+    },
+    "guard_unfixed_excl_quarantine": {
+      "n": 17,
+      "denominator": 80,
+      "percent": 21.25
+    },
+    "guard_baseline_strict_pass_excl_quarantine": {
+      "n": 1312,
+      "denominator": 1392,
+      "percent": 94.253
+    },
+    "guard_final_strict_pass_excl_quarantine": {
+      "n": 1375,
+      "denominator": 1392,
+      "percent": 98.779
+    },
+    "guard_changed_correct_cue_excl_quarantine": {
+      "n": 14,
+      "denominator": 1312,
+      "percent": 1.067
+    },
+    "guard_broke_correct_cue_excl_quarantine": {
+      "n": 0,
+      "denominator": 1312,
+      "percent": 0.0
+    },
+    "literal_ask_you_prefix_among_fixed": {
+      "n": 4,
+      "denominator": 63,
+      "percent": 6.349
+    },
+    "I2_target_P2_coverage": {
+      "n": 14,
+      "denominator": 80,
+      "percent": 17.5
+    },
+    "I2_target_final_coverage": {
+      "n": 77,
+      "denominator": 80,
+      "percent": 96.25
+    },
+    "I2_target_gained": {
+      "n": 63,
+      "denominator": 66,
+      "percent": 95.455
+    },
+    "I2_politeness_P2_coverage": {
+      "n": 26,
+      "denominator": 40,
+      "percent": 65.0
+    },
+    "I2_politeness_final_coverage": {
+      "n": 12,
+      "denominator": 40,
+      "percent": 30.0
+    },
+    "I2_politeness_coverage_lost": {
+      "n": 14,
+      "denominator": 40,
+      "percent": 35.0
+    },
+    "I2_politeness_loss_conditional": {
+      "n": 14,
+      "denominator": 26,
+      "percent": 53.846
+    },
+    "oracle_normalized_identity_false_failures": {
+      "n": 14,
+      "denominator": 2292,
+      "percent": 0.611
+    }
+  },
+  "examples": [
+    {
+      "id": "E1",
+      "source": "I don't like the new medication.",
+      "outputs": [
+        {
+          "output_id": "bba84cad0671fe35",
+          "request_key": "ea3b27d1bb49a69786d3287aa5e4d291df044590",
+          "text": "I like medication",
+          "critical": "affirmative",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "pol-07",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P0",
+          "input_text": "Keywords: like medication",
+          "jsonl_line": 1
+        },
+        {
+          "output_id": "ce2e2b1e30ae94d0",
+          "request_key": "72272ad1820f41ec7627dcfae1aabe339218228a",
+          "text": "I like new medication",
+          "critical": "affirmative",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "pol-07",
+          "variant": "A",
+          "channel": "noncrit",
+          "prompt_id": "P0",
+          "input_text": "Keywords: like new medication",
+          "jsonl_line": 65
+        },
+        {
+          "output_id": "e6f092619a003dea",
+          "request_key": "5367e3799f35c4bfa2782920bbe9b876dad3b77b",
+          "text": "I don't like medication.",
+          "critical": "negated",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "pol-07",
+          "variant": "A",
+          "channel": "chip1",
+          "prompt_id": "P0",
+          "input_text": "Keywords: [NOT] like medication",
+          "jsonl_line": 129
+        }
+      ]
+    },
+    {
+      "id": "E2",
+      "source": "I think I have a fever again.",
+      "outputs": [
+        {
+          "output_id": "8d6f9d1322aa8b19",
+          "request_key": "36a75c2090017138a85862a18de243d4a795a61c",
+          "text": "I have a fever.",
+          "critical": "plain assertion",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-07",
+          "variant": "B",
+          "channel": "bare",
+          "prompt_id": "P0",
+          "input_text": "Keywords: have fever",
+          "jsonl_line": 6402
+        },
+        {
+          "output_id": "aef4cedb9f91ef90",
+          "request_key": "10b13c1f050c420b7fe740a75de2565851c78df3",
+          "text": "Maybe I have fever.",
+          "critical": "hedged/uncertain",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-07",
+          "variant": "B",
+          "channel": "chip1",
+          "prompt_id": "P0",
+          "input_text": "Keywords: [MAYBE] have fever",
+          "jsonl_line": 6625
+        },
+        {
+          "output_id": "3ca142f53a86ea98",
+          "request_key": "dab79c4767755a50fc61083022ec785a136d1809",
+          "text": "I think I have a fever again.",
+          "critical": "hedged/uncertain",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-07",
+          "variant": "B",
+          "channel": "full",
+          "prompt_id": "P0",
+          "input_text": "The user typed: I think I have a fever again.",
+          "jsonl_line": 6689
+        }
+      ]
+    },
+    {
+      "id": "E3",
+      "source": "Wear headphones for your music.",
+      "outputs": [
+        {
+          "output_id": "30caad838cf21e24",
+          "request_key": "e2dbfd818828c10aa3b56fd94d0ba0bab6d57675",
+          "text": "Please wear headphones for your music.",
+          "critical": "polite",
+          "run": "main1",
+          "model": "llama3.1-8b",
+          "family_id": "pol2-07",
+          "variant": "B",
+          "channel": "full",
+          "prompt_id": "P0",
+          "input_text": "The user typed: Wear headphones for your music.",
+          "jsonl_line": 16288
+        }
+      ]
+    },
+    {
+      "id": "E4",
+      "source": "Can I bring my dog tomorrow?",
+      "outputs": [
+        {
+          "output_id": "4cf4eb259fde203e",
+          "request_key": "b86f1e7fe143dd419f03e9abc354ace30149773a",
+          "text": "Will you bring the dog?",
+          "critical": "request/command",
+          "run": "main1",
+          "model": "llama3.1-8b",
+          "family_id": "act-07",
+          "variant": "A",
+          "channel": "chip1",
+          "prompt_id": "P0",
+          "input_text": "Keywords: [?] bring dog",
+          "jsonl_line": 12930
+        }
+      ]
+    },
+    {
+      "id": "E5",
+      "source": "Let me finish my sentence first.",
+      "hash": "073258c200e244c333613fc2859d0732d5af2173",
+      "outputs": [
+        {
+          "output_id": "7aaf1cd767a60b6c",
+          "request_key": "57b2218c6b6bec72ae4e457a43da67acd458d4ee",
+          "text": "Please let me finish my sentence.",
+          "critical": "polite",
+          "run": "guard1",
+          "model": "gemma3-4b",
+          "family_id": "pol2-14",
+          "variant": "A",
+          "channel": "chip1",
+          "prompt_id": "P0",
+          "input_text": "Keywords: [PLAIN] let finish sentence",
+          "jsonl_line": 1723
+        },
+        {
+          "output_id": "6abe62e6ccf08832",
+          "request_key": "1230fd501142763ce9d9da766ab3ded5df989f16",
+          "text": "Let me finish the sentence.",
+          "critical": "plain",
+          "run": "guard1",
+          "model": "gemma3-4b",
+          "family_id": "pol2-14",
+          "variant": "A",
+          "channel": "chip1",
+          "prompt_id": "G1",
+          "input_text": "Keywords: [PLAIN] let finish sentence",
+          "jsonl_line": 1724
+        }
+      ]
+    },
+    {
+      "id": "E6",
+      "source": "Are you charging my wheelchair tonight?",
+      "hash": "44be7f9fc449f24223e624f2d2086c3586147b98",
+      "outputs": [
+        {
+          "output_id": "5c224e70ffdd74db",
+          "request_key": "ae1aa23a6ff747dee26ce60b2bf62e963eb13cd1",
+          "text": "Can you charge my wheelchair?",
+          "critical": "request/command",
+          "run": "guard1",
+          "model": "llama3.1-8b",
+          "family_id": "act-11",
+          "variant": "A",
+          "channel": "chipall",
+          "prompt_id": "P0",
+          "input_text": "Keywords: [?] [YOU] charge wheelchair",
+          "jsonl_line": 4936
+        },
+        {
+          "output_id": "53e4a9f64bf8d10a",
+          "request_key": "9d338cccd92c0a9f8347c46a3008e1dde9c517a1",
+          "text": "Can you charge my wheelchair?",
+          "critical": "request/command",
+          "run": "guard1",
+          "model": "llama3.1-8b",
+          "family_id": "act-11",
+          "variant": "A",
+          "channel": "chipall",
+          "prompt_id": "G1",
+          "input_text": "Keywords: [?] [YOU] charge wheelchair",
+          "jsonl_line": 4937
+        }
+      ]
+    },
+    {
+      "id": "E7",
+      "source": "Wear headphones for your music.",
+      "hash": "0a0bb9ed7d9a9611d3a79283cd608570cbd87f3d",
+      "outputs": [
+        {
+          "output_id": "885bbf93e0237bc8",
+          "request_key": "ecd2a4826f4d7c5150922a1c5f545bd8addc8fe3",
+          "text": "You wear headphones.",
+          "critical": "plain",
+          "run": "guard1",
+          "model": "llama3.1-8b",
+          "family_id": "pol2-07",
+          "variant": "B",
+          "channel": "chipall",
+          "prompt_id": "P0",
+          "input_text": "Keywords: [ASK] [YOU] [PLAIN] wear headphones",
+          "jsonl_line": 5125
+        },
+        {
+          "output_id": "6d4fc54b70a181d1",
+          "request_key": "3cbc490055bb03f6c1a62a15e4e284fd725bf657",
+          "text": "Ask you to wear headphones.",
+          "critical": "plain",
+          "run": "guard1",
+          "model": "llama3.1-8b",
+          "family_id": "pol2-07",
+          "variant": "B",
+          "channel": "chipall",
+          "prompt_id": "G1",
+          "input_text": "Keywords: [ASK] [YOU] [PLAIN] wear headphones",
+          "jsonl_line": 5126
+        }
+      ]
+    },
+    {
+      "id": "E8",
+      "hash": "06c64f4a8e38c08d6486c3ffb2bcde59d8c5340d",
+      "sources": {
+        "A": {
+          "source": "I smell gas in the hallway.",
+          "critical_value": "plain assertion",
+          "chips": [
+            "[SURE]"
+          ],
+          "all_chips": [
+            "[TELL]",
+            "[I]",
+            "[SURE]"
+          ]
+        },
+        "B": {
+          "source": "I think I smell gas in the hallway.",
+          "critical_value": "hedged/uncertain",
+          "chips": [
+            "[MAYBE]"
+          ],
+          "all_chips": [
+            "[TELL]",
+            "[I]",
+            "[MAYBE]"
+          ]
+        }
+      },
+      "outputs": [
+        {
+          "output_id": "27d3d478c0fe21c3",
+          "request_key": "b10642e35c030cd9a8cef9e9490342d39e4103bc",
+          "text": "I smell gas in the kitchen.",
+          "critical": "plain assertion",
+          "run": "span1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-11",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P2",
+          "input_text": "Keywords: smell gas",
+          "jsonl_line": 4465
+        },
+        {
+          "output_id": "494b1a6ab9b2d6a2",
+          "request_key": "b10642e35c030cd9a8cef9e9490342d39e4103bc",
+          "text": "There is gas smell coming from the basement.",
+          "critical": "plain assertion",
+          "run": "span1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-11",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P2",
+          "input_text": "Keywords: smell gas",
+          "jsonl_line": 4467
+        },
+        {
+          "output_id": "446587e27203f75c",
+          "request_key": "b10642e35c030cd9a8cef9e9490342d39e4103bc",
+          "text": "Do you smell gas outside?",
+          "critical": "unclear/mixed",
+          "run": "span1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-11",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P2",
+          "input_text": "Keywords: smell gas",
+          "jsonl_line": 4469
+        },
+        {
+          "output_id": "a41adef0096da366",
+          "request_key": "8e4daf4249e5679ab4290491699d5ea838448fb7",
+          "text": "I smell gas in the kitchen.",
+          "critical": "plain assertion",
+          "run": "span1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-11",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "I2",
+          "input_text": "Keywords: smell gas",
+          "jsonl_line": 5185
+        },
+        {
+          "output_id": "17b488f70a1aa793",
+          "request_key": "8e4daf4249e5679ab4290491699d5ea838448fb7",
+          "text": "There might be a gas smell coming from the basement.",
+          "critical": "hedged/uncertain",
+          "run": "span1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-11",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "I2",
+          "input_text": "Keywords: smell gas",
+          "jsonl_line": 5187
+        },
+        {
+          "output_id": "771dc7f584911dc5",
+          "request_key": "8e4daf4249e5679ab4290491699d5ea838448fb7",
+          "text": "Do you not smell gas outside?",
+          "critical": "unclear/mixed",
+          "run": "span1",
+          "model": "qwen2.5-7b",
+          "family_id": "cer-11",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "I2",
+          "input_text": "Keywords: smell gas",
+          "jsonl_line": 5189
+        }
+      ]
+    },
+    {
+      "id": "E9",
+      "hash": "002c366a6c116065a7583f77c4d11cc19817b39a",
+      "sources": {
+        "A": {
+          "source": "Knock before you come into my room.",
+          "critical_value": "plain",
+          "chips": [
+            "[PLAIN]"
+          ],
+          "all_chips": [
+            "[ASK]",
+            "[YOU]",
+            "[PLAIN]"
+          ]
+        },
+        "B": {
+          "source": "Please knock before you come into my room.",
+          "critical_value": "polite",
+          "chips": [
+            "[PLEASE]"
+          ],
+          "all_chips": [
+            "[ASK]",
+            "[YOU]",
+            "[PLEASE]"
+          ]
+        }
+      },
+      "outputs": [
+        {
+          "output_id": "f77957174ba5bcf5",
+          "request_key": "5fb551fd54faaf124c6b3a59a41aa8ec3755772c",
+          "text": "Someone knocked and came in.",
+          "critical": "plain",
+          "run": "span1",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P2",
+          "input_text": "Keywords: knock come",
+          "jsonl_line": 1747
+        },
+        {
+          "output_id": "f120a2778e24aaff",
+          "request_key": "5fb551fd54faaf124c6b3a59a41aa8ec3755772c",
+          "text": "Did someone knock before coming in?",
+          "critical": "plain",
+          "run": "span1",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P2",
+          "input_text": "Keywords: knock come",
+          "jsonl_line": 1749
+        },
+        {
+          "output_id": "4de32ee878cd7251",
+          "request_key": "5fb551fd54faaf124c6b3a59a41aa8ec3755772c",
+          "text": "Please knock before you come in.",
+          "critical": "polite",
+          "run": "span1",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "P2",
+          "input_text": "Keywords: knock come",
+          "jsonl_line": 1751
+        },
+        {
+          "output_id": "90c2bfa9b741461c",
+          "request_key": "668371cb685b9d88dd8e890b3b1d22223e62029a",
+          "text": "Someone knocked and came in.",
+          "critical": "plain",
+          "run": "span1",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "I2",
+          "input_text": "Keywords: knock come",
+          "jsonl_line": 2467
+        },
+        {
+          "output_id": "11d40c681957c0d2",
+          "request_key": "668371cb685b9d88dd8e890b3b1d22223e62029a",
+          "text": "Maybe someone knocked before coming in.",
+          "critical": "plain",
+          "run": "span1",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "I2",
+          "input_text": "Keywords: knock come",
+          "jsonl_line": 2469
+        },
+        {
+          "output_id": "d38665c19c990014",
+          "request_key": "668371cb685b9d88dd8e890b3b1d22223e62029a",
+          "text": "Don't knock before you come in.",
+          "critical": "plain",
+          "run": "span1",
+          "model": "gpt-6.1-terra",
+          "family_id": "pol2-08",
+          "variant": "A",
+          "channel": "bare",
+          "prompt_id": "I2",
+          "input_text": "Keywords: knock come",
+          "jsonl_line": 2471
+        }
+      ]
+    },
+    {
+      "id": "E10",
+      "source": "Yes, you can borrow my car this weekend.",
+      "quarantine": true,
+      "scoring_table": "runs/main1/scored_raw_oracle.parquet",
+      "raw_critical_match": false,
+      "relaxed_critical_match": true,
+      "outputs": [
+        {
+          "output_id": "b6b079ac5466dfc6",
+          "request_key": "4da5b3838bea15175bdabfaf170e174b6a83bffd",
+          "text": "Yes, you can borrow my car this weekend.",
+          "critical": "statement",
+          "run": "main1",
+          "model": "qwen2.5-7b",
+          "family_id": "act-16",
+          "variant": "B",
+          "channel": "full",
+          "prompt_id": "P0",
+          "input_text": "The user typed: Yes, you can borrow my car this weekend.",
+          "jsonl_line": 15967
+        }
+      ]
+    }
+  ]
+}

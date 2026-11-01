@@ -55,10 +55,8 @@ def main():
         for name in ['analysis/wb/report_tables.md','analysis/wb/estimates.csv','analysis/wb/long_dims.csv.gz']:
             assert old.extractfile(name).read() == (ROOT/name).read_bytes(), name
     names=set(audit['input_hashes'])
-    names.update(['orchestration/BRIEF.md','orchestration/PREREG_R2.md','orchestration/SPEC.md',
-                  'orchestration/decision_log.md','orchestration/claims_ledger.md',
-                  'ideas/cycles/c2/decision.md','ideas/cycles/c2/hyp_checks.json',
-                  'ideas/cycles/c2/hyp_examples.json','ideas/cycles/c2/mine_hyp.py',
+    names.update(['analysis/derived/r2_hyp_checks.json',
+                  'analysis/derived/r2_hyp_examples.json','analysis/derived/r2_mine_hyp.py',
                   'paper/figs/CAPTIONS.md','src/refresh_captions.py',
                   'src/wb_contract_audit_report.py','src/freeze_wb_contract_audit.py',
                   'src/attribute.py','src/judge.py','src/build_requests.py','annotation/CB_rules.md',
@@ -87,7 +85,7 @@ def main():
                 archive.addfile(member,io.BytesIO(data))
     manifest=dict(schema_version=1,created_at=datetime.now(timezone.utc).isoformat(),
                   kind='post-hoc evidence snapshot; not prospective item/codebook freeze',
-                  action='ideas/cycles/c2/decision.md Action 1',
+                  action='W-B restoration contract audit',
                   archive=str(ARCHIVE.relative_to(ROOT)),archive_sha256=digest(ARCHIVE.read_bytes()),
                   creation_command='.venv/bin/python src/freeze_wb_contract_audit.py',
                   verification_command='.venv/bin/python src/freeze_wb_contract_audit.py --verify',

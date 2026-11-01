@@ -58,7 +58,7 @@ def main() -> None:
                     "temperature": g["temperature"], "sample_idx": g["sample_idx"],
                     "dimension": g["dimension"], "split": g["split"], "input_text": g["input_text"],
                     "finish_reason": g.get("finish_reason")}
-            if g.get("namespace"):   # D-012 draw id (only on namespaced requests)
+            if g.get("namespace"):   # draw id (only on namespaced requests)
                 base["namespace"] = g["namespace"]
             for t in g["targets"]:
                 rows.append({**base, **t})

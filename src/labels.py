@@ -44,7 +44,7 @@ POLITE_VALUES = {"please", SOFT, "thanks/apology"}
 
 # Chip -> (general dimension, set of output values that honour it). Chips without a
 # general dimension (MUST, WANT, PAST/NOW/LATER, numbers) only matter as critical cues.
-# D-007: [SURE] is honoured by plain OR emphatic (emphatic is logged separately as a
+# Codebook rule: [SURE] is honoured by plain OR emphatic (emphatic is logged separately as a
 # stance addition); [PLEASE] by any explicit polite marker.
 CHIP_TO_GENERAL: dict[str, tuple[str, frozenset]] = {
     "[NOT]": ("polarity", frozenset({"negated"})),
@@ -100,12 +100,12 @@ _RAW = _os.environ.get("ORACLE_RAW") == "1"
 
 def critical_match(dimension: str, variant_value: str, label: str | None) -> bool | None:
     """Does an extracted critical label honour the variant's critical value?
-    D-007: on certainty, 'plain assertion' is honoured by plain OR emphatic."""
+    On certainty, 'plain assertion' is honoured by plain OR emphatic."""
     if label is None:
         return None
     if dimension == "certainty" and variant_value == PLAIN_A:
         return label in (PLAIN_A, EMPH)
-    # D-015: oracle identity test showed 'acceptance' overlaps 'statement' (verbatim source flagged).
+    # Oracle identity test showed 'acceptance' overlaps 'statement' (verbatim source flagged).
     # Set ORACLE_RAW=1 to reproduce the uncorrected oracle.
     if dimension == "speech_act" and variant_value == "acceptance" and not _RAW:
         return label in ("acceptance", "statement")

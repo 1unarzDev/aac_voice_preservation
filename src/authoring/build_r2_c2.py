@@ -1,16 +1,16 @@
-"""Builder for data/items/r2_c2.jsonl: W-C speech-act stratum (PREREG_R2), 80 families r2act-001..080.
+"""Builder for data/items/r2_c2.jsonl: W-C speech-act stratum, 80 families r2act-001..080.
 
 All sentences were hand-written / hand-edited by the item author (Claude); no LLM API was used.
 Edit here, not the JSONL.  Re-run:
     python3 src/authoring/build_r2_c2.py && python3 src/validate_items.py data/items/r2_c2.jsonl
 
-Design (PREREG_R2 W-C, speech act; no refusal/acceptance pairs):
+Design (round-2 W-C, speech act; no refusal/acceptance pairs):
   contrasts      statement-question (SQ), request-statement (RS), question-request (QR)
   construction   seeded (40): one variant is a minimally edited real message from
                  data/raw/aactext/sent_train_aac.txt (never a line whose text is in
                  data/specs/aactext_sample400.jsonl); the partner is the speech-act counterfactual.
                  drafted (30): written independently.  adversarial (10): codebook boundary cases
-                 ("Can I ...?" = question, D-007; you-subject declaratives = statement, CB-1;
+                 ("Can I ...?" = question; you-subject declaratives = statement, CB-1;
                  indirect requests "I need you to ...", keyed request/command, agent per CB-7;
                  "Will you ...?" request vs "Did you ...?" question).
   Agent and polarity are held constant inside every family (affirmative throughout; requests are
@@ -20,8 +20,8 @@ Design (PREREG_R2 W-C, speech act; no refusal/acceptance pairs):
   template: the syntactic construction pair (e.g. can-you~did-you).
   cluster_id: seeded -> r2c-seed-NNNNN (one cluster per seed line, same id as build_r2_c1 so a seed used in
   two strata is one cluster); drafted -> r2c-dra-<order-free template>; adversarial -> r2c-adv-<boundary
-  construction> (verifier V2-03, orchestration/item_verification_r2cd.md).
-  primary_exclude: "D-018" on the two "I need you to ..." families (excluded from P1, descriptive only).
+  construction> (verifier V2-03, analysis/item_verification/r2_c2.md).
+  primary_exclude: "D-018" (exclusion code) on the two "I need you to ..." families (excluded from P1, descriptive only).
   A/B order alternates by family index so neither value is systematically variant A.
 """
 from __future__ import annotations
@@ -205,7 +205,7 @@ DRAFTED = [
 ]
 
 ADVERSARIAL = [
-    # "Can I ...?" = question (D-007), not request; partner = speaker plan statement (act-04/07/13 pattern).
+    # "Can I ...?" = question, not request; partner = speaker plan statement (act-04/07/13 pattern).
     ("adv:can-I~I'm-ing", ("Can I park in the staff car park?", Q), ("I'm parking in the staff car park.", S), "I",
      "park car", "staff", None, "Adversarial (D-007): 'Can I ...?' is a permission question, and a judge may call it a request. Default: question."),
     ("adv:can-I~I'm-ing", ("I'm eating before the blood test.", S), ("Can I eat before the blood test?", Q), "I",

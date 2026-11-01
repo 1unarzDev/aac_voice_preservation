@@ -137,7 +137,7 @@ for ch in ["chip1", "chipall", "full"]:
              "runs/main1/scored.parquet; quarantine-inclusive sensitivity")
 put("n_fam_dim", all_scored.groupby("dimension").family_id.nunique().min(), "runs/main1/scored.parquet (design inventory)", "int")
 put("n_fam_dim_primary_min", d.groupby("dimension").family_id.nunique().min(), src_main, "int")
-put("n_rows_main", len(d[d.prompt_id != "P1"]), src_main + " (P1 excluded, D-010)", "int")
+put("n_rows_main", len(d[d.prompt_id != "P1"]), src_main + " (P1 excluded: cached sensitivity arm)", "int")
 put("n_texts_main", d[d.prompt_id != "P1"].text_id.nunique(), src_main, "int")
 put("n_requests_main", d[d.prompt_id != "P1"].request_key.nunique(), src_main, "int")
 put("n_models", d.model.nunique(), src_main, "int")
@@ -397,7 +397,7 @@ if sg.exists():
     put("oracle_ready", 1, str(sg.relative_to(ROOT)), "int")
 
 
-# ------------------------------------------- oracle identity relation (D-015) ---
+# ------------------------------------------- oracle identity relation (fixed oracle) ---
 # MR0 (identity): if the output repeats the full source verbatim, the verdict must be PASS.
 import re as _re
 _all_items = {}
@@ -433,7 +433,7 @@ if RAW.exists():
         put("id_fail_got", top.index[0][1], srcI, "str")
         put("id_fail_share_top", top.iloc[0] / len(fails), srcI)
     vf = identity_rows(all_scored)
-    put("id_fail_fixed", int((~vf.critical_match.astype(bool)).sum()), src_main + " (fixed oracle, D-015)", "int")
+    put("id_fail_fixed", int((~vf.critical_match.astype(bool)).sum()), src_main + " (fixed oracle)", "int")
     # how much the fix moves the headline cue-present numbers
     r0 = raw[(raw.prompt_id == "P0") & (raw.channel == "full")]
     put("match_full_raw", r0.critical_match.astype(bool).mean(), srcI)
@@ -450,8 +450,8 @@ put_frac("act_q_to_offer", int((qx.critical == "offer/suggestion").sum()), len(q
 fr = p0[(p0.dimension == "speech_act") & (p0.channel == "full") & (p0.variant_value == "refusal")]
 put_frac("act_full_refusal_kept", int(fr.critical_match.sum()), len(fr), src_main)
 
-# ============================================== REVISION (cycle-1 decision) ===
-# Everything below reads the ACTION-2 refreshed artifacts (shared label resolution,
+# ============================================== refreshed artifacts ===
+# Everything below reads the refreshed artifacts (shared label resolution,
 # primary exclusion of act-10/act-16). Each block is optional: missing inputs leave the
 # keys undefined and main.tex prints \pending or a red [key].
 def wilson(k, n, z=1.959964):
@@ -492,7 +492,7 @@ for pr in ["P0", "P1"]:
     pl, po, a, r = pz_dir(pzf[pzf.prompt_id == pr])
     tag = pr.lower()
     put_frac(f"{tag}_pz_added", int(a.sum()), len(pl), src_main + f" {pr} full politeness plain targets made polite"
-             + (" (cached P1 sensitivity, not a primary arm; D-010)" if pr == "P1" else ""))
+             + (" (cached P1 sensitivity, not a primary arm)" if pr == "P1" else ""))
     put_frac(f"{tag}_pz_removed", int(r.sum()), len(po), src_main + f" {pr} full polite targets made plain")
     for m in MODELS:
         put_frac(f"{tag}_pz_added_{SHORT[m]}", int(a[pl.model == m].sum()), int((pl.model == m).sum()), src_main)
@@ -644,8 +644,8 @@ for pr in ["P2", "S3"]:
         put_frac(f"covk_{pr.lower()}_{DSHORT[dim]}", int(round((x.estimate * x.n).sum())), int(x.n.sum()),
                  "analysis/main1/coverage.csv (sets)")
 
-# ---- exploratory H1 (cycle-1 hypothesis screen; replication is W-C's job)
-HC = ROOT / "ideas/cycles/c1/hyp_checks.json"
+# ---- exploratory H1 (main1 hypothesis screen; replication is W-C's job)
+HC = ROOT / "analysis/derived/main1_hyp_checks.json"
 if HC.exists():
     hc = json.load(open(HC))
     h = hc.get("H1/main1/P0/llama3.1-8b")
@@ -670,8 +670,8 @@ for tag, rels in [("wb", ["analysis/wb/report.md", "analysis/wb/report_wb1i.md"]
                         put(f"{tag}_{k_}", v_, str(hj.relative_to(ROOT)), "int" if isinstance(v_, int) else "f3")
             break
 
-# ================================================================ cycle 2 ===
-# Manuscript-formatted macros for the cycle-2 rewrite (ideas/cycles/c2/decision.md, ACTION 4).
+# ================================================================ round 2 ===
+# Manuscript-formatted macros for the round-2 analyses.
 # Every value is read from a frozen analysis file; nothing is typed. Keys are prefixed c2:
 #   wc*  W-C arbitrated analysis (analysis/r2c/*; 10,000 cluster resamples, seed 20261031)
 #   wd*  W-D (analysis/r2d/headline.json) and its C32 decomposition (analysis/applicability)
@@ -719,7 +719,7 @@ if (R2C / "primary.json").exists():
     put("wc_n_fam", hd["n_families"], "analysis/r2c/headline.json", "int")
     put("wc_n_fam_incl", hd["n_families_inclusive"], "analysis/r2c/headline.json", "int")
     put("wc_n_models", hd["n_models"], "analysis/r2c/headline.json", "int")
-    # analyzed families per dimension: scored inventory minus the frozen D-018 exclusions
+    # analyzed families per dimension: scored inventory minus the frozen primary exclusions
     _md = json.load(open(R2C / "metadata.json"))
     _fams = pd.read_parquet(ROOT / _md["table"], columns=["family_id"])["family_id"].drop_duplicates()
     _fams = _fams[~_fams.isin(_md["exclusions"])]
@@ -875,7 +875,7 @@ for sub in ["returns_wc", "returns_wb", "returns_repair"]:
 
 # --------------------------------------------------------- examples table ---
 # Examples are NOT reselected here. They are the stored occurrences frozen in
-# paper/figs/example_manifest.json (story rules E1-E10, ideas/cycles/c1/story.md). This
+# paper/figs/example_manifest.json (story rules E1-E10, analysis/examples/main1_story_evidence.json). This
 # script re-reads every quoted string from runs/<run>/outputs.jsonl by output_id and
 # aborts on any mismatch, then prints each row with the rate of its declared stratum
 # (as \RES keys, so the rate cannot drift from the macros).
@@ -963,11 +963,11 @@ lines = [f"{a} & {b} & {c} & {d} & {e_}\\\\[2pt]" for a, b, c, d, e_ in rows]
 (OUT / "examples_table.tex").write_text(
     "% generated by make_macros.py from paper/figs/example_manifest.json -- do not edit\n" + "\n".join(lines) + "\n")
 
-# ------------------------------------------------- cycle-2 gallery (Fig. 1) ---
-# Cards S1, S2, S5, S7, S9 from ideas/cycles/c2/story_evidence.json (declared rules in story.md)
+# ------------------------------------------------- example gallery (Fig. 1) ---
+# Cards S1, S2, S5, S7, S9 from analysis/examples/story_evidence.v2.json (declared selection rules per card)
 # plus the E10 oracle inset from paper/figs/example_manifest.json. Every (output_id, visible
 # input, text) triple is re-read from runs/<run>/outputs.jsonl; any mismatch aborts.
-SE = ROOT / "ideas/cycles/c3/story_evidence.v2.json"
+SE = ROOT / "analysis/examples/story_evidence.v2.json"
 _occ_cache: dict[str, set] = {}
 
 
@@ -994,8 +994,8 @@ if SE.exists():
     n_gal += 1
     put("gal_n_verified", n_gal, "story_evidence.json + example_manifest.json strings re-read from runs/*/outputs.jsonl", "int")
     ay = cards["S7"]["rates"]["ask_you_prefix_among_fixed"]
-    put("gal_askyou_k", ay["k"], "ideas/cycles/c3/story_evidence.v2.json S7/S9 (post hoc lexical diagnostic)", "int")
-    put("gal_askyou_n", ay["n"], "ideas/cycles/c3/story_evidence.v2.json S7/S9 (post hoc lexical diagnostic)", "int")
+    put("gal_askyou_k", ay["k"], "analysis/examples/story_evidence.v2.json S7/S9 (post hoc lexical diagnostic)", "int")
+    put("gal_askyou_n", ay["n"], "analysis/examples/story_evidence.v2.json S7/S9 (post hoc lexical diagnostic)", "int")
 
     def exact(inp):  # the stored input string verbatim, wrapper prefix included (no rendering)
         return r"\kw{" + tex(inp) + "}"
@@ -1032,7 +1032,7 @@ if SE.exists():
               r"\texttt{[?]} targets not kept as questions: \RES{wc_qfail_k}/\RES{wc_qfail_n}; of these, coded as requests: \RES{wc_q2req_k}/\RES{wc_qfail_n}"))
     glines = [f"{a_} & {b_} & {c_} & {d_}\\\\" for a_, b_, c_, d_ in g]
     (OUT / "gallery_table.tex").write_text(
-        "% generated by make_macros.py from ideas/cycles/c3/story_evidence.v2.json (S2, S1, S5) -- do not edit\n"
+        "% generated by make_macros.py from analysis/examples/story_evidence.v2.json (S2, S1, S5) -- do not edit\n"
         + "\n\\midrule\n".join(glines) + "\n")
 
     # Oracle inset (E10) for sec:oracle.
@@ -1050,7 +1050,7 @@ if SE.exists():
         rows.append(rf"{name}\newline {{\scriptsize {MS[ss[0]['model']]}}} & {exact(ss[0]['input_text'])}\newline "
                     rf"P0: {outq(ss[0]['text'])}\newline G1: {outq(ss[1]['text'])}\\")
     (OUT / "guard_table.tex").write_text(
-        "% generated by make_macros.py from ideas/cycles/c3/story_evidence.v2.json (S7, S9) -- do not edit\n"
+        "% generated by make_macros.py from analysis/examples/story_evidence.v2.json (S7, S9) -- do not edit\n"
         + "\n\\midrule\n".join(rows) + "\n")
 
 # W-C headline import check (consumed by analysis/r2c/verify_artifacts.py)
@@ -1062,7 +1062,7 @@ _mvj = json.load(open(_mv)) if _mv.exists() else {}
 _mvj["se4all"] = {"headline_keys_imported": len(_imp), "values_match": bool(_ok)}
 _mv.write_text(json.dumps(_mvj, indent=2) + "\n")
 
-# ---- R5 input-builder validator replay (cycle-3 Action 5; ledger C38). Census, no CI.
+# ---- R5 input-builder validator replay. Census, no CI.
 _R5 = "analysis/r5_validator/replay.json"
 _r5 = json.load(open(ROOT / _R5))
 assert _r5["known_conflicts_rejected"] == _r5["known_conflicts"] == _r5["verdicts"]["conflicting"], "R5 conflicts"
@@ -1074,7 +1074,7 @@ put("r5_sure", _r5["sure_granularity_flagged"], _R5, "int")
 put("r5_sure_cert", _r5["coarse_certified"], _R5, "int")
 put("r5_unknown", _r5["verdicts"]["unknown"], _R5, "int")
 
-# ---- frozen guard transfer to W-C speech act (ledger C37, accepted with qualifications, D-045). Macro view only;
+# ---- frozen guard transfer to W-C speech act (accepted with qualifications). Macro view only;
 # the intervention analysis belongs to CALE-AI. Source: analysis/guard_wc/headline.json, gated on ACCEPTANCE.
 _GT = "analysis/guard_wc/headline.json"
 _gt = json.load(open(ROOT / _GT))
