@@ -18,6 +18,12 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   other parts. See the Part 4 section below.
 - **Part 5, `wc_source_check.html`** (20 sentence pairs) and **Part 6, `wb_corpus_check.html`** (20 messages, two
   passes): optional, about 15 minutes each, only after Parts 1–4. See the sections at the end.
+- **Part 7, `write_pairs.html`** (write 15 sentence pairs): about 35 minutes, only if assigned as a writer. See the
+  Part 7 section below; it includes the release of your sentences under CC BY 4.0.
+- **Part 8, `check_pairs.html`** with a check file from the coordinator (30 sentence pairs written by other people):
+  about 20–25 minutes per file, only if assigned.
+- **Part 9, `keyword_elicitation.html`** with a message file from `elicitation_sets/` (37–38 messages): about 20
+  minutes, only if assigned.
 - **Part 10, `part10_gold_new.json`** (162 sentences, same tool and task as Parts 1–3): about 75–90 minutes, only
   if the coordinator assigned it. It can be split into two sittings. See the Part 10 section below.
 - **Part 11, `repair_audit_transfer.html`** (40 new sentences, same task as Part 4): about 15–20 minutes, only if
@@ -105,6 +111,74 @@ devices, each shortened to a few keywords.
 In Pass 1 there is no "right" set: we want to know which readings people find natural. Don't go back to Pass 1
 after seeing the messages; the tool prevents this anyway.
 
+## Part 7 (if assigned, ~35 min): write sentence pairs, `write_pairs.html`
+Here you **write** test sentences instead of labelling them. Your coordinator gives you a link or a dimension:
+polarity (negation), speech act, politeness, certainty, agent (who does it) or time.
+
+1. Open `write_pairs.html` with the fragment your coordinator gave you, e.g. `write_pairs.html#dim=agent&rot=4&id=P07`
+   (this fixes your dimension and topic order and fills in your ID). Without a fragment, enter your ID, press `Enter`,
+   and choose the dimension you were given (`1`–`6`).
+2. Read the instructions and examples for your dimension, then read the release note below and tick the box.
+3. **3 practice pairs** come first: say whether each pair is ready or what is wrong with it (`1`–`4`). You get feedback.
+4. Then write **15 pairs**. For each pair:
+   - **Sentence A**: an everyday message an adult might send or say (4 to 12 words). Each pair suggests a topic (health,
+     sensory, boundaries, work/school, plans, food, transport, money, relationships, self-advocacy, hobbies). Please
+     follow it unless it really does not work.
+   - **Sentence B**: A changed **only** on your dimension. Everything else (people, action, objects, place) stays the same.
+   - The **value** of each sentence on your dimension (e.g. affirmative / negated).
+   - **Keywords**: 2 to 4 words found in both sentences, as someone would select them on a communication device. They
+     must not give away the difference (no not/never/no, please/could/would, maybe/might/think, I/you/she, question words,
+     time words), and someone seeing only the keywords should be able to mean either sentence.
+   - Both sentences must share one more word that is not a keyword (a place, time, object or person).
+   - Optionally a one-line **situation**, only if the message needs it.
+5. The box under the form checks your pair as you type: **Fix** items must be fixed before the pair is saved; **Check**
+   items are worth a second look. Keys: `Enter` moves to the next box and, in the keyword box, saves the pair;
+   `Ctrl`+`Enter` saves from anywhere; `Page Down` / `Page Up` move between pairs without checking, so you can come back.
+6. Avoid stereotypes (about gender, age, disability, culture or religion), real names and private details, and
+   anything offensive. Use roles or invented first names ("my sister", "the nurse", "Sam").
+7. Click **Download CSV** at the end: `write_pairs_<dimension>_<ID>.csv`.
+
+**Release of your sentences (consent).** The tool shows this text and asks you to agree before you start:
+
+> The sentences, keywords and situations you write will be published with the study data under the Creative Commons
+> Attribution 4.0 licence (CC BY 4.0), so that other researchers can reuse them. You will be credited as an anonymous
+> item writer by your writer ID only; no name or other personal data is collected. Do not include real names or private
+> details. You can stop at any time; nothing is used unless you send your file.
+
+If you do not agree, do not start Part 7. Your sentences are used only if the box is ticked in your file.
+
+## Part 8 (if assigned, ~20–25 min per file): check other people's sentence pairs, `check_pairs.html`
+This is the same task as Part 5, on pairs written by other annotators in Part 7. You never get a file with your own
+pairs; the tool refuses to start if a file contains them.
+
+1. Open `check_pairs.html`, click **Check file** and choose the file your coordinator sent you (e.g. `hwc007.json`).
+   Enter **the same annotator ID** and press `Enter`.
+2. Two practice families with feedback come first, as in Part 5.
+3. For each pair answer the same four questions as in Part 5: the value of sentence **A** and of sentence **B** on the
+   named dimension, *"Could the bare keywords reasonably mean either sentence?"*, and *"Do A and B differ ONLY on that
+   dimension?"* (if not, type what else differs). The help panel defines each dimension, including certainty, agent
+   and time.
+4. Keys as in Part 5 (`1`–`7`, `S`, `↑`/`↓`, `Enter`, `Backspace`). Progress is saved per file.
+5. Click **Download CSV** at the end: `check_pairs_<file>_<ID>.csv`.
+
+Judge the words on the page. You are not told what the writer intended.
+
+## Part 9 (if assigned, ~20 min): choose keywords, `keyword_elicitation.html`
+Here you **choose keywords** for real messages written for communication devices (AACText, CC BY 4.0).
+
+1. Open `keyword_elicitation.html`, click **Message file** and choose the file your coordinator named, from the
+   `elicitation_sets` folder (e.g. `elic_s03_r2.json`). Enter **the same annotator ID** and press `Enter`.
+2. You see one full message at a time with this instruction: *"Type the 2–4 words you would select on a keyword-based
+   communication device to get this message across, as if each word takes a long time to select."*
+3. Type your words, separated by spaces, and press `Enter`. There is no right answer: we want the words **you** would
+   really choose, and you may use words that are not in the message. A symbol typed as its own word (for example `?`)
+   counts as one selection. If a message makes no sense to you, use **I can't do this one**.
+4. Two practice messages come first; the feedback only checks the number of words. `Page Up` goes back; an optional
+   note box is under the keyword box. Progress is saved in the browser and time per message is recorded.
+5. Click **Download CSV** at the end: `keyword_elicitation_<file>_<ID>.csv`.
+
+You will not see any AI-generated sentences in this part.
+
 ## Part 10 (if assigned, ~75–90 min): more sentence labels, `part10_gold_new.json`
 This is the same task as Parts 1–3, on 162 new sentences. Use the same tool and the same codebook.
 
@@ -130,7 +204,8 @@ Don't compare these sentences with the ones in Part 4. Judge each sentence on it
 
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
-`wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `labels_gold_new_<ID>.csv` for Part 10 and
+`wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `write_pairs_<dimension>_<ID>.csv`,
+`check_pairs_<file>_<ID>.csv` and `keyword_elicitation_<file>_<ID>.csv` for Parts 7–9, `labels_gold_new_<ID>.csv` for Part 10 and
 `repair_audit_transfer_<ID>.csv` for Part 11), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
