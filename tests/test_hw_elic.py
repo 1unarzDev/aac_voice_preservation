@@ -271,7 +271,7 @@ def test_elicitation_sets_committed():
             assert any(o == orders[0][c:] + orders[0][:c] for c in range(1, n))
         assert all(kid[x]["set"] == s and len(set(kid[x]["positions_by_replicate"])) == 3 for x in orders[0])
     asg = list(csv.DictReader(open(ROOT / "annotation/elicitation_assignment.csv")))
-    assert len(asg) == 24 and len({(r["annotator"], r["set"]) for r in asg}) == 24
+    assert len(asg) == 48 and len({(r["annotator"], r["set"]) for r in asg}) == 48
 
 
 def test_score_elicitation(tmp_path):
