@@ -1,0 +1,272 @@
+"""Score Part 4 repair-audit returns (annotation_package/repair_audit.html CSVs).
+
+usage: python src/score_repair_audit.py [CSV ...]            (default: annotation/returns_repair/*.csv)
+          [--key annotation/repair_audit_key.csv] [--out analysis/repair_audit]
+
+Per arm (repaired = guard G1 texts that differ from the first pass; control = unchanged
+first-pass texts the judge scored as passing), Wilson 95% CIs on:
+  usable              Pass A quality == "yes"            (sensitivity: yes or "minor fix needed")
+  contract-preserving Pass B contract == "yes"
+  usable & preserving both of the above
+  added stance        Pass B added == "yes"  (meaning, certainty, politeness or speaker not given)
+Units: (a) per annotator rating, items as the unit within an annotator; (b) item-level
+consensus = strict majority of the annotators who gave a usable answer (ties and all-unsure
+are 'unknown', reported, excluded from the denominator); (c) all ratings pooled (ratings
+are not independent across annotators, so the pooled CI is descriptive only).
+"Can't judge" and missing answers are unknown, never coded as failure or success. Practice
+rows are dropped. The repaired-minus-control difference uses Newcombe's hybrid score CI.
+Pool-weighted (Hajek, 1/pi_mc) consensus point estimates are given as a sensitivity: the
+sample is model-balanced, not proportional to the eligible pool.
+Agreement: pairwise Cohen's kappa and percent agreement per question, and Krippendorff's
+nominal alpha across all annotators (Pass A also as yes / not-yes).
+Outputs: <out>/report.md, <out>/items.csv (key joined with every rating + consensus),
+<out>/summary.json.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import glob
+import json
+import sys
+from collections import Counter, defaultdict
+from itertools import combinations
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from agree_stats import cohen_kappa  # noqa: E402
+from score_gold import alpha_nominal, wilson  # noqa: E402
+
+Q = {"quality": ["yes", "minor fix needed", "no"], "contract": ["yes", "partly", "no"], "added": ["yes", "no"]}
+ARMS = ("repaired", "control")
+
+
+def read_csv(p):
+    with open(p, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def load_returns(paths, key):
+    ratings = {}          # (annotator, item_id) -> dict
+    problems = []
+    for p in paths:
+        for r in read_csv(p):
+            if r.get("practice") == "1" or r["item_id"].startswith("prac-"):
+                continue
+            if r["item_id"] not in key:
+                problems.append(f"{p}: unknown item {r['item_id']}")
+                continue
+            a = r["annotator"].strip()
+            k = (a, r["item_id"])
+            if k in ratings:
+                problems.append(f"{p}: duplicate rating {k}; keeping the later export")
+            unsure_b = set(filter(None, (r.get("b_unsure") or "").split("|")))
+            ratings[k] = {
+                "annotator": a, "item_id": r["item_id"],
+                "quality": None if r.get("a_unsure") == "1" else (r.get("a_quality") or None),
+                "contract": None if "contract" in unsure_b else (r.get("b_contract") or None),
+                "added": None if "added" in unsure_b else (r.get("b_added") or None),
+                "a_note": r.get("a_note", ""),
+                "a_time_ms": float(r["a_time_ms"]) if r.get("a_time_ms") else None,
+                "b_time_ms": float(r["b_time_ms"]) if r.get("b_time_ms") else None,
+            }
+            for q, opts in Q.items():
+                v = ratings[k][q]
+                if v is not None and v not in opts:
+                    problems.append(f"{p}: {k} {q}={v!r} not a valid option; treated as unknown")
+                    ratings[k][q] = None
+    return ratings, problems
+
+
+def outcomes(r):
+    """Binary endpoints from one rating; None = unknown."""
+    q, c, ad = r["quality"], r["contract"], r["added"]
+    usable = None if q is None else q == "yes"
+    usable_lax = None if q is None else q in ("yes", "minor fix needed")
+    pres = None if c is None else c == "yes"
+    if usable is False or pres is False:
+        both = False
+    elif usable is None or pres is None:
+        both = None
+    else:
+        both = True
+    return {"usable": usable, "usable_or_minor": usable_lax, "preserving": pres,
+            "usable_and_preserving": both, "added_stance": None if ad is None else ad == "yes"}
+
+
+ENDPOINTS = ["usable", "usable_or_minor", "preserving", "usable_and_preserving", "added_stance"]
+
+
+def rate(vals):
+    known = [v for v in vals if v is not None]
+    k, n = sum(known), len(known)
+    return {"k": k, "n": n, "unknown": len(vals) - n, "p": (k / n) if n else None, "ci": wilson(k, n)}
+
+
+def newcombe(a, b):
+    """Difference a.p - b.p with Newcombe hybrid score CI (method 10)."""
+    if not a["n"] or not b["n"]:
+        return None
+    d = a["p"] - b["p"]
+    l1, u1 = a["ci"]; l2, u2 = b["ci"]
+    lo = d - ((a["p"] - l1) ** 2 + (u2 - b["p"]) ** 2) ** 0.5
+    hi = d + ((u1 - a["p"]) ** 2 + (b["p"] - l2) ** 2) ** 0.5
+    return {"diff": d, "ci": [round(max(-1, lo), 3), round(min(1, hi), 3)]}
+
+
+def consensus(vals):
+    known = [v for v in vals if v is not None]
+    if not known:
+        return None
+    c = Counter(known)
+    if c[True] * 2 > len(known):
+        return True
+    if c[False] * 2 > len(known):
+        return False
+    return None   # tie
+
+
+def fmt(r):
+    if not r or not r["n"]:
+        return "n/a (0 known)"
+    lo, hi = r["ci"]
+    s = f"{r['k']}/{r['n']} = {100 * r['p']:.1f}% [{100 * lo:.1f}, {100 * hi:.1f}]"
+    return s + (f"; {r['unknown']} unknown" if r["unknown"] else "")
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("csv", nargs="*")
+    ap.add_argument("--key", default=str(ROOT / "annotation" / "repair_audit_key.csv"))
+    ap.add_argument("--out", default=str(ROOT / "analysis" / "repair_audit"))
+    a = ap.parse_args()
+    paths = a.csv or sorted(glob.glob(str(ROOT / "annotation" / "returns_repair" / "*.csv")))
+    key = {r["item_id"]: r for r in read_csv(a.key)}
+    if not paths:
+        print("no return CSVs found (annotation/returns_repair/*.csv)", file=sys.stderr)
+        return 1
+    ratings, problems = load_returns(paths, key)
+    annots = sorted({r["annotator"] for r in ratings.values()})
+    out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+
+    for r in ratings.values():
+        r.update(outcomes(r))
+    by_item = defaultdict(list)
+    for r in ratings.values():
+        by_item[r["item_id"]].append(r)
+
+    S = {"returns": paths, "annotators": annots, "problems": problems, "n_items_key": len(key),
+         "per_arm": {}, "per_annotator": {}, "pooled_ratings": {}, "agreement": {}}
+    item_rows = []
+    for iid, k in key.items():
+        rs = by_item.get(iid, [])
+        row = {**k, "n_ratings": len(rs)}
+        for e in ENDPOINTS:
+            row["cons_" + e] = consensus([r[e] for r in rs])
+        for an in annots:
+            m = next((r for r in rs if r["annotator"] == an), None)
+            for f in ("quality", "contract", "added", "a_note", "a_time_ms", "b_time_ms"):
+                row[f"{an}_{f}"] = m[f] if m else None
+        item_rows.append(row)
+
+    for arm in ARMS:
+        its = [r for r in item_rows if r["arm"] == arm]
+        S["per_arm"][arm] = {"items": len(its), "rated_items": sum(r["n_ratings"] > 0 for r in its)}
+        for e in ENDPOINTS:
+            S["per_arm"][arm][e] = rate([r["cons_" + e] for r in its if r["n_ratings"] > 0])
+            # Hajek pool-weighted point estimate (sensitivity)
+            kw = [(r["cons_" + e], 1 / float(r["pi_mc"])) for r in its
+                  if r["cons_" + e] is not None and float(r["pi_mc"]) > 0]
+            S["per_arm"][arm][e]["hajek_weighted_p"] = (sum(w for v, w in kw if v) / sum(w for _, w in kw)) if kw else None
+        S["pooled_ratings"][arm] = {e: rate([r[e] for r in ratings.values() if key[r["item_id"]]["arm"] == arm])
+                                    for e in ENDPOINTS}
+        for an in annots:
+            rr = [r for r in ratings.values() if r["annotator"] == an and key[r["item_id"]]["arm"] == arm]
+            S["per_annotator"].setdefault(an, {})[arm] = {e: rate([r[e] for r in rr]) for e in ENDPOINTS}
+            S["per_annotator"][an]["median_time_s"] = {
+                p: (sorted(t)[len(t) // 2] / 1000 if t else None)
+                for p, t in (("A", [r["a_time_ms"] for r in ratings.values() if r["annotator"] == an and r["a_time_ms"]]),
+                             ("B", [r["b_time_ms"] for r in ratings.values() if r["annotator"] == an and r["b_time_ms"]]))}
+    S["difference_repaired_minus_control"] = {
+        e: newcombe(S["per_arm"]["repaired"][e], S["per_arm"]["control"][e]) for e in ENDPOINTS}
+
+    # breakdown of consensus by channel group (descriptive)
+    S["by_channel_group"] = {}
+    for arm in ARMS:
+        for g in ("cue", "ambiguous"):
+            its = [r for r in item_rows if r["arm"] == arm and r["channel_group"] == g and r["n_ratings"]]
+            S["by_channel_group"][f"{arm}/{g}"] = {e: rate([r["cons_" + e] for r in its])
+                                                  for e in ("usable", "preserving", "usable_and_preserving", "added_stance")}
+
+    # agreement
+    variants = {"quality": lambda v: v, "quality_yes_vs_not": lambda v: None if v is None else v == "yes",
+                "contract": lambda v: v, "contract_yes_vs_not": lambda v: None if v is None else v == "yes",
+                "added": lambda v: v}
+    for name, f in variants.items():
+        q = name.split("_")[0]
+        pw = []
+        for x, y in combinations(annots, 2):
+            common = [(f(ratings[(x, i)][q]), f(ratings[(y, i)][q])) for i in key
+                      if (x, i) in ratings and (y, i) in ratings]
+            common = [(u, v) for u, v in common if u is not None and v is not None]
+            pw.append({"pair": f"{x}-{y}", "n": len(common),
+                       "agree": round(sum(u == v for u, v in common) / len(common), 3) if common else None,
+                       "kappa": cohen_kappa([u for u, _ in common], [v for _, v in common]) if common else None})
+        cats = sorted({str(f(r[q])) for r in ratings.values() if f(r[q]) is not None})
+        idx = {c: i for i, c in enumerate(cats)}
+        units = [[idx[str(f(r[q]))] for r in by_item[i] if f(r[q]) is not None] for i in key]
+        units = [u for u in units if len(u) >= 2]
+        alpha = alpha_nominal(units, len(cats)) if units and len(cats) > 1 else None
+        S["agreement"][name] = {"pairwise": pw, "krippendorff_alpha_nominal": alpha, "units_with_2plus": len(units)}
+
+    cols = list(item_rows[0].keys())
+    with open(out / "items.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols); w.writeheader(); w.writerows(item_rows)
+    (out / "summary.json").write_text(json.dumps(S, indent=2, default=str) + "\n")
+
+    L = ["# Part 4 repair audit: human ratings\n",
+         f"Generated by `src/score_repair_audit.py`. Returns: {len(paths)} file(s), annotators: {', '.join(annots)}. "
+         f"Key: `{Path(a.key).relative_to(ROOT) if Path(a.key).is_relative_to(ROOT) else a.key}` "
+         f"(frozen hash-ordered sample, 20 repaired + 20 controls; `annotation/repair_audit_sample.json`).\n",
+         "Wilson 95% CIs on item-level consensus (strict majority of known answers; ties/unsure = unknown, excluded "
+         "from n and reported). Human ratings of a model-balanced sample: these are sample rates, not pool "
+         "prevalences; Hajek 1/pi weighted points are a sensitivity. Report the actual completed n.\n",
+         "| endpoint | repaired | control | repaired - control [Newcombe 95%] | Hajek-weighted (rep / ctl) |",
+         "|---|---|---|---|---|"]
+    for e in ENDPOINTS:
+        d = S["difference_repaired_minus_control"][e]
+        hw = [S["per_arm"][arm][e]["hajek_weighted_p"] for arm in ARMS]
+        L.append(f"| {e} | {fmt(S['per_arm']['repaired'][e])} | {fmt(S['per_arm']['control'][e])} | "
+                 + (f"{100 * d['diff']:+.1f} pp [{100 * d['ci'][0]:+.1f}, {100 * d['ci'][1]:+.1f}]" if d else "n/a")
+                 + " | " + " / ".join("n/a" if v is None else f"{100 * v:.1f}%" for v in hw) + " |")
+    L += ["\n## Per annotator (items within annotator)\n", "| annotator | arm | usable | preserving | usable & preserving | added stance |",
+          "|---|---|---|---|---|---|"]
+    for an in annots:
+        for arm in ARMS:
+            x = S["per_annotator"][an][arm]
+            L.append(f"| {an} | {arm} | {fmt(x['usable'])} | {fmt(x['preserving'])} | {fmt(x['usable_and_preserving'])} | {fmt(x['added_stance'])} |")
+    L += ["\n## By channel group (consensus, descriptive)\n", "| arm/group | usable | preserving | usable & preserving | added stance |", "|---|---|---|---|---|"]
+    for g, x in S["by_channel_group"].items():
+        L.append(f"| {g} | {fmt(x['usable'])} | {fmt(x['preserving'])} | {fmt(x['usable_and_preserving'])} | {fmt(x['added_stance'])} |")
+    L += ["\n## Agreement between annotators\n", "| question | pairwise (n, % agree, Cohen kappa) | Krippendorff alpha (nominal) |", "|---|---|---|"]
+    for name, x in S["agreement"].items():
+        pw = "; ".join(f"{p['pair']}: n={p['n']}, {'n/a' if p['agree'] is None else f'{100 * p['agree']:.0f}%'}, "
+                       f"k={'n/a' if p['kappa'] is None else p['kappa']}" for p in x["pairwise"]) or "single annotator"
+        al = x["krippendorff_alpha_nominal"]
+        L.append(f"| {name} | {pw} | {'n/a' if al is None else round(al, 3)} |")
+    L += ["\n## Not usable or not preserving (all kept; consensus)\n", "| item | arm | model | channel | input | sentence | notes |", "|---|---|---|---|---|---|---|"]
+    for r in sorted(item_rows, key=lambda r: (r["arm"], r["item_id"])):
+        if r["cons_usable"] is False or r["cons_preserving"] is False:
+            notes = " / ".join(str(r[f"{an}_a_note"]) for an in annots if r.get(f"{an}_a_note"))
+            L.append(f"| {r['item_id']} | {r['arm']} | {r['assigned_model']} | {r['channels']} | {r['input_text']} | "
+                     f"{r['text']} | {notes.replace('|', '/')} |")
+    if problems:
+        L += ["\n## Problems in returns\n"] + [f"- {p}" for p in problems]
+    (out / "report.md").write_text("\n".join(L) + "\n")
+    print("\n".join(L))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
