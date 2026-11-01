@@ -28,6 +28,21 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 EV = json.loads((HERE.parent / "evidence.json").read_text())
+ROOT = HERE.parents[2]
+
+
+def wc_ladder(dim: str, ch: str) -> dict:
+    """W-C P0 critical-match row (arbiter-resolved analysis) from analysis/r2c/channel_ladder.csv."""
+    import csv
+    with (ROOT / "analysis/r2c/channel_ladder.csv").open() as fh:
+        for r in csv.DictReader(fh):
+            if r["dimension"] == dim and r["channel"] == ch and r["metric"] == "critical_match":
+                return {"estimate": float(r["estimate"]), "ci_low": float(r["ci_low"]),
+                        "ci_high": float(r["ci_high"]), "k": float(r["sum"]), "n": int(r["n"])}
+    raise KeyError((dim, ch))
+
+
+WC_NONC, WC_CHIP, WC_FULL = (wc_ladder("speech_act", c) for c in ("noncrit", "chip1", "full"))
 
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#898781"
 GRID, AXIS = "#e1e0d9", "#c3c2b7"
@@ -58,6 +73,8 @@ def kill_verdicts() -> dict:
         "I1": g["G1_cue"]["fix"]["estimate"] >= .30 and g["G1_all"]["overcorr"]["estimate"] <= .10,
         "I2": s["polarity+certainty"]["diff_I2"]["estimate"] >= .30,
         "chip": c["d_chip1_noncrit"]["estimate"] >= .10 and c["chip1"]["estimate"] >= .8 * c["full"]["estimate"],
+        "chip_wc": (WC_CHIP["estimate"] - WC_NONC["estimate"] >= .10
+                    and WC_CHIP["estimate"] >= .8 * WC_FULL["estimate"]),
     }
 
 
@@ -66,7 +83,7 @@ def ledger():
     gr, sr = g["report"], s["report"]
     pc = sr["polarity+certainty"]
     kv = kill_verdicts()
-    verdict = lambda ok: "PASS" if ok else "KILL"
+    verdict = lambda ok: "PASS" if ok else "FAIL"
     n_cue = g["n_cue_targets"]
     rows = [
         dict(name="I1 Guard", sub="check supplied cues,\nregenerate on a flag\n(system side, runtime)",
@@ -100,9 +117,12 @@ def ledger():
                    f"{sr['cost_I2']['verified']}/{sr['cost_I2']['rewrites']} self-verified"],
              kill=f"gain ≥30 pp: {verdict(kv['I2'])}"),
         dict(name="Chip", sub="user adds one\ncommitment marker\n(user side)",
-             benefit=[("critical value matched", p(c["noncrit"]), p(c["chip1"]), None,
+             benefit=[("critical value matched,\ndiscovery (6 dimensions)", p(c["noncrit"]), p(c["chip1"]), None,
                        f"{int(c['noncrit']['k'])}→{int(c['chip1']['k'])} of {c['chip1']['n']}",
-                       100 * c["noncrit"]["estimate"] + 10)],
+                       100 * c["noncrit"]["estimate"] + 10),
+                      ("W-C speech act", p(WC_NONC), p(WC_CHIP), None,
+                       f"{int(WC_NONC['k'])}→{int(WC_CHIP['k'])} of {WC_CHIP['n']}",
+                       80 * WC_FULL["estimate"])],
              harm=[("lost after adding chip", p(c["lost_with_chip"]), None,
                     f"{int(c['lost_with_chip']['k'])} of {c['lost_with_chip']['n']}", None),
                    ("bare miss still missed", p(c["miss_persists"]), None,
@@ -111,7 +131,8 @@ def ledger():
                     f"{int(c['chip1_contra']['k'])} of {c['chip1_contra']['n']}", None)],
              cost=["+1 selection (nominal)²", "+0 calls",
                    f"all chips: {c['chipall_mean_chips']:.1f} selections"],
-             kill=f"gain ≥10 pp, ≥80% of full: {verdict(kv['chip'])}"),
+             kill=f"gain ≥10 pp, ≥80% of full: discovery {verdict(kv['chip'])}",
+             kill2=f"W-C speech act: {verdict(kv['chip_wc'])}"),
     ]
 
     W, H = 7.0, 4.4
@@ -173,11 +194,14 @@ def ledger():
                  color=INK, fontweight="bold", va="top")
         fig.text(X_COST / W, (y0 - 0.16 - 4 * 0.19 - 0.04) / H, ": ".join(kl[:-1]), fontsize=6.0,
                  color=INK2, va="top")
+        if "kill2" in r:
+            fig.text(X_COST / W, (y0 - 0.16 - 5 * 0.19 - 0.04) / H, r["kill2"], fontsize=6.6,
+                     color=INK, fontweight="bold", va="top")
         y0 = ybot - GAP - (0.0 if last else 0.06)
     # column heads
     for x, t in ((X_BEN, "Benefit (targeted endpoint)"), (X_HARM, "Harm ledger"), (X_COST, "Cost")):
         fig.text(x / W, (TOP + 0.08) / H, t, fontsize=7.8, fontweight="bold", color=INK, va="bottom")
-    fig.text(X_COST / W, 0.04 / H, "¹ local server, partial CPU offload\n² reading time not counted",
+    fig.text(X_NAME / W, 0.04 / H, "¹ local server, partial CPU offload\n² reading time not counted\nW-C tick: 80% of full-input match",
              fontsize=5.8, color=INK2, va="bottom", linespacing=1.1)
     from matplotlib.lines import Line2D
     h = [Line2D([], [], marker="o", ls="", mfc="white", mec=BASE, mew=1.2, ms=5, label="comparator (first pass, P2 set, length-matched word)"),
@@ -220,35 +244,49 @@ def setcell(arm: dict, rewritten: list[int], reading_names: dict) -> str:
     return r"\newline ".join(out)
 
 
+def applicability_row():
+    """Full-input P2 vs S3 for the declared H1 exact-partner example (analysis/applicability/examples.json)."""
+    exs = json.loads((ROOT / "analysis/applicability/examples.json").read_text())
+    res = json.loads((ROOT / "analysis/applicability/results.json").read_text())["preserved"]["H1/exact_partner"]
+    first = exs[0]
+    seen = set()
+    exs = [e for e in exs if not (e["output_id"] in seen or seen.add(e["output_id"]))]
+    same = [e for e in exs if e["request_key"] and e["family_id"] == first["family_id"] and e["variant"] == first["variant"]
+            and e["model"] == first["model"]]
+    p2 = sorted([e for e in same if e["prompt_id"] == "P2"], key=lambda e: e["suggestion_idx"])
+    s3 = sorted([e for e in same if e["prompt_id"] == "S3"], key=lambda e: (e["sample_idx"], e["suggestion_idx"]))
+    assert len(p2) == 3 and len(s3) == 3, (len(p2), len(s3))
+    def cell(arr):
+        out = []
+        for k, e in enumerate(arr):
+            mark = r"$^\ddagger$" if e["output_id"] == first["output_id"] else ""
+            out.append(rf"{k+1}.\,{q(e['text'])}{mark}")
+        return r"\newline ".join(out)
+    inp = first["input_text"]
+    rate = (rf"{SHORT[first['model']]}, {tex(first['family_id'])}/{first['variant']}, full input. Rule: first full-input P2 set containing "
+            rf"the other authored source ($\ddagger$) (family, model, variant, slot order). Sets reproducing the partner source: "
+            rf"P2 {frac(res['P2']['k'], res['P2']['n'])} vs.\ S3 {frac(res['S3']['k'], res['S3']['n'])}.")
+    return (r"Full-input set", kw(inp), "P2: " + cell(p2), "S3: " + cell(s3), rate)
+
+
 def gallery():
     g, s, c = EV["guard"], EV["span"], EV["chips"]
     G = {(x["category"], x["rank"]): x for x in g["gallery"]}
     cg = c["gallery"]
     rows = []
-    # Chip rows
-    r0, r1, r2 = cg["rows"]
-    rows.append((r"Chip", rf"{kw(r1['input'][10:])}\newline$\rightarrow$ {kw(r2['input'][10:])}",
-                 q(r1["output"]), q(r2["output"]),
-                 rf"{SHORT[cg['model']]}, {tex(cg['family_id'])}, negated target. Rule: first negated polarity target (family, model order). "
-                 rf"Polarity match {100*c['by_dim']['polarity']['noncrit']:.0f}\%$\rightarrow${100*c['by_dim']['polarity']['chip1']:.0f}\% "
-                 rf"(all dims {frac(c['noncrit']['k'], c['noncrit']['n'])}$\rightarrow${frac(c['chip1']['k'], c['chip1']['n'])})."))
-    f = cg["failure"]
-    rows.append((r"Chip", rf"{kw(f['noncrit_input'][10:])}\newline$\rightarrow$ {kw(f['input'][10:])}", q(f["noncrit_output"]), q(f["output"]),
-                 rf"{SHORT[f['model']]}, {tex(f['family_id'])}; target question, scored request. Rule: first speech-act chip failure. "
-                 rf"Speech-act chip match {100*c['by_dim']['speech_act']['chip1']:.1f}\%; bare misses still missed with a chip: "
-                 rf"{frac(c['miss_persists']['k'], c['miss_persists']['n'])}."))
     lab = {"fixed": "I1 repaired", "unfixed": "I1 not repaired", "changed_correct": "I1 changed correct"}
-    for key, note in ((("fixed", 1), "first"), (("unfixed", 1), "first"), (("fixed", 2), "second"),
+    for key, note in ((("fixed", 1), "first"), (("fixed", 2), "second"), (("unfixed", 1), "first"),
                       (("changed_correct", 1), "first")):
         x = G[key]
         inp = x["input"][10:] if x["input"].startswith("Keywords: ") else x["input"]
         if key[0] == "fixed" and key[1] == 1:
             rate = rf"{frac(x['pool_k'], x['pool_n'])} scored failures repaired."
         elif key[0] == "unfixed":
-            rate = rf"{frac(x['pool_k'], x['pool_n'])} failures remain; {g['residual_act']['k']}/{g['residual_act']['n']} of residuals involve speech act."
+            rate = (rf"{frac(x['pool_k'], x['pool_n'])} failures remain; {g['residual_act']['k']}/{g['residual_act']['n']} involve speech act; "
+                    rf"{g['residual_flagged']['k']}/{g['residual_flagged']['n']} still flagged by the monitor.")
         elif key[0] == "fixed":
-            rate = (rf"Scored pass, but not a usable sentence: {frac(g['ask_you_prefix']['k'], g['ask_you_prefix']['n'])} "
-                    r"repairs start ``Ask you'' (post hoc lexical count; fluency unmeasured).")
+            rate = (rf"Scored repair that is a fragment: {frac(g['ask_you_prefix']['k'], g['ask_you_prefix']['n'])} "
+                    r"scored repairs start ``Ask you'' (post hoc lexical count, not a fluency rate).")
         else:
             rate = (rf"Already-correct cue targets changed: {frac(g['changed_correct_cue']['k'], g['changed_correct_cue']['n'])}; "
                     r"none became a scored failure, yet the softener form changed.")
@@ -282,7 +320,8 @@ def gallery():
     rows.append(("I2 act drift", kw(e["bare"]), q(e["before"]), q(e["after"]),
                  rf"{SHORT[e['model']]}, {tex(e['family_id'])}, slot {e['slot']+1} (certainty rewrite). Rule: first certainty edit "
                  rf"that changes act (family, model, slot). Certainty edits changing act: {frac(bd['k'], bd['n'])}."))
-    L = [r"% AUTO-GENERATED by figs/make_caleai_figs.py from evidence.json -- do not edit by hand.",
+    rows.append(applicability_row())
+    L = [r"% AUTO-GENERATED by figs/make_caleai_figs.py from evidence.json and analysis/applicability -- do not edit by hand.",
          r"\begin{figure*}[!t]", r"\centering\footnotesize", r"\setlength{\tabcolsep}{3pt}",
          r"\renewcommand{\arraystretch}{1.12}",
          r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{2.55cm}>{\raggedright\arraybackslash}p{3.95cm}>{\raggedright\arraybackslash}p{4.05cm}>{\raggedright\arraybackslash}p{5.0cm}@{}}", r"\toprule",
@@ -290,14 +329,14 @@ def gallery():
          r"\midrule"]
     for k, rr in enumerate(rows):
         L.append(" & ".join(rr) + r"\\")
-        if k in (1, 5):
+        if k in (3, 6):
             L.append(r"\midrule")
     L += [r"\bottomrule", r"\end{tabular}",
-          r"\caption{Before/after gallery of real stored outputs, with no edits. Each row is chosen by the declared rule it names "
-          r"(hash order is SHA-1 of request, family, variant and channel, as in the intervention report). Its rate describes the population of that rule, "
-          r"so the gallery is not a random sample. Set rows show all three suggestions in both arms, in slot order, each with its "
-          r"scored reading ([?] = unclear on that dimension); $\dagger$ marks slots I2 rewrote. "
-          r"Chip rows compare against the length-matched non-critical word. Labels are machine-extracted; human validation is pending.}",
+          r"\caption{Before/after gallery of stored outputs, verbatim. Each row is chosen by the outcome-conditioned rule it names "
+          r"(hash order is SHA-1 of request, family, variant and channel, as in the intervention report); its rate describes that rule's population, "
+          r"so the gallery is illustrative, not a random sample. Set rows show all three suggestions in both arms, in slot order, with the scored reading "
+          r"([?] = unclear on that dimension); $\dagger$ marks slots I2 rewrote. Guard and I2 rows come from the discovery benchmark; the last row is "
+          r"W-C (exploratory channel comparison), whose two columns are the P2 and S3 arms for the same typed sentence rather than before and after. Labels are machine-extracted; the human extraction gate covered untreated outputs, not these repairs.}",
           r"\label{fig:gallery}", r"\end{figure*}"]
     (HERE / "gallery.tex").write_text("\n".join(L) + "\n")
 

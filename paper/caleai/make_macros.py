@@ -53,9 +53,12 @@ for arm in ("P0", "G1", "G1s"):
     a = arm.lower()
     pc(f"g_sp_{a}", gr[arm]["sp"]); pc(f"g_cm_{a}", gr[arm]["cm"])
     pc(f"g_ct_{a}", gr[arm]["ct"]); pc(f"g_pa_{a}", gr[arm]["pol_add"])
+    pc(f"g_spx_{a}", gr[arm]["sp"], d=2)  # two-decimal view used in the abstract and decision ledger
+    put(f"g_spc_{a}", f"{round(gr[arm]['sp']['estimate'] * g['n_cue_targets']):,}")
+put("g_sp_gain", f"{100 * (gr['G1']['sp']['estimate'] - gr['P0']['sp']['estimate']):.2f}")
 pc("g_fix", gr["G1_cue"]["fix"]); kn("g_fixc", round(gr["G1_cue"]["fix"]["estimate"] * gr["G1_cue"]["n_bad"]), gr["G1_cue"]["n_bad"])
 put("g_fix_fam", gr["G1_cue"]["fix"]["n_families"])
-pc("g_fixs", gr["G1s_cue"]["fix"]); kn("g_fixsc", round(gr["G1s_cue"]["fix"]["estimate"] * 80), gr["G1s_cue"]["n_bad"])
+pc("g_fixs", gr["G1s_cue"]["fix"]); kn("g_fixsc", round(gr["G1s_cue"]["fix"]["estimate"] * gr["G1s_cue"]["n_bad"]), gr["G1s_cue"]["n_bad"])
 pc("g_fix_all", gr["G1_all"]["fix"]); put("g_bad_all", gr["G1_all"]["n_bad"])
 kn("g_amb_fix", round(gr["G1_ambiguous"]["fix"]["estimate"] * gr["G1_ambiguous"]["n_bad"]), gr["G1_ambiguous"]["n_bad"])
 pc("g_oc_all", gr["G1_all"]["overcorr"]); kn("g_occ_all", round(gr["G1_all"]["overcorr"]["estimate"] * gr["G1_all"]["n_ok"]), gr["G1_all"]["n_ok"])
@@ -142,7 +145,7 @@ def leaves(x, path=""):
 
 
 for name, ready in EV["pending"].items():
-    if not ready:
+    if not ready or name in ("wc", "wd", "repair_audit"):
         continue
     put(f"{name}_ready", 1)
     f = ROOT / {"wc": "analysis/r2c/report.json", "wd": "analysis/r2d/report.json", "t3": "analysis/t3/report.json",
@@ -153,16 +156,123 @@ for name, ready in EV["pending"].items():
             put(key, f"{v:.3g}" if isinstance(v, float) else v)
 
 
-# ---------------- fresh W-C confirmation headline contract
-# Import the same flat W-C headline contract as SE4All, independent of whether
-# evidence.json was regenerated after the W-C analysis finished. Unit-scale
-# estimates and bounds remain numeric and get the same three-decimal formatting.
-wc_headline = ROOT / 'analysis/r2c/headline.json'
-if (wc_headline.parent / 'report.md').exists() and wc_headline.exists():
-    put('wc_ready', 1)
-    for key, value in json.loads(wc_headline.read_text()).items():
-        if isinstance(value, (int, float)) and not isinstance(value, bool):
-            put('wc_' + key, str(value) if isinstance(value, int) else f'{value:.3f}')
+# ---------------- cycle-2 evidence read directly from the frozen analysis JSON/CSV files
+# (W-C headline/primary, W-C ladder CSVs, applicability results.json, W-D headline.json).
+# Nothing below is typed: every value is read from a stored file and formatted here.
+import csv  # noqa: E402
+
+
+def pcu(k: str, est, lo=None, hi=None, d=2) -> None:
+    """Unit-scale estimate (and optional CI) -> percent macros k, k_lo, k_hi."""
+    put(k, f"{100 * est:.{d}f}")
+    if lo is not None:
+        lo, hi = sorted((100 * lo, 100 * hi))
+        put(k + "_lo", f"{lo:.{d}f}"); put(k + "_hi", f"{hi:.{d}f}")
+
+
+def csv_row(path: Path, **match) -> dict:
+    with path.open() as fh:
+        for r in csv.DictReader(fh):
+            if all(r.get(c) == v for c, v in match.items()):
+                return r
+    raise KeyError(f"{path}: no row {match}")
+
+
+R2C = ROOT / "analysis/r2c"
+if (R2C / "headline.json").exists() and (R2C / "primary.json").exists():
+    put("wc_ready", 1)
+    H = json.loads((R2C / "headline.json").read_text())
+    PR = json.loads((R2C / "primary.json").read_text())["primaries"]
+    for key in [k for k in H if k + "_ci_low" in H]:
+        pcu("wc_" + key.replace("_", ""), H[key], H[key + "_ci_low"], H[key + "_ci_high"])
+        put("wc_" + key.replace("_", "") + "_n", f"{H[key + '_n']:,}")
+        put("wc_" + key.replace("_", "") + "_ntot", f"{H[key + '_n_total']:,}")
+        put("wc_" + key.replace("_", "") + "_ncl", H[key + "_n_clusters"])
+    for c in ("p1", "p2", "p3"):
+        put(f"wc_{c}_pholm", f"{PR[c.upper()]['p_holm']:.4f}".lstrip("0"))
+        put(f"wc_{c}_reject", "passed" if PR[c.upper()]["reject_holm_005"] else "failed")
+    kn("wc_poladd", PR["P2"]["addition"]["sum"], PR["P2"]["addition"]["n"])
+    kn("wc_polrem", PR["P2"]["removal"]["sum"], PR["P2"]["removal"]["n"])
+    put("wc_fam", H["n_families"]); put("wc_fam_incl", H["n_families_inclusive"])
+    put("wc_clusters", H["n_clusters"]); put("wc_early", H["pre_freeze_cache_requests"])
+    put("wc_arb_rows", H["arbiter_resolved_rows"])
+    with (R2C / "primary_pre_freeze_cache.csv").open() as fh:
+        put("wc_early_primary", len({r["request_key"] for r in csv.DictReader(fh)}))
+    arb = json.loads((R2C / "arbitration/agreement.json").read_text())
+    put("wc_arb_units", arb["n_units"])
+    # speech-act ladder (P0): noncrit, chip1, full; and chip1-full paired difference
+    lad = R2C / "channel_ladder.csv"
+    for ch in ("bare", "noncrit", "chip1", "chipall", "full"):
+        r = csv_row(lad, dimension="speech_act", channel=ch, metric="critical_match")
+        pcu(f"wc_act_{ch}", float(r["estimate"]), float(r["ci_low"]), float(r["ci_high"]))
+        kn(f"wc_act_{ch}c", float(r["sum"]), int(r["n"]))
+    for dim, short in (("polarity", "pol"), ("politeness", "pz")):
+        for ch in ("chip1", "full"):
+            r = csv_row(lad, dimension=dim, channel=ch, metric="critical_match")
+            pcu(f"wc_{short}_{ch}", float(r["estimate"]), float(r["ci_low"]), float(r["ci_high"]))
+    r = csv_row(R2C / "channel_differences.csv", dimension="speech_act", metric="chip1-full")
+    pcu("wc_act_gap", float(r["estimate"]), float(r["ci_low"]), float(r["ci_high"]))
+    put("wc_act_gap_n", r["n"]); put("wc_act_gap_ncl", r["n_clusters"])
+    put("wc_act_fam", csv_row(lad, dimension="speech_act", channel="chip1", metric="critical_match")["n_families"])
+    a_chip = float(csv_row(lad, dimension="speech_act", channel="chip1", metric="critical_match")["estimate"])
+    a_full = float(csv_row(lad, dimension="speech_act", channel="full", metric="critical_match")["estimate"])
+    a_nonc = float(csv_row(lad, dimension="speech_act", channel="noncrit", metric="critical_match")["estimate"])
+    put("wc_act_ratio", f"{100 * a_chip / a_full:.1f}")
+    put("wc_kill_gain", "passes" if a_chip - a_nonc >= .10 else "fails")
+    put("wc_kill_ratio", "passes" if a_chip >= .8 * a_full else "fails")
+    put("wc_kill_chip", "passed" if (a_chip - a_nonc >= .10 and a_chip >= .8 * a_full) else "failed")
+    q = csv_row(R2C / "cue_value_match.csv", dimension="speech_act", cv="question", metric="critical_match")
+    kn("wc_qfail", int(q["n"]) - float(q["sum"]), int(q["n"]))
+    # selected W-C example (hash-first question chip1 failure), from the stored example manifest
+    for ex in json.loads((R2C / "examples.json").read_text()):
+        if ex["category"] == "Question cue failure":
+            put("wc_ex_q_model", {"llama3.1-8b": "Llama", "qwen2.5-7b": "Qwen", "gemma3-4b": "Gemma",
+                                  "gpt-6.1-terra": "Terra"}[ex["model"]])
+
+APP = ROOT / "analysis/applicability/results.json"
+if APP.exists():
+    put("app_ready", 1)
+    A = json.loads(APP.read_text())["preserved"]
+    for ch in ("full", "chip1", "chipall"):
+        for arm in ("P0", "P2", "S3"):
+            x = A[f"H1/{ch}"][arm]
+            pcu(f"app_{ch}_{arm.lower()}", x["estimate"], x["lo"], x["hi"])
+            kn(f"app_{ch}_{arm.lower()}c", x["k"], x["n"])
+        d = A[f"H1/{ch}"]["P2_minus_S3"]
+        pcu(f"app_{ch}_d", d["estimate"], d["lo"], d["hi"])
+        put(f"app_{ch}_avail", f"{A[f'H1/{ch}']['available_targets']:,}")
+        put(f"app_{ch}_ncl", d["clusters"])
+    ep = A["H1/exact_partner"]
+    for arm in ("P0", "P2", "S3"):
+        kn(f"app_ex_{arm.lower()}", ep[arm]["k"], ep[arm]["n"])
+        pcu(f"app_ex_{arm.lower()}", ep[arm]["estimate"], ep[arm]["lo"], ep[arm]["hi"])
+    pcu("app_ex_d", ep["P2_minus_S3"]["estimate"], ep["P2_minus_S3"]["lo"], ep["P2_minus_S3"]["hi"])
+    put("app_ex_ncl", ep["P2_minus_S3"]["clusters"])
+    der = json.loads(APP.read_text())["derivative"]
+    x = der["early_cache_sensitivity"]["full"]
+    pcu("app_full_d_noearly", x["estimate"], x["lo"], x["hi"])
+    # W-D NOTxYOU cell decomposition (C32)
+    h2 = A["H2"]
+    kn("wd_notyou", h2["NOT|YOU"]["k"], h2["NOT|YOU"]["n"]); kn("wd_othercells", h2["other"]["k"], h2["other"]["n"])
+    kn("wd_negabsent", h2["among_damage"]["negation_absent"]["k"], h2["among_damage"]["negation_absent"]["n"])
+
+WD = ROOT / "analysis/r2d/headline.json"
+if WD.exists():
+    put("wd_ready", 1)
+    W = json.loads(WD.read_text())
+    put("wd_scen", W["n_clusters"])
+    for key, short in (("statement_polarity_llama", "llpol"), ("tell_agent_qwen", "qwagt")):
+        pcu(f"wd_{short}", W[key + "_damage"], W[key + "_damage_ci_low"], W[key + "_damage_ci_high"])
+        kn(f"wd_{short}c", W[key + "_damage_k"], W[key + "_damage_n"])
+        put(f"wd_{short}_scen", W[key + "_damage_n_event_clusters"])
+        kn(f"wd_{short}_rep", W[key + "_repeat_disagreement_k"], W[key + "_repeat_disagreement_n"])
+        kn(f"wd_{short}_repboth", W[key + "_both_repeat_disagreement_k"], W[key + "_both_repeat_disagreement_n"])
+        pcu(f"wd_{short}_dboth", W[key + "_damage_minus_both_repeat"], W[key + "_damage_minus_both_repeat_ci_low"],
+            W[key + "_damage_minus_both_repeat_ci_high"])
+
+# Repair audit (Part 4): only if human returns were scored by src/score_repair_audit.py
+if (ROOT / "analysis/repair_audit/summary.json").exists():
+    put("repair_audit_ready", 1)
 
 
 # ---------------- human gold (W-A): judge vs two human annotators, from score_gold.py --human.
@@ -181,7 +291,8 @@ if JV.exists():
 
 
 def esc(v: str) -> str:
-    return v.replace("%", r"\%").replace("_", r"\_")
+    v = v.replace("%", r"\%").replace("_", r"\_")
+    return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus
 
 
 lines = ["% AUTO-GENERATED by make_macros.py from evidence.json -- do not edit by hand."]
