@@ -112,7 +112,7 @@ We report an offline, controlled audit of LLM keyword expansion for AAC.
 \item \textbf{Attribution by construction.} Controlled input channels determine whether an error counts as Loss, Violation, or Assumption. Judges only extract what an output says; attribution is a deterministic comparison with the item specification (\S\ref{sec:framework}).
 \item \textbf{The default asymmetry and its action cost.} Under ambiguous keywords, models commit to one reading of a minimal pair far more often than the other. We report how many extra input actions each reading costs, separately for each direction (\S\ref{sec:res-default}). %CHECK
 \item \textbf{Cue interaction and encoding.} An explicit choice that a single chip preserves can be lost when further chips are added. We measure this effect against an inert padding control and against alternative encodings of the same commitments (\S\ref{sec:res-interaction}). %CHECK
-\item \textbf{A validated label-extraction oracle.} We release the codebook, probe families and judge, validated against held-out human labels; autistic advisers reviewed the codebook (\S\ref{sec:res-oracle}). \pending{write as a contribution only if the validation gate passes; otherwise move it to Method as a limitation} %CHECK
+\item \textbf{A validated label-extraction oracle.} We release the codebook, probe families and judge, validated against held-out human labels (\S\ref{sec:res-oracle}). \pending{write as a contribution only if the validation gate passes; otherwise move it to Method as a limitation} %CHECK
 \end{enumerate}
 Conversational agency depends on what, when and to whom someone can communicate~\cite{valencia2020agency}; we measure only whether explicit textual commitments survive expansion. We make no claims about user benefit, agency, or authenticity, which require the people who use AAC to judge them~\cite{frisch2026complicated}.
 
@@ -267,13 +267,12 @@ The codebook fixes edge cases before scoring.
 \say{Can you\ldots?} is a request without politeness, \say{Can I\ldots?} is a question, and \say{I want X} has the speaker as agent.
 For certainty, an emphatic output matches a plain assertion and is logged as an added stance.
 
-\subsection{Human validation and adviser review}
-Two human coders labeled \num{\RES{gold_n}} held-out outputs, using the same options and the same output-only view as the judge. %CHECK
+\subsection{Human validation}
+Two anonymous annotators, neither an author, labeled \num{\RES{gold_n}} held-out outputs, using the same options and the same output-only view as the judge: they saw only the output sentence, plus the visible input when coding added content, with no model, condition or source shown. %CHECK
 The outputs were drawn with known inclusion probabilities, stratified by dimension, model and channel. %CHECK
 Coders also labeled \num{\RES{challenge_n}} authored challenge sentences: semantic mutations, such as a dropped negation or a swapped agent, and meaning-preserving paraphrases. %CHECK
 We report Krippendorff's $\alpha$ between coders before adjudication, and Cohen's $\kappa$, sensitivity and specificity of the final judge pipeline against adjudicated labels. %CHECK
 We use a dimension's judge labels only if its $\kappa \geq 0.6$; otherwise we report that dimension from human labels alone. %CHECK
-Autistic advisers reviewed the codebook before the main run, focusing on what counts as added certainty, politeness or directness, and on the agent rules. \pending{date, number of advisers, changes accepted and rejected} %CHECK
 
 \subsection{Statistics}
 Outputs within a family are not independent: two variants share one bare request, and three suggestions share one set.
@@ -447,29 +446,36 @@ Commitments are text-explicit categories: a chip restores \chip{NOT} but not its
 The judge is an LLM; we validated it against human labels on a limited sample, and dimensions below our agreement threshold rest on human labels alone. %CHECK
 We tested four models, three of them small quantized models, with fixed prompts and no conversation context; larger models, context or personalization may shift the defaults.
 Ten families per dimension support estimates for these models and items, not population rates.
+No autistic advisers or community reviewers took part; future work should involve autistic AAC users and advisers directly.
 
 \paragraph{Autistic-informed, not essentialist.}
-Autistic advisers shaped what we count as an added commitment, especially for directness, hedging and politeness. \pending{summarize their substantive changes}
-That review improves our definitions; it does not make our probes autistic speech, and it does not validate any claim that autistic people write in a particular way.
+Our definitions of an added commitment, especially for directness, hedging and politeness, rest on the autism and participatory-research literature, not on community review (\S\ref{sec:ethics}).
+They do not make our probes autistic speech, and they do not support any claim that autistic people write in a particular way.
 We treat directness as one legitimate choice among others, to be kept when the person makes it, not as a trait to detect or correct.
 
 %% =====================================================================
 \section{Ethics and Positionality}
+\label{sec:ethics}
 %% =====================================================================
 This study collected no data from AAC users and no personal preference data.
 AACText is public under CC BY 4.0 and contains fictional messages~\cite{vertanen2011imagination}.
-Human coders labeled model outputs under a fixed codebook. \pending{institutional determination for the coding and adviser work; compensation of coders}
+Two anonymous annotators, neither an author, labeled model outputs under a fixed codebook, blinded to model, condition and source.
+As independent researchers we did not obtain an institutional review determination; annotators labelled machine-generated sentences, were reimbursed, and no personal data were collected beyond an annotator ID. % AUTHOR-CONFIRM: ethics sentence
 \pending{Author positionality: state, as each author chooses, relevant lived experience (for example being autistic or using AAC) and disciplinary background, and how it shaped the work.}
 
-\paragraph{Contribution of autistic advisers.}
-\pending{Number of advisers, how they were recruited, when they joined (before the main run), what materials they received and in what format, accommodations offered (written or asynchronous participation, time to process), which decisions they could change, which changes we accepted and rejected and why, compensation, and how they chose to be credited (co-author, acknowledgment, or anonymous).}
-Following recent reviews of advisory practice in autism research~\cite{jansevanrensburg2026advisory}, we describe this as a codebook review, not as an advisory board or co-design.
+\paragraph{Research measures without advisers.}
+No autistic advisers or community reviewers took part in this study.
+Instead, we addressed the problems of an earlier version of this study through expert literature and literature reviews.
+A critical review of that version retired its synthetic autistic-vs-neurotypical comparison.
+The design draws on autism and participatory-research guidance, including AASPIRE~\cite{nicolaidis2019aaspire}, the double-empathy problem~\cite{milton2012double}, and cautions about heterogeneity among autistic AAC users~\cite{zisk2019aac,frisch2025autistic}.
+We assume no ``autistic style'', and we limit claims to commitments explicit in the text.
+Reviews of advisory practice in autism research~\cite{jansevanrensburg2026advisory} describe what such direct involvement would add.
 
 \paragraph{Release.}
 \pending{Repository URL with probe families, codebook, prompts, raw outputs, judge prompts and labels, and analysis code.}
 
 \begin{acknowledgments}
-\pending{Acknowledgments, including advisers who chose to be named.}
+\pending{Acknowledgments, including the two annotators if they wish to be thanked.}
 \end{acknowledgments}
 
 %% CEUR mandatory section. Must be truthful and follow https://ceur-ws.org/GenAI/Policy.html
