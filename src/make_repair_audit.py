@@ -27,15 +27,21 @@ Writes (private, never in the package):
 and embeds the blind items (item_id, sentence, visible input) in
 annotation_package/repair_audit.html between the AUDIT_ITEMS markers.
 
---source guard_wc (B4, Part 11: the W-C confirmation transfer, runs/guard_wc, the same
-  frozen G1 vs P0 pairing as analysis/guard_wc). Identical units, arms, quotas, passes and
-  Monte Carlo pi, with its own salts ("repair-audit-transfer-2026"), item ids "rx-...", and
-  private outputs annotation/repair_audit_transfer_{key,eligible}.csv and
-  annotation/repair_audit_transfer_sample.json (which also records the overlap with the
-  FREEZE.md fixed-SHA256 audit list, analysis/guard_wc/audit_sample.csv). The tool
+--source guard_wc (B4, Part 11: the W-C confirmation transfer). PRESPECIFIED selection,
+  exactly as analysis/guard_wc/FREEZE.md: the first 20 distinct normalised texts per arm
+  (G1 changed; G1 unchanged with a strict-correct first pass) by ascending SHA256 of the
+  normalised text, ties by model/family/variant/channel. The list is the frozen
+  analysis/guard_wc/audit_sample.csv (sha256 checked against audit_manifest.json) and is
+  re-derived here from analysis/guard_wc/scored.parquet with the same rule; the two must
+  match. No model balancing; inclusion is deterministic, so there are NO design weights
+  (pi_mc is blank); counts by model are descriptive. Pass B shows each row's frozen input.
+  Private outputs annotation/repair_audit_transfer_{key,eligible}.csv and
+  annotation/repair_audit_transfer_sample.json. The tool
   annotation_package/repair_audit_transfer.html is generated from repair_audit.html (the
   template is not modified) with its own title, RUN tag, localStorage namespace
   ("repairaudit:transfer:v1:") and CSV name (repair_audit_transfer_<ID>.csv).
+--source guard_wc_balanced: the model-balanced alternative with Monte Carlo pi (Part 4
+  design on guard_wc). NOT USED; local only (annotation/*_balanced_unused*), uncommitted.
 """
 from __future__ import annotations
 
@@ -53,12 +59,24 @@ sys.path.insert(0, str(ROOT / "src"))
 SOURCES = {
     "guard1": {"run": "guard1", "salt": "repair-audit-2026", "id_salt": "repair-audit-2026-item",
                "prefix": "ra-", "html": "repair_audit.html", "stem": "repair_audit", "template": None},
-    "guard_wc": {"run": "guard_wc", "salt": "repair-audit-transfer-2026",
-                 "id_salt": "repair-audit-transfer-2026-item", "prefix": "rx-",
-                 "html": "repair_audit_transfer.html", "stem": "repair_audit_transfer",
+    # Part 11 as packaged: the FREEZE.md prespecified list, no design weights (main_frozen)
+    "guard_wc": {"run": "guard_wc", "frozen": True, "id_salt": "repair-audit-transfer-frozen-item",
+                 "prefix": "rx-", "html": "repair_audit_transfer.html", "stem": "repair_audit_transfer",
                  "template": {"part": "Part 11", "run": "repair_audit_transfer_v1",
                               "store": "repairaudit:transfer:v1:", "csv": "repair_audit_transfer_"},
-                 "frozen_list": "analysis/guard_wc/audit_sample.csv", "by_input": True},
+                 "frozen_list": "analysis/guard_wc/audit_sample.csv",
+                 "frozen_manifest": "analysis/guard_wc/audit_manifest.json"},
+    # NOT USED (coordinator decision: prespecification wins). Model-balanced alternative,
+    # local only: written to annotation/, never to the package, never committed.
+    "guard_wc_balanced": {"run": "guard_wc", "salt": "repair-audit-transfer-2026",
+                          "id_salt": "repair-audit-transfer-2026-item", "prefix": "rb-",
+                          "html": "repair_audit_transfer_balanced_unused.html", "html_dir": "annotation",
+                          "stem": "repair_audit_transfer_balanced_unused",
+                          "template": {"part": "Part 11, unused alternative",
+                                       "run": "repair_audit_transfer_balanced_unused_v1",
+                                       "store": "repairaudit:transfer-balanced-unused:v1:",
+                                       "csv": "repair_audit_transfer_balanced_unused_"},
+                          "frozen_list": "analysis/guard_wc/audit_sample.csv", "by_input": True},
 }
 SALT = "repair-audit-2026"
 ID_SALT = "repair-audit-2026-item"
@@ -203,6 +221,80 @@ def render_html(cfg: dict, blob: str) -> str:
     return new
 
 
+def main_frozen(cfg: dict) -> int:
+    """Part 11: the FREEZE.md list (see module docstring). No sampling, no weights."""
+    import pandas as pd
+    from explode import normalise
+    fl, man = ROOT / cfg["frozen_list"], json.loads((ROOT / cfg["frozen_manifest"]).read_text())
+    assert hashlib.sha256(fl.read_bytes()).hexdigest() == man["sample_sha256"], "frozen list changed"
+    frozen = pd.read_csv(fl)
+    # re-derive with the frozen rule (analysis/guard_wc/analyze.py audit())
+    KEYC = ["model", "family_id", "variant", "channel"]
+    fr = pd.read_parquet(ROOT / "analysis/guard_wc/scored.parquet")
+    b = fr[fr.prompt_id.eq("P0")].set_index(KEYC)
+    g = fr[fr.prompt_id.eq("G1")].set_index(KEYC)
+    arm_of = {"changed": "repaired", "unchanged_correct": "control"}
+    key_rows, elig_rows, summ_arms = [], [], {}
+    for group, cand in (("changed", g[g.changed]), ("unchanged_correct", g[(~g.changed) & b.strict.eq(1)])):
+        cand = cand.reset_index().sort_values(KEYC)
+        cand["norm"] = cand.text.map(normalise)
+        cand["selection_hash"] = cand.norm.map(lambda x: hashlib.sha256(x.encode()).hexdigest())
+        distinct = cand.drop_duplicates("norm").sort_values(["selection_hash"] + KEYC).reset_index(drop=True)
+        fz = frozen[frozen.group == group].reset_index(drop=True)
+        mine = distinct.head(20)
+        assert list(mine.selection_hash) == list(fz.selection_hash) and list(mine.output_id) == list(fz.output_id), \
+            f"re-derived {group} list differs from {cfg['frozen_list']}"
+        arm = arm_of[group]
+        mem = cand.groupby("norm")
+        for rank, r in distinct.iterrows():
+            m = mem.get_group(r["norm"])
+            row = {"arm": arm, "frozen_group": group, "hash_rank": rank, "selection_hash": r["selection_hash"],
+                   "selected": rank < 20, "assigned_model": r["model"],
+                   "models": "|".join(sorted(set(m.model))), "families": "|".join(sorted(set(m.family_id))),
+                   "dimensions": "|".join(sorted(set(m.dimension))), "channels": r["channel"],
+                   "member_channels": "|".join(sorted(set(m.channel))), "channel_group": "cue",
+                   "family_id": r["family_id"], "variant": r["variant"], "n_memberships": len(m),
+                   "member_inputs": " || ".join(sorted(set(m.input_text))),
+                   "input_text": r["input_text"], "text": r["text"], "output_id": r["output_id"],
+                   "inclusion": "frozen rule (FREEZE.md): first 20 distinct normalised texts per arm by "
+                                "ascending SHA256; deterministic, not probability sampling; no design weights",
+                   "pi_mc": "", "design_weight": ""}
+            elig_rows.append(row)
+            if rank < 20:
+                key_rows.append(row)
+        sel = [r for r in key_rows if r["arm"] == arm]
+        summ_arms[arm] = {
+            "eligible_occurrences": len(cand), "eligible_distinct": len(distinct),
+            "manifest_eligible_distinct": man[group]["eligible_distinct"],
+            "selected_by_model_descriptive": dict(sorted(Counter(r["assigned_model"] for r in sel).items())),
+            "eligible_distinct_by_model_descriptive": dict(sorted(Counter(distinct.model).items())),
+            "selected_by_channel": dict(sorted(Counter(r["channels"] for r in sel).items())),
+            "selected_distinct_families": len({r["family_id"] for r in sel}),
+            "selected_multi_membership": sum(r["n_memberships"] > 1 for r in sel)}
+        assert len(distinct) == man[group]["eligible_distinct"]
+    for row in key_rows:
+        row["item_id"] = cfg["prefix"] + h(cfg["id_salt"] + row["selection_hash"])[:6]
+    assert len({r["item_id"] for r in key_rows}) == len(key_rows) == 40
+    assert len({normalise(r["text"]) for r in key_rows}) == 40, "duplicate sentence across arms"
+    summ = {"design": "PRESPECIFIED (analysis/guard_wc/FREEZE.md, Audit and examples): first 20 distinct "
+                      "normalised texts per arm by ascending SHA256(normalised text), ties by model, family, "
+                      "variant, channel. Deterministic; no model balancing; no inclusion probabilities or "
+                      "design weights. Counts by model are descriptive only.",
+            "frozen_list": cfg["frozen_list"], "frozen_list_sha256": man["sample_sha256"],
+            "rederived_from": "analysis/guard_wc/scored.parquet (matches the frozen list)",
+            "arms": summ_arms}
+    cols = ["item_id"] + [c for c in key_rows[0] if c != "item_id"]
+    pd.DataFrame(key_rows)[cols].sort_values(["arm", "hash_rank"]).to_csv(KEY, index=False)
+    pd.DataFrame(elig_rows).to_csv(ELIG, index=False)
+    SUMMARY.write_text(json.dumps(summ, indent=2) + "\n")
+    items = [{"item_id": r["item_id"], "text": r["text"], "input": visible_input(r["input_text"])}
+             for r in sorted(key_rows, key=lambda r: r["item_id"])]
+    blob = json.dumps(items, ensure_ascii=False, indent=0).replace("</", "<\\/")
+    HTML.write_text(render_html(cfg, blob))
+    print(json.dumps(summ, indent=1))
+    return 0
+
+
 def main() -> int:
     import argparse
     import pandas as pd
@@ -211,11 +303,13 @@ def main() -> int:
     ap.add_argument("--source", choices=sorted(SOURCES), default="guard1")
     a = ap.parse_args()
     cfg = SOURCES[a.source]
-    SALT, ID_SALT = cfg["salt"], cfg["id_salt"]
     KEY = ROOT / "annotation" / f"{cfg['stem']}_key.csv"
     ELIG = ROOT / "annotation" / f"{cfg['stem']}_eligible.csv"
     SUMMARY = ROOT / "annotation" / f"{cfg['stem']}_sample.json"
-    HTML = ROOT / "annotation_package" / cfg["html"]
+    HTML = ROOT / cfg.get("html_dir", "annotation_package") / cfg["html"]
+    if cfg.get("frozen"):
+        return main_frozen(cfg)
+    SALT, ID_SALT = cfg["salt"], cfg["id_salt"]
     bi = bool(cfg.get("by_input"))
     rep, ctl = build_pools(cfg["run"], by_input=bi)
     r_sel, c_sel = draw(rep, ctl, SALT, distinct_text=bi)

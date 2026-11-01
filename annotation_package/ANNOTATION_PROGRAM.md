@@ -105,7 +105,7 @@ critical value, and (shown last) whether it adds content beyond the typed keywor
 
 ---
 
-## B. New human-generated data (highest value; tools to be built, about half a day)
+## B. New human-generated data (highest value; B3 and B4 built, B1 and B2 to be built)
 
 ### B1. Human-written minimal pairs ("handwritten data")
 
@@ -163,27 +163,48 @@ Headline question: *when people choose their own keywords, how often does the mo
 
 **Deadline:** CALE-AI or later. If returned by about Nov 6, a compact version can go in SE4All.
 
-### B3. Expanded gold on new outputs (validation transfer)
+### B3. Expanded gold on new outputs: Part 10 (`annotate.html` with `part10_gold_new.json`, 162 sentences). Built.
 
 **Why:** human label validation (A1) covers the discovery outputs. The confirmation (W-C), composition (W-D) and
 guard-transfer outputs are scored by the same judge, but no human has labelled any of them.
 
-**Task:** the same tool and task as A1, with a new probability sample of about 150 outputs from W-C, W-D and the guard
-transfer. The tool needs no changes, only a new part file.
+**Task:** the same tool and task as A1, on a new part file.
+
+**Sample:** a frozen probability sample of 162 outputs, with known inclusion probabilities:
+- 58 from W-C;
+- 53 from W-D;
+- 51 new guard-transfer outputs (repaired or please-stripped).
+
+It is stratified by run × dimension × judge label, and positives and judge disagreements are oversampled.
 
 **Recommended:** **3 annotators**, about 1.5 h each.
 
 **Deadline:** SE4All if returned by Nov 8, CALE-AI otherwise.
 
-### B4. Repair audit on the confirmation transfer
+**Coordinator:**
+- Returns (`labels_gold_new_<ID>.csv`) go in `annotation/returns_gold_new/`.
+- Scoring: `src/score_gold.py --run new --human 'annotation/returns_gold_new/*.csv'`. It reports per-run and per-dimension κ and accuracy, plus verdict agreement.
+- The private key is `annotation/gold_key_new.csv`, and the design is in `annotation/gold_sample_new.json`.
+
+### B4. Repair audit on the confirmation transfer: Part 11 (`repair_audit_transfer.html`, self-contained, 40 sentences). Built.
 
 **Why:** A2 audits discovery repairs, but the guard's strongest evidence is now its transfer to the W-C confirmation set
 (joint pass +9.8 points). A second 40-item audit (20 repairs + 20 controls from that run) would make the transfer
 claim a *usable*-repair claim.
 
-**Task:** identical to A2, as a new embedded sample. **≥5 annotators**, about 20 min each.
+**Task:** identical to A2, with its own embedded sample and saved progress. **≥5 annotators**, about 20 min each.
+
+**Sample:** the list prespecified in `analysis/guard_wc/FREEZE.md` (`analysis/guard_wc/audit_sample.csv`): the first
+20 distinct changed texts and the first 20 unchanged strict-correct texts, by ascending SHA256.
+- There is no model balancing and there are no design weights.
+- The model mix is unbalanced (repaired: gemma 10, llama 7, qwen 2, terra 1; controls: gemma 10, terra 7, llama 2,
+  qwen 1). It is reported descriptively.
 
 **Deadline:** CALE-AI (Nov 16 freeze).
+
+**Coordinator:**
+- Returns (`repair_audit_transfer_<ID>.csv`) go in `annotation/returns_repair_transfer/`.
+- Scoring: `src/score_repair_audit.py --key annotation/repair_audit_transfer_key.csv`.
 
 ---
 
@@ -201,7 +222,7 @@ claim a *usable*-repair claim.
 
 **Practical schedule:**
 - Today/tomorrow: A2, A3 and A4 (tools exist), and start B1 writing as soon as its tool ships.
-- Nov 3–5: B1 checks, B2 elicitation, and B3/B4 as their sample files ship.
+- Nov 3–5: B1 checks, B2 elicitation, and B3/B4 (built: Parts 10 and 11).
 - Results flow into SE4All up to Nov 10 and into CALE-AI up to Nov 16.
 
 ## D. Reporting in the papers

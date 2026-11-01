@@ -1,90 +1,56 @@
 {
-  "salt": "repair-audit-transfer-2026",
-  "per_model": 5,
-  "per_arm": 20,
-  "mc_reps": 4000,
-  "source": "runs/guard_wc/scored.parquet (+generations.jsonl), primary families",
+  "design": "PRESPECIFIED (analysis/guard_wc/FREEZE.md, Audit and examples): first 20 distinct normalised texts per arm by ascending SHA256(normalised text), ties by model, family, variant, channel. Deterministic; no model balancing; no inclusion probabilities or design weights. Counts by model are descriptive only.",
+  "frozen_list": "analysis/guard_wc/audit_sample.csv",
+  "frozen_list_sha256": "10cf44bb28f2f233be905be3e1549cb826c8d99a69edf093e2931e93258410a7",
+  "rederived_from": "analysis/guard_wc/scored.parquet (matches the frozen list)",
   "arms": {
     "repaired": {
-      "eligible_units": 282,
-      "eligible_by_model_any": {
-        "gemma3-4b": 147,
-        "gpt-6.1-terra": 22,
-        "llama3.1-8b": 115,
-        "qwen2.5-7b": 17
+      "eligible_occurrences": 304,
+      "eligible_distinct": 244,
+      "manifest_eligible_distinct": 244,
+      "selected_by_model_descriptive": {
+        "gemma3-4b": 10,
+        "gpt-6.1-terra": 1,
+        "llama3.1-8b": 7,
+        "qwen2.5-7b": 2
       },
-      "eligible_by_channel_group": {
-        "cue": 282
-      },
-      "eligible_multi_model_units": 19,
-      "selected_by_model": {
-        "gemma3-4b": 5,
-        "gpt-6.1-terra": 5,
-        "llama3.1-8b": 5,
-        "qwen2.5-7b": 5
-      },
-      "selected_by_channel_group": {
-        "cue": 20
+      "eligible_distinct_by_model_descriptive": {
+        "gemma3-4b": 126,
+        "gpt-6.1-terra": 14,
+        "llama3.1-8b": 89,
+        "qwen2.5-7b": 15
       },
       "selected_by_channel": {
-        "chipall": 7,
-        "chip1": 13
+        "chip1": 14,
+        "chipall": 5,
+        "full": 1
       },
-      "selected_by_dimension": {
-        "speech_act": 20
-      },
-      "selected_distinct_families": 20
+      "selected_distinct_families": 17,
+      "selected_multi_membership": 5
     },
     "control": {
-      "eligible_units": 690,
-      "eligible_by_model_any": {
-        "gemma3-4b": 258,
-        "gpt-6.1-terra": 332,
-        "llama3.1-8b": 248,
-        "qwen2.5-7b": 319
+      "eligible_occurrences": 1368,
+      "eligible_distinct": 747,
+      "manifest_eligible_distinct": 747,
+      "selected_by_model_descriptive": {
+        "gemma3-4b": 10,
+        "gpt-6.1-terra": 7,
+        "llama3.1-8b": 2,
+        "qwen2.5-7b": 1
       },
-      "eligible_by_channel_group": {
-        "cue": 690
-      },
-      "eligible_multi_model_units": 191,
-      "selected_by_model": {
-        "gemma3-4b": 5,
-        "gpt-6.1-terra": 5,
-        "llama3.1-8b": 5,
-        "qwen2.5-7b": 5
-      },
-      "selected_by_channel_group": {
-        "cue": 20
+      "eligible_distinct_by_model_descriptive": {
+        "gemma3-4b": 280,
+        "gpt-6.1-terra": 207,
+        "llama3.1-8b": 97,
+        "qwen2.5-7b": 163
       },
       "selected_by_channel": {
-        "chipall": 11,
-        "chip1": 6,
-        "full": 3
+        "chip1": 5,
+        "chipall": 10,
+        "full": 5
       },
-      "selected_by_dimension": {
-        "speech_act": 20
-      },
-      "selected_distinct_families": 20
+      "selected_distinct_families": 18,
+      "selected_multi_membership": 7
     }
-  },
-  "selected_pi_range": {
-    "repaired": [
-      0.0325,
-      0.3277
-    ],
-    "control": [
-      0.02,
-      0.0355
-    ]
-  },
-  "overlap_with_frozen_sha256_list": {
-    "file": "analysis/guard_wc/audit_sample.csv",
-    "rule": "FREEZE.md: first 20 per arm by ascending SHA256(normalised text); deterministic, no inclusion probabilities",
-    "frozen_list_by_arm": {
-      "repaired": 20,
-      "control": 20
-    },
-    "repaired": 3,
-    "control": 0
   }
 }
