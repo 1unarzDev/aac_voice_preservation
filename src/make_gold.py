@@ -155,16 +155,18 @@ def item_for_annotator(u: dict) -> dict:
             "input_text": u["input_text"]}
 
 
-def build_units_multi(runs: list[str], exclude: set[str]) -> list[dict]:
-    """Extraction units of several runs (see module docstring, multi-run mode)."""
+def build_units_multi(runs: list[str], exclude: set[str], run_dirs: dict | None = None,
+                      items: dict | None = None) -> list[dict]:
+    """Extraction units of several runs (see module docstring, multi-run mode).
+    run_dirs / items override runs/<run> and data/items/*.jsonl (wrappers and tests)."""
     import pandas as pd
     from attribute import quarantined
     from explode import normalise
-    items = runio.load_items()
+    items = items if items is not None else runio.load_items()
     seen: set[tuple] = set()
     units: list[dict] = []
     for run in runs:
-        run_dir = ROOT / "runs" / run
+        run_dir = Path((run_dirs or {}).get(run) or ROOT / "runs" / run)
         sc = pd.read_parquet(run_dir / "scored.parquet")
         sc = sc[sc.judged & sc.valid.fillna(False).astype(bool) & ~sc.family_id.isin(exclude)]
         sc = sc[~sc.family_id.map(lambda f: quarantined(items[f]))]
