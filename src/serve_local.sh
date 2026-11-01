@@ -15,6 +15,7 @@ MODELS="$ROOT/models"
 IMAGE="ghcr.io/ggml-org/llama.cpp:server-cuda"
 PARALLEL="${PARALLEL:-8}"
 CTX_PER_SLOT="${CTX_PER_SLOT:-1536}"
+NGL="${NGL:-99}"   # GPU layers; lower = partial CPU offload (used when VRAM is shared, 2026-10-31)
 
 declare -A FILE=(
   [qwen]="Qwen2.5-7B-Instruct-Q4_K_M.gguf"
@@ -47,7 +48,7 @@ start_one() {
     "$IMAGE" \
     -m "/models/${FILE[$k]}" --alias "${ALIAS[$k]}" \
     --host 0.0.0.0 --port 8080 \
-    -ngl 99 --jinja --parallel "$PARALLEL" -c $((PARALLEL * CTX_PER_SLOT)) \
+    -ngl "$NGL" --jinja --parallel "$PARALLEL" -c $((PARALLEL * CTX_PER_SLOT)) \
     -fa on -ctk q8_0 -ctv q8_0 --no-warmup >/dev/null
   # wait for /health == ok
   for _ in $(seq 1 120); do

@@ -162,3 +162,8 @@ about your personal preferences.
   "plain assertion" target is matched by plain or emphatic, and emphatic is logged as a
   stance addition. Added CB-1 to CB-5 (annotation/CB_rules.md).
 - v0.1: initial schema (SPEC v0.1).
+
+## Clarifications added after arbitration (D-016)
+- **CB-7** "I tell/told you to X", "I'm asking you to X": the agent is the doer of X (the reporting verb is the speech act, not the content).
+- **CB-8** A claim plus a request ("I think I broke my ankle, can you look?"): code certainty from the claim.
+- **CB-9** "Can I …, please?": speech act = question; politeness = please.

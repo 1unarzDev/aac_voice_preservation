@@ -120,3 +120,28 @@ Throughput measured on 2026-10-31 (all four running at once, fresh cache, 3 serv
 | llama3.1-8b | 451–484 | 601–645 | 97–106 |
 | gemma3-4b | 366–392 | 480–522 | 99–105 |
 | gpt-6.1-terra (conc 16) | 169–179 | 226–238 | 58–67 |
+
+## 7. Interventions (CALE-AI): `interventions.py`, `run_interventions.sh`
+Two runtime interventions, both evaluated with the standard judge/attribute pipeline. They
+reuse a base run's cached first pass (P0 for I1; P2 + S3 bare for I2) and write a standard run
+(`generations.jsonl` with `targets` → explode → judge → `attribute --fallback J1`).
+| arm (`prompt_id`) | what |
+|---|---|
+| `P0` | first pass, copied from the base run (same request_key, judge cache hits) |
+| `G1` | **I1 commitment guard**: layer0 (+ a small number/tense add-on) checks the P0 output against the commitments the user *supplied* (chips parsed from the visible input; for `full`, layer0 labels of the typed source), plus unsupplied politeness (polite marker without `[PLEASE]` / without politeness in the source). On a flag: same conversation + one feedback turn ("Your sentence must keep: negated (...); no added politeness (...)"), up to `--max-retries 2`. Returns the first unflagged attempt, else the fewest-flag attempt (ties → original). |
+| `G1s` | strip-only variant: deterministic removal of an unsupplied "please"; 0 calls |
+| `P2`, `S3` | bare-channel first pass, copied |
+| `I2` | **ambiguity-complete set**: keep P2's s1; for polarity then certainty, if layer0 finds no slot with the alternative reading of s1, replace slot 3 (then 2) with an LLM rewrite of s1 ("make it NEGATED ..."), layer0-verified, one feedback retry |
+Extra keys on G1/G1s/I2 generation rows: `base_request_key`, `guard_spec`, `flags_initial`,
+`flags_final`, `attempts`, `chosen_attempt`, `changed`, `extra_calls`, `extra_latency_s`,
+`extra_completion_tokens`, `check_ms`; I2: `base_suggestions`, `span_plan`. Calls are cached in
+`runs/cache/` (key = sha1(model, tag `I1-guard-v1`/`I2-span-v1`, messages, T=0, seed)).
+`attribute.py` includes `I2` in coverage@3 (no change for older runs).
+```bash
+src/run_interventions.sh dev0 guardpilot spanpilot         # one local server at a time + terra
+python src/judge.py --run guardpilot && python src/attribute.py --run guardpilot --fallback J1
+python src/judge.py --run spanpilot  && python src/attribute.py --run spanpilot --fallback J1
+python src/interventions.py report --guard guardpilot --span spanpilot --out analysis/interventions/pilot.md
+# main: base = runs/main1 (test split, cached first pass) -> guard1 / span1 -> analysis/interventions/report.md
+```
+`dev0` = P0/P2/S3 first pass on `data/items/dev.jsonl` (`build_requests --split dev --prompts P0,P2,S3`).
