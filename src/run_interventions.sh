@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
-# GPU-safe intervention runner (D-008): one local server at a time (PARALLEL=4, CTX 1024),
-# terra (API) alongside at concurrency 8. Then assemble + explode.
+# GPU-safe intervention runner (D-008, D-019 lock): one local server at a time (PARALLEL=4,
+# CTX 1024), terra (API) alongside at concurrency 8 (<= 8 per D-019). Then assemble + explode.
 # usage: src/run_interventions.sh <base_run> <guard_run> <span_run> [models...]
 set -u
+# D-019: global GPU lock so only one workstream serves a local model at a time
+exec 9>/tmp/aacv_gpu.lock; flock 9
 base=$1; grun=$2; srun=$3; shift 3
 models=${*:-qwen llama gemma}
 declare -A MID=([qwen]=qwen2.5-7b [llama]=llama3.1-8b [gemma]=gemma3-4b)
 # per-model GPU layers from env, e.g. NGL_QWEN=14 (default 99 = all layers on GPU)
 declare -A NGL_MAP=([qwen]=${NGL_QWEN:-99} [llama]=${NGL_LLAMA:-99} [gemma]=${NGL_GEMMA:-99})
 cd ~/aac-voice-preservation; . .venv/bin/activate
+trap "bash src/stop_local.sh >/dev/null 2>&1" EXIT   # never leave a server up after the lock is released
 ( python src/interventions.py guard --base "$base" --run "$grun" --models gpt-6.1-terra --api-concurrency 8 &&
   python src/interventions.py span --base "$base" --run "$srun" --models gpt-6.1-terra --api-concurrency 8 ) > runs/${grun}_api.log 2>&1 &
 apipid=$!

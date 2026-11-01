@@ -107,6 +107,7 @@ Latency is measured per call against a single local llama.cpp server at 4 slots 
 First pass, flag (layer0) vs judged failure: TP 22, FP 4, FN 2, TN 260; precision 0.85, recall 0.92, kappa 0.869.
 Repaired items (flagged by layer0 and regenerated), n=26 targets, of which 20 changed: layer0 says fixed 20, judge says pass 22; agreement 24/26 = 0.92, kappa 0.755. Cross-tab (layer0 ok, judge ok): {(True, True): 20, (False, True): 2, (False, False): 4}.
 Judge label of the repaired output on the flagged dimension (layer0 target -> judge value): ('agent', True): 7, ('polarity', True): 2, ('speech_act', True): 5, ('speech_act', False): 3, ('agent', False): 1 (True = judge agrees target reached).
+Raw judge vs layer0 on the 24 distinct repaired output texts (agreement per dimension; tie-breaks = J1 != J2 so the final label came from layer0): polarity: J1 24/24, J2 24/24, layer0 tie-breaks 0; speech_act: J1 23/24, J2 23/24, layer0 tie-breaks 0; agent: J1 22/24, J2 22/24, layer0 tie-breaks 0; certainty: J1 23/24, J2 23/24, layer0 tie-breaks 0; politeness: J1 24/24, J2 24/24, layer0 tie-breaks 0.
 
 ### Ambiguity-complete set (spanpilot): coverage@3 under bare input
 

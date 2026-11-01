@@ -41,7 +41,7 @@ import models as M  # noqa: E402
 import prompts as P  # noqa: E402
 
 CHANNELS = ["bare", "noncrit", "chip1", "chipall", "full"]
-OPT_IN_SPLITS = {"smoke", "expB", "expC"}   # never included by default
+OPT_IN_SPLITS = {"smoke", "expB", "expC", "wb", "r2", "r2d"}   # never included by default (wb = W-B corpus items; r2/r2d = PREREG_R2 W-C/W-D)
 
 
 def custom_spec(fam: dict, vname: str, channel: str) -> dict:
@@ -142,6 +142,9 @@ def load_families(pattern: str, split: str | None) -> list[dict]:
             if line.strip():
                 fam = json.loads(line)
                 fam["_file"] = Path(path).name
+                if fam.get("dropped") is True:   # verifier DROP (keeps the record, never builds it); absent = included
+                    print(f"skip dropped family {fam.get('family_id')}: {fam.get('drop_reason', '')}", file=sys.stderr)
+                    continue
                 # smoke families live in data/items too; only included when asked for explicitly
                 if (split is None and fam.get("split") not in OPT_IN_SPLITS) or fam.get("split") == split:
                     validate(fam)

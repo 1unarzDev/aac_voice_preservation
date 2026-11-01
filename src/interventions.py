@@ -640,6 +640,21 @@ def guard_section(run: Path, n_boot: int, name: str) -> tuple[list[str], dict]:
                      ", ".join(f"{k}: {v}" for k, v in Counter((d, t == jv or (t == 'certain' and jv in CERTAIN))
                                                                for d, t, jv in rows).items()) + " (True = judge agrees target reached).")
         res["l0_vs_judge"] = {"tp": tp, "fp": fp, "fn": fn, "tn": tn}
+        # raw judge variants vs layer0 on the repaired texts (judge.py breaks J1/J2 ties on general
+        # dims with layer0, so the final labels are not fully independent of the guard)
+        jr = {r["text_id"]: r for r in runio.read_jsonl(run / "judgments.jsonl")}
+        tids = set(rep.text_id_G1) if len(rep) else set()
+        rows_j = [jr[t] for t in tids if t in jr]
+        if rows_j:
+            parts = []
+            for d in ("polarity", "speech_act", "agent", "certainty", "politeness"):
+                a1 = sum(r[f"J1_{d}"] == r[f"L0_{d}"] for r in rows_j)
+                a2 = sum(r[f"J2_{d}"] == r[f"L0_{d}"] for r in rows_j)
+                tb = sum(d in (r.get("general_disagree") or []) for r in rows_j)
+                parts.append(f"{d}: J1 {a1}/{len(rows_j)}, J2 {a2}/{len(rows_j)}, layer0 tie-breaks {tb}")
+            L.append(f"Raw judge vs layer0 on the {len(rows_j)} distinct repaired output texts (agreement per "
+                     "dimension; tie-breaks = J1 != J2 so the final label came from layer0): " + "; ".join(parts) + ".")
+            res["repaired_raw_agree"] = parts
     return L, res
 
 

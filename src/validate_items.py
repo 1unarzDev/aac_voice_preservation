@@ -5,6 +5,13 @@ Usage: python src/validate_items.py data/items/pilot.jsonl [more.jsonl ...]
 Exit code 1 if any ERROR is found. WARNs are printed but do not fail.
 Follow-up records (split expB / expC, D-012) may carry `custom_channels`; their inputs,
 commitments, alias/padding tokens and "Meaning:" lines are checked too.
+Round-2 records (split r2, PREREG_R2 W-C) use ids r2pol-NNN / r2act-NNN / r2plt-NNN and must carry
+`construction` (seeded|drafted|adversarial) and `cluster_id`; seeded records also carry
+`seed_line` (1-based line in data/raw/aactext/sent_train_aac.txt) and `seed_text` (that line verbatim).
+Seeds must be disjoint from the W-B reserved sample (data/specs/aactext_sample400.jsonl).
+W-D records (split r2d) use the Exp C factorial representation with ids r2d-NNN-{pol-i,pol-you,
+agt-yes,agt-not}, factorial_family r2d-NNN, and channels {neither,pol,actor,both}_{TELL,STATEMENT}
+under prompts=['P0x'] ([STATEMENT] = P0x alias of [TELL]).
 """
 import json
 import re
@@ -16,7 +23,32 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import prompts as P  # noqa: E402
 from labels import CHIP_TO_GENERAL, general_spec  # noqa: E402
 
-SPLITS = {"pilot", "dev", "test", "expB", "expC"}
+SPLITS = {"pilot", "dev", "test", "expB", "expC", "r2", "r2d"}
+CUSTOM_SPLITS = {"expB", "expC", "r2d"}
+FACTORIAL_SPLITS = {"expC", "r2d"}
+R2D_CHANNELS = {f"{c}_{e}" for c in ("neither", "pol", "actor", "both") for e in ("TELL", "STATEMENT")}
+R2_PREFIX = {"polarity": "r2pol", "speech_act": "r2act", "politeness": "r2plt"}
+CONSTRUCTIONS = {"seeded", "drafted", "adversarial"}
+ROOT = Path(__file__).resolve().parent.parent
+SEED_CORPUS = ROOT / "data/raw/aactext/sent_train_aac.txt"
+RESERVED_SPEC = ROOT / "data/specs/aactext_sample400.jsonl"
+_SEED_CACHE = {}
+
+
+def seed_resources():
+    """(corpus lines, reserved train line numbers, reserved texts lowercased); loaded once."""
+    if not _SEED_CACHE:
+        lines = SEED_CORPUS.read_text().split("\n") if SEED_CORPUS.exists() else None
+        res_ids, res_txt = set(), set()
+        if RESERVED_SPEC.exists():
+            for ln in RESERVED_SPEC.read_text().splitlines():
+                if ln.strip():
+                    r = json.loads(ln)
+                    res_txt.add(r["text"].strip().lower())
+                    if r.get("split") == "train":
+                        res_ids.add(int(r["id"].rsplit("-", 1)[1]))
+        _SEED_CACHE["v"] = (lines, res_ids, res_txt)
+    return _SEED_CACHE["v"]
 ALIAS_TO_CHIP = {v: k for k, v in P.ALIAS.items()}
 BRACKET = re.compile(r"\[[^\]]+\]")
 
@@ -51,7 +83,7 @@ IRREG = {"saw": "see", "seen": "see", "got": "get", "paid": "pay", "took": "take
          "met": "meet", "fell": "fall", "broke": "break", "wrote": "write", "gave": "give",
          "spent": "spend", "drove": "drive", "kept": "keep", "found": "find", "heard": "hear",
          "had": "have", "has": "have", "did": "do", "ran": "run", "rode": "ride", "sold": "sell",
-         "taught": "teach", "thought": "think", "caught": "catch", "hurt": "hurt"}
+         "taught": "teach", "thought": "think", "caught": "catch", "hurt": "hurt", "said": "say"}
 
 
 def matches(w, t):
@@ -87,6 +119,15 @@ def validate_family(fam, where, errs, warns):
     elif fam["split"] == "expC":
         if not re.fullmatch(r"xc-\d{2}-(pol-(i|you)|agt-(yes|not))", fid):
             E("expC family_id must be 'xc-NN-pol-{i,you}' or 'xc-NN-agt-{yes,not}'")
+    elif fam["split"] == "r2d":
+        if not re.fullmatch(r"r2d-\d{3}-(pol-(i|you)|agt-(yes|not))", fid):
+            E("r2d family_id must be 'r2d-NNN-pol-{i,you}' or 'r2d-NNN-agt-{yes,not}'")
+        elif fam.get("factorial_family") != fid[:7]:
+            E("r2d factorial_family must be the r2d-NNN prefix of family_id")
+    elif fam["split"] == "r2":
+        if dim not in R2_PREFIX or not re.fullmatch(rf"{R2_PREFIX[dim]}-\d{{3}}", fid):
+            E(f"r2 family_id must be '{R2_PREFIX.get(dim, 'r2???')}-NNN'")
+        validate_r2(fam, E, W)
     elif not re.fullmatch(rf"{DIMENSIONS[dim]}-\d{{2,3}}", fid):
         E(f"family_id does not match prefix '{DIMENSIONS[dim]}-NN'")
     if fam["split"] not in SPLITS:
@@ -181,11 +222,40 @@ def validate_family(fam, where, errs, warns):
                     E(f"bare word '{w}' occurs in only one variant (critical cue leak)")
 
 
+def validate_r2(fam, E, W):
+    """Round-2 provenance fields: construction, cluster_id, and seed for seeded families."""
+    con = fam.get("construction")
+    if con not in CONSTRUCTIONS:
+        E(f"construction must be one of {sorted(CONSTRUCTIONS)}")
+    if not isinstance(fam.get("cluster_id"), str) or not fam["cluster_id"].strip():
+        E("cluster_id must be a nonempty string")
+    if fam.get("dimension") == "speech_act":   # PREREG_R2 W-C: no refusal/acceptance pairs
+        bad = [k for k, v in fam["variants"].items() if v.get("critical_value") in ("refusal", "acceptance")]
+        if bad:
+            E(f"r2 speech-act variants {bad} are refusal/acceptance (excluded by PREREG_R2)")
+    has_seed = "seed_line" in fam or "seed_text" in fam
+    if con != "seeded":
+        if has_seed:
+            E("only seeded families may carry seed_line/seed_text")
+        return
+    sl, st = fam.get("seed_line"), fam.get("seed_text")
+    if not isinstance(sl, int) or isinstance(sl, bool) or sl < 1 or not isinstance(st, str) or not st.strip():
+        E("seeded family needs int seed_line >= 1 and nonempty seed_text")
+        return
+    lines, res_ids, res_txt = seed_resources()
+    if lines is None:
+        W(f"seed corpus {SEED_CORPUS} not found; seed_text not checked")
+    elif sl > len(lines) or lines[sl - 1].rstrip("\r") != st:
+        E(f"seed_text does not match line {sl} of {SEED_CORPUS.name}")
+    if sl in res_ids or st.strip().lower() in res_txt:
+        E(f"seed line {sl} is in the reserved W-B sample ({RESERVED_SPEC.name})")
+
+
 def validate_custom(fam, E, W):
     """custom_channels: {variant: {channel_id: input | {input, commitments, prompts}}}."""
     cc, variants = fam["custom_channels"], fam["variants"]
-    if fam["split"] not in {"expB", "expC"}:
-        E("custom_channels only allowed in follow-up splits (expB/expC)")
+    if fam["split"] not in CUSTOM_SPLITS:
+        E("custom_channels only allowed in follow-up splits (expB/expC/r2d)")
     if not isinstance(cc, dict) or set(cc) != set(variants):
         E("custom_channels must have exactly one entry per variant")
         return
@@ -240,14 +310,36 @@ def validate_custom(fam, E, W):
                     E(f"{tag}: unknown prompt {pid}")
             if cid.startswith("e_") and sorted(com) != sorted(v["all_chips"]):
                 E(f"{tag}: encoding channel must carry exactly all_chips")
+        if fam["split"] == "r2d":
+            check_r2d_channels(chans, vk, E)
+
+
+def check_r2d_channels(chans, vk, E):
+    """W-D: same 4 channels in two encodings that differ only in the constant [TELL] / [STATEMENT]."""
+    if set(chans) != R2D_CHANNELS:
+        E(f"custom {vk}: r2d channels must be exactly {sorted(R2D_CHANNELS)}")
+        return
+    for c in ("neither", "pol", "actor", "both"):
+        t, s = chans[f"{c}_TELL"], chans[f"{c}_STATEMENT"]
+        if not isinstance(t, dict) or not isinstance(s, dict):
+            E(f"custom {vk}/{c}: r2d channels must be dicts with input/commitments/prompts")
+            continue
+        if "[TELL]" not in t["input"] or "[STATEMENT]" in t["input"]:
+            E(f"custom {vk}/{c}_TELL must carry [TELL] and not [STATEMENT]")
+        if s["input"] != t["input"].replace("[TELL]", "[STATEMENT]"):
+            E(f"custom {vk}/{c}_STATEMENT must equal {c}_TELL with [TELL] -> [STATEMENT]")
+        if t.get("commitments") != s.get("commitments"):
+            E(f"custom {vk}/{c}: TELL and STATEMENT encodings must carry the same commitments")
+        if t.get("prompts") != ["P0x"] or s.get("prompts") != ["P0x"]:
+            E(f"custom {vk}/{c}: r2d channels must run under prompts=['P0x'] only")
 
 
 def check_factorial(fams, errs):
     """expC: each factorial family has 4 records whose (cell -> source) maps agree, 4 cells."""
     by = {}
     for where, f in fams:
-        if f.get("split") == "expC":
-            by.setdefault(f.get("factorial_family"), []).append((where, f))
+        if f.get("split") in FACTORIAL_SPLITS:
+            by.setdefault((f["split"], f.get("factorial_family")), []).append((where, f))
     for ff, recs in by.items():
         cells = {}
         for where, f in recs:
@@ -255,8 +347,26 @@ def check_factorial(fams, errs):
                 if cells.setdefault(v.get("cell"), v["source"]) != v["source"]:
                     errs.append(f"{where} {f['family_id']}: cell {v.get('cell')} source differs across records")
         if len(recs) != 4 or len(cells) != 4 or len(set(cells.values())) != 4:
-            errs.append(f"expC {ff}: need 4 records over 4 distinct cells/sources "
+            errs.append(f"{ff[0]} {ff[1]}: need 4 records over 4 distinct cells/sources "
                         f"(got {len(recs)} records, {len(cells)} cells)")
+
+
+def check_r2_clusters(fams, errs, warns):
+    """r2: one cluster per seed line; warn when an r2 bare input repeats any other family's bare."""
+    seed_cluster, bares = {}, {}
+    for where, f in fams:
+        bares.setdefault(f.get("bare"), []).append(f.get("family_id"))
+    for where, f in fams:
+        if f.get("split") != "r2":
+            continue
+        if f.get("construction") == "seeded" and "seed_line" in f:
+            prev = seed_cluster.setdefault(f["seed_line"], (f.get("cluster_id"), f.get("family_id")))
+            if prev[0] != f.get("cluster_id"):
+                errs.append(f"{where} {f.get('family_id')}: seed line {f['seed_line']} also used by "
+                            f"{prev[1]} with a different cluster_id")
+        others = [x for x in bares.get(f.get("bare"), []) if x != f.get("family_id")]
+        if others:
+            warns.append(f"{where} {f.get('family_id')}: bare '{f.get('bare')}' repeats {others}")
 
 
 def main(paths):
@@ -293,6 +403,7 @@ def main(paths):
         dims = ", ".join(f"{d}={counts[d]}" for d in DIMENSIONS)
         print(f"{p}: {n} families ({dims}); with context: {n_ctx}")
     check_factorial(all_fams, errs)
+    check_r2_clusters(all_fams, errs, warns)
     # cross-file near-duplicate check on bare inputs
     for w in warns:
         print("WARN ", w)
