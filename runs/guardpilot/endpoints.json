@@ -1,9 +1,45 @@
 {
- "n_rows": 1080,
+ "n_rows": 1440,
  "n_invalid": 0,
  "n_critical_unresolved": 0,
  "n_families": 12,
  "cp1_constraint_preserving": {
+  "gemma3-4b|G1|chip1": {
+   "rate": 1.0,
+   "n": 24
+  },
+  "gemma3-4b|G1|chipall": {
+   "rate": 1.0,
+   "n": 24
+  },
+  "gemma3-4b|G1|full": {
+   "rate": 1.0,
+   "n": 24
+  },
+  "gemma3-4b|G1s|chip1": {
+   "rate": 0.958,
+   "n": 24
+  },
+  "gemma3-4b|G1s|chipall": {
+   "rate": 0.875,
+   "n": 24
+  },
+  "gemma3-4b|G1s|full": {
+   "rate": 1.0,
+   "n": 24
+  },
+  "gemma3-4b|P0|chip1": {
+   "rate": 0.875,
+   "n": 24
+  },
+  "gemma3-4b|P0|chipall": {
+   "rate": 0.792,
+   "n": 24
+  },
+  "gemma3-4b|P0|full": {
+   "rate": 0.958,
+   "n": 24
+  },
   "gpt-6.1-terra|G1|chip1": {
    "rate": 1.0,
    "n": 24
@@ -114,6 +150,30 @@
   }
  },
  "violation_by_dim": {
+  "gemma3-4b|agent": {
+   "rate": 0.0,
+   "n": 36
+  },
+  "gemma3-4b|certainty": {
+   "rate": 0.0,
+   "n": 36
+  },
+  "gemma3-4b|polarity": {
+   "rate": 0.0,
+   "n": 36
+  },
+  "gemma3-4b|politeness": {
+   "rate": 0.139,
+   "n": 36
+  },
+  "gemma3-4b|speech_act": {
+   "rate": 0.0,
+   "n": 36
+  },
+  "gemma3-4b|time_quantity": {
+   "rate": 0.056,
+   "n": 36
+  },
   "gpt-6.1-terra|agent": {
    "rate": 0.0,
    "n": 36
@@ -188,6 +248,30 @@
   }
  },
  "cp2_commitment": {
+  "gemma3-4b|G1|bare": {
+   "rate": 0.917,
+   "n": 12
+  },
+  "gemma3-4b|G1|noncrit": {
+   "rate": 0.917,
+   "n": 12
+  },
+  "gemma3-4b|G1s|bare": {
+   "rate": 0.917,
+   "n": 12
+  },
+  "gemma3-4b|G1s|noncrit": {
+   "rate": 0.917,
+   "n": 12
+  },
+  "gemma3-4b|P0|bare": {
+   "rate": 0.833,
+   "n": 12
+  },
+  "gemma3-4b|P0|noncrit": {
+   "rate": 0.833,
+   "n": 12
+  },
   "gpt-6.1-terra|G1|bare": {
    "rate": 0.917,
    "n": 12
@@ -262,6 +346,42 @@
   }
  },
  "cp2_direction_vs_50pct": {
+  "gemma3-4b|agent": {
+   "A": 12,
+   "B": 0,
+   "other": 0,
+   "share_A": 1.0
+  },
+  "gemma3-4b|certainty": {
+   "A": 6,
+   "B": 6,
+   "other": 0,
+   "share_A": 0.5
+  },
+  "gemma3-4b|polarity": {
+   "A": 6,
+   "B": 6,
+   "other": 0,
+   "share_A": 0.5
+  },
+  "gemma3-4b|politeness": {
+   "A": 7,
+   "B": 5,
+   "other": 0,
+   "share_A": 0.583
+  },
+  "gemma3-4b|speech_act": {
+   "A": 3,
+   "B": 8,
+   "other": 1,
+   "share_A": 0.273
+  },
+  "gemma3-4b|time_quantity": {
+   "A": 4,
+   "B": 0,
+   "other": 0,
+   "share_A": 1.0
+  },
   "gpt-6.1-terra|agent": {
    "A": 12,
    "B": 0,
@@ -367,6 +487,27 @@
  },
  "coverage_at_3": {},
  "stance_additions": {
+  "gemma3-4b|G1": {
+   "any_stance_addition": 0.167,
+   "politeness_added": 0.0,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.033,
+   "added_content": 0.058
+  },
+  "gemma3-4b|G1s": {
+   "any_stance_addition": 0.167,
+   "politeness_added": 0.0,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.033,
+   "added_content": 0.067
+  },
+  "gemma3-4b|P0": {
+   "any_stance_addition": 0.2,
+   "politeness_added": 0.15,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.033,
+   "added_content": 0.05
+  },
   "gpt-6.1-terra|G1": {
    "any_stance_addition": 0.183,
    "politeness_added": 0.0,
