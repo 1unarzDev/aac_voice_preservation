@@ -5,10 +5,11 @@
  "unsure_policy": "unsure dims -> missing",
  "key": {
   "n_sampled": 163,
-  "n_challenge": 0,
+  "n_challenge": 72,
   "critical_source": {
-   "agree": 150,
-   "arbiter": 13
+   "agree": 221,
+   "arbiter": 13,
+   "null": 1
   }
  },
  "human": null,
@@ -20,63 +21,63 @@
    "C-gpt-6-astra",
    "C-gpt-6-luna"
   ],
-  "n_items": 163,
+  "n_items": 187,
   "consensus_rule": "majority",
   "alpha_nominal": {
    "critical": {
-    "alpha": 0.831,
-    "n_units": 163,
+    "alpha": 0.823,
+    "n_units": 187,
     "ci95": [
-     0.781,
-     0.874
+     0.777,
+     0.866
     ]
    },
    "polarity": {
-    "alpha": 0.786,
-    "n_units": 163,
+    "alpha": 0.772,
+    "n_units": 187,
     "ci95": [
-     0.649,
-     0.9
+     0.647,
+     0.873
     ]
    },
    "speech_act": {
-    "alpha": 0.88,
-    "n_units": 160,
+    "alpha": 0.853,
+    "n_units": 184,
     "ci95": [
-     0.821,
-     0.93
+     0.79,
+     0.907
     ]
    },
    "agent": {
-    "alpha": 0.82,
-    "n_units": 160,
+    "alpha": 0.793,
+    "n_units": 184,
     "ci95": [
-     0.753,
-     0.876
+     0.733,
+     0.849
     ]
    },
    "certainty": {
-    "alpha": 0.839,
-    "n_units": 163,
+    "alpha": 0.829,
+    "n_units": 187,
     "ci95": [
-     0.769,
-     0.9
+     0.764,
+     0.887
     ]
    },
    "politeness": {
-    "alpha": 0.88,
-    "n_units": 163,
+    "alpha": 0.853,
+    "n_units": 187,
     "ci95": [
-     0.785,
-     0.952
+     0.76,
+     0.931
     ]
    },
    "added_content": {
-    "alpha": 0.381,
-    "n_units": 163,
+    "alpha": 0.407,
+    "n_units": 187,
     "ci95": [
-     0.27,
-     0.485
+     0.304,
+     0.513
     ]
    }
   },
@@ -91,6 +92,15 @@
      ],
      "kappa": 0.98
     },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-5.6-sol~C-gpt-6-luna|sampled": {
      "n": 163,
      "agree": 0.761,
@@ -99,6 +109,15 @@
       0.82
      ],
      "kappa": 0.748
+    },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.667,
+     "agree_ci": [
+      0.467,
+      0.82
+     ],
+     "kappa": 0.642
     },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 163,
@@ -109,6 +128,15 @@
      ],
      "kappa": 0.948
     },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 160,
      "agree": 0.775,
@@ -117,6 +145,15 @@
       0.833
      ],
      "kappa": 0.763
+    },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.667,
+     "agree_ci": [
+      0.467,
+      0.82
+     ],
+     "kappa": 0.642
     },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 160,
@@ -127,6 +164,15 @@
      ],
      "kappa": 0.967
     },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-luna~judge(final)|sampled": {
      "n": 163,
      "agree": 0.779,
@@ -135,6 +181,15 @@
       0.836
      ],
      "kappa": 0.767
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.667,
+     "agree_ci": [
+      0.467,
+      0.82
+     ],
+     "kappa": 0.642
     }
    },
    "polarity": {
@@ -143,6 +198,15 @@
      "agree": 1.0,
      "agree_ci": [
       0.977,
+      1.0
+     ],
+     "kappa": 1.0
+    },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 22,
+     "agree": 1.0,
+     "agree_ci": [
+      0.851,
       1.0
      ],
      "kappa": 1.0
@@ -156,6 +220,15 @@
      ],
      "kappa": 0.686
     },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.591
+    },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 163,
      "agree": 0.994,
@@ -164,6 +237,15 @@
       0.999
      ],
      "kappa": 0.967
+    },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
     },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 162,
@@ -174,11 +256,29 @@
      ],
      "kappa": 0.71
     },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 22,
+     "agree": 0.909,
+     "agree_ci": [
+      0.722,
+      0.975
+     ],
+     "kappa": 0.614
+    },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 162,
      "agree": 1.0,
      "agree_ci": [
       0.977,
+      1.0
+     ],
+     "kappa": 1.0
+    },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 22,
+     "agree": 1.0,
+     "agree_ci": [
+      0.851,
       1.0
      ],
      "kappa": 1.0
@@ -191,6 +291,15 @@
       0.971
      ],
      "kappa": 0.711
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.591
     }
    },
    "speech_act": {
@@ -203,6 +312,15 @@
      ],
      "kappa": 0.988
     },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 23,
+     "agree": 1.0,
+     "agree_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-5.6-sol~C-gpt-6-luna|sampled": {
      "n": 160,
      "agree": 0.912,
@@ -211,6 +329,15 @@
       0.947
      ],
      "kappa": 0.834
+    },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 23,
+     "agree": 0.783,
+     "agree_ci": [
+      0.581,
+      0.903
+     ],
+     "kappa": 0.559
     },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 160,
@@ -221,6 +348,15 @@
      ],
      "kappa": 0.942
     },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 23,
+     "agree": 1.0,
+     "agree_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 152,
      "agree": 0.914,
@@ -229,6 +365,15 @@
       0.949
      ],
      "kappa": 0.838
+    },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.75,
+     "agree_ci": [
+      0.551,
+      0.88
+     ],
+     "kappa": 0.509
     },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 152,
@@ -239,6 +384,15 @@
      ],
      "kappa": 0.988
     },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-luna~judge(final)|sampled": {
      "n": 163,
      "agree": 0.871,
@@ -247,6 +401,15 @@
       0.914
      ],
      "kappa": 0.76
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.75,
+     "agree_ci": [
+      0.551,
+      0.88
+     ],
+     "kappa": 0.509
     }
    },
    "agent": {
@@ -259,6 +422,15 @@
      ],
      "kappa": 0.961
     },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 23,
+     "agree": 1.0,
+     "agree_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-5.6-sol~C-gpt-6-luna|sampled": {
      "n": 156,
      "agree": 0.833,
@@ -267,6 +439,15 @@
       0.884
      ],
      "kappa": 0.757
+    },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.625,
+     "agree_ci": [
+      0.427,
+      0.788
+     ],
+     "kappa": 0.416
     },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 155,
@@ -277,6 +458,15 @@
      ],
      "kappa": 0.925
     },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 152,
      "agree": 0.849,
@@ -285,6 +475,15 @@
       0.897
      ],
      "kappa": 0.779
+    },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 23,
+     "agree": 0.609,
+     "agree_ci": [
+      0.408,
+      0.778
+     ],
+     "kappa": 0.369
     },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 152,
@@ -295,6 +494,15 @@
      ],
      "kappa": 0.952
     },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 23,
+     "agree": 1.0,
+     "agree_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-luna~judge(final)|sampled": {
      "n": 162,
      "agree": 0.833,
@@ -303,6 +511,15 @@
       0.883
      ],
      "kappa": 0.756
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.625,
+     "agree_ci": [
+      0.427,
+      0.788
+     ],
+     "kappa": 0.416
     }
    },
    "certainty": {
@@ -315,6 +532,15 @@
      ],
      "kappa": 0.953
     },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-5.6-sol~C-gpt-6-luna|sampled": {
      "n": 162,
      "agree": 0.889,
@@ -323,6 +549,15 @@
       0.929
      ],
      "kappa": 0.801
+    },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.792,
+     "agree_ci": [
+      0.595,
+      0.908
+     ],
+     "kappa": 0.651
     },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 162,
@@ -333,6 +568,15 @@
      ],
      "kappa": 0.9
     },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 157,
      "agree": 0.892,
@@ -341,6 +585,15 @@
       0.931
      ],
      "kappa": 0.805
+    },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.792,
+     "agree_ci": [
+      0.595,
+      0.908
+     ],
+     "kappa": 0.651
     },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 157,
@@ -351,6 +604,15 @@
      ],
      "kappa": 0.918
     },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
+    },
     "C-gpt-6-luna~judge(final)|sampled": {
      "n": 163,
      "agree": 0.853,
@@ -359,6 +621,15 @@
       0.899
      ],
      "kappa": 0.737
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.792,
+     "agree_ci": [
+      0.595,
+      0.908
+     ],
+     "kappa": 0.651
     }
    },
    "politeness": {
@@ -367,6 +638,15 @@
      "agree": 1.0,
      "agree_ci": [
       0.977,
+      1.0
+     ],
+     "kappa": 1.0
+    },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
       1.0
      ],
      "kappa": 1.0
@@ -380,6 +660,15 @@
      ],
      "kappa": 0.822
     },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.532
+    },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 163,
      "agree": 0.988,
@@ -388,6 +677,15 @@
       0.997
      ],
      "kappa": 0.955
+    },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0
     },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 161,
@@ -398,11 +696,29 @@
      ],
      "kappa": 0.807
     },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.532
+    },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 161,
      "agree": 1.0,
      "agree_ci": [
       0.977,
+      1.0
+     ],
+     "kappa": 1.0
+    },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
       1.0
      ],
      "kappa": 1.0
@@ -415,6 +731,15 @@
       0.966
      ],
      "kappa": 0.769
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.532
     }
    },
    "added_content": {
@@ -427,6 +752,15 @@
      ],
      "kappa": 0.621
     },
+    "C-gpt-5.6-sol~C-gpt-6-astra|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": null
+    },
     "C-gpt-5.6-sol~C-gpt-6-luna|sampled": {
      "n": 163,
      "agree": 0.632,
@@ -435,6 +769,15 @@
       0.702
      ],
      "kappa": 0.209
+    },
+    "C-gpt-5.6-sol~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.0
     },
     "C-gpt-5.6-sol~judge(final)|sampled": {
      "n": 145,
@@ -445,6 +788,15 @@
      ],
      "kappa": 0.68
     },
+    "C-gpt-5.6-sol~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": null
+    },
     "C-gpt-6-astra~C-gpt-6-luna|sampled": {
      "n": 153,
      "agree": 0.68,
@@ -453,6 +805,15 @@
       0.748
      ],
      "kappa": 0.316
+    },
+    "C-gpt-6-astra~C-gpt-6-luna|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.0
     },
     "C-gpt-6-astra~judge(final)|sampled": {
      "n": 139,
@@ -463,6 +824,15 @@
      ],
      "kappa": 0.884
     },
+    "C-gpt-6-astra~judge(final)|challenge": {
+     "n": 24,
+     "agree": 1.0,
+     "agree_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": null
+    },
     "C-gpt-6-luna~judge(final)|sampled": {
      "n": 145,
      "agree": 0.621,
@@ -471,6 +841,15 @@
       0.696
      ],
      "kappa": 0.226
+    },
+    "C-gpt-6-luna~judge(final)|challenge": {
+     "n": 24,
+     "agree": 0.875,
+     "agree_ci": [
+      0.69,
+      0.957
+     ],
+     "kappa": 0.0
     }
    }
   },
@@ -13166,10 +13545,1696 @@
       1.0
      ],
      "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "acceptance": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "addressee": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "hedged/uncertain": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "later": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      },
+      "past": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "plain": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "plain assertion": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "polite": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "speaker": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "third party": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "two": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      }
+     },
+     "confusion_rows_reference": {
+      "acceptance": {
+       "acceptance": 1,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "addressee": {
+       "acceptance": 0,
+       "addressee": 2,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "hedged/uncertain": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 2,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "later": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 1,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "negated": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 4,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "past": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 1,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "plain": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 2,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "plain assertion": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 1,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "polite": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 2,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "question": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "refusal": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "request/command": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 1,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "speaker": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 1,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "strongly certain/emphatic": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 1,
+       "third party": 0,
+       "two": 0
+      },
+      "third party": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 1,
+       "two": 0
+      },
+      "two": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 2
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "acceptance": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "addressee": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "hedged/uncertain": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "later": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      },
+      "past": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "plain": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "plain assertion": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "polite": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "speaker": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "third party": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "two": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      }
+     },
+     "confusion_rows_reference": {
+      "acceptance": {
+       "acceptance": 1,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "addressee": {
+       "acceptance": 0,
+       "addressee": 2,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "hedged/uncertain": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 2,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "later": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 1,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "negated": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 4,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "past": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 1,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "plain": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 2,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "plain assertion": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 1,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "polite": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 2,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "question": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "refusal": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "request/command": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 1,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "speaker": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 1,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "strongly certain/emphatic": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 1,
+       "third party": 0,
+       "two": 0
+      },
+      "third party": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 1,
+       "two": 0
+      },
+      "two": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 2
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "acceptance": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "addressee": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "hedged/uncertain": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "later": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      },
+      "past": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "plain": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "plain assertion": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "polite": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      },
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "speaker": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "third party": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "two": {
+       "tp": 2,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.342,
+        1.0
+       ],
+       "recall_ci": [
+        0.342,
+        1.0
+       ],
+       "n_reference": 2
+      }
+     },
+     "confusion_rows_reference": {
+      "acceptance": {
+       "acceptance": 1,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "addressee": {
+       "acceptance": 0,
+       "addressee": 2,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "hedged/uncertain": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 2,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "later": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 1,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "negated": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 4,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "past": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 1,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "plain": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 2,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "plain assertion": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 1,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "polite": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 2,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "question": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "refusal": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "request/command": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 1,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "speaker": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 1,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 0
+      },
+      "strongly certain/emphatic": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 1,
+       "third party": 0,
+       "two": 0
+      },
+      "third party": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 1,
+       "two": 0
+      },
+      "two": {
+       "acceptance": 0,
+       "addressee": 0,
+       "hedged/uncertain": 0,
+       "later": 0,
+       "negated": 0,
+       "past": 0,
+       "plain": 0,
+       "plain assertion": 0,
+       "polite": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "speaker": 0,
+       "strongly certain/emphatic": 0,
+       "third party": 0,
+       "two": 2
+      }
+     },
+     "n_judge_null": 0
     }
    },
    "polarity": {
-    "no_consensus_excluded": 1,
+    "no_consensus_excluded": 2,
     "sampled/final": {
      "n": 162,
      "acc": 1.0,
@@ -14627,10 +16692,242 @@
       1.0
      ],
      "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "affirmative": {
+       "tp": 19,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.832,
+        1.0
+       ],
+       "recall_ci": [
+        0.832,
+        1.0
+       ],
+       "n_reference": 19
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      }
+     },
+     "confusion_rows_reference": {
+      "affirmative": {
+       "affirmative": 19,
+       "negated": 0
+      },
+      "negated": {
+       "affirmative": 0,
+       "negated": 4
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "affirmative": {
+       "tp": 19,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.832,
+        1.0
+       ],
+       "recall_ci": [
+        0.832,
+        1.0
+       ],
+       "n_reference": 19
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      }
+     },
+     "confusion_rows_reference": {
+      "affirmative": {
+       "affirmative": 19,
+       "negated": 0
+      },
+      "negated": {
+       "affirmative": 0,
+       "negated": 4
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "affirmative": {
+       "tp": 19,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.832,
+        1.0
+       ],
+       "recall_ci": [
+        0.832,
+        1.0
+       ],
+       "n_reference": 19
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      }
+     },
+     "confusion_rows_reference": {
+      "affirmative": {
+       "affirmative": 19,
+       "negated": 0
+      },
+      "negated": {
+       "affirmative": 0,
+       "negated": 4
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/L0": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "affirmative": {
+       "tp": 19,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.832,
+        1.0
+       ],
+       "recall_ci": [
+        0.832,
+        1.0
+       ],
+       "n_reference": 19
+      },
+      "negated": {
+       "tp": 4,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.51,
+        1.0
+       ],
+       "recall_ci": [
+        0.51,
+        1.0
+       ],
+       "n_reference": 4
+      }
+     },
+     "confusion_rows_reference": {
+      "affirmative": {
+       "affirmative": 19,
+       "negated": 0
+      },
+      "negated": {
+       "affirmative": 0,
+       "negated": 4
+      }
+     },
+     "n_judge_null": 0
     }
    },
    "speech_act": {
-    "no_consensus_excluded": 5,
+    "no_consensus_excluded": 6,
     "sampled/final": {
      "n": 158,
      "acc": 0.975,
@@ -16840,6 +19137,454 @@
       0.603,
       1.0
      ],
+     "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 5,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.566,
+        1.0
+       ],
+       "recall_ci": [
+        0.566,
+        1.0
+       ],
+       "n_reference": 5
+      },
+      "statement": {
+       "tp": 16,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.806,
+        1.0
+       ],
+       "recall_ci": [
+        0.806,
+        1.0
+       ],
+       "n_reference": 16
+      }
+     },
+     "confusion_rows_reference": {
+      "question": {
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 0
+      },
+      "refusal": {
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "statement": 0
+      },
+      "request/command": {
+       "question": 0,
+       "refusal": 0,
+       "request/command": 5,
+       "statement": 0
+      },
+      "statement": {
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 16
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 5,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.566,
+        1.0
+       ],
+       "recall_ci": [
+        0.566,
+        1.0
+       ],
+       "n_reference": 5
+      },
+      "statement": {
+       "tp": 16,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.806,
+        1.0
+       ],
+       "recall_ci": [
+        0.806,
+        1.0
+       ],
+       "n_reference": 16
+      }
+     },
+     "confusion_rows_reference": {
+      "question": {
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 0
+      },
+      "refusal": {
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "statement": 0
+      },
+      "request/command": {
+       "question": 0,
+       "refusal": 0,
+       "request/command": 5,
+       "statement": 0
+      },
+      "statement": {
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 16
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 23,
+     "acc": 1.0,
+     "acc_ci": [
+      0.857,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 5,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.566,
+        1.0
+       ],
+       "recall_ci": [
+        0.566,
+        1.0
+       ],
+       "n_reference": 5
+      },
+      "statement": {
+       "tp": 16,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.806,
+        1.0
+       ],
+       "recall_ci": [
+        0.806,
+        1.0
+       ],
+       "n_reference": 16
+      }
+     },
+     "confusion_rows_reference": {
+      "question": {
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 0
+      },
+      "refusal": {
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "statement": 0
+      },
+      "request/command": {
+       "question": 0,
+       "refusal": 0,
+       "request/command": 5,
+       "statement": 0
+      },
+      "statement": {
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 16
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/L0": {
+     "n": 23,
+     "acc": 0.913,
+     "acc_ci": [
+      0.732,
+      0.976
+     ],
+     "kappa": 0.832,
+     "kappa_ci": [
+      0.602,
+      1.0
+     ],
+     "per_label": {
+      "offer/suggestion": {
+       "tp": 0,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.0,
+       "recall": null,
+       "precision_ci": [
+        0.0,
+        0.793
+       ],
+       "recall_ci": null,
+       "n_reference": 0
+      },
+      "question": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "refusal": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "request/command": {
+       "tp": 5,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.833,
+       "recall": 1.0,
+       "precision_ci": [
+        0.436,
+        0.97
+       ],
+       "recall_ci": [
+        0.566,
+        1.0
+       ],
+       "n_reference": 5
+      },
+      "statement": {
+       "tp": 14,
+       "fp": 0,
+       "fn": 2,
+       "precision": 1.0,
+       "recall": 0.875,
+       "precision_ci": [
+        0.785,
+        1.0
+       ],
+       "recall_ci": [
+        0.64,
+        0.965
+       ],
+       "n_reference": 16
+      }
+     },
+     "confusion_rows_reference": {
+      "offer/suggestion": {
+       "offer/suggestion": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 0
+      },
+      "question": {
+       "offer/suggestion": 0,
+       "question": 1,
+       "refusal": 0,
+       "request/command": 0,
+       "statement": 0
+      },
+      "refusal": {
+       "offer/suggestion": 0,
+       "question": 0,
+       "refusal": 1,
+       "request/command": 0,
+       "statement": 0
+      },
+      "request/command": {
+       "offer/suggestion": 0,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 5,
+       "statement": 0
+      },
+      "statement": {
+       "offer/suggestion": 1,
+       "question": 0,
+       "refusal": 0,
+       "request/command": 1,
+       "statement": 14
+      }
+     },
      "n_judge_null": 0
     }
    },
@@ -19172,6 +21917,352 @@
       1.0
      ],
      "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "addressee": {
+       "tp": 8,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.676,
+        1.0
+       ],
+       "recall_ci": [
+        0.676,
+        1.0
+       ],
+       "n_reference": 8
+      },
+      "speaker": {
+       "tp": 13,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.772,
+        1.0
+       ],
+       "recall_ci": [
+        0.772,
+        1.0
+       ],
+       "n_reference": 13
+      },
+      "third party": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      }
+     },
+     "confusion_rows_reference": {
+      "addressee": {
+       "addressee": 8,
+       "speaker": 0,
+       "third party": 0
+      },
+      "speaker": {
+       "addressee": 0,
+       "speaker": 13,
+       "third party": 0
+      },
+      "third party": {
+       "addressee": 0,
+       "speaker": 0,
+       "third party": 3
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "addressee": {
+       "tp": 8,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.676,
+        1.0
+       ],
+       "recall_ci": [
+        0.676,
+        1.0
+       ],
+       "n_reference": 8
+      },
+      "speaker": {
+       "tp": 13,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.772,
+        1.0
+       ],
+       "recall_ci": [
+        0.772,
+        1.0
+       ],
+       "n_reference": 13
+      },
+      "third party": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      }
+     },
+     "confusion_rows_reference": {
+      "addressee": {
+       "addressee": 8,
+       "speaker": 0,
+       "third party": 0
+      },
+      "speaker": {
+       "addressee": 0,
+       "speaker": 13,
+       "third party": 0
+      },
+      "third party": {
+       "addressee": 0,
+       "speaker": 0,
+       "third party": 3
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "addressee": {
+       "tp": 8,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.676,
+        1.0
+       ],
+       "recall_ci": [
+        0.676,
+        1.0
+       ],
+       "n_reference": 8
+      },
+      "speaker": {
+       "tp": 13,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.772,
+        1.0
+       ],
+       "recall_ci": [
+        0.772,
+        1.0
+       ],
+       "n_reference": 13
+      },
+      "third party": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      }
+     },
+     "confusion_rows_reference": {
+      "addressee": {
+       "addressee": 8,
+       "speaker": 0,
+       "third party": 0
+      },
+      "speaker": {
+       "addressee": 0,
+       "speaker": 13,
+       "third party": 0
+      },
+      "third party": {
+       "addressee": 0,
+       "speaker": 0,
+       "third party": 3
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/L0": {
+     "n": 24,
+     "acc": 0.958,
+     "acc_ci": [
+      0.798,
+      0.993
+     ],
+     "kappa": 0.931,
+     "kappa_ci": [
+      0.78,
+      1.0
+     ],
+     "per_label": {
+      "addressee": {
+       "tp": 8,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.676,
+        1.0
+       ],
+       "recall_ci": [
+        0.676,
+        1.0
+       ],
+       "n_reference": 8
+      },
+      "speaker": {
+       "tp": 12,
+       "fp": 0,
+       "fn": 1,
+       "precision": 1.0,
+       "recall": 0.923,
+       "precision_ci": [
+        0.758,
+        1.0
+       ],
+       "recall_ci": [
+        0.667,
+        0.986
+       ],
+       "n_reference": 13
+      },
+      "third party": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      },
+      "unspecified": {
+       "tp": 0,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.0,
+       "recall": null,
+       "precision_ci": [
+        0.0,
+        0.793
+       ],
+       "recall_ci": null,
+       "n_reference": 0
+      }
+     },
+     "confusion_rows_reference": {
+      "addressee": {
+       "addressee": 8,
+       "speaker": 0,
+       "third party": 0,
+       "unspecified": 0
+      },
+      "speaker": {
+       "addressee": 0,
+       "speaker": 12,
+       "third party": 0,
+       "unspecified": 1
+      },
+      "third party": {
+       "addressee": 0,
+       "speaker": 0,
+       "third party": 3,
+       "unspecified": 0
+      },
+      "unspecified": {
+       "addressee": 0,
+       "speaker": 0,
+       "third party": 0,
+       "unspecified": 0
+      }
+     },
+     "n_judge_null": 0
     }
    },
    "certainty": {
@@ -21059,6 +24150,430 @@
       1.0
      ],
      "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "hedged/uncertain": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      },
+      "n/a (question/request)": {
+       "tp": 6,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.61,
+        1.0
+       ],
+       "recall_ci": [
+        0.61,
+        1.0
+       ],
+       "n_reference": 6
+      },
+      "plain assertion": {
+       "tp": 14,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.785,
+        1.0
+       ],
+       "recall_ci": [
+        0.785,
+        1.0
+       ],
+       "n_reference": 14
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "hedged/uncertain": {
+       "hedged/uncertain": 3,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "n/a (question/request)": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 6,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "plain assertion": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 14,
+       "strongly certain/emphatic": 0
+      },
+      "strongly certain/emphatic": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 1
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "hedged/uncertain": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      },
+      "n/a (question/request)": {
+       "tp": 6,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.61,
+        1.0
+       ],
+       "recall_ci": [
+        0.61,
+        1.0
+       ],
+       "n_reference": 6
+      },
+      "plain assertion": {
+       "tp": 14,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.785,
+        1.0
+       ],
+       "recall_ci": [
+        0.785,
+        1.0
+       ],
+       "n_reference": 14
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "hedged/uncertain": {
+       "hedged/uncertain": 3,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "n/a (question/request)": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 6,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "plain assertion": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 14,
+       "strongly certain/emphatic": 0
+      },
+      "strongly certain/emphatic": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 1
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "hedged/uncertain": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      },
+      "n/a (question/request)": {
+       "tp": 6,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.61,
+        1.0
+       ],
+       "recall_ci": [
+        0.61,
+        1.0
+       ],
+       "n_reference": 6
+      },
+      "plain assertion": {
+       "tp": 14,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.785,
+        1.0
+       ],
+       "recall_ci": [
+        0.785,
+        1.0
+       ],
+       "n_reference": 14
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "hedged/uncertain": {
+       "hedged/uncertain": 3,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "n/a (question/request)": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 6,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "plain assertion": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 14,
+       "strongly certain/emphatic": 0
+      },
+      "strongly certain/emphatic": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 1
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/L0": {
+     "n": 24,
+     "acc": 0.958,
+     "acc_ci": [
+      0.798,
+      0.993
+     ],
+     "kappa": 0.93,
+     "kappa_ci": [
+      0.76,
+      1.0
+     ],
+     "per_label": {
+      "hedged/uncertain": {
+       "tp": 3,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.439,
+        1.0
+       ],
+       "recall_ci": [
+        0.439,
+        1.0
+       ],
+       "n_reference": 3
+      },
+      "n/a (question/request)": {
+       "tp": 6,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.857,
+       "recall": 1.0,
+       "precision_ci": [
+        0.487,
+        0.974
+       ],
+       "recall_ci": [
+        0.61,
+        1.0
+       ],
+       "n_reference": 6
+      },
+      "plain assertion": {
+       "tp": 13,
+       "fp": 0,
+       "fn": 1,
+       "precision": 1.0,
+       "recall": 0.929,
+       "precision_ci": [
+        0.772,
+        1.0
+       ],
+       "recall_ci": [
+        0.685,
+        0.987
+       ],
+       "n_reference": 14
+      },
+      "strongly certain/emphatic": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "hedged/uncertain": {
+       "hedged/uncertain": 3,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "n/a (question/request)": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 6,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 0
+      },
+      "plain assertion": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 1,
+       "plain assertion": 13,
+       "strongly certain/emphatic": 0
+      },
+      "strongly certain/emphatic": {
+       "hedged/uncertain": 0,
+       "n/a (question/request)": 0,
+       "plain assertion": 0,
+       "strongly certain/emphatic": 1
+      }
+     },
+     "n_judge_null": 0
     }
    },
    "politeness": {
@@ -22394,6 +25909,330 @@
       1.0
      ],
      "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "none": {
+       "tp": 22,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.851,
+        1.0
+       ],
+       "recall_ci": [
+        0.851,
+        1.0
+       ],
+       "n_reference": 22
+      },
+      "please": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "softened request (could you/would you mind)": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "none": {
+       "none": 22,
+       "please": 0,
+       "softened request (could you/would you mind)": 0
+      },
+      "please": {
+       "none": 0,
+       "please": 1,
+       "softened request (could you/would you mind)": 0
+      },
+      "softened request (could you/would you mind)": {
+       "none": 0,
+       "please": 0,
+       "softened request (could you/would you mind)": 1
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "none": {
+       "tp": 22,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.851,
+        1.0
+       ],
+       "recall_ci": [
+        0.851,
+        1.0
+       ],
+       "n_reference": 22
+      },
+      "please": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "softened request (could you/would you mind)": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "none": {
+       "none": 22,
+       "please": 0,
+       "softened request (could you/would you mind)": 0
+      },
+      "please": {
+       "none": 0,
+       "please": 1,
+       "softened request (could you/would you mind)": 0
+      },
+      "softened request (could you/would you mind)": {
+       "none": 0,
+       "please": 0,
+       "softened request (could you/would you mind)": 1
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "none": {
+       "tp": 22,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.851,
+        1.0
+       ],
+       "recall_ci": [
+        0.851,
+        1.0
+       ],
+       "n_reference": 22
+      },
+      "please": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "softened request (could you/would you mind)": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "none": {
+       "none": 22,
+       "please": 0,
+       "softened request (could you/would you mind)": 0
+      },
+      "please": {
+       "none": 0,
+       "please": 1,
+       "softened request (could you/would you mind)": 0
+      },
+      "softened request (could you/would you mind)": {
+       "none": 0,
+       "please": 0,
+       "softened request (could you/would you mind)": 1
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/L0": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": 1.0,
+     "kappa_ci": [
+      1.0,
+      1.0
+     ],
+     "per_label": {
+      "none": {
+       "tp": 22,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.851,
+        1.0
+       ],
+       "recall_ci": [
+        0.851,
+        1.0
+       ],
+       "n_reference": 22
+      },
+      "please": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      },
+      "softened request (could you/would you mind)": {
+       "tp": 1,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.207,
+        1.0
+       ],
+       "recall_ci": [
+        0.207,
+        1.0
+       ],
+       "n_reference": 1
+      }
+     },
+     "confusion_rows_reference": {
+      "none": {
+       "none": 22,
+       "please": 0,
+       "softened request (could you/would you mind)": 0
+      },
+      "please": {
+       "none": 0,
+       "please": 1,
+       "softened request (could you/would you mind)": 0
+      },
+      "softened request (could you/would you mind)": {
+       "none": 0,
+       "please": 0,
+       "softened request (could you/would you mind)": 1
+      }
+     },
+     "n_judge_null": 0
     }
    },
    "added_content": {
@@ -23198,6 +27037,108 @@
       0.866
      ],
      "n_judge_null": 0
+    },
+    "challenge/final": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": null,
+     "kappa_ci": null,
+     "per_label": {
+      "no": {
+       "tp": 24,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.862,
+        1.0
+       ],
+       "recall_ci": [
+        0.862,
+        1.0
+       ],
+       "n_reference": 24
+      }
+     },
+     "confusion_rows_reference": {
+      "no": {
+       "no": 24
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J1": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": null,
+     "kappa_ci": null,
+     "per_label": {
+      "no": {
+       "tp": 24,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.862,
+        1.0
+       ],
+       "recall_ci": [
+        0.862,
+        1.0
+       ],
+       "n_reference": 24
+      }
+     },
+     "confusion_rows_reference": {
+      "no": {
+       "no": 24
+      }
+     },
+     "n_judge_null": 0
+    },
+    "challenge/J2": {
+     "n": 24,
+     "acc": 1.0,
+     "acc_ci": [
+      0.862,
+      1.0
+     ],
+     "kappa": null,
+     "kappa_ci": null,
+     "per_label": {
+      "no": {
+       "tp": 24,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "precision_ci": [
+        0.862,
+        1.0
+       ],
+       "recall_ci": [
+        0.862,
+        1.0
+       ],
+       "n_reference": 24
+      }
+     },
+     "confusion_rows_reference": {
+      "no": {
+       "no": 24
+      }
+     },
+     "n_judge_null": 0
     }
    }
   },
@@ -23211,17 +27152,16 @@
     "annotation/returns_codex/C_gpt-6-luna_extraA.csv",
     "annotation/returns_codex/C_gpt-6-luna_extraB.csv"
    ],
-   "not_in_key": 72,
-   "out_of_schema:politeness=plain": 1,
-   "out_of_schema:speech_act=acceptance": 2,
+   "out_of_schema:politeness=plain": 2,
+   "out_of_schema:speech_act=acceptance": 3,
    "rows_with_extra_columns": 43,
    "unsure:added_content": 10,
-   "unsure:agent": 18,
+   "unsure:agent": 19,
    "unsure:certainty": 7,
    "unsure:critical": 3,
-   "unsure:polarity": 1,
+   "unsure:polarity": 3,
    "unsure:politeness": 2,
-   "unsure:speech_act": 14
+   "unsure:speech_act": 15
   }
  }
 }
