@@ -45,6 +45,14 @@ Method
             against runs/<run>/scored.parquet (consistency_check).
   challenge_key  each member, the consensus and the judge against the authored challenge
             keys (annotation/challenge_items.jsonl).
+Multi-run keys (B3, make_gold.py --runs; e.g. annotation/gold_key_new.csv)
+  python src/score_gold.py --run new --human 'annotation/returns_gold_new/*.csv'
+  A key with a 'run' column stores the production critical label (and critical_source) per
+  unit, so no arbiter fill is applied. Extra subsets 'sampled@<run>' (judge vs reference per
+  run and label field, Wilson CI on accuracy, bootstrap CI on kappa, 1/pi weights within the
+  run) and, for the critical field, 'sampled@<run>#<family dimension>'. Verdicts are
+  recomputed per run from runs/<run>/scored.parquet occurrences of the unit (output_ids),
+  including W-D custom channels, and reported overall and under verdict.by_run.
 """
 from __future__ import annotations
 
@@ -141,6 +149,11 @@ def is_cal(item_id: str, seed: int, frac: float) -> bool:
     return h / 0xFFFFFFFF < frac
 
 
+
+
+def key_runs(key: dict) -> list[str]:
+    """Runs of a multi-run key (make_gold.py --runs), in first-seen order; [] otherwise."""
+    return list(dict.fromkeys(k["run"] for k in key.values() if k.get("run")))
 
 
 # ----------------------------------------------------------------------- stats
@@ -244,6 +257,9 @@ def load_key(run: str, challenge_dir: Path | None) -> dict[str, dict]:
         r = {k: (v if v != "" else None) for k, v in r.items()}
         r["subset"], r["pi"] = "sampled", float(r["pi"])
         r["critical_options"] = fam_opts.get(r["family_id"])
+        if r.get("run"):          # multi-run key: production critical label already stored
+            key[r["item_id"]] = r
+            continue
         r["critical_source"] = "agree" if r["critical"] else None
         if r["critical"] is None and _jkey(r) in arb:
             r["critical"], r["critical_source"] = arb[_jkey(r)], "arbiter"
@@ -381,6 +397,12 @@ def score_reference(name, ann, key, rule, args, adj=None):
                    "sampled_test": lambda i: key[i]["subset"] == "sampled" and not is_cal(i, args.seed, args.cal_frac),
                    "sampled_calibration": lambda i: key[i]["subset"] == "sampled" and is_cal(i, args.seed, args.cal_frac),
                    "challenge": lambda i: key[i]["subset"] == "challenge"}
+        for run in key_runs(key):   # multi-run keys: per run (and per family dimension for critical)
+            subsets[f"sampled@{run}"] = lambda i, run=run: key[i]["subset"] == "sampled" and key[i].get("run") == run
+            if d == "critical":
+                for fd in sorted({k["dimension"] for k in key.values() if k.get("run") == run}):
+                    subsets[f"sampled@{run}#{fd}"] = (lambda i, run=run, fd=fd: key[i]["subset"] == "sampled"
+                                                      and key[i].get("run") == run and key[i]["dimension"] == fd)
         for sub, f in subsets.items():
             items = sorted(i for i in cons if f(i))
             for src in ("final", "J1", "J2", "L0"):
@@ -407,22 +429,28 @@ def score_reference(name, ann, key, rule, args, adj=None):
 
 # ------------------------------------------------------------ verdict level
 
-def _verdicts(dim, var, channel, lab):
+def _verdicts(dim, var, channel, lab, custom=None):
     """Violation / constraint_preserving / assumption from one label set, with the
     production rules of attribute.py (critical_match, general_spec, channel_dims).
-    A missing label on a dimension the verdict needs makes that verdict undetermined."""
+    A missing label on a dimension the verdict needs makes that verdict undetermined.
+    custom: the family's custom channel spec (W-D), as in attribute.score."""
     from attribute import AMBIG_CHANNELS, CUE_CHANNELS, channel_dims
     from labels import NA_CERTAINTY, critical_match, general_spec, is_unclear
     crit = lab.get("critical")
     out = {"violation": None, "constraint_preserving": None, "assumption": None}
     if crit is None:
         return out
-    if channel in CUE_CHANNELS:
+    if custom is not None:
+        cue = set(var["chips"]) <= set(custom["commitments"])
+        amb = not cue
+    else:
+        cue, amb = channel in CUE_CHANNELS, channel in AMBIG_CHANNELS
+    if cue:
         match = critical_match(dim, var["critical_value"], crit)
         out["violation"] = not match
         spec = general_spec(var.get("all_chips", []), var.get("general_spec"))
         contra, undetermined = False, False
-        for d in channel_dims(channel, var):
+        for d in channel_dims(channel, var, custom):
             s = spec.get(d)
             if d == dim or s is None or NA_CERTAINTY in s:
                 continue
@@ -435,7 +463,7 @@ def _verdicts(dim, var, channel, lab):
             contra |= v not in s
         out["constraint_preserving"] = (False if (not match or contra) else
                                         None if undetermined else True)
-    elif channel in AMBIG_CHANNELS:
+    elif amb:
         out["assumption"] = not is_unclear(crit)
     return out
 
@@ -448,16 +476,38 @@ def verdict_agreement(run: str, key: dict, cons_all: dict) -> dict:
     import pandas as pd
     import runio
     from attribute import quarantined
-    sp = ROOT / f"runs/{run}/scored.parquet"
-    if not sp.exists():
-        return {}
+    from build_requests import custom_spec
+    runs = key_runs(key)
     items = runio.load_items()
-    sc = pd.read_parquet(sp, columns=["text_id", "family_id", "input_text", "variant", "channel",
-                                      "valid", "violation", "constraint_preserving", "assumption"])
-    sc = sc[sc.valid.fillna(False).astype(bool)]
+    cols = ["output_id", "text_id", "family_id", "input_text", "variant", "channel",
+            "valid", "violation", "constraint_preserving", "assumption"]
     stored = {}
-    for r in sc.drop_duplicates(["text_id", "family_id", "input_text", "variant", "channel"]).itertuples():
-        stored.setdefault((r.text_id, r.family_id, r.input_text), []).append(r)
+    if not runs:
+        sp = ROOT / f"runs/{run}/scored.parquet"
+        if not sp.exists():
+            return {}
+        sc = pd.read_parquet(sp, columns=cols)
+        sc = sc[sc.valid.fillna(False).astype(bool)]
+        for r in sc.drop_duplicates(["text_id", "family_id", "input_text", "variant", "channel"]).itertuples():
+            stored.setdefault((r.text_id, r.family_id, r.input_text), []).append(r)
+        unit_rows = lambda k: stored.get((k["text_id"], k["family_id"], k["input_text"]), [])
+    else:
+        # multi-run key: every (family, variant, channel) occurrence of the unit's output_ids
+        # (one output can carry targets of other-dimension families: keep the unit's families)
+        want = {}
+        for iid, k in key.items():
+            if k["subset"] == "sampled":
+                for o in (k.get("output_ids") or "").split("|"):
+                    for f in (k.get("families") or k["family_id"]).split("|"):
+                        want[(k["run"], o, f)] = iid
+        for rn in runs:
+            sc = pd.read_parquet(ROOT / f"runs/{rn}/scored.parquet", columns=cols)
+            sc = sc[sc.valid.fillna(False).astype(bool)
+                    & pd.Series([(rn, o, f) in want for o, f in zip(sc.output_id, sc.family_id)], index=sc.index)]
+            sc = sc.assign(item=[want[(rn, o, f)] for o, f in zip(sc.output_id, sc.family_id)])
+            for r in sc.drop_duplicates(["item", "family_id", "variant", "channel"]).itertuples():
+                stored.setdefault(r.item, []).append(r)
+        unit_rows = lambda k: stored.get(k["item_id"], [])
     res, check = {}, Counter()
     rows = {"violation": [], "constraint_preserving": [], "assumption": []}
     for iid, k in key.items():
@@ -467,12 +517,13 @@ def verdict_agreement(run: str, key: dict, cons_all: dict) -> dict:
         if not any(v is not None for v in human.values()):
             continue
         judge = {d: k.get(d) for d in DIMS}
-        it = items[k["family_id"]]
         seen_assumption = False
-        for r in stored.get((k["text_id"], k["family_id"], k["input_text"]), []):
+        for r in unit_rows(k):
+            it = items[r.family_id]
             var = it["variants"][r.variant]
-            vh = _verdicts(it["dimension"], var, r.channel, human)
-            vj = _verdicts(it["dimension"], var, r.channel, judge)
+            cust = custom_spec(it, r.variant, r.channel) if it.get("custom_channels") else None
+            vh = _verdicts(it["dimension"], var, r.channel, human, cust)
+            vj = _verdicts(it["dimension"], var, r.channel, judge, cust)
             for e in rows:
                 if e == "assumption":
                     if seen_assumption or vj[e] is None and vh[e] is None:
@@ -483,9 +534,19 @@ def verdict_agreement(run: str, key: dict, cons_all: dict) -> dict:
                 if vj[e] is None and vh[e] is None:
                     continue
                 rows[e].append({"item": iid, "judge": vj[e], "ref": vh[e], "pi": k["pi"],
-                                "quarantine": quarantined(it)})
-            if r.channel in ("bare", "noncrit"):
+                                "quarantine": quarantined(it), "run": k.get("run")})
+            if r.channel in ("bare", "noncrit") or vj["assumption"] is not None or vh["assumption"] is not None:
                 seen_assumption = True
+    res = _verdict_tables(rows)
+    if runs:
+        res["by_run"] = {rn: _verdict_tables({e: [x for x in rr if x["run"] == rn] for e, rr in rows.items()})
+                         for rn in runs}
+    res["consistency_check"] = dict(check)
+    return res
+
+
+def _verdict_tables(rows: dict) -> dict:
+    res = {}
     for e, rr in rows.items():
         out = {}
         for scope, sel in (("all", rr), ("primary", [x for x in rr if not x["quarantine"]])):
@@ -510,7 +571,6 @@ def verdict_agreement(run: str, key: dict, cons_all: dict) -> dict:
                 "ref_positive": tab[(True, True)] + tab[(False, True)],
                 "judge_positive": tab[(True, True)] + tab[(True, False)]}
         res[e] = out
-    res["consistency_check"] = dict(check)
     return res
 
 
@@ -724,6 +784,19 @@ def main() -> int:
             t = r["judge"][d].get("sampled/final", {})
             print(f"  {d:13s} alpha={al['alpha']} (n={al['n_units']})  sampled/final: n={t.get('n')} "
                   f"acc={t.get('acc')} kappa={t.get('kappa')} kappa_w={t.get('kappa_w')}")
+        for run in key_runs(key):
+            print(f"  -- run {run} (judge final vs {name} consensus; Wilson / bootstrap 95% CI)")
+            for d in DIMS:
+                for sub in sorted(s for s in r["judge"][d] if s.startswith(f"sampled@{run}") and s.endswith("/final")):
+                    t = r["judge"][d][sub]
+                    if t.get("n"):
+                        print(f"     {d:13s} {sub.split('/')[0][len('sampled@' + run):] or 'all':14s} n={t['n']:3d} "
+                              f"acc={t['acc']} {t['acc_ci']} kappa={t['kappa']} {t.get('kappa_ci')}")
+            for e, v in ((r.get("verdict") or {}).get("by_run", {}).get(run) or {}).items():
+                p = v.get("primary")
+                if p:
+                    print(f"     verdict {e:22s} {p['agree_k']}/{p['n']} agree {p['agree_ci']} kappa={p['kappa']} "
+                          f"(judge+/ref+ {p['judge_positive']}/{p['ref_positive']})")
         for e, v in (r.get("verdict") or {}).items():
             if isinstance(v, dict) and "primary" in v:
                 p = v["primary"]

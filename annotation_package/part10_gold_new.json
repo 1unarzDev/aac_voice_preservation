@@ -1,0 +1,2820 @@
+{
+ "run": "gold_new",
+ "codebook_version": "v0.2 (D-007)",
+ "general_dims": [
+  {
+   "name": "polarity",
+   "definition": "Is the main statement or request negated (not/never/no/don't)? 'mixed/unclear' if both or you cannot tell.",
+   "options": [
+    "affirmative",
+    "negated",
+    "mixed/unclear"
+   ]
+  },
+  {
+   "name": "speech_act",
+   "definition": "What the sentence does: tells (statement), asks for information (question), asks someone to do something (request/command), declines (refusal), proposes or offers (offer/suggestion).",
+   "options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "offer/suggestion",
+    "other"
+   ]
+  },
+  {
+   "name": "agent",
+   "definition": "Who does the main action: the speaker (I), the listener (you), both (we/let's), someone else (third party), or no doer is stated (unspecified).",
+   "options": [
+    "speaker",
+    "addressee",
+    "we/joint",
+    "third party",
+    "unspecified"
+   ]
+  },
+  {
+   "name": "certainty",
+   "definition": "How sure the sentence sounds: plain, hedged (maybe/I think/probably), strongly certain (definitely/really/for sure). Questions and requests: n/a.",
+   "options": [
+    "plain assertion",
+    "hedged/uncertain",
+    "strongly certain/emphatic",
+    "n/a (question/request)"
+   ]
+  },
+  {
+   "name": "politeness",
+   "definition": "Explicit politeness words only: 'please'; a softened request (could you / would you mind / if possible); thanks or apology. Else none.",
+   "options": [
+    "none",
+    "please",
+    "softened request (could you/would you mind)",
+    "thanks/apology"
+   ]
+  }
+ ],
+ "added_content": {
+  "definition": "Does the sentence state a fact, reason, person, place or time that is NOT in the input words? Grammar words and chips' meanings do not count.",
+  "options": [
+   "yes",
+   "no"
+  ]
+ },
+ "practice": [
+  {
+   "item_id": "practice-1",
+   "text": "I don't want to go to the party tonight.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: want go party",
+   "expected": {
+    "critical": "negated",
+    "polarity": "negated",
+    "speech_act": "statement",
+    "agent": "speaker",
+    "certainty": "plain assertion",
+    "politeness": "none",
+    "added_content": "yes"
+   },
+   "feedback": "\"don't\" negates the main verb, so polarity is negated. 'tonight' is a time that is not in the input words, so added content = yes."
+  },
+  {
+   "item_id": "practice-2",
+   "text": "Can you pick me up after work?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: pick up work",
+   "expected": {
+    "critical": "request/command",
+    "polarity": "affirmative",
+    "speech_act": "request/command",
+    "agent": "addressee",
+    "certainty": "n/a (question/request)",
+    "politeness": "none",
+    "added_content": "no"
+   },
+   "feedback": "'Can you ...?' asks the listener to do something: a request, done by the addressee. 'Can you' alone is NOT a polite marker (codebook rule), so politeness = none. Requests get certainty n/a."
+  },
+  {
+   "item_id": "practice-3",
+   "text": "I think the bus might be late today.",
+   "critical": {
+    "dimension": "certainty",
+    "question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+    "options": [
+     "plain assertion",
+     "hedged/uncertain",
+     "strongly certain/emphatic",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [MAYBE] bus late",
+   "expected": {
+    "critical": "hedged/uncertain",
+    "polarity": "affirmative",
+    "speech_act": "statement",
+    "agent": "third party",
+    "certainty": "hedged/uncertain",
+    "politeness": "none",
+    "added_content": "yes"
+   },
+   "feedback": "'I think' and 'might' are hedges. The bus is the one that is late, so the agent is a third party. 'today' is not in the input: added content = yes."
+  },
+  {
+   "item_id": "practice-4",
+   "text": "Could you please turn the TV down?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] turn tv down",
+   "expected": {
+    "critical": "polite",
+    "polarity": "affirmative",
+    "speech_act": "request/command",
+    "agent": "addressee",
+    "certainty": "n/a (question/request)",
+    "politeness": "please",
+    "added_content": "no"
+   },
+   "feedback": "Both 'could you' and 'please' are present. For the general politeness question pick the highest: please."
+  },
+  {
+   "item_id": "practice-5",
+   "text": "Let's go to the park later.",
+   "critical": {
+    "dimension": "time_quantity",
+    "question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+    "options": [
+     "past",
+     "now",
+     "later",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: go park",
+   "expected": {
+    "critical": "later",
+    "polarity": "affirmative",
+    "speech_act": "offer/suggestion",
+    "agent": "we/joint",
+    "certainty": "plain assertion",
+    "politeness": "none",
+    "added_content": "yes"
+   },
+   "feedback": "'Let's' is a suggestion done together (we/joint). 'later' places it in the future and is not in the input words, so added content = yes."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "g-9279aa2459",
+   "text": "Can you sign for my parcel?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] parcel signature"
+  },
+  {
+   "item_id": "g-bbe6aaecbb",
+   "text": "I will collect cleaning.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] collect cleaning"
+  },
+  {
+   "item_id": "g-12c758b7b1",
+   "text": "They told me the manager wouldn't approve my leave.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [THEY] [PAST] manager approve leave"
+  },
+  {
+   "item_id": "g-8a93e337d0",
+   "text": "Put the bins away.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] put bins"
+  },
+  {
+   "item_id": "g-3920f49633",
+   "text": "Are we going out?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [WE] out filters"
+  },
+  {
+   "item_id": "g-00f0a9aa0e",
+   "text": "Are they going to the hospital?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [THEY] bus stop hospital"
+  },
+  {
+   "item_id": "g-f873841a42",
+   "text": "Tell you a message.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] convey message"
+  },
+  {
+   "item_id": "g-b13fea9ab8",
+   "text": "Are you conveying the message?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [YOU] convey message"
+  },
+  {
+   "item_id": "g-0d9f66b065",
+   "text": "I have an iron shirt.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [STATEMENT] iron shirt"
+  },
+  {
+   "item_id": "g-f1dc1b5eba",
+   "text": "I will bring a friend.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: bring friend"
+  },
+  {
+   "item_id": "g-717f6d30dd",
+   "text": "Can I have the book at the table?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] book table"
+  },
+  {
+   "item_id": "g-4bfcb8ec44",
+   "text": "I need to lift something.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [PLAIN] where lift"
+  },
+  {
+   "item_id": "g-7ed24e301f",
+   "text": "I want to take your temperature again, please.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: take temperature again"
+  },
+  {
+   "item_id": "g-75f60afcb5",
+   "text": "You don't label the jars.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] [YOU] label jars"
+  },
+  {
+   "item_id": "g-74436367d1",
+   "text": "Sort the recycling.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] sort recycling"
+  },
+  {
+   "item_id": "g-6a22ef1bee",
+   "text": "I tell the empty bin.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] empty bin"
+  },
+  {
+   "item_id": "g-2b5d00b719",
+   "text": "You tell you cook rice.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [YOU] cook rice"
+  },
+  {
+   "item_id": "g-8175db47d4",
+   "text": "We are staying in the cottage.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [STATEMENT] book cottage"
+  },
+  {
+   "item_id": "g-f2b53b25f2",
+   "text": "You tell me to borrow the ladder.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] borrow ladder"
+  },
+  {
+   "item_id": "g-818a39e4bc",
+   "text": "I don't want to do the dishes.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: do dishes"
+  },
+  {
+   "item_id": "g-c2820bad7f",
+   "text": "You unplug the heater.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] [YOU] unplug heater"
+  },
+  {
+   "item_id": "g-f9d99cd549",
+   "text": "Can I have a turn conditioner?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] turn conditioner"
+  },
+  {
+   "item_id": "g-5c149c6676",
+   "text": "Tell you if the snow is clear.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] clear snow"
+  },
+  {
+   "item_id": "g-176d3e930f",
+   "text": "Tell me where the remote is.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] find remote"
+  },
+  {
+   "item_id": "g-d6b5bb46fe",
+   "text": "You will scan receipts.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [YOU] scan receipts"
+  },
+  {
+   "item_id": "g-f2e8d15ff2",
+   "text": "Can you pick up the milk.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] pick up milk"
+  },
+  {
+   "item_id": "g-4bba145725",
+   "text": "I will tell them to sign for the parcel.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] parcel signature"
+  },
+  {
+   "item_id": "g-c030b1dce2",
+   "text": "Get the chair.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] get chair"
+  },
+  {
+   "item_id": "g-5dd755dcb2",
+   "text": "Can I turn on the conditioner?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] turn conditioner"
+  },
+  {
+   "item_id": "g-91002bdea8",
+   "text": "I make soup.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [I] make soup"
+  },
+  {
+   "item_id": "g-1572546402",
+   "text": "I will post the letter.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] post letter"
+  },
+  {
+   "item_id": "g-b5f8a0b7dc",
+   "text": "I do not sign.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [I] sign form"
+  },
+  {
+   "item_id": "g-5a682c43e2",
+   "text": "I don't tell you to pay fine.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] pay fine"
+  },
+  {
+   "item_id": "g-c6c41aa603",
+   "text": "The hotel is just a short bus ride from the airport stop.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: airport bus stop hotel"
+  },
+  {
+   "item_id": "g-3998a5a17f",
+   "text": "I will clear the gutters.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] clear gutters"
+  },
+  {
+   "item_id": "g-3ebbf52d63",
+   "text": "I did not report the streetlight.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] report streetlight"
+  },
+  {
+   "item_id": "g-3f8f9f4bf3",
+   "text": "Tell you to email my manager about the rota now.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Email my manager about the rota."
+  },
+  {
+   "item_id": "g-8f8921d0d7",
+   "text": "I tell I book a taxi.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [I] book taxi"
+  },
+  {
+   "item_id": "g-5d047aa122",
+   "text": "You register car.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [STATEMENT] [YOU] register car"
+  },
+  {
+   "item_id": "g-b08537e09b",
+   "text": "Bring salt.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] bring salt"
+  },
+  {
+   "item_id": "g-3c8e74048f",
+   "text": "Yes, I confirm the table.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] confirm table"
+  },
+  {
+   "item_id": "g-63c0ef4298",
+   "text": "They are wondering when the computer will arrive?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [THEY] computer arrive"
+  },
+  {
+   "item_id": "g-b17f96d358",
+   "text": "Did you top up my bus pass yesterday?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Did you top up my bus pass?"
+  },
+  {
+   "item_id": "g-9ce6a14bd5",
+   "text": "I will tell you the download statement.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] download statement"
+  },
+  {
+   "item_id": "g-ec62a37ed2",
+   "text": "I understand the schedule for the rotation.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [I] understand rota"
+  },
+  {
+   "item_id": "g-e2b93309f2",
+   "text": "Dad is not going to the party.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] dad know party"
+  },
+  {
+   "item_id": "g-bf06b61c75",
+   "text": "You tell me you have an email about surgery.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [YOU] email surgery"
+  },
+  {
+   "item_id": "g-36de9c16f0",
+   "text": "I do not tell the vacuum to clean the carpet.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] vacuum carpet"
+  },
+  {
+   "item_id": "g-74fab00190",
+   "text": "I want you to post the letter now.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] post letter"
+  },
+  {
+   "item_id": "g-ab7414f971",
+   "text": "Do I bring a friend?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [I] bring friend"
+  },
+  {
+   "item_id": "g-2e41f55e6a",
+   "text": "Can you get the chair for me?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: get chair"
+  },
+  {
+   "item_id": "g-eee0e27df9",
+   "text": "Is the accessible entrance unavailable today?",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: The accessible entrance isn't open today."
+  },
+  {
+   "item_id": "g-18d229137f",
+   "text": "I want the book at the table.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] book table"
+  },
+  {
+   "item_id": "g-608217c31d",
+   "text": "You back up your photos.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [STATEMENT] [YOU] back up photos"
+  },
+  {
+   "item_id": "g-fe3265c1c8",
+   "text": "I won't understand the rota unless explained.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [I] understand rota"
+  },
+  {
+   "item_id": "g-8188c51d15",
+   "text": "Tell you to measure the window.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] measure window"
+  },
+  {
+   "item_id": "g-2dc8d762af",
+   "text": "I want details on the book.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] get details book"
+  },
+  {
+   "item_id": "g-e10b842da8",
+   "text": "The plumber.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] text plumber"
+  },
+  {
+   "item_id": "g-dcca781dad",
+   "text": "Bring slippers.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] bring slippers"
+  },
+  {
+   "item_id": "g-5766e5da9e",
+   "text": "I am telling mom here.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] mom here"
+  },
+  {
+   "item_id": "g-3e42ffc361",
+   "text": "Take the card.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] take card"
+  },
+  {
+   "item_id": "g-73aeb00c60",
+   "text": "Can I get a potter’s book?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] get potter book"
+  },
+  {
+   "item_id": "g-a5dde7241d",
+   "text": "I tell you to bring slippers.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] bring slippers"
+  },
+  {
+   "item_id": "g-2765baf568",
+   "text": "They did not tell us the bus stop and hotel.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [THEY] bus stop hotel"
+  },
+  {
+   "item_id": "g-832840c5a3",
+   "text": "We need water baskets.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] water baskets"
+  },
+  {
+   "item_id": "g-032498bcbf",
+   "text": "Will they permit the ring council?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] ring council permit"
+  },
+  {
+   "item_id": "g-13c274a12c",
+   "text": "I want a permit for the council to ring.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: ring council permit"
+  },
+  {
+   "item_id": "g-0d8d036267",
+   "text": "I tell you to sort recycling.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] sort recycling"
+  },
+  {
+   "item_id": "g-4cc6927b06",
+   "text": "Check my account?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [YOU] check account"
+  },
+  {
+   "item_id": "g-fb87cdd38f",
+   "text": "You are not supposed to clean the tank.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] [YOU] clean tank"
+  },
+  {
+   "item_id": "g-0402e3018b",
+   "text": "How do you spell your name?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: spell name"
+  },
+  {
+   "item_id": "g-1b91cb44c3",
+   "text": "I'm too busy to do that.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [I] busy work"
+  },
+  {
+   "item_id": "g-2464587034",
+   "text": "Will you call me tomorrow to give me a quote?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Call me tomorrow about the quote."
+  },
+  {
+   "item_id": "g-da69ad24b9",
+   "text": "Pay the window cleaner.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] pay window cleaner"
+  },
+  {
+   "item_id": "g-4a3ae50b38",
+   "text": "Please give me your details so I can make the booking.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [PLEASE] give details booking"
+  },
+  {
+   "item_id": "g-0aad2cdf02",
+   "text": "You do not tell me about the cottage book.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [YOU] book cottage"
+  },
+  {
+   "item_id": "g-e4b31eba46",
+   "text": "Can you open the jar?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [PLAIN] open jar"
+  },
+  {
+   "item_id": "g-dff231a15d",
+   "text": "You plant seeds.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] [YOU] plant seeds"
+  },
+  {
+   "item_id": "g-691f8aed88",
+   "text": "I need to drive to the station.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] drive station"
+  },
+  {
+   "item_id": "g-4d5ed68f1a",
+   "text": "The light is left on.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] leave light"
+  },
+  {
+   "item_id": "g-69119ec7a1",
+   "text": "Could you please give the glasses to someone else?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLEASE] give glasses"
+  },
+  {
+   "item_id": "g-c7e2e9cea7",
+   "text": "Can you help me with some text about a plumber?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] text plumber"
+  },
+  {
+   "item_id": "g-802f2c121e",
+   "text": "I did not register the car.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] register car"
+  },
+  {
+   "item_id": "g-50b49bd1fa",
+   "text": "I want to adjust the screen brightness.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: screen bright"
+  },
+  {
+   "item_id": "g-c5c665ee4d",
+   "text": "I am waiting on the flat’s waiting list.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: waiting list flat"
+  },
+  {
+   "item_id": "g-ae19c2eed7",
+   "text": "I want you to keep the noise down now.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [PLAIN] keep noise down"
+  },
+  {
+   "item_id": "g-cae2e1bcd2",
+   "text": "Do you bring a friend?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] bring friend"
+  },
+  {
+   "item_id": "g-52bd7aa6b7",
+   "text": "I will read and print it.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: read print"
+  },
+  {
+   "item_id": "g-505de3bb01",
+   "text": "You do not tell me to make soup.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [YOU] make soup"
+  },
+  {
+   "item_id": "g-f1f22c31a8",
+   "text": "It's working well with my new device.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: My new device is working well."
+  },
+  {
+   "item_id": "g-c39b924c77",
+   "text": "Scrub the tray.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [STATEMENT] scrub tray"
+  },
+  {
+   "item_id": "g-c1d869efbd",
+   "text": "You need to upload the new pictures now.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Upload the new pics."
+  },
+  {
+   "item_id": "g-1057d021b0",
+   "text": "Is the TV louder than it was before?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Did you increase the volume of the TV?"
+  },
+  {
+   "item_id": "g-06eb2763ce",
+   "text": "The window cleaner needs to be paid.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] pay window cleaner"
+  },
+  {
+   "item_id": "g-df6b1150d0",
+   "text": "Yes, you fold the laundry.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [YOU] fold laundry"
+  },
+  {
+   "item_id": "g-3fc787b93b",
+   "text": "I eat meat.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [I] eat meat"
+  },
+  {
+   "item_id": "g-79b29d30ea",
+   "text": "I want to do shopping.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] do shopping"
+  },
+  {
+   "item_id": "g-7b7b8a3cd9",
+   "text": "Take your card.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] take card"
+  },
+  {
+   "item_id": "g-a20d1bdf1f",
+   "text": "We tell the book is in the cottage.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] book cottage"
+  },
+  {
+   "item_id": "g-ef3e8d3d0e",
+   "text": "Do you want sugar?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] take sugar"
+  },
+  {
+   "item_id": "g-1c393e06ae",
+   "text": "Please water the tomatoes.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: water tomatoes"
+  },
+  {
+   "item_id": "g-40aa3d372b",
+   "text": "I need you to print boarding passes.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: print boarding passes"
+  },
+  {
+   "item_id": "g-c321232af5",
+   "text": "I do not vacuum the carpet.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] vacuum carpet"
+  },
+  {
+   "item_id": "g-fb648afe0c",
+   "text": "You will not borrow the ladder.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] [YOU] borrow ladder"
+  },
+  {
+   "item_id": "g-11d0803dc7",
+   "text": "You sell the bike.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] sell bike"
+  },
+  {
+   "item_id": "g-21c71d4646",
+   "text": "I will not test the alarm.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] test alarm"
+  },
+  {
+   "item_id": "g-cfbd650820",
+   "text": "I don't tell you confirm table.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] confirm table"
+  },
+  {
+   "item_id": "g-f191a1b0f7",
+   "text": "Yes, you have water baskets.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] [YOU] water baskets"
+  },
+  {
+   "item_id": "g-30f5886627",
+   "text": "You tell me to recycle bottles.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] recycle bottles"
+  },
+  {
+   "item_id": "g-b166018db3",
+   "text": "I tell I file tax return.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [I] file tax return"
+  },
+  {
+   "item_id": "g-05039f5431",
+   "text": "Can you go to the store with me?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] go store"
+  },
+  {
+   "item_id": "g-d05606e070",
+   "text": "Set an alarm?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] set alarm"
+  },
+  {
+   "item_id": "g-63ec091b4f",
+   "text": "I will tell you to leave the light on.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] leave light"
+  },
+  {
+   "item_id": "g-9afcbfce97",
+   "text": "I will not clean the tank.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] clean tank"
+  },
+  {
+   "item_id": "g-20b1029c57",
+   "text": "I need to get clippers.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] get clippers"
+  },
+  {
+   "item_id": "g-063fc41b7f",
+   "text": "The store sells clothes.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] store clothes"
+  },
+  {
+   "item_id": "g-bcd152d7c6",
+   "text": "They put the shopping on the table.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: put shopping"
+  },
+  {
+   "item_id": "g-4a3f28969b",
+   "text": "Could you sort the recycling?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] sort recycling"
+  },
+  {
+   "item_id": "g-fbbd0ff38d",
+   "text": "I am not interested in seeing the film.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] see film"
+  },
+  {
+   "item_id": "g-e4ccdd3ff5",
+   "text": "May I reserve a table to read a book?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] book table"
+  },
+  {
+   "item_id": "g-077ed13c38",
+   "text": "I don't recycle bottles.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] recycle bottles"
+  },
+  {
+   "item_id": "g-6aff372bc6",
+   "text": "I need to use the wheelchair at the station.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: station wheelchair"
+  },
+  {
+   "item_id": "g-3c5ac1b9cd",
+   "text": "Bring me slippers.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] bring slippers"
+  },
+  {
+   "item_id": "g-a6309fab29",
+   "text": "I get the juice from the fridge.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] get juice fridge"
+  },
+  {
+   "item_id": "g-f80496b679",
+   "text": "Tell you to install curtain",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] [YOU] install curtain"
+  },
+  {
+   "item_id": "g-17c6c82b94",
+   "text": "The park staff will take your car.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: park staff car"
+  },
+  {
+   "item_id": "g-bb0340762b",
+   "text": "You replied to the email.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [STATEMENT] [YOU] reply email"
+  },
+  {
+   "item_id": "g-ee50b85421",
+   "text": "I need the keys to the room.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] keys room"
+  },
+  {
+   "item_id": "g-fb3dde0e1f",
+   "text": "You tell me to post the letter.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] [TELL] [YOU] post letter"
+  },
+  {
+   "item_id": "g-2d1aa87fa5",
+   "text": "Could you please turn the music down?",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: turn music down"
+  },
+  {
+   "item_id": "g-5fa4a4832e",
+   "text": "I want to take the bus to the airport hotel.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: airport bus stop hotel"
+  },
+  {
+   "item_id": "g-5f288afe15",
+   "text": "I told the night nurse I wasn't in pain, but I am now.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: I told the night nurse I wasn't in pain."
+  },
+  {
+   "item_id": "g-ccdc9922db",
+   "text": "Get reports.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] get reports"
+  },
+  {
+   "item_id": "g-291da38cb4",
+   "text": "The phone should be silent.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] phone silent"
+  },
+  {
+   "item_id": "g-5e98ba83f1",
+   "text": "Bring chairs?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [YOU] bring chairs"
+  },
+  {
+   "item_id": "g-aa93336727",
+   "text": "I need to go to the station in a wheelchair.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] station wheelchair"
+  },
+  {
+   "item_id": "g-785dceecad",
+   "text": "Are you sure you're driving safely?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Are you driving too fast?"
+  },
+  {
+   "item_id": "g-c7f41f8df3",
+   "text": "Yes, I want to watch the match.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [YES] watch match"
+  },
+  {
+   "item_id": "g-fe1eca0970",
+   "text": "I need a massage for my left shoulder, please.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: massage left shoulder"
+  },
+  {
+   "item_id": "g-a28596b96a",
+   "text": "Do not tell you to take tablets.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] [YOU] take tablets"
+  },
+  {
+   "item_id": "g-01ab70a877",
+   "text": "I will back up the photos.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [STATEMENT] back up photos"
+  },
+  {
+   "item_id": "g-2517692202",
+   "text": "How do I open the inbox?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] open inbox"
+  },
+  {
+   "item_id": "g-dd6981756d",
+   "text": "The juice is in the fridge.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] get juice fridge"
+  },
+  {
+   "item_id": "g-dba2b7998c",
+   "text": "Put the charger.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] put charger"
+  },
+  {
+   "item_id": "g-e0ad05bf0d",
+   "text": "I want you to pay back the tickets now.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: pay back tickets friday"
+  },
+  {
+   "item_id": "g-2784b71767",
+   "text": "Can I pick up some milk?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] pick up milk"
+  },
+  {
+   "item_id": "g-f9999635bf",
+   "text": "You are not confirming the table.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] [YOU] confirm table"
+  },
+  {
+   "item_id": "g-0e1ae10862",
+   "text": "I need cream coffee, please.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: need cream coffee"
+  },
+  {
+   "item_id": "g-28ad24d00b",
+   "text": "I want the details of the book.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] get details book"
+  },
+  {
+   "item_id": "g-97c4d32d17",
+   "text": "I do not tell the scrub tray.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] scrub tray"
+  },
+  {
+   "item_id": "g-3fdc737d0a",
+   "text": "Do you need to email the manager?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [?] [YOU] email manager"
+  },
+  {
+   "item_id": "g-3adfa7ad8b",
+   "text": "Bring bread.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] bring bread"
+  },
+  {
+   "item_id": "g-b8bd963d70",
+   "text": "I do not sell a bike.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [STATEMENT] sell bike"
+  },
+  {
+   "item_id": "g-cb018c33dc",
+   "text": "I do not tell you to take tablets.",
+   "critical": {
+    "dimension": "agent",
+    "question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+    "options": [
+     "speaker",
+     "addressee",
+     "we/joint",
+     "third party",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [NOT] [TELL] take tablets"
+  },
+  {
+   "item_id": "g-b42b60bcf4",
+   "text": "I need water for the tomatoes.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [TELL] water tomatoes"
+  },
+  {
+   "item_id": "g-344658e3f2",
+   "text": "Ask you for a ring council permit.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] ring council permit"
+  },
+  {
+   "item_id": "g-9c5b481621",
+   "text": "Call for a quote.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] [YOU] [PLAIN] call quote"
+  },
+  {
+   "item_id": "g-3e56f4b3d7",
+   "text": "I want to leave the parcel back at the door.",
+   "critical": {
+    "dimension": "politeness",
+    "question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+    "options": [
+     "polite",
+     "plain",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: leave parcel back door"
+  },
+  {
+   "item_id": "g-eca08e1e08",
+   "text": "Yesterday, I bought groceries.",
+   "critical": {
+    "dimension": "polarity",
+    "question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+    "options": [
+     "negated",
+     "affirmative",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: buy groceries yesterday"
+  },
+  {
+   "item_id": "g-ea0533452b",
+   "text": "I want you to pick a film for tonight.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "The user typed: Will you pick a film for tonight?"
+  },
+  {
+   "item_id": "g-2d99e309f9",
+   "text": "Can I have some water and tomatoes?",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] water tomatoes"
+  },
+  {
+   "item_id": "g-b99679c488",
+   "text": "Get reports.",
+   "critical": {
+    "dimension": "speech_act",
+    "question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+    "options": [
+     "statement",
+     "question",
+     "request/command",
+     "refusal",
+     "acceptance",
+     "offer/suggestion",
+     "unclear/mixed"
+    ]
+   },
+   "input_text": "Keywords: [ASK] get reports"
+  }
+ ],
+ "part": "gold_new"
+}
