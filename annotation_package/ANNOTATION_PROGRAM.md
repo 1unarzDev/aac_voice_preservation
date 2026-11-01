@@ -5,6 +5,103 @@ papers, how many annotators it needs and how long it takes, how blinding works, 
 Annotators need only `annotation_package.zip` and the instructions for their task. Coordinators also use the
 "Coordinator" sections.
 
+## Two-stage plan for 20 annotators (P01-P20), plus an optional Stage 3
+
+This section replaces the older allocation tables (section C and the per-task "Recommended" lines). Those are kept
+below for reference but are **superseded**.
+
+**Sources.**
+- The plan comes from `src/make_assignments.py --stage 1 --annotators P01..P20` and is frozen in
+  `annotation/assignments/plan.json`.
+- Assignment lists are in `annotation/assignments/stage{1,2,3}.csv`; per-person sheets are in
+  `annotation_package/assignments/<ID>.md` (Stage 1), `<ID>_stage2.md` and `<ID>_stage3.md`.
+- The coordinator hand-out is `HANDOUT.md`. The commands between stages are in `annotation/COORDINATOR_STEPS.md`
+  (private).
+
+**Timeline**
+
+| Stage | Dates | What | Person-hours |
+|---|---|---|---|
+| 1 | Nov 2-4 (due Nov 4) | Part 9 keyword choice, then audits (Parts 4, 11, 5, 6; Part 10; Parts 1-3), then Part 7 writing | 65.2 h (165-220 min each) |
+| between | Nov 4-5 | collect pairs, fill check files, elicitation generation + judging, draw Part 12 | compute only |
+| 2 | Nov 5-7 (due Nov 7) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
+| between | Nov 7-8 | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
+| 3 (optional) | Nov 8-9 (due Nov 9) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
+
+**Deadlines.**
+- SE4All @ ICSE'27: evidence freeze Nov 10, submission Nov 13 AoE. Stages 1-2 feed it, and Stage 3 only if it is
+  back on Nov 9.
+- CALE-AI @ AAAI'27: evidence freeze Nov 16, deadline Nov 20 (internal target Nov 19). It gets all three stages.
+
+**Why this order.**
+- **Elicitation comes first.** It must happen while annotators are naive. Before typing keywords, they have not
+  seen any model output, test pair, codebook, or the study's dimensions, so nothing primes them to type "not",
+  "please" or "?". Annotators who saw the minimal pairs or the codebook first would over-report the very cues
+  whose loss Part 9 measures.
+- **Audits come in the middle.** They are independent of each other.
+- **Writing comes last.** It requires reading the six dimension definitions and writing deliberate minimal
+  contrasts. That is the strongest priming, and it is harmless only once elicitation and the label tasks are done.
+- **Stage 2 needs Stage 1 data.** It checks and labels what Stage 1 produced.
+
+**Stage 1 design (checked in code).**
+- **Part 9:** 48 sessions (16 sets x 3 Latin-square replicates). Each person gets 2-3 sessions and never two
+  replicates of one set; every set is done 3 times.
+- **Part 12 coders' sessions:** P03, P08, P13 and P19 hold the paired replicates of sets s01-s04. The Part 12
+  sample therefore excludes every message they saw and every keyword set they typed.
+- **Audits:** Part 10 (P07, P09, P11) and Parts 1-3 (P02, P10, P14) are the only audit for those six people.
+- **Audit counts:** Parts 4/11/5/6 reach 14/14/12/12 annotators against 10/10/6/6 required. The extra coders come
+  from topping everyone else up to at least 60 audit minutes (40 for the Part 12 coders, whose Stage 2 is longer).
+- **Part 7:** 2 sessions x 15 pairs per person in two different dimensions. That is 600 pairs, with 7/7/6/6/7/7
+  writers for polarity, speech act, politeness, certainty, agent and time. Topic rotations follow
+  `make_writer_links.py`.
+
+**Stage 2 design (fixed now; files filled after Stage 1).**
+- **Checker graph.** Each writer's 30 pairs form 6 chunks of 5. Chunk c, replica k goes to the checker at
+  ring offset OFF[c][k], where OFF is a partition of 1-18 that spreads co-checker pairs.
+- **Result.** Every pair gets 3 distinct checkers and never its writer. Everyone checks 18 chunks = 90 pairs in
+  `stage2/<ID>_check_1..3.json`.
+- **Fallbacks for short or missing returns** are in COORDINATOR_STEPS.md: short returns shrink files; a writer who
+  returns nothing frees 18 slots, and if that person is also out, their own checks move one-to-one into those slots.
+- **Part 12.** `stage2/part12_gold_elic.json` comes from `src/make_gold_elic.py`: about 150 outputs on human
+  keyword inputs, drawn as for Part 10, with neutral ids and a private key `annotation/gold_key_elic.csv`.
+
+**Stage 3 (optional; people chosen now: lightest Stage 1+2 load, Part 12 coders excluded).**
+- **Part 13** (P04, P15, P20). `stage3/part13_gold_hw.json` comes from `src/make_gold_hw.py`: about 150 outputs
+  of run hw1 on the checked pairs. It excludes pairs the coders wrote or checked; the key is
+  `annotation/gold_key_hw.csv`.
+- **Part 14** (P01, P06, P12, P16, P17, P18). `stage3/<ID>_tiebreak.json` holds a 4th independent check for pairs
+  missing a check (priority 1) and for 2-1 splits (priority 2). A tie-breaker is never the writer or a planned or
+  actual checker. Each tie-breaker gets at most 40 pairs and is chosen by lowest load. A file may be empty.
+- **Reserves** are listed in `annotation/assignments/stage3_people.json`.
+
+**Compute between stages** (request counts; ratios measured on r2c1/wb1).
+- **Measured ratios:**
+  - P0 gives about 0.65-0.71 judged units per request.
+  - S3 gives about 0.36, because samples repeat.
+  - The judge needs about 0.15 calls per unit (4 calls per batch of 25) plus about 0.6% arbiter units.
+  - codex-lb sustained about 46 calls/min for gpt-6.1-terra and 48 for the judge.
+
+| Run | Design | Requests (terra on codex-lb) | Judge calls | codex-lb time |
+|---|---|---|---|---|
+| elic1 (after Stage 1) | **recommended:** P0 + S3, 3 human channels + POS-cap4, 4 models | <= 38,400 (9,600) | ~2,600 | ~4.5 h |
+| elic1 | full P0/P2/S3 | <= 48,000 (12,000) | ~6,600 | ~6.6 h |
+| hw1 (after Stage 2) | **recommended:** P0, 5 channels, 4 models, ~450 kept pairs (600 max) | ~14,400 (3,600); max 19,200 (4,800) | ~1,600; max ~2,100 | ~1.8 h |
+| hw1 | full P0/P2/S3 | ~72,000 (18,000) | ~7,800 | ~9 h |
+
+- **Recommended design.** P0 on all 5 channels for the human-written pairs. P0 and S3 on bare input (the human
+  keyword channels) for the elicited keywords, with the POS-cap4 baseline under the same prompts. Together that is
+  about 13,200 terra requests and 4,200 judge calls, roughly 6 h of codex-lb time spread over the two windows.
+- **Reading the counts.** Elicitation counts are upper bounds: identical keyword sets are rendered once.
+- **Local models.** The local models need about 1 h of GPU time in total, run one model at a time under the lock.
+- **If codex-lb is congested,** run S3 only on the local models and keep terra at P0. That cuts elic1 terra
+  requests to 2,400.
+
+**After Stage 3.** No further annotation is needed for the SE4All and CALE-AI papers. The next step is a separate
+study with AAC users. It needs its own ethics determination (IRB or equivalent) before anyone is recruited, and it
+is outside this program.
+
+---
+
 **Deadlines that shape priorities**
 - SE4All evidence freeze: **Nov 10** (submission Nov 13 AoE).
 - CALE-AI evidence freeze: **Nov 16** (submission Nov 19).
@@ -242,7 +339,7 @@ claim a *usable*-repair claim.
 
 ---
 
-## C. Recommended allocation
+## C. Recommended allocation (SUPERSEDED by the two-stage plan at the top)
 
 | Priority | Task | Annotators | Time each | What it adds |
 |---|---|---|---|---|

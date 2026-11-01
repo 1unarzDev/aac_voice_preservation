@@ -2,6 +2,7 @@
 
 usage:
   python src/make_assignments.py --stage 1 --annotators P01..P20      # plan BOTH stages now, write sheets
+  python src/make_assignments.py --stage 2 --prepare                  # Stage 2/3 sheets + CSVs from plan.json
   python src/make_assignments.py --stage 2 [--absent P07,...] [--still-checking P09,...]
                                                                        # between stages: fill the fixed Stage 2 files
   python src/make_assignments.py --stage 3 [--absent P11,...]         # after Stage 2 scoring: route Part 14 tie-breaks
@@ -561,8 +562,8 @@ def item_line(r, a) -> str:
     elif t == "tiebreak":
         f = r["file_or_link"].split(" + ")[1]
         body = (f"Open `check_pairs.html`, click **Check file**, choose `{f}` (arrives on {DATES['stage3_open']}), enter `{a}`. "
-                "Same task as Part 8 (README: Part 8). If the tool says the file has no items, you have no pairs: "
-                "nothing to do or send.")
+                "Same task as Part 8 (README: Part 8). Your file may be empty: if the tool says \"This is not a check file "
+                "(no check_id or items)\", you have no pairs and nothing to do or send.")
     else:
         body = f"Open `{r['file_or_link']}`, enter `{a}`. README: {r['part']}."
     ret = f" Return: `{r['return_file']}`." if r["return_file"] else ""
@@ -710,6 +711,58 @@ def report(plan, summ):
     print("stage 3:", summ["stage3_people"])
     print("check pairs per person:", set(summ["check_pairs_per_person"].values()), "; Part 12 coders:", plan["part12_coders"],
           "; Part 12 excluded sets:", plan["part12_excluded_sets"])
+
+
+# ---------------------------------------------------------------- Stage 2/3 sheets from the frozen plan
+def later_sheet(plan, rows, tab, a, stage: str) -> str | None:
+    rs = [r for r in rows[stage] if r["annotator"] == a]
+    if not rs:
+        return None
+    if stage == "2":
+        title = f"# Stage 2 task sheet for {a} ({DATES['stage2']}; due {DATES['stage2_due']})"
+        intro = (f"Re-download `annotation_package.zip` on {DATES['stage2_open']}: your files are in its `stage2/` folder. "
+                 f"About **{tab[a]['stage2']} min**.")
+    else:
+        title = f"# Stage 3 task sheet for {a} (OPTIONAL, {DATES['stage3']}; due {DATES['stage3_due']})"
+        intro = (f"Only if you can spare about **{tab[a]['stage3']} min**; if not, tell the coordinator by "
+                 f"{DATES['stage2_due']} so a reserve can be asked. Re-download `annotation_package.zip` on "
+                 f"{DATES['stage3_open']}: your files are in its `stage3/` folder.")
+    L = [title, "", intro, "", RULES.format(ID=a), "", "## Steps (in this order)", ""]
+    L += [item_line(r, a) for r in rs]
+    L += ["", f"Return: email every CSV above to the coordinator by {DATES[f'stage{stage}_due']} "
+          f"(subject `AAC annotation {a} stage {stage}`), with the time you spent and any notes.", "",
+          "Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time."]
+    return "\n".join(L) + "\n"
+
+
+def prepare_later(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR,
+                  out_stage2=STAGE2_DIR, out_stage3=STAGE3_DIR) -> dict:
+    """Write the Stage 2/3 sheets, CSVs and folder READMEs from the frozen plan.json (Stage 1 files untouched)."""
+    plan = json.loads(Path(plan_path).read_text())
+    rows = rows_for(plan)
+    tab = minutes_table(plan, rows)
+    cols = ["annotator", "stage", "order", "part", "task", "description", "file_or_link", "expected_minutes",
+            "return_file", "return_folder", "due"]
+    write_csv(out_assign / "stage2.csv", rows["2"], cols)
+    write_csv(out_assign / "stage3.csv", rows["3"], cols)
+    write_csv(out_assign / "check_graph.csv", plan["check_graph"])
+    (out_assign / "part12_coders.txt").write_text("\n".join(plan["part12_coders"]) + "\n")
+    (out_assign / "stage3_people.json").write_text(json.dumps(
+        {"part13": plan["part13_coders"], "tiebreak": plan["tiebreakers"], "reserve": plan["stage3_reserve"]}, indent=1) + "\n")
+    out_sheets.mkdir(parents=True, exist_ok=True)
+    n = Counter()
+    for a in plan["annotators"]:
+        for st in ("2", "3"):
+            txt = later_sheet(plan, rows, tab, a, st)
+            if txt:
+                (out_sheets / f"{a}_stage{st}.md").write_text(txt); n[st] += 1
+    out_stage2.mkdir(parents=True, exist_ok=True); out_stage3.mkdir(parents=True, exist_ok=True)
+    (out_stage2 / "README.md").write_text(stage2_readme(plan))
+    (out_stage3 / "README.md").write_text(stage3_readme(plan))
+    print(f"stage 2 sheets {n['2']}, stage 3 sheets {n['3']} -> {out_sheets}; stage 2 min "
+          f"{min(v['stage2'] for v in tab.values())}-{max(v['stage2'] for v in tab.values())}; stage 3 "
+          f"{ {a: v['stage3'] for a, v in tab.items() if v['stage3']} }")
+    return {"rows": rows, "minutes": tab}
 
 
 # ---------------------------------------------------------------- Stage 2 fill
@@ -962,11 +1015,15 @@ def main(argv=None) -> int:
     ap.add_argument("--absent", default="", help="stage 2/3: people who will not do that stage")
     ap.add_argument("--still-checking", default="", help="stage 2: non-returning writers who still check")
     ap.add_argument("--candidates", default=str(WRITTEN / "hw_candidates.jsonl"))
+    ap.add_argument("--prepare", action="store_true",
+                    help="with --stage 2: only write the Stage 2/3 sheets and CSVs from the frozen plan.json")
     a = ap.parse_args(argv)
     if a.stage == "1":
         run_stage1(parse_ids(a.annotators))
     split = lambda s: [x.strip() for x in s.split(",") if x.strip()]  # noqa: E731
-    if a.stage == "2":
+    if a.stage == "2" and a.prepare:
+        prepare_later()
+    elif a.stage == "2":
         run_stage2(cand_path=Path(a.candidates), absent=split(a.absent), still_checking=split(a.still_checking))
     elif a.stage == "3":
         run_stage3(cand_path=Path(a.candidates), absent=split(a.absent))
