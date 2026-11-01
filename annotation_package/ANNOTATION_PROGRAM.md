@@ -22,9 +22,9 @@ below for reference but are **superseded**.
 
 | Stage | Dates | What | Person-hours |
 |---|---|---|---|
-| 1 | Nov 2-4 (due Nov 4) | Part 9 keyword choice, then audits (Parts 4, 11, 5, 6; Part 10; Parts 1-3), then Part 7 writing | 65.2 h (165-220 min each) |
-| between | Nov 4-5 | collect pairs, fill check files, elicitation generation + judging, draw Part 12 | compute only |
-| 2 | Nov 5-7 (due Nov 7) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
+| 1 | Nov 2-4 (all returned Nov 1) | Part 9 keyword choice, then audits (Parts 4, 11, 5, 6; Part 10; Parts 1-3), then Part 7 writing | 65.2 h (165-220 min each) |
+| between | Nov 1 | collect pairs, fill check files, elicitation generation + judging, draw Part 12 | compute only |
+| 2 | Nov 1-7 (due Nov 7) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
 | between | Nov 7-8 | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
 | 3 (optional) | Nov 8-9 (due Nov 9) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
 
@@ -236,7 +236,7 @@ current confirmation set, from independent authors.
 4. Analyze the same three preregistered contrasts, clustered by writer.
 
 **Deadline:** realistic for CALE-AI (Nov 16 freeze) and for a later version of the HUMANE paper. For SE4All only if the
-pairs are returned by about Nov 5.
+pairs are returned by about Nov 5 (Stage 1 pairs were returned Nov 1).
 
 **As built (scaled up):** six dimensions (polarity, speech act, politeness, certainty, agent, time), 15 pairs per writer
 session (about 35 min), with a per-writer topic rotation over 11 domains (health, sensory, boundaries, work/school, plans,

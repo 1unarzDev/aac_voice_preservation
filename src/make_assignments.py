@@ -74,8 +74,8 @@ SHEET_DIR = PKG / "assignments"
 STAGE2_DIR = PKG / "stage2"
 ELIC_DIR = PKG / "elicitation_sets"
 WRITTEN = ROOT / "annotation" / "written"
-DATES = {"stage1": "Mon Nov 2 - Wed Nov 4", "stage1_due": "Wed Nov 4, 23:59", "stage2_open": "Thu Nov 5",
-         "stage2": "Thu Nov 5 - Sat Nov 7", "stage2_due": "Sat Nov 7, 23:59", "stage3_open": "Sun Nov 8",
+DATES = {"stage1": "Mon Nov 2 - Wed Nov 4", "stage1_due": "Wed Nov 4, 23:59", "stage2_open": "Sun Nov 1",
+         "stage2": "Sun Nov 1 - Sat Nov 7", "stage2_due": "Sat Nov 7, 23:59", "stage3_open": "Sun Nov 8",
          "stage3": "Sun Nov 8 - Mon Nov 9", "stage3_due": "Mon Nov 9, 23:59"}
 STAGE3_DIR = PKG / "stage3"
 N_PART13, N_TIEBREAK, TIEBREAK_CAP = 3, 6, 40
@@ -546,7 +546,7 @@ def item_line(r, a) -> str:
                 "README: Part 7 (includes the CC BY 4.0 release you agree to in the tool).")
     elif t == "check":
         f = r["file_or_link"].split(" + ")[1]
-        body = (f"Open `check_pairs.html`, click **Check file**, choose `{f}` (arrives on {DATES['stage2_open']}), enter `{a}`. "
+        body = (f"Open `check_pairs.html`, click **Check file**, choose `{f}`, enter `{a}`. "
                 "README: Part 8.")
     elif t == "codebook":
         body = "About 10 minutes, once. Short definitions also stay on screen in the tool."
@@ -556,7 +556,7 @@ def item_line(r, a) -> str:
                 f"`labels_main1_{a}.csv` (the 2nd and 3rd may get `(1)`, `(2)` added); rename them to the names under Return. README: Setup and Parts 1-3.")
     elif t in ("part10", "part12", "part13"):
         f = r["file_or_link"].split(" + ")[1]
-        when = {"part12": f" (arrives on {DATES['stage2_open']})", "part13": f" (arrives on {DATES['stage3_open']})"}.get(t, "")
+        when = {"part12": " (arrives in a later zip update: the coordinator will tell you; do steps 1-4 first)", "part13": f" (arrives on {DATES['stage3_open']})"}.get(t, "")
         body = (f"Open `annotate.html`, enter `{a}`, load `{f}`{when}, do the 5 practice items, then every item. "
                 f"README: Part 10{' (this part is the same task on a new file)' if t != 'part10' else ''}.")
     elif t == "tiebreak":
@@ -571,15 +571,12 @@ def item_line(r, a) -> str:
 
 
 def stage2_readme(plan) -> str:
-    return (f"# Stage 2 files (arrive {DATES['stage2_open']})\n\n"
-            "This folder is empty until Stage 1 is finished. On " + DATES["stage2_open"] + " the coordinator rebuilds the "
-            "package and this folder then holds:\n\n"
+    return ("# Stage 2 files\n\n"
             "- `<ID>_check_1.json`, `<ID>_check_2.json`, `<ID>_check_3.json`: your Part 8 check files (sentence pairs "
             "written by other annotators; never your own). Open them with `../check_pairs.html`.\n"
             "- `part12_gold_elic.json`: the Part 12 labelling file, for the annotators whose sheet lists Part 12. "
-            "Open it with `../annotate.html`.\n\n"
-            "Re-download `annotation_package.zip` on " + DATES["stage2_open"] + ", then follow Stage 2 of your sheet "
-            "`assignments/<ID>.md`. Due " + DATES["stage2_due"] + ".\n")
+            "Open it with `../annotate.html`. It is added in a later zip update; the coordinator will tell you when.\n\n"
+            "Follow your sheet `assignments/<ID>_stage2.md`. Due " + DATES["stage2_due"] + ".\n")
 
 
 def stage3_readme(plan) -> str:
@@ -720,7 +717,7 @@ def later_sheet(plan, rows, tab, a, stage: str) -> str | None:
         return None
     if stage == "2":
         title = f"# Stage 2 task sheet for {a} ({DATES['stage2']}; due {DATES['stage2_due']})"
-        intro = (f"Re-download `annotation_package.zip` on {DATES['stage2_open']}: your files are in its `stage2/` folder. "
+        intro = (f"Download the current `annotation_package.zip`: your files are in its `stage2/` folder. "
                  f"About **{tab[a]['stage2']} min**.")
     else:
         title = f"# Stage 3 task sheet for {a} (OPTIONAL, {DATES['stage3']}; due {DATES['stage3_due']})"

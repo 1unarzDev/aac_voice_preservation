@@ -5,9 +5,9 @@
 files from `annotation/` (answer keys, model labels).
 
 **Deadlines**
-- **Stage 1** (Mon Nov 2 - Wed Nov 4): due **Wed Nov 4, 23:59**. Keyword choice first, then checks/labels, then writing:
+- **Stage 1** (handed out for Mon Nov 2 - Wed Nov 4): **all returned Sun Nov 1**. Keyword choice first, then checks/labels, then writing:
   the order on the sheet is mandatory. About 165-220 min each, plus breaks.
-- **Stage 2** (opens **Thu Nov 5**): due **Sat Nov 7, 23:59**. Instructions and files are sent on Thu Nov 5
+- **Stage 2** (opens **Sun Nov 1**): due **Sat Nov 7, 23:59**. Instructions and files sent Sun Nov 1
   (annotators re-download the zip).
 - Stage 3 (optional, Sun Nov 8 - Mon Nov 9) for a few people; instructions later.
 
