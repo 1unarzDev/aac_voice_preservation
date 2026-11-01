@@ -9,7 +9,7 @@ req=$1; run=$2; shift 2
 models=${*:-qwen llama gemma}
 declare -A MID=([qwen]=qwen2.5-7b [llama]=llama3.1-8b [gemma]=gemma3-4b)
 cd ~/aac-voice-preservation; . .venv/bin/activate
-python src/generate.py --requests "$req" --run-id "$run" --models gpt-6.1-terra --api-concurrency 16 > runs/${run}_api.log 2>&1 &
+python src/generate.py --requests "$req" --run-id "$run" --models gpt-6.1-terra --api-concurrency ${API_CONC:-12} > runs/${run}_api.log 2>&1 &
 apipid=$!
 for m in $models; do
   bash src/stop_local.sh >/dev/null 2>&1
