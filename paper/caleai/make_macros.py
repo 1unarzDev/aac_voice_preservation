@@ -272,7 +272,7 @@ if WD.exists():
         pcu(f"wd_{short}_dboth", W[key + "_damage_minus_both_repeat"], W[key + "_damage_minus_both_repeat_ci_low"],
             W[key + "_damage_minus_both_repeat_ci_high"])
 
-# ---------------- frozen guard transfer to W-C speech act (cycle-3 Action 1; claims ledger C36 "GUARD TRANSFER").
+# ---------------- frozen guard transfer to W-C speech act (cycle-3 Action 1; claims ledger C37, renumbered from a duplicate C36 by D-045).
 # Read from analysis/guard_wc/headline.json (written by analysis/guard_wc/analyze.py + close_action1.py from
 # scored.parquet / paired_G1*.parquet). Separate population from the discovery guard result above. Prefix gt_.
 GT = ROOT / "analysis/guard_wc/headline.json"
@@ -316,8 +316,21 @@ if GT.exists():
     put("gt_usable_validated", "yes" if T.get("usable_repair_validated") else "no")
     co = T["cost"]
     put("gt_calls", f"{co['calls_per_input']:.2f}"); put("gt_calls_flag", f"{co['calls_per_flagged']:.2f}")
-    put("gt_gen_calls", f"{co['actual_generation_calls']:,}"); put("gt_gen_cap", f"{co['generation_cap']:,}")
-    put("gt_judge_calls", f"{co['actual_judge_batch_calls']:,}"); put("gt_judge_cap", f"{co['judge_batch_cap']:,}")
+    # Actual HTTP calls come from the formal acceptance audit (analysis/guard_wc/ACCEPTANCE.md ->
+    # acceptance_check.json; D-045, ledger C37), which corrects the unsupported "937 calls" figure (D-042).
+    AC = json.loads((ROOT / "analysis/guard_wc/acceptance_check.json").read_text())
+    assert AC["verdict"] == "ACCEPT WITH QUALIFICATIONS", AC["verdict"]
+    ac = AC["calls"]
+    assert ac["retry_generation_http"] == co["actual_generation_calls"], "acceptance vs headline generation calls"
+    assert ac["judge_batch_http"] == co["actual_judge_batch_calls"], "acceptance vs headline judge batches"
+    put("gt_gen_calls", f"{ac['retry_generation_http']:,}"); put("gt_gen_cap", f"{AC['frozen_limits']['retry_generation_http']:,}")
+    put("gt_gen_failed", f"{ac['retry_generation_failed']:,}")
+    put("gt_judge_calls", f"{ac['judge_batch_http']:,}"); put("gt_judge_cap", f"{AC['frozen_limits']['judge_batch_http']:,}")
+    put("gt_judge_failed", f"{ac['judge_batch_failed']:,}")
+    put("gt_judge_conc", f"{AC['concurrency']['judge_peak']}")
+    put("gt_probe_calls", f"{AC['uninstrumented_http']['inferred_probe_calls']}")
+    put("gt_probe_calls_word", {0: "no", 1: "one", 2: "two", 3: "three"}[AC['uninstrumented_http']['inferred_probe_calls']])
+    put("gt_accepted", "accepted with qualifications")
     put("gt_resid_flag_unique", f"{co['residual_flagged_unique']:,}")
     for m, short in (("qwen2.5-7b", "qwen"), ("gemma3-4b", "gemma"), ("llama3.1-8b", "llama"), ("gpt-6.1-terra", "terra")):
         pm = T["per_model"][m]["paired"]["G1"]
