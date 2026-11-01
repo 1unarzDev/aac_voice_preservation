@@ -1,6 +1,6 @@
 # W-C: registered contrasts and discovery replication
 
-**3/3 registered directions pass Holm α=.05 in the protocol-aligned analysis. Confirmation is qualified:** 48 cached requests predate the final item freeze (20 also predate the PREREG mtime), and the supplied scoring used unadjudicated J1 fallback. The primary analysis treats fallback critical labels as unresolved; neither an unqualified wholly fresh sample nor completed cross-family adjudication is claimed. See [FREEZE.md](FREEZE.md), [primary.json](primary.json), and sensitivities below.
+**3/3 registered directions pass Holm α=.05 in the protocol-aligned analysis. Confirmation is qualified:** 48 cached requests predate the final item freeze (20 also predate the PREREG mtime), and 259 J1/J2 critical-disagreement rows are resolved by the post-outcome cross-family arbiter record (runs/r2c1/arbiter.jsonl; [arbitration.md](arbitration.md)); the earlier unknown-masked snapshot is retained in [snapshot_unknown_masked](snapshot_unknown_masked/README.md) and as a sensitivity below. An unqualified wholly fresh sample is not claimed. See [FREEZE.md](FREEZE.md), [primary.json](primary.json), and sensitivities below.
 
 ## Population, chronology and scoring
 
@@ -10,7 +10,7 @@ Fixed 240 approved families: 80 polarity, 80 speech act, 80 politeness; 40 seede
 
 Input contains 67,166 target rows; analyzed 66,610; P0 has all 9,600 planned inclusive target rows. All five channels are present for P0/P2/S3. PREREG called for P2/S3 bare; D-022 describes bare/noncrit, but the stored manifest actually generated all five channels for all three prompt regimes. Extra generated channels do not enlarge the primary test family. 38,300 unique generation records map to 48,000 request targets and 67,166 exploded/scored suggestions. The cache audit found 48 early requests across 6 families: r2act-007, r2act-029, r2act-030, r2act-032, r2plt-002, r2pol-004. All 48,000 request input targets match current source specs exactly. The fixed primary sample is retained; family-exclusion sensitivity is supplementary. Hash/timestamp evidence cannot prove these cache outputs followed the final freeze.
 
-Supplied critical_source counts: {'agree': 66907, 'J1': 259}. No r2c1 arbiter file exists. 259 fallback rows are converted to unknown critical labels, without altering the input parquet. General dimensions retain the supplied production labels, including its existing general-label resolution. Scored invalid completions: 0; critical unknown after masking: 259. General missingness: {'polarity': 19, 'speech_act': 5, 'agent': 27, 'certainty': 7, 'politeness': 0}. Critical unknowns are excluded; invalid completions count as match failures. The available human-gold report contains human validation on the earlier validation inventory; this is not a W-C human spot-check or proof of every new boundary label.
+Supplied critical_source counts: {'agree': 66907, 'arbiter': 259}. runs/r2c1/arbiter.jsonl resolves 259 rows (no J1/J2 fallback remains); see arbitration.md. General dimensions retain the supplied production labels, including its existing general-label resolution. Scored invalid completions: 0; critical unknown after masking: 0. General missingness: {'polarity': 19, 'speech_act': 5, 'agent': 27, 'certainty': 7, 'politeness': 0}. Critical unknowns are excluded; invalid completions count as match failures. The available human-gold report contains human validation on the earlier validation inventory; this is not a W-C human spot-check or proof of every new boundary label.
 
 ## PRIMARY registered contrasts
 
@@ -18,7 +18,7 @@ Estimate and pointwise 95% percentile CI; differences in percentage points. n is
 
 | contrast | estimand | estimate [95% CI], n, clusters | p one-sided | Holm p | reject .05 |
 | --- | --- | --- | --- | --- | --- |
-| P1 | speech-act chip1−noncrit match | 31.65 pp [25.22, 38.19]; n=613/624, clusters=55/55, eff=32.9 | 0.0001 | 0.0003 | True |
+| P1 | speech-act chip1−noncrit match | 31.41 pp [25.00, 37.94]; n=624/624, clusters=55/55, eff=33.1 | 0.0001 | 0.0003 | True |
 | P2 | full politeness addition−removal | 6.25 pp [2.50, 10.00]; n=320/320, clusters=80/80, eff=80.0 | 0.0009 | 0.0009 | True |
 | P3 | bare affirmative share−0.5 | 49.37 pp [48.42, 50.00]; n=319/320, clusters=79/79, eff=78.0 | 0.0001 | 0.0003 | True |
 
@@ -30,9 +30,9 @@ Bootstrap: 10,000 whole recorded seed/construction-cluster multinomial resamples
 
 | contrast | stratum | estimate [95% CI], n, clusters |
 | --- | --- | --- |
-| P1 | gemma3-4b | 36.73 pp [27.16, 46.94]; n=147/156, clusters=54/55, eff=31.7 |
+| P1 | gemma3-4b | 35.26 pp [25.56, 45.59]; n=156/156, clusters=55/55, eff=33.1 |
 | P1 | gpt-6.1-terra | 41.67 pp [35.00, 48.03]; n=156/156, clusters=55/55, eff=33.1 |
-| P1 | llama3.1-8b | 20.13 pp [11.11, 28.79]; n=154/156, clusters=55/55, eff=33.1 |
+| P1 | llama3.1-8b | 20.51 pp [12.19, 28.87]; n=156/156, clusters=55/55, eff=33.1 |
 | P1 | qwen2.5-7b | 28.21 pp [18.05, 38.24]; n=156/156, clusters=55/55, eff=33.1 |
 | P2 | gemma3-4b | 23.75 pp [13.75, 33.75]; n=80/80, clusters=80/80, eff=80.0 |
 | P2 | gpt-6.1-terra | 6.25 pp [1.25, 12.50]; n=80/80, clusters=80/80, eff=80.0 |
@@ -45,9 +45,9 @@ Bootstrap: 10,000 whole recorded seed/construction-cluster multinomial resamples
 
 | contrast | stratum | estimate [95% CI], n, clusters |
 | --- | --- | --- |
-| P1 | adversarial | 20.97 pp [6.67, 45.83]; n=62/64, clusters=6/6, eff=4.8 |
-| P1 | drafted | 35.86 pp [26.42, 47.83]; n=237/240, clusters=9/9, eff=6.9 |
-| P1 | seeded | 30.57 pp [21.61, 39.05]; n=314/320, clusters=40/40, eff=39.9 |
+| P1 | adversarial | 21.88 pp [8.75, 45.83]; n=64/64, clusters=6/6, eff=4.6 |
+| P1 | drafted | 35.83 pp [26.19, 47.83]; n=240/240, clusters=9/9, eff=6.9 |
+| P1 | seeded | 30.00 pp [20.94, 38.75]; n=320/320, clusters=40/40, eff=40.0 |
 | P2 | adversarial | 0.00 pp [-10.00, 10.00]; n=40/40, clusters=10/10, eff=10.0 |
 | P2 | drafted | 11.67 pp [5.00, 19.17]; n=120/120, clusters=30/30, eff=30.0 |
 | P2 | seeded | 3.75 pp [0.00, 7.50]; n=160/160, clusters=40/40, eff=40.0 |
@@ -59,15 +59,18 @@ Bootstrap: 10,000 whole recorded seed/construction-cluster multinomial resamples
 
 | sensitivity | contrast | estimate [95% CI], n, clusters |
 | --- | --- | --- |
-| exclude_any_pre_freeze_cache_family | P1 | 29.78 pp [23.20, 36.38]; n=581/592, clusters=51/51, eff=30.2 |
+| exclude_any_pre_freeze_cache_family | P1 | 29.56 pp [23.06, 36.27]; n=592/592, clusters=51/51, eff=30.4 |
 | exclude_any_pre_freeze_cache_family | P2 | 6.33 pp [2.85, 10.13]; n=316/316, clusters=79/79, eff=79.0 |
 | exclude_any_pre_freeze_cache_family | P3 | 49.37 pp [48.40, 50.00]; n=315/316, clusters=78/78, eff=77.0 |
-| exclude_negative_question_r2pol077 | P1 | 31.65 pp [25.22, 38.19]; n=613/624, clusters=55/55, eff=32.9 |
+| exclude_negative_question_r2pol077 | P1 | 31.41 pp [25.00, 37.94]; n=624/624, clusters=55/55, eff=33.1 |
 | exclude_negative_question_r2pol077 | P2 | 6.25 pp [2.50, 10.00]; n=320/320, clusters=80/80, eff=80.0 |
 | exclude_negative_question_r2pol077 | P3 | 49.37 pp [48.40, 50.00]; n=315/316, clusters=78/78, eff=77.0 |
 | supplied_J1_fallback | P1 | 31.41 pp [24.85, 38.04]; n=624/624, clusters=55/55, eff=33.1 |
 | supplied_J1_fallback | P2 | 6.25 pp [2.50, 10.00]; n=320/320, clusters=80/80, eff=80.0 |
 | supplied_J1_fallback | P3 | 49.37 pp [48.42, 50.00]; n=319/320, clusters=79/79, eff=78.0 |
+| unknown_masked_pre_arbitration | P1 | 31.65 pp [25.22, 38.19]; n=613/624, clusters=55/55, eff=32.9 |
+| unknown_masked_pre_arbitration | P2 | 6.25 pp [2.50, 10.00]; n=320/320, clusters=80/80, eff=80.0 |
+| unknown_masked_pre_arbitration | P3 | 49.37 pp [48.42, 50.00]; n=319/320, clusters=79/79, eff=78.0 |
 | P3_all_known_outputs | P3 | 49.06 pp [47.81, 50.00]; n=320/320, clusters=79/79, eff=78.0 |
 
 ## Secondary/descriptive endpoints
@@ -82,19 +85,19 @@ P0 critical match is reference agreement for bare/noncrit, supplied-critical pre
 | --- | --- | --- |
 | polarity | bare | 49.84% [49.53, 50.00]; n=640/640, clusters=79/79, eff=78.0 |
 | polarity | chip1 | 99.22% [98.28, 99.85]; n=640/640, clusters=79/79, eff=78.0 |
-| polarity | chipall | 96.24% [94.59, 97.78]; n=639/640, clusters=79/79, eff=78.0 |
-| polarity | full | 99.84% [99.52, 100.00]; n=636/640, clusters=79/79, eff=77.8 |
+| polarity | chipall | 96.25% [94.60, 97.78]; n=640/640, clusters=79/79, eff=78.0 |
+| polarity | full | 99.84% [99.53, 100.00]; n=640/640, clusters=79/79, eff=78.0 |
 | polarity | noncrit | 49.84% [49.53, 50.00]; n=640/640, clusters=79/79, eff=78.0 |
 | politeness | bare | 50.00% [50.00, 50.00]; n=640/640, clusters=80/80, eff=80.0 |
-| politeness | chip1 | 89.67% [87.76, 91.55]; n=639/640, clusters=80/80, eff=80.0 |
+| politeness | chip1 | 89.53% [87.66, 91.41]; n=640/640, clusters=80/80, eff=80.0 |
 | politeness | chipall | 87.19% [86.25, 88.12]; n=640/640, clusters=80/80, eff=80.0 |
 | politeness | full | 95.00% [93.28, 96.56]; n=640/640, clusters=80/80, eff=80.0 |
 | politeness | noncrit | 50.00% [50.00, 50.00]; n=640/640, clusters=80/80, eff=80.0 |
-| speech_act | bare | 39.39% [34.48, 43.68]; n=622/624, clusters=55/55, eff=32.9 |
-| speech_act | chip1 | 73.51% [69.26, 77.79]; n=619/624, clusters=55/55, eff=33.1 |
-| speech_act | chipall | 75.12% [70.07, 80.48]; n=619/624, clusters=55/55, eff=33.4 |
+| speech_act | bare | 39.26% [34.38, 43.52]; n=624/624, clusters=55/55, eff=33.1 |
+| speech_act | chip1 | 73.24% [68.97, 77.56]; n=624/624, clusters=55/55, eff=33.1 |
+| speech_act | chipall | 74.84% [69.88, 80.11]; n=624/624, clusters=55/55, eff=33.1 |
 | speech_act | full | 99.20% [98.44, 99.83]; n=624/624, clusters=55/55, eff=33.1 |
-| speech_act | noncrit | 41.75% [36.94, 46.08]; n=618/624, clusters=55/55, eff=32.9 |
+| speech_act | noncrit | 41.83% [36.99, 46.19]; n=624/624, clusters=55/55, eff=33.1 |
 
 ### Coverage@3: P2 versus S3
 
@@ -104,25 +107,25 @@ Both pair values among the first three suggestions; shared A/B targets deduplica
 | --- | --- | --- | --- |
 | polarity | bare | P2 | 7.81% [4.43, 11.39]; n=320/320, clusters=79/79, eff=78.0 |
 | polarity | bare | S3 | 0.62% [0.00, 1.54]; n=320/320, clusters=79/79, eff=78.0 |
-| polarity | noncrit | P2 | 6.13% [3.25, 9.29]; n=326/328, clusters=79/79, eff=76.2 |
+| polarity | noncrit | P2 | 6.71% [3.61, 10.17]; n=328/328, clusters=79/79, eff=76.4 |
 | polarity | noncrit | S3 | 0.91% [0.00, 2.11]; n=328/328, clusters=79/79, eff=76.4 |
 | politeness | bare | P2 | 69.38% [64.06, 74.69]; n=320/320, clusters=80/80, eff=80.0 |
 | politeness | bare | S3 | 12.81% [9.38, 16.56]; n=320/320, clusters=80/80, eff=80.0 |
-| politeness | noncrit | P2 | 63.01% [57.05, 69.06]; n=319/320, clusters=80/80, eff=79.9 |
+| politeness | noncrit | P2 | 63.12% [57.19, 69.06]; n=320/320, clusters=80/80, eff=80.0 |
 | politeness | noncrit | S3 | 12.81% [9.38, 16.25]; n=320/320, clusters=80/80, eff=80.0 |
-| speech_act | bare | P2 | 53.23% [44.58, 61.63]; n=310/312, clusters=55/55, eff=33.1 |
-| speech_act | bare | S3 | 3.86% [1.99, 5.80]; n=311/312, clusters=55/55, eff=32.9 |
-| speech_act | noncrit | P2 | 59.10% [50.13, 67.21]; n=357/364, clusters=55/55, eff=33.3 |
-| speech_act | noncrit | S3 | 3.91% [2.15, 5.74]; n=358/364, clusters=55/55, eff=32.8 |
+| speech_act | bare | P2 | 53.21% [44.48, 61.71]; n=312/312, clusters=55/55, eff=33.1 |
+| speech_act | bare | S3 | 3.85% [1.97, 5.77]; n=312/312, clusters=55/55, eff=33.1 |
+| speech_act | noncrit | P2 | 59.07% [50.32, 66.98]; n=364/364, clusters=55/55, eff=33.3 |
+| speech_act | noncrit | S3 | 4.12% [2.16, 6.36]; n=364/364, clusters=55/55, eff=33.3 |
 
 | dimension | channel | estimate [95% CI], n, clusters |
 | --- | --- | --- |
 | polarity | bare | 7.19 pp [4.11, 10.49]; n=320/320, clusters=79/79, eff=78.0 |
-| polarity | noncrit | 5.21 pp [2.20, 8.41]; n=326/328, clusters=79/79, eff=76.2 |
+| polarity | noncrit | 5.79 pp [2.71, 9.26]; n=328/328, clusters=79/79, eff=76.4 |
 | politeness | bare | 56.56 pp [51.25, 61.88]; n=320/320, clusters=80/80, eff=80.0 |
-| politeness | noncrit | 50.16 pp [44.03, 56.60]; n=319/320, clusters=80/80, eff=79.9 |
-| speech_act | bare | 49.51 pp [41.61, 57.28]; n=309/312, clusters=55/55, eff=32.9 |
-| speech_act | noncrit | 55.27 pp [46.56, 63.44]; n=351/364, clusters=55/55, eff=32.9 |
+| politeness | noncrit | 50.31 pp [44.06, 56.88]; n=320/320, clusters=80/80, eff=80.0 |
+| speech_act | bare | 49.36 pp [41.39, 57.28]; n=312/312, clusters=55/55, eff=33.1 |
+| speech_act | noncrit | 54.95 pp [46.55, 62.79]; n=364/364, clusters=55/55, eff=33.3 |
 
 ### Stance additions
 
@@ -165,13 +168,13 @@ Default is each output/set top-1 A/B reading. Unclear/other top-1 is unidentifie
 | politeness | S3 | non-default | 1.000 [1.000, 1.000] | 320 | 80 |
 | speech_act | P0 | default | 0.000 [0.000, 0.000] | 245 | 52 |
 | speech_act | P0 | non-default | 1.000 [1.000, 1.000] | 245 | 52 |
-| speech_act | P0 | unidentified | 1.000 [1.000, 1.000] | 132 | 24 |
-| speech_act | P2 | default | 0.000 [0.000, 0.000] | 234 | 50 |
-| speech_act | P2 | non-default | 1.000 [1.000, 1.000] | 233 | 50 |
-| speech_act | P2 | unidentified | 1.000 [1.000, 1.000] | 155 | 23 |
+| speech_act | P0 | unidentified | 1.000 [1.000, 1.000] | 134 | 24 |
+| speech_act | P2 | default | 0.000 [0.000, 0.000] | 237 | 50 |
+| speech_act | P2 | non-default | 1.000 [1.000, 1.000] | 237 | 50 |
+| speech_act | P2 | unidentified | 1.000 [1.000, 1.000] | 150 | 21 |
 | speech_act | S3 | default | 0.000 [0.000, 0.000] | 243 | 51 |
 | speech_act | S3 | non-default | 1.000 [1.000, 1.000] | 243 | 51 |
-| speech_act | S3 | unidentified | 1.000 [1.000, 1.000] | 137 | 23 |
+| speech_act | S3 | unidentified | 1.000 [1.000, 1.000] | 138 | 23 |
 
 ## Discovery-claim replication (secondary unless explicitly PRIMARY above)
 
@@ -180,9 +183,9 @@ Original C1–C11 and C17 are discovery claims. Fresh matching endpoints test tr
 | claim | status | W-C evidence / scope |
 | --- | --- | --- |
 | C1 | PRIMARY P3 counterpart | 99.37% [98.42, 100.00]; n=319/320, clusters=79/79, eff=78.0 |
-| C2 | Descriptive length-control check | polarity: 0.00 pp [0.00, 0.00]; n=640/640, clusters=79/79, eff=78.0; speech_act: 2.27 pp [0.36, 4.15]; n=616/624, clusters=55/55, eff=32.7; politeness: 0.00 pp [0.00, 0.00]; n=640/640, clusters=80/80, eff=80.0; no equivalence margin was registered. |
-| C3 | Descriptive chip1 versus full | polarity: -0.63 pp [-1.58, 0.16]; n=636/640, clusters=79/79, eff=77.8; speech_act: -25.69 pp [-30.07, -21.28]; n=619/624, clusters=55/55, eff=33.1; politeness: -5.32 pp [-7.82, -2.67]; n=639/640, clusters=80/80, eff=80.0; no noninferiority margin, so “full-level” is not formally established. |
-| C4 | Descriptive P2−S3 coverage | polarity: 7.19 pp [4.11, 10.49]; n=320/320, clusters=79/79, eff=78.0; politeness: 56.56 pp [51.25, 61.88]; n=320/320, clusters=80/80, eff=80.0; speech_act: 49.51 pp [41.61, 57.28]; n=309/312, clusters=55/55, eff=32.9 |
+| C2 | Descriptive length-control check | polarity: 0.00 pp [0.00, 0.00]; n=640/640, clusters=79/79, eff=78.0; speech_act: 2.56 pp [0.60, 4.58]; n=624/624, clusters=55/55, eff=33.1; politeness: 0.00 pp [0.00, 0.00]; n=640/640, clusters=80/80, eff=80.0; no equivalence margin was registered. |
+| C3 | Descriptive chip1 versus full | polarity: -0.62 pp [-1.58, 0.16]; n=640/640, clusters=79/79, eff=78.0; speech_act: -25.96 pp [-30.36, -21.53]; n=624/624, clusters=55/55, eff=33.1; politeness: -5.47 pp [-7.97, -2.81]; n=640/640, clusters=80/80, eff=80.0; no noninferiority margin, so “full-level” is not formally established. |
+| C4 | Descriptive P2−S3 coverage | polarity: 7.19 pp [4.11, 10.49]; n=320/320, clusters=79/79, eff=78.0; politeness: 56.56 pp [51.25, 61.88]; n=320/320, clusters=80/80, eff=80.0; speech_act: 49.36 pp [41.39, 57.28]; n=312/312, clusters=55/55, eff=33.1 |
 | C5 | Not testable in W-C | AACText natural-corpus POS-cap4 cue prevalence requires S1/W-B; authored balanced pairs cannot estimate corpus prevalence. |
 | C6 | PRIMARY P2 related endpoint | Full politeness addition 8.12% [5.31, 11.25]; n=320/320, clusters=80/80, eff=80.0; literal please-only counts are reported below. |
 | C7 | PRIMARY P2 counterpart | Addition−removal 6.25 pp [2.50, 10.00]; n=320/320, clusters=80/80, eff=80.0; model directions may differ from discovery. |
@@ -196,11 +199,11 @@ Original C1–C11 and C17 are discovery claims. Fresh matching endpoints test tr
 | --- | --- | --- |
 | polarity | affirmative | 100.00% [100.00, 100.00]; n=320/320, clusters=79/79, eff=78.0 |
 | polarity | negated | 98.44% [96.56, 99.69]; n=320/320, clusters=79/79, eff=78.0 |
-| politeness | plain | 79.31% [75.39, 83.07]; n=319/320, clusters=80/80, eff=79.9 |
+| politeness | plain | 79.06% [75.31, 82.81]; n=320/320, clusters=80/80, eff=80.0 |
 | politeness | polite | 100.00% [100.00, 100.00]; n=320/320, clusters=80/80, eff=80.0 |
-| speech_act | question | 72.20% [62.61, 81.15]; n=205/208, clusters=37/37, eff=25.1 |
-| speech_act | request/command | 89.45% [85.34, 92.98]; n=199/200, clusters=36/36, eff=21.1 |
-| speech_act | statement | 60.00% [50.75, 69.90]; n=215/216, clusters=37/37, eff=20.7 |
+| speech_act | question | 72.12% [62.50, 81.14]; n=208/208, clusters=37/37, eff=24.6 |
+| speech_act | request/command | 89.00% [84.87, 92.55]; n=200/200, clusters=36/36, eff=21.2 |
+| speech_act | statement | 59.72% [50.49, 69.55]; n=216/216, clusters=37/37, eff=20.8 |
 
 C6 literal please-only extraction: 8.12% [5.31, 11.25]; n=320/320, clusters=80/80, eff=80.0. This category is narrower than any-polite addition.
 
@@ -233,11 +236,11 @@ Plain/polite arm retention, register match and joint preservation are in [h1_arm
 
 | channel | construction | question loss [95% CI], n, clusters |
 | --- | --- | --- |
-| chip1 | action/event | 38.06% [28.57, 46.91]; n=134/136, clusters=26/26, eff=19.6 |
-| chip1 | state/evaluation | 9.52% [1.92, 21.15]; n=63/64, clusters=13/13, eff=9.5 |
+| chip1 | action/event | 38.24% [28.91, 46.95]; n=136/136, clusters=26/26, eff=19.3 |
+| chip1 | state/evaluation | 9.38% [1.92, 21.15]; n=64/64, clusters=13/13, eff=9.1 |
 | chip1 | unresolved | 0.00% [0.00, 0.00]; n=8/8, clusters=1/1, eff=1.0 |
 | chipall | action/event | 38.97% [26.47, 50.66]; n=136/136, clusters=26/26, eff=19.3 |
-| chipall | state/evaluation | 9.52% [4.60, 15.69]; n=63/64, clusters=13/13, eff=9.0 |
+| chipall | state/evaluation | 9.38% [4.55, 15.38]; n=64/64, clusters=13/13, eff=9.1 |
 | chipall | unresolved | 12.50% [12.50, 12.50]; n=8/8, clusters=1/1, eff=1.0 |
 | full | action/event | 0.00% [0.00, 0.00]; n=136/136, clusters=26/26, eff=19.3 |
 | full | state/evaluation | 0.00% [0.00, 0.00]; n=64/64, clusters=13/13, eff=9.1 |
@@ -247,15 +250,15 @@ Action-minus-state question-loss differences (joint seed/construction-cluster re
 
 | channel | gap pp [95% CI] | n | action/state clusters | numeric threshold met | independent audit |
 | --- | --- | --- | --- | --- | --- |
-| chip1 | 28.54 [13.78, 41.26] | 197 | 26/13 | True | False |
-| chipall | 29.45 [15.13, 42.54] | 199 | 26/13 | True | False |
+| chip1 | 28.86 [14.26, 41.41] | 200 | 26/13 | True | False |
+| chipall | 29.60 [15.28, 42.65] | 200 | 26/13 | True | False |
 | full | 0.00 [0.00, 0.00] | 200 | 26/13 | False | False |
 
 ## Limitations and reproducibility
 
 Items/source hashes and actual timestamp ordering are in FREEZE.md; that file was written during analysis, not before generation. Caches include earlier generations; exclusion sensitivity cannot establish prospective registration retroactively. The request builder deduplicated identical visible inputs and reuses them as multiple target occurrences where applicable; recorded cluster_id preserves known seed/construction dependence, but distinct authored families can still share a model request. Sensitivity excluding early-cache families does not repair every possible content overlap. New item human spot-check completion is not established here. Automated labels and a partial contract cannot certify full meaning, fluency, communicative usefulness or population-wide model behavior.
 
-J1 fallback was a deviation in orchestration/r2c_judge.sh. Protocol-aligned unknown masking prevents an arbitrary fallback from entering the primary estimate; final arbiter adjudication is still outstanding. Complete-case analysis can be biased by outcome-related missingness; supplied-J1 sensitivity is not adjudication. General labels follow the stored production resolution. Per-model and construction intervals are pointwise descriptive with small adversarial construction inventories.
+J1 fallback was a deviation in orchestration/r2c_judge.sh. The fallback rows were later resolved by a single post-outcome Claude arbiter (blind to reference, model, arm and J1/J2; see arbitration.md); this is not a prospective resolution, and the unknown-masked and supplied-J1 analyses are retained as sensitivities. Complete-case analysis can be biased by outcome-related missingness; supplied-J1 sensitivity is not adjudication. General labels follow the stored production resolution. Per-model and construction intervals are pointwise descriptive with small adversarial construction inventories.
 
 Reproduce with `.venv/bin/python analysis/r2c/analyze_confirmatory.py` (set OPENBLAS_NUM_THREADS=1 for predictable local performance). Do not rerun freeze_analysis.py after outcomes: FREEZE.md is an audit record, not regenerated output. All analysis is CPU/local files; no API, judge or GPU server calls. [metadata.json](metadata.json) hashes the inputs, source eligibility and analysis helpers. [headline.json](headline.json) is flat numeric unit-scale estimates (multiply by 100 for percentages/pp); `<key>_ci_low`, `_ci_high`, `_n`, `_n_clusters` accompany each estimate. Top-level n counts analyzed target/suggestion rows, while endpoint-specific n is authoritative. [report.json](report.json) supplies the CALE readiness compatibility artifact.
 
