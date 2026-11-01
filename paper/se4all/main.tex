@@ -8,7 +8,7 @@
 %%  * Example strings (Figs. 1, 2, 5) come from analysis/examples/story_evidence.v2.json and
 %%    paper/figs/example_manifest.json and are re-read from runs/*/outputs.jsonl by make_macros.py
 %%    (gallery_table.tex, checker_table.tex, guard_table.tex). Inputs are shown verbatim, wrappers included.
-%%  * \pending{...} remains ONLY for author, ethics and AI-disclosure facts the authors must supply.
+%%  * \pending{...} remains ONLY for the IEEE AI disclosure (candidate text is in a comment above it).
 %%
 %% !! IEEE requires disclosure of AI-generated text in the Acknowledgment, naming the system and the sections.
 \documentclass[conference,10pt]{IEEEtran}
@@ -455,6 +455,7 @@ The planned 20-item W-C human source check was not completed (\RES{n_returns_wc}
 \emph{Heterogeneity.} The politeness and composition effects are model- and encoding-specific.
 \emph{Cost.} Selection counts omit reading, navigation and fatigue~\cite{frisch2026complicated}.
 \emph{No users.} All examples are constructed tests; we cannot speak to benefit, agency or whether anyone wants a given output, and we assume no particular language style of any group of AAC users~\cite{zisk2019aac,donaldson2021everyone}.
+No autistic advisers took part; future work should involve autistic AAC users and advisers directly.
 
 %% =====================================================================
 \section{Conclusion}
@@ -465,11 +466,19 @@ On fresh items, the registered contrasts held, with smaller and model-specific e
 Testing the test infrastructure mattered as much as testing the models.
 Families, requirements, harness, oracle tests, stored outputs, example manifests and analysis code are available at \url{https://github.com/1unarzDev/aac_voice_preservation}.
 
-\section*{Ethics}
+\section*{Ethics and Positionality}
 No data were collected from AAC users; AACText is public under CC BY 4.0.
-Two human annotators labeled model outputs under a fixed codebook.\pending{institutional determination; annotator recruitment and compensation}
+Two anonymous annotators, neither an author, labeled model outputs under a fixed codebook, blinded as designed: they saw only each output sentence, plus the visible input when coding added content, with no model, condition or source shown; only an annotator ID was recorded.
+As independent researchers we did not obtain an institutional review determination; annotators labelled machine-generated sentences, were reimbursed, and no personal data were collected. % AUTHOR-CONFIRM: ethics sentence
+No autistic advisers or community reviewers took part.
+Instead, we addressed the problems of an earlier version of this study through expert literature and literature reviews: a critical review of that version retired its synthetic autistic-vs-neurotypical comparison; the design draws on autism and participatory-research guidance, including AASPIRE~\cite{nicolaidis2019aaspire} and the double-empathy~\cite{milton2012double} and heterogeneity~\cite{zisk2019aac} cautions; we assume no \say{autistic style}; and our claims are limited to commitments explicit in the text.
 
 \section*{Acknowledgment}
+%% AUTHOR-APPROVE: candidate IEEE AI disclosure (replace the \pending below once approved and corrected):
+%% Large language model tools (Anthropic Claude, OpenAI Codex/GPT models) were used to assist with analysis code,
+%% figure generation, literature search and drafting under the authors' direction; GPT models were also systems
+%% under test and automatic labellers, and a Claude model was the arbiter, as described in
+%% Sections~\ref{sec:setup}--\ref{sec:oracle}. All content was reviewed by the authors.
 \pending{IEEE AI disclosure: name the AI system(s) that drafted text, figures and code, the sections affected and the level of use (VENUE.md). The models under test, the extractor and the arbiter are research instruments described in Sections III--V.}
 
 \bibliographystyle{IEEEtran}
