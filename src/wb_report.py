@@ -41,6 +41,15 @@ B = 2000
 RNG = np.random.default_rng(20261101)
 
 
+def mdt(df, index=True):
+    """Markdown table without the optional tabulate dependency."""
+    d = df.reset_index() if index else df
+    cols = [str(c) for c in d.columns]
+    lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
+    lines += ["| " + " | ".join(str(v) for v in row) + " |" for row in d.itertuples(index=False)]
+    return "\n".join(lines)
+
+
 def honours(d, src, out):
     if out is None or src is None or (isinstance(out, float) and np.isnan(out)):
         return None
@@ -53,7 +62,7 @@ def honours(d, src, out):
 
 def boot(df, col, cluster="msg"):
     """Mean of boolean col with message-cluster bootstrap CI. Returns (k, n, est, lo, hi, n_msgs)."""
-    d = df.dropna(subset=[col])
+    d = df.dropna(subset=[col]) if col in df else df.iloc[0:0]
     if d.empty:
         return dict(k=0, n=0, est=None, lo=None, hi=None, msgs=0)
     g = d.groupby(cluster)[col].agg(["sum", "count"])
@@ -67,7 +76,7 @@ def boot(df, col, cluster="msg"):
 
 def boot_diff(df, a, b, cluster="msg"):
     """Paired difference mean(a) - mean(b) over rows with both, message-cluster bootstrap."""
-    d = df.dropna(subset=[a, b])
+    d = df.dropna(subset=[a, b]) if a in df and b in df else df.iloc[0:0]
     if d.empty:
         return dict(n=0, est=None, lo=None, hi=None, msgs=0)
     g = d.groupby(cluster).agg(sa=(a, "sum"), sb=(b, "sum"), c=(a, "count"))
@@ -155,14 +164,14 @@ def main() -> int:
     tab = gen.groupby(["sample", "channel"]).agg(outputs=("valid", "size"), valid=("valid", "sum"),
                                                  critical_resolved=("critical", lambda s: s.notna().sum()))
     md += ["Outputs per sample x channel (one per message x model; invalid = empty/failed generation; "
-           "critical_resolved = J1==J2 on the focal critical question):", "", tab.to_markdown(), ""]
+           "critical_resolved = J1==J2 on the focal critical question):", "", mdt(tab), ""]
     st = (L.drop_duplicates(["msg", "dim"]).groupby(["sample", "dim", "status"]).size()
           .unstack(fill_value=0))
     md += ["Panel status of every (message, dimension), POS-cap4 input (both coders): "
            "confirmed_ambiguous = both list >=2 values; supplied = both list exactly the source value; "
            "coder_disagree = the coders differ; unambiguous_wrong = both unambiguous but not equal to "
            "their source value (or source value disputed). Only the first two are eligible for A/B.", "",
-           st.to_markdown(), ""]
+           mdt(st), ""]
 
     # ---------- panel agreement
     md += ["## Codex panel agreement (source-blind pass 1, source-revealed pass 2)", "",
@@ -185,13 +194,15 @@ def main() -> int:
            "outside admissible = a value neither coder listed.", ""]
     A = L[(L["channel"] == "pos_cap4") & (L["status"] == "confirmed_ambiguous")]
     for samp in ("random", "enriched"):
-        md += [f"### {samp}", "", "| dim | eligible msgs | committed | takes default | honours source | outside admissible |",
-               "|---|---|---|---|---|---|"]
+        md += [f"### {samp}", "", "| dim | eligible msgs | committed | takes default | honours source | honours NON-default source | outside admissible |",
+               "|---|---|---|---|---|---|---|"]
         for d in DIMS + ["ALL"]:
             s = A[(A["sample"] == samp) & ((A["dim"] == d) if d != "ALL" else True)]
             r = {c: boot(s, c) for c in ("committed", "takes_default", "honour", "outside_admissible")}
+            nd = s[s["src"].notna() & (s["src"] != s["dim"].map(DEFAULT))]
+            r["honour_nondefault"] = boot(nd, "honour")
             nm = s["msg"].nunique()
-            md.append(f"| {d} | {nm} | {fmt(r['committed'])} | {fmt(r['takes_default'])} | {fmt(r['honour'])} | {fmt(r['outside_admissible'])} |")
+            md.append(f"| {d} | {nm} | {fmt(r['committed'])} | {fmt(r['takes_default'])} | {fmt(r['honour'])} | {fmt(r['honour_nondefault'])} | {fmt(r['outside_admissible'])} |")
             for c, v in r.items():
                 csv.append(dict(analysis="A_default", sample=samp, dim=d, model="pooled", metric=c, **v))
         md.append("")
@@ -199,13 +210,13 @@ def main() -> int:
                 .rename("n").reset_index())
         dirn["share"] = dirn["n"] / dirn.groupby("dim")["n"].transform("sum")
         md += [f"Direction (output value distribution) on confirmed-ambiguous dims, {samp}:", "",
-               dirn.assign(share=dirn["share"].round(3)).to_markdown(index=False), ""]
+               mdt(dirn.assign(share=dirn["share"].round(3)), index=False), ""]
         dirn.assign(sample=samp).to_csv(OUT / f"defaults_direction_{samp}.csv", index=False)
         mm = []
         for m, g in A[A["sample"] == samp].groupby("model"):
             mm.append(dict(model=m, takes_default=fmt(boot(g, "takes_default")), honours_source=fmt(boot(g, "honour"))))
         if mm:
-            md += [f"By model ({samp}, all dims):", "", pd.DataFrame(mm).to_markdown(index=False), ""]
+            md += [f"By model ({samp}, all dims):", "", mdt(pd.DataFrame(mm), index=False), ""]
 
     # ---------- B. violations
     md += ["## B. Violations of supplied, expressible commitments", "",
@@ -232,10 +243,10 @@ def main() -> int:
         mm = []
         for m, g in Bv[Bv["sample"] == samp].groupby("model"):
             mm.append(dict(model=m, **{ch: fmt(boot(g[g["channel"] == ch], "violation")) for ch in ("pos_cap4", "restored", "full")}))
-        md += [f"By model ({samp}, all dims):", "", pd.DataFrame(mm).to_markdown(index=False), ""]
+        md += [f"By model ({samp}, all dims):", "", mdt(pd.DataFrame(mm), index=False), ""]
         ex = Bv[(Bv["sample"] == samp) & (Bv["violation"] == True)]  # noqa: E712
         vc = ex.groupby(["channel", "dim", "src", "out"]).size().rename("n").reset_index().sort_values("n", ascending=False)
-        md += [f"Most frequent violation patterns ({samp}):", "", vc.head(12).to_markdown(index=False), ""]
+        md += [f"Most frequent violation patterns ({samp}):", "", mdt(vc.head(12), index=False), ""]
 
     # ---------- sensitivity: strict (likely-only) admissibility from the graded pass p1g
     if L["status_strict"].notna().any():
@@ -245,7 +256,7 @@ def main() -> int:
                "pass showed near-ceiling ambiguity, before any judged output was inspected).", ""]
         st2 = (L.drop_duplicates(["msg", "dim"]).groupby(["sample", "dim", "status_strict"]).size()
                .unstack(fill_value=0))
-        md += [st2.to_markdown(), ""]
+        md += [mdt(st2), ""]
         md += ["| sample | dim | A: eligible msgs | A: takes default | A: honours source | B: POS-cap4 supplied violation |",
                "|---|---|---|---|---|---|"]
         for samp in ("random", "enriched"):
@@ -304,7 +315,7 @@ def main() -> int:
             for (samp, m), g in piv[piv["focal"] != "none"].groupby(["sample", "model"]):
                 mm.append(dict(sample=samp, model=m, pos_cap4=fmt(boot(g, "pos_cap4")),
                                restored=fmt(boot(g, "restored")), effect=fmt(boot_diff(g, "restored", "pos_cap4"))))
-            md += ["By model:", "", pd.DataFrame(mm).to_markdown(index=False), ""]
+            md += ["By model:", "", mdt(pd.DataFrame(mm), index=False), ""]
     unres = sc[sc["valid"] & sc["critical"].isna()]
     md += [f"Unresolved focal critical labels (J1 != J2): {len(unres)} of {int(sc['valid'].sum())} valid output rows.", ""]
     pd.DataFrame(csv).to_csv(OUT / "estimates.csv", index=False)

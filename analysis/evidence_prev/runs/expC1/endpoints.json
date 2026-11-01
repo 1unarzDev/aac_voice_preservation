@@ -1,0 +1,221 @@
+{
+ "n_rows": 2048,
+ "n_invalid": 0,
+ "n_critical_unresolved": 0,
+ "n_families": 32,
+ "cp1_constraint_preserving": {
+  "gemma3-4b|P0|actor": {
+   "rate": 0.688,
+   "n": 64
+  },
+  "gemma3-4b|P0|both": {
+   "rate": 0.75,
+   "n": 128
+  },
+  "gemma3-4b|P0|pol": {
+   "rate": 0.312,
+   "n": 64
+  },
+  "gpt-6.1-terra|P0|actor": {
+   "rate": 1.0,
+   "n": 64
+  },
+  "gpt-6.1-terra|P0|both": {
+   "rate": 1.0,
+   "n": 128
+  },
+  "gpt-6.1-terra|P0|pol": {
+   "rate": 0.906,
+   "n": 64
+  },
+  "llama3.1-8b|P0|actor": {
+   "rate": 0.688,
+   "n": 64
+  },
+  "llama3.1-8b|P0|both": {
+   "rate": 0.938,
+   "n": 128
+  },
+  "llama3.1-8b|P0|pol": {
+   "rate": 0.562,
+   "n": 64
+  },
+  "qwen2.5-7b|P0|actor": {
+   "rate": 0.375,
+   "n": 64
+  },
+  "qwen2.5-7b|P0|both": {
+   "rate": 0.508,
+   "n": 128
+  },
+  "qwen2.5-7b|P0|pol": {
+   "rate": 0.906,
+   "n": 64
+  }
+ },
+ "violation_by_dim": {
+  "gemma3-4b|agent": {
+   "rate": 0.031,
+   "n": 128
+  },
+  "gemma3-4b|polarity": {
+   "rate": 0.062,
+   "n": 128
+  },
+  "gpt-6.1-terra|agent": {
+   "rate": 0.0,
+   "n": 128
+  },
+  "gpt-6.1-terra|polarity": {
+   "rate": 0.0,
+   "n": 128
+  },
+  "llama3.1-8b|agent": {
+   "rate": 0.078,
+   "n": 128
+  },
+  "llama3.1-8b|polarity": {
+   "rate": 0.0,
+   "n": 128
+  },
+  "qwen2.5-7b|agent": {
+   "rate": 0.211,
+   "n": 128
+  },
+  "qwen2.5-7b|polarity": {
+   "rate": 0.0,
+   "n": 128
+  }
+ },
+ "cp2_commitment": {
+  "gemma3-4b|P0|actor": {
+   "rate": 1.0,
+   "n": 32
+  },
+  "gemma3-4b|P0|neither": {
+   "rate": 1.0,
+   "n": 64
+  },
+  "gemma3-4b|P0|pol": {
+   "rate": 1.0,
+   "n": 32
+  },
+  "gpt-6.1-terra|P0|actor": {
+   "rate": 1.0,
+   "n": 32
+  },
+  "gpt-6.1-terra|P0|neither": {
+   "rate": 1.0,
+   "n": 64
+  },
+  "gpt-6.1-terra|P0|pol": {
+   "rate": 0.906,
+   "n": 32
+  },
+  "llama3.1-8b|P0|actor": {
+   "rate": 1.0,
+   "n": 32
+  },
+  "llama3.1-8b|P0|neither": {
+   "rate": 1.0,
+   "n": 64
+  },
+  "llama3.1-8b|P0|pol": {
+   "rate": 1.0,
+   "n": 32
+  },
+  "qwen2.5-7b|P0|actor": {
+   "rate": 1.0,
+   "n": 32
+  },
+  "qwen2.5-7b|P0|neither": {
+   "rate": 1.0,
+   "n": 64
+  },
+  "qwen2.5-7b|P0|pol": {
+   "rate": 1.0,
+   "n": 32
+  }
+ },
+ "cp2_direction_vs_50pct": {
+  "gemma3-4b|agent": {
+   "A": 23,
+   "B": 41,
+   "other": 0,
+   "share_A": 0.359
+  },
+  "gemma3-4b|polarity": {
+   "A": 64,
+   "B": 0,
+   "other": 0,
+   "share_A": 1.0
+  },
+  "gpt-6.1-terra|agent": {
+   "A": 48,
+   "B": 5,
+   "other": 8,
+   "share_A": 0.906
+  },
+  "gpt-6.1-terra|polarity": {
+   "A": 64,
+   "B": 0,
+   "other": 0,
+   "share_A": 1.0
+  },
+  "llama3.1-8b|agent": {
+   "A": 10,
+   "B": 54,
+   "other": 0,
+   "share_A": 0.156
+  },
+  "llama3.1-8b|polarity": {
+   "A": 64,
+   "B": 0,
+   "other": 0,
+   "share_A": 1.0
+  },
+  "qwen2.5-7b|agent": {
+   "A": 46,
+   "B": 18,
+   "other": 0,
+   "share_A": 0.719
+  },
+  "qwen2.5-7b|polarity": {
+   "A": 64,
+   "B": 0,
+   "other": 0,
+   "share_A": 1.0
+  }
+ },
+ "coverage_at_3": {},
+ "stance_additions": {
+  "gemma3-4b|P0": {
+   "any_stance_addition": 0.369,
+   "politeness_added": 0.172,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.0,
+   "added_content": 0.371
+  },
+  "gpt-6.1-terra|P0": {
+   "any_stance_addition": 0.271,
+   "politeness_added": 0.0,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.0,
+   "added_content": 0.078
+  },
+  "llama3.1-8b|P0": {
+   "any_stance_addition": 0.266,
+   "politeness_added": 0.031,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.0,
+   "added_content": 0.43
+  },
+  "qwen2.5-7b|P0": {
+   "any_stance_addition": 0.25,
+   "politeness_added": 0.0,
+   "hedge_added": 0.0,
+   "emphatic_added": 0.0,
+   "added_content": 0.285
+  }
+ }
+}

@@ -151,11 +151,14 @@ def pct_axis(ax, axis="x"):
 
 
 # ---------------------------------------------------------------- data
-def load(tables: list[Path], items_glob: str) -> tuple[pd.DataFrame, dict]:
+def load(tables: list[Path], items_glob: str, include_quarantine=False) -> tuple[pd.DataFrame, dict]:
     items = A.load_items(items_glob)
     raw = pd.concat([pd.read_parquet(t) for t in tables], ignore_index=True)
     raw = raw[raw.channel.isin(CHANNELS)]
     df = A.normalize_table(raw, items)
+    if not include_quarantine:
+        from attribute import quarantined
+        df = df[~df.family_id.map(lambda f: quarantined(items[f]))].copy()
     df["subdim"] = df.apply(subdim, axis=1)
     df["value"] = df.apply(value_of, axis=1)
     return df, items
@@ -609,15 +612,21 @@ def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
 
 
 def main() -> int:
+    global OUT
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--table", type=Path, nargs="+", default=[ROOT / "runs/main1/scored.parquet"])
     ap.add_argument("--items", default=str(ROOT / "data/items/*.jsonl"))
     ap.add_argument("--only", nargs="*", help="subset of figure names")
+    ap.add_argument("--include-quarantine", action="store_true")
+    ap.add_argument("--out", type=Path, default=OUT)
     args = ap.parse_args()
-    df, items = load(args.table, args.items)
+    OUT = args.out
+    OUT.mkdir(parents=True, exist_ok=True)
+    df, items = load(args.table, args.items, args.include_quarantine)
     nums = {"n_families": int(df.family_id.nunique()), "n_rows": int(len(df)),
             "models": MODEL_ORDER, "n_boot": N_BOOT, "seed": SEED,
-            "tables": [str(t) for t in args.table]}
+            "tables": [str(t) for t in args.table], "include_quarantine": args.include_quarantine,
+            "label_resolution": "annotation/label_resolution.jsonl"}
     nums["note"] = "widths in inches of the saved PDFs are reported under pdf_sizes"
     todo = {"fig_defaults": lambda: fig_defaults(df, nums),
             "fig_channel_ladder": lambda: fig_channel_ladder(df, nums),

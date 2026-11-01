@@ -1,0 +1,1304 @@
+{
+ "n_families": 60,
+ "n_rows": 19198,
+ "models": [
+  "gpt-6.1-terra",
+  "qwen2.5-7b",
+  "llama3.1-8b",
+  "gemma3-4b"
+ ],
+ "n_boot": 2000,
+ "seed": 20261031,
+ "tables": [
+  "/home/lunarz/aac-voice-preservation/runs/main1/scored.parquet"
+ ],
+ "note": "widths in inches of the saved PDFs are reported under pdf_sizes",
+ "fig_defaults": {
+  "n_outputs": 240,
+  "n_families": 60,
+  "rule": "bare channel, P0, one output per family x model (A/B share the request)",
+  "polarity": {
+   "n": 40,
+   "families": 10,
+   "shares": {
+    "affirmative": {
+     "estimate": 1.0,
+     "ci_low": 1.0,
+     "ci_high": 1.0,
+     "by_model": {
+      "gpt-6.1-terra": 1.0,
+      "qwen2.5-7b": 1.0,
+      "llama3.1-8b": 1.0,
+      "gemma3-4b": 1.0
+     }
+    },
+    "negated": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    }
+   }
+  },
+  "certainty": {
+   "n": 40,
+   "families": 10,
+   "shares": {
+    "plain assertion": {
+     "estimate": 0.9,
+     "ci_low": 0.8,
+     "ci_high": 1.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.9,
+      "qwen2.5-7b": 1.0,
+      "llama3.1-8b": 0.9,
+      "gemma3-4b": 0.8
+     }
+    },
+    "hedged/uncertain": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 0.1,
+     "ci_low": 0.0,
+     "ci_high": 0.2,
+     "by_model": {
+      "gpt-6.1-terra": 0.1,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.1,
+      "gemma3-4b": 0.2
+     }
+    }
+   }
+  },
+  "agent": {
+   "n": 40,
+   "families": 10,
+   "shares": {
+    "speaker": {
+     "estimate": 0.675,
+     "ci_low": 0.425,
+     "ci_high": 0.875,
+     "by_model": {
+      "gpt-6.1-terra": 0.7,
+      "qwen2.5-7b": 0.6,
+      "llama3.1-8b": 0.8,
+      "gemma3-4b": 0.6
+     }
+    },
+    "addressee": {
+     "estimate": 0.275,
+     "ci_low": 0.075,
+     "ci_high": 0.5,
+     "by_model": {
+      "gpt-6.1-terra": 0.3,
+      "qwen2.5-7b": 0.3,
+      "llama3.1-8b": 0.1,
+      "gemma3-4b": 0.4
+     }
+    },
+    "third party": {
+     "estimate": 0.05,
+     "ci_low": 0.0,
+     "ci_high": 0.15,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.1,
+      "llama3.1-8b": 0.1,
+      "gemma3-4b": 0.0
+     }
+    },
+    "we/joint": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    }
+   }
+  },
+  "speech_act": {
+   "n": 40,
+   "families": 10,
+   "shares": {
+    "statement": {
+     "estimate": 0.675,
+     "ci_low": 0.5,
+     "ci_high": 0.85,
+     "by_model": {
+      "gpt-6.1-terra": 0.6,
+      "qwen2.5-7b": 0.8,
+      "llama3.1-8b": 0.7,
+      "gemma3-4b": 0.6
+     }
+    },
+    "question": {
+     "estimate": 0.125,
+     "ci_low": 0.0,
+     "ci_high": 0.275,
+     "by_model": {
+      "gpt-6.1-terra": 0.2,
+      "qwen2.5-7b": 0.1,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.2
+     }
+    },
+    "request/command": {
+     "estimate": 0.15,
+     "ci_low": 0.025,
+     "ci_high": 0.3,
+     "by_model": {
+      "gpt-6.1-terra": 0.1,
+      "qwen2.5-7b": 0.1,
+      "llama3.1-8b": 0.2,
+      "gemma3-4b": 0.2
+     }
+    },
+    "refusal": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "acceptance": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "offer/suggestion": {
+     "estimate": 0.05,
+     "ci_low": 0.0,
+     "ci_high": 0.15,
+     "by_model": {
+      "gpt-6.1-terra": 0.1,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.1,
+      "gemma3-4b": 0.0
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    }
+   }
+  },
+  "politeness": {
+   "n": 40,
+   "families": 10,
+   "shares": {
+    "plain": {
+     "estimate": 0.55,
+     "ci_low": 0.35,
+     "ci_high": 0.75,
+     "by_model": {
+      "gpt-6.1-terra": 0.6,
+      "qwen2.5-7b": 0.5,
+      "llama3.1-8b": 0.6,
+      "gemma3-4b": 0.5
+     }
+    },
+    "polite": {
+     "estimate": 0.45,
+     "ci_low": 0.25,
+     "ci_high": 0.65,
+     "by_model": {
+      "gpt-6.1-terra": 0.4,
+      "qwen2.5-7b": 0.5,
+      "llama3.1-8b": 0.4,
+      "gemma3-4b": 0.5
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    }
+   }
+  },
+  "time": {
+   "n": 20,
+   "families": 5,
+   "shares": {
+    "past": {
+     "estimate": 0.1,
+     "ci_low": 0.0,
+     "ci_high": 0.2,
+     "by_model": {
+      "gpt-6.1-terra": 0.4,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "now": {
+     "estimate": 0.3,
+     "ci_low": 0.05,
+     "ci_high": 0.65,
+     "by_model": {
+      "gpt-6.1-terra": 0.2,
+      "qwen2.5-7b": 0.4,
+      "llama3.1-8b": 0.2,
+      "gemma3-4b": 0.4
+     }
+    },
+    "later": {
+     "estimate": 0.3,
+     "ci_low": 0.05,
+     "ci_high": 0.55,
+     "by_model": {
+      "gpt-6.1-terra": 0.2,
+      "qwen2.5-7b": 0.4,
+      "llama3.1-8b": 0.6,
+      "gemma3-4b": 0.0
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 0.3,
+     "ci_low": 0.15,
+     "ci_high": 0.45,
+     "by_model": {
+      "gpt-6.1-terra": 0.2,
+      "qwen2.5-7b": 0.2,
+      "llama3.1-8b": 0.2,
+      "gemma3-4b": 0.6
+     }
+    }
+   }
+  },
+  "quantity": {
+   "n": 20,
+   "families": 5,
+   "shares": {
+    "lower number": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "higher number": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "by_model": {
+      "gpt-6.1-terra": 0.0,
+      "qwen2.5-7b": 0.0,
+      "llama3.1-8b": 0.0,
+      "gemma3-4b": 0.0
+     }
+    },
+    "unclear/mixed": {
+     "estimate": 1.0,
+     "ci_low": 1.0,
+     "ci_high": 1.0,
+     "by_model": {
+      "gpt-6.1-terra": 1.0,
+      "qwen2.5-7b": 1.0,
+      "llama3.1-8b": 1.0,
+      "gemma3-4b": 1.0
+     }
+    }
+   }
+  }
+ },
+ "fig_channel_ladder": {
+  "n_outputs": 2400,
+  "n_families": 60,
+  "all_dims": {
+   "bare": {
+    "estimate": 0.38125,
+    "ci_low": 0.3333333333333333,
+    "ci_high": 0.42505208333333305
+   },
+   "noncrit": {
+    "estimate": 0.4083333333333333,
+    "ci_low": 0.36244791666666665,
+    "ci_high": 0.45
+   },
+   "chip1": {
+    "estimate": 0.94375,
+    "ci_low": 0.9104166666666667,
+    "ci_high": 0.9729166666666667
+   },
+   "chipall": {
+    "estimate": 0.9479166666666666,
+    "ci_low": 0.9208333333333333,
+    "ci_high": 0.96875
+   },
+   "full": {
+    "estimate": 0.96875,
+    "ci_low": 0.9458333333333333,
+    "ci_high": 0.9875
+   }
+  },
+  "polarity": {
+   "bare": {
+    "estimate": 0.5,
+    "ci_low": 0.5,
+    "ci_high": 0.5
+   },
+   "noncrit": {
+    "estimate": 0.5,
+    "ci_low": 0.5,
+    "ci_high": 0.5
+   },
+   "chip1": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   },
+   "chipall": {
+    "estimate": 0.9875,
+    "ci_low": 0.9625,
+    "ci_high": 1.0
+   },
+   "full": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   }
+  },
+  "certainty": {
+   "bare": {
+    "estimate": 0.45,
+    "ci_low": 0.4,
+    "ci_high": 0.5
+   },
+   "noncrit": {
+    "estimate": 0.4875,
+    "ci_low": 0.4625,
+    "ci_high": 0.5
+   },
+   "chip1": {
+    "estimate": 0.9875,
+    "ci_low": 0.9625,
+    "ci_high": 1.0
+   },
+   "chipall": {
+    "estimate": 0.9875,
+    "ci_low": 0.9625,
+    "ci_high": 1.0
+   },
+   "full": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   }
+  },
+  "agent": {
+   "bare": {
+    "estimate": 0.4,
+    "ci_low": 0.275,
+    "ci_high": 0.4875
+   },
+   "noncrit": {
+    "estimate": 0.475,
+    "ci_low": 0.4375,
+    "ci_high": 0.5
+   },
+   "chip1": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   },
+   "chipall": {
+    "estimate": 0.9875,
+    "ci_low": 0.9625,
+    "ci_high": 1.0
+   },
+   "full": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   }
+  },
+  "speech_act": {
+   "bare": {
+    "estimate": 0.3375,
+    "ci_low": 0.2371875,
+    "ci_high": 0.4375
+   },
+   "noncrit": {
+    "estimate": 0.375,
+    "ci_low": 0.275,
+    "ci_high": 0.475
+   },
+   "chip1": {
+    "estimate": 0.8125,
+    "ci_low": 0.675,
+    "ci_high": 0.925
+   },
+   "chipall": {
+    "estimate": 0.85,
+    "ci_low": 0.75,
+    "ci_high": 0.9375
+   },
+   "full": {
+    "estimate": 0.95,
+    "ci_low": 0.8875,
+    "ci_high": 0.9875
+   }
+  },
+  "politeness": {
+   "bare": {
+    "estimate": 0.5,
+    "ci_low": 0.5,
+    "ci_high": 0.5
+   },
+   "noncrit": {
+    "estimate": 0.5,
+    "ci_low": 0.5,
+    "ci_high": 0.5
+   },
+   "chip1": {
+    "estimate": 0.9,
+    "ci_low": 0.8375,
+    "ci_high": 0.95
+   },
+   "chipall": {
+    "estimate": 0.875,
+    "ci_low": 0.875,
+    "ci_high": 0.875
+   },
+   "full": {
+    "estimate": 0.8625,
+    "ci_low": 0.7625,
+    "ci_high": 0.95
+   }
+  },
+  "time": {
+   "bare": {
+    "estimate": 0.2,
+    "ci_low": 0.075,
+    "ci_high": 0.325
+   },
+   "noncrit": {
+    "estimate": 0.2,
+    "ci_low": 0.025,
+    "ci_high": 0.375
+   },
+   "chip1": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   },
+   "chipall": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   },
+   "full": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   }
+  },
+  "quantity": {
+   "bare": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0
+   },
+   "noncrit": {
+    "estimate": 0.025,
+    "ci_low": 0.0,
+    "ci_high": 0.075
+   },
+   "chip1": {
+    "estimate": 0.925,
+    "ci_low": 0.775,
+    "ci_high": 1.0
+   },
+   "chipall": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   },
+   "full": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0
+   }
+  }
+ },
+ "fig_cost_asymmetry": {
+  "rule": "bare channel; default = A/B value most often produced by P0 top-1 over 4 models (ties broken by bare P2+S3 outputs); P0 cost 0 if top-1 matches else chip count; P2 cost 0 if top-1, 1 if in 3 suggestions, else chip count",
+  "families_without_default": [
+   "agt-13",
+   "pol2-16",
+   "tq-07",
+   "tq-09",
+   "tq-11",
+   "tq-13",
+   "tq-14",
+   "tq-15"
+  ],
+  "n_families_with_default": 52,
+  "rows": [
+   {
+    "prompt": "P0",
+    "dim": "polarity",
+    "reading": "default",
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P0",
+    "dim": "polarity",
+    "reading": "non-default",
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P0",
+    "dim": "certainty",
+    "reading": "default",
+    "estimate": 0.1,
+    "ci_low": 0.0,
+    "ci_high": 0.2,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P0",
+    "dim": "certainty",
+    "reading": "non-default",
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P0",
+    "dim": "agent",
+    "reading": "default",
+    "estimate": 0.2222222222222222,
+    "ci_low": 0.05555555555555555,
+    "ci_high": 0.4166666666666667,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P0",
+    "dim": "agent",
+    "reading": "non-default",
+    "estimate": 0.8888888888888888,
+    "ci_low": 0.7777777777777778,
+    "ci_high": 0.9722222222222222,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P0",
+    "dim": "speech_act",
+    "reading": "default",
+    "estimate": 0.375,
+    "ci_low": 0.175,
+    "ci_high": 0.575,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P0",
+    "dim": "speech_act",
+    "reading": "non-default",
+    "estimate": 0.95,
+    "ci_low": 0.85,
+    "ci_high": 1.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P0",
+    "dim": "politeness",
+    "reading": "default",
+    "estimate": 0.2222222222222222,
+    "ci_low": 0.1111111111111111,
+    "ci_high": 0.3333333333333333,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P0",
+    "dim": "politeness",
+    "reading": "non-default",
+    "estimate": 0.7777777777777778,
+    "ci_low": 0.6666666666666666,
+    "ci_high": 0.8888888888888888,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P0",
+    "dim": "time",
+    "reading": "default",
+    "estimate": 0.5625,
+    "ci_low": 0.375,
+    "ci_high": 0.75,
+    "n": 16,
+    "n_families": 4
+   },
+   {
+    "prompt": "P0",
+    "dim": "time",
+    "reading": "non-default",
+    "estimate": 0.9375,
+    "ci_low": 0.8125,
+    "ci_high": 1.0,
+    "n": 16,
+    "n_families": 4
+   },
+   {
+    "prompt": "P2",
+    "dim": "polarity",
+    "reading": "default",
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P2",
+    "dim": "polarity",
+    "reading": "non-default",
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P2",
+    "dim": "certainty",
+    "reading": "default",
+    "estimate": 0.075,
+    "ci_low": 0.0,
+    "ci_high": 0.15,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P2",
+    "dim": "certainty",
+    "reading": "non-default",
+    "estimate": 0.95,
+    "ci_low": 0.875,
+    "ci_high": 1.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P2",
+    "dim": "agent",
+    "reading": "default",
+    "estimate": 0.2222222222222222,
+    "ci_low": 0.027777777777777776,
+    "ci_high": 0.4722222222222222,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P2",
+    "dim": "agent",
+    "reading": "non-default",
+    "estimate": 0.8055555555555556,
+    "ci_low": 0.5833333333333334,
+    "ci_high": 0.9722222222222222,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P2",
+    "dim": "speech_act",
+    "reading": "default",
+    "estimate": 0.325,
+    "ci_low": 0.14937500000000004,
+    "ci_high": 0.55,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P2",
+    "dim": "speech_act",
+    "reading": "non-default",
+    "estimate": 0.975,
+    "ci_low": 0.925,
+    "ci_high": 1.0,
+    "n": 40,
+    "n_families": 10
+   },
+   {
+    "prompt": "P2",
+    "dim": "politeness",
+    "reading": "default",
+    "estimate": 0.4444444444444444,
+    "ci_low": 0.2222222222222222,
+    "ci_high": 0.6388888888888888,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P2",
+    "dim": "politeness",
+    "reading": "non-default",
+    "estimate": 0.5555555555555556,
+    "ci_low": 0.3611111111111111,
+    "ci_high": 0.7777777777777778,
+    "n": 36,
+    "n_families": 9
+   },
+   {
+    "prompt": "P2",
+    "dim": "time",
+    "reading": "default",
+    "estimate": 0.6875,
+    "ci_low": 0.375,
+    "ci_high": 1.0,
+    "n": 16,
+    "n_families": 4
+   },
+   {
+    "prompt": "P2",
+    "dim": "time",
+    "reading": "non-default",
+    "estimate": 0.8125,
+    "ci_low": 0.75,
+    "ci_high": 0.9375,
+    "n": 16,
+    "n_families": 4
+   }
+  ],
+  "pooled": {
+   "P0_default": {
+    "estimate": 0.21153846153846154,
+    "ci_low": 0.13942307692307693,
+    "ci_high": 0.27884615384615385,
+    "n": 208,
+    "n_families": 52
+   },
+   "P0_non-default": {
+    "estimate": 0.9278846153846154,
+    "ci_low": 0.8846153846153846,
+    "ci_high": 0.9663461538461539,
+    "n": 208,
+    "n_families": 52
+   },
+   "P2_default": {
+    "estimate": 0.24519230769230768,
+    "ci_low": 0.16334134615384616,
+    "ci_high": 0.33653846153846156,
+    "n": 208,
+    "n_families": 52
+   },
+   "P2_non-default": {
+    "estimate": 0.8605769230769231,
+    "ci_low": 0.7884615384615384,
+    "ci_high": 0.9230769230769231,
+    "n": 208,
+    "n_families": 52
+   }
+  }
+ },
+ "fig_politeness_ratchet": {
+  "rule": "full channel (user typed the source), P0",
+  "Politeness": {
+   "Pooled": {
+    "added to a plain source": {
+     "estimate": 0.225,
+     "ci_low": 0.1,
+     "ci_high": 0.375,
+     "n": 40,
+     "n_families": 10
+    },
+    "removed from a polite source": {
+     "estimate": 0.05,
+     "ci_low": 0.0,
+     "ci_high": 0.125,
+     "n": 40,
+     "n_families": 10
+    }
+   },
+   "gpt-6.1-terra": {
+    "added to a plain source": {
+     "estimate": 0.2,
+     "ci_low": 0.0,
+     "ci_high": 0.5,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a polite source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    }
+   },
+   "qwen2.5-7b": {
+    "added to a plain source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a polite source": {
+     "estimate": 0.1,
+     "ci_low": 0.0,
+     "ci_high": 0.3,
+     "n": 10,
+     "n_families": 10
+    }
+   },
+   "llama3.1-8b": {
+    "added to a plain source": {
+     "estimate": 0.1,
+     "ci_low": 0.0,
+     "ci_high": 0.3,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a polite source": {
+     "estimate": 0.1,
+     "ci_low": 0.0,
+     "ci_high": 0.3,
+     "n": 10,
+     "n_families": 10
+    }
+   },
+   "gemma3-4b": {
+    "added to a plain source": {
+     "estimate": 0.6,
+     "ci_low": 0.3,
+     "ci_high": 0.9,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a polite source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    }
+   }
+  },
+  "Hedging": {
+   "Pooled": {
+    "added to a plain source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 40,
+     "n_families": 10
+    },
+    "removed from a hedged source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 40,
+     "n_families": 10
+    }
+   },
+   "gpt-6.1-terra": {
+    "added to a plain source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a hedged source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    }
+   },
+   "qwen2.5-7b": {
+    "added to a plain source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a hedged source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    }
+   },
+   "llama3.1-8b": {
+    "added to a plain source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a hedged source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    }
+   },
+   "gemma3-4b": {
+    "added to a plain source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    },
+    "removed from a hedged source": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 10,
+     "n_families": 10
+    }
+   }
+  },
+  "politeness_added_all_plain_sources": {
+   "Pooled": 0.022727272727272728,
+   "gpt-6.1-terra": 0.01818181818181818,
+   "qwen2.5-7b": 0.0,
+   "llama3.1-8b": 0.00909090909090909,
+   "gemma3-4b": 0.06363636363636363,
+   "n": 440,
+   "families": 60
+  }
+ },
+ "fig_sets": {
+  "rule": "bare channel, one set per family x model x prompt",
+  "by_dim": {
+   "polarity": {
+    "S3": {
+     "estimate": 0.025,
+     "ci_low": 0.0,
+     "ci_high": 0.075,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.1,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    },
+    "P2": {
+     "estimate": 0.25,
+     "ci_low": 0.125,
+     "ci_high": 0.4,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.4,
+      "gpt-6.1-terra": 0.4,
+      "llama3.1-8b": 0.1,
+      "qwen2.5-7b": 0.1
+     }
+    }
+   },
+   "certainty": {
+    "S3": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.0,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    },
+    "P2": {
+     "estimate": 0.125,
+     "ci_low": 0.025,
+     "ci_high": 0.25,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.2,
+      "gpt-6.1-terra": 0.1,
+      "llama3.1-8b": 0.2,
+      "qwen2.5-7b": 0.0
+     }
+    }
+   },
+   "agent": {
+    "S3": {
+     "estimate": 0.025,
+     "ci_low": 0.0,
+     "ci_high": 0.075,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.1,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    },
+    "P2": {
+     "estimate": 0.5,
+     "ci_low": 0.325,
+     "ci_high": 0.675,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.6,
+      "gpt-6.1-terra": 0.5,
+      "llama3.1-8b": 0.4,
+      "qwen2.5-7b": 0.5
+     }
+    }
+   },
+   "speech_act": {
+    "S3": {
+     "estimate": 0.025,
+     "ci_low": 0.0,
+     "ci_high": 0.075,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.1,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    },
+    "P2": {
+     "estimate": 0.375,
+     "ci_low": 0.225,
+     "ci_high": 0.525,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.3,
+      "gpt-6.1-terra": 0.8,
+      "llama3.1-8b": 0.2,
+      "qwen2.5-7b": 0.2
+     }
+    }
+   },
+   "politeness": {
+    "S3": {
+     "estimate": 0.125,
+     "ci_low": 0.025,
+     "ci_high": 0.225,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.1,
+      "gpt-6.1-terra": 0.2,
+      "llama3.1-8b": 0.1,
+      "qwen2.5-7b": 0.1
+     }
+    },
+    "P2": {
+     "estimate": 0.65,
+     "ci_low": 0.524375,
+     "ci_high": 0.775,
+     "n": 40,
+     "n_families": 10,
+     "by_model": {
+      "gemma3-4b": 0.8,
+      "gpt-6.1-terra": 0.8,
+      "llama3.1-8b": 0.6,
+      "qwen2.5-7b": 0.4
+     }
+    }
+   },
+   "time": {
+    "S3": {
+     "estimate": 0.05,
+     "ci_low": 0.0,
+     "ci_high": 0.15,
+     "n": 20,
+     "n_families": 5,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.2,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    },
+    "P2": {
+     "estimate": 0.1,
+     "ci_low": 0.0,
+     "ci_high": 0.2,
+     "n": 20,
+     "n_families": 5,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.4,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    }
+   },
+   "quantity": {
+    "S3": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 20,
+     "n_families": 5,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.0,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    },
+    "P2": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "n": 20,
+     "n_families": 5,
+     "by_model": {
+      "gemma3-4b": 0.0,
+      "gpt-6.1-terra": 0.0,
+      "llama3.1-8b": 0.0,
+      "qwen2.5-7b": 0.0
+     }
+    }
+   }
+  },
+  "pooled": {
+   "P2": {
+    "estimate": 0.325,
+    "ci_low": 0.25,
+    "ci_high": 0.4041666666666667,
+    "n": 240,
+    "n_families": 60
+   },
+   "S3": {
+    "estimate": 0.0375,
+    "ci_low": 0.0125,
+    "ci_high": 0.06666666666666667,
+    "n": 240,
+    "n_families": 60
+   }
+  }
+ },
+ "fig_pipeline": {
+  "example_family": "pol-07",
+  "model": "gpt-6.1-terra",
+  "output": "I like the medication.",
+  "polarity": "affirmative",
+  "agent": "speaker",
+  "speech_act": "statement"
+ },
+ "pdf_sizes": {
+  "fig_channel_ladder": [
+   6.02,
+   2.57
+  ],
+  "fig_cost_asymmetry": [
+   3.21,
+   2.26
+  ],
+  "fig_defaults": [
+   6.21,
+   2.64
+  ],
+  "fig_pipeline": [
+   6.86,
+   1.76
+  ],
+  "fig_politeness_ratchet": [
+   3.29,
+   2.04
+  ],
+  "fig_sets": [
+   3.29,
+   1.98
+  ]
+ }
+}

@@ -120,11 +120,19 @@ def boot_diff(df, col, a, b, keys, src):
 # ---------------------------------------------------------------- main1 ----
 SC = ROOT / "runs/main1/scored.parquet"
 d = pd.read_parquet(SC)
-src_main = "runs/main1/scored.parquet"
+all_scored = d.copy()
+src_main = "runs/main1/scored.parquet; shared resolution; primary excludes act-10/act-16"
+put("n_fam_test", d.family_id.nunique(), "runs/main1/scored.parquet (design inventory)", "int")
+d = d[~d.quarantine_refusal_acceptance.fillna(False).astype(bool)].copy()
 d["critical_match"] = d["critical_match"].astype(bool)
 p0 = d[d.prompt_id == "P0"].copy()
 
-put("n_fam_test", d.family_id.nunique(), src_main, "int")
+put("n_fam_primary", d.family_id.nunique(), src_main, "int")
+put("n_fam_quarantined", all_scored.family_id.nunique() - d.family_id.nunique(), src_main, "int")
+for ch in ["chip1", "chipall", "full"]:
+    inclusive = all_scored[(all_scored.prompt_id == "P0") & (all_scored.channel == ch)]
+    put_frac(f"sensitivity_match_{ch}", int(inclusive.critical_match.sum()), len(inclusive),
+             "runs/main1/scored.parquet; quarantine-inclusive sensitivity")
 put("n_fam_dim", d.groupby("dimension").family_id.nunique().min(), src_main, "int")
 put("n_rows_main", len(d[d.prompt_id != "P1"]), src_main + " (P1 excluded, D-010)", "int")
 put("n_texts_main", d[d.prompt_id != "P1"].text_id.nunique(), src_main, "int")
@@ -414,7 +422,7 @@ if RAW.exists():
         put("id_fail_want", top.index[0][0], srcI, "str")
         put("id_fail_got", top.index[0][1], srcI, "str")
         put("id_fail_share_top", top.iloc[0] / len(fails), srcI)
-    vf = identity_rows(d)
+    vf = identity_rows(all_scored)
     put("id_fail_fixed", int((~vf.critical_match.astype(bool)).sum()), src_main + " (fixed oracle, D-015)", "int")
     # how much the fix moves the headline cue-present numbers
     r0 = raw[(raw.prompt_id == "P0") & (raw.channel == "full")]
@@ -513,7 +521,7 @@ hdr = [
     f"% inputs: runs/main1/scored.parquet sha256:{sha(SC)}"
     + (f"; runs/expB1/scored.parquet sha256:{sha(B)}" if B.exists() else "; expB1: absent")
     + (f"; runs/expC1/scored.parquet sha256:{sha(C)}" if C.exists() else "; expC1 scored: absent (PENDING)"),
-    f"% make_macros.py sha256:{sha(Path(__file__))}; labels: judge final (J1==J2, else J1 fallback); human gold: "
+    f"% make_macros.py sha256:{sha(Path(__file__))}; labels: shared arbiter > J1/J2 agreement > unknown; human gold: "
     + ("present" if "oracle_ready" in macros else "PENDING"),
     "% Percentages are 0-100 with one decimal; *_pp are percentage points; *_k/*_den are counts.",
 ]

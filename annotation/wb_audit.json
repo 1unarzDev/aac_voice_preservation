@@ -1,0 +1,3972 @@
+{
+ "instructions": "W-B admissibility audit (20 random messages of 160). For each item: FIRST look only at keywords_shown_first and decide, per dimension, whether >=2 different values are plausible (HUMAN_ambiguous_yes_no). THEN read full_source_reveal_after and give the value the source commits to (HUMAN_source_value; options in 'options'). Finally say whether the panel status is right (HUMAN_panel_correct_yes_no). Coder readings are shown for reference; to stay source-blind, cover them until you have made your own ambiguity judgement.",
+ "options": {
+  "polarity": [
+   "affirmative",
+   "negated",
+   "mixed/unclear"
+  ],
+  "speech_act": [
+   "statement",
+   "question",
+   "request/command",
+   "refusal",
+   "offer/suggestion",
+   "other"
+  ],
+  "agent": [
+   "speaker",
+   "addressee",
+   "we/joint",
+   "third party",
+   "unspecified"
+  ],
+  "certainty": [
+   "plain assertion",
+   "hedged/uncertain",
+   "strongly certain/emphatic",
+   "n/a (question/request)"
+  ],
+  "politeness": [
+   "none",
+   "please",
+   "softened request (could you/would you mind)",
+   "thanks/apology"
+  ]
+ },
+ "panel_models": [
+  "gpt-5.6-sol",
+  "gpt-6-astra"
+ ],
+ "sampling": "random.Random(20261108).sample(panel, 20)",
+ "items": [
+  {
+   "audit_id": "w084",
+   "keywords_shown_first": "know first time",
+   "full_source_reveal_after": "you know this is not the first time.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I know this is the first time."
+      },
+      {
+       "value": "negated",
+       "witness": "I did not know it was the first time."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I know it's your first time."
+      },
+      {
+       "value": "negated",
+       "witness": "I didn't know it was your first time."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "negated",
+     "coder2_source": "negated",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I know this is the first time."
+      },
+      {
+       "value": "question",
+       "witness": "Did you know this is the first time?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I know it's your first time."
+      },
+      {
+       "value": "question",
+       "witness": "Do you know it's my first time?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please know that it's my first time."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I know this is the first time."
+      },
+      {
+       "value": "addressee",
+       "witness": "You know this is the first time."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We know this is the first time."
+      },
+      {
+       "value": "third party",
+       "witness": "They know this is the first time."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I know it's your first time."
+      },
+      {
+       "value": "addressee",
+       "witness": "You know it's my first time."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We know it's your first time."
+      },
+      {
+       "value": "third party",
+       "witness": "They know it's my first time."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I know this is the first time."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think I know this is the first time."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I definitely know this is the first time."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Did you know this is the first time?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I know it's your first time."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think they know it's my first time."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I definitely know it's your first time."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Do you know it's my first time?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "I know this is the first time."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I did not know it was the first time."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "I know it's your first time."
+      },
+      {
+       "value": "please",
+       "witness": "Please know that it's my first time."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I didn't know it was your first time."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w116",
+   "keywords_shown_first": "go have shower",
+   "full_source_reveal_after": "Go and have a shower.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I will go have a shower."
+      },
+      {
+       "value": "negated",
+       "witness": "I will not go have a shower."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I will go and have a shower."
+      },
+      {
+       "value": "negated",
+       "witness": "I won't go and have a shower."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I will go have a shower."
+      },
+      {
+       "value": "question",
+       "witness": "Can I go have a shower?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Go have a shower."
+      },
+      {
+       "value": "refusal",
+       "witness": "I will not go have a shower."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's go have a shower."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I will go and have a shower."
+      },
+      {
+       "value": "question",
+       "witness": "May I go and have a shower?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Go and have a shower."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't go and have a shower."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's go and have a shower."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "request/command",
+     "coder2_source": "request/command",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I will go have a shower."
+      },
+      {
+       "value": "addressee",
+       "witness": "Go have a shower."
+      },
+      {
+       "value": "we/joint",
+       "witness": "Let's go have a shower."
+      },
+      {
+       "value": "third party",
+       "witness": "They will go have a shower."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I will go and have a shower."
+      },
+      {
+       "value": "addressee",
+       "witness": "Go and have a shower."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We will go and have a shower."
+      },
+      {
+       "value": "third party",
+       "witness": "She will go and have a shower."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I will go have a shower."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might go have a shower."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I will definitely go have a shower."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Can I go have a shower?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I will go and have a shower."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might go and have a shower."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I will definitely go and have a shower."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "May I go and have a shower?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "Go have a shower."
+      },
+      {
+       "value": "please",
+       "witness": "Please go have a shower."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you go have a shower?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I am going to have a shower."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "Go and have a shower."
+      },
+      {
+       "value": "please",
+       "witness": "Please go and have a shower."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you go and have a shower?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Excuse me, may I go and have a shower?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w058",
+   "keywords_shown_first": "interested going",
+   "full_source_reveal_after": "I am not interested in going anywhere now.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I am interested in going."
+      },
+      {
+       "value": "negated",
+       "witness": "I am not interested in going."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I'm interested in going."
+      },
+      {
+       "value": "negated",
+       "witness": "I'm not interested in going."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "negated",
+     "coder2_source": "negated",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I am interested in going."
+      },
+      {
+       "value": "question",
+       "witness": "Are you interested in going?"
+      },
+      {
+       "value": "refusal",
+       "witness": "I am not interested in going."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Would you be interested in going?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I'm interested in going."
+      },
+      {
+       "value": "question",
+       "witness": "Are you interested in going?"
+      },
+      {
+       "value": "refusal",
+       "witness": "No thanks, I'm not interested in going."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Would you be interested in going with me?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "refusal",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I am interested in going."
+      },
+      {
+       "value": "addressee",
+       "witness": "You are interested in going."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We are interested in going."
+      },
+      {
+       "value": "third party",
+       "witness": "They are interested in going."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I'm interested in going."
+      },
+      {
+       "value": "addressee",
+       "witness": "You're interested in going."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We're interested in going."
+      },
+      {
+       "value": "third party",
+       "witness": "They're interested in going."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "speaker",
+     "coder2_source": "speaker",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I am interested in going."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be interested in going."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I am definitely interested in going."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you interested in going?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I'm interested in going."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be interested in going."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'm definitely interested in going."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you interested in going?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "I am interested in going."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "If possible, I am interested in going."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I am not interested in going."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "I'm interested in going."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Would you be interested in going with me?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I'm not interested in going."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w077",
+   "keywords_shown_first": "same time next week",
+   "full_source_reveal_after": "same time next week",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "It will be the same time next week."
+      },
+      {
+       "value": "negated",
+       "witness": "It will not be the same time next week."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "It's at the same time next week."
+      },
+      {
+       "value": "negated",
+       "witness": "It isn't at the same time next week."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "It will be the same time next week."
+      },
+      {
+       "value": "question",
+       "witness": "Will it be the same time next week?"
+      },
+      {
+       "value": "request/command",
+       "witness": "I would like the same time next week."
+      },
+      {
+       "value": "refusal",
+       "witness": "No, it will not be the same time next week."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Shall we do the same time next week?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "It's at the same time next week."
+      },
+      {
+       "value": "question",
+       "witness": "Is it at the same time next week?"
+      },
+      {
+       "value": "request/command",
+       "witness": "I'd like the same time next week."
+      },
+      {
+       "value": "refusal",
+       "witness": "I can't do the same time next week."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "How about the same time next week?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I will do the same time next week."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We will do the same time next week."
+      },
+      {
+       "value": "third party",
+       "witness": "They will do the same time next week."
+      },
+      {
+       "value": "unspecified",
+       "witness": "It will be the same time next week."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I'll be there at the same time next week."
+      },
+      {
+       "value": "addressee",
+       "witness": "Will you be there at the same time next week?"
+      },
+      {
+       "value": "we/joint",
+       "witness": "We'll be there at the same time next week."
+      },
+      {
+       "value": "third party",
+       "witness": "She'll be there at the same time next week."
+      },
+      {
+       "value": "unspecified",
+       "witness": "It's at the same time next week."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "unspecified",
+     "coder2_source": "unspecified",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "It will be the same time next week."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe it will be the same time next week."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "It will definitely be the same time next week."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Will it be the same time next week?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "It's at the same time next week."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think it's at the same time next week."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "It's definitely at the same time next week."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Is it at the same time next week?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "It will be the same time next week."
+      },
+      {
+       "value": "please",
+       "witness": "Please, let it be the same time next week."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "I would like the same time next week."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, it will not be the same time next week."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "It's at the same time next week."
+      },
+      {
+       "value": "please",
+       "witness": "I'd like the same time next week, please."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "I'd like the same time next week."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I can't do the same time next week."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w099",
+   "keywords_shown_first": "hand remote please",
+   "full_source_reveal_after": "Would you hand me the remote please?",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Hand me the remote, please."
+      },
+      {
+       "value": "negated",
+       "witness": "Please do not hand me the remote."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please hand me the remote."
+      },
+      {
+       "value": "negated",
+       "witness": "Please don't hand him the remote."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "question",
+       "witness": "May I hand you the remote, please?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Hand me the remote, please."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Shall I hand you the remote, please?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "Please, I'll hand you the remote."
+      },
+      {
+       "value": "question",
+       "witness": "May I hand her the remote, please?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please hand me the remote."
+      },
+      {
+       "value": "refusal",
+       "witness": "Please, I won't hand him the remote."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Please, let's hand her the remote."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "request/command",
+     "coder2_source": "request/command",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "May I hand you the remote, please?"
+      },
+      {
+       "value": "addressee",
+       "witness": "Hand me the remote, please."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "May I hand her the remote, please?"
+      },
+      {
+       "value": "addressee",
+       "witness": "Please hand me the remote."
+      },
+      {
+       "value": "we/joint",
+       "witness": "Please, let's hand her the remote."
+      },
+      {
+       "value": "third party",
+       "witness": "Please, can she hand me the remote?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "n/a (question/request)",
+       "witness": "Hand me the remote, please."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "Please, I'll hand you the remote."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Please, maybe she'll hand you the remote."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "Please, I'll definitely hand you the remote."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Please hand me the remote."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "please",
+       "witness": "Hand me the remote, please."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "please",
+       "witness": "Please hand me the remote."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "please",
+     "coder2_source": "please",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w142",
+   "keywords_shown_first": "going date",
+   "full_source_reveal_after": "Are you going on a date?",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I am going on a date."
+      },
+      {
+       "value": "negated",
+       "witness": "I am not going on a date."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I'm going on a date."
+      },
+      {
+       "value": "negated",
+       "witness": "I'm not going on a date."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I am going on a date."
+      },
+      {
+       "value": "question",
+       "witness": "Are you going on a date?"
+      },
+      {
+       "value": "request/command",
+       "witness": "I would like to go on a date."
+      },
+      {
+       "value": "refusal",
+       "witness": "No, I am not going on a date."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let us go on a date."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I'm going on a date."
+      },
+      {
+       "value": "question",
+       "witness": "Are you going on a date?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Would you be going on a date with me?"
+      },
+      {
+       "value": "refusal",
+       "witness": "I'm not going on a date with you."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "How about going on a date?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "question",
+     "coder2_source": "question",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I am going on a date."
+      },
+      {
+       "value": "addressee",
+       "witness": "You are going on a date."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We are going on a date."
+      },
+      {
+       "value": "third party",
+       "witness": "They are going on a date."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I'm going on a date."
+      },
+      {
+       "value": "addressee",
+       "witness": "You're going on a date."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We're going on a date."
+      },
+      {
+       "value": "third party",
+       "witness": "She's going on a date."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I am going on a date."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be going on a date."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I am definitely going on a date."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you going on a date?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I'm going on a date."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be going on a date."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'm definitely going on a date."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you going on a date?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "I am going on a date."
+      },
+      {
+       "value": "please",
+       "witness": "Please, can we go on a date?"
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "I would like to go on a date."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I am going on a date."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "I'm going on a date."
+      },
+      {
+       "value": "please",
+       "witness": "Please, no going on a date without me."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Would you mind going on a date with me?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I'm not going on a date with you."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w004",
+   "keywords_shown_first": "unwell",
+   "full_source_reveal_after": "Are you unwell?",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "negated",
+       "witness": "I am not unwell."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "negated",
+       "witness": "I am not unwell."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "question",
+       "witness": "Are you unwell?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "question",
+       "witness": "Are you unwell?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "question",
+     "coder2_source": "question",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "addressee",
+       "witness": "Are you unwell?"
+      },
+      {
+       "value": "we/joint",
+       "witness": "We are unwell."
+      },
+      {
+       "value": "third party",
+       "witness": "They are unwell."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "addressee",
+       "witness": "You are unwell."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We are unwell."
+      },
+      {
+       "value": "third party",
+       "witness": "She is unwell."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think I am unwell."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I am definitely unwell."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you unwell?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be unwell."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I am definitely unwell."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you unwell?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I am unwell."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "I am unwell."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I am unwell."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w141",
+   "keywords_shown_first": "late",
+   "full_source_reveal_after": "Maybe it's too late now.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I am late."
+      },
+      {
+       "value": "negated",
+       "witness": "I am not late."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I'm late."
+      },
+      {
+       "value": "negated",
+       "witness": "I'm not late."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "mixed/unclear",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I am late."
+      },
+      {
+       "value": "question",
+       "witness": "Are you late?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please do not be late."
+      },
+      {
+       "value": "refusal",
+       "witness": "No, I will not be late."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I'm late."
+      },
+      {
+       "value": "question",
+       "witness": "Am I late?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Don't be late."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't be late."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's not be late."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I am late."
+      },
+      {
+       "value": "addressee",
+       "witness": "You are late."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We are late."
+      },
+      {
+       "value": "third party",
+       "witness": "They are late."
+      },
+      {
+       "value": "unspecified",
+       "witness": "It is late."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I'm late."
+      },
+      {
+       "value": "addressee",
+       "witness": "You're late."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We're late."
+      },
+      {
+       "value": "third party",
+       "witness": "She's late."
+      },
+      {
+       "value": "unspecified",
+       "witness": "It's late."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "unspecified",
+     "coder2_source": "unspecified",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I am late."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be late."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I am definitely late."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you late?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I'm late."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might be late."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'm definitely late."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Am I late?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "hedged/uncertain",
+     "coder2_source": "hedged/uncertain",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "Do not be late."
+      },
+      {
+       "value": "please",
+       "witness": "Please do not be late."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you not be late?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry I am late."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "I'm late."
+      },
+      {
+       "value": "please",
+       "witness": "Please don't be late."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you please avoid being late?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry I'm late."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w109",
+   "keywords_shown_first": "seem excited",
+   "full_source_reveal_after": "You seem very excited.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "negated",
+       "witness": "You do not seem excited."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "negated",
+       "witness": "You don't seem excited."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "question",
+       "witness": "Do I seem excited?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "question",
+       "witness": "Do I seem excited?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please seem excited."
+      },
+      {
+       "value": "refusal",
+       "witness": "I don't want to seem excited."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's not seem too excited."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I seem excited."
+      },
+      {
+       "value": "addressee",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We seem excited."
+      },
+      {
+       "value": "third party",
+       "witness": "They seem excited."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I seem excited."
+      },
+      {
+       "value": "addressee",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We seem excited."
+      },
+      {
+       "value": "third party",
+       "witness": "She seems excited."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think you seem excited."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "You definitely seem excited."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Do I seem excited?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "hedged/uncertain",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "You definitely seem excited."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Do I seem excited?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "hedged/uncertain",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "You seem excited."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "You seem excited."
+      },
+      {
+       "value": "please",
+       "witness": "Please seem excited."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you seem excited?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I don't seem excited."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w021",
+   "keywords_shown_first": "hand paper please",
+   "full_source_reveal_after": "Would you hand me the paper please?",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please hand me the paper."
+      },
+      {
+       "value": "negated",
+       "witness": "Please don't hand me the paper."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "request/command",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "request/command",
+       "witness": "Please hand me the paper."
+      },
+      {
+       "value": "question",
+       "witness": "May I hand you the paper, please?"
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Shall we hand her the paper, please?"
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "request/command",
+     "coder2_source": "request/command",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "addressee",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "May I hand you the paper, please?"
+      },
+      {
+       "value": "addressee",
+       "witness": "Please hand me the paper."
+      },
+      {
+       "value": "we/joint",
+       "witness": "Can we hand her the paper, please?"
+      },
+      {
+       "value": "third party",
+       "witness": "Can he hand me the paper, please?"
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "n/a (question/request)",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "n/a (question/request)",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "please",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "please",
+       "witness": "Please hand me the paper."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "please",
+     "coder2_source": "please",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w028",
+   "keywords_shown_first": "doing thank",
+   "full_source_reveal_after": "i am doing very well thank you!",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Thank you for doing that."
+      },
+      {
+       "value": "negated",
+       "witness": "Thank you for not doing that."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Thank you for doing that."
+      },
+      {
+       "value": "negated",
+       "witness": "Don't thank me for doing that."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I'm doing it, thank you."
+      },
+      {
+       "value": "other",
+       "witness": "Thank you for doing that."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "She thanked me for doing that."
+      },
+      {
+       "value": "question",
+       "witness": "Did you thank her for doing that?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Thank her for doing that."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't thank him for doing that."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's thank her for doing that."
+      },
+      {
+       "value": "other",
+       "witness": "Thank you for doing that."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I'm doing it, thank you."
+      },
+      {
+       "value": "addressee",
+       "witness": "Thank you for doing that."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We're doing it, thank you."
+      },
+      {
+       "value": "third party",
+       "witness": "They're doing it, thank you."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I thanked her for doing that."
+      },
+      {
+       "value": "addressee",
+       "witness": "Thank her for doing that."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We thanked her for doing that."
+      },
+      {
+       "value": "third party",
+       "witness": "She thanked him for doing that."
+      },
+      {
+       "value": "unspecified",
+       "witness": "He was thanked for doing that."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "speaker",
+     "coder2_source": "speaker",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I'm doing it, thank you."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'm definitely doing it, thank you."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "She thanked me for doing that."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe she thanked him for doing that."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "She definitely thanked him for doing that."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Did you thank her for doing that?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "thanks/apology",
+       "witness": "Thank you for doing that."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "Did he thank her for doing that?"
+      },
+      {
+       "value": "please",
+       "witness": "Please thank her for doing that."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you thank her for doing that?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Thank you for doing that."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "thanks/apology",
+     "coder2_source": "thanks/apology",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w001",
+   "keywords_shown_first": "imagine",
+   "full_source_reveal_after": "Can you imagine?",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "negated",
+       "witness": "I can't imagine it."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "negated",
+       "witness": "I can't imagine it."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "question",
+       "witness": "Can you imagine it?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Imagine it."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't imagine it."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's imagine it."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "question",
+       "witness": "Can you imagine it?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Imagine it."
+      },
+      {
+       "value": "refusal",
+       "witness": "I don't want to imagine it."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's imagine it."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "question",
+     "coder2_source": "question",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "addressee",
+       "witness": "Imagine it."
+      },
+      {
+       "value": "we/joint",
+       "witness": "Let's imagine it."
+      },
+      {
+       "value": "third party",
+       "witness": "They can imagine it."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "addressee",
+       "witness": "Imagine it."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We can imagine it."
+      },
+      {
+       "value": "third party",
+       "witness": "She can imagine it."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe I can imagine it."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I can definitely imagine it."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Can you imagine it?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I can imagine it."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe I can imagine it."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I definitely can imagine it."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Can you imagine it?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "Imagine it."
+      },
+      {
+       "value": "please",
+       "witness": "Please imagine it."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you imagine it?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I can't imagine it."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "Imagine it."
+      },
+      {
+       "value": "please",
+       "witness": "Please imagine it."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you imagine it?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I can't imagine it."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w096",
+   "keywords_shown_first": "hand itches lot please",
+   "full_source_reveal_after": "My hand itches a lot, please help me.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please, my hand itches a lot."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please, my hand itches a lot."
+      },
+      {
+       "value": "negated",
+       "witness": "Please, my hand doesn't itch a lot."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "request/command",
+       "witness": "Please, my hand itches a lot."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "Please, my hand itches a lot."
+      },
+      {
+       "value": "question",
+       "witness": "Please, why does my hand itch a lot?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please, my hand itches a lot!"
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "Please, my hand itches a lot."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "Please, my hand itches a lot."
+      },
+      {
+       "value": "addressee",
+       "witness": "Please, does your hand itch a lot?"
+      },
+      {
+       "value": "third party",
+       "witness": "Please, her hand itches a lot."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "speaker",
+     "coder2_source": "speaker",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "n/a (question/request)",
+       "witness": "Please, my hand itches a lot."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "Please, my hand itches a lot."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Please, I think her hand itches a lot."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "Please, my hand really itches a lot."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Please, why does my hand itch a lot?"
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "please",
+       "witness": "Please, my hand itches a lot."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "please",
+       "witness": "Please, my hand itches a lot."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "please",
+     "coder2_source": "please",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w104",
+   "keywords_shown_first": "thanks get wishes",
+   "full_source_reveal_after": "Thanks for all those get well soon wishes.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Thanks for getting my wishes."
+      },
+      {
+       "value": "negated",
+       "witness": "Thanks, but I did not get my wishes."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I got your thanks and wishes."
+      },
+      {
+       "value": "negated",
+       "witness": "I didn't get your thanks and wishes."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I got my wishes, thanks."
+      },
+      {
+       "value": "question",
+       "witness": "Did you get my wishes? Thanks."
+      },
+      {
+       "value": "request/command",
+       "witness": "Could you get my wishes? Thanks."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I got your thanks and wishes."
+      },
+      {
+       "value": "question",
+       "witness": "Did you get my thanks and wishes?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please get my thanks and wishes to her."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't get your thanks and wishes to him."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's get our thanks and wishes to her."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "other",
+     "coder2_source": "other",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I got my wishes, thanks."
+      },
+      {
+       "value": "addressee",
+       "witness": "Thanks for getting my wishes."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We got our wishes, thanks."
+      },
+      {
+       "value": "third party",
+       "witness": "They got my wishes, thanks."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I got your thanks and wishes."
+      },
+      {
+       "value": "addressee",
+       "witness": "You got my thanks and wishes."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We got their thanks and wishes."
+      },
+      {
+       "value": "third party",
+       "witness": "She got our thanks and wishes."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "speaker",
+     "coder2_source": "unspecified",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "You got my wishes, thanks."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think you got my wishes, thanks."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "You definitely got my wishes, thanks."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Did you get my wishes? Thanks."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I got your thanks and wishes."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think she got our thanks and wishes."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "She definitely got our thanks and wishes."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Did she get our thanks and wishes?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you get my wishes? Thanks."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Thanks for getting my wishes."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "She got their thanks and wishes."
+      },
+      {
+       "value": "please",
+       "witness": "Please get my thanks and wishes to her."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you get my thanks and wishes to her?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Thanks, I got your wishes."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "thanks/apology",
+     "coder2_source": "thanks/apology",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w120",
+   "keywords_shown_first": "please bring romantic movie",
+   "full_source_reveal_after": "please bring a romantic movie for me",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please bring a romantic movie."
+      },
+      {
+       "value": "negated",
+       "witness": "Please do not bring a romantic movie."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Please bring a romantic movie."
+      },
+      {
+       "value": "negated",
+       "witness": "Please don't bring a romantic movie."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "question",
+       "witness": "May I please bring a romantic movie?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please bring a romantic movie."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Please, let's bring a romantic movie."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "question",
+       "witness": "May I bring a romantic movie, please?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Please bring a romantic movie."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's bring a romantic movie, please."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "request/command",
+     "coder2_source": "request/command",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "May I please bring a romantic movie?"
+      },
+      {
+       "value": "addressee",
+       "witness": "Please bring a romantic movie."
+      },
+      {
+       "value": "we/joint",
+       "witness": "Please, let's bring a romantic movie."
+      },
+      {
+       "value": "third party",
+       "witness": "Please, they should bring a romantic movie."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "May I bring a romantic movie, please?"
+      },
+      {
+       "value": "addressee",
+       "witness": "Please bring a romantic movie."
+      },
+      {
+       "value": "we/joint",
+       "witness": "Can we bring a romantic movie, please?"
+      },
+      {
+       "value": "third party",
+       "witness": "Can she bring a romantic movie, please?"
+      },
+      {
+       "value": "unspecified",
+       "witness": "Could a romantic movie be brought, please?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "n/a (question/request)",
+       "witness": "May I please bring a romantic movie?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "n/a (question/request)",
+       "witness": "Please bring a romantic movie."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "please",
+       "witness": "Please bring a romantic movie."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "please",
+       "witness": "Please bring a romantic movie."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "please",
+     "coder2_source": "please",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w022",
+   "keywords_shown_first": "able tune channel want",
+   "full_source_reveal_after": "I haven't been able to tune in the channel I want to watch.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I want to be able to tune the channel."
+      },
+      {
+       "value": "negated",
+       "witness": "I don't want to be able to tune the channel."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I want to be able to tune to that channel."
+      },
+      {
+       "value": "negated",
+       "witness": "I don't want to be able to tune to that channel."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "negated",
+     "coder2_source": "negated",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I want to be able to tune the channel."
+      },
+      {
+       "value": "question",
+       "witness": "Do you want to be able to tune the channel?"
+      },
+      {
+       "value": "refusal",
+       "witness": "I don't want to be able to tune the channel."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I'm able to tune to the channel I want."
+      },
+      {
+       "value": "question",
+       "witness": "Are you able to tune to the channel you want?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Could you tune to the channel I want, if you're able?"
+      },
+      {
+       "value": "refusal",
+       "witness": "I'm able to tune to that channel, but I don't want to."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Do you want me to tune to that channel, if I'm able?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I want to be able to tune the channel."
+      },
+      {
+       "value": "addressee",
+       "witness": "Do you want to be able to tune the channel?"
+      },
+      {
+       "value": "we/joint",
+       "witness": "We want to be able to tune the channel."
+      },
+      {
+       "value": "third party",
+       "witness": "They want to be able to tune the channel."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I want to be able to tune to that channel."
+      },
+      {
+       "value": "addressee",
+       "witness": "You want to be able to tune to that channel."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We want to be able to tune to that channel."
+      },
+      {
+       "value": "third party",
+       "witness": "She wants to be able to tune to that channel."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "speaker",
+     "coder2_source": "speaker",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I want to be able to tune the channel."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think I want to be able to tune the channel."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I definitely want to be able to tune the channel."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Do you want to be able to tune the channel?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I'm able to tune to the channel I want."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I think I'm able to tune to the channel I want."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'm definitely able to tune to the channel I want."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Are you able to tune to the channel you want?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "I want to be able to tune the channel."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "I want to be able to tune to that channel."
+      },
+      {
+       "value": "please",
+       "witness": "Please tune to the channel I want, if you're able."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you tune to the channel I want, if you're able?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I'm not able to tune to the channel you want."
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w068",
+   "keywords_shown_first": "bad luck",
+   "full_source_reveal_after": "It's really bad luck.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "That is bad luck."
+      },
+      {
+       "value": "negated",
+       "witness": "That is not bad luck."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "That's bad luck."
+      },
+      {
+       "value": "negated",
+       "witness": "That isn't bad luck."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "That is bad luck."
+      },
+      {
+       "value": "question",
+       "witness": "Is that bad luck?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "That's bad luck."
+      },
+      {
+       "value": "question",
+       "witness": "Is that bad luck?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "statement",
+     "coder2_source": "statement",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "third party",
+       "witness": "That is bad luck."
+      },
+      {
+       "value": "unspecified",
+       "witness": "It is bad luck."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I've had bad luck."
+      },
+      {
+       "value": "addressee",
+       "witness": "You've had bad luck."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We've had bad luck."
+      },
+      {
+       "value": "third party",
+       "witness": "She's had bad luck."
+      },
+      {
+       "value": "unspecified",
+       "witness": "It's bad luck."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "unspecified",
+     "coder2_source": "unspecified",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "That is bad luck."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe that is bad luck."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "That is definitely bad luck."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Is that bad luck?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "That's bad luck."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe that's bad luck."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "That's definitely bad luck."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Is that bad luck?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "strongly certain/emphatic",
+     "coder2_source": "strongly certain/emphatic",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "That is bad luck."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, that is bad luck."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "That's bad luck."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "I'm sorry about your bad luck."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w145",
+   "keywords_shown_first": "lets go",
+   "full_source_reveal_after": "Lets go somewhere.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Let us go."
+      },
+      {
+       "value": "negated",
+       "witness": "Let us not go."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Let's go."
+      },
+      {
+       "value": "negated",
+       "witness": "Let's not go."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "offer/suggestion",
+       "witness": "Let us go."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's go."
+      },
+      {
+       "value": "request/command",
+       "witness": "Let's go, please!"
+      }
+     ],
+     "panel_status": "coder_disagree",
+     "coder1_source": "offer/suggestion",
+     "coder2_source": "offer/suggestion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "we/joint",
+       "witness": "Let us go."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "we/joint",
+       "witness": "Let's go."
+      }
+     ],
+     "panel_status": "supplied",
+     "coder1_source": "we/joint",
+     "coder2_source": "we/joint",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "Let us go."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe let us go."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "Let us definitely go."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "Let's go."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe let's go."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "Let's definitely go."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Let's go, please!"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "plain assertion",
+     "coder2_source": "plain assertion",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "Let us go."
+      },
+      {
+       "value": "please",
+       "witness": "Please, let us go."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "Let's go."
+      },
+      {
+       "value": "please",
+       "witness": "Let's go, please."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Let's go, if possible."
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, let's go."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w086",
+   "keywords_shown_first": "come quick",
+   "full_source_reveal_after": "Come on quick.",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I will come quick."
+      },
+      {
+       "value": "negated",
+       "witness": "I cannot come quick."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "Come quick."
+      },
+      {
+       "value": "negated",
+       "witness": "You don't have to come quick."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I will come quick."
+      },
+      {
+       "value": "question",
+       "witness": "Can I come quick?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Come quick."
+      },
+      {
+       "value": "refusal",
+       "witness": "I will not come quick."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let us come quick."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I'll come quick."
+      },
+      {
+       "value": "question",
+       "witness": "Can she come quick?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Come quick."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't come quick."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Shall we come quick?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "request/command",
+     "coder2_source": "request/command",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I will come quick."
+      },
+      {
+       "value": "addressee",
+       "witness": "Come quick."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We will come quick."
+      },
+      {
+       "value": "third party",
+       "witness": "They will come quick."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I'll come quick."
+      },
+      {
+       "value": "addressee",
+       "witness": "Come quick."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We'll come quick."
+      },
+      {
+       "value": "third party",
+       "witness": "She'll come quick."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I will come quick."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might come quick."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I will definitely come quick."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Can you come quick?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I'll come quick."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "Maybe she'll come quick."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'll definitely come quick."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Come quick."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "Come quick."
+      },
+      {
+       "value": "please",
+       "witness": "Please come quick."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you come quick?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I cannot come quick."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "Come quick."
+      },
+      {
+       "value": "please",
+       "witness": "Please come quick."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you come quick?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Sorry, I can't come quick."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  },
+  {
+   "audit_id": "w052",
+   "keywords_shown_first": "pray",
+   "full_source_reveal_after": "Will you pray for me?",
+   "dims": {
+    "polarity": {
+     "coder1_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I pray."
+      },
+      {
+       "value": "negated",
+       "witness": "I do not pray."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "affirmative",
+       "witness": "I pray."
+      },
+      {
+       "value": "negated",
+       "witness": "I don't pray."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "affirmative",
+     "coder2_source": "affirmative",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "speech_act": {
+     "coder1_readings": [
+      {
+       "value": "statement",
+       "witness": "I pray."
+      },
+      {
+       "value": "question",
+       "witness": "Do you pray?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Pray for me."
+      },
+      {
+       "value": "refusal",
+       "witness": "I will not pray."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's pray."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "statement",
+       "witness": "I pray."
+      },
+      {
+       "value": "question",
+       "witness": "Do you pray?"
+      },
+      {
+       "value": "request/command",
+       "witness": "Pray for me."
+      },
+      {
+       "value": "refusal",
+       "witness": "I won't pray."
+      },
+      {
+       "value": "offer/suggestion",
+       "witness": "Let's pray."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "request/command",
+     "coder2_source": "request/command",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "agent": {
+     "coder1_readings": [
+      {
+       "value": "speaker",
+       "witness": "I pray."
+      },
+      {
+       "value": "addressee",
+       "witness": "You pray."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We pray."
+      },
+      {
+       "value": "third party",
+       "witness": "They pray."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "speaker",
+       "witness": "I pray."
+      },
+      {
+       "value": "addressee",
+       "witness": "Pray for me."
+      },
+      {
+       "value": "we/joint",
+       "witness": "We pray."
+      },
+      {
+       "value": "third party",
+       "witness": "They pray."
+      },
+      {
+       "value": "unspecified",
+       "witness": "I've been prayed for."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "addressee",
+     "coder2_source": "addressee",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "certainty": {
+     "coder1_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I pray."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might pray."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I definitely pray."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Could you pray?"
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "plain assertion",
+       "witness": "I pray."
+      },
+      {
+       "value": "hedged/uncertain",
+       "witness": "I might pray."
+      },
+      {
+       "value": "strongly certain/emphatic",
+       "witness": "I'll definitely pray."
+      },
+      {
+       "value": "n/a (question/request)",
+       "witness": "Do you pray?"
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "n/a (question/request)",
+     "coder2_source": "n/a (question/request)",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    },
+    "politeness": {
+     "coder1_readings": [
+      {
+       "value": "none",
+       "witness": "Pray for me."
+      },
+      {
+       "value": "please",
+       "witness": "Please pray for me."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you pray for me?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Pray for me, thanks."
+      }
+     ],
+     "coder2_readings": [
+      {
+       "value": "none",
+       "witness": "Pray for me."
+      },
+      {
+       "value": "please",
+       "witness": "Please pray for me."
+      },
+      {
+       "value": "softened request (could you/would you mind)",
+       "witness": "Could you pray for me?"
+      },
+      {
+       "value": "thanks/apology",
+       "witness": "Thank you for praying for me."
+      }
+     ],
+     "panel_status": "confirmed_ambiguous",
+     "coder1_source": "none",
+     "coder2_source": "none",
+     "HUMAN_ambiguous_yes_no": "",
+     "HUMAN_source_value": "",
+     "HUMAN_panel_correct_yes_no": "",
+     "HUMAN_note": ""
+    }
+   }
+  }
+ ]
+}

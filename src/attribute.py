@@ -93,7 +93,8 @@ def channel_dims(channel: str, var: dict, custom: dict | None = None) -> set[str
     return set()
 
 
-def score(run_dir: Path, items_path=None, fallback: str | None = None) -> pd.DataFrame:
+def score(run_dir: Path, items_path=None, fallback: str | None = None,
+          resolution: Path | None = None) -> pd.DataFrame:
     occ = runio.load_occurrences(run_dir) + non_completions(run_dir)
     items = runio.load_items(runio.items_path_for(run_dir, items_path))
     jpath = run_dir / "judgments.jsonl"
@@ -102,6 +103,13 @@ def score(run_dir: Path, items_path=None, fallback: str | None = None) -> pd.Dat
     apath = run_dir / "arbiter.jsonl"
     arb = {(a["text_id"], a["family_id"], a["input_text"]): a["critical"]
            for a in (runio.read_jsonl(apath) if apath.exists() else [])}
+    resolved = {}
+    if resolution is not None:
+        for entry in runio.read_jsonl(Path(resolution)):
+            key = (entry["text_id"], entry["input_text"], entry["dimension"])
+            if key in resolved:
+                raise ValueError(f"Duplicate resolution key: {key}")
+            resolved[key] = entry
     # layer0 on the SOURCE sentences: reference for 'emphatic added' (D-007)
     srcs = sorted({v["source"] for it in items.values() for v in it["variants"].values()})
     src_l0 = dict(zip(srcs, layer0.label_many(srcs)))
@@ -136,6 +144,11 @@ def score(run_dir: Path, items_path=None, fallback: str | None = None) -> pd.Dat
                 crit, src = arb[k], "arbiter"
             elif fallback:
                 crit, src = j.get(f"{fallback}_critical"), fallback
+        if resolution is not None and o["valid"]:
+            # A supplied table is authoritative, including explicit unresolved
+            # entries. Never fall back to a local judge for an absent/null unit.
+            entry = resolved.get((o.get("text_id"), o["input_text"], dim), {})
+            crit, src = entry.get("critical"), entry.get("critical_source")
         r["critical"], r["critical_source"] = crit, src
         if cust is None:
             r["cue_in_input"] = o["channel"] in CUE_CHANNELS
@@ -202,7 +215,10 @@ def _rate(s: pd.Series):
     return {"rate": round(float(s.mean()), 3) if len(s) else None, "n": int(len(s))}
 
 
-def endpoints(df: pd.DataFrame) -> dict:
+def endpoints(df: pd.DataFrame, include_quarantine: bool = False) -> dict:
+    all_df = df
+    if not include_quarantine and "quarantine_refusal_acceptance" in df:
+        df = df[~df.quarantine_refusal_acceptance.fillna(False).astype(bool)]
     ep: dict = {"n_rows": len(df), "n_invalid": int((~df["valid"]).sum()),
                 "n_critical_unresolved": int((df["valid"] & df["critical"].isna()).sum()),
                 "n_families": int(df["family_id"].nunique())}
@@ -213,7 +229,7 @@ def endpoints(df: pd.DataFrame) -> dict:
     ep["violation_by_dim"] = {f"{m}|{d}": _rate(g["violation"])
                               for (m, d), g in cue.groupby(["model", "dimension"])}
     if "quarantine_refusal_acceptance" in df:
-        q = cue[cue["dimension"] == "speech_act"]
+        q = all_df[all_df.cue_in_input & all_df.dimension.eq("speech_act")]
         ep["speech_act_violation_primary_excl_quarantine"] = {
             f"{m}": _rate(g["violation"]) for m, g in q[~q["quarantine_refusal_acceptance"]].groupby("model")}
         ep["speech_act_violation_quarantined_only"] = {
@@ -246,6 +262,9 @@ def endpoints(df: pd.DataFrame) -> dict:
                      ["any_stance_addition", "politeness_added", "hedge_added", "emphatic_added"]}
         | {"added_content": round(float((g["added_content"] == "yes").mean()), 3)}
         for (m, p), g in df[df["judged"]].groupby(["model", "prompt_id"])}
+    if not include_quarantine:
+        ep["population"] = "primary: excludes refusal/acceptance families (D-024)"
+        ep["sensitivity_including_quarantine"] = endpoints(all_df, include_quarantine=True)
     return ep
 
 
@@ -255,9 +274,11 @@ def main() -> int:
     ap.add_argument("--items", type=Path, default=None)
     ap.add_argument("--fallback", choices=["J1", "J2"], default=None,
                     help="use this judge variant when J1/J2 disagree and no arbiter label")
+    ap.add_argument("--resolution", type=Path,
+                    help="authoritative cross-run critical labels; overrides local fallback, including unknowns")
     a = ap.parse_args()
     run_dir = Path(a.run) if Path(a.run).exists() else runio.ROOT / "runs" / a.run
-    df = score(run_dir, a.items, a.fallback)
+    df = score(run_dir, a.items, a.fallback, a.resolution)
     out = run_dir / "scored.parquet"
     df.to_parquet(out, index=False)
     ep = endpoints(df)
