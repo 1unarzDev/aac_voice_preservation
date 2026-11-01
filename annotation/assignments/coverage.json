@@ -1,0 +1,393 @@
+{
+ "coverage": {
+  "part4": {
+   "required": 10,
+   "n": 14,
+   "annotators": "P01 P03 P04 P05 P06 P08 P12 P13 P15 P16 P17 P18 P19 P20"
+  },
+  "part11": {
+   "required": 10,
+   "n": 14,
+   "annotators": "P01 P03 P04 P05 P06 P08 P12 P13 P15 P16 P17 P18 P19 P20"
+  },
+  "part5": {
+   "required": 6,
+   "n": 12,
+   "annotators": "P01 P03 P04 P05 P06 P12 P15 P16 P17 P18 P19 P20"
+  },
+  "part6": {
+   "required": 6,
+   "n": 12,
+   "annotators": "P01 P04 P05 P06 P08 P12 P13 P15 P16 P17 P18 P20"
+  },
+  "part10": {
+   "required": 3,
+   "n": 3,
+   "annotators": "P07 P09 P11"
+  },
+  "parts13": {
+   "required": 3,
+   "n": 3,
+   "annotators": "P02 P10 P14"
+  }
+ },
+ "elic_sessions_per_set": {
+  "s01": 3,
+  "s02": 3,
+  "s03": 3,
+  "s04": 3,
+  "s05": 3,
+  "s06": 3,
+  "s07": 3,
+  "s08": 3,
+  "s09": 3,
+  "s10": 3,
+  "s11": 3,
+  "s12": 3,
+  "s13": 3,
+  "s14": 3,
+  "s15": 3,
+  "s16": 3
+ },
+ "writers_per_dimension": {
+  "polarity": 7,
+  "speech_act": 7,
+  "politeness": 6,
+  "certainty": 6,
+  "agent": 7,
+  "time": 7
+ },
+ "pairs_per_dimension": {
+  "polarity": 105,
+  "speech_act": 105,
+  "politeness": 90,
+  "certainty": 90,
+  "agent": 105,
+  "time": 105
+ },
+ "check_pairs_per_person": {
+  "P01": 90,
+  "P02": 90,
+  "P03": 90,
+  "P04": 90,
+  "P05": 90,
+  "P06": 90,
+  "P07": 90,
+  "P08": 90,
+  "P09": 90,
+  "P10": 90,
+  "P11": 90,
+  "P12": 90,
+  "P13": 90,
+  "P14": 90,
+  "P15": 90,
+  "P16": 90,
+  "P17": 90,
+  "P18": 90,
+  "P19": 90,
+  "P20": 90
+ },
+ "stage1_minutes_min_max": [
+  165,
+  220
+ ],
+ "stage2_minutes_min_max": [
+  66,
+  156
+ ],
+ "audit_minutes_min_max_nonheavy": [
+  55,
+  70
+ ],
+ "stage3_people": {
+  "part13": [
+   "P15",
+   "P04",
+   "P20"
+  ],
+  "tiebreak": [
+   "P17",
+   "P16",
+   "P18",
+   "P06",
+   "P01",
+   "P12"
+  ],
+  "reserve": [
+   "P05",
+   "P07",
+   "P11",
+   "P09",
+   "P02",
+   "P10",
+   "P14"
+  ]
+ },
+ "person_hours": {
+  "stage1": 65.2,
+  "stage2": 28.0,
+  "stage3": 7.5
+ },
+ "minutes": {
+  "P01": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 30,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "speech_act+certainty",
+   "total": 296
+  },
+  "P02": {
+   "role": "parts13",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 110,
+   "write": 70,
+   "stage1": 220,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P1-3",
+   "dims": "time+politeness",
+   "total": 286
+  },
+  "P03": {
+   "role": "part12",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 55,
+   "write": 70,
+   "stage1": 165,
+   "stage2": 156,
+   "stage3": 0,
+   "audit_tasks": "P4 P11 P5",
+   "dims": "agent+speech_act",
+   "total": 321
+  },
+  "P04": {
+   "role": "regular",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 70,
+   "write": 70,
+   "stage1": 180,
+   "stage2": 66,
+   "stage3": 90,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "speech_act+politeness",
+   "total": 336
+  },
+  "P05": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "polarity+certainty",
+   "total": 266
+  },
+  "P06": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 30,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "time+speech_act",
+   "total": 296
+  },
+  "P07": {
+   "role": "part10",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 100,
+   "write": 70,
+   "stage1": 210,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P10",
+   "dims": "agent+polarity",
+   "total": 276
+  },
+  "P08": {
+   "role": "part12",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 55,
+   "write": 70,
+   "stage1": 165,
+   "stage2": 156,
+   "stage3": 0,
+   "audit_tasks": "P4 P11 P6",
+   "dims": "speech_act+time",
+   "total": 321
+  },
+  "P09": {
+   "role": "part10",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 100,
+   "write": 70,
+   "stage1": 210,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P10",
+   "dims": "time+polarity",
+   "total": 276
+  },
+  "P10": {
+   "role": "parts13",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 110,
+   "write": 70,
+   "stage1": 220,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P1-3",
+   "dims": "certainty+time",
+   "total": 286
+  },
+  "P11": {
+   "role": "part10",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 100,
+   "write": 70,
+   "stage1": 210,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P10",
+   "dims": "politeness+time",
+   "total": 276
+  },
+  "P12": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 30,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "politeness+agent",
+   "total": 296
+  },
+  "P13": {
+   "role": "part12",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 55,
+   "write": 70,
+   "stage1": 165,
+   "stage2": 156,
+   "stage3": 0,
+   "audit_tasks": "P4 P11 P6",
+   "dims": "certainty+agent",
+   "total": 321
+  },
+  "P14": {
+   "role": "parts13",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 110,
+   "write": 70,
+   "stage1": 220,
+   "stage2": 66,
+   "stage3": 0,
+   "audit_tasks": "P1-3",
+   "dims": "polarity+speech_act",
+   "total": 286
+  },
+  "P15": {
+   "role": "regular",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 70,
+   "write": 70,
+   "stage1": 180,
+   "stage2": 66,
+   "stage3": 90,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "speech_act+agent",
+   "total": 336
+  },
+  "P16": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 30,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "politeness+certainty",
+   "total": 296
+  },
+  "P17": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 30,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "certainty+polarity",
+   "total": 296
+  },
+  "P18": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 30,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "polarity+politeness",
+   "total": 296
+  },
+  "P19": {
+   "role": "part12",
+   "elic_sessions": 2,
+   "elic": 40,
+   "audits": 55,
+   "write": 70,
+   "stage1": 165,
+   "stage2": 156,
+   "stage3": 0,
+   "audit_tasks": "P4 P11 P5",
+   "dims": "polarity+agent",
+   "total": 321
+  },
+  "P20": {
+   "role": "regular",
+   "elic_sessions": 3,
+   "elic": 60,
+   "audits": 70,
+   "write": 70,
+   "stage1": 200,
+   "stage2": 66,
+   "stage3": 90,
+   "audit_tasks": "P4 P11 P5 P6",
+   "dims": "agent+time",
+   "total": 356
+  }
+ }
+}

@@ -27,6 +27,19 @@ sys.path.insert(0, str(ROOT / "src"))
 from hw_rules import DIMS, TOPICS  # noqa: E402
 
 
+def rotation(j: int, dim_index: int) -> int:
+    """Topic rotation of the j-th writer (0-based) of the dimension with index dim_index."""
+    return (3 * j + dim_index) % len(TOPICS)
+
+
+def first_topics(rot: int, k: int = 3) -> str:
+    return " ".join(TOPICS[(rot + i) % len(TOPICS)] for i in range(k))
+
+
+def link_fragment(dim: str, rot: int, n: int, writer: str) -> str:
+    return f"#dim={dim}&rot={rot}&n={n}&id={writer}"
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     g = ap.add_mutually_exclusive_group(required=True)
@@ -52,10 +65,9 @@ def main(argv=None) -> int:
     for w in new:
         d = min(dims, key=lambda d: (per_dim[d], dims.index(d)))
         j = per_dim[d]; per_dim[d] += 1
-        rot = (3 * j + dims.index(d)) % len(TOPICS)
+        rot = rotation(j, dims.index(d))
         rows.append({"writer_id": w, "dimension": d, "rot": rot, "n_pairs": a.pairs,
-                     "first_topics": " ".join(TOPICS[(rot + i) % len(TOPICS)] for i in range(3)),
-                     "link_fragment": f"#dim={d}&rot={rot}&n={a.pairs}&id={w}"})
+                     "first_topics": first_topics(rot), "link_fragment": link_fragment(d, rot, a.pairs, w)})
     with open(out, "w", newline="", encoding="utf-8") as f:
         wr = csv.DictWriter(f, fieldnames=["writer_id", "dimension", "rot", "n_pairs", "first_topics", "link_fragment"])
         wr.writeheader(); wr.writerows(rows)

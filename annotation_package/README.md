@@ -1,5 +1,8 @@
 # Annotation package: labelling what a sentence says
 
+**Start with your own task sheet, `assignments/<your ID>.md`.** It lists your steps in the required order, with the exact
+files and the names of the files to send back. The sections below explain each part.
+
 Thank you for helping. This package contains **everything you need**. Please use **only the files in this folder**.
 The project repository holds other files, such as model labels and answer keys, that would bias your judgments,
 so please don't open or browse them.
