@@ -1,20 +1,20 @@
 {
   "run_id": "r2c1",
-  "created_utc": "2026-11-01T03:27:26+00:00",
+  "created_utc": "2026-11-01T03:36:35+00:00",
   "requests_file": "/home/lunarz/aac-voice-preservation/runs/requests/r2c.jsonl",
   "requests_sha256": "bf14ad6997903f47342634d5b57eacc654a0cac885ff9005b36ce38170595994",
   "n_requests": 9575,
-  "wall_s": 527.5,
+  "wall_s": 543.7,
   "models": {
-    "qwen2.5-7b": {
-      "name": "qwen2.5-7b",
-      "base_url": "http://127.0.0.1:8091/v1",
-      "model": "qwen2.5-7b",
+    "llama3.1-8b": {
+      "name": "llama3.1-8b",
+      "base_url": "http://127.0.0.1:8092/v1",
+      "model": "llama3.1-8b",
       "kind": "local",
       "role": "under_test",
       "quant": "Q4_K_M",
-      "gguf": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
-      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "gguf": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "sha256": "7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c",
       "concurrency": 8,
       "supports_seed": true
     }
@@ -78,20 +78,22 @@
   "python": "3.12.15",
   "httpx": "0.28.1",
   "throughput": {
-    "qwen2.5-7b": {
+    "llama3.1-8b": {
       "requests": 9575,
       "cached": 12,
       "errors": 0,
       "fresh_requests": 9563,
-      "active_s": 527.5,
-      "requests_per_min": 1087.8,
-      "outputs_per_min": 1523.2,
-      "completion_tok_per_s": 236.5,
+      "active_s": 543.7,
+      "requests_per_min": 1055.4,
+      "outputs_per_min": 1477.2,
+      "completion_tok_per_s": 218.8,
       "concurrency": 4
     }
   },
-  "parse_failures": {},
+  "parse_failures": {
+    "llama3.1-8b": 4
+  },
   "finish_reasons": {
-    "qwen2.5-7b:stop": 9575
+    "llama3.1-8b:stop": 9575
   }
 }

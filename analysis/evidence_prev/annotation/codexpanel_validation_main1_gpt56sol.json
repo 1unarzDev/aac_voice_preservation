@@ -1,0 +1,7683 @@
+{
+ "run": "main1",
+ "annotators": [
+  "C-gpt-5.6-sol"
+ ],
+ "n_items_annotated": 163,
+ "seed": 20261031,
+ "cal_frac": 0.25,
+ "alpha_nominal": {
+  "critical": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  },
+  "polarity": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  },
+  "speech_act": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  },
+  "agent": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  },
+  "certainty": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  },
+  "politeness": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  },
+  "added_content": {
+   "alpha": null,
+   "n_units": 0,
+   "ci95": null
+  }
+ },
+ "judge": {
+  "critical": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 40,
+    "acc": 0.95,
+    "acc_ipw": 0.981,
+    "kappa": 0.946,
+    "per_label": {
+     "addressee": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "affirmative": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "forty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "four": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "later": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "now": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "past": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0
+     },
+     "polite": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "question": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "six": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "strongly certain/emphatic": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     },
+     "twenty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "two": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "unclear/mixed": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.667
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 1,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "affirmative": {
+      "addressee": 0,
+      "affirmative": 2,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "forty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 1,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "four": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 2,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "hedged/uncertain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 4,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "later": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 2,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "negated": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 2,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "now": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "past": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 1,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "plain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 6,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "plain assertion": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 4,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "polite": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "question": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 1,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "refusal": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "request/command": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "six": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 1,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "statement": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 1,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "strongly certain/emphatic": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 1,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 1,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "twenty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 1,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "two": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 2,
+      "unclear/mixed": 0
+     },
+     "unclear/mixed": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 1,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 2
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 0.929,
+    "acc_ipw": 0.977,
+    "kappa": 0.923,
+    "per_label": {
+     "addressee": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "affirmative": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "forty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "four": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "later": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "now": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "past": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.833,
+      "recall": 1.0
+     },
+     "polite": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "question": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "six": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0
+     },
+     "strongly certain/emphatic": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     },
+     "twenty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "two": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "unclear/mixed": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.667
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 1,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "affirmative": {
+      "addressee": 0,
+      "affirmative": 2,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "forty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 1,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "four": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 2,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "hedged/uncertain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 4,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "later": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 2,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "negated": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 2,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "now": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "past": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 1,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "plain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 6,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "plain assertion": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 5,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "polite": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "question": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 1,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 1,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "refusal": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "request/command": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "six": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 1,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "statement": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 1,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "strongly certain/emphatic": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 1,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 1,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "twenty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 1,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "two": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 2,
+      "unclear/mixed": 0
+     },
+     "unclear/mixed": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 1,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 2
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 0.929,
+    "acc_ipw": 0.977,
+    "kappa": 0.923,
+    "per_label": {
+     "addressee": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "affirmative": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "forty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "four": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "later": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "now": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "past": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.8,
+      "recall": 0.8
+     },
+     "polite": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "question": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "six": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "strongly certain/emphatic": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     },
+     "twenty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "two": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "unclear/mixed": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.667,
+      "recall": 0.667
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 1,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "affirmative": {
+      "addressee": 0,
+      "affirmative": 2,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "forty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 1,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "four": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 2,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "hedged/uncertain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 4,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "later": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 2,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "negated": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 2,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "now": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "past": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 1,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "plain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 6,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "plain assertion": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 4,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1
+     },
+     "polite": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "question": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 2,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "refusal": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "request/command": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "six": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 1,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "statement": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 1,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "strongly certain/emphatic": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 1,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 1,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "twenty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 1,
+      "two": 0,
+      "unclear/mixed": 0
+     },
+     "two": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 2,
+      "unclear/mixed": 0
+     },
+     "unclear/mixed": {
+      "addressee": 0,
+      "affirmative": 0,
+      "forty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 1,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 2
+     }
+    }
+   },
+   "test/final": {
+    "n": 110,
+    "acc": 0.964,
+    "acc_ipw": 0.977,
+    "kappa": 0.961,
+    "per_label": {
+     "addressee": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "affirmative": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "fifty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "four": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "hedged/uncertain": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "later": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "now": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "past": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "polite": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "question": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "six": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.889,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.889
+     },
+     "strongly certain/emphatic": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "ten": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "third party": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0
+     },
+     "twenty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "two": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "unclear/mixed": {
+      "tp": 14,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.933,
+      "recall": 0.875
+     },
+     "we/joint": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 4,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "affirmative": {
+      "addressee": 0,
+      "affirmative": 7,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "fifty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 1,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "four": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 2,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "hedged/uncertain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 2,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "later": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 3,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "negated": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 4,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "now": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 3,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "offer/suggestion": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 2,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "past": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 1,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "plain": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 5,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "plain assertion": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 7,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "polite": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 9,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "question": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 6,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "refusal": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 5,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "request/command": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 6,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "six": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 1,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 8,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "statement": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 8,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "strongly certain/emphatic": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 4,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "ten": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 1,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "twenty": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 1,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "two": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 1,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "unclear/mixed": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 1,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 1,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 14,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 1
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.934,
+    "acc_ipw": 0.972,
+    "kappa": 0.93,
+    "per_label": {
+     "acceptance": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "addressee": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "affirmative": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "fifty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "four": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "hedged/uncertain": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "later": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.667,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "now": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "past": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "polite": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "question": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "six": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 8,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.889
+     },
+     "strongly certain/emphatic": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "ten": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "third party": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0
+     },
+     "twenty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "two": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "unclear/mixed": {
+      "tp": 14,
+      "fp": 1,
+      "fn": 4,
+      "precision": 0.933,
+      "recall": 0.778
+     },
+     "we/joint": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "acceptance": {
+      "acceptance": 1,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "addressee": {
+      "acceptance": 0,
+      "addressee": 4,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "affirmative": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 7,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "fifty": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 1,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "four": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 2,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "hedged/uncertain": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 3,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "later": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 4,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "negated": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 5,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "now": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 3,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "offer/suggestion": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 2,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "past": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 2,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "plain": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 5,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "plain assertion": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 7,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "polite": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 10,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "question": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 7,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "refusal": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 5,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "request/command": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 6,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "six": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 1,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 8,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "statement": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 8,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "strongly certain/emphatic": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 1,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 4,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "ten": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 1,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "twenty": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 1,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "two": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 1,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "unclear/mixed": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 2,
+      "negated": 0,
+      "now": 1,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 1,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 14,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 1
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.901,
+    "acc_ipw": 0.967,
+    "kappa": 0.894,
+    "per_label": {
+     "acceptance": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0
+     },
+     "addressee": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "affirmative": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "fifty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "four": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "hedged/uncertain": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.667
+     },
+     "later": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.75
+     },
+     "negated": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "now": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "past": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     },
+     "plain": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.833,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.875,
+      "recall": 1.0
+     },
+     "polite": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9
+     },
+     "question": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.857
+     },
+     "refusal": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "six": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.889,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 8,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0.8,
+      "recall": 0.889
+     },
+     "strongly certain/emphatic": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "ten": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "third party": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0
+     },
+     "twenty": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "two": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "unclear/mixed": {
+      "tp": 16,
+      "fp": 5,
+      "fn": 2,
+      "precision": 0.762,
+      "recall": 0.889
+     },
+     "we/joint": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "acceptance": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 1,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "addressee": {
+      "acceptance": 0,
+      "addressee": 5,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "affirmative": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 7,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "fifty": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 1,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "four": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 2,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "hedged/uncertain": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 2,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "later": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 3,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "negated": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 4,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "now": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 3,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "offer/suggestion": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 2,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "past": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 1,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "plain": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 5,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "plain assertion": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 7,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "polite": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 1,
+      "plain assertion": 0,
+      "polite": 9,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "question": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 6,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 1,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "refusal": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 5,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "request/command": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 6,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "six": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 1,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 8,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "statement": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 8,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 1,
+      "we/joint": 0
+     },
+     "strongly certain/emphatic": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 1,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 4,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "ten": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 1,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 1,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "twenty": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 1,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "two": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 1,
+      "unclear/mixed": 0,
+      "we/joint": 0
+     },
+     "unclear/mixed": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 1,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 1,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 16,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "acceptance": 0,
+      "addressee": 0,
+      "affirmative": 0,
+      "fifty": 0,
+      "four": 0,
+      "hedged/uncertain": 0,
+      "later": 0,
+      "negated": 0,
+      "now": 0,
+      "offer/suggestion": 0,
+      "past": 0,
+      "plain": 0,
+      "plain assertion": 0,
+      "polite": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "six": 0,
+      "speaker": 0,
+      "statement": 0,
+      "strongly certain/emphatic": 0,
+      "ten": 0,
+      "third party": 0,
+      "twenty": 0,
+      "two": 0,
+      "unclear/mixed": 0,
+      "we/joint": 1
+     }
+    }
+   }
+  },
+  "polarity": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "affirmative": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 38,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 1,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 0,
+      "mixed/unclear": 0,
+      "negated": 3
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "affirmative": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 38,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 1,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 0,
+      "mixed/unclear": 0,
+      "negated": 3
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "affirmative": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 38,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 1,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 0,
+      "mixed/unclear": 0,
+      "negated": 3
+     }
+    }
+   },
+   "calibration/L0": {
+    "n": 42,
+    "acc": 0.976,
+    "acc_ipw": 0.963,
+    "kappa": 0.864,
+    "per_label": {
+     "affirmative": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0
+     },
+     "negated": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 38,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 0,
+      "negated": 1
+     },
+     "negated": {
+      "affirmative": 0,
+      "mixed/unclear": 0,
+      "negated": 3
+     }
+    }
+   },
+   "test/final": {
+    "n": 121,
+    "acc": 0.992,
+    "acc_ipw": 0.993,
+    "kappa": 0.956,
+    "per_label": {
+     "affirmative": {
+      "tp": 108,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.991,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.889
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 108,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 4,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 1,
+      "mixed/unclear": 0,
+      "negated": 8
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.992,
+    "acc_ipw": 0.993,
+    "kappa": 0.956,
+    "per_label": {
+     "affirmative": {
+      "tp": 108,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.991,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.889
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 108,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 4,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 1,
+      "mixed/unclear": 0,
+      "negated": 8
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.983,
+    "acc_ipw": 0.993,
+    "kappa": 0.913,
+    "per_label": {
+     "affirmative": {
+      "tp": 108,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.991,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.778
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 108,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 4,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 1,
+      "mixed/unclear": 1,
+      "negated": 7
+     }
+    }
+   },
+   "test/L0": {
+    "n": 121,
+    "acc": 0.992,
+    "acc_ipw": 0.993,
+    "kappa": 0.958,
+    "per_label": {
+     "affirmative": {
+      "tp": 108,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "mixed/unclear": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0
+     },
+     "negated": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.889
+     }
+    },
+    "confusion_rows_human": {
+     "affirmative": {
+      "affirmative": 108,
+      "mixed/unclear": 0,
+      "negated": 0
+     },
+     "mixed/unclear": {
+      "affirmative": 0,
+      "mixed/unclear": 4,
+      "negated": 0
+     },
+     "negated": {
+      "affirmative": 0,
+      "mixed/unclear": 1,
+      "negated": 8
+     }
+    }
+   }
+  },
+  "speech_act": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 42,
+    "acc": 0.976,
+    "acc_ipw": 0.995,
+    "kappa": 0.949,
+    "per_label": {
+     "question": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.875,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 29,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.967
+     }
+    },
+    "confusion_rows_human": {
+     "question": {
+      "question": 4,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "refusal": {
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "question": 0,
+      "refusal": 0,
+      "request/command": 7,
+      "statement": 0
+     },
+     "statement": {
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 29
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 0.952,
+    "acc_ipw": 0.991,
+    "kappa": 0.894,
+    "per_label": {
+     "question": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.75
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.875,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 29,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.967,
+      "recall": 0.967
+     }
+    },
+    "confusion_rows_human": {
+     "question": {
+      "question": 3,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 1
+     },
+     "refusal": {
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "question": 0,
+      "refusal": 0,
+      "request/command": 7,
+      "statement": 0
+     },
+     "statement": {
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 29
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 0.976,
+    "acc_ipw": 0.994,
+    "kappa": 0.949,
+    "per_label": {
+     "question": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.875,
+      "recall": 1.0
+     },
+     "statement": {
+      "tp": 29,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.967
+     }
+    },
+    "confusion_rows_human": {
+     "question": {
+      "question": 4,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "refusal": {
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "question": 0,
+      "refusal": 0,
+      "request/command": 7,
+      "statement": 0
+     },
+     "statement": {
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 29
+     }
+    }
+   },
+   "calibration/L0": {
+    "n": 42,
+    "acc": 0.905,
+    "acc_ipw": 0.922,
+    "kappa": 0.804,
+    "per_label": {
+     "offer/suggestion": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "question": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.667,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.833,
+      "recall": 0.714
+     },
+     "statement": {
+      "tp": 28,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.933
+     }
+    },
+    "confusion_rows_human": {
+     "offer/suggestion": {
+      "offer/suggestion": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "question": {
+      "offer/suggestion": 0,
+      "question": 4,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "refusal": {
+      "offer/suggestion": 0,
+      "question": 0,
+      "refusal": 1,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "offer/suggestion": 0,
+      "question": 2,
+      "refusal": 0,
+      "request/command": 5,
+      "statement": 0
+     },
+     "statement": {
+      "offer/suggestion": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 28
+     }
+    }
+   },
+   "test/final": {
+    "n": 121,
+    "acc": 0.959,
+    "acc_ipw": 0.967,
+    "kappa": 0.927,
+    "per_label": {
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "other": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "question": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.938
+     },
+     "refusal": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 22,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.88,
+      "recall": 0.957
+     },
+     "statement": {
+      "tp": 72,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.986,
+      "recall": 0.96
+     }
+    },
+    "confusion_rows_human": {
+     "offer/suggestion": {
+      "offer/suggestion": 2,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "other": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "question": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 15,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 0
+     },
+     "refusal": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 5,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 22,
+      "statement": 1
+     },
+     "statement": {
+      "offer/suggestion": 0,
+      "other": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 2,
+      "statement": 72
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.959,
+    "acc_ipw": 0.967,
+    "kappa": 0.927,
+    "per_label": {
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "other": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "question": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.938
+     },
+     "refusal": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 22,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.88,
+      "recall": 0.957
+     },
+     "statement": {
+      "tp": 72,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.986,
+      "recall": 0.96
+     }
+    },
+    "confusion_rows_human": {
+     "offer/suggestion": {
+      "offer/suggestion": 2,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "other": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "question": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 15,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 0
+     },
+     "refusal": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 5,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 22,
+      "statement": 1
+     },
+     "statement": {
+      "offer/suggestion": 0,
+      "other": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 2,
+      "statement": 72
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.95,
+    "acc_ipw": 0.96,
+    "kappa": 0.911,
+    "per_label": {
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "other": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": null
+     },
+     "question": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.875
+     },
+     "refusal": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "request/command": {
+      "tp": 21,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.913,
+      "recall": 0.913
+     },
+     "statement": {
+      "tp": 73,
+      "fp": 3,
+      "fn": 2,
+      "precision": 0.961,
+      "recall": 0.973
+     }
+    },
+    "confusion_rows_human": {
+     "offer/suggestion": {
+      "offer/suggestion": 2,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "other": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "question": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 14,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 1
+     },
+     "refusal": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 5,
+      "request/command": 0,
+      "statement": 0
+     },
+     "request/command": {
+      "offer/suggestion": 0,
+      "other": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 21,
+      "statement": 2
+     },
+     "statement": {
+      "offer/suggestion": 0,
+      "other": 1,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 1,
+      "statement": 73
+     }
+    }
+   },
+   "test/L0": {
+    "n": 121,
+    "acc": 0.95,
+    "acc_ipw": 0.966,
+    "kappa": 0.91,
+    "per_label": {
+     "offer/suggestion": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "question": {
+      "tp": 16,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "refusal": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.6
+     },
+     "request/command": {
+      "tp": 21,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.913,
+      "recall": 0.913
+     },
+     "statement": {
+      "tp": 73,
+      "fp": 4,
+      "fn": 2,
+      "precision": 0.948,
+      "recall": 0.973
+     }
+    },
+    "confusion_rows_human": {
+     "offer/suggestion": {
+      "offer/suggestion": 2,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "question": {
+      "offer/suggestion": 0,
+      "question": 16,
+      "refusal": 0,
+      "request/command": 0,
+      "statement": 0
+     },
+     "refusal": {
+      "offer/suggestion": 0,
+      "question": 0,
+      "refusal": 3,
+      "request/command": 0,
+      "statement": 2
+     },
+     "request/command": {
+      "offer/suggestion": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 21,
+      "statement": 2
+     },
+     "statement": {
+      "offer/suggestion": 0,
+      "question": 0,
+      "refusal": 0,
+      "request/command": 2,
+      "statement": 73
+     }
+    }
+   }
+  },
+  "agent": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 42,
+    "acc": 0.952,
+    "acc_ipw": 0.973,
+    "kappa": 0.932,
+    "per_label": {
+     "addressee": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.917,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 17,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.944
+     },
+     "third party": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9
+     },
+     "unspecified": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0
+     },
+     "we/joint": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 11,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 1,
+      "speaker": 17,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 9,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 2
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 0.952,
+    "acc_ipw": 0.973,
+    "kappa": 0.932,
+    "per_label": {
+     "addressee": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.917,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 17,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.944
+     },
+     "third party": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9
+     },
+     "unspecified": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0
+     },
+     "we/joint": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 11,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 1,
+      "speaker": 17,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 9,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 2
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 0.929,
+    "acc_ipw": 0.959,
+    "kappa": 0.897,
+    "per_label": {
+     "addressee": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.917,
+      "recall": 1.0
+     },
+     "speaker": {
+      "tp": 17,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.944,
+      "recall": 0.944
+     },
+     "third party": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "unspecified": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0
+     },
+     "we/joint": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 11,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 1,
+      "speaker": 17,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 1,
+      "third party": 8,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 2
+     }
+    }
+   },
+   "calibration/L0": {
+    "n": 42,
+    "acc": 0.905,
+    "acc_ipw": 0.941,
+    "kappa": 0.862,
+    "per_label": {
+     "addressee": {
+      "tp": 10,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.909,
+      "recall": 0.909
+     },
+     "speaker": {
+      "tp": 17,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.944,
+      "recall": 0.944
+     },
+     "third party": {
+      "tp": 9,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.9,
+      "recall": 0.9
+     },
+     "unspecified": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0
+     },
+     "we/joint": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 10,
+      "speaker": 1,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 1,
+      "speaker": 17,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 9,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 1,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 2
+     }
+    }
+   },
+   "test/final": {
+    "n": 120,
+    "acc": 0.933,
+    "acc_ipw": 0.95,
+    "kappa": 0.904,
+    "per_label": {
+     "addressee": {
+      "tp": 36,
+      "fp": 0,
+      "fn": 3,
+      "precision": 1.0,
+      "recall": 0.923
+     },
+     "speaker": {
+      "tp": 47,
+      "fp": 7,
+      "fn": 1,
+      "precision": 0.87,
+      "recall": 0.979
+     },
+     "third party": {
+      "tp": 18,
+      "fp": 0,
+      "fn": 3,
+      "precision": 1.0,
+      "recall": 0.857
+     },
+     "unspecified": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0
+     },
+     "we/joint": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.875
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 36,
+      "speaker": 3,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "speaker": 47,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 3,
+      "third party": 18,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 4,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 1,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 7
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.959,
+    "acc_ipw": 0.953,
+    "kappa": 0.941,
+    "per_label": {
+     "addressee": {
+      "tp": 37,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.949
+     },
+     "speaker": {
+      "tp": 47,
+      "fp": 4,
+      "fn": 1,
+      "precision": 0.922,
+      "recall": 0.979
+     },
+     "third party": {
+      "tp": 20,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.909
+     },
+     "unspecified": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0
+     },
+     "we/joint": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 37,
+      "speaker": 2,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "speaker": 47,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 2,
+      "third party": 20,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 4,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 8
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.934,
+    "acc_ipw": 0.947,
+    "kappa": 0.905,
+    "per_label": {
+     "addressee": {
+      "tp": 37,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.949
+     },
+     "speaker": {
+      "tp": 47,
+      "fp": 6,
+      "fn": 1,
+      "precision": 0.887,
+      "recall": 0.979
+     },
+     "third party": {
+      "tp": 18,
+      "fp": 0,
+      "fn": 4,
+      "precision": 1.0,
+      "recall": 0.818
+     },
+     "unspecified": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.667,
+      "recall": 1.0
+     },
+     "we/joint": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.875
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 37,
+      "speaker": 2,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "speaker": 47,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 3,
+      "third party": 18,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 0,
+      "unspecified": 4,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 1,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 7
+     }
+    }
+   },
+   "test/L0": {
+    "n": 121,
+    "acc": 0.876,
+    "acc_ipw": 0.883,
+    "kappa": 0.82,
+    "per_label": {
+     "addressee": {
+      "tp": 32,
+      "fp": 0,
+      "fn": 7,
+      "precision": 1.0,
+      "recall": 0.821
+     },
+     "speaker": {
+      "tp": 47,
+      "fp": 12,
+      "fn": 1,
+      "precision": 0.797,
+      "recall": 0.979
+     },
+     "third party": {
+      "tp": 17,
+      "fp": 1,
+      "fn": 5,
+      "precision": 0.944,
+      "recall": 0.773
+     },
+     "unspecified": {
+      "tp": 3,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0.6,
+      "recall": 0.75
+     },
+     "we/joint": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.875
+     }
+    },
+    "confusion_rows_human": {
+     "addressee": {
+      "addressee": 32,
+      "speaker": 6,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "speaker": {
+      "addressee": 0,
+      "speaker": 47,
+      "third party": 0,
+      "unspecified": 1,
+      "we/joint": 0
+     },
+     "third party": {
+      "addressee": 0,
+      "speaker": 5,
+      "third party": 17,
+      "unspecified": 0,
+      "we/joint": 0
+     },
+     "unspecified": {
+      "addressee": 0,
+      "speaker": 0,
+      "third party": 1,
+      "unspecified": 3,
+      "we/joint": 0
+     },
+     "we/joint": {
+      "addressee": 0,
+      "speaker": 1,
+      "third party": 0,
+      "unspecified": 0,
+      "we/joint": 7
+     }
+    }
+   }
+  },
+  "certainty": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 42,
+    "acc": 0.905,
+    "acc_ipw": 0.941,
+    "kappa": 0.833,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "n/a (question/request)": {
+      "tp": 9,
+      "fp": 3,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 23,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.958,
+      "recall": 0.885
+     },
+     "strongly certain/emphatic": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 5,
+      "n/a (question/request)": 0,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 9,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 3,
+      "plain assertion": 23,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 1
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 0.881,
+    "acc_ipw": 0.936,
+    "kappa": 0.787,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "n/a (question/request)": {
+      "tp": 8,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.727,
+      "recall": 0.889
+     },
+     "plain assertion": {
+      "tp": 23,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.92,
+      "recall": 0.885
+     },
+     "strongly certain/emphatic": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 5,
+      "n/a (question/request)": 0,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 8,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 3,
+      "plain assertion": 23,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 1
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 0.905,
+    "acc_ipw": 0.939,
+    "kappa": 0.833,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "n/a (question/request)": {
+      "tp": 9,
+      "fp": 3,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 23,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.958,
+      "recall": 0.885
+     },
+     "strongly certain/emphatic": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 5,
+      "n/a (question/request)": 0,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 9,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 3,
+      "plain assertion": 23,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 1
+     }
+    }
+   },
+   "calibration/L0": {
+    "n": 42,
+    "acc": 0.905,
+    "acc_ipw": 0.929,
+    "kappa": 0.833,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "n/a (question/request)": {
+      "tp": 9,
+      "fp": 3,
+      "fn": 0,
+      "precision": 0.75,
+      "recall": 1.0
+     },
+     "plain assertion": {
+      "tp": 23,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.958,
+      "recall": 0.885
+     },
+     "strongly certain/emphatic": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 4,
+      "n/a (question/request)": 0,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 9,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 3,
+      "plain assertion": 23,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 2
+     }
+    }
+   },
+   "test/final": {
+    "n": 121,
+    "acc": 0.95,
+    "acc_ipw": 0.977,
+    "kappa": 0.909,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "n/a (question/request)": {
+      "tp": 38,
+      "fp": 4,
+      "fn": 1,
+      "precision": 0.905,
+      "recall": 0.974
+     },
+     "plain assertion": {
+      "tp": 68,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.971,
+      "recall": 0.958
+     },
+     "strongly certain/emphatic": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.833
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 4,
+      "n/a (question/request)": 1,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 38,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 3,
+      "plain assertion": 68,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 5
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.95,
+    "acc_ipw": 0.977,
+    "kappa": 0.91,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.8,
+      "recall": 0.8
+     },
+     "n/a (question/request)": {
+      "tp": 38,
+      "fp": 4,
+      "fn": 1,
+      "precision": 0.905,
+      "recall": 0.974
+     },
+     "plain assertion": {
+      "tp": 68,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.986,
+      "recall": 0.958
+     },
+     "strongly certain/emphatic": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.833
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 4,
+      "n/a (question/request)": 1,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 38,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 3,
+      "plain assertion": 68,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 1,
+      "n/a (question/request)": 0,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 5
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.942,
+    "acc_ipw": 0.97,
+    "kappa": 0.893,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8
+     },
+     "n/a (question/request)": {
+      "tp": 36,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.923,
+      "recall": 0.923
+     },
+     "plain assertion": {
+      "tp": 69,
+      "fp": 4,
+      "fn": 2,
+      "precision": 0.945,
+      "recall": 0.972
+     },
+     "strongly certain/emphatic": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.833
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 4,
+      "n/a (question/request)": 1,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 36,
+      "plain assertion": 3,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 2,
+      "plain assertion": 69,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 1,
+      "strongly certain/emphatic": 5
+     }
+    }
+   },
+   "test/L0": {
+    "n": 121,
+    "acc": 0.901,
+    "acc_ipw": 0.916,
+    "kappa": 0.814,
+    "per_label": {
+     "hedged/uncertain": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.8,
+      "recall": 0.8
+     },
+     "n/a (question/request)": {
+      "tp": 35,
+      "fp": 4,
+      "fn": 4,
+      "precision": 0.897,
+      "recall": 0.897
+     },
+     "plain assertion": {
+      "tp": 67,
+      "fp": 7,
+      "fn": 4,
+      "precision": 0.905,
+      "recall": 0.944
+     },
+     "strongly certain/emphatic": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 3,
+      "precision": 1.0,
+      "recall": 0.5
+     }
+    },
+    "confusion_rows_human": {
+     "hedged/uncertain": {
+      "hedged/uncertain": 4,
+      "n/a (question/request)": 1,
+      "plain assertion": 0,
+      "strongly certain/emphatic": 0
+     },
+     "n/a (question/request)": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 35,
+      "plain assertion": 4,
+      "strongly certain/emphatic": 0
+     },
+     "plain assertion": {
+      "hedged/uncertain": 1,
+      "n/a (question/request)": 3,
+      "plain assertion": 67,
+      "strongly certain/emphatic": 0
+     },
+     "strongly certain/emphatic": {
+      "hedged/uncertain": 0,
+      "n/a (question/request)": 0,
+      "plain assertion": 3,
+      "strongly certain/emphatic": 3
+     }
+    }
+   }
+  },
+  "politeness": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "none": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 38,
+      "please": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 4
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "none": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 38,
+      "please": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 4
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "none": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 38,
+      "please": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 4
+     }
+    }
+   },
+   "calibration/L0": {
+    "n": 42,
+    "acc": 1.0,
+    "acc_ipw": 1.0,
+    "kappa": 1.0,
+    "per_label": {
+     "none": {
+      "tp": 38,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 38,
+      "please": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 4
+     }
+    }
+   },
+   "test/final": {
+    "n": 121,
+    "acc": 0.983,
+    "acc_ipw": 0.991,
+    "kappa": 0.946,
+    "per_label": {
+     "none": {
+      "tp": 98,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.98,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 19,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "softened request (could you/would you mind)": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.5
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 98,
+      "please": 0,
+      "softened request (could you/would you mind)": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 19,
+      "softened request (could you/would you mind)": 0
+     },
+     "softened request (could you/would you mind)": {
+      "none": 2,
+      "please": 0,
+      "softened request (could you/would you mind)": 2
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.992,
+    "acc_ipw": 0.992,
+    "kappa": 0.973,
+    "per_label": {
+     "none": {
+      "tp": 98,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.99,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 19,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "softened request (could you/would you mind)": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.75
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 98,
+      "please": 0,
+      "softened request (could you/would you mind)": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 19,
+      "softened request (could you/would you mind)": 0
+     },
+     "softened request (could you/would you mind)": {
+      "none": 1,
+      "please": 0,
+      "softened request (could you/would you mind)": 3
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.983,
+    "acc_ipw": 0.991,
+    "kappa": 0.946,
+    "per_label": {
+     "none": {
+      "tp": 98,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.98,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 19,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "softened request (could you/would you mind)": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.5
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 98,
+      "please": 0,
+      "softened request (could you/would you mind)": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 19,
+      "softened request (could you/would you mind)": 0
+     },
+     "softened request (could you/would you mind)": {
+      "none": 2,
+      "please": 0,
+      "softened request (could you/would you mind)": 2
+     }
+    }
+   },
+   "test/L0": {
+    "n": 121,
+    "acc": 0.992,
+    "acc_ipw": 0.999,
+    "kappa": 0.973,
+    "per_label": {
+     "none": {
+      "tp": 98,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.99,
+      "recall": 1.0
+     },
+     "please": {
+      "tp": 19,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+     },
+     "softened request (could you/would you mind)": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.75
+     }
+    },
+    "confusion_rows_human": {
+     "none": {
+      "none": 98,
+      "please": 0,
+      "softened request (could you/would you mind)": 0
+     },
+     "please": {
+      "none": 0,
+      "please": 19,
+      "softened request (could you/would you mind)": 0
+     },
+     "softened request (could you/would you mind)": {
+      "none": 1,
+      "please": 0,
+      "softened request (could you/would you mind)": 3
+     }
+    }
+   }
+  },
+  "added_content": {
+   "consensus_ties_excluded": 0,
+   "calibration/final": {
+    "n": 37,
+    "acc": 0.892,
+    "acc_ipw": 0.928,
+    "kappa": 0.782,
+    "per_label": {
+     "no": {
+      "tp": 18,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.9,
+      "recall": 0.9
+     },
+     "yes": {
+      "tp": 15,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.882,
+      "recall": 0.882
+     }
+    },
+    "confusion_rows_human": {
+     "no": {
+      "no": 18,
+      "yes": 2
+     },
+     "yes": {
+      "no": 2,
+      "yes": 15
+     }
+    }
+   },
+   "calibration/J1": {
+    "n": 42,
+    "acc": 0.881,
+    "acc_ipw": 0.926,
+    "kappa": 0.759,
+    "per_label": {
+     "no": {
+      "tp": 21,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.913,
+      "recall": 0.875
+     },
+     "yes": {
+      "tp": 16,
+      "fp": 3,
+      "fn": 2,
+      "precision": 0.842,
+      "recall": 0.889
+     }
+    },
+    "confusion_rows_human": {
+     "no": {
+      "no": 21,
+      "yes": 3
+     },
+     "yes": {
+      "no": 2,
+      "yes": 16
+     }
+    }
+   },
+   "calibration/J2": {
+    "n": 42,
+    "acc": 0.81,
+    "acc_ipw": 0.884,
+    "kappa": 0.616,
+    "per_label": {
+     "no": {
+      "tp": 19,
+      "fp": 3,
+      "fn": 5,
+      "precision": 0.864,
+      "recall": 0.792
+     },
+     "yes": {
+      "tp": 15,
+      "fp": 5,
+      "fn": 3,
+      "precision": 0.75,
+      "recall": 0.833
+     }
+    },
+    "confusion_rows_human": {
+     "no": {
+      "no": 19,
+      "yes": 5
+     },
+     "yes": {
+      "no": 3,
+      "yes": 15
+     }
+    }
+   },
+   "test/final": {
+    "n": 108,
+    "acc": 0.824,
+    "acc_ipw": 0.822,
+    "kappa": 0.644,
+    "per_label": {
+     "no": {
+      "tp": 51,
+      "fp": 6,
+      "fn": 13,
+      "precision": 0.895,
+      "recall": 0.797
+     },
+     "yes": {
+      "tp": 38,
+      "fp": 13,
+      "fn": 6,
+      "precision": 0.745,
+      "recall": 0.864
+     }
+    },
+    "confusion_rows_human": {
+     "no": {
+      "no": 51,
+      "yes": 13
+     },
+     "yes": {
+      "no": 6,
+      "yes": 38
+     }
+    }
+   },
+   "test/J1": {
+    "n": 121,
+    "acc": 0.777,
+    "acc_ipw": 0.794,
+    "kappa": 0.545,
+    "per_label": {
+     "no": {
+      "tp": 56,
+      "fp": 10,
+      "fn": 17,
+      "precision": 0.848,
+      "recall": 0.767
+     },
+     "yes": {
+      "tp": 38,
+      "fp": 17,
+      "fn": 10,
+      "precision": 0.691,
+      "recall": 0.792
+     }
+    },
+    "confusion_rows_human": {
+     "no": {
+      "no": 56,
+      "yes": 17
+     },
+     "yes": {
+      "no": 10,
+      "yes": 38
+     }
+    }
+   },
+   "test/J2": {
+    "n": 121,
+    "acc": 0.802,
+    "acc_ipw": 0.815,
+    "kappa": 0.603,
+    "per_label": {
+     "no": {
+      "tp": 55,
+      "fp": 6,
+      "fn": 18,
+      "precision": 0.902,
+      "recall": 0.753
+     },
+     "yes": {
+      "tp": 42,
+      "fp": 18,
+      "fn": 6,
+      "precision": 0.7,
+      "recall": 0.875
+     }
+    },
+    "confusion_rows_human": {
+     "no": {
+      "no": 55,
+      "yes": 18
+     },
+     "yes": {
+      "no": 6,
+      "yes": 42
+     }
+    }
+   }
+  }
+ }
+}

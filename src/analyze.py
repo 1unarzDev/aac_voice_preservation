@@ -451,7 +451,8 @@ def write_report(out: Path, df: pd.DataFrame, tables: dict, args) -> None:
               "sensitivity_without_act01_act02.csv excludes those frozen pilot speech-act families (D-009). "
               "sensitivity_quarantine_refusal_acceptance.csv reports speech-act estimates with and without the "
               "refusal/acceptance families (column quarantine_refusal_acceptance; PREREG_R2 W-A): the primary speech-act "
-              "estimate is primary_excl_quarantine. "
+              "estimate is primary_excl_quarantine. All headline tables and figures exclude quarantined families "
+              "unless --include-quarantine is explicitly supplied for sensitivity. "
               "Pilot layer0 time/quantity labels are unavailable; no time/quantity inference should be made.\n",
               "## Artifacts\n",
               "Normalized input: [scored.parquet](scored.parquet). Set-level audit: [suggestion_sets.csv](suggestion_sets.csv). "
@@ -475,6 +476,7 @@ def main() -> int:
     ap.add_argument("--n-boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=20261031)
     ap.add_argument("--column-map", type=Path, help='JSON object of input column -> canonical column')
+    ap.add_argument("--include-quarantine", action="store_true", help="quarantine-inclusive sensitivity only")
     args = ap.parse_args()
     if not re.fullmatch(r"[A-Za-z0-9_.-]+", args.tag) or args.tag in {".", ".."}:
         ap.error("--tag must be a simple directory name")
@@ -484,6 +486,11 @@ def main() -> int:
     raw = pd.read_parquet(args.table) if args.table.suffix in {".parquet", ".pq"} else pd.read_pickle(args.table)
     mapping = json.loads(args.column_map.read_text()) if args.column_map else None
     df = normalize_table(raw, items, mapping)
+    all_df = df
+    quarantine = df.family_id.map(lambda f: items[f]["dimension"] == "speech_act" and any(
+        v["critical_value"] in {"refusal", "acceptance"} for v in items[f]["variants"].values()))
+    if not args.include_quarantine:
+        df = df[~quarantine].copy()
     out = ROOT / "analysis" / args.tag
     out.mkdir(parents=True, exist_ok=True)
     df.to_parquet(out / "scored.parquet", index=False)
@@ -522,12 +529,8 @@ def main() -> int:
     sensitive = df[~df.family_id.isin(["act-01", "act-02"])]
     tables["sensitivity_without_act01_act02"] = summarize(sensitive, GROUP, ["critical_match", "constraint_preserving"], nboot, seed)
     # PREREG_R2 W-A: refusal/acceptance families are quarantined from primary speech-act estimates.
-    if "quarantine_refusal_acceptance" in df:
-        quar = df["quarantine_refusal_acceptance"].fillna(False).astype(bool)
-    else:
-        quar = df.family_id.map(lambda f: items[f]["dimension"] == "speech_act" and any(
-            v["critical_value"] in {"refusal", "acceptance"} for v in items[f]["variants"].values()))
-    sa = df[df.dimension.eq("speech_act")]
+    quar = quarantine
+    sa = all_df[all_df.dimension.eq("speech_act")]
     qmetrics = ["critical_match", "violation", "constraint_preserving"]
     tables["sensitivity_quarantine_refusal_acceptance"] = pd.concat([
         summarize(sa, GROUP, qmetrics, nboot, seed).assign(subset="all_speech_act_families"),
@@ -540,6 +543,7 @@ def main() -> int:
     (out / "examples.md").write_text(example_miner(df, sets, seed))
     metadata = dict(table=str(args.table), items=args.items, n_boot=nboot, seed=seed,
                     n_rows=len(df), n_families=int(df.family_id.nunique()),
+                    include_quarantine=args.include_quarantine, n_rows_inclusive=len(all_df),
                     input_sha256=hashlib.sha256(args.table.read_bytes()).hexdigest(),
                     items_sha256={p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in sorted(glob.glob(args.items))},
                     versions={"pandas": pd.__version__, "numpy": np.__version__})
