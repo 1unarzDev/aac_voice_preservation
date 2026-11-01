@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message Check (Part 6)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  label { font-weight: 600; }
+  input[type=text] { font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 10em; }
+  textarea { font: inherit; font-size: 1rem; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.4rem; font-weight: 600; padding: 10px 14px; border: 3px solid var(--fg); margin: 4px 0 10px; background: var(--panel); overflow-wrap: anywhere; }
+  .sentence .lab { display: inline-block; min-width: 1.6em; font-weight: 800; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  fieldset.active { border: 4px solid var(--accent); }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  .unsure { font-style: italic; color: var(--muted); }
+  .input-box { padding: 8px 12px; border: 2px dashed var(--fg); margin: 4px 0 8px; overflow-wrap: anywhere; }
+  .input-box .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .hidden { display: none; }
+  .opt input[type=checkbox] { width: 1.1em; height: 1.1em; }
+  .kw { font-size: 1.6rem; font-weight: 700; font-family: ui-monospace, Menlo, Consolas, monospace; padding: 12px 16px; border: 3px dashed var(--fg); margin: 6px 0 12px; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Message check (Part 6)</h1>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Enter your annotator ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="itemview" class="hidden">
+        <div id="phasetag" class="tag"></div>
+        <div class="q">Keywords the person selected:</div>
+        <div class="kw" id="keywords"></div>
+        <div id="msgwrap" class="hidden">
+          <div class="q">The full message the person actually meant:</div>
+          <div class="sentence" id="message"></div>
+        </div>
+        <form id="form" onsubmit="return false"></form>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div>
+          <button type="button" id="back">Back (Backspace)</button>
+          <button type="button" id="next" class="primary">Next (Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to judge</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li id="keyhint"><span class="key">1</span>–<span class="key">6</span> choose an option for the highlighted question</li>
+        <li><span class="key">S</span> can't judge / skip the highlighted question</li>
+        <li><span class="key">↑</span> <span class="key">↓</span> move between questions</li>
+        <li><span class="key">Tab</span> go to the note box; type your note</li>
+        <li><span class="key">Enter</span> next message (also from the note box)</li>
+        <li><span class="key">Esc</span> leave the note box</li>
+        <li><span class="key">Backspace</span> previous message (outside the note box)</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+/* Items are embedded (no file loading). Only id, keywords and message; no panel labels. */
+const DATA = /*WB_ITEMS_BEGIN*/{
+"options": {
+"polarity": [
+"affirmative",
+"negated",
+"mixed/unclear"
+],
+"speech_act": [
+"statement",
+"question",
+"request/command",
+"refusal",
+"offer/suggestion",
+"other"
+],
+"agent": [
+"speaker",
+"addressee",
+"we/joint",
+"third party",
+"unspecified"
+],
+"certainty": [
+"plain assertion",
+"hedged/uncertain",
+"strongly certain/emphatic",
+"n/a (question/request)"
+],
+"politeness": [
+"none",
+"please",
+"softened request (could you/would you mind)",
+"thanks/apology"
+]
+},
+"items": [
+{
+"item_id": "wb-024790",
+"keywords": "lets go",
+"message": "Lets go somewhere."
+},
+{
+"item_id": "wb-03c730",
+"keywords": "pray",
+"message": "Will you pray for me?"
+},
+{
+"item_id": "wb-0900bf",
+"keywords": "thanks get wishes",
+"message": "Thanks for all those get well soon wishes."
+},
+{
+"item_id": "wb-0b6a48",
+"keywords": "late",
+"message": "Maybe it's too late now."
+},
+{
+"item_id": "wb-15f0d8",
+"keywords": "please bring romantic movie",
+"message": "please bring a romantic movie for me"
+},
+{
+"item_id": "wb-3f2b18",
+"keywords": "able tune channel want",
+"message": "I haven't been able to tune in the channel I want to watch."
+},
+{
+"item_id": "wb-4b8918",
+"keywords": "interested going",
+"message": "I am not interested in going anywhere now."
+},
+{
+"item_id": "wb-4ba2ab",
+"keywords": "hand itches lot please",
+"message": "My hand itches a lot, please help me."
+},
+{
+"item_id": "wb-5486f1",
+"keywords": "doing thank",
+"message": "i am doing very well thank you!"
+},
+{
+"item_id": "wb-627b62",
+"keywords": "same time next week",
+"message": "same time next week"
+},
+{
+"item_id": "wb-6d6e32",
+"keywords": "bad luck",
+"message": "It's really bad luck."
+},
+{
+"item_id": "wb-6e57fa",
+"keywords": "going date",
+"message": "Are you going on a date?"
+},
+{
+"item_id": "wb-8d3044",
+"keywords": "seem excited",
+"message": "You seem very excited."
+},
+{
+"item_id": "wb-a21be0",
+"keywords": "come quick",
+"message": "Come on quick."
+},
+{
+"item_id": "wb-c45773",
+"keywords": "go have shower",
+"message": "Go and have a shower."
+},
+{
+"item_id": "wb-dcf7d6",
+"keywords": "hand paper please",
+"message": "Would you hand me the paper please?"
+},
+{
+"item_id": "wb-dd4e73",
+"keywords": "unwell",
+"message": "Are you unwell?"
+},
+{
+"item_id": "wb-f12c96",
+"keywords": "imagine",
+"message": "Can you imagine?"
+},
+{
+"item_id": "wb-fbb448",
+"keywords": "know first time",
+"message": "you know this is not the first time."
+},
+{
+"item_id": "wb-fe3651",
+"keywords": "hand remote please",
+"message": "Would you hand me the remote please?"
+}
+]
+}/*WB_ITEMS_END*/;
+const ITEMS = DATA.items, OPTIONS = DATA.options;
+const RUN = "wb_corpus_check_v1";
+const DIMS = ["polarity", "speech_act", "agent", "certainty", "politeness"];
+const DNAME = {polarity: "Polarity", speech_act: "Speech act", agent: "Agent (who does it)", certainty: "Certainty", politeness: "Politeness"};
+const DQ1 = {polarity: "Could it be meant as negated, affirmative, or both?", speech_act: "What could the message be doing?",
+  agent: "Who could be doing the main action?", certainty: "How sure could the message sound?", politeness: "Which polite markers could the message contain?"};
+const DQ2 = {polarity: "Is the main thing said negated?", speech_act: "What does the message do?",
+  agent: "Who does the main action?", certainty: "How sure does it sound?", politeness: "Which is the highest polite marker present?"};
+const DEFS = "<dl><dt>Polarity</dt><dd>negated: not, n't, never, no. mixed/unclear: one part negated and one not.</dd>" +
+  "<dt>Speech act</dt><dd>statement tells (incl. \"I want X\"); question asks for information or permission (\"Can I ...?\"); request/command asks the listener to act (imperatives, \"can/could you ...?\", \"please\"); refusal declines; offer/suggestion: \"let's\", \"how about\", \"do you want to ...?\"; other: only a greeting or thanks.</dd>" +
+  "<dt>Agent</dt><dd>Who does the content verb: speaker (I, my body), addressee (you, imperatives), we/joint (we, let's), third party (others, things), unspecified (it/there, no doer).</dd>" +
+  "<dt>Certainty</dt><dd>hedged: maybe, might, probably, I think. strongly certain: definitely, really, for sure. n/a: questions and requests. plain assertion: none of these.</dd>" +
+  "<dt>Politeness</dt><dd>please &gt; softened request (could you, would you mind, may I) &gt; thanks/apology &gt; none. \"Can you ...?\" alone is none.</dd></dl>";
+const HELP = {
+  "1": "<p><strong>Pass 1: keywords only.</strong> A person selected these keywords on a communication device. For each question, tick <strong>every value a person could reasonably have meant</strong> with these keywords: natural readings, not far-fetched ones. Tick one value if only one makes sense, several if several do.</p>" + DEFS,
+  "2": "<p><strong>Pass 2: the full message.</strong> You now see what the person actually meant. For each question choose the <strong>one value the message commits to</strong>, judging the words of the message.</p>" + DEFS,
+};
+const PRACTICE = {
+  "1": [
+    {item_id: "prac1-1", practice: true, keywords: "want soup", message: "I don't want soup.",
+     expected: {polarity: ["affirmative", "negated"], speech_act: ["statement", "question"], agent: ["speaker", "addressee", "third party"],
+                certainty: ["plain assertion", "n/a (question/request)"], politeness: ["none"]},
+     fb: "Several readings are natural: 'I want soup', 'I don't want soup', 'Do you want soup?', 'She wants soup'. Nothing suggests a polite word. Reasonable people differ a little on such sets; what matters is ticking every value you find natural."},
+    {item_id: "prac1-2", practice: true, keywords: "please pass salt", message: "Could you please pass the salt?",
+     expected: {polarity: ["affirmative"], speech_act: ["request/command"], agent: ["addressee"], certainty: ["n/a (question/request)"], politeness: ["please"]},
+     fb: "'please' makes this a request to the listener, so most questions have one natural answer. A negated reading ('please don't pass the salt') is possible in principle but not natural here."},
+  ],
+  "2": [
+    {item_id: "prac2-1", practice: true, keywords: "want soup", message: "I don't want soup.",
+     expected: {polarity: "negated", speech_act: "statement", agent: "speaker", certainty: "plain assertion", politeness: "none"},
+     fb: "Negated (don't), a statement, the speaker is the one who wants, no hedge, no polite word."},
+    {item_id: "prac2-2", practice: true, keywords: "please pass salt", message: "Could you please pass the salt?",
+     expected: {polarity: "affirmative", speech_act: "request/command", agent: "addressee", certainty: "n/a (question/request)", politeness: "please"},
+     fb: "A request to the listener (addressee); requests take n/a for certainty. It has both 'could you' and 'please': choose the highest marker, please."},
+  ],
+};
+
+let S = null;
+let shownAt = null, showingFeedback = false, active = 0;
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+const store = {
+  key(id) { return "wbcorpuscheck:v1:" + id; },
+  load(id) { try { const s = localStorage.getItem(this.key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.annot), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function seedOf(str) { let h = 2166136261 >>> 0; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
+function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function shuffled(ids, seedStr) { const a = ids.slice(), r = rng(seedOf(seedStr)); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function newState(id) {
+  const ids = ITEMS.map(x => x.item_id);
+  return {annot: id, run: RUN, phase: "intro1", idx: 0, order1: shuffled(ids, id + "|1"), order2: shuffled(ids, id + "|2"),
+          X1: {}, X2: {}, P1: {}, P2: {}, started1: null, started2: null};
+}
+const BYID = Object.fromEntries([...ITEMS, ...PRACTICE["1"], ...PRACTICE["2"]].map(x => [x.item_id, x]));
+const PHASES = {
+  intro1: {intro: true, next: "P1"}, P1: {pass: "1", practice: true, next: "X1"}, X1: {pass: "1", next: "intro2"},
+  intro2: {intro: true, next: "P2"}, P2: {pass: "2", practice: true, next: "X2"}, X2: {pass: "2", next: "done"}, done: {intro: true},
+};
+function seq(ph) { return ph === "P1" || ph === "P2" ? PRACTICE[PHASES[ph].pass].map(p => p.item_id) : ph === "X1" ? S.order1 : S.order2; }
+function multi(ph) { return PHASES[ph].pass === "1"; }
+function rec(ph, id) { if (!S[ph][id]) S[ph][id] = {answers: {}, unsure: {}, note: "", time_ms: 0}; return S[ph][id]; }
+function answered(ph, r, d) { const v = r.answers[d]; return r.unsure[d] || (multi(ph) ? Array.isArray(v) && v.length > 0 : !!v); }
+function complete(ph, id) { const r = S[ph][id]; return !!r && DIMS.every(d => answered(ph, r, d)); }
+function nDone(ph) { return seq(ph).filter(id => complete(ph, id)).length; }
+function stopClock() {
+  if (shownAt !== null && S && !PHASES[S.phase].intro) rec(S.phase, seq(S.phase)[S.idx]).time_ms += Date.now() - shownAt;
+  shownAt = null;
+}
+function renderProgress() {
+  const total = 2 * ITEMS.length, done = S ? nDone("X1") + nDone("X2") : 0, pct = total ? Math.round(100 * done / total) : 0;
+  let t = "Enter your annotator ID to begin.";
+  if (S) {
+    const ph = S.phase;
+    t = PHASES[ph].intro ? (ph === "done" ? "Finished" : ph === "intro1" ? "Ready for Pass 1" : "Ready for Pass 2")
+      : (PHASES[ph].practice ? "Practice " : "") + "Pass " + PHASES[ph].pass + ": message " + (S.idx + 1) + " of " + seq(ph).length;
+    t += " (" + done + " of " + total + " message passes complete, " + pct + "%)";
+  }
+  $("progtext").textContent = t;
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+function renderIntro() {
+  const ph = S.phase, v = $("introview");
+  $("itemview").classList.add("hidden"); v.classList.remove("hidden");
+  $("help").innerHTML = ph === "intro2" ? HELP["2"] : HELP["1"];
+  if (ph === "intro1") v.innerHTML = "<h2>Pass 1: what could these keywords mean?</h2><p>You will see " + ITEMS.length +
+    " short keyword inputs that people selected on a communication device, one at a time, without the message they meant. For each of five questions, tick every value a person could reasonably have meant.</p>" +
+    "<p>Use <span class='key'>1</span>–<span class='key'>6</span> to tick or untick a value, <span class='key'>↓</span> to go to the next question, and <span class='key'>Enter</span> for the next message.</p>" +
+    "<p>First come 2 practice items with feedback. Press <span class='key'>Enter</span> or the button to start.</p><button type='button' class='primary' id='go'>Start practice (Enter)</button>";
+  else if (ph === "intro2") v.innerHTML = "<h2>Pass 2: what does the message say?</h2><p>Pass 1 is complete and now locked. You will see the same " + ITEMS.length +
+    " keyword inputs again in a new order, now with the full message the person meant. For each question choose the one value the message commits to.</p>" +
+    "<p>First come 2 practice items with feedback. Press <span class='key'>Enter</span> or the button to start.</p><button type='button' class='primary' id='go'>Start practice (Enter)</button>";
+  else v.innerHTML = "<h2>All done. Thank you!</h2><p>Please press <strong>Download CSV</strong> and send the file to the study coordinator.</p>";
+  const go = $("go"); if (go) go.addEventListener("click", advanceIntro);
+  v.focus();
+}
+function advanceIntro() {
+  if (S.phase === "intro1") { S.phase = "P1"; if (!S.started1) S.started1 = new Date().toISOString(); }
+  else if (S.phase === "intro2") { S.phase = "P2"; if (!S.started2) S.started2 = new Date().toISOString(); }
+  else return;
+  S.idx = 0; active = 0; store.save(); render();
+}
+function render() {
+  if (!S) return;
+  renderProgress();
+  if (PHASES[S.phase].intro) { renderIntro(); return; }
+  const ph = S.phase, info = PHASES[ph], id = seq(ph)[S.idx], it = BYID[id], r = rec(ph, id), m = multi(ph);
+  $("introview").classList.add("hidden"); $("itemview").classList.remove("hidden");
+  $("help").innerHTML = HELP[info.pass];
+  $("phasetag").textContent = (info.practice ? "Practice (you will see feedback) - " : "") + "Pass " + info.pass + (m ? ": keywords only" : ": full message");
+  $("keyhint").innerHTML = m ? "<span class='key'>1</span>–<span class='key'>6</span> tick / untick a value for the highlighted question"
+                             : "<span class='key'>1</span>–<span class='key'>6</span> choose a value for the highlighted question";
+  $("keywords").textContent = it.keywords;
+  $("msgwrap").classList.toggle("hidden", m);
+  $("message").textContent = m ? "" : it.message;
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  const form = $("form"); form.innerHTML = "";
+  DIMS.forEach((d, qi) => {
+    const fs = document.createElement("fieldset"); fs.id = "q" + qi; fs.className = qi === active ? "active" : "";
+    const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + DNAME[d]; fs.append(lg);
+    const p = document.createElement("p"); p.className = "q"; p.textContent = m ? DQ1[d] + " Tick every reasonable value." : DQ2[d]; fs.append(p);
+    const opts = document.createElement("div"); opts.className = "opts";
+    opts.setAttribute("role", m ? "group" : "radiogroup"); opts.setAttribute("aria-label", DNAME[d]);
+    OPTS(d).forEach((o, oi) => {
+      const on = m ? (r.answers[d] || []).includes(o) : r.answers[d] === o;
+      const lab = document.createElement("label"); lab.className = "opt" + (on ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = m ? "checkbox" : "radio"; inp.name = "q" + qi; inp.value = o; inp.checked = on;
+      inp.disabled = showingFeedback; inp.addEventListener("change", () => answer(qi, o));
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(oi + 1);
+      lab.append(inp, k, document.createTextNode(" " + o)); opts.append(lab);
+    });
+    fs.append(opts);
+    if (r.unsure[d]) { const u = document.createElement("p"); u.className = "unsure"; u.textContent = "Marked can't judge / skipped."; fs.append(u); }
+    fs.addEventListener("click", () => { if (active !== qi) { active = qi; render(); } });
+    form.append(fs);
+  });
+  const wrap = document.createElement("div");
+  const lab = document.createElement("label"); lab.htmlFor = "note"; lab.textContent = "Optional note";
+  const ta = document.createElement("textarea"); ta.id = "note"; ta.value = r.note; ta.maxLength = 300; ta.disabled = showingFeedback;
+  ta.addEventListener("input", () => { r.note = ta.value; store.save(); });
+  wrap.append(lab, ta); form.append(wrap);
+  const a = $("q" + active); if (a && a.scrollIntoView) a.scrollIntoView({block: "nearest"});
+  if (shownAt === null) shownAt = Date.now();
+}
+function OPTS(d) { return OPTIONS[d] || []; }
+function cur() { const ph = S.phase, id = seq(ph)[S.idx]; return {ph, id, it: BYID[id], r: rec(ph, id)}; }
+function answer(qi, value) {
+  if (showingFeedback) return;
+  const {ph, r} = cur(), d = DIMS[qi];
+  if (multi(ph)) {
+    const set = new Set(r.answers[d] || []); if (set.has(value)) set.delete(value); else set.add(value);
+    r.answers[d] = OPTS(d).filter(o => set.has(o)); delete r.unsure[d]; active = qi;
+  } else { r.answers[d] = value; delete r.unsure[d]; active = Math.min(qi + 1, DIMS.length - 1); }
+  store.save(); render();
+}
+function markUnsure() {
+  if (showingFeedback) return;
+  const {r} = cur(), d = DIMS[active];
+  r.unsure[d] = true; delete r.answers[d];
+  active = Math.min(active + 1, DIMS.length - 1);
+  store.save(); render();
+}
+function showFeedback(it) {
+  const {ph, r} = cur(), fb = $("feedback"), m = multi(ph); fb.innerHTML = "";
+  const h = document.createElement("p"); h.innerHTML = "<strong>Feedback.</strong> Press Enter to continue."; fb.append(h);
+  const ul = document.createElement("ul");
+  for (const d of DIMS) {
+    const exp = it.expected[d], gotv = r.answers[d];
+    const got = m ? (gotv && gotv.length ? gotv.join(", ") : "(can't judge)") : (gotv || "(can't judge)");
+    const want = m ? exp.join(", ") : exp;
+    const same = m ? (gotv && gotv.length === exp.length && exp.every(x => gotv.includes(x))) : gotv === exp;
+    const li = document.createElement("li"); const s = document.createElement("span");
+    s.className = same ? "ok" : "bad"; s.textContent = same ? "Matches" : "Different";
+    li.append(s, document.createTextNode(" - " + DNAME[d] + ": you chose " + got + "; suggested: " + want)); ul.append(li);
+  }
+  fb.append(ul);
+  const p = document.createElement("p"); p.textContent = it.fb; fb.append(p);
+  showingFeedback = true; render(); fb.classList.remove("hidden"); fb.focus();
+}
+function next() {
+  if (!S) return;
+  if (PHASES[S.phase].intro) { advanceIntro(); return; }
+  const {ph, id, it, r} = cur();
+  if (!complete(ph, id)) {
+    active = DIMS.findIndex(d => !answered(ph, r, d));
+    say(multi(ph) ? "Please tick at least one value for every question, or press S for can't judge." : "Please answer every question, or press S for can't judge.");
+    render(); return;
+  }
+  if (it.practice && !showingFeedback) { showFeedback(it); return; }
+  showingFeedback = false; stopClock(); say("");
+  if (S.idx < seq(ph).length - 1) { S.idx++; active = 0; }
+  else if ((ph === "X1" || ph === "X2") && nDone(ph) < ITEMS.length) { S.idx = seq(ph).findIndex(x => !complete(ph, x)); active = 0; say("Some messages are incomplete."); }
+  else { S.phase = PHASES[ph].next; S.idx = 0; active = 0; }
+  store.save(); render();
+}
+function back() {
+  if (!S || PHASES[S.phase].intro || S.idx === 0) return;   // never back across a pass boundary: Pass 1 locks
+  showingFeedback = false; stopClock(); S.idx--; active = 0; store.save(); render();
+}
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your annotator ID first."); $("annot").focus(); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["item_id", "annotator", "practice", "dimension", "p1_order", "p1_plausible", "p1_unsure", "p1_note", "p1_time_ms",
+                "p2_order", "p2_value", "p2_unsure", "p2_note", "p2_time_ms", "p1_started_at", "p2_started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  const rows = (id, practice, a, b, ao, bo) => DIMS.forEach(d => lines.push([id, S.annot, practice ? 1 : 0, d,
+    ao, a ? (a.answers[d] || []).join("|") : "", a && a.unsure[d] ? 1 : 0, a ? a.note.trim() : "", a ? Math.round(a.time_ms) : "",
+    bo, b ? b.answers[d] || "" : "", b && b.unsure[d] ? 1 : 0, b ? b.note.trim() : "", b ? Math.round(b.time_ms) : "",
+    S.started1 || "", S.started2 || "", RUN, now].map(csvCell).join(",")));
+  for (const k of ["1", "2"]) PRACTICE[k].forEach((p, i) => { const a = k === "1" ? S.P1[p.item_id] : null, b = k === "2" ? S.P2[p.item_id] : null; if (a || b) rows(p.item_id, true, a, b, i + 1, i + 1); });
+  for (const it of ITEMS) {
+    const a = S.X1[it.item_id], b = S.X2[it.item_id]; if (!a && !b) continue;
+    rows(it.item_id, false, a, b, S.order1.indexOf(it.item_id) + 1, S.order2.indexOf(it.item_id) + 1);
+  }
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "wb_corpus_check_" + S.annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (lines.length - 1) + " rows, " + (nDone("X1") + nDone("X2")) + " of " + 2 * ITEMS.length + " message passes complete).");
+  return lines.join("\n");
+}
+function startFor(id) {
+  if (!id) { S = null; return; }
+  stopClock(); store.save(); showingFeedback = false;
+  const saved = store.load(id);
+  S = saved && saved.run === RUN ? saved : newState(id);
+  active = 0; store.save();
+  say(saved ? "Resumed saved progress for " + id + "." : "Started a new session for " + id + ".");
+  render();
+}
+$("annot").addEventListener("change", () => startFor(annotId()));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); startFor(annotId()); const v = $("introview"); if (!v.classList.contains("hidden")) v.focus(); } });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && !PHASES[S.phase].intro && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!S || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && t.id === "annot") return;
+  if (t && t.tagName === "TEXTAREA") {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); next(); }
+    else if (e.key === "Escape") { e.preventDefault(); t.blur(); $("form").focus(); }
+    return;
+  }
+  if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) { if (e.key === "Enter") { e.preventDefault(); t.click(); } return; }
+  if (PHASES[S.phase].intro) { if (e.key === "Enter") { e.preventDefault(); next(); } return; }
+  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1, o = OPTS(DIMS[active]); if (n < o.length) { e.preventDefault(); answer(active, o[n]); } }
+  else if (e.key === "s" || e.key === "S") { e.preventDefault(); markUnsure(); }
+  else if (e.key === "Enter") { e.preventDefault(); next(); }
+  else if (e.key === "Backspace") { e.preventDefault(); back(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, DIMS.length - 1); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+});
+$("form").tabIndex = -1;
+renderProgress();
+$("annot").focus();
+</script>
+</body>
+</html>

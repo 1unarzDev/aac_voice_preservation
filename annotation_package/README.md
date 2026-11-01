@@ -16,6 +16,8 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   Ideally every annotator does them too; if time is short, split them between annotators.
 - **Part 4, `repair_audit.html`** (40 sentences, two short passes): optional, about 15–20 minutes, only after the
   other parts. See the Part 4 section below.
+- **Part 5, `wc_source_check.html`** (20 sentence pairs) and **Part 6, `wb_corpus_check.html`** (20 messages, two
+  passes): optional, about 15 minutes each, only after Parts 1–4. See the sections at the end.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -60,8 +62,48 @@ Judge each pass on its own. A sentence can be badly formed and still say what th
 can also happen. You will not see which system wrote a sentence or how it was produced. Don't go back to Pass A
 after seeing the inputs; the tool prevents this anyway.
 
+## Part 5 (optional, ~15 min): sentence pair check, `wc_source_check.html`
+Do this only after Parts 1–4, and only if you have time left. Everything it needs is inside the one file.
+
+1. Open `wc_source_check.html` and enter **the same annotator ID**. Press `Enter`.
+2. You see 20 **families**. Each has two sentences, **A** and **B**, that were written to differ in **one** way only:
+   negation (*polarity*), what the sentence does (*speech act*: statement, question, request, ...), or *politeness*.
+   The dimension is named on screen, with its definitions in the help panel. You also see the **bare keywords** a
+   person might select on a communication device, and one extra (noncritical) word shared by both sentences.
+3. Answer four questions per family:
+   - the value of sentence **A** on that dimension, then the value of sentence **B** (`1`–`7`);
+   - *"Could the bare keywords reasonably mean either sentence?"* (`1` yes, `2` only A, `3` only B, `4` neither);
+   - *"Do A and B differ ONLY on that dimension?"* (`1` yes, `2` no). If no, a note box opens: type what else
+     differs (e.g. "window vs door", "tense changes"), then press `Enter`.
+4. Two practice families with feedback come first. `S` marks a question you can't judge; `↑`/`↓` move between
+   questions; `Backspace` goes back. Progress is saved in the browser and time per family is recorded.
+5. Click **Download CSV** at the end: `wc_source_check_<ID>.csv`.
+
+Label the words on the page, using the same definitions as the codebook. You are not shown what the sentence
+writers intended; that is the point of the check.
+
+## Part 6 (optional, ~15 min): message check, `wb_corpus_check.html`
+Do this only after Parts 1–4 (before or after Part 5). It uses 20 real messages written for communication
+devices, each shortened to a few keywords.
+
+1. Open `wb_corpus_check.html` and enter **the same annotator ID**. Press `Enter`.
+2. **Pass 1 (keywords only, about 8 min).** You see only the keywords, never the message. For each of five
+   questions (polarity, speech act, agent = who does it, certainty, politeness), **tick every value a person could
+   reasonably have meant** with those keywords: natural readings, not far-fetched ones. Tick one value if only one
+   makes sense. Keys: `1`–`6` tick or untick a value, `↓`/`↑` move to the next/previous question, `Enter` next message.
+3. **Pass 2 (full message, about 6 min).** Pass 2 starts after Pass 1 is finished, and **Pass 1 is then locked**.
+   You now see the keywords and the full message the person meant, in a new order. For each question choose the
+   **one value the message commits to** (`1`–`6`; the next question is selected automatically).
+4. Each pass begins with 2 practice items with feedback. `S` marks a question you can't judge. An optional note box
+   is under the questions (`Tab`). Progress is saved in the browser and time per message is recorded.
+5. Click **Download CSV** at the end: `wb_corpus_check_<ID>.csv`.
+
+In Pass 1 there is no "right" set: we want to know which readings people find natural. Don't go back to Pass 1
+after seeing the messages; the tool prevents this anyway.
+
 ## Returning your work
-Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv` for Part 4), to the study coordinator. Please also send:
+Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
+`wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

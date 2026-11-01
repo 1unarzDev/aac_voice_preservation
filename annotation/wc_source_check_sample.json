@@ -1,0 +1,51 @@
+{
+ "rule": "quota      polarity 7, speech_act 7, politeness 6 (= 20)\n  order      within each stratum, ascending sha1(\"wc-source-check-2026|\" + family_id)\n  pass 1     walk the order, accept a family while its stratum quota is open and its\n             cluster_id (seed/construction cluster) is not already in the sample\n  pass 2     only if a quota is still open: relax the cluster constraint\nInclusion probabilities are estimated by rerunning the identical rule under 4000 random\nsalts (Monte Carlo); the realised sample uses the fixed salt. Without the cluster rule\npi would be quota/N within the stratum.",
+ "salt": "wc-source-check-2026",
+ "quota": {
+  "polarity": 7,
+  "speech_act": 7,
+  "politeness": 6
+ },
+ "excluded": [
+  "r2act-078",
+  "r2act-079"
+ ],
+ "eligible_by_stratum": {
+  "polarity": 80,
+  "politeness": 80,
+  "speech_act": 78
+ },
+ "selected": [
+  "r2pol-053",
+  "r2pol-009",
+  "r2pol-026",
+  "r2pol-050",
+  "r2pol-048",
+  "r2pol-007",
+  "r2pol-030",
+  "r2act-063",
+  "r2act-001",
+  "r2act-056",
+  "r2act-039",
+  "r2act-027",
+  "r2act-012",
+  "r2act-035",
+  "r2plt-006",
+  "r2plt-057",
+  "r2plt-016",
+  "r2plt-014",
+  "r2plt-069",
+  "r2plt-019"
+ ],
+ "selected_by_construction": {
+  "drafted": 7,
+  "seeded": 13
+ },
+ "distinct_clusters": 20,
+ "codex_rows_found": 20,
+ "item_file_sha1": {
+  "data/items/r2_c1.jsonl": "b1b1e5c94475cbeb17190bb7feb49981b7695669",
+  "data/items/r2_c2.jsonl": "f9f6a00c1db23500518485503f6e401fc7b8797e"
+ },
+ "mc_salts": 4000
+}
