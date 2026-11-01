@@ -1,4 +1,4 @@
-"""B2 keyword elicitation: draw 300 AACText messages and split them into blind sets for 3 annotators each.
+"""B2 keyword elicitation: draw 600 AACText messages and split them into blind sets for 3 annotators each.
 
 usage: python src/make_elicitation_sets.py [--annotators P01,P02,... | --annotators-file ids.txt]
 
@@ -38,9 +38,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED = "elic-20261101"
-N_RANDOM = 150
-QUOTA = {"certainty": 38, "polarity": 38, "politeness": 37, "speech_act": 37}   # pool priority order
-N_SETS, N_REPS = 8, 3
+N_RANDOM = 300
+QUOTA = {"certainty": 75, "polarity": 75, "politeness": 75, "speech_act": 75}   # pool priority order
+N_SETS, N_REPS = 16, 3
 CUES = ROOT / "analysis/s1/message_cues.jsonl"
 WB = ROOT / "data/specs/wb_sample.jsonl"
 WC = [ROOT / "data/items/r2_c1.jsonl", ROOT / "data/items/r2_c2.jsonl"]
@@ -147,7 +147,7 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     fr, excl, n_rows, n_wb, n_wc = frame()
     chosen, pools = draw(fr)
-    assert len(chosen) == 300 and len({r["id"] for r, *_ in chosen}) == 300
+    assert len(chosen) == 600 and len({r["id"] for r, *_ in chosen}) == 600
     # deal into sets: stratum by stratum, rank order, round-robin
     strata = ["random"] + [f"enriched_{d}" for d in QUOTA]
     dealt = [x for s in strata for x in sorted((c for c in chosen if c[1] == s), key=lambda c: rank(c[0]["id"]))]
@@ -178,7 +178,7 @@ def main(argv=None) -> int:
                         "detector_labels": r["detector"]["labels"], "detector_cues": r["detector"]["cues"],
                         "present": r["loss"]["pos_cap4"]["present"], "lost_pos_cap4": r["loss"]["pos_cap4"]["lost"],
                         "corpus": "AACText (Vertanen & Kristensson 2011), CC BY 4.0"})
-    assert len({k["item_id"] for k in key}) == 300
+    assert len({k["item_id"] for k in key}) == 600
     key.sort(key=lambda k: (k["set"], k["item_id"]))
     KEY.parent.mkdir(parents=True, exist_ok=True)
     with KEY.open("w") as f:

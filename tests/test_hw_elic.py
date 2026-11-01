@@ -246,8 +246,8 @@ def test_writer_links(tmp_path):
 
 def test_elicitation_sets_committed():
     key = [json.loads(l) for l in (ROOT / "annotation/elicitation_key.jsonl").open()]
-    assert len(key) == 300 and len({k["id"] for k in key}) == 300
-    assert Counter(k["sample"] for k in key) == {"random": 150, "enriched": 150}
+    assert len(key) == 600 and len({k["id"] for k in key}) == 600
+    assert Counter(k["sample"] for k in key) == {"random": 300, "enriched": 300}
     assert all(0 < k["inclusion_prob"] <= 1 for k in key)
     wb = [json.loads(l) for l in (ROOT / "data/specs/wb_sample.jsonl").open()]
     wb_ids = {r["id"] for r in wb} | {d for r in wb for d in r.get("duplicate_ids") or []}
@@ -255,7 +255,7 @@ def test_elicitation_sets_committed():
              for l in (ROOT / f"data/items/{p}.jsonl").open() if json.loads(l).get("seed_line")}
     assert not ({k["id"] for k in key} & (wb_ids | seeds))
     files = sorted((ROOT / "annotation_package/elicitation_sets").glob("elic_s*_r*.json"))
-    assert len(files) == 24
+    assert len(files) == 48
     by_set = {}
     for f in files:
         d = json.loads(f.read_text())
