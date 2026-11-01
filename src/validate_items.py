@@ -5,6 +5,8 @@ Usage: python src/validate_items.py data/items/pilot.jsonl [more.jsonl ...]
 Exit code 1 if any ERROR is found. WARNs are printed but do not fail.
 Follow-up records (split expB / expC) may carry `custom_channels`; their inputs,
 commitments, alias/padding tokens and "Meaning:" lines are checked too.
+Human-written records (split hw, B1) use ids hw-<pol|act|plt|cer|agt|tim>-NNN, construction
+`handwritten` and cluster_id == writer_id.
 Round-2 records (split r2, round-2 W-C) use ids r2pol-NNN / r2act-NNN / r2plt-NNN and must carry
 `construction` (seeded|drafted|adversarial) and `cluster_id`; seeded records also carry
 `seed_line` (1-based line in data/raw/aactext/sent_train_aac.txt) and `seed_text` (that line verbatim).
@@ -23,11 +25,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import prompts as P  # noqa: E402
 from labels import CHIP_TO_GENERAL, general_spec  # noqa: E402
 
-SPLITS = {"pilot", "dev", "test", "expB", "expC", "r2", "r2d"}
+SPLITS = {"pilot", "dev", "test", "expB", "expC", "r2", "r2d", "hw"}
 CUSTOM_SPLITS = {"expB", "expC", "r2d"}
 FACTORIAL_SPLITS = {"expC", "r2d"}
 R2D_CHANNELS = {f"{c}_{e}" for c in ("neither", "pol", "actor", "both") for e in ("TELL", "STATEMENT")}
 R2_PREFIX = {"polarity": "r2pol", "speech_act": "r2act", "politeness": "r2plt"}
+# Human-written families (split hw, B1): hw-<code>-NNN, cluster_id = writer_id.
+HW_CODE = {"polarity": "pol", "speech_act": "act", "politeness": "plt", "certainty": "cer", "agent": "agt",
+           "time_quantity": "tim"}
 CONSTRUCTIONS = {"seeded", "drafted", "adversarial"}
 ROOT = Path(__file__).resolve().parent.parent
 SEED_CORPUS = ROOT / "data/raw/aactext/sent_train_aac.txt"
@@ -124,6 +129,18 @@ def validate_family(fam, where, errs, warns):
             E("r2d family_id must be 'r2d-NNN-pol-{i,you}' or 'r2d-NNN-agt-{yes,not}'")
         elif fam.get("factorial_family") != fid[:7]:
             E("r2d factorial_family must be the r2d-NNN prefix of family_id")
+    elif fam["split"] == "hw":
+        if not re.fullmatch(rf"hw-{HW_CODE[dim]}-\d{{3}}", fid):
+            E(f"hw family_id must be 'hw-{HW_CODE[dim]}-NNN'")
+        if not isinstance(fam.get("cluster_id"), str) or not fam["cluster_id"].strip():
+            E("hw cluster_id must be the nonempty writer id")
+        elif fam.get("writer_id") != fam["cluster_id"]:
+            E("hw cluster_id must equal writer_id")
+        if fam.get("construction") != "handwritten":
+            E("hw construction must be 'handwritten'")
+        bad = [k for k, v in fam["variants"].items() if v.get("critical_value") in ("refusal", "acceptance")]
+        if dim == "speech_act" and bad:
+            E(f"hw speech-act variants {bad} are refusal/acceptance (statement/question/request only)")
     elif fam["split"] == "r2":
         if dim not in R2_PREFIX or not re.fullmatch(rf"{R2_PREFIX[dim]}-\d{{3}}", fid):
             E(f"r2 family_id must be '{R2_PREFIX.get(dim, 'r2???')}-NNN'")

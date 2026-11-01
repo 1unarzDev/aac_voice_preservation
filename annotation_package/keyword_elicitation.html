@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyword Choice (Part 9)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  label { font-weight: 600; }
+  input[type=text] { font: inherit; font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  #annot { width: 10em; }
+  #kw { width: 100%; font-size: 1.3rem; }
+  textarea { font: inherit; font-size: 1rem; width: 100%; min-height: 2.6em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.4rem; font-weight: 600; padding: 10px 14px; border: 3px solid var(--fg); margin: 4px 0 12px; background: var(--panel); overflow-wrap: anywhere; }
+  .instr { font-weight: 600; margin: 0 0 6px; }
+  .count { font-weight: 700; margin: 4px 0 10px; }
+  .count.bad { color: var(--bad); }
+  .count.ok { color: var(--ok); }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; padding: 0 3px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Keyword choice (Part 9)</h1>
+  <div><label for="file">Message file (JSON)</label> <input id="file" type="file" accept=".json,application/json"></div>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Load your message file and enter your annotator ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="itemview" class="hidden">
+        <div id="phasetag" class="tag"></div>
+        <p class="q">The message:</p>
+        <div class="sentence" id="message"></div>
+        <p class="instr" id="instr"></p>
+        <label for="kw">Your keywords</label>
+        <input id="kw" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="instr count">
+        <p class="count" id="count" aria-live="off"></p>
+        <label for="note">Optional note</label>
+        <textarea id="note" maxlength="300"></textarea>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div>
+          <button type="button" id="back">Previous (Page Up)</button>
+          <button type="button" id="skip">I can't do this one</button>
+          <button type="button" id="next" class="primary">Next (Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to do</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">Enter</span> next message (when you have typed 2 to 4 words)</li>
+        <li><span class="key">Page Up</span> previous message</li>
+        <li><span class="key">Tab</span> go to the note box or the buttons</li>
+        <li><span class="key">Esc</span> back to the keyword box</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+/* Blind by construction: the page shows only the message text from the loaded file. It contains no
+   model output, no system keywords and no labels, and it refuses any file with other fields. */
+const TOOL = "keyword_elicitation_v1";
+const INSTRUCTION = "Type the 2–4 words you would select on a keyword-based communication device to get this message across, as if each word takes a long time to select.";
+const ALLOWED_TOP = ["set_file", "set", "order", "tool", "version", "n", "messages"];
+const ALLOWED_MSG = ["item_id", "text"];
+const MIN_W = 2, MAX_W = 4;
+/* Practice messages are neutral (no negation, hedge, question, request or politeness) and the feedback
+   is about the format only: no example answer is ever shown, so nobody is taught a selection strategy. */
+const PRACTICE = [
+  {item_id: "prac-1", practice: true, text: "The bus to town leaves at nine."},
+  {item_id: "prac-2", practice: true, text: "My sister is visiting us next weekend."},
+];
+const HELP = "<p>" + INSTRUCTION + "</p><p>There is no right answer. We want the words <strong>you</strong> would really choose. You may use words that are not in the message. Separate words with spaces. Each word or symbol you type separately counts as one selection.</p><p>If a message makes no sense to you, use <em>I can't do this one</em>.</p>";
+
+let DATA = null, ITEMS = [], S = null, shownAt = null, showingFeedback = false;
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+const store = {
+  key(id) { return "keywordelic:v1:" + (DATA ? DATA.set_file : "") + ":" + id; },
+  load(id) { try { const s = localStorage.getItem(this.key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.annot), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function words(s) { return (s || "").trim().split(/\s+/).filter(Boolean); }
+function validateData(d) {
+  if (!d || typeof d !== "object" || !Array.isArray(d.messages) || !d.messages.length || !d.set_file) return "This is not a message file.";
+  const extraTop = Object.keys(d).filter(k => !ALLOWED_TOP.includes(k));
+  if (extraTop.length) return "This file has fields that must not be shown: " + extraTop.join(", ") + ". Ask the coordinator for a new file.";
+  for (const m of d.messages) {
+    const extra = Object.keys(m).filter(k => !ALLOWED_MSG.includes(k));
+    if (extra.length) return "Message " + m.item_id + " has fields that must not be shown: " + extra.join(", ") + ".";
+    if (typeof m.text !== "string" || !m.text.trim() || !m.item_id) return "A message in the file is empty.";
+  }
+  if (new Set(d.messages.map(m => m.item_id)).size !== d.messages.length) return "Duplicate message ids in the file.";
+  return null;
+}
+function newState(id) { return {annot: id, set_file: DATA.set_file, tool: TOOL, phase: "intro", idx: 0, P: {}, M: {}, started: null}; }
+function seq(ph) { return ph === "P" ? PRACTICE : ITEMS; }
+function rec(ph, id) { if (!S[ph][id]) S[ph][id] = {keywords: "", skipped: false, note: "", time_ms: 0, n_edits: 0}; return S[ph][id]; }
+function complete(r) { if (!r) return false; const n = words(r.keywords).length; return r.skipped || (n >= MIN_W && n <= MAX_W); }
+function nDone() { return S ? ITEMS.filter(m => complete(S.M[m.item_id])).length : 0; }
+function stopClock() {
+  if (shownAt !== null && S && (S.phase === "P" || S.phase === "M")) rec(S.phase, seq(S.phase)[S.idx].item_id).time_ms += Date.now() - shownAt;
+  shownAt = null;
+}
+function renderProgress() {
+  const total = ITEMS.length, done = nDone(), pct = total ? Math.round(100 * done / total) : 0;
+  let t = DATA ? "Enter your annotator ID to begin." : "Load your message file and enter your annotator ID to begin.";
+  if (S) t = (S.phase === "intro" ? "Ready to start" : S.phase === "done" ? "Finished" : S.phase === "P" ? "Practice " + (S.idx + 1) + " of " + PRACTICE.length
+      : "Message " + (S.idx + 1) + " of " + total) + " (" + done + " of " + total + " messages complete, " + pct + "%)";
+  $("progtext").textContent = t; $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+function renderIntro() {
+  const v = $("introview"); $("itemview").classList.add("hidden"); v.classList.remove("hidden");
+  $("help").innerHTML = HELP;
+  if (S.phase === "intro") {
+    v.innerHTML = "<h2>Keyword choice</h2>";
+    const p1 = document.createElement("p"); p1.textContent = "You will see " + ITEMS.length + " short messages, one at a time. For each one:"; v.append(p1);
+    const p2 = document.createElement("p"); p2.className = "instr"; p2.textContent = INSTRUCTION; v.append(p2);
+    const p3 = document.createElement("p"); p3.textContent = "There is no right answer. We want the words you would really choose, and you may use words that are not in the message. First come 2 practice messages. Press Enter or the button to start."; v.append(p3);
+    const b = document.createElement("button"); b.type = "button"; b.className = "primary"; b.id = "go"; b.textContent = "Start practice (Enter)";
+    b.addEventListener("click", advanceIntro); v.append(b);
+  } else v.innerHTML = "<h2>All done. Thank you!</h2><p>Please press <strong>Download CSV</strong> and send the file to the study coordinator.</p>";
+  v.focus();
+}
+function advanceIntro() { if (S.phase !== "intro") return; S.phase = "P"; S.idx = 0; if (!S.started) S.started = new Date().toISOString(); store.save(); render(); }
+function updateCount() {
+  const n = words($("kw").value).length, c = $("count");
+  c.textContent = n === 1 ? "1 word" : n + " words";
+  c.className = "count " + (n >= MIN_W && n <= MAX_W ? "ok" : n ? "bad" : "");
+  if (n > MAX_W) c.textContent += " (use at most " + MAX_W + ")";
+}
+function render() {
+  if (!S) return;
+  renderProgress();
+  if (S.phase === "intro" || S.phase === "done") { renderIntro(); return; }
+  const m = seq(S.phase)[S.idx], r = rec(S.phase, m.item_id);
+  $("introview").classList.add("hidden"); $("itemview").classList.remove("hidden"); $("help").innerHTML = HELP;
+  $("phasetag").textContent = S.phase === "P" ? "Practice (format feedback only)" : "Message " + (S.idx + 1) + " of " + ITEMS.length;
+  $("message").textContent = m.text;
+  $("instr").textContent = INSTRUCTION;
+  $("kw").value = r.keywords; $("kw").disabled = showingFeedback;
+  $("note").value = r.note; $("note").disabled = showingFeedback;
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  updateCount();
+  if (r.skipped) say("You marked this message as one you can't do. Type keywords to undo.");
+  if (shownAt === null) shownAt = Date.now();
+}
+function showFeedback(r) {
+  const fb = $("feedback"), n = words(r.keywords).length; fb.innerHTML = "";
+  const p = document.createElement("p");
+  p.textContent = r.skipped ? "You marked this message as one you can't do. That is fine whenever a message does not make sense to you."
+    : "You typed " + n + " words: \"" + r.keywords.trim() + "\". That is within 2 to 4, so it would be saved. There is no right answer; any words you would really select are fine.";
+  const p2 = document.createElement("p"); p2.textContent = "Press Enter to continue.";
+  fb.append(p, p2); showingFeedback = true; render(); fb.classList.remove("hidden"); fb.focus();
+}
+function next() {
+  if (!S) return;
+  if (S.phase === "intro") { advanceIntro(); return; }
+  if (S.phase === "done") return;
+  const ph = S.phase, m = seq(ph)[S.idx], r = rec(ph, m.item_id);
+  if (!showingFeedback) {
+    r.keywords = $("kw").value; r.note = $("note").value;
+    const n = words(r.keywords).length;
+    if (!r.skipped && (n < MIN_W || n > MAX_W)) { say("Please type " + MIN_W + " to " + MAX_W + " words (you have " + n + ")."); $("kw").focus(); return; }
+    if (n) r.skipped = false;
+    store.save();
+    if (ph === "P") { showFeedback(r); return; }
+  }
+  showingFeedback = false; stopClock(); say("");
+  if (S.idx < seq(ph).length - 1) S.idx++;
+  else if (ph === "P") { S.phase = "M"; S.idx = 0; }
+  else if (nDone() < ITEMS.length) { S.idx = ITEMS.findIndex(x => !complete(S.M[x.item_id])); say("Some messages are not done yet."); }
+  else S.phase = "done";
+  store.save(); render();
+  if (S.phase === "P" || S.phase === "M") $("kw").focus();
+}
+function skip() {
+  if (!S || showingFeedback || (S.phase !== "P" && S.phase !== "M")) return;
+  const r = rec(S.phase, seq(S.phase)[S.idx].item_id);
+  r.skipped = true; r.keywords = ""; r.note = $("note").value; store.save();
+  next();
+}
+function back() {
+  if (!S || (S.phase !== "P" && S.phase !== "M") || S.idx === 0) return;
+  showingFeedback = false; stopClock(); S.idx--; store.save(); render(); $("kw").focus();
+}
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say(DATA ? "Enter your annotator ID first." : "Load your message file first."); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["item_id", "annotator", "set_file", "practice", "order", "message", "keywords", "n_words", "skipped", "note",
+                "time_ms", "n_edits", "started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  const row = (m, practice, r, o) => [m.item_id, S.annot, DATA.set_file, practice ? 1 : 0, o, m.text, r.keywords.trim().replace(/\s+/g, " "),
+    words(r.keywords).length, r.skipped ? 1 : 0, r.note.trim(), Math.round(r.time_ms), r.n_edits, S.started || "", TOOL, now].map(csvCell).join(",");
+  PRACTICE.forEach((m, i) => { if (S.P[m.item_id]) lines.push(row(m, true, S.P[m.item_id], i + 1)); });
+  ITEMS.forEach((m, i) => { if (S.M[m.item_id]) lines.push(row(m, false, S.M[m.item_id], i + 1)); });
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "keyword_elicitation_" + DATA.set_file + "_" + S.annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + nDone() + " of " + ITEMS.length + " messages complete).");
+  return lines.join("\n");
+}
+function startFor(id) {
+  if (!id) { S = null; return; }
+  if (!DATA) { say("Load your message file first (the Message file button)."); $("file").focus(); return; }
+  stopClock(); store.save(); showingFeedback = false;
+  const saved = store.load(id);
+  S = saved && saved.tool === TOOL && saved.set_file === DATA.set_file ? saved : newState(id);
+  store.save();
+  say(saved ? "Resumed saved progress for " + id + "." : "Started a new session for " + id + ".");
+  render();
+  if (S.phase === "P" || S.phase === "M") $("kw").focus();
+}
+function loadData(d) {
+  const err = validateData(d);
+  if (err) { say(err); return false; }
+  stopClock(); store.save(); DATA = d; ITEMS = d.messages; S = null;
+  say("Loaded " + d.set_file + " (" + ITEMS.length + " messages).");
+  if (annotId()) startFor(annotId()); else { renderProgress(); $("annot").focus(); }
+  return true;
+}
+$("file").addEventListener("change", (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { loadData(JSON.parse(rd.result)); } catch (err) { say("Could not read that file: " + err.message); } };
+  rd.readAsText(f);
+});
+$("annot").addEventListener("change", () => startFor(annotId()));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); e.stopPropagation(); startFor(annotId()); } });
+$("kw").addEventListener("input", () => {
+  if (!S || (S.phase !== "P" && S.phase !== "M")) return;
+  const r = rec(S.phase, seq(S.phase)[S.idx].item_id); r.keywords = $("kw").value; r.n_edits++;
+  if (words(r.keywords).length) r.skipped = false;
+  updateCount(); store.save(); renderProgress();
+});
+$("note").addEventListener("input", () => { if (!S || (S.phase !== "P" && S.phase !== "M")) return; rec(S.phase, seq(S.phase)[S.idx].item_id).note = $("note").value; store.save(); });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("skip").addEventListener("click", skip);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && (S.phase === "P" || S.phase === "M") && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!S || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.id === "annot" || t.id === "file")) return;
+  if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) return;
+  if (e.key === "Escape") { e.preventDefault(); if (!$("kw").disabled) $("kw").focus(); return; }
+  if (e.key === "PageUp") { e.preventDefault(); back(); return; }
+  if (e.key === "Enter" && !(t && t.tagName === "TEXTAREA" && e.shiftKey)) { e.preventDefault(); next(); }
+});
+renderProgress();
+$("file").focus();
+</script>
+</body>
+</html>

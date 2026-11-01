@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Write Sentence Pairs (Part 7)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --warn: #7a4a00; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --warn: #ffd27f; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  h3 { font-size: 1rem; margin: 12px 0 4px; }
+  label { font-weight: 600; }
+  input[type=text] { font: inherit; font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  #annot { width: 10em; }
+  .wide { width: 100%; }
+  select { font: inherit; font-size: 1rem; padding: 5px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.2rem; font-weight: 600; padding: 8px 12px; border: 3px solid var(--fg); margin: 4px 0 8px; background: var(--panel); overflow-wrap: anywhere; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  .field { margin: 0 0 10px; }
+  .field label { display: block; }
+  .hint { color: var(--muted); font-size: .9rem; margin: 2px 0; }
+  .input-box { padding: 8px 12px; border: 2px dashed var(--fg); margin: 4px 0 8px; overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .checks { border: 3px solid var(--fg); padding: 8px 12px; margin: 10px 0; }
+  .checks ul { margin: 4px 0; padding-left: 1.2em; }
+  .fix { color: var(--bad); font-weight: 700; }
+  .chk { color: var(--warn); font-weight: 700; }
+  .good { color: var(--ok); font-weight: 700; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .ex { margin: 4px 0 10px; padding-left: 1.2em; }
+  .ex li { margin: 4px 0; }
+  .consent { border: 2px solid var(--line); padding: 8px 12px; background: var(--panel); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Write sentence pairs (Part 7)</h1>
+  <div><label for="annot">Writer ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <div id="dimtag" class="tag hidden"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Enter your writer ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="pracview" class="hidden">
+        <div id="practag" class="tag"></div>
+        <p class="q">Is this pair ready to submit? Choose the main problem, if any.</p>
+        <div id="pracbox"></div>
+        <form id="pracform" onsubmit="return false"></form>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div><button type="button" id="pracnext" class="primary">Next (Enter)</button></div>
+      </div>
+      <div id="writeview" class="hidden">
+        <div id="writetag" class="tag"></div>
+        <p id="topicline"></p>
+        <form id="writeform" onsubmit="return false"></form>
+        <div id="checks" class="checks" tabindex="-1"></div>
+        <div>
+          <button type="button" id="prev">Previous pair (Page Up)</button>
+          <button type="button" id="skip">Next pair, finish later (Page Down)</button>
+          <button type="button" id="next" class="primary">Save and next (Ctrl+Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to write</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">Enter</span> in a box: go to the next box; in the keyword box: save and next pair</li>
+        <li><span class="key">Tab</span> / <span class="key">Shift</span>+<span class="key">Tab</span> move between boxes</li>
+        <li><span class="key">1</span>–<span class="key">6</span> on a value or choice: pick that option</li>
+        <li><span class="key">Ctrl</span>+<span class="key">Enter</span> save and next pair</li>
+        <li><span class="key">Page Down</span> / <span class="key">Page Up</span> next / previous pair without checking</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+const RUN = "write_pairs_v1";
+const DEFAULT_N = 15;
+const TOPICS = ["health", "sensory", "boundaries", "work/school", "plans", "food", "transport", "money",
+                "relationships", "self-advocacy", "hobbies"];
+const TOPIC_HINT = {"health": "symptoms, medicine, appointments", "sensory": "noise, light, textures, crowds",
+  "boundaries": "personal space, privacy, saying what is OK", "work/school": "tasks, deadlines, classes, colleagues",
+  "plans": "meeting up, weekends, changes of plan", "food": "meals, shopping, cooking, diet",
+  "transport": "buses, taxis, lifts, driving", "money": "bills, prices, payments, banks",
+  "relationships": "family, friends, partners, neighbours", "self-advocacy": "asking for support, access, rights",
+  "hobbies": "sport, music, games, crafts, TV"};
+
+/* ---------- rule data: a port of src/hw_rules.py (+ validate_items.py CUE_WORDS / IRREG / matches) ---------- */
+const CUE_WORDS = ["not","no","never","don't","doesn't","didn't","won't","can't","isn't","yes","please","maybe","might",
+  "probably","perhaps","think","sure","definitely","could","would","mind","i","you","we","they","she","he","me","my","your",
+  "yesterday","tomorrow","already","later","tonight","today","now","last","next","soon",
+  "one","two","three","four","five","six","seven","eight","nine","ten"];
+const QWORDS = ["what","where","when","who","whom","whose","why","how","which"];
+const NEG_EXTRA = ["nothing","nobody","none","nowhere","neither","nor","cannot","dont","doesnt","didnt","wont","cant","isnt",
+  "arent","wasnt","werent","shouldnt","couldnt","wouldnt","havent","hasnt","hadnt","aint","n't"];
+const POLITE = ["please","pls","plz","thanks","thank","sorry","kindly","excuse","mind"];
+const AUX = ["can","will","shall","should","must","may","might","does","did","is","are","am","was","were","would","could","'ll","ll","wo"];
+const PRON = ["him","her","them","us","our","their","his","hers","its","it","myself","yourself","yourselves","ourselves",
+  "themselves","himself","herself","mine","yours","ours","theirs","someone","somebody","everyone","everybody","anyone",
+  "anybody","let's","lets","i'm","i'll","i've","i'd","you're","you'll","you've","you'd","we're","we'll","they're","they'll",
+  "he's","she's","it's","y'all"];
+const HEDGES = ["maybe","might","may","probably","perhaps","possibly","likely","unlikely","guess","suppose","think","believe",
+  "seems","seem","apparently","presumably","kinda","sorta","prolly","dunno","doubt","possible","uncertain","unclear","suspect","wonder"];
+const BOOSTERS = ["definitely","really","certainly","absolutely","surely","totally","sure","obviously","clearly","honestly"];
+const TIME_WORDS = ["yesterday","tomorrow","today","tonight","now","later","soon","already","last","next","ago","yet",
+  "recently","currently","earlier","then","still","just","before","after"];
+const CUES_ALL = new Set([].concat(CUE_WORDS, QWORDS, NEG_EXTRA, POLITE, AUX, PRON, HEDGES, BOOSTERS, TIME_WORDS));
+const STOP_BASE = ["a","an","the","to","of","in","on","at","for","with","from","by","and","or","but","so","if","as","into",
+  "onto","about","up","out","off","over","this","that","these","those","there","here","be","been","being","do","have","has",
+  "had","i","me","my","you","your","we","our","they","them","he","she","it","its","his","her","their","is","are","am","was",
+  "were","not","no","very","too","also","some","any","all","s","t","'s","re","ve","d","m","ll","than","again","back","get",
+  "got","go","going","gone","come","every","each","other","another","more","most","much","many","few","own","same","such",
+  "both","either","something","anything","everything","thing","way","lot","bit"];
+const STOP = new Set([...STOP_BASE, ...CUES_ALL]);
+const NONCRIT_TIME_OK = ["yesterday","tomorrow","today","tonight","now","later","soon"];
+const STOP_NO_TIME = new Set([...STOP].filter(w => !NONCRIT_TIME_OK.includes(w)));
+const IRREG = {"saw":"see","seen":"see","got":"get","paid":"pay","took":"take","left":"leave","went":"go","gone":"go",
+  "ate":"eat","bought":"buy","brought":"bring","made":"make","lost":"lose","sent":"send","told":"tell","felt":"feel",
+  "slept":"sleep","won":"win","forgot":"forget","came":"come","met":"meet","fell":"fall","broke":"break","wrote":"write",
+  "gave":"give","spent":"spend","drove":"drive","kept":"keep","found":"find","heard":"hear","had":"have","has":"have",
+  "did":"do","ran":"run","rode":"ride","sold":"sell","taught":"teach","thought":"think","caught":"catch","hurt":"hurt","said":"say"};
+const STRICT_FORM_DIMS = ["time", "agent"];
+const NEGATION_RE = /\b(not|never|no|nothing|nobody|none|neither|nor|cannot)\b|n't\b/;
+const POLITE_RE = /\bplease\b|\bcould you\b|\bwould you\b|\bthank(s| you)\b|\bsorry\b/;
+const HEDGE_RE = /\b(maybe|might|may|probably|perhaps|possibly|likely|i think|i guess|i suppose|not sure|could be|i doubt|i believe|seems?|apparently)\b/;
+const BOOST_RE = /\b(definitely|really|certainly|absolutely|for sure|of course|i'm sure|surely|totally)\b/;
+const PAST_RE = /\b(yesterday|ago|last|already|did|was|were|had)\b|\w{3,}ed\b/;
+const LATER_RE = /\b(will|tomorrow|next|later|soon|tonight|going to)\b|'ll\b/;
+const NOW_RE = /\b(now|right now|at the moment|currently|today)\b|\b(am|is|are|i'm|you're|we're|they're|he's|she's|it's)\s+\w+ing\b/;
+const SPEAKER_RE = /\b(i|i'm|i'll|i've|i'd|my|me)\b/;
+const ADDRESSEE_RE = /\b(you|you're|you'll|you've|you'd|your)\b/;
+
+function norm(s) { return (s || "").toLowerCase().replace(/[’‘]/g, "'"); }
+function toks(s) { return norm(s).match(/[a-z0-9']+/g) || []; }
+function matches(w, t) {
+  const t2 = IRREG[t] || t;
+  return w === t || w === t2 || t.startsWith(w.slice(0, 3)) || w.startsWith(t.slice(0, 3)) || t2.startsWith(w.slice(0, 3));
+}
+function baseOf(w, t) {  /* keyword w is the base form of source token t (finish/finished, make/made, bake/baking) */
+  return t.startsWith(w) || IRREG[t] === w || (w.length > 3 && /[ey]$/.test(w) && t.startsWith(w.slice(0, -1)));
+}
+function kwSplit(k) { return norm(k).trim().split(/[\s,]+/).filter(Boolean); }
+function extraWords(a, b, kws, dim) {
+  const tb = new Set(toks(b)), excl = dim === "time" ? STOP : STOP_NO_TIME, out = [];
+  for (const t of toks(a)) {
+    if (tb.has(t) && !out.includes(t) && !excl.has(t) && (t.length >= 3 || /^\d+$/.test(t)) && !kws.some(w => matches(w, t))) out.push(t);
+  }
+  return out;
+}
+function checkPair(p, dim) {
+  const P = [], W = [], vals = DIMS[dim].values.map(v => v[0]);
+  const a = (p.A || "").trim(), b = (p.B || "").trim(), ta = toks(a), tb = toks(b);
+  for (const [k, t] of [["A", ta], ["B", tb]]) {
+    if (!t.length) P.push([k, "Write sentence " + k + "."]);
+    else if (t.length < 4 || t.length > 12) P.push([k, "Sentence " + k + " has " + t.length + " words; use 4 to 12."]);
+  }
+  if (ta.length && tb.length && ta.join(" ") === tb.join(" ")) P.push(["B", "Sentences A and B are the same; change B on the dimension only."]);
+  const va = p.valA || "", vb = p.valB || "";
+  if (!vals.includes(va)) P.push(["valA", "Choose the value of sentence A."]);
+  if (!vals.includes(vb)) P.push(["valB", "Choose the value of sentence B."]);
+  if (vals.includes(va) && va === vb) P.push(["valB", "A and B must have different values."]);
+  const kws = kwSplit(p.keywords || "");
+  if (!kws.length) P.push(["keywords", "Type the 2 to 4 keywords."]);
+  else if (kws.length < 2 || kws.length > 4) P.push(["keywords", kws.length + " keywords; use 2 to 4."]);
+  const badChars = kws.filter(w => !/^[a-z0-9']+$/.test(w));
+  if (badChars.length) P.push(["keywords", "Use letters and numbers only (no ?, ! or hyphens): " + badChars.join(", ")]);
+  const hits = kws.filter(w => CUES_ALL.has(w) || w.includes("n't"));
+  if (hits.length) P.push(["keywords", "These words give away the difference or are grammar words; leave them out: " + hits.join(", ")]);
+  if (new Set(kws).size !== kws.length) P.push(["keywords", "A keyword is repeated."]);
+  const sa = new Set(ta), sb = new Set(tb);
+  for (const w of kws) {
+    if (hits.includes(w) || badChars.includes(w)) continue;
+    const inA = ta.some(t => t.length >= 2 && matches(w, t)), inB = tb.some(t => t.length >= 2 && matches(w, t));
+    if (!inA || !inB) {
+      const miss = [["A", inA], ["B", inB]].filter(x => !x[1]).map(x => x[0]).join(" and ");
+      P.push(["keywords", "Keyword '" + w + "' is not in sentence " + miss + "; keywords must be in both."]);
+    } else if (sa.has(w) !== sb.has(w) && !(sa.has(w) ? tb : ta).some(t => t.length >= 2 && matches(w, t) && baseOf(w, t))) {
+      if (STRICT_FORM_DIMS.includes(dim) || w in IRREG) P.push(["keywords", "Keyword '" + w + "' is the exact form of only one sentence; use the base form (e.g. 'finish' for finished / will finish)."]);
+      else W.push(["keywords", "Keyword '" + w + "' matches one sentence exactly and the other only by its ending; the base form is better."]);
+    }
+  }
+  const ex = ta.length && tb.length ? extraWords(a, b, kws, dim) : [];
+  if (ta.length && tb.length && kws.length && !ex.length) P.push(["B", "Both sentences need one more shared word that is not a keyword (a place, time, object or person), e.g. '... on the train'."]);
+  const sit = p.situation || "";
+  if (sit.includes("\n") || sit.length > 140) P.push(["situation", "Keep the situation to one short line."]);
+  for (const [k, raw, v] of [["A", a, va], ["B", b, vb]]) {
+    const s = norm(raw);
+    if (!s || !vals.includes(v)) continue;
+    const has = rx => rx.test(s);
+    if (dim === "polarity") {
+      if (v === "negated" && !has(NEGATION_RE)) W.push([k, "Sentence " + k + " is marked negated but has no not / n't / never / no."]);
+      if (v === "affirmative" && has(NEGATION_RE)) W.push([k, "Sentence " + k + " is marked affirmative but contains a negation."]);
+    } else if (dim === "politeness") {
+      if (v === "polite" && !has(POLITE_RE)) W.push([k, "Sentence " + k + " is marked polite but has no please / could you / would you / thanks / sorry."]);
+      if (v === "plain" && has(POLITE_RE)) W.push([k, "Sentence " + k + " is marked plain but contains a polite word."]);
+    } else if (dim === "speech_act") {
+      const q = s.trimEnd().endsWith("?");
+      if (v === "question" && !q) W.push([k, "Sentence " + k + " is marked question but does not end with '?'."]);
+      if (v === "statement" && q) W.push([k, "Sentence " + k + " is marked statement but ends with '?'."]);
+      if (has(POLITE_RE)) W.push([k, "Sentence " + k + " contains a polite word; keep politeness out of speech-act pairs."]);
+      if (/\b(let's|lets|shall we|how about|no thanks)\b/.test(s)) W.push([k, "Sentence " + k + " looks like an offer or refusal; use statement / question / request only."]);
+    } else if (dim === "certainty") {
+      if (v === "hedged/uncertain" && !has(HEDGE_RE)) W.push([k, "Sentence " + k + " is marked hedged but has no maybe / might / probably / I think."]);
+      if (v === "plain assertion" && has(HEDGE_RE)) W.push([k, "Sentence " + k + " is marked plain but contains a hedge."]);
+      if (has(BOOST_RE)) W.push([k, "Sentence " + k + " contains a booster (really, definitely); plain means no hedge and no booster."]);
+      if (s.trimEnd().endsWith("?")) W.push([k, "Sentence " + k + " is a question; certainty pairs should be statements."]);
+    } else if (dim === "agent") {
+      if (v === "speaker" && !has(SPEAKER_RE)) W.push([k, "Sentence " + k + " is marked speaker but has no I / my / me."]);
+      if (v === "addressee" && !has(ADDRESSEE_RE)) W.push([k, "Sentence " + k + " is marked addressee but has no you / your."]);
+      if (v === "third party" && /^\s*(i|i'm|i'll|i've|you|you're|you'll|we|let's)\b/.test(s)) W.push([k, "Sentence " + k + " is marked third party but starts with I / you / we."]);
+      if (/\b(we|let's|us)\b/.test(s)) W.push([k, "Sentence " + k + " mentions we / us; keep to I, you or someone else."]);
+    } else if (dim === "time") {
+      const rx = {past: PAST_RE, later: LATER_RE, now: NOW_RE}[v];
+      if (!has(rx)) W.push([k, "Sentence " + k + " is marked " + v + " but has no clear " + v + " tense or time word."]);
+    }
+    if (dim !== "certainty" && (has(HEDGE_RE) || has(BOOST_RE))) W.push([k, "Sentence " + k + " contains a hedge or booster (maybe, really, ...); leave these out."]);
+  }
+  return {problems: P, warnings: W, extra: ex, keywords: kws, ok: !P.length};
+}
+
+/* ---------- dimensions: values (canonical value, label), guidance, practice ---------- */
+const OPTS_PRAC = ["Ready: no problem", "The keywords give away the difference (or are missing from a sentence)",
+                   "The sentences differ in more than one way", "A value is wrong, or a sentence does not fit the dimension"];
+const DIMS = {
+  polarity: {name: "polarity (negation)", values: [["affirmative", "affirmative"], ["negated", "negated"]],
+    what: "B is A with the main statement or request negated (not, n't, never, no), or the other way round.",
+    good: [["I want the window seat on the train.", "I don't want the window seat on the train.", "want window seat", "Only the negation changes; 'train' is the extra shared word."],
+           ["The lift in our building is working.", "The lift in our building isn't working.", "lift working", "Both readings fit 'lift working'."]],
+    bad: [["I'm not coming to the barbecue.", "I'm coming to the barbecue.", "not coming barbecue", "'not' in the keywords gives the answer away."],
+          ["I like the new nurse on my ward.", "I don't like the old nurse on my ward.", "like nurse", "new/old also changes: two differences."]],
+    practice: [
+      {A: "I want the window seat on the train.", valA: "affirmative", B: "I don't want the window seat on the train.", valB: "negated", keywords: "want window seat", expected: 0,
+       fb: "Ready. Only the negation differs, the keywords fit both sentences, and 'train' is a shared extra word."},
+      {A: "I like the new nurse on my ward.", valA: "affirmative", B: "I don't like the old nurse on my ward.", valB: "negated", keywords: "like nurse", expected: 2,
+       fb: "Not ready: 'new' and 'old' also differ. Keep everything except the negation the same."},
+      {A: "I'm not coming to the barbecue on Sunday.", valA: "negated", B: "I'm coming to the barbecue on Sunday.", valB: "affirmative", keywords: "not coming barbecue", expected: 1,
+       fb: "Not ready: 'not' in the keywords tells which sentence is meant. Use e.g. 'come barbecue'."}]},
+  speech_act: {name: "speech act", values: [["statement", "statement (tells)"], ["question", "question (asks for information)"], ["request/command", "request (asks the listener to do something)"]],
+    what: "B does a different thing than A: tells (statement), asks (question) or asks the listener to do something (request: an imperative or 'Can you ...?'). Keep both plain: no please, could or would.",
+    good: [["The pharmacy is open on Sunday.", "Is the pharmacy open on Sunday?", "pharmacy open", "Statement vs question."],
+           ["You booked the taxi to the airport.", "Book the taxi to the airport.", "book taxi", "Statement vs request."],
+           ["Did you charge my phone overnight?", "Charge my phone overnight.", "charge phone", "Question vs request."]],
+    bad: [["You booked the taxi to the airport.", "Can you book the taxi to the airport?", "you book taxi", "'you' in the keywords is a cue word."],
+          ["The bus stop is here.", "Could you please show me the bus stop?", "bus stop", "Adds politeness and changes more than one thing."]],
+    practice: [
+      {A: "The pharmacy is open on Sunday.", valA: "statement", B: "Is the pharmacy open on Sunday?", valB: "question", keywords: "pharmacy open", expected: 0,
+       fb: "Ready. Statement vs question, the same words otherwise, and 'sunday' is the extra shared word."},
+      {A: "Did you water the plants on the balcony?", valA: "request/command", B: "Water the plants on the balcony.", valB: "statement", keywords: "water plants", expected: 3,
+       fb: "Not ready: A is a question and B is a request. The values are wrong."},
+      {A: "You booked the taxi to the airport.", valA: "statement", B: "Can you book the taxi to the airport?", valB: "request/command", keywords: "you book taxi", expected: 1,
+       fb: "Not ready: 'you' is a cue word and must not be a keyword. 'book taxi' works."}]},
+  politeness: {name: "politeness", values: [["plain", "plain (no polite word)"], ["polite", "polite (please, could you, would you, thanks, sorry)"]],
+    what: "B is A with an explicit polite word added or removed: please, could you, would you (mind), thank you/thanks, sorry. 'Can you ...?' alone is plain.",
+    good: [["Please send me the photos from the wedding.", "Send me the photos from the wedding.", "send photos", "Only 'please' differs."],
+           ["Could you turn the music down tonight?", "Can you turn the music down tonight?", "turn music down", "'Could you' is polite, 'Can you' is plain."]],
+    bad: [["Could you check the oven timer for me?", "Can you check the oven timer for me?", "could check oven", "'could' in the keywords gives it away."],
+          ["Could you move your car this evening?", "Move your car right now.", "move car", "The time also changes: two differences."]],
+    practice: [
+      {A: "Please send me the photos from the wedding.", valA: "polite", B: "Send me the photos from the wedding.", valB: "plain", keywords: "send photos", expected: 0,
+       fb: "Ready. Only 'please' differs and 'wedding' is a shared extra word."},
+      {A: "Could you move your car this evening?", valA: "polite", B: "Move your car right now.", valB: "plain", keywords: "move car", expected: 2,
+       fb: "Not ready: the time changes too (this evening vs right now)."},
+      {A: "Could you check the oven timer for me?", valA: "polite", B: "Can you check the oven timer for me?", valB: "plain", keywords: "could check oven", expected: 1,
+       fb: "Not ready: 'could' is the polite cue and must not be a keyword. 'check oven timer' works."}]},
+  certainty: {name: "certainty", values: [["plain assertion", "plain (no hedge, no booster)"], ["hedged/uncertain", "hedged (maybe, might, probably, I think)"]],
+    what: "B is A with a hedge added or removed: maybe, might, probably, perhaps, I think, I guess. Both are statements. Plain means no hedge and no booster (not 'definitely' or 'really').",
+    good: [["The morning bus is probably late.", "The morning bus is late.", "bus late", "Only 'probably' differs; 'morning' is the extra word."],
+           ["I think I left my keys at work.", "I left my keys at work.", "leave keys", "Only 'I think' differs."]],
+    bad: [["Maybe the clinic is closed today.", "The clinic is closed today.", "maybe clinic closed", "'maybe' in the keywords gives it away."],
+          ["I think I left my keys at work.", "I definitely left my keys at work.", "leave keys", "'definitely' is a booster, so B is not plain."]],
+    practice: [
+      {A: "The morning bus is probably late.", valA: "hedged/uncertain", B: "The morning bus is late.", valB: "plain assertion", keywords: "bus late", expected: 0,
+       fb: "Ready. Only the hedge differs and 'morning' is a shared extra word."},
+      {A: "I think I left my keys at work.", valA: "hedged/uncertain", B: "I definitely left my keys at work.", valB: "plain assertion", keywords: "leave keys", expected: 3,
+       fb: "Not ready: 'definitely' makes B emphatic, not plain. Drop it: 'I left my keys at work.'"},
+      {A: "Maybe the clinic is closed today.", valA: "hedged/uncertain", B: "The clinic is closed today.", valB: "plain assertion", keywords: "maybe clinic closed", expected: 1,
+       fb: "Not ready: 'maybe' must not be a keyword. 'clinic closed' works."}]},
+  agent: {name: "agent (who does it)", values: [["speaker", "speaker (I)"], ["addressee", "addressee (you)"], ["third party", "third party (someone or something else)"]],
+    what: "B is A with a different doer of the action: I, you, or someone/something else (my sister, the nurse, the bus). Not 'we'. Keywords use the base form of the verb (go, not goes).",
+    good: [["I booked the dentist appointment for Friday.", "You booked the dentist appointment for Friday.", "book appointment", "Only the doer differs."],
+           ["My sister paid for the taxi home.", "I paid for the taxi home.", "pay taxi", "Third party vs speaker; 'pay' covers paid."]],
+    bad: [["She walks the dog every morning.", "I walk the dog every morning.", "walks dog", "'walks' only fits she: use 'walk'."],
+          ["My sister paid for the taxi home.", "I paid for the bus home.", "pay home", "taxi/bus also changes: two differences."]],
+    practice: [
+      {A: "I booked the dentist appointment for Friday.", valA: "speaker", B: "You booked the dentist appointment for Friday.", valB: "addressee", keywords: "book appointment", expected: 0,
+       fb: "Ready. Only the doer differs; 'dentist' and 'friday' are shared extra words."},
+      {A: "My sister paid for the taxi home.", valA: "third party", B: "I paid for the bus home.", valB: "speaker", keywords: "pay home", expected: 2,
+       fb: "Not ready: taxi vs bus also differs."},
+      {A: "She walks the dog every morning.", valA: "third party", B: "I walk the dog every morning.", valB: "speaker", keywords: "walks dog", expected: 1,
+       fb: "Not ready: 'walks' only fits 'she', so it gives the doer away. Use 'walk dog'."}]},
+  time: {name: "time", values: [["past", "past (already happened)"], ["now", "now (happening now)"], ["later", "later (in the future)"]],
+    what: "B is A at a different time: past, now or later. Change the tense and any time words only. Keywords use the base form (finish, not finished) and no time words.",
+    good: [["I finished the knitting project last month.", "I'll finish the knitting project next month.", "finish project", "Past vs later; 'knitting' is the extra word."],
+           ["I'm cooking pasta for dinner right now.", "I cooked pasta for dinner yesterday.", "cook pasta", "Now vs past."]],
+    bad: [["I'm watching the match right now.", "I watched the match last night.", "watched match", "'watched' carries the tense: use 'watch'."],
+          ["I called the bank about my card yesterday.", "I'll call the bank about my rent tomorrow.", "call bank", "card/rent also changes: two differences."]],
+    practice: [
+      {A: "I finished the knitting project last month.", valA: "past", B: "I'll finish the knitting project next month.", valB: "later", keywords: "finish project", expected: 0,
+       fb: "Ready. Only the time differs and 'knitting' is a shared extra word."},
+      {A: "I called the bank about my card yesterday.", valA: "past", B: "I'll call the bank about my rent tomorrow.", valB: "later", keywords: "call bank", expected: 2,
+       fb: "Not ready: card vs rent also differs."},
+      {A: "I'm watching the match right now.", valA: "now", B: "I watched the match last night.", valB: "past", keywords: "watched match", expected: 1,
+       fb: "Not ready: 'watched' carries the past tense. Use 'watch match'."}]},
+};
+const DIM_KEYS = Object.keys(DIMS);
+
+/* ---------- state ---------- */
+let S = null, HASH = {}, shownAt = null, showingFeedback = false, pendingDim = null;
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+function parseHash() {
+  const h = {}; const raw = (location.hash || "").replace(/^#/, "");
+  for (const part of raw.split("&")) { const [k, v] = part.split("="); if (k) h[decodeURIComponent(k)] = decodeURIComponent(v || ""); }
+  const out = {};
+  if (h.dim && DIMS[h.dim]) out.dim = h.dim;
+  if (h.rot !== undefined && /^\d+$/.test(h.rot)) out.rot = Number(h.rot) % TOPICS.length;
+  if (h.n && /^\d+$/.test(h.n)) out.n = Math.max(1, Math.min(40, Number(h.n)));
+  if (h.topics) { const t = h.topics.split(",").filter(x => TOPICS.includes(x)); if (t.length) out.topics = t; }
+  if (h.id) out.id = h.id.slice(0, 20);
+  return out;
+}
+const store = {
+  key(id, dim) { return "writepairs:v1:" + id + ":" + dim; },
+  load(id, dim) { try { const s = localStorage.getItem(this.key(id, dim)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.writer, S.dim), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function topicPlan(n, rot, topics) {
+  const base = topics && topics.length ? topics : TOPICS.slice(rot || 0).concat(TOPICS.slice(0, rot || 0));
+  return Array.from({length: n}, (_, i) => base[i % base.length]);
+}
+function newState(id, dim) {
+  const n = HASH.n || DEFAULT_N, plan = topicPlan(n, HASH.rot || 0, HASH.topics);
+  return {writer: id, dim, run: RUN, phase: "intro", idx: 0, rot: HASH.rot || 0, n, consent: {agreed: false, at: null},
+          dim_source: HASH.dim ? "hash" : "chosen", P: {},
+          W: plan.map(t => ({situation: "", topic: t, topic_suggested: t, A: "", valA: "", B: "", valB: "", keywords: "", time_ms: 0})),
+          started: null};
+}
+function practiceOf(dim) { return DIMS[dim].practice.map((p, i) => Object.assign({id: "prac-" + dim + "-" + (i + 1)}, p)); }
+function nReady() { return S ? S.W.filter(p => checkPair(p, S.dim).ok).length : 0; }
+function stopClock() {
+  if (shownAt !== null && S) {
+    const dt = Date.now() - shownAt;
+    if (S.phase === "W") S.W[S.idx].time_ms += dt;
+    else if (S.phase === "P") { const pid = practiceOf(S.dim)[S.idx].id; S.P[pid] = S.P[pid] || {answer: null, time_ms: 0}; S.P[pid].time_ms += dt; }
+  }
+  shownAt = null;
+}
+function renderProgress() {
+  let t = "Enter your writer ID to begin.", pct = 0;
+  if (S) {
+    const ready = nReady(); pct = Math.round(100 * ready / S.W.length);
+    t = S.phase === "intro" ? "Ready to start" : S.phase === "done" ? "Finished" : S.phase === "P" ? "Practice " + (S.idx + 1) + " of 3"
+      : "Pair " + (S.idx + 1) + " of " + S.W.length;
+    t += " (" + ready + " of " + S.W.length + " pairs ready, " + pct + "%)";
+    $("dimtag").textContent = "Dimension: " + DIMS[S.dim].name; $("dimtag").classList.remove("hidden");
+  } else $("dimtag").classList.add("hidden");
+  $("progtext").textContent = t;
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+function exList(rows, good) {
+  const ul = document.createElement("ul"); ul.className = "ex";
+  for (const [a, b, k, why] of rows) {
+    const li = document.createElement("li");
+    li.append((good ? "Good: " : "Not good: ") + "A \"" + a + "\" / B \"" + b + "\" / keywords ");
+    const m = document.createElement("span"); m.className = "mono"; m.textContent = k; li.append(m, document.createTextNode(". " + why));
+    ul.append(li);
+  }
+  return ul;
+}
+function renderHelp() {
+  const h = $("help"); h.innerHTML = "";
+  const gen = document.createElement("div");
+  gen.innerHTML = "<dl><dt>One sentence each</dt><dd>4 to 12 words, natural everyday English an adult might send or say.</dd>" +
+    "<dt>One difference</dt><dd>B is A changed on your dimension only. Same people, action, objects and place.</dd>" +
+    "<dt>Keywords</dt><dd>2 to 4 words found in both sentences, as a person would select them on a device. They must not give away the difference: no not / no / never, please / could / would, maybe / might / think, I / you / she, question words, time words, or grammar words.</dd>" +
+    "<dt>Both readings fit</dt><dd>Someone seeing only the keywords could mean either sentence.</dd>" +
+    "<dt>Extra word</dt><dd>Both sentences share one more word that is not a keyword (a place, time, object or person).</dd>" +
+    "<dt>Respectful</dt><dd>No stereotypes (gender, age, disability, culture, religion), no real names or private details, nothing offensive. Use roles or invented first names.</dd></dl>";
+  h.append(gen);
+  if (S) { const d = DIMS[S.dim]; const h3 = document.createElement("h3"); h3.textContent = d.name; const p = document.createElement("p"); p.textContent = d.what; h.append(h3, p); }
+}
+function renderIntro() {
+  const v = $("introview");
+  for (const id of ["pracview", "writeview"]) $(id).classList.add("hidden");
+  v.classList.remove("hidden"); v.innerHTML = ""; renderHelp();
+  if (!S && HASH.dim) {
+    v.innerHTML = "<h2>Write sentence pairs</h2>";
+    const p = document.createElement("p"); p.textContent = "Your dimension is " + DIMS[HASH.dim].name + ". Type your writer ID at the top and press Enter.";
+    v.append(p); return;
+  }
+  if (!S) {
+    const h = document.createElement("h2"); h.textContent = "Choose your dimension"; v.append(h);
+    const p = document.createElement("p"); p.textContent = "Your coordinator tells you which dimension to write. Choose it (keys 1 to 6), then press Enter."; v.append(p);
+    const fs = document.createElement("fieldset"); const lg = document.createElement("legend"); lg.textContent = "Dimension"; fs.append(lg);
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", "Dimension");
+    DIM_KEYS.forEach((k, i) => {
+      const lab = document.createElement("label"); lab.className = "opt" + (pendingDim === k ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = "dimpick"; inp.value = k; inp.checked = pendingDim === k;
+      inp.addEventListener("change", () => { pendingDim = k; renderIntro(); });
+      const kk = document.createElement("span"); kk.className = "key"; kk.textContent = String(i + 1);
+      lab.append(inp, kk, document.createTextNode(" " + DIMS[k].name)); opts.append(lab);
+    });
+    fs.append(opts); v.append(fs);
+    const b = document.createElement("button"); b.type = "button"; b.className = "primary"; b.id = "go"; b.textContent = "Continue (Enter)";
+    b.addEventListener("click", advanceIntro); v.append(b);
+    v.focus(); return;
+  }
+  const d = DIMS[S.dim];
+  if (S.phase === "done") {
+    v.innerHTML = "<h2>All done. Thank you!</h2><p>Please press <strong>Download CSV</strong> and send the file to the study coordinator. You can still go back to change a pair (Page Up).</p>";
+    v.focus(); return;
+  }
+  const h = document.createElement("h2"); h.textContent = "Write " + S.W.length + " sentence pairs: " + d.name; v.append(h);
+  const p1 = document.createElement("p");
+  p1.textContent = "You will write " + S.W.length + " pairs of everyday messages. Each pair is two sentences, A and B, that differ in one way only: " + d.what;
+  v.append(p1);
+  const p2 = document.createElement("p");
+  p2.textContent = "For each pair you also type the 2 to 4 keywords both sentences share, choose each sentence's value, and optionally add a one-line situation. Each pair suggests a topic so that pairs cover many areas of adult life; follow it unless it does not work for you. The page checks the format as you type.";
+  v.append(p2);
+  const h3 = document.createElement("h3"); h3.textContent = "Examples"; v.append(h3, exList(d.good, true), exList(d.bad, false));
+  const c = document.createElement("div"); c.className = "consent";
+  c.innerHTML = "<p><strong>Release of your sentences.</strong> The sentences, keywords and situations you write will be published with the study data under the Creative Commons Attribution 4.0 licence (CC BY 4.0), so that other researchers can reuse them. You will be credited as an anonymous item writer by your writer ID only; no name or other personal data is collected. Do not include real names or private details. You can stop at any time; nothing is used unless you send your file.</p>";
+  const lab = document.createElement("label"); const cb = document.createElement("input"); cb.type = "checkbox"; cb.id = "consent"; cb.checked = !!S.consent.agreed;
+  cb.addEventListener("change", () => { S.consent = {agreed: cb.checked, at: cb.checked ? new Date().toISOString() : null}; store.save(); });
+  lab.append(cb, document.createTextNode(" I agree to release my sentences under CC BY 4.0 as described."));
+  c.append(lab); v.append(c);
+  const p3 = document.createElement("p"); p3.textContent = "First come 3 practice pairs with feedback. Press Enter or the button to start."; v.append(p3);
+  const b = document.createElement("button"); b.type = "button"; b.className = "primary"; b.id = "go"; b.textContent = "Start practice (Enter)";
+  b.addEventListener("click", advanceIntro); v.append(b);
+  v.focus();
+}
+function advanceIntro() {
+  if (!S) {
+    if (!annotId()) { say("Enter your writer ID first."); $("annot").focus(); return; }
+    if (!pendingDim) { say("Choose a dimension first (keys 1 to 6)."); return; }
+    startFor(annotId(), pendingDim); return;
+  }
+  if (S.phase !== "intro") return;
+  if (!S.consent.agreed) { say("Please read the release note and tick the box to continue."); const c = $("consent"); if (c) c.focus(); return; }
+  S.phase = "P"; S.idx = 0; if (!S.started) S.started = new Date().toISOString(); store.save(); render();
+}
+function render() {
+  renderProgress();
+  if (!S || S.phase === "intro" || S.phase === "done") { renderIntro(); return; }
+  renderHelp();
+  if (S.phase === "P") renderPractice(); else renderWrite();
+  if (shownAt === null) shownAt = Date.now();
+}
+function pairBox(p, dim, box) {
+  box.innerHTML = "";
+  const lab = Object.fromEntries(DIMS[dim].values);
+  for (const k of ["A", "B"]) {
+    const d = document.createElement("div"); d.className = "sentence"; d.textContent = k + ": " + p[k] + "  (" + lab[p["val" + k]] + ")"; box.append(d);
+  }
+  const kb = document.createElement("div"); kb.className = "input-box"; kb.append("Keywords: ");
+  const m = document.createElement("span"); m.className = "mono"; m.textContent = p.keywords; kb.append(m); box.append(kb);
+}
+function renderPractice() {
+  $("introview").classList.add("hidden"); $("writeview").classList.add("hidden"); $("pracview").classList.remove("hidden");
+  const items = practiceOf(S.dim), it = items[S.idx], r = S.P[it.id] || {answer: null, time_ms: 0};
+  $("practag").textContent = "Practice " + (S.idx + 1) + " of " + items.length + " (you will see feedback)";
+  pairBox(it, S.dim, $("pracbox"));
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  const form = $("pracform"); form.innerHTML = "";
+  const fs = document.createElement("fieldset"); const lg = document.createElement("legend"); lg.textContent = "Is this pair ready?"; fs.append(lg);
+  const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", "Is this pair ready?");
+  OPTS_PRAC.forEach((o, i) => {
+    const l = document.createElement("label"); l.className = "opt" + (r.answer === i ? " checked" : "");
+    const inp = document.createElement("input"); inp.type = "radio"; inp.name = "prac"; inp.value = String(i); inp.checked = r.answer === i; inp.disabled = showingFeedback;
+    inp.addEventListener("change", () => pracAnswer(i));
+    const k = document.createElement("span"); k.className = "key"; k.textContent = String(i + 1);
+    l.append(inp, k, document.createTextNode(" " + o)); opts.append(l);
+  });
+  fs.append(opts); form.append(fs);
+}
+function pracAnswer(i) {
+  if (showingFeedback) return;
+  const it = practiceOf(S.dim)[S.idx]; S.P[it.id] = S.P[it.id] || {answer: null, time_ms: 0}; S.P[it.id].answer = i; store.save(); renderPractice();
+}
+function pracNext() {
+  const items = practiceOf(S.dim), it = items[S.idx], r = S.P[it.id];
+  if (!showingFeedback) {
+    if (!r || r.answer === null || r.answer === undefined) { say("Choose an answer (keys 1 to 4)."); return; }
+    const fb = $("feedback"); fb.innerHTML = "";
+    const s = document.createElement("p"); const sp = document.createElement("span");
+    sp.className = r.answer === it.expected ? "ok" : "bad"; sp.textContent = r.answer === it.expected ? "Matches." : "Different.";
+    s.append(sp, document.createTextNode(" Suggested answer: " + OPTS_PRAC[it.expected] + ".")); fb.append(s);
+    const p = document.createElement("p"); p.textContent = it.fb; fb.append(p);
+    const p2 = document.createElement("p"); p2.textContent = "Press Enter to continue."; fb.append(p2);
+    showingFeedback = true; renderPractice(); fb.classList.remove("hidden"); fb.focus(); return;
+  }
+  showingFeedback = false; stopClock(); say("");
+  if (S.idx < items.length - 1) S.idx++; else { S.phase = "W"; S.idx = 0; }
+  store.save(); render();
+  if (S.phase === "W") focusField("f_A");
+}
+const FIELD_ORDER = ["f_situation", "f_topic", "f_A", "valA", "f_B", "valB", "f_keywords"];
+function focusField(id) {
+  if (id === "valA" || id === "valB") {
+    const rs = [...document.querySelectorAll("input[name=" + id + "]")]; const t = rs.find(x => x.checked) || rs[0]; if (t) t.focus(); return;
+  }
+  const el = $(id); if (el) el.focus();
+}
+function renderWrite() {
+  $("introview").classList.add("hidden"); $("pracview").classList.add("hidden"); $("writeview").classList.remove("hidden");
+  const p = S.W[S.idx], d = DIMS[S.dim];
+  $("writetag").textContent = "Pair " + (S.idx + 1) + " of " + S.W.length + " - " + d.name;
+  $("topicline").textContent = "Suggested topic: " + p.topic_suggested + " (" + (TOPIC_HINT[p.topic_suggested] || "") + "). " + d.what;
+  const form = $("writeform"); form.innerHTML = "";
+  const text = (id, label, hint, key, wide) => {
+    const w = document.createElement("div"); w.className = "field";
+    const l = document.createElement("label"); l.htmlFor = id; l.textContent = label; w.append(l);
+    if (hint) { const h = document.createElement("div"); h.className = "hint"; h.id = id + "_hint"; h.textContent = hint; w.append(h); }
+    const i = document.createElement("input"); i.type = "text"; i.id = id; i.value = p[key]; i.autocomplete = "off"; i.spellcheck = true;
+    if (wide) i.className = "wide"; if (hint) i.setAttribute("aria-describedby", id + "_hint");
+    i.maxLength = key === "keywords" ? 80 : 160;
+    i.addEventListener("input", () => { p[key] = i.value; store.save(); renderChecks(); renderProgress(); });
+    w.append(i); form.append(w); return i;
+  };
+  const values = (name, label, key) => {
+    const fs = document.createElement("fieldset"); const lg = document.createElement("legend"); lg.textContent = label; fs.append(lg);
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", label);
+    d.values.forEach(([v, lab], i) => {
+      const l = document.createElement("label"); l.className = "opt" + (p[key] === v ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = name; inp.value = v; inp.checked = p[key] === v;
+      inp.addEventListener("change", () => { p[key] = v; store.save(); for (const x of opts.children) x.classList.toggle("checked", x.querySelector("input").checked); renderChecks(); renderProgress(); });
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(i + 1);
+      l.append(inp, k, document.createTextNode(" " + lab)); opts.append(l);
+    });
+    fs.append(opts); form.append(fs);
+  };
+  text("f_situation", "Situation (optional, one line)", "Only if the message needs it, e.g. 'At the GP surgery.'", "situation", true);
+  const tw = document.createElement("div"); tw.className = "field";
+  const tl = document.createElement("label"); tl.htmlFor = "f_topic"; tl.textContent = "Topic"; tw.append(tl);
+  const sel = document.createElement("select"); sel.id = "f_topic";
+  for (const t of TOPICS.concat(["other"])) { const o = document.createElement("option"); o.value = t; o.textContent = t; o.selected = p.topic === t; sel.append(o); }
+  sel.addEventListener("change", () => { p.topic = sel.value; store.save(); });
+  tw.append(sel); form.append(tw);
+  text("f_A", "Sentence A", null, "A", true);
+  values("valA", "Value of sentence A", "valA");
+  text("f_B", "Sentence B (A changed in one way only)", null, "B", true);
+  values("valB", "Value of sentence B", "valB");
+  text("f_keywords", "Keywords (2 to 4, separated by spaces)", "Words in both sentences that someone would select on a device; no cue words.", "keywords", true);
+  renderChecks();
+}
+function renderChecks() {
+  const p = S.W[S.idx], c = checkPair(p, S.dim), box = $("checks"); box.innerHTML = "";
+  const h = document.createElement("p");
+  if (c.ok && !c.warnings.length) { h.className = "good"; h.textContent = "Checks: all fine."; }
+  else h.innerHTML = "<strong>Checks:</strong> " + c.problems.length + " to fix, " + c.warnings.length + " to look at.";
+  box.append(h);
+  const ul = document.createElement("ul");
+  for (const [, m] of c.problems) { const li = document.createElement("li"); const s = document.createElement("span"); s.className = "fix"; s.textContent = "Fix: "; li.append(s, document.createTextNode(m)); ul.append(li); }
+  for (const [, m] of c.warnings) { const li = document.createElement("li"); const s = document.createElement("span"); s.className = "chk"; s.textContent = "Check: "; li.append(s, document.createTextNode(m)); ul.append(li); }
+  if (ul.children.length) box.append(ul);
+  if (c.extra.length) { const e = document.createElement("p"); e.className = "hint"; e.textContent = "Shared extra word: " + c.extra[0] + "."; box.append(e); }
+  const dup = S.W.findIndex((q, i) => i !== S.idx && q.keywords.trim() && kwSplit(q.keywords).join(" ") === c.keywords.join(" "));
+  if (dup >= 0) { const e = document.createElement("p"); e.className = "chk"; e.textContent = "Check: pair " + (dup + 1) + " uses the same keywords; vary your pairs."; box.append(e); }
+}
+function goPair(i) {
+  stopClock(); S.idx = Math.max(0, Math.min(S.W.length - 1, i)); store.save(); render(); focusField("f_A");
+}
+function saveNext() {
+  if (S.phase !== "W") return;
+  const c = checkPair(S.W[S.idx], S.dim);
+  if (!c.ok) {
+    const f = c.problems[0][0];
+    say("Pair " + (S.idx + 1) + ": " + c.problems.length + " thing(s) to fix. First: " + c.problems[0][1]);
+    focusField({A: "f_A", B: "f_B", valA: "valA", valB: "valB", keywords: "f_keywords", situation: "f_situation"}[f] || "f_A");
+    return;
+  }
+  say("");
+  const next = S.W.findIndex((q, i) => i > S.idx && !checkPair(q, S.dim).ok);
+  const any = S.W.findIndex(q => !checkPair(q, S.dim).ok);
+  if (next >= 0) goPair(next);
+  else if (any >= 0) { say("Some earlier pairs still need work."); goPair(any); }
+  else { stopClock(); S.phase = "done"; store.save(); render(); say("All pairs ready. Please download the CSV."); }
+}
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your writer ID first."); $("annot").focus(); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["row_type", "writer", "dimension", "pair_no", "situation", "topic", "topic_suggested", "sentence_A", "value_A",
+                "sentence_B", "value_B", "keywords", "extra_word", "checks_ok", "problems", "warnings", "practice_answer",
+                "practice_expected", "time_ms", "consent", "consent_at", "dim_source", "started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  practiceOf(S.dim).forEach((it) => {
+    const r = S.P[it.id]; if (!r) return;
+    lines.push(["practice", S.writer, S.dim, it.id, "", "", "", it.A, it.valA, it.B, it.valB, it.keywords, "", "", "", "",
+      r.answer === null || r.answer === undefined ? "" : r.answer + 1, it.expected + 1, Math.round(r.time_ms),
+      S.consent.agreed ? "yes" : "no", S.consent.at || "", S.dim_source, S.started || "", RUN, now].map(csvCell).join(","));
+  });
+  S.W.forEach((p, i) => {
+    const c = checkPair(p, S.dim);
+    if (!p.A.trim() && !p.B.trim() && !p.keywords.trim()) return;
+    lines.push(["pair", S.writer, S.dim, i + 1, p.situation.trim(), p.topic, p.topic_suggested, p.A.trim(), p.valA, p.B.trim(), p.valB,
+      c.keywords.join(" "), c.extra[0] || "", c.ok ? 1 : 0, c.problems.map(x => x[1]).join(" | "), c.warnings.map(x => x[1]).join(" | "),
+      "", "", Math.round(p.time_ms), S.consent.agreed ? "yes" : "no", S.consent.at || "", S.dim_source, S.started || "", RUN, now].map(csvCell).join(","));
+  });
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "write_pairs_" + S.dim + "_" + S.writer + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + nReady() + " of " + S.W.length + " pairs ready).");
+  return lines.join("\n");
+}
+function startFor(id, dim) {
+  if (!id) { S = null; render(); return; }
+  stopClock(); store.save(); showingFeedback = false;
+  dim = dim || HASH.dim || null;
+  if (!dim) { S = null; render(); say("Choose your dimension."); return; }
+  const saved = store.load(id, dim);
+  S = saved && saved.run === RUN ? saved : newState(id, dim);
+  store.save();
+  say(saved ? "Resumed saved work for " + id + " (" + DIMS[dim].name + ")." : "Started a new session for " + id + " (" + DIMS[dim].name + ").");
+  render();
+  if (S.phase === "W") focusField("f_A");
+}
+HASH = parseHash();
+if (HASH.id) $("annot").value = HASH.id;
+$("annot").addEventListener("change", () => startFor(annotId(), S ? S.dim : pendingDim));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); e.stopPropagation(); startFor(annotId(), S ? S.dim : pendingDim); const v = $("introview"); if (!v.classList.contains("hidden")) v.focus(); } });
+$("export").addEventListener("click", exportCSV);
+$("pracnext").addEventListener("click", pracNext);
+$("next").addEventListener("click", saveNext);
+$("skip").addEventListener("click", () => { if (S && S.phase === "W") goPair(S.idx + 1); });
+$("prev").addEventListener("click", () => { if (S && S.phase === "W") goPair(S.idx - 1); });
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && (S.phase === "W" || S.phase === "P") && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  const t = e.target;
+  if (t && t.id === "annot") return;
+  if (e.altKey || e.metaKey) return;
+  if (!S) {
+    if (/^[1-6]$/.test(e.key) && !e.ctrlKey) { e.preventDefault(); pendingDim = DIM_KEYS[Number(e.key) - 1]; renderIntro(); }
+    else if (e.key === "Enter") { e.preventDefault(); advanceIntro(); }
+    return;
+  }
+  if (S.phase === "intro") {
+    if (e.key === "Enter" && !(t && t.id === "consent")) { e.preventDefault(); advanceIntro(); }
+    return;
+  }
+  if (S.phase === "done") { if (e.key === "PageUp") { e.preventDefault(); S.phase = "W"; goPair(S.W.length - 1); } return; }
+  if (S.phase === "P") {
+    if (/^[1-4]$/.test(e.key)) { e.preventDefault(); pracAnswer(Number(e.key) - 1); }
+    else if (e.key === "Enter") { e.preventDefault(); pracNext(); }
+    return;
+  }
+  // writing phase
+  if (e.key === "PageDown") { e.preventDefault(); goPair(S.idx + 1); return; }
+  if (e.key === "PageUp") { e.preventDefault(); goPair(S.idx - 1); return; }
+  if (e.key === "Enter" && e.ctrlKey) { e.preventDefault(); saveNext(); return; }
+  if (e.ctrlKey) return;
+  const fid = t && (t.name === "valA" || t.name === "valB") ? t.name : t && t.id;
+  if (t && t.type === "radio" && (t.name === "valA" || t.name === "valB") && /^[1-6]$/.test(e.key)) {
+    const rs = [...document.querySelectorAll("input[name=" + t.name + "]")], n = Number(e.key) - 1;
+    if (n < rs.length) { e.preventDefault(); rs[n].checked = true; rs[n].dispatchEvent(new Event("change")); rs[n].focus(); }
+    return;
+  }
+  if (e.key === "Enter" && t && t.tagName === "BUTTON") return;
+  if (e.key === "Enter" && FIELD_ORDER.includes(fid)) {
+    e.preventDefault();
+    if (fid === "f_keywords") saveNext(); else focusField(FIELD_ORDER[FIELD_ORDER.indexOf(fid) + 1]);
+  }
+});
+renderProgress(); renderIntro();
+if (HASH.id && HASH.dim) startFor(HASH.id, HASH.dim);
+$("annot").focus();
+</script>
+</body>
+</html>
