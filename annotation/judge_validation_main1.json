@@ -26905,6 +26905,24 @@
     }
    }
   },
+  "design": {
+   "items_by_n_coders": {
+    "1": 87,
+    "2": 100
+   },
+   "multi_coded_sampled": 76,
+   "multi_coded_challenge": 24,
+   "sampled_items": 163,
+   "challenge_items": 24,
+   "items_per_member": {
+    "A1": 144,
+    "A2": 143
+   },
+   "single_coded_per_member": {
+    "A1": 44,
+    "A2": 43
+   }
+  },
   "notes": {
    "files": [
     "annotation/returns/A1_core.csv",
@@ -26912,6 +26930,253 @@
     "annotation/returns/A2_core.csv",
     "annotation/returns/A2_extraB.csv"
    ]
+  },
+  "verdict": {
+   "violation": {
+    "all": {
+     "n": 105,
+     "n_units_ref_undetermined": 1,
+     "n_items": 104,
+     "agree_k": 101,
+     "agree": 0.962,
+     "agree_ci": [
+      0.906,
+      0.985
+     ],
+     "kappa": 0.895,
+     "agree_w": 0.977,
+     "n_eff": 58.2,
+     "agree_w_ci": [
+      0.9,
+      0.995
+     ],
+     "judge_T_ref_T": 23,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 3,
+     "judge_F_ref_F": 78,
+     "ref_positive": 26,
+     "judge_positive": 24
+    },
+    "primary": {
+     "n": 99,
+     "n_units_ref_undetermined": 1,
+     "n_items": 98,
+     "agree_k": 96,
+     "agree": 0.97,
+     "agree_ci": [
+      0.915,
+      0.99
+     ],
+     "kappa": 0.916,
+     "agree_w": 0.979,
+     "n_eff": 55.6,
+     "agree_w_ci": [
+      0.9,
+      0.996
+     ],
+     "judge_T_ref_T": 22,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 2,
+     "judge_F_ref_F": 74,
+     "ref_positive": 24,
+     "judge_positive": 23
+    }
+   },
+   "constraint_preserving": {
+    "all": {
+     "n": 103,
+     "n_units_ref_undetermined": 3,
+     "n_items": 102,
+     "agree_k": 99,
+     "agree": 0.961,
+     "agree_ci": [
+      0.904,
+      0.985
+     ],
+     "kappa": 0.908,
+     "agree_w": 0.977,
+     "n_eff": 57.2,
+     "agree_w_ci": [
+      0.899,
+      0.995
+     ],
+     "judge_T_ref_T": 70,
+     "judge_T_ref_F": 3,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 29,
+     "ref_positive": 71,
+     "judge_positive": 73
+    },
+    "primary": {
+     "n": 97,
+     "n_units_ref_undetermined": 3,
+     "n_items": 96,
+     "agree_k": 94,
+     "agree": 0.969,
+     "agree_ci": [
+      0.913,
+      0.989
+     ],
+     "kappa": 0.927,
+     "agree_w": 0.979,
+     "n_eff": 54.6,
+     "agree_w_ci": [
+      0.898,
+      0.996
+     ],
+     "judge_T_ref_T": 66,
+     "judge_T_ref_F": 2,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 28,
+     "ref_positive": 67,
+     "judge_positive": 68
+    }
+   },
+   "assumption": {
+    "all": {
+     "n": 57,
+     "n_units_ref_undetermined": 1,
+     "n_items": 57,
+     "agree_k": 55,
+     "agree": 0.965,
+     "agree_ci": [
+      0.881,
+      0.99
+     ],
+     "kappa": 0.9,
+     "agree_w": 0.994,
+     "n_eff": 46.6,
+     "agree_w_ci": [
+      0.913,
+      1.0
+     ],
+     "judge_T_ref_T": 43,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 12,
+     "ref_positive": 44,
+     "judge_positive": 44
+    },
+    "primary": {
+     "n": 56,
+     "n_units_ref_undetermined": 1,
+     "n_items": 56,
+     "agree_k": 54,
+     "agree": 0.964,
+     "agree_ci": [
+      0.879,
+      0.99
+     ],
+     "kappa": 0.9,
+     "agree_w": 0.994,
+     "n_eff": 45.6,
+     "agree_w_ci": [
+      0.911,
+      1.0
+     ],
+     "judge_T_ref_T": 42,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 12,
+     "ref_positive": 43,
+     "judge_positive": 43
+    }
+   },
+   "consistency_check": {
+    "judge_recomputed_matches_stored": 270
+   }
+  },
+  "challenge_key": {
+   "A1": {
+    "critical_k": 23,
+    "critical_n": 24,
+    "critical_ci": [
+     0.798,
+     0.993
+    ],
+    "keyed_k": 66,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   },
+   "A2": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 64,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-05",
+      "text": "I don't think the bus is late.",
+      "key": "negated",
+      "label": "unclear/mixed"
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   },
+   "judge(final)": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 64,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-08",
+      "text": "I can't wait to go to the party.",
+      "key": "affirmative",
+      "label": "negated"
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   },
+   "consensus": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 64,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-05",
+      "text": "I don't think the bus is late.",
+      "key": "negated",
+      "label": null
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   }
   }
  },
  "panel": {
@@ -52917,6 +53182,23 @@
     }
    }
   },
+  "design": {
+   "items_by_n_coders": {
+    "2": 187
+   },
+   "multi_coded_sampled": 163,
+   "multi_coded_challenge": 24,
+   "sampled_items": 163,
+   "challenge_items": 24,
+   "items_per_member": {
+    "C-gpt-5.6-sol": 187,
+    "C-gpt-6-astra": 187
+   },
+   "single_coded_per_member": {
+    "C-gpt-5.6-sol": 0,
+    "C-gpt-6-astra": 0
+   }
+  },
   "notes": {
    "files": [
     "annotation/returns_codex/C_gpt-5.6-sol.csv",
@@ -52931,6 +53213,259 @@
    "unsure:polarity": 3,
    "unsure:politeness": 2,
    "unsure:speech_act": 15
+  },
+  "verdict": {
+   "violation": {
+    "all": {
+     "n": 103,
+     "n_units_ref_undetermined": 3,
+     "n_items": 102,
+     "agree_k": 101,
+     "agree": 0.981,
+     "agree_ci": [
+      0.932,
+      0.995
+     ],
+     "kappa": 0.947,
+     "agree_w": 0.987,
+     "n_eff": 57.8,
+     "agree_w_ci": [
+      0.915,
+      0.998
+     ],
+     "judge_T_ref_T": 24,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 77,
+     "ref_positive": 25,
+     "judge_positive": 25
+    },
+    "primary": {
+     "n": 97,
+     "n_units_ref_undetermined": 3,
+     "n_items": 96,
+     "agree_k": 95,
+     "agree": 0.979,
+     "agree_ci": [
+      0.928,
+      0.994
+     ],
+     "kappa": 0.945,
+     "agree_w": 0.986,
+     "n_eff": 55.2,
+     "agree_w_ci": [
+      0.911,
+      0.998
+     ],
+     "judge_T_ref_T": 23,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 72,
+     "ref_positive": 24,
+     "judge_positive": 24
+    }
+   },
+   "constraint_preserving": {
+    "all": {
+     "n": 98,
+     "n_units_ref_undetermined": 8,
+     "n_items": 97,
+     "agree_k": 96,
+     "agree": 0.98,
+     "agree_ci": [
+      0.929,
+      0.994
+     ],
+     "kappa": 0.95,
+     "agree_w": 0.986,
+     "n_eff": 54.9,
+     "agree_w_ci": [
+      0.911,
+      0.998
+     ],
+     "judge_T_ref_T": 69,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 27,
+     "ref_positive": 70,
+     "judge_positive": 70
+    },
+    "primary": {
+     "n": 92,
+     "n_units_ref_undetermined": 8,
+     "n_items": 91,
+     "agree_k": 90,
+     "agree": 0.978,
+     "agree_ci": [
+      0.924,
+      0.994
+     ],
+     "kappa": 0.948,
+     "agree_w": 0.986,
+     "n_eff": 52.4,
+     "agree_w_ci": [
+      0.907,
+      0.998
+     ],
+     "judge_T_ref_T": 64,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 1,
+     "judge_F_ref_F": 26,
+     "ref_positive": 65,
+     "judge_positive": 65
+    }
+   },
+   "assumption": {
+    "all": {
+     "n": 55,
+     "n_units_ref_undetermined": 3,
+     "n_items": 55,
+     "agree_k": 54,
+     "agree": 0.982,
+     "agree_ci": [
+      0.904,
+      0.997
+     ],
+     "kappa": 0.951,
+     "agree_w": 0.996,
+     "n_eff": 45.6,
+     "agree_w_ci": [
+      0.915,
+      1.0
+     ],
+     "judge_T_ref_T": 41,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 0,
+     "judge_F_ref_F": 13,
+     "ref_positive": 41,
+     "judge_positive": 42
+    },
+    "primary": {
+     "n": 54,
+     "n_units_ref_undetermined": 3,
+     "n_items": 54,
+     "agree_k": 53,
+     "agree": 0.981,
+     "agree_ci": [
+      0.902,
+      0.997
+     ],
+     "kappa": 0.951,
+     "agree_w": 0.996,
+     "n_eff": 44.7,
+     "agree_w_ci": [
+      0.913,
+      1.0
+     ],
+     "judge_T_ref_T": 40,
+     "judge_T_ref_F": 1,
+     "judge_F_ref_T": 0,
+     "judge_F_ref_F": 13,
+     "ref_positive": 40,
+     "judge_positive": 41
+    }
+   },
+   "consistency_check": {
+    "judge_recomputed_matches_stored": 270
+   }
+  },
+  "challenge_key": {
+   "C-gpt-5.6-sol": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 64,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-08",
+      "text": "I can't wait to go to the party.",
+      "key": "affirmative",
+      "label": "negated"
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   },
+   "C-gpt-6-astra": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 62,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-08",
+      "text": "I can't wait to go to the party.",
+      "key": "affirmative",
+      "label": "negated"
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   },
+   "judge(final)": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 64,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-08",
+      "text": "I can't wait to go to the party.",
+      "key": "affirmative",
+      "label": "negated"
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   },
+   "consensus": {
+    "critical_k": 22,
+    "critical_n": 24,
+    "critical_ci": [
+     0.742,
+     0.977
+    ],
+    "keyed_k": 62,
+    "keyed_n": 68,
+    "critical_misses": [
+     {
+      "cid": "ch-08",
+      "text": "I can't wait to go to the party.",
+      "key": "affirmative",
+      "label": "negated"
+     },
+     {
+      "cid": "ch-22",
+      "text": "I took a couple of painkillers this morning.",
+      "key": "unclear/mixed",
+      "label": "two"
+     }
+    ]
+   }
   }
  }
 }

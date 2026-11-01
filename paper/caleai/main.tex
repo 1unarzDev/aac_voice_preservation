@@ -67,7 +67,7 @@ It also left \RES{g_unfixed_k} violations in place and produced repairs that pas
 Filling missing readings into a three-suggestion set raised sets offering both polarity or both certainty readings from \kof{sc_pc_p2} to \kof{sc_pc_i2}, at \RES{s_calls} calls per set; politeness coverage fell by \RES{s_pz_loss} points and \pct{s_drift} of rewrites changed the sentence type.
 One user-selected cue raised critical-value match from \pct{c_noncrit} to \pct{c_chip1} for one nominal selection.
 All three pass their kill criteria, and none comes without a measured cost.
-Labels are machine-extracted and human validation is pending; we claim no human effects. %CHECK
+Labels are machine-extracted by an extractor that agrees with two human annotators at $\kappa=\RES{human_kappa_min}$--$\RES{human_kappa_max}$ on every label dimension; we claim no human effects.
 We close with a micro-randomized protocol that tests whether these offline ledgers predict causal, longitudinal effects for AAC users.
 \end{abstract}
 
@@ -151,7 +151,8 @@ P0 asks for one sentence, decoded greedily; P2 asks for three suggestions that \
 An LLM extractor (gpt-6.1-sol, two prompt variants, cross-family arbiter on disagreement) labels each output \emph{blind} to source, channel, model and arm.
 Deterministic code then computes verdicts from those labels.
 The extractor never sees which arm produced a text, so treated and untreated outputs are scored by the same blind procedure.
-The oracle's own validation (identity and mutation tests) is reported in the concurrent study~\cite{anon2027contracts}; human validation is pending (\S\ref{sec:limits}).
+The oracle's identity and mutation tests are reported in the concurrent study~\cite{anon2027contracts}.
+Against two human annotators on \RES{human_sampleditems} sampled outputs of the untreated run, the extractor's labels agree at $\kappa=\RES{human_kappa_min}$--$\RES{human_kappa_max}$ on all \RES{human_gate_n} label dimensions, passing a pre-specified $\kappa\geq0.6$ gate, and its Violation verdicts match the verdicts recomputed from human labels on \kof{human_v_viol} units (\S\ref{sec:limits}).
 
 %% =====================================================================
 \section{Interventions}
@@ -408,8 +409,11 @@ If it does not, offline evaluation of this kind should be demoted.
 %% =====================================================================
 \emph{No human outcomes.} Nothing here measures communication success, agency, effort or trust.
 \emph{Machine labels.} All endpoints use a blind LLM extractor and deterministic verdicts.
-The extraction pipeline passed identity and mutation tests~\cite{anon2027contracts}, but
-\IfRES{human_gold_ready}{\insertres{human gold: per-dimension kappa vs adjudicated labels on gold\_core; Violation sens/spec; which dimensions pass the 0.6 gate}}{its pre-registered validation against independent human labels has no returns yet, so every rate is conditional on the extractor.\pending{human gold}} %CHECK
+The extraction pipeline passed identity and mutation tests~\cite{anon2027contracts}, and
+\IfRES{human_gold_ready}{its pre-registered human validation has passed: two annotators coded \RES{human_n_items} items (a 100-item core double-coded, inter-annotator $\alpha=\RES{human_alpha_min}$--$\RES{human_alpha_max}$), and extractor-vs-human $\kappa$ on the held-out split is \RES{human_gkappa_min}--\RES{human_gkappa_max} (lowest 95\% bound \RES{human_gkappa_lo_min}; gate 0.6).
+Violation verdicts agree on \kof{human_v_viol} units ($\kappa=\RES{human_v_viol_kappa}$), constraint preservation on \kof{human_v_cp}.
+On one idiomatic negation (\say{I can't wait\ldots}) every machine coder, including an independent model panel, erred and both humans did not: agreement among machine coders is not evidence of correctness.
+The check is limited: two annotators, labels converted from another format with no timing, near-ceiling agreement on a codebook for explicit markers, and untreated outputs only, so validity on repaired and rewritten outputs is not established.}{its pre-registered validation against independent human labels is still pending, so every rate is conditional on the extractor.}
 Shared errors between monitor and extractor can inflate guard repairs; the planned repair audit targets this.
 \emph{Constructed items.} Ten families per dimension and four models describe these systems and items, not AAC users' messages.
 \IfRES{wb_ready}{\insertres{W-B: AACText transfer of defaults/violations, random and enriched strata separate}}{A transfer study on fictional crowd-written AAC messages~\cite{vertanen2011imagination} is in progress.\pending{W-B}} %CHECK

@@ -4,6 +4,8 @@
       --panel annotation/returns_codex/*.csv \
       --challenge-judgments runs/oracle_challenges
   python src/score_gold.py --self-check
+  (main1 as reported: --human 'annotation/returns/*.csv' --panel
+   annotation/returns_codex/C_gpt-5.6-sol.csv 'annotation/returns_codex/C_gpt-6-astra_*.csv')
 
 Reference sets (provenance is kept separate in every output; never pooled)
   --human  annotate.html CSV exports from people (alias: --csv).  Gate set: the
@@ -35,6 +37,14 @@ Method
             (rows = reference), and design-weighted (1/pi, Horvitz-Thompson) accuracy,
             kappa, precision and recall with Kish-effective-n Wilson CIs. Challenge
             items have no inclusion probability: unweighted only, separate subset.
+  verdict   per reference set: Violation / constraint_preserving (cue channels) and
+            Assumption (bare/noncrit) recomputed with the production rules from the
+            reference consensus and from the judge labels on the sampled items; agreement
+            (Wilson CI), kappa, 2x2 counts, design-weighted agreement; "primary" excludes
+            the quarantined refusal/acceptance families. The judge recomputation is checked
+            against runs/<run>/scored.parquet (consistency_check).
+  challenge_key  each member, the consensus and the judge against the authored challenge
+            keys (annotation/challenge_items.jsonl).
 """
 from __future__ import annotations
 
@@ -346,6 +356,14 @@ def score_reference(name, ann, key, rule, args, adj=None):
     rep = {"reference_set": name, "provenance": "human" if name == "human" else "machine (codex panel)",
            "members": members, "n_items": len(ann), "consensus_rule": rule,
            "alpha_nominal": {}, "pairwise": {}, "judge": {}}
+    nk = Counter(len(v) for v in ann.values())
+    rep["design"] = {"items_by_n_coders": {str(k): v for k, v in sorted(nk.items())},
+                     "multi_coded_sampled": sum(len(v) >= 2 and key[i]["subset"] == "sampled" for i, v in ann.items()),
+                     "multi_coded_challenge": sum(len(v) >= 2 and key[i]["subset"] == "challenge" for i, v in ann.items()),
+                     "sampled_items": sum(key[i]["subset"] == "sampled" for i in ann),
+                     "challenge_items": sum(key[i]["subset"] == "challenge" for i in ann),
+                     "items_per_member": {m: sum(m in v for v in ann.values()) for m in members},
+                     "single_coded_per_member": {m: sum(list(v) == [m] for v in ann.values()) for m in members}}
     rows, cons_all = [], {}
     for d in DIMS:
         cats = sorted({x[d] for v in ann.values() for x in v.values()} - {None})
@@ -385,6 +403,247 @@ def score_reference(name, ann, key, rule, args, adj=None):
                              "gate_applicable": gate,
                              "passes_H7": ((m.get("kappa") or 0) >= H7_KAPPA) if gate else None})
     return rep, rows, cons_all
+
+
+# ------------------------------------------------------------ verdict level
+
+def _verdicts(dim, var, channel, lab):
+    """Violation / constraint_preserving / assumption from one label set, with the
+    production rules of attribute.py (critical_match, general_spec, channel_dims).
+    A missing label on a dimension the verdict needs makes that verdict undetermined."""
+    from attribute import AMBIG_CHANNELS, CUE_CHANNELS, channel_dims
+    from labels import NA_CERTAINTY, critical_match, general_spec, is_unclear
+    crit = lab.get("critical")
+    out = {"violation": None, "constraint_preserving": None, "assumption": None}
+    if crit is None:
+        return out
+    if channel in CUE_CHANNELS:
+        match = critical_match(dim, var["critical_value"], crit)
+        out["violation"] = not match
+        spec = general_spec(var.get("all_chips", []), var.get("general_spec"))
+        contra, undetermined = False, False
+        for d in channel_dims(channel, var):
+            s = spec.get(d)
+            if d == dim or s is None or NA_CERTAINTY in s:
+                continue
+            v = lab.get(d)
+            if v is None:
+                undetermined = True
+                continue
+            if d == "certainty" and v == NA_CERTAINTY:
+                continue
+            contra |= v not in s
+        out["constraint_preserving"] = (False if (not match or contra) else
+                                        None if undetermined else True)
+    elif channel in AMBIG_CHANNELS:
+        out["assumption"] = not is_unclear(crit)
+    return out
+
+
+def verdict_agreement(run: str, key: dict, cons_all: dict) -> dict:
+    """Recompute each sampled item's verdicts from the reference labels and from the
+    judge (production) labels; report agreement, kappa and the 2x2 table.
+    Unit = (item, variant, channel) for Violation/CP (cue channels map 1:1 to a variant);
+    Assumption does not depend on the variant, so its unit is the item."""
+    import pandas as pd
+    import runio
+    from attribute import quarantined
+    sp = ROOT / f"runs/{run}/scored.parquet"
+    if not sp.exists():
+        return {}
+    items = runio.load_items()
+    sc = pd.read_parquet(sp, columns=["text_id", "family_id", "input_text", "variant", "channel",
+                                      "valid", "violation", "constraint_preserving", "assumption"])
+    sc = sc[sc.valid.fillna(False).astype(bool)]
+    stored = {}
+    for r in sc.drop_duplicates(["text_id", "family_id", "input_text", "variant", "channel"]).itertuples():
+        stored.setdefault((r.text_id, r.family_id, r.input_text), []).append(r)
+    res, check = {}, Counter()
+    rows = {"violation": [], "constraint_preserving": [], "assumption": []}
+    for iid, k in key.items():
+        if k["subset"] != "sampled":
+            continue
+        human = {d: cons_all[d].get(iid) for d in DIMS}
+        if not any(v is not None for v in human.values()):
+            continue
+        judge = {d: k.get(d) for d in DIMS}
+        it = items[k["family_id"]]
+        seen_assumption = False
+        for r in stored.get((k["text_id"], k["family_id"], k["input_text"]), []):
+            var = it["variants"][r.variant]
+            vh = _verdicts(it["dimension"], var, r.channel, human)
+            vj = _verdicts(it["dimension"], var, r.channel, judge)
+            for e in rows:
+                if e == "assumption":
+                    if seen_assumption or vj[e] is None and vh[e] is None:
+                        continue
+                st = getattr(r, e)
+                if vj[e] is not None and st is not None and not pd.isna(st):
+                    check["judge_recomputed_matches_stored" if bool(st) == vj[e] else "judge_recomputed_differs"] += 1
+                if vj[e] is None and vh[e] is None:
+                    continue
+                rows[e].append({"item": iid, "judge": vj[e], "ref": vh[e], "pi": k["pi"],
+                                "quarantine": quarantined(it)})
+            if r.channel in ("bare", "noncrit"):
+                seen_assumption = True
+    for e, rr in rows.items():
+        out = {}
+        for scope, sel in (("all", rr), ("primary", [x for x in rr if not x["quarantine"]])):
+            both = [x for x in sel if x["judge"] is not None and x["ref"] is not None]
+            n = len(both)
+            if not n:
+                continue
+            ok = sum(x["judge"] == x["ref"] for x in both)
+            w = [1 / x["pi"] for x in both]
+            tw = sum(w)
+            aw = sum(wi for x, wi in zip(both, w) if x["judge"] == x["ref"]) / tw
+            ne = n_eff(w)
+            tab = Counter((x["judge"], x["ref"]) for x in both)
+            out[scope] = {
+                "n": n, "n_units_ref_undetermined": sum(x["ref"] is None for x in sel),
+                "n_items": len({x["item"] for x in both}),
+                "agree_k": ok, "agree": round(ok / n, 3), "agree_ci": wilson(ok, n),
+                "kappa": cohen_kappa([x["judge"] for x in both], [x["ref"] for x in both]),
+                "agree_w": round(aw, 3), "n_eff": round(ne, 1), "agree_w_ci": wilson(aw * ne, ne),
+                "judge_T_ref_T": tab[(True, True)], "judge_T_ref_F": tab[(True, False)],
+                "judge_F_ref_T": tab[(False, True)], "judge_F_ref_F": tab[(False, False)],
+                "ref_positive": tab[(True, True)] + tab[(False, True)],
+                "judge_positive": tab[(True, True)] + tab[(True, False)]}
+        res[e] = out
+    res["consistency_check"] = dict(check)
+    return res
+
+
+def challenge_key_accuracy(ann: dict, key: dict, cons_all: dict) -> dict:
+    """Each member (and the judge) against the authored challenge keys
+    (annotation/challenge_items.jsonl): critical, and every keyed dimension."""
+    kp = ROOT / "annotation/challenge_items.jsonl"
+    if not kp.exists():
+        return {}
+    keys = {c["cid"]: c for c in map(json.loads, open(kp))}
+    members = sorted({a for i, v in ann.items() if i in keys for a in v})
+    coders = {m: {i: v[m] for i, v in ann.items() if i in keys and m in v} for m in members}
+    coders["judge(final)"] = {i: {d: key[i].get(d) for d in DIMS} for i in keys if i in key}
+    coders["consensus"] = {i: {d: cons_all[d].get(i) for d in DIMS} for i in keys if i in ann}
+    out = {}
+    for m, lab in coders.items():
+        crit = [(i, lab[i].get("critical"), keys[i]["key"]["critical"]) for i in sorted(lab)]
+        ck = sum(g == k for _, g, k in crit)
+        alld = [(lab[i].get(d), v) for i in lab for d, v in keys[i]["key"].items()]
+        ak = sum(g == k for g, k in alld)
+        out[m] = {"critical_k": ck, "critical_n": len(crit), "critical_ci": wilson(ck, len(crit)),
+                  "keyed_k": ak, "keyed_n": len(alld),
+                  "critical_misses": [{"cid": i, "text": keys[i]["text"], "key": k, "label": g}
+                                      for i, g, k in crit if g != k]}
+    return out
+
+
+# --------------------------------------------------------------- paper macros
+
+MACRO_DIMS = {"critical": "crit", "polarity": "pol", "speech_act": "act", "agent": "agt",
+              "certainty": "cer", "politeness": "pz", "added_content": "add"}
+
+
+def paper_macros(rep: dict, prefix: str = "human") -> dict[str, str]:
+    """Flatten one reference-set section of judge_validation_<run>.json into formatted
+    paper macros (shared by paper/se4all and paper/caleai make_macros.py).
+    Percentages 0-100 with one decimal; kappa/alpha two decimals; counts as integers.
+    Judge-vs-reference metrics: sampled/final (all sampled items, unweighted, Wilson CI on
+    accuracy, item-bootstrap CI on kappa); design-weighted kappa_w; the preregistered H7
+    gate on sampled_test/final; the challenge subset separately."""
+    if not rep or not rep.get("n_items"):
+        return {}
+    f2 = lambda v: f"{v:.2f}"
+    pc = lambda v: f"{100 * v:.1f}"
+    M = {f"{prefix}_ready": "1", f"{prefix}_n_items": str(rep["n_items"]),
+         f"{prefix}_n_members": str(len(rep["members"]))}
+    des = rep.get("design") or {}
+    for k in ("multi_coded_sampled", "multi_coded_challenge", "sampled_items", "challenge_items"):
+        if k in des:
+            M[f"{prefix}_{k.replace('_', '')}"] = str(des[k])
+    if des:
+        M[f"{prefix}_multicoded"] = str(des["multi_coded_sampled"] + des["multi_coded_challenge"])
+        M[f"{prefix}_singlecoded"] = str(des["items_by_n_coders"].get("1", 0))
+        for m, n in des["items_per_member"].items():
+            M[f"{prefix}_items_{''.join(c for c in m if c.isalnum())}"] = str(n)
+        for m, n in des.get("single_coded_per_member", {}).items():
+            M[f"{prefix}_single_{''.join(c for c in m if c.isalnum())}"] = str(n)
+    al, ka, gk, gate = [], [], [], []
+    for d, s in MACRO_DIMS.items():
+        a = rep["alpha_nominal"].get(d) or {}
+        if a.get("alpha") is not None:
+            M[f"{prefix}_{s}_alpha"] = f2(a["alpha"]); al.append(a["alpha"])
+            M[f"{prefix}_{s}_alpha_n"] = str(a["n_units"])
+            if a.get("ci95"):
+                M[f"{prefix}_{s}_alpha_lo"], M[f"{prefix}_{s}_alpha_hi"] = map(f2, a["ci95"])
+        j = rep["judge"].get(d) or {}
+        t = j.get("sampled/final") or {}
+        if t.get("n"):
+            M[f"{prefix}_{s}_n"] = str(t["n"])
+            M[f"{prefix}_{s}_acc"] = pc(t["acc"])
+            M[f"{prefix}_{s}_acc_k"] = str(round(t["acc"] * t["n"]))
+            M[f"{prefix}_{s}_acc_lo"], M[f"{prefix}_{s}_acc_hi"] = map(pc, t["acc_ci"])
+            if t.get("kappa") is not None:
+                M[f"{prefix}_{s}_kappa"] = f2(t["kappa"]); ka.append(t["kappa"])
+                if t.get("kappa_ci"):
+                    M[f"{prefix}_{s}_kappa_lo"], M[f"{prefix}_{s}_kappa_hi"] = map(f2, t["kappa_ci"])
+            if t.get("kappa_w") is not None:
+                M[f"{prefix}_{s}_kappaw"] = f2(t["kappa_w"])
+                if t.get("kappa_w_ci"):
+                    M[f"{prefix}_{s}_kappaw_lo"], M[f"{prefix}_{s}_kappaw_hi"] = map(f2, t["kappa_w_ci"])
+            if t.get("acc_w") is not None:
+                M[f"{prefix}_{s}_accw"] = pc(t["acc_w"])
+            M[f"{prefix}_{s}_nnull"] = str(t.get("n_judge_null", 0))
+            M[f"{prefix}_{s}_noconsensus"] = str(j.get("no_consensus_excluded", 0))
+        g = j.get("sampled_test/final") or {}
+        if g.get("kappa") is not None:
+            M[f"{prefix}_{s}_gkappa"] = f2(g["kappa"]); gk.append(g["kappa"])
+            M[f"{prefix}_{s}_gn"] = str(g["n"])
+            if g.get("kappa_ci"):
+                M[f"{prefix}_{s}_gkappa_lo"], M[f"{prefix}_{s}_gkappa_hi"] = map(f2, g["kappa_ci"])
+            ok = g["kappa"] >= H7_KAPPA
+            M[f"{prefix}_{s}_gate"] = "pass" if ok else "fail"
+            gate.append(ok)
+        c = j.get("challenge/final") or {}
+        if c.get("n"):
+            M[f"{prefix}_{s}_chn"] = str(c["n"])
+            M[f"{prefix}_{s}_chacc_k"] = str(round(c["acc"] * c["n"]))
+            M[f"{prefix}_{s}_chacc"] = pc(c["acc"])
+    nc = [(rep["judge"].get(d) or {}).get("no_consensus_excluded", 0) for d in MACRO_DIMS]
+    M[f"{prefix}_noconsensus_max"], M[f"{prefix}_noconsensus_sum"] = str(max(nc)), str(sum(nc))
+    cc = (rep.get("verdict") or {}).get("consistency_check") or {}
+    M[f"{prefix}_v_recomputed_ok"] = str(cc.get("judge_recomputed_matches_stored", 0))
+    M[f"{prefix}_v_recomputed_diff"] = str(cc.get("judge_recomputed_differs", 0))
+    glo = [float(v) for k, v in M.items() if k.endswith("_gkappa_lo")]
+    if glo:
+        M[f"{prefix}_gkappa_lo_min"] = f2(min(glo))
+    for nm, xs in (("alpha", al), ("kappa", ka), ("gkappa", gk)):
+        if xs:
+            M[f"{prefix}_{nm}_min"], M[f"{prefix}_{nm}_max"] = f2(min(xs)), f2(max(xs))
+    if gate:
+        M[f"{prefix}_gate_pass_k"], M[f"{prefix}_gate_n"] = str(sum(gate)), str(len(gate))
+        M[f"{prefix}_gate_all"] = "1" if all(gate) else "0"
+    for e, s in (("violation", "viol"), ("constraint_preserving", "cp"), ("assumption", "asm")):
+        for scope in ("primary", "all"):
+            v = ((rep.get("verdict") or {}).get(e) or {}).get(scope)
+            if not v:
+                continue
+            b = f"{prefix}_v_{s}" + ("" if scope == "primary" else "_all")
+            M[b + "_k"], M[b + "_n"] = str(v["agree_k"]), str(v["n"])
+            M[b], (M[b + "_lo"], M[b + "_hi"]) = pc(v["agree"]), map(pc, v["agree_ci"])
+            M[b + "_kappa"] = f2(v["kappa"]) if v.get("kappa") is not None else "NA"
+            M[b + "_w"] = pc(v["agree_w"])
+            M[b + "_w_lo"], M[b + "_w_hi"] = map(pc, v["agree_w_ci"])
+            # tp/fp/fn/tn: judge verdict vs reference verdict (reference = truth)
+            for t, nm in (("judge_T_ref_T", "tp"), ("judge_T_ref_F", "fp"), ("judge_F_ref_T", "fn"),
+                          ("judge_F_ref_F", "tn"), ("ref_positive", "refpos"),
+                          ("judge_positive", "judgepos"), ("n_units_ref_undetermined", "undet")):
+                M[b + "_" + nm] = str(v[t])
+    for m, c in (rep.get("challenge_key") or {}).items():
+        b = f"{prefix}_chkey_" + "".join(ch for ch in m.split("(")[0] if ch.isalnum())
+        M[b + "_k"], M[b + "_n"] = str(c["critical_k"]), str(c["critical_n"])
+        M[b + "_keyed_k"], M[b + "_keyed_n"] = str(c["keyed_k"]), str(c["keyed_n"])
+    return M
 
 
 def write_consensus(path, name, members, cons_all, ann):
@@ -441,6 +700,8 @@ def main() -> int:
             continue
         r, rr, cons_all = score_reference(name, ann, key, rule, a, adj if name == "human" else None)
         r["notes"] = notes
+        r["verdict"] = verdict_agreement(a.run, key, cons_all)
+        r["challenge_key"] = challenge_key_accuracy(ann, key, cons_all)
         rep[name] = r
         rows += rr
         fn = "human_consensus" if name == "human" else "panel_majority"
@@ -463,6 +724,14 @@ def main() -> int:
             t = r["judge"][d].get("sampled/final", {})
             print(f"  {d:13s} alpha={al['alpha']} (n={al['n_units']})  sampled/final: n={t.get('n')} "
                   f"acc={t.get('acc')} kappa={t.get('kappa')} kappa_w={t.get('kappa_w')}")
+        for e, v in (r.get("verdict") or {}).items():
+            if isinstance(v, dict) and "primary" in v:
+                p = v["primary"]
+                print(f"  verdict {e:22s} primary: {p['agree_k']}/{p['n']} agree kappa={p['kappa']} "
+                      f"(judge+/ref+ {p['judge_positive']}/{p['ref_positive']})")
+        for m, c in (r.get("challenge_key") or {}).items():
+            print(f"  challenge key {m:14s} critical {c['critical_k']}/{c['critical_n']}  "
+                  f"keyed dims {c['keyed_k']}/{c['keyed_n']}")
     print(f"wrote {out}.json/.csv  (H7 gate kappa >= {H7_KAPPA}: human set, sampled_test, final only)")
     return 0
 

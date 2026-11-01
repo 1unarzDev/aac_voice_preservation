@@ -38,6 +38,7 @@
 \newcommand{\kof}[1]{\RES{#1_k}/\RES{#1_den}}
 \newcommand{\ci}[1]{[\RES{#1_lo}, \RES{#1_hi}]}
 \newcommand{\cip}[1]{[\RES{#1_lo}, \RES{#1_hi}]\%}
+\newcommand{\kn}[1]{\RES{#1_k}/\RES{#1_n}}
 
 %% ---------- notation ----------
 \newcommand{\chip}[1]{\texttt{[#1]}}
@@ -66,7 +67,7 @@ We write \emph{input-conditioned} preservation requirements: they score a commit
 Executable checks over controlled input channels, plus a partial oracle with blind extraction and code-computed verdicts, separate interface loss from model violation.
 We also test the oracle: an identity check exposed a specification defect, and the obvious relaxation then missed keyed statement-substitution mutants, so the affected families are quarantined.
 A developer can act on these checks: exact-copy routing passes all \RES{copy_pass_den} non-quarantined typed sources at zero model calls, and a runtime guard repairs \kof{g1_fix} supplied-cue failures, leaving \RES{g1_remain_k}.
-All rates are machine-scored on constructed items; validation against human labels is in progress. %CHECK
+All rates are machine-scored on constructed items, by an extractor whose labels agree with two human annotators at $\kappa=\RES{human_kappa_min}$--$\RES{human_kappa_max}$ on every label dimension, passing a pre-specified human gate.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -100,10 +101,10 @@ Testing such a feature therefore needs requirements that depend on what the inpu
 We treat meaning preservation in AAC expansion as an accessibility requirement that should be specified, tested and regression-checked.
 We make three contributions.
 (1)~\emph{Input-conditioned requirements} (\S\ref{sec:contracts}): executable checks that score a commitment only when the visible input supplied it, run over controlled input channels of minimal-pair families.
-(2)~\emph{A partial oracle that is itself tested} (\S\ref{sec:oracle}), with a stated failure envelope, including a defect our own repair introduced.
+(2)~\emph{A partial oracle that is itself tested} (\S\ref{sec:oracle}), with a stated failure envelope, including a defect our own repair introduced, and validated against human labels on all \RES{human_gate_n} label dimensions.
 (3)~\emph{A worked requirement $\to$ check $\to$ developer decision $\to$ failure envelope sequence} (\S\ref{sec:decisions}), including an evaluated runtime guard and an exact-copy baseline.
 We ran no study with AAC users and make no claims about benefit, effort or preference.
-All rates are machine-scored and remain provisional until the human validation in \S\ref{sec:oracle} is complete. %CHECK
+All rates are machine-scored; the extractor behind them passed a pre-specified human-agreement gate on every label dimension (\S\ref{sec:oracle}).
 
 %% =====================================================================
 \section{Related Work}
@@ -197,7 +198,7 @@ Each of the \RES{or_identity_fa_den} authored test sources was injected as its o
 A second, hand-written challenge set has four groups of six controls and six one-feature mutants with keys hashed before the first judge call.
 The pre-specified gate (\(\geq\)22/24 mutants detected, \(\leq\)1/24 false alarms) passes when pooled, with no slack.
 The protocol's wording \say{22/24 per new group} is impossible with six mutants per group; we report the pooled reading as an interpretation and show the group that fails it.
-Machine agreement is reported separately and is not an error bound: three machine coders and the judge share two errors on round-1 challenges (\say{I can't wait\ldots} coded negated; \say{a couple of} coded as two).
+Machine agreement is reported separately and is not an error bound: three machine coders and the judge share two departures from our key on round-1 challenges (\say{I can't wait\ldots} coded negated; \say{a couple of} coded as two); the human annotators below resolve both.
 
 \begin{table}[t]
   \caption{Oracle evidence status. Authored inputs, Wilson 95\% intervals; these are minimum-functionality checks on clean sentences, not error rates on model outputs.}
@@ -215,7 +216,8 @@ Machine agreement is reported separately and is not an error bound: three machin
     \quad acceptance group: mutants detected & \kof{or_acc_mut_det} & \cip{or_acc_mut_det}\\
     \quad same, without the acceptance relaxation & \kof{or_new_mut_det_raw} & (all groups)\\
     Machine panel: Violation flips (units) & \kof{or_panel_flip} & not a bound\\
-    Human gold, adjudicated (\(\kappa\geq0.6\) gate) & \IfRES{human_ready}{see text}{\textbf{unassessed}} & \\
+    Human gold, \(\kappa\geq0.6\) gate (dimensions passing) & \IfRES{human_ready}{\RES{human_gate_pass_k}/\RES{human_gate_n}}{\textbf{unassessed}} & Table~\ref{tab:human}\\
+    \quad Violation verdicts, judge vs.\ humans (agree) & \IfRES{human_ready}{\kn{human_v_viol}}{--} & \IfRES{human_ready}{\cip{human_v_viol}}{}\\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -231,10 +233,49 @@ A symmetric acceptance/refusal predicate remains open.
 
 \paragraph*{Human validation}
 \IfRES{human_ready}{%
-\pending{Insert human results: per-dimension $\kappa$ with CI, positive/negative counts, verdict confusion, natural vs.\ challenge items separately; apply the $\kappa\geq0.6$ gate per dimension and narrow every claim for a failing dimension.} %CHECK
+Two annotators (A1, A2) coded with the extractor's codebook; the annotation package shows the extractor's blind view: the output, the family's critical question and, for added content only, the visible input.
+Both coded a 100-item core (\RES{human_multicodedsampled} probability-sampled outputs and \RES{human_multicodedchallenge} challenge sentences); A1 coded \RES{human_single_A1} and A2 \RES{human_single_A2} further sampled outputs alone, \RES{human_n_items} items in all.
+They labelled in another format, converted to the annotation tool's CSV; the files carry no per-item timing, so we cannot report effort or screen fast responses.
+The files use the repository's item IDs, not the annotation package's neutralized IDs; since the public repository holds judge labels and challenge keys, independence rests on the annotators' instructions and their confirmation, not on the files.
+The reference label is the plurality label; the few core disagreements (at most \RES{human_noconsensus_max} per dimension) are excluded, not adjudicated as planned, and unsure answers count as missing.
+
+\begin{table}[t]
+  \caption{Extractor (production labels) vs.\ human consensus on sampled outputs. $\alpha$: Krippendorff, the two annotators on the core. Gate: pre-specified $\kappa\geq0.6$ on the held-out test split. Accuracy with Wilson 95\% CI; $\kappa$ CIs from 1,000 item bootstraps; $\kappa_w$ design-weighted ($1/\pi$). Chall.: same comparison on the 24 challenge sentences (ties excluded).}
+  \label{tab:human}
+  \scriptsize
+  \setlength{\tabcolsep}{2.2pt}
+  \begin{tabularx}{\columnwidth}{@{}Xccrcccr@{}}
+    \toprule
+    Dimension & $\alpha$ & Gate $\kappa$ [CI] & $n$ & $\kappa$ (all) & $\kappa_w$ & Accuracy [CI] & Chall.\\
+    \midrule
+    critical & \RES{human_crit_alpha} & \RES{human_crit_gkappa} \ci{human_crit_gkappa} & \RES{human_crit_gn} & \RES{human_crit_kappa} & \RES{human_crit_kappaw} & \RES{human_crit_acc} \ci{human_crit_acc} & \RES{human_crit_chacc_k}/\RES{human_crit_chn}\\
+    polarity & \RES{human_pol_alpha} & \RES{human_pol_gkappa} \ci{human_pol_gkappa} & \RES{human_pol_gn} & \RES{human_pol_kappa} & \RES{human_pol_kappaw} & \RES{human_pol_acc} \ci{human_pol_acc} & \RES{human_pol_chacc_k}/\RES{human_pol_chn}\\
+    speech act & \RES{human_act_alpha} & \RES{human_act_gkappa} \ci{human_act_gkappa} & \RES{human_act_gn} & \RES{human_act_kappa} & \RES{human_act_kappaw} & \RES{human_act_acc} \ci{human_act_acc} & \RES{human_act_chacc_k}/\RES{human_act_chn}\\
+    agent & \RES{human_agt_alpha} & \RES{human_agt_gkappa} \ci{human_agt_gkappa} & \RES{human_agt_gn} & \RES{human_agt_kappa} & \RES{human_agt_kappaw} & \RES{human_agt_acc} \ci{human_agt_acc} & \RES{human_agt_chacc_k}/\RES{human_agt_chn}\\
+    certainty & \RES{human_cer_alpha} & \RES{human_cer_gkappa} \ci{human_cer_gkappa} & \RES{human_cer_gn} & \RES{human_cer_kappa} & \RES{human_cer_kappaw} & \RES{human_cer_acc} \ci{human_cer_acc} & \RES{human_cer_chacc_k}/\RES{human_cer_chn}\\
+    politeness & \RES{human_pz_alpha} & \RES{human_pz_gkappa} \ci{human_pz_gkappa} & \RES{human_pz_gn} & \RES{human_pz_kappa} & \RES{human_pz_kappaw} & \RES{human_pz_acc} \ci{human_pz_acc} & \RES{human_pz_chacc_k}/\RES{human_pz_chn}\\
+    added content & \RES{human_add_alpha} & \RES{human_add_gkappa} \ci{human_add_gkappa} & \RES{human_add_gn} & \RES{human_add_kappa} & \RES{human_add_kappaw} & \RES{human_add_acc} \ci{human_add_acc} & \RES{human_add_chacc_k}/\RES{human_add_chn}\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Inter-annotator $\alpha$ is \RES{human_alpha_min}--\RES{human_alpha_max}.
+The gate passes on all \RES{human_gate_n} dimensions (Table~\ref{tab:human}): test-split $\kappa$ is \RES{human_gkappa_min}--\RES{human_gkappa_max}, and the lowest lower bound is \RES{human_gkappa_lo_min}.
+Added content scores only units where J1 and J2 agree (\RES{human_add_nnull} without a production label), which favours that row.
+Verdicts agree too.
+Recomputing each sampled unit's verdict from the human labels with the production rules (the judge's labels reproduce all \RES{human_v_recomputed_ok} stored verdicts), Violation agrees on \kn{human_v_viol} primary cue-channel units (\pct{human_v_viol}, \cip{human_v_viol}; $\kappa=\RES{human_v_viol_kappa}$): the judge flags \RES{human_v_viol_judgepos}, the humans \RES{human_v_viol_refpos}, with \RES{human_v_viol_fp} judge-only and \RES{human_v_viol_fn} human-only.
+Two of those three are epistemic \say{must have} sentences, coded emphatic and hedged in opposite directions.
+Constraint preservation agrees on \kn{human_v_cp} ($\kappa=\RES{human_v_cp_kappa}$) and the default-commitment verdict on \kn{human_v_asm} bare/noncrit units ($\kappa=\RES{human_v_asm_kappa}$).
+
+The humans also caught what every machine coder missed.
+On \say{I can't wait to go to the party.} both judge prompts, the rule-based extractor and both panel coders answered \emph{negated}; both annotators answered \emph{affirmative}, as keyed.
+The machines agreed with each other perfectly there and were wrong together, so panel agreement is not validation.
+The annotators in turn disputed one of our keys: both read \say{a couple of painkillers} as \emph{two}, as the machines did, against our key \emph{unclear}, which we now consider debatable.
+On critical labels against the keys, A1 scores \kn{human_chkey_A1}, A2 \kn{human_chkey_A2} (one negation-raising \say{I don't think\ldots} coded unclear) and the judge \kn{human_chkey_judge}.
+Two annotators are few, and near-ceiling $\alpha$ on a codebook built for determinate, explicit markers shows that these labels are reproducible, not that subtler pragmatic readings are.
 }{%
-Professional annotators are double-coding a 100-item core (76 probability-sampled outputs plus 24 challenge items), blind and independently, with adjudication; returns so far: \RES{human_return_files}.\pending{human gold results}
-A dimension enters a validated headline only if human--pipeline $\kappa\geq0.6$ against adjudicated labels; otherwise it is reported as machine-scored only, and panel consensus never substitutes for human labels. %CHECK
+Human annotation of a 100-item core (76 sampled outputs, 24 challenge items) is in progress; returns so far: \RES{human_return_files}.
+A dimension enters a validated headline only if human--pipeline $\kappa\geq0.6$; panel consensus never substitutes for human labels.
 }
 
 %% =====================================================================
@@ -289,7 +330,7 @@ Every displayed example is a stored output selected by a declared rule, shown wi
     Oracle: an unchanged source passes (\MR{0}) &
     Identity on stored outputs: \RES{id_fail_raw} false fails, one sentence &
     Relax acceptance; re-test with keyed mutants; on failure (\kof{or_acc_mut_det}), quarantine the two families &
-    Refusal/acceptance unresolved; idiomatic negation and vague quantity are shared machine blind spots; human gate pending.\\
+    Refusal/acceptance unresolved; idiomatic negation is a shared machine blind spot that human coders caught.\\
     \addlinespace
     R3: defaults are reported &
     Bare: \kof{bare_pol_aff_p0} affirmative; P2 covers both in \kof{covk_p2_pol} &
@@ -361,7 +402,7 @@ Compare labels, not strings, and repeat draws for any release gate.
 \label{sec:threats}
 %% =====================================================================
 \emph{Construct.} Labels are coarse, text-explicit categories from a codebook; \say{plain} means no explicit marker, and coverage of content, referents, negation scope and certainty degree (emphatic outputs pass a plain target by design) is partial.
-\emph{Oracle.} All rates depend on an LLM extractor that has not yet passed the human gate; machine-panel agreement shares errors.
+\emph{Oracle.} All rates depend on an LLM extractor; it passed the human gate, but with two annotators, near-ceiling agreement and a codebook written for explicit markers, the validation covers these dimensions on these outputs, not subtler readings; machine-panel agreement shares errors.
 \emph{Selection and scale.} Ten authored families per dimension and four fixed models support counterexamples and regression tests, not prevalence; examples were selected after discovery, by declared rules.
 The politeness asymmetry is prompt-dependent (P1) and model-dependent.
 \emph{Follow-ups.} Composition evidence uses eight scenarios and a tag that models literalize.
