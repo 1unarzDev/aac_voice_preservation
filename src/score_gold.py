@@ -226,11 +226,14 @@ def _jkey(r):
 def load_key(run: str, challenge_dir: Path | None) -> dict[str, dict]:
     """item_id -> production labels. Null final critical is filled from the arbiter."""
     key = {}
+    import runio
+    fam_opts = {f: it["critical_options"] for f, it in runio.load_items().items()}
     arb_p = ROOT / f"runs/{run}/arbiter.jsonl"
     arb = {_jkey(a): a["critical"] for a in map(json.loads, open(arb_p))} if arb_p.exists() else {}
     for r in read_csv(ROOT / f"annotation/gold_key_{run}.csv"):
         r = {k: (v if v != "" else None) for k, v in r.items()}
         r["subset"], r["pi"] = "sampled", float(r["pi"])
+        r["critical_options"] = fam_opts.get(r["family_id"])
         r["critical_source"] = "agree" if r["critical"] else None
         if r["critical"] is None and _jkey(r) in arb:
             r["critical"], r["critical_source"] = arb[_jkey(r)], "arbiter"
@@ -247,7 +250,7 @@ def load_key(run: str, challenge_dir: Path | None) -> dict[str, dict]:
             r["critical_source"] = "agree" if r["critical"] else None
             if r["critical"] is None and _jkey(r) in carb:
                 r["critical"], r["critical_source"] = carb[_jkey(r)], "arbiter"
-            r.update(item_id=j["family_id"], subset="challenge", pi=None)
+            r.update(item_id=j["family_id"], subset="challenge", pi=None, critical_options=j["critical_options"])
             key[r["item_id"]] = r
     return key
 
@@ -273,6 +276,13 @@ def load_returns(patterns: list[str], key: dict, unsure_missing: bool = True):
                 v = (r.get(d) or "").strip() or None
                 if v is not None and d in GENERAL_OPTIONS and v not in GENERAL_OPTIONS[d]:
                     notes[f"out_of_schema:{d}={v}"] += 1
+                if v is not None and d == "critical":
+                    opts = key[iid].get("critical_options") or []
+                    if v == "mixed/unclear" and "unclear/mixed" in opts:
+                        v = "unclear/mixed"
+                    if opts and v not in opts:   # answer is not an option of this item: invalid
+                        notes[f"critical_off_option_dropped:{r.get('annotator')}"] += 1
+                        v = None
                 if v is not None and d in uns:
                     notes[f"unsure:{d}"] += 1
                     if unsure_missing:
@@ -395,6 +405,9 @@ def main() -> int:
     ap.add_argument("--panel", nargs="*", default=[], help="codex panel exports (machine, provisional)")
     ap.add_argument("--challenge-judgments", type=Path, default=None,
                     help="dir with judgments.jsonl (+arbiter.jsonl) for ch-* items")
+    ap.add_argument("--panel-members", default=None,
+                    help="comma-separated annotator ids to keep from --panel (sensitivity)")
+    ap.add_argument("--tag", default="", help="suffix for output files (sensitivity runs)")
     ap.add_argument("--unsure-as-label", action="store_true",
                     help="keep labels listed in unsure_dims (default: treat as missing)")
     ap.add_argument("--seed", type=int, default=SEED)
@@ -419,6 +432,10 @@ def main() -> int:
         if not pats:
             continue
         ann, notes = load_returns(pats, key, not a.unsure_as_label)
+        if name == "panel" and a.panel_members:
+            keep = set(a.panel_members.split(","))
+            ann = {i: {m: x for m, x in v.items() if m in keep} for i, v in ann.items()}
+            ann = {i: v for i, v in ann.items() if v}
         if not ann:
             rep[name] = {"reference_set": name, "n_items": 0, "notes": notes}
             continue
@@ -427,8 +444,8 @@ def main() -> int:
         rep[name] = r
         rows += rr
         fn = "human_consensus" if name == "human" else "panel_majority"
-        write_consensus(ROOT / f"annotation/{fn}_{a.run}.csv", name, r["members"], cons_all, ann)
-    out = ROOT / f"annotation/judge_validation_{a.run}"
+        write_consensus(ROOT / f"annotation/{fn}_{a.run}{a.tag}.csv", name, r["members"], cons_all, ann)
+    out = ROOT / f"annotation/judge_validation_{a.run}{a.tag}"
     out.with_suffix(".json").write_text(json.dumps(rep, indent=1))
     if rows:
         with out.with_suffix(".csv").open("w", newline="") as fh:

@@ -1,0 +1,35 @@
+You are an independent linguistic coder for an AAC (augmentative and alternative communication) study.
+A person who uses an AAC app selected the KEYWORDS below; the app must turn them into the one sentence the person means. You do NOT know the original sentence.
+
+For EACH item and EACH of the five dimensions, list every reading that is ADMISSIBLE: a fluent, ordinary sentence that a person could plausibly mean with exactly these keywords (you may add function words, pronouns, auxiliaries, negation, question form, hedges or politeness words, but not new content nouns/verbs/adjectives that change the topic). For each admissible reading give the dimension value and one short witness paraphrase (a full sentence using the keywords that has that value). Include a reading only if a typical listener would find it a natural intended meaning, not merely grammatically possible. Tag every reading with plausibility: "likely" = a typical listener would consider it one of the main candidate meanings of these keywords; "possible" = coherent and natural enough to be meant, but a less expected interpretation. Do not list readings that are merely grammatical stretches. Mark ambiguous=true if two or more DIFFERENT values are admissible (likely or possible), else false. For every dimension, explicitly consider EACH option value in turn (e.g. would a negated version, a question, a request, a hedged version, a polite version, a different doer be a natural intended meaning of these keywords?) and include it only if it is plausible. Do not list the same value twice. Never use "mixed/unclear" as a reading unless the keywords themselves force an uncertain/mixed reading.
+
+Dimension definitions (use exactly these option strings):
+- polarity: is the main statement/request negated (not/never/no/don't/can't)? affirmative | negated | mixed/unclear ("I'm not sure"-type uncertainty, or one clause negated and one not).
+- speech_act: statement (tells) | question (asks for information or permission; "Can I ...?" is a question) | request/command (asks the listener to do something: imperatives, "can/could/would you ...?", "I'd like ...", asks with please) | refusal (explicitly declines: "no thanks", "I won't", "I don't want to") | offer/suggestion ("let's", "how about", "shall we", "do you want to ...?") | other (greetings, thanks only).
+- agent: who does the main content action: speaker (I, incl. own body part) | addressee (you; imperatives and "can you" requests) | we/joint (we, let's) | third party (other people or things) | unspecified (dummy it/there, agentless).
+- certainty: plain assertion | hedged/uncertain (maybe, might, probably, I think, I guess, not sure) | strongly certain/emphatic (definitely, really, for sure, of course) | n/a (question/request) for questions and requests/commands.
+- politeness: none | please | softened request (could you/would you mind) (could you, would you, would you mind, may I, if possible, I'd like) | thanks/apology (thank you, thanks, sorry, excuse me). If several, the first in this order: please > softened > thanks/apology.
+
+STRICT RULES: Do NOT read, list, open or search any files. Do NOT run any shell commands or tools. Everything you need is in this message. Answer only with the JSON object required by the output schema.
+
+Items (id: keywords):
+w101: hungry
+w102: friend
+w103: nose itches
+w104: thanks get wishes
+w105: get eat
+w106: communicate device
+w107: please get food
+w108: take keys open box
+w109: seem excited
+w110: cold
+w111: wonderful friend
+w112: get ipod mood music
+w113: make call
+w114: take ride
+w115: loved go rain kept
+w116: go have shower
+w117: know check
+w118: want one
+w119: lying
+w120: please bring romantic movie
