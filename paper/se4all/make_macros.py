@@ -548,24 +548,20 @@ if OS.exists():
 JV = ROOT / "annotation/judge_validation_main1.json"
 if JV.exists():
     jv = json.load(open(JV))
+    sys.path.insert(0, str(ROOT / "src"))
+    from score_gold import paper_macros
+    srcJV = str(JV.relative_to(ROOT))
     pan = jv.get("panel") or {}
-    try:
-        kap = {k: v["kappa"] for k, v in pan["judge"].items() if isinstance(v, dict) and "kappa" in v}
-        if kap:
-            put("panel_kappa_min", min(kap.values()), str(JV.relative_to(ROOT)) + " panel (machine)", "f2")
-    except (KeyError, TypeError, AttributeError):
-        pass
-    # HUMAN SLOT: when score_gold.py --human writes a non-null "human" section, its keys
-    # are exported with prefix human_ and the paper's conditional block switches on.
-    hum = jv.get("human")
-    if hum:
-        put("human_ready", 1, str(JV.relative_to(ROOT)) + " human section", "int")
-        for dim, v in (hum.get("judge") or {}).items():
-            if isinstance(v, dict):
-                for fld in ("kappa", "kappa_lo", "kappa_hi", "acc", "n"):
-                    if fld in v and v[fld] is not None:
-                        put(f"human_{dim}_{fld}".replace("/", ""), v[fld], str(JV.relative_to(ROOT)),
-                            "int" if fld == "n" else "f2")
+    kap = [t["kappa"] for t in ((v.get("sampled/final") or {}) for v in (pan.get("judge") or {}).values()
+                                if isinstance(v, dict)) if t.get("kappa") is not None]
+    if kap:
+        put("panel_kappa_min", min(kap), srcJV + " panel (machine), sampled/final", "f2")
+    # HUMAN SECTION (score_gold.py --human): exported with prefix human_ via the shared
+    # score_gold.paper_macros (per-dimension alpha, judge kappa / weighted kappa / accuracy
+    # with Wilson CI / n, H7 gate on the test split, challenge subset, verdict-level
+    # agreement, challenge-key accuracy). The paper's conditional block keys on human_ready.
+    for k_, v_ in paper_macros(jv.get("human") or {}, "human").items():
+        put(k_, v_, srcJV + " human section", "raw")
 put("human_return_files", len(glob.glob(str(ROOT / "annotation/returns/*.csv"))), "annotation/returns/*.csv", "int")
 
 # ---- guard + copy baseline (analysis/interventions/report.json, primary 58 families)
@@ -768,7 +764,7 @@ hdr = [
     + (f"; runs/expC1/scored.parquet sha256:{sha(C)}" if C.exists() else "; expC1 scored: absent (PENDING)"),
     f"% make_macros.py sha256:{sha(Path(__file__))}; resolution sha256:{sha(ROOT / 'annotation/label_resolution.jsonl')}; "
     "labels: shared arbiter > J1/J2 agreement > unknown; human gold: "
-    + ("present" if "oracle_ready" in macros else "PENDING"),
+    + ("present (human_ready)" if "human_ready" in macros else "PENDING"),
     "% Percentages are 0-100 with one decimal; *_pp are percentage points; *_k/*_den are counts.",
 ]
 body = [f"\\resdef{{{k}}}{{{v}}} % {sources[k]}" for k, v in sorted(macros.items())]

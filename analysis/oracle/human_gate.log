@@ -6,6 +6,13 @@
   certainty     alpha=1.0 (n=100)  sampled/final: n=161 acc=0.944 kappa=0.899 kappa_w=0.945
   politeness    alpha=1.0 (n=100)  sampled/final: n=163 acc=0.994 kappa=0.977 kappa_w=0.997
   added_content alpha=0.977 (n=100)  sampled/final: n=144 acc=0.951 kappa=0.903 kappa_w=0.911
+  verdict violation              primary: 96/99 agree kappa=0.916 (judge+/ref+ 23/24)
+  verdict constraint_preserving  primary: 94/97 agree kappa=0.927 (judge+/ref+ 68/67)
+  verdict assumption             primary: 54/56 agree kappa=0.9 (judge+/ref+ 43/43)
+  challenge key A1             critical 23/24  keyed dims 66/68
+  challenge key A2             critical 22/24  keyed dims 64/68
+  challenge key judge(final)   critical 22/24  keyed dims 64/68
+  challenge key consensus      critical 22/24  keyed dims 64/68
 [panel] members: ['C-gpt-5.6-sol', 'C-gpt-6-astra']; items: 187
   critical      alpha=0.983 (n=184)  sampled/final: n=157 acc=0.968 kappa=0.966 kappa_w=0.982
   polarity      alpha=1.0 (n=184)  sampled/final: n=162 acc=1.0 kappa=1.0 kappa_w=1.0
@@ -14,4 +21,11 @@
   certainty     alpha=0.959 (n=180)  sampled/final: n=152 acc=0.974 kappa=0.951 kappa_w=0.991
   politeness    alpha=1.0 (n=185)  sampled/final: n=161 acc=1.0 kappa=1.0 kappa_w=1.0
   added_content alpha=0.653 (n=177)  sampled/final: n=116 acc=0.983 kappa=0.964 kappa_w=0.975
+  verdict violation              primary: 95/97 agree kappa=0.945 (judge+/ref+ 24/24)
+  verdict constraint_preserving  primary: 90/92 agree kappa=0.948 (judge+/ref+ 65/65)
+  verdict assumption             primary: 53/54 agree kappa=0.951 (judge+/ref+ 41/40)
+  challenge key C-gpt-5.6-sol  critical 22/24  keyed dims 64/68
+  challenge key C-gpt-6-astra  critical 22/24  keyed dims 62/68
+  challenge key judge(final)   critical 22/24  keyed dims 64/68
+  challenge key consensus      critical 22/24  keyed dims 62/68
 wrote /home/lunarz/aac-voice-preservation/annotation/judge_validation_main1.json/.csv  (H7 gate kappa >= 0.6: human set, sampled_test, final only)

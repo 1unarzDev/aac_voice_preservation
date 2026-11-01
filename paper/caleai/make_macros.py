@@ -6,7 +6,8 @@
 Every number in main.tex is \\RES{key}. Never type a result by hand. Keys ending _lo/_hi are 95%
 family-cluster bootstrap bounds; _k/_n are counts. Percentages carry one decimal.
 
-Pending inputs (W-B, W-C, W-D, human gold, repair audit, T3) are exported as <name>_ready only
+Human gold is read directly from annotation/judge_validation_main1.json (score_gold.paper_macros,
+keys human_*; human_gold_ready). Pending inputs (W-B, W-C, W-D, repair audit, T3) are exported as <name>_ready only
 when their file exists; any numeric leaves of a pending JSON report are exported generically as
 <name>__<path> so the paper's conditional slots can pick them up without editing this script.
 """
@@ -150,6 +151,21 @@ for name, ready in EV["pending"].items():
         for pth, v in leaves(json.loads(f.read_text())):
             key = f"{name}__" + "".join(ch if ch.isalnum() else "_" for ch in pth)
             put(key, f"{v:.3g}" if isinstance(v, float) else v)
+
+
+# ---------------- human gold (W-A): judge vs two human annotators, from score_gold.py --human.
+# Same keys as the SE4All paper (shared score_gold.paper_macros, prefix human_); human_gold_ready
+# switches on the conditional slot whenever the human section exists.
+JV = ROOT / "annotation/judge_validation_main1.json"
+if JV.exists():
+    import sys
+    sys.path.insert(0, str(ROOT / "src"))
+    from score_gold import paper_macros
+    hm = paper_macros(json.loads(JV.read_text()).get("human") or {}, "human")
+    for k, v in hm.items():
+        put(k, v)
+    if hm:
+        put("human_gold_ready", 1)
 
 
 def esc(v: str) -> str:
