@@ -62,7 +62,7 @@ plt.rcParams.update({
     "font.sans-serif": ["Noto Sans", "DejaVu Sans"],
     "font.size": 7, "axes.titlesize": 7, "axes.labelsize": 7,
     "xtick.labelsize": 6.5, "ytick.labelsize": 6.5, "legend.fontsize": 6.5,
-    "axes.titleweight": "semibold", "axes.titlelocation": "left", "axes.titlepad": 3,
+    "axes.titleweight": "medium", "axes.titlelocation": "left", "axes.titlepad": 3,
     "axes.edgecolor": AXIS, "axes.linewidth": 0.6, "axes.labelcolor": INK2,
     "xtick.color": INK2, "ytick.color": INK2, "xtick.major.width": 0.6, "ytick.major.width": 0.6,
     "xtick.major.size": 2.5, "ytick.major.size": 0, "xtick.major.pad": 2, "ytick.major.pad": 3,
@@ -98,7 +98,7 @@ VALUE_LABEL = {"plain assertion": "plain", "hedged/uncertain": "hedged",
 NUM = {"two": 2, "three": 3, "four": 4, "six": 6, "nine": 9, "ten": 10, "twenty": 20,
        "forty": 40, "fifty": 50}
 CHANNELS = ["bare", "noncrit", "chip1", "chipall", "full"]
-CH_LABEL = {"bare": "bare", "noncrit": "+word", "chip1": "+chip", "chipall": "+all\nchips",
+CH_LABEL = {"bare": "bare", "noncrit": "+word", "chip1": "+chip", "chipall": "+all",
             "full": "full"}
 
 
@@ -141,7 +141,7 @@ def hgrid(ax):
 
 def pct_axis(ax, axis="x"):
     ticks = [0, .25, .5, .75, 1]
-    labels = ["0", "25", "50", "75", "100%"]
+    labels = ["0", "", "50", "", "100%"]
     if axis == "x":
         ax.set_xlim(-0.02, 1.02)
         ax.set_xticks(ticks, labels)
@@ -166,7 +166,7 @@ def fig_defaults(df: pd.DataFrame, nums: dict) -> None:
     amb = A.unique_ambiguous(df)
     b = amb[(amb.channel == "bare") & (amb.prompt_id == "P0") & amb.valid.astype(bool)].copy()
     fig, axes = plt.subplots(2, 4, figsize=(DOUBLE, 2.75),
-                             gridspec_kw=dict(hspace=0.62, wspace=0.95))
+                             gridspec_kw=dict(hspace=0.62, wspace=1.05))
     axes = axes.ravel()
     nums["fig_defaults"] = {"n_outputs": int(len(b)), "n_families": int(b.family_id.nunique()),
                             "rule": "bare channel, P0, one output per family x model (A/B share the request)"}
@@ -187,15 +187,11 @@ def fig_defaults(df: pd.DataFrame, nums: dict) -> None:
                 ax.plot([r["ci_low"], r["ci_high"]], [i, i], color=INK, lw=0.7, zorder=4,
                         solid_capstyle="butt")
             for k, m in enumerate(MODEL_ORDER):
-                ax.scatter(res[v]["by_model"][m], i + (k - 1.5) * 0.12, marker=MODEL_MARK[m], s=7,
+                ax.scatter(res[v]["by_model"][m], i + (k - 1.5) * 0.1, marker=MODEL_MARK[m], s=6,
                            facecolor="white", edgecolor=INK, lw=0.5, zorder=5)
-            lab = f"{r['estimate']*100:.0f}%"
-            xpos = max(r["ci_high"], max(res[v]["by_model"].values())) + 0.04
-            if xpos > 0.86:
-                ax.text(min(r["estimate"], 0.98) - 0.03, i, lab, va="center", ha="right",
-                        fontsize=6, color="white", zorder=6, fontweight="semibold")
-            else:
-                ax.text(xpos, i, lab, va="center", ha="left", fontsize=6, color=INK2)
+            ax.text(1.1, i, f"{r['estimate']*100:.0f}%", va="center", ha="left", fontsize=6,
+                    color=INK if r["estimate"] > 0 else MUTED, transform=ax.get_yaxis_transform(),
+                    clip_on=False)
         ax.axvline(0.5, color=INK2, lw=0.6, ls=(0, (2, 1.5)), zorder=3)
         ax.set_yticks(range(len(vals)), [VALUE_LABEL.get(v, v) for v in vals])
         ax.invert_yaxis()
@@ -229,7 +225,7 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
     d = df[df.prompt_id == "P0"].copy()
     d["cm"] = d.critical_match.astype(float)
     fig, axes = plt.subplots(2, 4, figsize=(DOUBLE, 2.7), sharey=True,
-                             gridspec_kw=dict(hspace=0.55, wspace=0.18))
+                             gridspec_kw=dict(hspace=0.5, wspace=0.22))
     axes = axes.ravel()
     x = np.arange(len(CHANNELS))
     nums["fig_channel_ladder"] = {"n_outputs": int(len(d)), "n_families": int(d.family_id.nunique())}
@@ -249,13 +245,13 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
                     mfc="white", mec=MUTED, mew=0.5, zorder=3)
         ax.fill_between(x, lo, hi, color=BLUE_LT, alpha=0.55, lw=0, zorder=1)
         ax.plot(x, est, color=BLUE, lw=1.4, marker="o", ms=3.4, mfc=BLUE, mec="white", mew=0.6, zorder=4)
-        ax.axhline(0.5, color=INK2, lw=0.5, ls=(0, (2, 1.5)), zorder=0)
+        ax.axhline(0.5, color=INK2, lw=0.5, ls=(0, (2, 1.5)), zorder=1.5)
         pct_axis(ax, "y")
         ax.set_xticks(x, [CH_LABEL[c] for c in CHANNELS])
         ax.set_xlim(-0.35, 4.35)
         ax.grid(axis="y", color=GRID, lw=0.5)
         ax.set_axisbelow(True)
-        ax.tick_params(axis="x", labelsize=6)
+        ax.tick_params(axis="x", labelsize=5.8)
         ax.axvspan(1.5, 4.5, color="#f3f2ee", lw=0, zorder=-1)
         ax.set_title(f"{DIM_LABEL[dim]}  ({g.family_id.nunique()} fam.)")
         if j % 4 == 0:
@@ -272,8 +268,10 @@ def fig_channel_ladder(df: pd.DataFrame, nums: dict) -> None:
         ls.append(MODEL_LABEL[m])
     hs.append(plt.Rectangle((0, 0), 1, 1, color="#f3f2ee", lw=0))
     ls.append("critical cue visible")
-    lg.legend(hs, ls, loc="center left", bbox_to_anchor=(0.02, 0.5), handlelength=1.6,
-              labelspacing=0.45)
+    hs.append(Line2D([], [], color=INK2, lw=0.5, ls=(0, (2, 1.5))))
+    ls.append("50%: bare ceiling (A and B\nget the same input)")
+    lg.legend(hs, ls, loc="center left", bbox_to_anchor=(0.0, 0.4), handlelength=1.6,
+              labelspacing=0.32, fontsize=6)
     save(fig, "fig_channel_ladder")
 
 
@@ -282,14 +280,17 @@ def family_defaults(df: pd.DataFrame) -> dict:
     """Default reading of each family = the A/B value most often produced under bare.
 
     Primary count: P0 bare top-1 over the 4 models (one output each). Ties are broken
-    by all bare P2 and S3 outputs. Families still tied, or with no committed A/B output,
-    have no default and are excluded from fig_cost_asymmetry."""
+    by all bare P2 and S3 outputs. Families whose P0 bare outputs never commit to A or B
+    (unclear, or a third value), or that stay tied, have no default and are excluded."""
     amb = A.unique_ambiguous(df)
     b = amb[amb.channel == "bare"]
     out = {}
     for fid, g in b.groupby("family_id"):
         p0 = g[g.prompt_id == "P0"].chose.value_counts()
         a, bb = p0.get("A", 0), p0.get("B", 0)
+        if a == bb == 0:
+            out[fid] = None
+            continue
         if a == bb:
             alt = g[g.prompt_id.isin(["P2", "S3"])].chose.value_counts()
             a, bb = alt.get("A", 0), alt.get("B", 0)
@@ -329,8 +330,6 @@ def fig_cost_asymmetry(df: pd.DataFrame, nums: dict) -> None:
         s = res[res.prompt == prompt].set_index(["dim", "reading"])
         for i, dim in enumerate(dims):
             dd, nd = s.loc[(dim, "default")], s.loc[(dim, "non-default")]
-            ax.plot([dd.estimate, nd.estimate], [i, i], color=AXIS, lw=1.6, zorder=1,
-                    solid_capstyle="butt")
             for row, col, mk, off in ((dd, BLUE, "o", -0.14), (nd, ORANGE, "D", 0.14)):
                 ax.plot([row.ci_low, row.ci_high], [i + off, i + off], color=col, lw=0.7, zorder=2,
                         solid_capstyle="butt")
@@ -346,8 +345,9 @@ def fig_cost_asymmetry(df: pd.DataFrame, nums: dict) -> None:
         ax.set_xlabel("extra input actions", labelpad=1.5)
     hs = [Line2D([], [], marker="o", ls="", ms=3.6, color=BLUE, mec="white", mew=0.5),
           Line2D([], [], marker="D", ls="", ms=3.2, color=ORANGE, mec="white", mew=0.5)]
-    fig.legend(hs, ["default reading", "non-default reading"], loc="lower center", ncol=2,
-               bbox_to_anchor=(0.55, -0.07), handlelength=1.0)
+    fig.legend(hs, ["default reading (most common under bare)", "non-default reading"],
+               loc="lower center", ncol=2, bbox_to_anchor=(0.5, -0.14), handlelength=1.0,
+               fontsize=6)
     save(fig, "fig_cost_asymmetry")
     nums["fig_cost_asymmetry"] = {
         "rule": "bare channel; default = A/B value most often produced by P0 top-1 over 4 models "
@@ -382,16 +382,16 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
     pol = f[f.subdim == "politeness"]
     cer = f[f.subdim == "certainty"]
     panels = [
-        ("Politeness (politeness items)",
+        ("Politeness",
          (pol[pol.pol_plain], "polite_out", "added to a plain source"),
          (pol[~pol.pol_plain], "impolite_out", "removed from a polite source")),
-        ("Hedging (certainty items)",
+        ("Hedging",
          (cer[cer.cv == "plain assertion"], "hedged_out", "added to a plain source"),
          (cer[cer.cv == "hedged/uncertain"], "unhedged_out", "removed from a hedged source")),
     ]
     rows_lbl = ["Pooled"] + [MODEL_LABEL[m] for m in MODEL_ORDER]
-    fig, axes = plt.subplots(1, 2, figsize=(SINGLE, 1.75), sharey=True,
-                             gridspec_kw=dict(wspace=0.12))
+    fig, axes = plt.subplots(1, 2, figsize=(SINGLE - 0.04, 1.8), sharey=True,
+                             gridspec_kw=dict(wspace=0.22))
     nums["fig_politeness_ratchet"] = {"rule": "full channel (user typed the source), P0"}
     for ax, (title, add, rem) in zip(axes, panels):
         rec = {}
@@ -407,10 +407,14 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
                         mec="white", mew=0.5, zorder=3)
                 rec.setdefault(key, {})[name] = {k: r[k] for k in ("estimate", "ci_low", "ci_high",
                                                                    "n", "n_families")}
-            ax.plot(pts, [i - 0.13, i + 0.13], color=AXIS, lw=0.8, zorder=1)
-        ax.axhline(0.5, color=GRID, lw=0.6)
+        ax.axhline(0.5, color=AXIS, lw=0.5)
+        if all(v[n]["estimate"] == 0 for v in rec.values() for n in v):
+            n_add = rec["Pooled"][add[2]]["n"]; n_rem = rec["Pooled"][rem[2]]["n"]
+            ax.text(0.13, 2.5, f"no hedge added\n(0 of {n_add} plain sources)\nor removed\n(0 of {n_rem} hedged sources)",
+                    fontsize=5.8, color=INK2, va="center", ha="left", linespacing=1.2,
+                    bbox=dict(fc="white", ec="none", pad=1))
         ax.set_yticks(range(5), rows_lbl)
-        ax.get_yticklabels()[0].set_fontweight("semibold")
+        [t.set_fontweight("bold") for t in ax.get_yticklabels()[:1]]
         ax.set_ylim(4.5, -0.6)
         pct_axis(ax)
         ax.set_xticks([0, .25, .5, .75, 1], ["0", "", "50", "", "100%"])
@@ -426,8 +430,9 @@ def fig_politeness_ratchet(df: pd.DataFrame, items: dict, nums: dict) -> None:
         for k in ["Pooled"] + MODEL_ORDER} | {"n": int(len(allp)), "families": int(allp.family_id.nunique())}
     hs = [Line2D([], [], marker="D", ls="", ms=3.2, color=ORANGE, mec="white", mew=0.5),
           Line2D([], [], marker="o", ls="", ms=3.6, color=BLUE, mec="white", mew=0.5)]
-    fig.legend(hs, ["marker added to a plain source", "marker removed from a marked source"],
-               loc="lower center", ncol=2, bbox_to_anchor=(0.52, -0.1), handlelength=1.0)
+    fig.legend(hs, ["added to a plain source", "removed from a marked source"],
+               loc="lower center", ncol=2, bbox_to_anchor=(0.55, -0.16), handlelength=1.0,
+               fontsize=6)
     save(fig, "fig_politeness_ratchet")
 
 
@@ -438,7 +443,7 @@ def fig_sets(df: pd.DataFrame, nums: dict) -> None:
     u = u[u.channel == "bare"].copy()
     u["subdim"] = u.family_id.map(df.drop_duplicates("family_id").set_index("family_id").subdim)
     u["cov"] = u.coverage_at_3.astype(float)
-    fig, ax = plt.subplots(figsize=(SINGLE, 1.9))
+    fig, ax = plt.subplots(figsize=(SINGLE - 0.36, 1.9))
     res = {}
     for i, dim in enumerate(DIMS):
         pts = []
@@ -450,16 +455,15 @@ def fig_sets(df: pd.DataFrame, nums: dict) -> None:
                     solid_capstyle="butt", zorder=2)
             ax.plot(r["estimate"], i + off, marker=mk, ms=3.6 if mk == "o" else 3.2, color=colr,
                     mec="white", mew=0.5, zorder=3)
-            bym = g.groupby("model").cov.mean().to_dict()
+            bym = g.groupby("model")["cov"].mean().to_dict()
             res.setdefault(dim, {})[prompt] = {k: r[k] for k in ("estimate", "ci_low", "ci_high", "n",
                                                                 "n_families")} | {"by_model": bym}
-        ax.plot(pts, [i + 0.13, i - 0.13], color=AXIS, lw=0.8, zorder=1)
-        ax.text(1.04, i, f"{res[dim]['P2']['estimate']*100:.0f}%", va="center", ha="left",
+        ax.text(1.05, i, f"{res[dim]['P2']['estimate']*100:.0f}%", va="center", ha="left",
                 fontsize=6, color=BLUE)
-        ax.text(1.17, i, f"{res[dim]['S3']['estimate']*100:.0f}%", va="center", ha="left",
+        ax.text(1.16, i, f"{res[dim]['S3']['estimate']*100:.0f}%", va="center", ha="left",
                 fontsize=6, color=INK2)
-    ax.text(1.04, -0.85, "P2", fontsize=6, color=BLUE, fontweight="semibold", ha="left")
-    ax.text(1.17, -0.85, "S3", fontsize=6, color=INK2, fontweight="semibold", ha="left")
+    ax.text(1.05, -0.85, "P2", fontsize=6, color=BLUE, fontweight="medium", ha="left")
+    ax.text(1.16, -0.85, "S3", fontsize=6, color=INK2, fontweight="medium", ha="left")
     ax.set_yticks(range(len(DIMS)), [DIM_LABEL[d] for d in DIMS])
     ax.set_ylim(len(DIMS) - 0.45, -0.6)
     pct_axis(ax)
@@ -480,115 +484,127 @@ def fig_sets(df: pd.DataFrame, nums: dict) -> None:
 
 
 # ---------------------------------------------------------------- fig 6
-def fig_pipeline(items: dict) -> None:
+def fig_pipeline(df: pd.DataFrame, items: dict, nums: dict) -> None:
+    """Method schematic. The example output and its extracted labels are read from the
+    stored data (family pol-07, bare channel, P0, first model in MODEL_ORDER)."""
     fam = items["pol-07"]
     va, vb = fam["variants"]["A"], fam["variants"]["B"]
+    ex = df[(df.family_id == "pol-07") & (df.channel == "bare") & (df.prompt_id == "P0")]
+    ex = ex[ex.model == MODEL_ORDER[0]].iloc[0]
+    nums["fig_pipeline"] = {"example_family": "pol-07", "model": ex.model, "output": ex.text,
+                            "polarity": ex.polarity, "agent": ex.agent, "speech_act": ex.speech_act}
     bare, nc = fam["bare"], fam["noncritical"]
-    chans = [("bare", bare, "collision"),
-             ("+noncritical", f"{bare} {nc}", "length control"),
-             ("+chip", f"{' '.join(va['chips'])} {bare}", "critical cue"),
-             ("+all chips", f"{' '.join(va['all_chips'])} {bare}", "all commitments"),
-             ("full", va["source"], "oracle")]
-    W, H = DOUBLE, 2.05
+    chans = [("bare", bare), ("+noncritical", f"{bare} {nc}"),
+             ("+chip", f"{' '.join(va['chips'])} {bare}"),
+             ("+all chips", f"{' '.join(va['all_chips'])} {bare}"),
+             ("full", va["source"])]
+    W, H = DOUBLE - 0.22, 1.72
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis("off")
+    CUE_FC = "#eef4fc"
 
-    def box(x, y, w, h, fc="white", ec=AXIS, lw=0.7, r=0.04):
+    def box(x, y, w, h, fc="white", ec=AXIS, lw=0.7, r=0.035):
         ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle=f"round,pad=0,rounding_size={r}",
                                     fc=fc, ec=ec, lw=lw, zorder=2))
 
-    def arrow(x0, y0, x1, y1, color=INK2):
+    def arrow(x0, y0, x1, y1):
         ax.annotate("", xy=(x1, y1), xytext=(x0, y0), zorder=3,
-                    arrowprops=dict(arrowstyle="-|>,head_length=0.28,head_width=0.14", color=color,
+                    arrowprops=dict(arrowstyle="-|>,head_length=0.32,head_width=0.16", color=INK2,
                                     lw=0.7, shrinkA=0, shrinkB=0))
 
     def stage(x, label):
-        ax.text(x, H - 0.08, label, ha="left", va="top", fontsize=6, color=MUTED,
-                fontweight="semibold")
+        ax.text(x, H - 0.03, label, ha="left", va="top", fontsize=5.6, color=MUTED,
+                fontweight="bold")
 
-    top, bot = H - 0.28, 0.08
+    top, bot = H - 0.2, 0.17
     mid = (top + bot) / 2
+    gap = 0.15
+    widths = dict(src=0.86, ch=1.76, llm=0.46, out=0.7, judge=0.92, att=1.3)
+    xs, x = {}, 0.01
+    for k, w in widths.items():
+        xs[k] = x
+        x += w + gap
     # 1 source pair
-    x = 0.02; w = 1.12
+    x, w = xs["src"], widths["src"]
     stage(x, "1  SOURCE PAIR")
-    box(x, mid + 0.05, w, 0.44)
-    ax.text(x + 0.06, mid + 0.4, "variant A (negated)", fontsize=5.5, color=MUTED, va="top")
-    ax.text(x + 0.06, mid + 0.26, f"“{va['source']}”", fontsize=6, va="top", wrap=True)
-    box(x, mid - 0.49, w, 0.44)
-    ax.text(x + 0.06, mid - 0.09, "variant B (affirmative)", fontsize=5.5, color=MUTED, va="top")
-    ax.text(x + 0.06, mid - 0.23, f"“{vb['source']}”", fontsize=6, va="top")
-    ax.text(x + w / 2, bot + 0.02, "differ on one dimension", fontsize=5.5, color=MUTED, ha="center")
-    # 2 compression -> channels
-    x2 = x + w + 0.3
-    arrow(x + w + 0.03, mid, x2 - 0.03, mid)
-    ax.text((x + w + x2) / 2, mid + 0.06, "compress", fontsize=5.5, color=INK2, ha="center",
-            rotation=90, va="bottom")
-    w2 = 1.72
+    for k, (var, lab, yb) in enumerate(((va, "variant A: negated", mid + 0.03),
+                                         (vb, "variant B: affirmative", mid - 0.57))):
+        box(x, yb, w, 0.54)
+        ax.text(x + 0.05, yb + 0.49, lab, fontsize=5.2, color=MUTED, va="top")
+        words = var["source"].split()
+        cut = len(words) // 2 + 1
+        ax.text(x + 0.05, yb + 0.39, "“" + " ".join(words[:cut]) + "\n" + " ".join(words[cut:]) + "”",
+                fontsize=6, va="top", linespacing=1.15)
+    ax.text(x + w / 2, bot - 0.05, "differ on one dimension", fontsize=5.2, color=MUTED, ha="center",
+            va="top")
+    # 2 channels
+    x2, w2 = xs["ch"], widths["ch"]
+    arrow(x + w + 0.015, mid, x2 - 0.015, mid)
     stage(x2, "2  VISIBLE INPUT CHANNEL")
-    hgt = (top - bot - 0.04 * 4) / 5
+    sep = 0.035
+    hgt = (top - bot - sep * 4) / 5
     ys = []
-    for k, (name, inp, role) in enumerate(chans):
-        yb = top - (k + 1) * hgt - k * 0.04
+    for k, (name, inp) in enumerate(chans):
+        yb = top - (k + 1) * hgt - k * sep
         ys.append(yb + hgt / 2)
         cue = k >= 2
-        box(x2, yb, w2, hgt, fc="#eef4fc" if cue else "white", ec=BLUE if cue else AXIS)
-        ax.text(x2 + 0.05, yb + hgt / 2, name, fontsize=6, fontweight="semibold", va="center")
-        ax.text(x2 + 0.58, yb + hgt / 2, inp, fontsize=5.6, va="center", family="DejaVu Sans Mono")
-        ax.text(x2 + w2 - 0.04, yb + hgt / 2, role, fontsize=5, va="center", ha="right", color=MUTED)
-    ax.text(x2 + w2 + 0.035, (ys[0] + ys[1]) / 2, "no\ncue", fontsize=5, color=MUTED, va="center")
-    ax.text(x2 + w2 + 0.035, ys[3], "cue", fontsize=5, color=BLUE, va="center")
-    ax.plot([x2 + w2 + 0.015] * 2, [ys[0] + hgt / 2 - 0.02, ys[1] - hgt / 2 + 0.02], color=AXIS, lw=0.6)
-    ax.plot([x2 + w2 + 0.015] * 2, [ys[2] + hgt / 2 - 0.02, ys[4] - hgt / 2 + 0.02], color=BLUE, lw=0.6)
-    # 3 LLM
-    x3 = x2 + w2 + 0.32
-    w3 = 0.62
-    for yy in ys:
-        ax.plot([x2 + w2 + 0.22, x3 - 0.08], [yy, mid], color=AXIS, lw=0.5, zorder=1)
-    arrow(x3 - 0.1, mid, x3 - 0.02, mid)
+        box(x2, yb, w2, hgt, fc=CUE_FC if cue else "white", ec=BLUE if cue else AXIS)
+        ax.text(x2 + 0.05, yb + hgt / 2, name, fontsize=5.6, fontweight="bold", va="center")
+        ax.text(x2 + 0.56, yb + hgt / 2, inp, fontsize=5.5, va="center")
+    ax.text(x2 + w2 / 2, bot - 0.05, "blue = critical cue visible to the model", fontsize=5.2,
+            color=MUTED, ha="center", va="top")
+    # 3 LLM (fan-in)
+    x3, w3 = xs["llm"], widths["llm"]
+    for k, yy in enumerate(ys):
+        ax.plot([x2 + w2, x3], [yy, mid + (2 - k) * 0.06], color=AXIS, lw=0.5, zorder=1)
     stage(x3, "3  GENERATE")
-    box(x3, mid - 0.36, w3, 0.72, fc=INK, ec=INK)
-    ax.text(x3 + w3 / 2, mid + 0.14, "LLM", fontsize=7.5, color="white", ha="center", va="center",
-            fontweight="semibold")
-    ax.text(x3 + w3 / 2, mid - 0.13, "4 models\nP0 / P2 / S3", fontsize=5.3, color="#e1e0d9",
-            ha="center", va="center", linespacing=1.2)
+    box(x3, mid - 0.34, w3, 0.68, fc=INK, ec=INK)
+    ax.text(x3 + w3 / 2, mid + 0.13, "LLM", fontsize=7.5, color="white", ha="center", va="center",
+            fontweight="bold")
+    ax.text(x3 + w3 / 2, mid - 0.13, "4 models\nP0 / P2 / S3", fontsize=5.2, color="#e1e0d9",
+            ha="center", va="center", linespacing=1.25)
     # 4 output
-    x4 = x3 + w3 + 0.22
-    w4 = 0.86
-    arrow(x3 + w3 + 0.02, mid, x4 - 0.02, mid)
+    x4, w4 = xs["out"], widths["out"]
+    arrow(x3 + w3 + 0.015, mid, x4 - 0.015, mid)
     stage(x4, "4  OUTPUT")
-    box(x4, mid - 0.27, w4, 0.54)
-    ax.text(x4 + w4 / 2, mid + 0.02, "“I like the\nmedication.”", fontsize=6, ha="center",
-            va="center", linespacing=1.2)
-    ax.text(x4 + w4 / 2, mid - 0.36, "(bare input)", fontsize=5, color=MUTED, ha="center", va="top")
-    # 5 blind judge
-    x5 = x4 + w4 + 0.22
-    w5 = 0.98
-    arrow(x4 + w4 + 0.02, mid, x5 - 0.02, mid)
+    box(x4, mid - 0.24, w4, 0.48)
+    words = ex.text.split()
+    cut = (len(words) + 1) // 2
+    ax.text(x4 + w4 / 2, mid, "“" + " ".join(words[:cut]) + "\n" + " ".join(words[cut:]) + "”",
+            fontsize=6, ha="center", va="center", linespacing=1.15)
+    ax.text(x4 + w4 / 2, mid - 0.31, f"{MODEL_LABEL[ex.model]},\nbare input", fontsize=5,
+            color=MUTED, ha="center", va="top", linespacing=1.15)
+    # 5 blind extraction
+    x5, w5 = xs["judge"], widths["judge"]
+    arrow(x4 + w4 + 0.015, mid, x5 - 0.015, mid)
     stage(x5, "5  BLIND EXTRACTION")
     box(x5, mid - 0.4, w5, 0.8)
-    ax.text(x5 + w5 / 2, mid + 0.27, "LLM judge + human gold", fontsize=5.6, ha="center", va="center",
-            fontweight="semibold")
-    ax.text(x5 + w5 / 2, mid + 0.1, "sees the output only", fontsize=5.2, ha="center", va="center",
-            color=MUTED)
-    ax.text(x5 + w5 / 2, mid - 0.17, "polarity = affirmative\nagent = speaker\n…",
-            fontsize=5.4, ha="center", va="center", family="DejaVu Sans Mono", linespacing=1.25)
+    ax.text(x5 + 0.06, mid + 0.31, "LLM judge", fontsize=6, fontweight="bold", va="center")
+    ax.text(x5 + 0.06, mid + 0.17, "sees the output only,\nnot the source or channel", fontsize=5,
+            color=MUTED, va="top", linespacing=1.15)
+    lab = [("polarity", ex.polarity), ("agent", ex.agent), ("speech act", ex.speech_act)]
+    for k, (d, v) in enumerate(lab):
+        ax.text(x5 + 0.06, mid - 0.12 - k * 0.1, d, fontsize=5.2, color=INK2, va="center")
+        ax.text(x5 + 0.5, mid - 0.12 - k * 0.1, v, fontsize=5.2, va="center", fontweight="bold")
     # 6 attribution
-    x6 = x5 + w5 + 0.22
-    w6 = W - x6 - 0.03
-    arrow(x5 + w5 + 0.02, mid, x6 - 0.02, mid)
+    x6, w6 = xs["att"], W - xs["att"] - 0.01
+    arrow(x5 + w5 + 0.015, mid, x6 - 0.015, mid)
     stage(x6, "6  DETERMINISTIC ATTRIBUTION")
-    outs = [("Loss", "value not recoverable from the input"),
-            ("Violation", "cue visible, output value ≠ source"),
-            ("Assumption", "no cue, output commits to a value")]
-    bh = 0.36
+    outs = [("Loss", "critical value not recoverable\nfrom the visible input"),
+            ("Violation", "cue visible, but output\nvalue ≠ source value"),
+            ("Assumption", "no cue, but output commits\nto a definite value")]
+    sep6 = 0.05
+    bh = (top - bot - 2 * sep6) / 3
     for k, (name, desc) in enumerate(outs):
-        yb = mid + 0.62 - (k + 1) * bh - k * 0.08
-        box(x6, yb, w6, bh, ec=ORANGE if name != "Loss" else AXIS, lw=0.7)
-        ax.text(x6 + 0.05, yb + bh - 0.09, name, fontsize=6.2, fontweight="semibold", va="top")
-        ax.text(x6 + 0.05, yb + 0.07, desc, fontsize=5.2, color=INK2, va="bottom")
-    ax.text(x6 + w6 / 2, bot + 0.02, "compares extracted value with item spec + channel",
-            fontsize=5, color=MUTED, ha="center")
+        yb = top - (k + 1) * bh - k * sep6
+        box(x6, yb, w6, bh)
+        ax.add_patch(plt.Rectangle((x6, yb + 0.03), 0.025, bh - 0.06, color=ORANGE if k else MUTED,
+                                   lw=0, zorder=3))
+        ax.text(x6 + 0.07, yb + bh - 0.055, name, fontsize=6, fontweight="bold", va="top")
+        ax.text(x6 + 0.07, yb + bh - 0.16, desc, fontsize=5.1, color=INK2, va="top", linespacing=1.15)
+    ax.text(x6 + w6 / 2, bot - 0.05, "label vs item spec + channel; no judgment", fontsize=5.2,
+            color=MUTED, ha="center", va="top")
     save(fig, "fig_pipeline")
 
 
@@ -602,16 +618,22 @@ def main() -> int:
     nums = {"n_families": int(df.family_id.nunique()), "n_rows": int(len(df)),
             "models": MODEL_ORDER, "n_boot": N_BOOT, "seed": SEED,
             "tables": [str(t) for t in args.table]}
+    nums["note"] = "widths in inches of the saved PDFs are reported under pdf_sizes"
     todo = {"fig_defaults": lambda: fig_defaults(df, nums),
             "fig_channel_ladder": lambda: fig_channel_ladder(df, nums),
             "fig_cost_asymmetry": lambda: fig_cost_asymmetry(df, nums),
             "fig_politeness_ratchet": lambda: fig_politeness_ratchet(df, items, nums),
             "fig_sets": lambda: fig_sets(df, nums),
-            "fig_pipeline": lambda: fig_pipeline(items)}
+            "fig_pipeline": lambda: fig_pipeline(df, items, nums)}
     for name, fn in todo.items():
         if not args.only or name in args.only:
             fn()
             print("wrote", name)
+    import re
+    nums["pdf_sizes"] = {}
+    for f in sorted(OUT.glob("fig_*.pdf")):
+        m = re.search(rb"/MediaBox \[([^\]]+)\]", f.read_bytes())
+        nums["pdf_sizes"][f.stem] = [round(float(v) / 72, 2) for v in m.group(1).split()[2:]]
     path = OUT / "fig_numbers.json"
     old = json.loads(path.read_text()) if args.only and path.exists() else {}
     path.write_text(json.dumps(old | nums, indent=1, default=float) + "\n")
