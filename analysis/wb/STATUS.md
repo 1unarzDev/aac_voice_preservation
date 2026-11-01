@@ -14,3 +14,5 @@ Then: generate.py --requests runs/requests/wb1.jsonl --run-id wb1 (all cached, a
 - [ckpt 4] analysis/wb/report.md currently = interim wb1i (narrative.md + tables). When wb1_finish.sh completes (WBFINISHED in runs/wb1_attr.log)
   it rewrites analysis/wb/report.md from wb1 (4-model restored); then update the C paragraph in narrative.md and rerun `python src/wb_report.py`.
 - [ckpt 5] DONE: wb1 complete (1836 rows); report.md regenerated from wb1 with final narrative.
+
+- [ckpt 6, 2026-11-01] Cycle-2 Action 1 complete: all 139 restoration inputs / 556 stored outputs audited in `contract_audit.md`; original source tables retained, actual-input fidelity and aligned/expressible sensitivities separate. Seven definite chip/source conflicts; two word cases unknown, nine unclear references and five source-consensus fallbacks withheld from aligned sensitivity. W-B remains machine-assessed; 20-message human audit still unreturned. No new generation/judging; no request rebuild. Hashed post-hoc evidence snapshot: `contract_audit_evidence_manifest.json`.
