@@ -556,7 +556,7 @@ def item_line(r, a) -> str:
                 f"`labels_main1_{a}.csv` (the 2nd and 3rd may get `(1)`, `(2)` added); rename them to the names under Return. README: Setup and Parts 1-3.")
     elif t in ("part10", "part12", "part13"):
         f = r["file_or_link"].split(" + ")[1]
-        when = {"part12": " (arrives in a later zip update: the coordinator will tell you; do steps 1-4 first)", "part13": f" (arrives on {DATES['stage3_open']})"}.get(t, "")
+        when = {"part12": "", "part13": f" (arrives on {DATES['stage3_open']})"}.get(t, "")
         body = (f"Open `annotate.html`, enter `{a}`, load `{f}`{when}, do the 5 practice items, then every item. "
                 f"README: Part 10{' (this part is the same task on a new file)' if t != 'part10' else ''}.")
     elif t == "tiebreak":
@@ -575,7 +575,7 @@ def stage2_readme(plan) -> str:
             "- `<ID>_check_1.json`, `<ID>_check_2.json`, `<ID>_check_3.json`: your Part 8 check files (sentence pairs "
             "written by other annotators; never your own). Open them with `../check_pairs.html`.\n"
             "- `part12_gold_elic.json`: the Part 12 labelling file, for the annotators whose sheet lists Part 12. "
-            "Open it with `../annotate.html`. It is added in a later zip update; the coordinator will tell you when.\n\n"
+            "Open it with `../annotate.html`.\n\n"
             "Follow your sheet `assignments/<ID>_stage2.md`. Due " + DATES["stage2_due"] + ".\n")
 
 
