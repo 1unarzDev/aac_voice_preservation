@@ -5040,5 +5040,177 @@
       "n_planned": 1872,
       "cluster_by": "family_id"
     }
+  },
+  "closure": {
+    "baseline_value_differences": 0,
+    "historical_parity_failure": "dtype-only bool versus object",
+    "comparator": {
+      "joint": {
+        "family": {
+          "estimate": 0.06356837606837606,
+          "ci_low": 0.052884615384615384,
+          "ci_high": 0.07478632478632478,
+          "n": 1872,
+          "n_total": 1872,
+          "n_missing": 0,
+          "n_families": 78,
+          "n_families_observed": 78,
+          "n_boot_valid": 10000,
+          "k": 119.0,
+          "n_planned": 1872,
+          "cluster_by": "family_id"
+        },
+        "recorded_cluster": {
+          "estimate": 0.06356837606837606,
+          "ci_low": 0.052845528455284556,
+          "ci_high": 0.075,
+          "n": 1872,
+          "n_total": 1872,
+          "n_missing": 0,
+          "n_families": 55,
+          "n_families_observed": 55,
+          "n_boot_valid": 10000,
+          "k": 119.0,
+          "n_planned": 1872,
+          "cluster_by": "cluster_id"
+        },
+        "G1_only_pass": 123,
+        "G1s_only_pass": 4
+      },
+      "strict": {
+        "family": {
+          "estimate": 0.06143162393162393,
+          "ci_low": 0.049145299145299144,
+          "ci_high": 0.07425213675213675,
+          "n": 1872,
+          "n_total": 1872,
+          "n_missing": 0,
+          "n_families": 78,
+          "n_families_observed": 78,
+          "n_boot_valid": 10000,
+          "k": 115.0,
+          "n_planned": 1872,
+          "cluster_by": "family_id"
+        },
+        "recorded_cluster": {
+          "estimate": 0.06143162393162393,
+          "ci_low": 0.04861111111111111,
+          "ci_high": 0.07482078853046595,
+          "n": 1872,
+          "n_total": 1872,
+          "n_missing": 0,
+          "n_families": 55,
+          "n_families_observed": 55,
+          "n_boot_valid": 10000,
+          "k": 115.0,
+          "n_planned": 1872,
+          "cluster_by": "cluster_id"
+        },
+        "G1_only_pass": 128,
+        "G1s_only_pass": 13
+      }
+    },
+    "cost": {
+      "actual_generation_http_calls": 766,
+      "successful_generation_http_calls": 726,
+      "failed_generation_http_calls": 40,
+      "judge_batch_http_calls": 207,
+      "successful_judge_batches": 34,
+      "failed_judge_batches": 173,
+      "total_instrumented_http_calls": 973,
+      "new_arbitration_calls": 0,
+      "closure_generation_calls": 0,
+      "closure_judge_calls": 0,
+      "recorded_analysis_start_elapsed_s": 3605.328051328659,
+      "completed_analysis_elapsed_upper_bound_s": 3624.0978841781616,
+      "completion_evidence_commit": "55d85db2e41f2a37e821ee740736e3be7b2e6a70",
+      "completed_analysis_utc_upper_bound": "2026-11-01T19:32:14+00:00",
+      "last_instrumented_http_end_utc": "2026-11-01T19:31:53.199104+00:00",
+      "original_launch_utc": "2026-11-01T18:31:49.902116+00:00",
+      "original_deadline_utc": "2026-11-01T22:31:49.902116+00:00",
+      "judge_peak_concurrency": 12,
+      "inherited_resume_exceeds_current_concurrency_8": true,
+      "resource_caps_met": true,
+      "memo_937_generation_count_supported": false
+    },
+    "unresolved_J_units": 10,
+    "unresolved_selected_target_rows": 26,
+    "new_selected_critical_unknowns": 0,
+    "general_disagreement_target_fields": 49,
+    "general_disagreement_fields_by_dimension": {
+      "polarity": 3,
+      "speech_act": 17,
+      "agent": 14,
+      "certainty": 15
+    },
+    "general_agreement_only_joint_outcome_changes": 0,
+    "all_displayed_examples_verified": true,
+    "source_snapshot_manifest_sha256": "3347e969133a3b69e7d9035ec5a3c2ed1569ae2ccea29acfc82da61a55920f6d"
+  },
+  "G1_minus_G1s": {
+    "joint": {
+      "family": {
+        "estimate": 0.06356837606837606,
+        "ci_low": 0.052884615384615384,
+        "ci_high": 0.07478632478632478,
+        "n": 1872,
+        "n_total": 1872,
+        "n_missing": 0,
+        "n_families": 78,
+        "n_families_observed": 78,
+        "n_boot_valid": 10000,
+        "k": 119.0,
+        "n_planned": 1872,
+        "cluster_by": "family_id"
+      },
+      "recorded_cluster": {
+        "estimate": 0.06356837606837606,
+        "ci_low": 0.052845528455284556,
+        "ci_high": 0.075,
+        "n": 1872,
+        "n_total": 1872,
+        "n_missing": 0,
+        "n_families": 55,
+        "n_families_observed": 55,
+        "n_boot_valid": 10000,
+        "k": 119.0,
+        "n_planned": 1872,
+        "cluster_by": "cluster_id"
+      },
+      "G1_only_pass": 123,
+      "G1s_only_pass": 4
+    },
+    "strict": {
+      "family": {
+        "estimate": 0.06143162393162393,
+        "ci_low": 0.049145299145299144,
+        "ci_high": 0.07425213675213675,
+        "n": 1872,
+        "n_total": 1872,
+        "n_missing": 0,
+        "n_families": 78,
+        "n_families_observed": 78,
+        "n_boot_valid": 10000,
+        "k": 115.0,
+        "n_planned": 1872,
+        "cluster_by": "family_id"
+      },
+      "recorded_cluster": {
+        "estimate": 0.06143162393162393,
+        "ci_low": 0.04861111111111111,
+        "ci_high": 0.07482078853046595,
+        "n": 1872,
+        "n_total": 1872,
+        "n_missing": 0,
+        "n_families": 55,
+        "n_families_observed": 55,
+        "n_boot_valid": 10000,
+        "k": 115.0,
+        "n_planned": 1872,
+        "cluster_by": "cluster_id"
+      },
+      "G1_only_pass": 128,
+      "G1s_only_pass": 13
+    }
   }
 }

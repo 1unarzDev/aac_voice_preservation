@@ -81,11 +81,22 @@ def main():
         assert int((correct&p.changed_arm).sum())==h['paired'][arm]['strict_changed_correct']['k']
         assert int((correct&p.strict_arm.eq(0)).sum())==h['paired'][arm]['strict_pass_to_fail']['k']
     assert h['transfer_success']==all(h['criteria'].values())
+    closure=json.loads((OUT/'closure_audit.json').read_text())
+    assert closure['baseline_value_differences']==0
+    assert closure['new_selected_critical_unknowns']==0
+    for endpoint in ['joint','strict']:
+        p=sc[sc.prompt_id.eq('G1')].set_index(['model','family_id','variant','channel'])
+        s=sc[sc.prompt_id.eq('G1s')].set_index(['model','family_id','variant','channel'])
+        r=closure['comparator'][endpoint]
+        assert abs((p[endpoint]-s[endpoint]).mean()-r['family']['estimate'])<1e-12
+        assert r['G1_only_pass']-r['G1s_only_pass']==r['family']['k']
     result=dict(passed=True,checks=['immutable freeze/inventory/launch/result hashes','all 1872 planned cells in each of 3 arms',
         'unchanged guard return/tie rule and monitor-only retries','actual HTTP/logical/cache call accounting',
-        'generation starts after freeze','API <=8, judge <=12, local <=4 concurrency','local model inference windows do not overlap',
+        'generation starts after freeze','historical launch concurrency: generation API <=8, judge <=12, local <=4','local model inference windows do not overlap',
         'frozen P0 texts/labels retained','no J1/J2 fallback','verbatim stored example provenance','independent paired arithmetic and verdict'],
         actual_call_counts=dict(counts),peak_http_concurrency_by_model=peaks,logical_guard_attempts=logical,
+        current_api_concurrency_limit_8_met=all(peaks.get(m,0)<=8 for m in ['gpt-6.1-terra','gpt-6.1-sol']),
+        inherited_concurrency_deviation_disclosed=True,closure_comparator_verified=True,
         checked_epoch=time.time())
     (OUT/'verification.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
