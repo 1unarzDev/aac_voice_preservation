@@ -719,6 +719,14 @@ if (R2C / "primary.json").exists():
     put("wc_n_fam", hd["n_families"], "analysis/r2c/headline.json", "int")
     put("wc_n_fam_incl", hd["n_families_inclusive"], "analysis/r2c/headline.json", "int")
     put("wc_n_models", hd["n_models"], "analysis/r2c/headline.json", "int")
+    # analyzed families per dimension: scored inventory minus the frozen D-018 exclusions
+    _md = json.load(open(R2C / "metadata.json"))
+    _fams = pd.read_parquet(ROOT / _md["table"], columns=["family_id"])["family_id"].drop_duplicates()
+    _fams = _fams[~_fams.isin(_md["exclusions"])]
+    _srcF = "runs/r2c1/scored.parquet unique family_id minus analysis/r2c/metadata.json exclusions"
+    for _pre, _key in [("r2pol", "wc_nfam_pol"), ("r2act", "wc_nfam_act"), ("r2plt", "wc_nfam_pz")]:
+        put(_key, int(_fams.str.startswith(_pre).sum()), _srcF, "int")
+    assert sum(int(_fams.str.startswith(p).sum()) for p in ["r2pol", "r2act", "r2plt"]) == hd["n_families"]
     put("wc_prefreeze", hd["pre_freeze_cache_requests"], "analysis/r2c/headline.json", "int")
     put("wc_arb_rows", hd["arbiter_resolved_rows"], "analysis/r2c/headline.json", "int")
     put("wc_unadj_rows", hd["unadjudicated_fallback_rows"], "analysis/r2c/headline.json", "int")
@@ -959,7 +967,7 @@ lines = [f"{a} & {b} & {c} & {d} & {e_}\\\\[2pt]" for a, b, c, d, e_ in rows]
 # Cards S1, S2, S5, S7, S9 from ideas/cycles/c2/story_evidence.json (declared rules in story.md)
 # plus the E10 oracle inset from paper/figs/example_manifest.json. Every (output_id, visible
 # input, text) triple is re-read from runs/<run>/outputs.jsonl; any mismatch aborts.
-SE = ROOT / "ideas/cycles/c2/story_evidence.json"
+SE = ROOT / "ideas/cycles/c3/story_evidence.v2.json"
 _occ_cache: dict[str, set] = {}
 
 
@@ -986,54 +994,64 @@ if SE.exists():
     n_gal += 1
     put("gal_n_verified", n_gal, "story_evidence.json + example_manifest.json strings re-read from runs/*/outputs.jsonl", "int")
     ay = cards["S7"]["rates"]["ask_you_prefix_among_fixed"]
-    put("gal_askyou_k", ay["k"], "ideas/cycles/c2/story_evidence.json S7/S9 (post hoc lexical diagnostic)", "int")
-    put("gal_askyou_n", ay["n"], "ideas/cycles/c2/story_evidence.json S7/S9 (post hoc lexical diagnostic)", "int")
+    put("gal_askyou_k", ay["k"], "ideas/cycles/c3/story_evidence.v2.json S7/S9 (post hoc lexical diagnostic)", "int")
+    put("gal_askyou_n", ay["n"], "ideas/cycles/c3/story_evidence.v2.json S7/S9 (post hoc lexical diagnostic)", "int")
 
-    def vin(inp):  # visible input, monospace, chips literal
-        return visible(inp)
+    def exact(inp):  # the stored input string verbatim, wrapper prefix included (no rendering)
+        return r"\kw{" + tex(inp) + "}"
 
     def outq(t):
         return r"\say{" + tex(t) + "}"
 
-    def ids(o):
-        return r"\texttt{" + o["output_id"][:8] + "}"
-
     MS = {"qwen2.5-7b": "Qwen2.5-7B", "llama3.1-8b": "Llama-3.1-8B", "gemma3-4b": "Gemma-3-4B",
           "gpt-6.1-terra": "gpt-6.1-terra"}
     ARROW = r"\,$\Rightarrow$\,"
+    HID = r"\newline {\scriptsize\emph{hidden source, not shown to the model:} \say{%s}}"
+
+    def lab(name, model, pop):
+        return rf"\textbf{{{name}}}\newline {{\scriptsize {MS[model]}, {pop}}}"
+
+    # Fig. 1: teaching sequence (S2) first, then two compact failure cards (S1, S5).
     g = []
-    o = cards["S1"]["outputs"][0]
-    g.append((r"\textbf{A}\newline full input",
-              vin(o["input_text"]) + ARROW + outq(o["text"]),
-              rf"{MS[o['model']]}, W-C {tex(o['family_id'])}/{o['variant']}, {ids(o)}",
-              r"plain sources gained a marker in \RES{wcpzadd_k}/\RES{wcpzadd_n} (this model \RES{wcpzadd_gemma_k}/\RES{wcpzadd_gemma_n}); polite sources lost it in \RES{wcpzrem_k}/\RES{wcpzrem_n}"))
     s2 = cards["S2"]["outputs"]
     chname = {"bare": "bare", "noncrit": "+word", "chip1": "+chip", "full": "full"}
-    seq = r"\newline ".join(rf"\makebox[2.6em][l]{{\scriptsize {chname[x['channel']]}}}" + vin(x["input_text"]) + ARROW + outq(x["text"]) for x in s2)
-    g.append((r"\textbf{B}\newline channels",
-              seq + r"\newline {\footnotesize hidden source: \say{" + tex(cards["S2"]["source"]) + "}}",
-              rf"{MS[s2[0]['model']]}, W-C {tex(s2[0]['family_id'])}/{s2[0]['variant']}, " + ", ".join(ids(x) for x in s2),
-              r"bare outputs affirmative \RES{wcaff_k}/\RES{wcaff_n} (directional; an \emph{Assumption}, not a failure); \chip{NOT} targets negated \RES{wc_negchip_k}/\RES{wc_negchip_n}"))
+    seq = r"\newline ".join(rf"\makebox[2.9em][l]{{\scriptsize {chname[x['channel']]}}}" + exact(x["input_text"]) + ARROW + outq(x["text"]) for x in s2)
+    g.append((lab("1\\ \\ Missing vs.\\ supplied", s2[0]["model"], "W-C"),
+              seq + HID % tex(cards["S2"]["source"]),
+              r"Without a negation cue (bare, +word) the input does not say whether the person feels well; the affirmative is an \emph{Assumption} the input forced, not a model error. Once \texttt{[NOT]} or the full sentence is supplied, the negation is kept. \emph{Owner:} the input channel.",
+              r"bare outputs affirmative: \RES{wcaff_k}/\RES{wcaff_n} directional (\RES{wcaff_k}/\RES{wcaff_ntot} all outputs); \texttt{[NOT]} targets negated: \RES{wc_negchip_k}/\RES{wc_negchip_n}. Separate endpoints, not a paired repair rate."))
+    o = cards["S1"]["outputs"][0]
+    g.append((lab("2\\ \\ Typed text changed", o["model"], "W-C"),
+              exact(o["input_text"]) + ARROW + outq(o["text"]),
+              r"A constructed full-input test: the whole sentence was supplied, and the model added \say{Please} (an R2 \emph{Violation}). \emph{Owner:} the generation step; copying the sentence avoids it.",
+              r"plain sources gained a marker in \RES{wcpzadd_k}/\RES{wcpzadd_n} outputs (this model \RES{wcpzadd_gemma_k}/\RES{wcpzadd_gemma_n}); polite sources lost it in \RES{wcpzrem_k}/\RES{wcpzrem_n}"))
     o = cards["S5"]["outputs"][0]
-    g.append((r"\textbf{C}\newline question cue",
-              vin(o["input_text"]) + ARROW + outq(o["text"]) + r"\newline {\footnotesize hidden source: \say{" + tex(cards["S5"]["source"]) + "}}",
-              rf"{MS[o['model']]}, W-C {tex(o['family_id'])}/{o['variant']}, {ids(o)}",
-              r"\chip{?} targets not kept as questions \RES{wc_qfail_k}/\RES{wc_qfail_n}; of these, became requests \RES{wc_q2req_k}/\RES{wc_qfail_n}"))
-    s7, s9 = cards["S7"]["outputs"], cards["S9"]["outputs"]
-    g.append((r"\textbf{D}\newline guard repair",
-              vin(s7[0]["input_text"]) + r"\newline " + outq(s7[0]["text"]) + r"\,$\to$\," + outq(s7[1]["text"])
-              + r"\newline " + vin(s9[0]["input_text"]) + r"\newline " + outq(s9[0]["text"]) + r"\,$\to$\," + outq(s9[1]["text"]),
-              rf"{MS[s7[0]['model']]} {tex(s7[0]['family_id'])}/{s7[0]['variant']}; {MS[s9[0]['model']]} {tex(s9[0]['family_id'])}/{s9[0]['variant']}; discovery set, P0$\to$G1",
-              r"scored repairs \kof{g1_fix}, \RES{g1_remain_k} remain; the second passes the scorer but is a fragment (prefix \say{Ask you} in \RES{gal_askyou_k}/\RES{gal_askyou_n} repairs, post hoc lexical count)"))
-    o = e10["occurrence"]
-    g.append((r"\textbf{E}\newline checker",
-              vin(o["input_text"]) + ARROW + outq(o["text"]),
-              rf"{MS[o['model']]}, discovery {tex(o['family_id'])}/{o['variant']}, {ids(o)}",
-              r"the model copied the sentence; the original checker failed \RES{id_fail_raw}/\RES{id_n} such identical outputs, all this sentence (family now quarantined)"))
-    glines = [f"{a} & {b} & {c} & {d}\\\\" for a, b, c, d in g]
+    g.append((lab("3\\ \\ Question cue lost", o["model"], "W-C"),
+              exact(o["input_text"]) + ARROW + outq(o["text"]) + HID % tex(cards["S5"]["source"]),
+              r"Phrased as a question, but it asks someone to sign; the source asks whether a signature is required. Our codebook codes it a \emph{request}, so the supplied \texttt{[?]} cue was not kept (R1). \emph{Owner:} the model, given that cue.",
+              r"\texttt{[?]} targets not kept as questions: \RES{wc_qfail_k}/\RES{wc_qfail_n}; of these, coded as requests: \RES{wc_q2req_k}/\RES{wc_qfail_n}"))
+    glines = [f"{a_} & {b_} & {c_} & {d_}\\\\" for a_, b_, c_, d_ in g]
     (OUT / "gallery_table.tex").write_text(
-        "% generated by make_macros.py from ideas/cycles/c2/story_evidence.json + paper/figs/example_manifest.json -- do not edit\n"
+        "% generated by make_macros.py from ideas/cycles/c3/story_evidence.v2.json (S2, S1, S5) -- do not edit\n"
         + "\n\\midrule\n".join(glines) + "\n")
+
+    # Oracle inset (E10) for sec:oracle.
+    o = e10["occurrence"]
+    (OUT / "checker_table.tex").write_text(
+        "% generated by make_macros.py from paper/figs/example_manifest.json (E10) -- do not edit\n"
+        + rf"input & {exact(o['input_text'])}\\" + "\n"
+        + rf"output & {outq(o['text'])}\\" + "\n"
+        + rf"model & {MS[o['model']]}, discovery set, prompt P0, full channel\\" + "\n")
+
+    # Guard inset (S7 repair, S9 fragment) for sec:decisions.
+    s7, s9 = cards["S7"]["outputs"], cards["S9"]["outputs"]
+    rows = []
+    for name, ss in [("repair", s7), ("fragment", s9)]:
+        rows.append(rf"{name}\newline {{\scriptsize {MS[ss[0]['model']]}}} & {exact(ss[0]['input_text'])}\newline "
+                    rf"P0: {outq(ss[0]['text'])}\newline G1: {outq(ss[1]['text'])}\\")
+    (OUT / "guard_table.tex").write_text(
+        "% generated by make_macros.py from ideas/cycles/c3/story_evidence.v2.json (S7, S9) -- do not edit\n"
+        + "\n\\midrule\n".join(rows) + "\n")
 
 # W-C headline import check (consumed by analysis/r2c/verify_artifacts.py)
 _hj = json.load(open(ROOT / "analysis/r2c/headline.json"))
@@ -1045,6 +1063,10 @@ _mvj["se4all"] = {"headline_keys_imported": len(_imp), "values_match": bool(_ok)
 _mv.write_text(json.dumps(_mvj, indent=2) + "\n")
 
 # ------------------------------------------------------------------ write ---
+from c3_exports import macros as c3_macros
+for _key, _value in c3_macros().items():
+    put(_key, _value, "analysis/evidence_c3/current.json (C35/C36; populations separate)", "raw")
+
 def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()[:12]
 
