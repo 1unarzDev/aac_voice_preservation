@@ -18,6 +18,10 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   other parts. See the Part 4 section below.
 - **Part 5, `wc_source_check.html`** (20 sentence pairs) and **Part 6, `wb_corpus_check.html`** (20 messages, two
   passes): optional, about 15 minutes each, only after Parts 1–4. See the sections at the end.
+- **Part 10, `part10_gold_new.json`** (162 sentences, same tool and task as Parts 1–3): about 75–90 minutes, only
+  if the coordinator assigned it. It can be split into two sittings. See the Part 10 section below.
+- **Part 11, `repair_audit_transfer.html`** (40 new sentences, same task as Part 4): about 15–20 minutes, only if
+  assigned. See the Part 11 section below.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -101,9 +105,33 @@ devices, each shortened to a few keywords.
 In Pass 1 there is no "right" set: we want to know which readings people find natural. Don't go back to Pass 1
 after seeing the messages; the tool prevents this anyway.
 
+## Part 10 (if assigned, ~75–90 min): more sentence labels, `part10_gold_new.json`
+This is the same task as Parts 1–3, on 162 new sentences. Use the same tool and the same codebook.
+
+1. Open `annotate.html`, enter **the same annotator ID**, and load `part10_gold_new.json`.
+2. Do the 5 practice items again. They are the same as in Part 1, and they are a quick refresher.
+3. Label every sentence as in Part 1. The main question (question 1) changes from sentence to sentence: it can be
+   about polarity, speech act, agent or politeness. Read it each time. The input appears only for the last question,
+   added content, as before.
+4. Progress is saved in the browser, separately from Parts 1–3, so you can stop and come back with the same ID. Click
+   **Download CSV** at the end: `labels_gold_new_<ID>.csv`.
+
+Some sentences may look alike, or appear twice with different keywords. Label each one on its own.
+
+## Part 11 (if assigned, ~15–20 min): second sentence check, `repair_audit_transfer.html`
+This is the same task as Part 4, with 40 different sentences. Follow the Part 4 instructions above (Pass A
+sentence alone, then Pass B with the input; 3 practice items per pass). Everything is inside the one file.
+
+1. Open `repair_audit_transfer.html` and enter **the same annotator ID**. Press `Enter`.
+2. Its progress is saved separately from Part 4, so doing one does not affect the other.
+3. Click **Download CSV** at the end: `repair_audit_transfer_<ID>.csv`.
+
+Don't compare these sentences with the ones in Part 4. Judge each sentence on its own.
+
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
-`wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6), to the study coordinator. Please also send:
+`wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `labels_gold_new_<ID>.csv` for Part 10 and
+`repair_audit_transfer_<ID>.csv` for Part 11), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

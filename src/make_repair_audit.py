@@ -26,6 +26,16 @@ Writes (private, never in the package):
   annotation/repair_audit_sample.json    summary counts
 and embeds the blind items (item_id, sentence, visible input) in
 annotation_package/repair_audit.html between the AUDIT_ITEMS markers.
+
+--source guard_wc (B4, Part 11: the W-C confirmation transfer, runs/guard_wc, the same
+  frozen G1 vs P0 pairing as analysis/guard_wc). Identical units, arms, quotas, passes and
+  Monte Carlo pi, with its own salts ("repair-audit-transfer-2026"), item ids "rx-...", and
+  private outputs annotation/repair_audit_transfer_{key,eligible}.csv and
+  annotation/repair_audit_transfer_sample.json (which also records the overlap with the
+  FREEZE.md fixed-SHA256 audit list, analysis/guard_wc/audit_sample.csv). The tool
+  annotation_package/repair_audit_transfer.html is generated from repair_audit.html (the
+  template is not modified) with its own title, RUN tag, localStorage namespace
+  ("repairaudit:transfer:v1:") and CSV name (repair_audit_transfer_<ID>.csv).
 """
 from __future__ import annotations
 
@@ -40,6 +50,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+SOURCES = {
+    "guard1": {"run": "guard1", "salt": "repair-audit-2026", "id_salt": "repair-audit-2026-item",
+               "prefix": "ra-", "html": "repair_audit.html", "stem": "repair_audit", "template": None},
+    "guard_wc": {"run": "guard_wc", "salt": "repair-audit-transfer-2026",
+                 "id_salt": "repair-audit-transfer-2026-item", "prefix": "rx-",
+                 "html": "repair_audit_transfer.html", "stem": "repair_audit_transfer",
+                 "template": {"part": "Part 11", "run": "repair_audit_transfer_v1",
+                              "store": "repairaudit:transfer:v1:", "csv": "repair_audit_transfer_"},
+                 "frozen_list": "analysis/guard_wc/audit_sample.csv", "by_input": True},
+}
 SALT = "repair-audit-2026"
 ID_SALT = "repair-audit-2026-item"
 PER_MODEL, PER_ARM = 5, 20
@@ -78,18 +98,22 @@ def visible_input(input_text: str) -> dict:
     return {"kind": "keywords", "words": " ".join(words), "chips": out}
 
 
-def build_pools():
+def build_pools(run: str = "guard1", by_input: bool = False):
+    """by_input: unit = (text, visible input) (guard_wc text ids are per text only, and a
+    sentence can occur under two inputs); the unit id is then '<text_id>|<sha1(input)[:8]>'."""
     import interventions as iv
-    sc, pairs = iv.guard_frame(ROOT / "runs" / "guard1")      # primary: quarantine excluded
+    sc, pairs = iv.guard_frame(ROOT / "runs" / run)      # primary: quarantine excluded
     j = pairs["G1"]
     j = j[j.valid & j.valid_G1].copy()
     assert not j.family_id.isin(["act-10", "act-16"]).any()
+    assert not j.quarantine_refusal_acceptance.fillna(False).astype(bool).any()
 
     def agg(rows, tcol, scol_p0, scol_g1):
         units = {}
         for _, r in rows.iterrows():
-            u = units.setdefault(r[tcol], {
-                "text_id": r[tcol], "text": r["text_G1"] if tcol == "text_id_G1" else r["text"],
+            uid = f"{r[tcol]}|{h(r['input_text'])[:8]}" if by_input else r[tcol]
+            u = units.setdefault(uid, {
+                "text_id": uid, "text": r["text_G1"] if tcol == "text_id_G1" else r["text"],
                 "input_text": r["input_text"], "models": set(), "families": set(), "dimensions": set(),
                 "channels": set(), "p0_texts": set(), "output_ids": set(), "n_occ": 0,
                 "p0_strict_fail": set(), "g1_strict_fail": set()})
@@ -108,20 +132,22 @@ def build_pools():
     occ = j.groupby("text_id").agg(any_changed=("changed_G1", lambda s: bool(s.astype(bool).any())),
                                    all_pass=("strict_fail", lambda s: bool(s.notna().all() and
                                                                            (~s.astype(bool)).all())))
-    ok_ids = set(occ.index[~occ.any_changed & occ.all_pass]) - set(rep)
+    ok_ids = set(occ.index[~occ.any_changed & occ.all_pass]) - {u.split("|")[0] for u in rep}
     rep_texts = {u["text"] for u in rep.values()}
     ctl = agg(j[j.text_id.isin(ok_ids)], "text_id", "strict_fail", "strict_fail_G1")
     ctl = {k: u for k, u in ctl.items() if u["text"] not in rep_texts}
     return rep, ctl
 
 
-def select(units: dict, salt: str, group_quota: dict | None = None) -> list[tuple[str, str]]:
-    """Return [(text_id, assigned_model)] in acceptance order."""
+def select(units: dict, salt: str, group_quota: dict | None = None,
+           distinct_text: bool = False) -> list[tuple[str, str]]:
+    """Return [(text_id, assigned_model)] in acceptance order. distinct_text: never accept a
+    second unit with an already accepted sentence (by_input units)."""
     order = sorted(units, key=lambda t: h(t + salt))
     models = sorted({m for u in units.values() for m in u["models"]})
     quota = {m: PER_MODEL for m in models}
     gq = {k: v for k, v in (group_quota or {}).items()}
-    picked, used_fam, taken = [], set(), set()
+    picked, used_fam, taken, used_text = [], set(), set(), set()
     # passes: (family-distinct, channel-mix, model-quota)
     for fam_c, grp_c, mod_c in [(True, True, True), (False, True, True), (False, False, True),
                                 (False, False, False)]:
@@ -133,6 +159,8 @@ def select(units: dict, salt: str, group_quota: dict | None = None) -> list[tupl
             if t in taken:
                 continue
             u = units[t]
+            if distinct_text and u["text"] in used_text:
+                continue
             if fam_c and u["families"] & used_fam:
                 continue
             cands = sorted(u["models"], key=lambda m: (-quota[m], m))
@@ -146,21 +174,51 @@ def select(units: dict, salt: str, group_quota: dict | None = None) -> list[tupl
             quota[m] -= 1
             if (m, u["group"]) in gq:
                 gq[(m, u["group"])] -= 1
-            picked.append((t, m)); taken.add(t); used_fam |= u["families"]
+            picked.append((t, m)); taken.add(t); used_fam |= u["families"]; used_text.add(u["text"])
     return picked
 
 
-def draw(rep, ctl, salt):
-    r = select(rep, salt)
+def draw(rep, ctl, salt, distinct_text=False):
+    r = select(rep, salt, distinct_text=distinct_text)
     gq = Counter((m, rep[t]["group"]) for t, m in r)
-    c = select(ctl, salt, group_quota=dict(gq))
+    c = select(ctl, salt, group_quota=dict(gq), distinct_text=distinct_text)
     return r, c
 
 
+def render_html(cfg: dict, blob: str) -> str:
+    """Embed the items; for a derived tool, re-label the template (Part 4 file untouched)."""
+    src = ROOT / "annotation_package" / ("repair_audit.html" if cfg["template"] else cfg["html"])
+    html = src.read_text()
+    new, n = re.subn(r"(/\*AUDIT_ITEMS_BEGIN\*/).*?(/\*AUDIT_ITEMS_END\*/)",
+                     lambda m: m.group(1) + blob + m.group(2), html, flags=re.S)
+    assert n == 1
+    t = cfg["template"]
+    if t:
+        for old, rep_, cnt in (("(Part 4)", f"({t['part']})", 2),
+                               ('const RUN = "repair_audit_v1";', f'const RUN = "{t["run"]}";', 1),
+                               ('return "repairaudit:v1:" + id;', f'return "{t["store"]}" + id;', 1),
+                               ('a.download = "repair_audit_" + S.annot', f'a.download = "{t["csv"]}" + S.annot', 1)):
+            assert new.count(old) == cnt, (old, new.count(old))
+            new = new.replace(old, rep_)
+    return new
+
+
 def main() -> int:
+    import argparse
     import pandas as pd
-    rep, ctl = build_pools()
-    r_sel, c_sel = draw(rep, ctl, SALT)
+    global SALT, ID_SALT, KEY, ELIG, SUMMARY, HTML
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--source", choices=sorted(SOURCES), default="guard1")
+    a = ap.parse_args()
+    cfg = SOURCES[a.source]
+    SALT, ID_SALT = cfg["salt"], cfg["id_salt"]
+    KEY = ROOT / "annotation" / f"{cfg['stem']}_key.csv"
+    ELIG = ROOT / "annotation" / f"{cfg['stem']}_eligible.csv"
+    SUMMARY = ROOT / "annotation" / f"{cfg['stem']}_sample.json"
+    HTML = ROOT / "annotation_package" / cfg["html"]
+    bi = bool(cfg.get("by_input"))
+    rep, ctl = build_pools(cfg["run"], by_input=bi)
+    r_sel, c_sel = draw(rep, ctl, SALT, distinct_text=bi)
     assert len(r_sel) == PER_ARM and len(c_sel) == PER_ARM, (len(r_sel), len(c_sel))
 
     # Monte Carlo inclusion probabilities under the identical algorithm
@@ -168,7 +226,7 @@ def main() -> int:
     inc = Counter()
     for _ in range(MC_REPS):
         s = "mc-%016x" % rng.getrandbits(64)
-        a, b = draw(rep, ctl, s)
+        a, b = draw(rep, ctl, s, distinct_text=bi)
         inc.update(("repaired", t) for t, _ in a)
         inc.update(("control", t) for t, _ in b)
     pi = {k: v / MC_REPS for k, v in inc.items()}
@@ -179,7 +237,7 @@ def main() -> int:
         return by_m, by_g
 
     summ = {"salt": SALT, "per_model": PER_MODEL, "per_arm": PER_ARM, "mc_reps": MC_REPS,
-            "source": "runs/guard1/scored.parquet (+generations.jsonl), primary families", "arms": {}}
+            "source": f"runs/{cfg['run']}/scored.parquet (+generations.jsonl), primary families", "arms": {}}
     elig_rows, key_rows = [], []
     for arm, units, sel in (("repaired", rep, r_sel), ("control", ctl, c_sel)):
         by_m, by_g = elig_counts(units)
@@ -213,7 +271,7 @@ def main() -> int:
             if t in selm:
                 key_rows.append(row)
     for row in key_rows:
-        row["item_id"] = "ra-" + h(ID_SALT + row["text_id"])[:6]
+        row["item_id"] = cfg["prefix"] + h(ID_SALT + row["text_id"])[:6]
     ids = [r["item_id"] for r in key_rows]
     assert len(set(ids)) == len(ids) == 2 * PER_ARM
     texts = [r["text"] for r in key_rows]
@@ -221,6 +279,16 @@ def main() -> int:
     summ["selected_pi_range"] = {arm: [min(r["pi_mc"] for r in key_rows if r["arm"] == arm),
                                        max(r["pi_mc"] for r in key_rows if r["arm"] == arm)]
                                  for arm in ("repaired", "control")}
+    if cfg.get("frozen_list") and (ROOT / cfg["frozen_list"]).exists():
+        fz = pd.read_csv(ROOT / cfg["frozen_list"])
+        grp = {"changed": "repaired", "unchanged_correct": "control"}
+        fz_texts = {(grp.get(g, g), t) for g, t in zip(fz["group"], fz["text"])}
+        summ["overlap_with_frozen_sha256_list"] = {
+            "file": cfg["frozen_list"], "rule": "FREEZE.md: first 20 per arm by ascending SHA256(normalised "
+                                                "text); deterministic, no inclusion probabilities",
+            "frozen_list_by_arm": dict(Counter(grp.get(g, g) for g in fz["group"])),
+            **{arm: sum((arm, r["text"]) in fz_texts for r in key_rows if r["arm"] == arm)
+               for arm in ("repaired", "control")}}
 
     cols = ["item_id"] + [c for c in key_rows[0] if c != "item_id"]
     pd.DataFrame(key_rows)[cols].sort_values(["arm", "hash_rank"]).to_csv(KEY, index=False)
@@ -231,11 +299,7 @@ def main() -> int:
     items = [{"item_id": r["item_id"], "text": r["text"], "input": visible_input(r["input_text"])}
              for r in sorted(key_rows, key=lambda r: r["item_id"])]
     blob = json.dumps(items, ensure_ascii=False, indent=0).replace("</", "<\\/")
-    html = HTML.read_text()
-    new, n = re.subn(r"(/\*AUDIT_ITEMS_BEGIN\*/).*?(/\*AUDIT_ITEMS_END\*/)",
-                     lambda m: m.group(1) + blob + m.group(2), html, flags=re.S)
-    assert n == 1
-    HTML.write_text(new)
+    HTML.write_text(render_html(cfg, blob))
     print(json.dumps(summ, indent=1))
     return 0
 

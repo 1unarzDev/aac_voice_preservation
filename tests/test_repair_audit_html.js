@@ -1,5 +1,6 @@
 // jsdom check of annotation_package/repair_audit.html.
 // usage: NODE_PATH=<dir containing jsdom> node tests/test_repair_audit_html.js annotation_package/repair_audit.html
+//        (also annotation_package/repair_audit_transfer.html, Part 11: same template, own namespace)
 const {JSDOM} = require('jsdom');
 const fs = require('fs');
 const html = fs.readFileSync(process.argv[2], 'utf8');
@@ -13,6 +14,10 @@ function key(w, k, target) { const ev = new w.KeyboardEvent('keydown', {key: k, 
 const dom = boot(); const w = dom.window, d = w.document, $ = id => d.getElementById(id);
 const errs = []; w.addEventListener('error', e => errs.push(e.message));
 ok(w.eval('ITEMS.length') === 40, '40 embedded items');
+const SKEY = w.eval('store.key("T1")'), RUNTAG = w.eval('RUN');
+const transfer = /transfer/.test(process.argv[2]);
+ok(transfer ? (SKEY === 'repairaudit:transfer:v1:T1' && RUNTAG === 'repair_audit_transfer_v1' && /Part 11/.test(d.title))
+            : (SKEY === 'repairaudit:v1:T1' && RUNTAG === 'repair_audit_v1' && /Part 4/.test(d.title)), 'storage namespace / RUN tag / title: ' + SKEY);
 ok(w.eval('ITEMS.every(x => Object.keys(x).sort().join() === "input,item_id,text")'), 'items carry only id/text/input (blind)');
 ok(!/repaired|control|gemma|llama|qwen|terra|G1|P0/.test(w.eval('JSON.stringify(ITEMS)')), 'no arm/model/condition strings in items');
 // keys ignored before ID
@@ -52,7 +57,7 @@ ok(w.eval('S.phase') === 'B', 'pass B begins');
 key(w, '1'); key(w, 'Enter'); ok(w.eval('S.idx') === 0 && /every question/.test($('status').textContent), 'B requires both answers');
 key(w, '2'); key(w, 'Enter');
 // autosave & resume in new dom
-const saved = w.localStorage.getItem('repairaudit:v1:T1'); ok(saved && JSON.parse(saved).phase === 'B', 'autosaved to localStorage');
+const saved = w.localStorage.getItem(SKEY); ok(saved && JSON.parse(saved).phase === 'B', 'autosaved to localStorage');
 for (let i = 1; i < 40; i++) { key(w, String(1 + (i % 3))); key(w, String(1 + (i % 2))); key(w, 'Enter'); }
 ok(w.eval('S.phase') === 'done', 'done after pass B');
 const csv = w.eval('exportCSV()');  const rows = csv.trim().split('\n');
@@ -60,11 +65,14 @@ ok(rows.length === 1 + 3 + 40, 'CSV has header + 3 practice + 40 rows');
 const head = rows[0].split(','); const r1 = rows.find(r => r.includes('missing word 3'));
 ok(head.includes('a_time_ms') && head.includes('b_contract') && head.includes('a_note'), 'CSV columns');
 ok(r1 && /minor fix needed/.test(r1), 'note + answer exported');
-const bad = rows.slice(4).filter(r => !/^ra-/.test(r)); ok(bad.length === 0, 'item rows have ids');
+const bad = rows.slice(4).filter(r => !(transfer ? /^rx-/ : /^ra-/).test(r)); ok(bad.length === 0, 'item rows have ids');
 ok(rows.slice(4).every(r => /,(yes|partly|no),(yes|no),/.test(r)), 'all B answers exported');
+ok(rows.slice(1).every(r => r.includes(',' + RUNTAG + ',')), 'tool column carries RUN tag');
+let dl = null; w.HTMLAnchorElement.prototype.click = function () { dl = this.download; }; w.eval('exportCSV()');
+ok(dl === (transfer ? 'repair_audit_transfer_T1.csv' : 'repair_audit_T1.csv'), 'download file name ' + dl);
 ok(errs.length === 0, 'no script errors ' + errs.join(';'));
 // resume in a fresh DOM sharing storage: emulate by copying
-const dom2 = boot(); dom2.window.localStorage.setItem('repairaudit:v1:T1', saved);
+const dom2 = boot(); dom2.window.localStorage.setItem(SKEY, saved);
 dom2.window.document.getElementById('annot').value = 'T1'; key(dom2.window, 'Enter', dom2.window.document.getElementById('annot'));
 ok(dom2.window.eval('S.phase') === 'B' && /Resumed/.test(dom2.window.document.getElementById('status').textContent), 'resume from saved state');
 // different annotator -> different order
