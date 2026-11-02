@@ -66,6 +66,8 @@ def put(key: str, value, src: str, fmt: str = "pct"):
         s = f"{value:.4f}".lstrip("0")
     elif fmt == "f1":
         s = f"{value:.1f}"
+    elif fmt == "f1x":
+        s = f"{100 * value:.1f}"
     elif fmt == "f3":
         s = f"{value:.3f}"
     else:
@@ -1092,6 +1094,150 @@ put("gtw_cc_k", _gp["strict_changed_correct"]["k"], _GT, "int")
 put("gtw_cc_n", _gp["strict_changed_correct"]["n"], _GT, "int")
 put("gtw_pf_k", _gp["strict_pass_to_fail"]["k"], _GT, "int")
 put("gtw_pf_n", _gp["strict_pass_to_fail"]["n"], _GT, "int")
+
+# ================================================================ cycle 1 ===
+# hw1 (human-written replication, primary), judge validation Parts 12/13, elicitation anchor,
+# and the hw1 example figure. Everything is read from analysis/hw1/*, annotation/judge_validation_*.json,
+# analysis/elicitation/summary.json; nothing is typed.
+import re as _re
+_H = "analysis/hw1/summary.json"
+_hs = json.load(open(ROOT / _H))
+put("hw_ncand", _hs["n_candidates"], _H, "int")
+put("hw_nkept", _hs["n_kept"], _H, "int")
+put("hw_nfam", _hs["n_analysed_families"], _H, "int")
+_wr = {r_["writer_id"] for r_ in map(json.loads, open(ROOT / "data/items/hw.jsonl"))}
+put("hw_nwriters", len(_wr), "data/items/hw.jsonl (distinct writer_id among kept families)", "int")
+put("hw_wr_min", min(_hs["writers_by_dim"].values()), _H, "int")
+put("hw_wr_max", max(_hs["writers_by_dim"].values()), _H, "int")
+for _k, _n in (("P1", "hwp1"), ("P2", "hwp2")):
+    _e = _hs["primary"][_k]["writer"]
+    put(_n, _e["estimate"], _H, "pct")
+    put(_n + "_lo", _e["ci_low"], _H, "pct")
+    put(_n + "_hi", _e["ci_high"], _H, "pct")
+    put(_n + "_n", _e["n"], _H, "int")
+    put(_n + "_wr", _e["n_clusters"], _H, "int")
+    put(_n + "_holm", _e["p_holm"], _H, "p4")
+_e = _hs["P3_affirmative_share"]
+put("hwaff", _e["estimate"], _H, "pct")
+put("hwaff_lo", _e["ci_low"], _H, "pct")
+put("hwaff_hi", _e["ci_high"], _H, "pct")
+put("hwaff_n", _e["n"], _H, "int")
+put("hwp3_wr", _e["n_clusters"], _H, "int")
+put("hwp3_holm", _hs["primary"]["P3"]["writer"]["p_holm"], _H, "p4")
+for _k, _n in (("addition_plain_to_polite", "hwpzadd"), ("removal_polite_to_plain", "hwpzrem")):
+    _e = _hs["P2_arms"][_k]
+    put(_n, _e["estimate"], _H, "pct")
+    put(_n + "_k", _e["sum"], _H, "int")
+    put(_n + "_n", _e["n"], _H, "int")
+_pm = pd.read_csv(ROOT / "analysis/hw1/primary_by_model.csv")
+for _m_, _s_ in (("gemma3-4b", "gemma"), ("gpt-6.1-terra", "terra"), ("llama3.1-8b", "llama"), ("qwen2.5-7b", "qwen")):
+    put("hwpz_" + _s_, _pm[(_pm.contrast == "P2") & (_pm.model == _m_)].estimate.iloc[0], "analysis/hw1/primary_by_model.csv", "pct")
+_cg = pd.read_csv(ROOT / "analysis/hw1/chip_gain.csv")
+_cg = _cg[_cg.model == "ALL"]
+put("hw_gain_min", _cg.estimate.min(), "analysis/hw1/chip_gain.csv", "pct")
+put("hw_gain_max", _cg.estimate.max(), "analysis/hw1/chip_gain.csv", "pct")
+put("hw_gain_lo_min", _cg.ci_low.min(), "analysis/hw1/chip_gain.csv", "pct")
+_ms = _hs["max_shift_pp"]
+put("hw_shift_max", max(v for k, v in _ms.items() if not k.startswith("d_")) / 100, _H + " max_shift_pp (a,b,c scenarios)", "f1x")
+put("hw_shift_all", _ms["d_all_574_candidates"] / 100, _H + " max_shift_pp (all 574 candidates)", "f1x")
+put("hw_sens_flags", len(_hs["sensitivity_flags"]), _H + " sensitivity_flags", "int")
+
+# judge validation on new human data (Parts 12 elicitation outputs, 13 human-written-pair outputs)
+for _tag, _f in (("jve", "elic"), ("jvh", "hw")):
+    _JV = f"annotation/judge_validation_{_f}.json"
+    _j = json.load(open(ROOT / _JV))["human"]
+    _c = _j["judge"]["critical"]["sampled/final"]
+    put(_tag + "_kappa", _c["kappa"], _JV, "f2")
+    put(_tag + "_kappa_lo", _c["kappa_ci"][0], _JV, "f2")
+    put(_tag + "_kappa_hi", _c["kappa_ci"][1], _JV, "f2")
+    put(_tag + "_n", _c["n"], _JV, "int")
+    put(_tag + "_items", _j["n_items"], _JV, "int")
+    put(_tag + "_coders", len(_j["members"]), _JV, "int")
+    put(_tag + "_alpha", _j["alpha_nominal"]["critical"]["alpha"], _JV, "f2")
+    _vk = []
+    for _vn in ("violation", "constraint_preserving", "assumption"):
+        _vv = _j["verdict"].get(_vn, {}).get("primary") or _j["verdict"].get(_vn, {}).get("all")
+        if _vv:
+            _vk.append(_vv)
+    put(_tag + "_vk_min", min(v["kappa"] for v in _vk if v.get("kappa") is not None), _JV, "f2")
+    put(_tag + "_vk_max", max(v["kappa"] for v in _vk if v.get("kappa") is not None), _JV, "f2")
+    _va = _j["verdict"]["assumption"].get("primary") or _j["verdict"]["assumption"]["all"]
+    put(_tag + "_va_k", _va["agree_k"], _JV, "int")
+    put(_tag + "_va_n", _va["n"], _JV, "int")
+    _vv = _j["verdict"]["violation"].get("primary")
+    if _vv:
+        put(_tag + "_vv_k", _vv["agree_k"], _JV, "int")
+        put(_tag + "_vv_n", _vv["n"], _JV, "int")
+
+# elicitation anchor (one sentence in this paper): negation loss, humans vs the POS-cap4 compressor
+_EL = "analysis/elicitation/summary.json"
+_el = json.load(open(ROOT / _EL))
+_pl = _el["by_dimension"]["polarity"]["lenient"]
+put("el_neg_h", _pl["human_pooled"]["p"], _EL, "pct")
+put("el_neg_h_k", _pl["human_pooled"]["k"], _EL, "int")
+put("el_neg_h_n", _pl["human_pooled"]["n"], _EL, "int")
+put("el_neg_c", _pl["pos_cap4"]["p"], _EL, "pct")
+put("el_neg_c_k", _pl["pos_cap4"]["k"], _EL, "int")
+put("el_neg_c_n", _pl["pos_cap4"]["n"], _EL, "int")
+put("el_nmsg", _el["n_messages_rated"], _EL, "int")
+put("el_nsets", _el["n_ratings_valid"], _EL, "int")
+put("el_nann", len(_el["annotators"]), _EL, "int")
+macros["hash_release"] = "protocol-hash-2026-11-01"
+sources["hash_release"] = "GitHub release tag named in orchestration/LOOP_BRIEF (identifier, not a result)"
+
+# Fig. 1 (hw1 examples): declared hash rule in analysis/hw1/examples.md; strings re-read from runs/hw1.
+_hout = set()
+for _l in open(ROOT / "runs/hw1/outputs.jsonl"):
+    _r = json.loads(_l)
+    _hout.add((_r["family_id"], _r["model"], _r["channel"], _r["input_text"], _r["text"]))
+_md = (ROOT / "analysis/hw1/examples.md").read_text()
+_blocks = _re.split(r"^## ", _md, flags=_re.M)[1:]
+_MOD = {"gemma3-4b": "Gemma-3-4B", "llama3.1-8b": "Llama-3.1-8B", "qwen2.5-7b": "Qwen2.5-7B", "gpt-6.1-terra": "gpt-6.1-terra"}
+_cards = []
+for _b in _blocks:
+    _dim = _b.split("\n", 1)[0].strip()
+    if _dim not in ("polarity", "speech_act", "politeness"):
+        continue
+    _hd = _re.search(r"Family `(hw-[a-z]+-\d+)` \(writer (P\d+)\); first of (\d+) qualifying families by hash; model `([^`]+)`, variant (\w) \(target value: \*\*(.+?)\*\*\)\. Source sentence: \"(.+?)\"\n", _b, _re.S)
+    assert _hd, _dim
+    _fam, _wid, _nq, _mod, _var, _tv, _src = _hd.groups()
+    _rows = {}
+    for _m in _re.finditer(r"^\| (bare|noncrit|chip1|chipall|full) \| `(.+?)` \| (.+?) \| (.+?) \| (\w+) \|$", _b, _re.M):
+        _ch, _inp, _out, _lab, _ls = _m.groups()
+        assert (_fam, _mod, _ch, _inp, _out) in _hout, (_fam, _ch, _inp, _out)
+        _rows[_ch] = (_inp, _out, _lab)
+    _key = "hwe_" + DSHORT[_dim]
+    _ex = _hs["examples"][_dim]
+    assert _ex["family_id"] == _fam and _ex["model"] == _mod
+    put(_key + "_nq", int(_nq), _H + " examples", "int")
+    put(_key + "_wrong", _ex["bare_wrong_committed_rate"]["estimate"], _H + " examples", "pct")
+    put(_key + "_wrong_lo", _ex["bare_wrong_committed_rate"]["ci_low"], _H + " examples", "pct")
+    put(_key + "_wrong_hi", _ex["bare_wrong_committed_rate"]["ci_high"], _H + " examples", "pct")
+    put(_key + "_fix", _ex["repair_rate_given_bare_wrong"]["estimate"], _H + " examples", "pct")
+    put(_key + "_fix_lo", _ex["repair_rate_given_bare_wrong"]["ci_low"], _H + " examples", "pct")
+    put(_key + "_fix_hi", _ex["repair_rate_given_bare_wrong"]["ci_high"], _H + " examples", "pct")
+    put(_key + "_fix_n", _ex["repair_rate_given_bare_wrong"]["n"], _H + " examples", "int")
+    put(_key + "_wr", _ex["bare_wrong_committed_rate"]["n_clusters"], _H + " examples", "int")
+    _cards.append((_dim, _fam, _wid, _mod, _tv, _src, _rows, _key))
+_DN = {"polarity": "polarity", "speech_act": "speech act", "politeness": "politeness"}
+_CN = {"bare": "bare", "chip1": "+chip", "full": "full"}
+_READ = {
+    "polarity": r"A bare input does not say whether the sentence is negated, so the affirmative is an \emph{Assumption}, not a model error. With the supplied cue or the typed sentence, negation is kept. \emph{Owner of the fix (our taxonomy's choice):} the input channel.",
+    "speech_act": r"A bare input leaves question vs.\ statement open; the statement is an \emph{Assumption}. With \texttt{[?]} this output is a question, but a supplied tag is not always kept. \emph{Owner:} the input channel for the bare miss, the model when a supplied tag is dropped.",
+    "politeness": r"Bare keywords carry no politeness marker, so \say{Please} is an \emph{Assumption}; with the typed sentence the plain wording is kept. \emph{Owner:} the input channel.",
+}
+_hl = []
+for _i, (_dim, _fam, _wid, _mod, _tv, _src, _rows, _key) in enumerate(_cards, 1):
+    _seq = r"\newline ".join(
+        rf"\makebox[2.9em][l]{{\scriptsize {_CN[c_]}}}\kw{{{tex(_rows[c_][0])}}}\,$\Rightarrow$\,\say{{{tex(_rows[c_][1])}}} {{\scriptsize({tex(_rows[c_][2])})}}"
+        for c_ in ("bare", "chip1", "full"))
+    _lab = rf"\textbf{{{_i}\ \ {_DN[_dim]}}}\newline {{\scriptsize {_MOD[_mod]}, writer {_wid}; target \emph{{{tex(_tv)}}}}}"
+    _rate = (rf"bare commits to a wrong value: \RES{{{_key}_wrong}}\% \cip{{{_key}_wrong}} of bare rows (\RES{{{_key}_wr}} writers); "
+             rf"then the \texttt{{[chip]}} output matches: \RES{{{_key}_fix}}\% \cip{{{_key}_fix}} (\RES{{{_key}_fix_n}}). First of \RES{{{_key}_nq}} qualifying families by hash.")
+    _hl.append(f"{_lab} & {_seq}\\newline {{\\scriptsize\\emph{{hidden source:}} \\say{{{tex(_src)}}}}} & {_READ[_dim]} & {_rate}\\\\")
+(OUT / "hw_gallery_table.tex").write_text(
+    "% generated by make_macros.py from analysis/hw1/examples.md + summary.json (strings verified in runs/hw1/outputs.jsonl) -- do not edit\n"
+    + "\n\\midrule\n".join(_hl) + "\n")
 
 # ------------------------------------------------------------------ write ---
 from c3_exports import macros as c3_macros
