@@ -295,12 +295,12 @@ In the other cells the chip or sentence is visible, so the match measures preser
 Under bare input, \kn{wcaff} directional polarity outputs on the confirmation set were affirmative; these are Assumptions, not failures, and the interface decides who pays an extra selection to say \say{not}.
 That default may be an artifact of heavy compression, so we asked humans: \RES{el_nann} annotators typed keywords for \RES{el_nmsg} crowd-written AACText messages (\RES{el_nsets} sets).
 On the \RES{el_neg_c_n} messages with a negation cue they dropped it in \pct{el_neg_h} of sets, against \pct{el_neg_c} for a deliberately crude four-word rule-based compressor.
-So the Assumption channel is realistic but the compressor is not a user model.
 The affirmative default is also the better guess: among human keyword strings with no negation word, only \pct{t2_post} \cip{t2_post} came from a negated message, and the models answered affirmatively for \pct{t2_modelshare} of them.
-It is correct on average, but its errors are costly and silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations.
-No default removes that exposure, which is why the harness needs a requirement (R3) that logs the Assumption and a test that exposes its direction.
+Its errors are silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations.
+No default removes that exposure, so the harness needs R3 to log the Assumption and test its direction.
 A pre-declared three-arm test shows the default is not a prompt-legend artifact: on bare polarity input the affirmative share among committed outputs was \pct{lg_a} with the legend, \pct{lg_b} with none and \pct{lg_c} when the prompt also said markers may be missing and not to assume, across \RES{lg_nmodels} models and both the confirmation set and the human-written pairs (a second draw: \pct{lg_a_d2}, \pct{lg_b_d2}, \pct{lg_c_d2}).
-Models almost never answered \say{unclear} (at most \pct{lg_unclear_max} of outputs in any arm), so a prompt instruction is not a substitute for the requirement and the test.
+Chen et al.~\cite{chen2023say} reported a positivity bias in keyword-to-sentence generation; we price the default against a human base rate, show that it survives prompting, find it on \RES{mb_nmod} models, and separate it by construction from cue violations and compression loss.
+Models almost never answered \say{unclear} (at most \pct{lg_unclear_max} in any arm), so prompting does not replace the requirement and test.
 
 \begin{table}[t]
   \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values are in the released artifact.}
