@@ -78,7 +78,7 @@
 \affiliations{}
 
 %% ---------- slots (defaults print today; see header for fill-in patterns) ----------
-\newcommand{\slotAuditAbs}{A larger audit of \RES{p17_texts} texts with three independent raters each, its decision rule fixed in advance, is in progress.} % PART17
+\newcommand{\slotAuditAbs}{A larger audit of \RES{p17_texts} texts with a frozen rule is in progress.} % PART17
 \newcommand{\slotAuditBody}{The audit is still in progress; its result will replace this sentence.} % PART17
 \newcommand{\slotIntent}{Its result is not yet in.} % PART18
 \newcommand{\slotBaseline}{The no-feedback baseline (G1r) keeps the monitor, trigger and retry budget but regenerates from the original prompt with no feedback turn, at temperature 0.7 because a temperature-0 retry repeats the first pass; the guard at the same temperature (G1t) isolates the feedback message.} % BASELINE
@@ -95,20 +95,15 @@ You cannot prompt the default away, so the ledger must measure it.} % LEGEND_TES
 \maketitle
 
 \begin{abstract}
-People who use AAC (augmentative and alternative communication) apps pick a few words, and a large language model can turn them into a full sentence that the app may speak for them.
-The model can quietly change the meaning, for example by dropping a ``not''.
-Work on such systems commonly reports accuracy- or similarity-style gains.
-We argue that gain-only reports hide failures, and propose a \emph{ledger} that records, beside each gain, what the fix leaves broken, what it breaks that was fine, what it costs, where it applies, and what a default costs when it is wrong, against a free baseline and a pass line set in advance.
-Our test case is a \emph{guard} that makes the model try again when its sentence contradicts what the user supplied.
-A pass means the strict check (keeps the critical meaning, contradicts nothing supplied, adds no politeness).
-\textbf{Does it work?}
-Yes, and feedback beats plain retrying (+\RES{bw_gr} points [\RES{bw_gr_lo}, \RES{bw_gr_hi}]).
-On \RES{gt_fam} fresh item families the guard raises the pass rate from \RES{gt_sp_p0}\% to \RES{gt_sp_g1}\% (+\RES{gt_sgain_g1} points, of which deleting an unrequested \say{please} earns +\RES{gt_sgain_g1s}), yet \RES{gt_res_g1}\% of targets still fail, and it repaired \RES{gt_rep_g1}\% of failures against \RES{g_fix}\% in development.
-A passing sentence can also be unusable: \say{\RES{bx1_before}} became \say{\RES{bx1_after}} and still counted as correct.
-A 40-text pilot is a warning sign, not a result: repaired sentences were rated usable \RES{ra_unk_rep}\% of the time against \RES{ra_unk_ctl}\% for never-failed controls (gap \RES{ra_unk_gap} points [\RES{ra_unk_gap_lo}, \RES{ra_unk_gap_hi}]), but its raters were about \RES{ra_effn} independent raters and its controls had all passed.
+People who use AAC (augmentative and alternative communication) apps pick a few words, and a language model can turn them into a sentence the app speaks for them, sometimes quietly changing the meaning, as by dropping a ``not''.
+We study a commitment \emph{guard}, which makes the model retry when its sentence contradicts the user's input, in a \emph{ledger} that sets each gain beside what it leaves broken, what it breaks, what it costs and what a default costs when wrong, against a free baseline.
+On \RES{gt_fam} fresh confirmation families the guard raises the pass rate by +\RES{gt_jgain_g1} points [\RES{gt_jgain_g1_lo}, \RES{gt_jgain_g1_hi}] and repairs \RES{gt_rep_g1}\% of strict failures, without turning a correct sentence into a wrong one.
+Its feedback beats plain retrying by +\RES{bw_tr} points at matched decoding.
+The ledger shows what a gain-only report hides: \RES{gt_res_g1}\% of targets still fail, deleting an unrequested \say{please} earns +\RES{gt_sgain_g1s} of the +\RES{gt_sgain_g1}-point strict gain, and a passing sentence can be unusable.
+A 40-text pilot of stored text warns of a usability cost (repairs rated usable \RES{ra_rep}\% of the time against \RES{ra_ctl}\% for controls; raters about \RES{ra_effn} independent).
 \slotAuditAbs{} % PART17
-Models default to affirmative, the better guess (a message was negated in only \RES{t2_post_h}\% of such cases), but accuracy metrics reward exactly the behavior that silently reverses about \RES{t2_rev_h} in 1,000 messages; removing the prompt's cue legend or telling the model not to assume leaves the default at \RES{lg_b}\% and \RES{lg_c}\%.
-We study stored text, not people, and no AAC user took part; we give a pre-specified design for testing our predictions on people.
+Models also commit to the affirmative reading in \RES{lg_c}\% of committed answers even when told not to assume, so their rare errors are silent reversals that accuracy metrics reward.
+The ledger turns these trade-offs into falsifiable predictions, with a pre-specified design for testing them with AAC users.
 \end{abstract}
 
 \begin{figure}[t]
@@ -151,8 +146,8 @@ Our running case is keyword-to-sentence expansion with four LLMs on minimal-pair
 
 \paragraph{Contributions.}
 (1)~A ledger and its design rules: attribution decides what an intervention may be credited with; a free baseline and pass lines fixed in advance decide whether it merits a human study (\S\ref{sec:design}).
-(2)~One lead case, a commitment guard, evaluated end to end: a confirmation set with a frozen rule, a modest increment over a free baseline, and a human usability check on its repairs (\S\ref{sec:results}).
-(3)~Two bounded secondary rows, and a bridge to human-written pairs and human-chosen keywords, where the default of answering affirmative is analyzed as a good guess with an asymmetric cost.
+(2)~One lead case, a commitment guard, evaluated end to end: on a confirmation set with a frozen rule it raises the joint pass rate by +\RES{gt_jgain_g1} points, repairs \RES{gt_rep_g1}\% of strict failures, never turned a correct sentence into a scored failure (\RES{gt_pf_g1_k} cases), and its feedback beats plain retrying by +\RES{bw_tr} points at matched decoding; the ledger adds the residual failures, the share a free baseline earns, and a usability pilot (\S\ref{sec:results}).
+(3)~Two bounded secondary rows, and a bridge to human-written pairs and human-chosen keywords, where the default of answering affirmative is analyzed as a good guess with an asymmetric cost; models commit to it in \RES{lg_c}\% of committed answers even when told not to assume, so its rare errors are silent reversals.
 (4)~A pre-specified human-effect design that turns the ledger into falsifiable predictions about people (\S\ref{sec:protocol}).
 We ran no study with AAC users; every result is a change in stored text.
 
@@ -283,7 +278,7 @@ Pass lines are coarse by design: they decide whether an intervention merits a hu
 \section{Results}
 \label{sec:results}
 %% =====================================================================
-\begin{table*}[t]
+\begin{table*}[!t]
 \footnotesize
 \begin{minipage}[t]{0.485\textwidth}\vspace{0pt}
 \setlength{\tabcolsep}{2.5pt}
@@ -350,7 +345,7 @@ The guard is in Table~\ref{tab:guard}.}
 \label{fig:ledger}
 \end{figure*}
 
-\subsection{The guard: most scored failures repaired, a modest increment over a free baseline}
+\subsection{The guard: about half of failures repaired, and feedback beats plain retrying}
 On the development cue conditions, strict pass rose from \RES{g_spx_p0}\% to \RES{g_spx_g1}\% of \RES{n_cue_targets} targets (Table~\ref{tab:guard}).
 Of the \RES{g_fixc_n} initial failures the guard repaired \RES{g_fixc_k} (\pci{g_fix}), far above its 30\% pass line.
 A gain-only report stops there.
@@ -496,9 +491,9 @@ Any claim about benefit requires direct involvement of AAC users and advisers.
 All annotators were adult non-authors recruited from the authors' university peers, identified only by an ID; each consented and was reimbursed for their time. They labelled model outputs and audited items under a fixed codebook, blinded to model, condition and source; some also chose keywords for public AACText messages or wrote new sentence pairs, released under CC~BY~4.0 with recorded consent. No personal or health data were collected, and we did not seek an institutional review determination.
 
 \section{Conclusion}
-Gain-only reporting would have credited the guard with its confirmation gain and stopped.
-The ledger adds that deletion alone explains part of it (+\RES{gt_sgain_g1s} of +\RES{gt_sgain_g1} points, strict) while plain retrying explains little more, so the feedback message earns its increment, that scored passes can be fragments, that its repair rate fell from development to confirmation, that a small pilot points to a usability cost that a larger audit with a frozen rule will test, and that a default that is right on average still reverses meaning silently at a rate accuracy cannot show.
-The two bounded rows show the same pattern: the menu gains target readings and loses others, and the cue passed its development test but failed one clause of its fresh-item test.
+The guard works as intended: on fresh confirmation items it raises the joint pass rate by +\RES{gt_jgain_g1} points, repairs \RES{gt_rep_g1}\% of strict failures, never turned a correct sentence into a scored failure, and beats plain retrying by +\RES{bw_tr} points at matched decoding.
+Gain-only reporting would have stopped there; the ledger adds that deletion alone explains part of the gain (+\RES{gt_sgain_g1s} of +\RES{gt_sgain_g1} points, strict), that plain retrying explains little of it, that scored passes can be fragments, that its repair rate fell from development to confirmation, that a small pilot points to a usability cost that a larger audit with a frozen rule will test, and that a default that is right on average still reverses meaning silently at a rate accuracy cannot show.
+The menu and the cue show the same pattern: gains in one place, a loss or a failed clause in another.
 Human-written pairs and human-chosen keywords point the same way in a small sample of writers, but only people who use AAC can say whether any of it matters to them.
 The pre-specified study turns these offline findings into predictions that people can falsify.
 Analysis code, stored outputs and scripts that rebuild every number and figure accompany the submission as anonymized supplementary material. % VERIFY: attach the anonymized archive before submission
