@@ -1,0 +1,194 @@
+{
+ "seed": 20261101,
+ "rule": "; seeded, declared; seed 20261101):\n  * 100 arbiter units, drawn from runs/r2c1, runs/hw1, runs/elic1 `arbiter.jsonl` (one unit = exact text x critical\n    dimension x visible input). Frame: a unit already in a human gold file (Parts 10/12/13: annotation/gold_key_*.csv) is\n    left out (people already labelled it); hw1 units of families not kept after Stage 2/3 are left out.\n    Every unit is tagged with the arbiter precedent it used (TAG_RULES below, from the text, dimension, label and the\n    arbiter's rationale). The draw is quota-based and oversamples the precedents: PRECEDENT_QUOTA per tag (spread over\n    the runs that have the tag, roughly in proportion to the square root of its count, at least 1 per run), then the\n    rest of the 100 from untagged (\"other\") units spread over run x dimension cells. Within a group, units are taken in\n    ascending sha1(seed | run | text_id | family_id) order.\n  * 30 \"Can you ...?\" / \"Could you ...?\" outputs: speech-act units of runs r2c1 (W-C, 15) and hw1 (15) whose output\n    sentence contains \"can you\" or \"could you\" and ends with \"?\" (production label: request/command, from the judges\n    when they agreed). In r2c1: 5 from typed inputs, 10 from keyword inputs. Same hash order. Not already in the 100.\nThe \"Can you\" items show the critical question without its two parenthetical examples (\"'Can I ...?' is a question\",\n\"'Can you ...?' is a request\"), and Part 19's practice items 2 and 4 are replaced (the standard ones use \"Can you\" and\n\"Could you please\"), so these items test the rule instead of reading it back. The tool's general speech-act question\n(asked on every item) has no examples either; the scorer reports both.",
+ "annotators": [
+  "P01",
+  "P02",
+  "P03",
+  "P04",
+  "P05",
+  "P06",
+  "P07",
+  "P08",
+  "P09",
+  "P10",
+  "P11",
+  "P12",
+  "P13",
+  "P14",
+  "P15",
+  "P16",
+  "P17",
+  "P18",
+  "P19",
+  "P20"
+ ],
+ "per_item": 2,
+ "labelled_sentences_before": [
+  "P02",
+  "P03",
+  "P04",
+  "P07",
+  "P08",
+  "P09",
+  "P10",
+  "P11",
+  "P13",
+  "P14",
+  "P15",
+  "P19",
+  "P20"
+ ],
+ "precedent_quota": {
+  "no_time_word_unclear": 8,
+  "vague_time_word_unclear": 7,
+  "will_now": 3,
+  "will_or_lets_later": 4,
+  "sure_emphatic": 6,
+  "maybe_hedged": 2,
+  "certainty_on_request_unclear": 3,
+  "hope_hedged": 6,
+  "wonder_hedged": 3,
+  "could_hedged": 2,
+  "may_permission_plain": 3,
+  "want_please_request": 6,
+  "will_you_request": 4,
+  "tell_you_to_request": 3,
+  "ask_with_please": 2,
+  "should_we_proposal": 2,
+  "can_could_you": 2,
+  "may_i_softener": 2,
+  "would_softener": 2,
+  "inanimate_third_party": 3,
+  "negation_uncertainty_unclear": 3
+ },
+ "arbiter_frame": {
+  "units_after_exclusions": 419,
+  "excluded": {
+   "already labelled in Parts 10/12/13": 38,
+   "family not kept / not in data/items": 12,
+   "same unit twice": 20
+  },
+  "frame_by_tag": {
+   "ask_with_please": 6,
+   "can_could_you": 2,
+   "certainty_on_request_unclear": 3,
+   "could_hedged": 2,
+   "hope_hedged": 9,
+   "inanimate_third_party": 24,
+   "may_i_softener": 15,
+   "may_permission_plain": 3,
+   "maybe_hedged": 1,
+   "negation_uncertainty_unclear": 14,
+   "no_time_word_unclear": 90,
+   "other": 141,
+   "should_we_proposal": 7,
+   "sure_emphatic": 8,
+   "tell_you_to_request": 9,
+   "vague_time_word_unclear": 4,
+   "want_please_request": 37,
+   "will_now": 7,
+   "will_or_lets_later": 2,
+   "will_you_request": 18,
+   "wonder_hedged": 2,
+   "would_softener": 15
+  }
+ },
+ "can_you_frame": {
+  "units": 1648,
+  "excluded": {
+   "already used / labelled": 1461
+  },
+  "by_run": {
+   "r2c1": 1611,
+   "hw1": 37
+  }
+ },
+ "arbiter_sample": {
+  "n": 100,
+  "by_run": {
+   "elic1": 36,
+   "hw1": 32,
+   "r2c1": 32
+  },
+  "by_dimension": {
+   "agent": 8,
+   "certainty": 28,
+   "polarity": 11,
+   "politeness": 6,
+   "speech_act": 29,
+   "time_quantity": 18
+  },
+  "by_tag": {
+   "ask_with_please": 2,
+   "can_could_you": 2,
+   "certainty_on_request_unclear": 3,
+   "could_hedged": 2,
+   "hope_hedged": 6,
+   "inanimate_third_party": 3,
+   "may_i_softener": 2,
+   "may_permission_plain": 3,
+   "maybe_hedged": 1,
+   "negation_uncertainty_unclear": 3,
+   "no_time_word_unclear": 8,
+   "other": 31,
+   "should_we_proposal": 2,
+   "sure_emphatic": 6,
+   "tell_you_to_request": 3,
+   "vague_time_word_unclear": 4,
+   "want_please_request": 6,
+   "will_now": 3,
+   "will_or_lets_later": 2,
+   "will_you_request": 4,
+   "wonder_hedged": 2,
+   "would_softener": 2
+  },
+  "arbiter_picked_J1": 62,
+  "arbiter_picked_J2": 36,
+  "arbiter_picked_neither": 2
+ },
+ "can_you_sample": {
+  "n": 30,
+  "by_run": {
+   "hw1": 15,
+   "r2c1": 15
+  },
+  "by_dimension": {
+   "speech_act": 30
+  },
+  "by_tag": {
+   "canyou_request": 30
+  },
+  "arbiter_picked_J1": 0,
+  "arbiter_picked_J2": 0,
+  "arbiter_picked_neither": 0
+ },
+ "codings": 260,
+ "items_per_person": {
+  "P01": 13,
+  "P02": 13,
+  "P03": 13,
+  "P04": 13,
+  "P05": 13,
+  "P06": 13,
+  "P07": 13,
+  "P08": 13,
+  "P09": 13,
+  "P10": 13,
+  "P11": 13,
+  "P12": 13,
+  "P13": 13,
+  "P14": 13,
+  "P15": 13,
+  "P16": 13,
+  "P17": 13,
+  "P18": 13,
+  "P19": 13,
+  "P20": 13
+ },
+ "min_max_items_per_person": [
+  13,
+  13
+ ],
+ "key_sha256": "52225d7cc01a5e4c013e42ba9d8e5ac7c6c78f401bef614633ba30ace6ff4b86"
+}

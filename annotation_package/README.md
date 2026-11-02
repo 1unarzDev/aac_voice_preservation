@@ -31,6 +31,10 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   if the coordinator assigned it. It can be split into two sittings. See the Part 10 section below.
 - **Part 11, `repair_audit_transfer.html`** (40 new sentences, same task as Part 4): about 15–20 minutes, only if
   assigned. See the Part 11 section below.
+- **Part 17, `stage4/repair_audit_v2_<ID>.html`** (80 new sentences, same task as Part 4): about 47 minutes, only if
+  assigned. **Part 18, `intent_check.html`** (10 sentences from your own pairs): about 15 minutes. **Part 19,
+  `stage4/<ID>_part19.json`** (about 13 sentences, same tool as Part 10): about 10 minutes, everyone. See their
+  sections below.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -205,8 +209,8 @@ sentence alone, then Pass B with the input; 3 practice items per pass). Everythi
 
 Don't compare these sentences with the ones in Part 4. Judge each sentence on its own.
 
-## Part 17 (if assigned, ~35 min): third sentence check, your own `repair_audit_v2_<ID>.html`
-This is the same task as Part 4, with 60 new sentences. Follow the Part 4 instructions above (Pass A sentence alone,
+## Part 17 (if assigned, ~47 min): third sentence check, your own `repair_audit_v2_<ID>.html`
+This is the same task as Part 4, with 80 new sentences. Follow the Part 4 instructions above (Pass A sentence alone,
 then Pass B with the input; 3 practice items per pass). Everything is inside one file, made for you.
 
 1. Open the file named with your ID (for example `repair_audit_v2_P02.html`, in the `stage4` folder). Enter **the same
@@ -214,8 +218,8 @@ then Pass B with the input; 3 practice items per pass). Everything is inside one
 2. Its progress is saved separately from Parts 4 and 11.
 3. Click **Download CSV** at the end: `repair_audit_v2_<ID>.csv`.
 
-These sentences are new. Do not look for the ones from Parts 4 or 11, and do not talk about the sentences with anyone
-until everyone has finished. Judge each sentence on its own.
+These sentences are new. Some of them may be weak or odd: answer honestly. Do not look for the ones from Parts 4 or 11,
+and do not talk about the sentences with anyone until everyone has finished. Judge each sentence on its own.
 
 ## Part 18 (if assigned, ~15 min): did it say what you meant? `intent_check.html`
 This part uses **your own sentence pairs** from Part 7. A writing tool was given keywords (and sometimes chips) taken
@@ -238,12 +242,27 @@ from your pairs and wrote a sentence. You say whether the sentence says what **y
 Some sentences will be poor. That is expected: answer honestly. You are not told how a sentence was made or how it
 was scored. This part checks what the writers meant. It is not a test with AAC users.
 
+## Part 19 (all 20 people, ~10 min): label a few more sentences, `stage4/<ID>_part19.json`
+This is the same task as Part 10, with only about 13 sentences, so it is short. You use `annotate.html` and the file
+named with your ID. You do not need the codebook for this part: the short definitions on the screen are enough. Label
+only what the **words on the page** say.
+
+1. Open `annotate.html`, enter **the same annotator ID**, and load `stage4/<ID>_part19.json` (for example
+   `stage4/P02_part19.json`).
+2. Do the 5 practice items, then every sentence, as in Part 10. The main question (question 1) changes from sentence to
+   sentence: read it each time. Press `S` when a sentence is really unclear.
+3. Each sentence is labelled by two people, working alone. Nobody gets a sentence from a pair they wrote or checked,
+   or from a message whose keywords they chose.
+4. Click **Download CSV** at the end: `labels_part19_<ID>.csv`.
+
+Some sentences may be odd or look like others you have seen. Label each one on its own, and do not look anything up.
+
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
 `wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `write_pairs_<dimension>_<ID>.csv`,
 `check_pairs_<file>_<ID>.csv` and `keyword_elicitation_<file>_<ID>.csv` for Parts 7–9, `labels_gold_new_<ID>.csv` for Part 10 and
-`repair_audit_transfer_<ID>.csv` for Part 11, `repair_audit_v2_<ID>.csv` for Part 17 and `intent_check_<ID>.csv` for
-Part 18), to the study coordinator. Please also send:
+`repair_audit_transfer_<ID>.csv` for Part 11, `repair_audit_v2_<ID>.csv` for Part 17, `intent_check_<ID>.csv` for
+Part 18 and `labels_part19_<ID>.csv` for Part 19), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

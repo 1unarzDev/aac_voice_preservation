@@ -6,6 +6,7 @@ Writes only into temporary directories (the real stage4 files are not touched).
 import csv
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -168,6 +169,144 @@ def test_collect_batch_hw2_ids_and_paths():
     assert [c["family_id"] for c in cands] == ["hw2-act-001"], (cands, r.stdout)
     rej = list(csv.DictReader(open(tmp / "out" / "rejected.csv")))
     assert any("exact duplicate pair" in x["reasons"] for x in rej), (rej, r.stdout)
+
+
+# ---------------------------------------------------------------- Part 19 and the Part 17 comparison arms (2026-11-01)
+import make_arbiter_check as MC  # noqa: E402
+import runio  # noqa: E402
+
+BASE120_SHA = "74b3415e4e78a6412ce9412c95ca194a71d3f28f0966e09437855b2315b9eafd"   # the original 120-row key (columns before the arms)
+
+
+def test_part19_in_every_sheet_after_part18_and_part17_minutes(tmp_path=None):
+    tmp = Path(tmp_path or tempfile.mkdtemp())
+    res = _build(tmp)
+    rows, s4 = res["rows"], res["stage4"]
+    for a in res["plan"]["annotators"]:
+        mine = sorted((r for r in rows if r["annotator"] == a), key=lambda r: r["order"])
+        assert [r["task"] for r in mine][:2] == ["intent", "part19"], (a, [r["task"] for r in mine])
+        r19 = mine[1]
+        assert r19["return_file"] == f"labels_part19_{a}.csv" and r19["return_folder"] == "annotation/returns_arbiter_check/"
+        assert f"stage4/{a}_part19.json" in r19["file_or_link"]
+        txt = (tmp / "sheets" / f"{a}_stage4.md").read_text()
+        assert "Part 19" in txt and f"labels_part19_{a}.csv" in txt
+        steps = txt.split("## Steps")[1]
+        assert steps.index("**1. Part 18:") < steps.index("**2. Part 19:") < (steps.index("**3. Part 17:") if a in s4["raters"] else 10 ** 9)
+    for a in s4["raters"]:
+        r17 = next(r for r in rows if r["annotator"] == a and r["task"] == "repair2")
+        assert r17["expected_minutes"] == 47 and "80 sentences" in r17["description"]
+        assert sum(r["expected_minutes"] for r in rows if r["annotator"] == a) == 15 + 10 + 47
+    h = (tmp / "HANDOUT.md").read_text()
+    assert "Part 19" in h and "labels_part19_<ID>" in h and "Parts 18 and 19 only" in h
+
+
+def _recompute_blocked(items):
+    b = {}
+    for f, it in items.items():
+        if it.get("writer_id"):
+            b.setdefault(f, set()).add(it["writer_id"])
+    for r in csv.DictReader(open(ROOT / "annotation" / "written" / "check_key.csv")):
+        for c in r["check_id"].split():
+            b.setdefault(r["family_id"], set()).add(c.rsplit("_check_", 1)[0] if "_check_" in c else c.rsplit("_tiebreak", 1)[0])
+    ek = {r["id"]: r["set"] for r in map(json.loads, open(ROOT / "annotation" / "elicitation_key.jsonl"))}
+    sets = {}
+    for r in csv.DictReader(open(ROOT / "annotation" / "elicitation_assignment.csv")):
+        sets.setdefault(r["set"], set()).add(r["annotator"])
+    for f in items:
+        if f.startswith("elic-") and f[5:] in ek:
+            b.setdefault(f, set()).update(sets[ek[f[5:]]])
+    return b
+
+
+def test_part19_key_exclusions_loads_and_blind_files():
+    key = list(csv.DictReader(open(ROOT / "annotation" / "arbiter_check_key.csv")))
+    items = runio.load_items()
+    blocked = _recompute_blocked(items)
+    assert len(key) == 130 and Counter(k["source"] for k in key) == {"arbiter": 100, "canyou": 30}
+    assert len({k["item_id"] for k in key}) == 130
+    plan = json.loads(PLAN.read_text())
+    load = Counter()
+    for k in key:
+        cs = k["coders"].split("|")
+        assert len(cs) == 2 and len(set(cs)) == 2 and set(cs) <= set(plan["annotators"])
+        assert not set(cs) & blocked.get(k["family_id"], set()), (k["item_id"], cs, blocked.get(k["family_id"]))
+        load.update(cs)
+    assert set(load) == set(plan["annotators"]) and set(load.values()) == {13}, load
+    assert set(k["run"] for k in key) == {"r2c1", "hw1", "elic1"} and Counter(k["run"] for k in key if k["source"] == "canyou") == {"r2c1": 15, "hw1": 15}
+    # arbiter labels come from the arbiter file; J1 and J2 differ on every arbiter unit
+    arb = {}
+    for run in ("r2c1", "hw1", "elic1"):
+        for x in runio.read_jsonl(ROOT / "runs" / run / "arbiter.jsonl"):
+            arb[(run, x["text_id"], x["family_id"])] = x["critical"]
+    for k in key:
+        if k["source"] == "arbiter":
+            assert arb[(k["run"], k["text_id"], k["family_id"])] == k["arbiter_label"]
+            assert k["J1"] != k["J2"] and k["arbiter_label"] in k["critical_options"].split("|")
+        else:
+            assert k["arbiter_label"] == "" and re.search(r"\b(can|could) you\b", k["text"], re.I)
+    # the oversampled precedents are there
+    tags = Counter(k["precedent_tag"] for k in key if k["source"] == "arbiter")
+    for t in ("no_time_word_unclear", "hope_hedged", "sure_emphatic", "may_permission_plain", "want_please_request", "wonder_hedged"):
+        assert tags[t] >= 2, (t, tags)
+    # per-person blind files: items == the key's items for that person; no run/label leakage; Can-you question has no example
+    by_id = {k["item_id"]: k for k in key}
+    for a in plan["annotators"]:
+        doc = json.loads((ROOT / "annotation_package" / "stage4" / f"{a}_part19.json").read_text())
+        assert doc["run"] == "part19" and len(doc["practice"]) == 5 and len(doc["items"]) == 13
+        assert {i["item_id"] for i in doc["items"]} == {k["item_id"] for k in key if a in k["coders"].split("|")}
+        for it in doc["items"]:
+            assert sorted(it) == ["critical", "input_text", "item_id", "text"]
+            k = by_id[it["item_id"]]
+            if k["source"] == "canyou":
+                assert "'Can you" not in it["critical"]["question"] and "'Can I" not in it["critical"]["question"]
+        blob = json.dumps(doc["items"]) + json.dumps(doc["practice"])
+        assert not re.search(r"r2c1|hw1|elic1|arbiter|J1|J2|gemma|llama|qwen|terra", blob)
+        assert not any(re.search(r"can you|could you", p["text"], re.I) for p in doc["practice"])
+
+
+def test_part19_assign_respects_blocks_and_balances():
+    ids = [f"P{i:02d}" for i in range(1, 11)]
+    units = [{"families": f"f{i}", "run": "r", "text_id": f"t{i}", "family_id": f"f{i}"} for i in range(20)]
+    blocked = {f"f{i}": {ids[i % 10], ids[(i + 1) % 10], ids[(i + 2) % 10]} for i in range(20)}
+    load = MC.assign(units, ids, blocked)
+    assert set(load.values()) == {4}, load
+    for u in units:
+        assert len(set(u["coders"])) == 2 and not set(u["coders"]) & blocked[u["families"]]
+
+
+def test_part17_comparison_arms_in_key_and_files():
+    key = list(csv.DictReader(open(ROOT / "annotation" / "repair_audit_v2_key.csv")))
+    assert len(key) == 160 and Counter(r["arm"] for r in key) == {"repaired": 60, "control": 60, "original_failed": 20, "strip_only": 20}
+    base_cols = ["item_id", "arm", "pool", "assigned_model", "source_id", "output_ids", "families", "dimensions", "channels",
+                 "channel_group", "hash_rank", "hash", "raters", "input_text", "text", "eligible_after_exclusion"]
+    base = [r for r in key if r["arm"] in ("repaired", "control")]
+    assert key[:120] == base, "the 120 base rows must stay first"
+    assert hashlib.sha256(json.dumps([[r[c] for c in base_cols] for r in base]).encode()).hexdigest() == BASE120_SHA
+    for arm in ("original_failed", "strip_only"):
+        for pool in ("discovery", "transfer"):
+            assert sum(r["arm"] == arm and r["pool"] == pool for r in key) == 10
+    import explode
+    ex = {explode.normalise(r["text"]) for f in ("repair_audit_key.csv", "repair_audit_transfer_key.csv")
+          for r in csv.DictReader(open(ROOT / "annotation" / f))}
+    norm = [explode.normalise(r["text"]) for r in key]
+    assert len(set(norm)) == 160 and not set(norm) & ex
+    assert len({r["item_id"] for r in key}) == 160 and all(r["item_id"].startswith("rv-") for r in key)
+    rep = {(r["pool"], r["source_id"]): r for r in key if r["arm"] == "repaired"}
+    for r in key:
+        assert len(set(r["raters"].split("|"))) == 3 and set(r["raters"].split("|")) <= set(MA.PART17_RATERS)
+        if r["arm"] == "original_failed":
+            assert (r["pool"], r["paired_source_id"]) in rep and r["paired_item_id"] == rep[(r["pool"], r["paired_source_id"])]["item_id"]
+        if r["arm"] == "strip_only" and r["paired_source_id"]:
+            assert (r["pool"], r["paired_source_id"]) in rep
+    assert sum(r["arm"] == "original_failed" and r["paired_source_id"] != "" for r in key) == 20
+    assert sum(r["arm"] == "strip_only" and r["paired_source_id"] != "" for r in key) >= 8
+    load = Counter(x for r in key for x in r["raters"].split("|"))
+    assert set(load) == set(MA.PART17_RATERS) and max(load.values()) <= 85 and min(load.values()) >= 78, load
+    for rid in MA.PART17_RATERS:
+        txt = (ROOT / "annotation_package" / "stage4" / f"repair_audit_v2_{rid}.html").read_text()
+        ids = set(re.findall(r'"item_id":\s*"(rv-[0-9a-f]{6})"', txt))
+        assert ids == {r["item_id"] for r in key if rid in r["raters"].split("|")}, rid
+        assert not re.search(r"original_failed|strip_only|paired_source", txt)
 
 
 if __name__ == "__main__":

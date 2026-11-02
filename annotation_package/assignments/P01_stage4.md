@@ -1,6 +1,6 @@
 # Stage 4 task sheet for P01 (OPTIONAL; Mon Nov 2; due Mon Nov 2, 23:59, Part 16 due Tue Nov 3, 23:59)
 
-Stage 4 is a short top-up and **optional**: if you cannot do it, tell the coordinator now so someone else can be asked. Download the current `annotation_package.zip`: your files are in its `stage4/` folder and the tools are in the package folder. About **37 min** in total (Part 18 15 min, Part 16 22 min), plus breaks.
+Stage 4 is a short top-up and **optional**: if you cannot do it, tell the coordinator now so someone else can be asked. Download the current `annotation_package.zip`: your files are in its `stage4/` folder and the tools are in the package folder. About **47 min** in total (Part 18 15 min, Part 19 10 min, Part 16 22 min), plus breaks.
 
 **Rules (all parts)**
 - Work **alone**. Do not discuss any item with anyone until all stages are finished (Tue Nov 3).
@@ -12,20 +12,23 @@ Stage 4 is a short top-up and **optional**: if you cannot do it, tell the coordi
 
 **Extra rules for Stage 4**
 - **Your own words only.** Every sentence you write or rate is your own work or your own judgment: do not copy, reuse or adapt anyone else's sentences, and do not ask anyone for examples.
-- **Part 16** opens once Part 15 is back (Mon Nov 2 evening at the earliest; the coordinator tells you). Do Part 18 first, then wait for the message that Part 15 is back; re-download the zip then.
+- **Part 19:** label what each sentence says, using only the words on the page. Do not search for the sentences or ask anyone or any tool; if the sentence is odd or unclear, say so with the unsure key (`S`).
+- **Part 16** opens once Part 15 is back (Mon Nov 2 evening at the earliest; the coordinator tells you). Do Parts 18 and 19 first, then wait for the message that Part 15 is back; re-download the zip then.
 
 ## Steps (in this order)
 
-Order: **Part 18 first** (it needs no other context), then the rest of the list.
+Order: **Part 18 first** (it needs no other context), then **Part 19**, then the rest of the list.
 
 - [ ] **1. Part 18: Did it say what you meant? (10 sentences made from your own pairs)** (about 15 min)  
   Open `intent_check.html`, choose `stage4/P01_intent.json`, enter `P01`. Do this first: it needs nothing else. README: Part 18. Return: `intent_check_P01.csv`.
-- [ ] **2. Part 16: Check about 30 new sentence pairs written by other people (same task as Part 8)** (about 22 min)  
+- [ ] **2. Part 19: Label sentences: about 13 sentences, 5 practice items first (same task as Part 10)** (about 10 min)  
+  Open `annotate.html`, enter `P01`, load `stage4/P01_part19.json`, do the 5 practice items, then every item (about 13 sentences). Same tool and questions as Part 10 (README: Part 10 and Part 19). Label only what the words on the page say; the codebook is not needed for this part, the short definitions on the screen are enough. Click **Download CSV** at the end. The file name will be `labels_part19_P01.csv`. Return: `labels_part19_P01.csv`.
+- [ ] **3. Part 16: Check about 30 new sentence pairs written by other people (same task as Part 8)** (about 22 min)  
   Open `check_pairs.html`, click **Check file**, choose `stage4/P01_check_hw2.json` (arrives once Part 15 is back (Mon Nov 2 evening at the earliest; the coordinator tells you); re-download the zip then, the file in the zip before that is an empty placeholder), enter `P01`. Same task as Part 8 (README: Part 8). You never get a pair you wrote. Return: `check_pairs_P01_check_hw2_P01.csv`.
 
-**Return files (names must be exact):** `intent_check_P01.csv` (Part 18); `check_pairs_P01_check_hw2_P01.csv` (Part 16).
+**Return files (names must be exact):** `intent_check_P01.csv` (Part 18); `labels_part19_P01.csv` (Part 19); `check_pairs_P01_check_hw2_P01.csv` (Part 16).
 
-Return: email the CSV files for Part 18 to the coordinator by Mon Nov 2, 23:59 (subject `AAC annotation P01 stage 4`), with the time you spent and any notes.
+Return: email the CSV files for Part 18, Part 19 to the coordinator by Mon Nov 2, 23:59 (subject `AAC annotation P01 stage 4`), with the time you spent and any notes.
 Email the Part 16 CSV by Tue Nov 3, 23:59 (same subject).
 
 Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time.

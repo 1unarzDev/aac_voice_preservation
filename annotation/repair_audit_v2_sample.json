@@ -82,66 +82,134 @@
       "cue": 30
     }
   },
-  "ratings_total": 360,
+  "comparison_arms": {
+    "discovery/original_failed": {
+      "drawn": 10,
+      "paired": 10,
+      "skipped_sources": [
+        "b97906169b8c17c6"
+      ]
+    },
+    "discovery/strip_only": {
+      "drawn": 10,
+      "paired_with_a_repaired_v2_item": 6,
+      "candidates_walked": 122,
+      "rejected_during_walk": {
+        "strip equals the repair (same sentence)": 41,
+        "strip left the first pass unchanged": 25,
+        "text already used": 6
+      }
+    },
+    "discovery/repaired_v2_items_vs_strip": {
+      "n": 30,
+      "strip_output_identical_to_repair": 10,
+      "strip_left_first_pass_unchanged": 15
+    },
+    "transfer/original_failed": {
+      "drawn": 10,
+      "paired": 10,
+      "skipped_sources": []
+    },
+    "transfer/strip_only": {
+      "drawn": 10,
+      "paired_with_a_repaired_v2_item": 2,
+      "candidates_walked": 244,
+      "rejected_during_walk": {
+        "strip equals the repair (same sentence)": 38,
+        "strip left the first pass unchanged": 55
+      }
+    },
+    "transfer/repaired_v2_items_vs_strip": {
+      "n": 30,
+      "strip_output_identical_to_repair": 10,
+      "strip_left_first_pass_unchanged": 18
+    },
+    "assignment_cost": 1176
+  },
+  "ratings_total": 480,
   "per_rater_load": {
     "P02": {
-      "items": 60,
+      "items": 80,
       "discovery/repaired": 15,
       "discovery/control": 15,
       "transfer/repaired": 15,
-      "transfer/control": 15
+      "transfer/control": 15,
+      "discovery/original_failed": 4,
+      "transfer/original_failed": 6,
+      "discovery/strip_only": 6,
+      "transfer/strip_only": 4
     },
     "P07": {
-      "items": 60,
+      "items": 80,
       "discovery/repaired": 15,
       "discovery/control": 15,
       "transfer/repaired": 15,
-      "transfer/control": 15
+      "transfer/control": 15,
+      "discovery/original_failed": 4,
+      "transfer/original_failed": 6,
+      "discovery/strip_only": 6,
+      "transfer/strip_only": 4
     },
     "P09": {
-      "items": 60,
+      "items": 80,
       "discovery/repaired": 15,
       "discovery/control": 15,
       "transfer/repaired": 15,
-      "transfer/control": 15
+      "transfer/control": 15,
+      "discovery/original_failed": 6,
+      "transfer/original_failed": 4,
+      "discovery/strip_only": 4,
+      "transfer/strip_only": 6
     },
     "P10": {
-      "items": 60,
+      "items": 80,
       "discovery/repaired": 15,
       "discovery/control": 15,
       "transfer/repaired": 15,
-      "transfer/control": 15
+      "transfer/control": 15,
+      "discovery/original_failed": 4,
+      "transfer/original_failed": 6,
+      "discovery/strip_only": 4,
+      "transfer/strip_only": 6
     },
     "P11": {
-      "items": 60,
+      "items": 80,
       "discovery/repaired": 15,
       "discovery/control": 15,
       "transfer/repaired": 15,
-      "transfer/control": 15
+      "transfer/control": 15,
+      "discovery/original_failed": 5,
+      "transfer/original_failed": 5,
+      "discovery/strip_only": 5,
+      "transfer/strip_only": 5
     },
     "P14": {
-      "items": 60,
+      "items": 80,
       "discovery/repaired": 15,
       "discovery/control": 15,
       "transfer/repaired": 15,
-      "transfer/control": 15
+      "transfer/control": 15,
+      "discovery/original_failed": 7,
+      "transfer/original_failed": 3,
+      "discovery/strip_only": 5,
+      "transfer/strip_only": 5
     }
   },
   "shared_items_per_rater_pair": {
-    "P02-P07": 24,
-    "P02-P09": 24,
-    "P02-P10": 24,
-    "P02-P11": 24,
-    "P02-P14": 24,
-    "P07-P09": 24,
-    "P07-P10": 24,
-    "P07-P11": 24,
-    "P07-P14": 24,
-    "P09-P10": 24,
-    "P09-P11": 24,
-    "P09-P14": 24,
-    "P10-P11": 24,
-    "P10-P14": 24,
-    "P11-P14": 24
+    "P02-P07": 34,
+    "P02-P09": 30,
+    "P02-P10": 33,
+    "P02-P11": 32,
+    "P02-P14": 31,
+    "P07-P09": 30,
+    "P07-P10": 30,
+    "P07-P11": 32,
+    "P07-P14": 34,
+    "P09-P10": 36,
+    "P09-P11": 32,
+    "P09-P14": 32,
+    "P10-P11": 31,
+    "P10-P14": 30,
+    "P11-P14": 33
   }
 }

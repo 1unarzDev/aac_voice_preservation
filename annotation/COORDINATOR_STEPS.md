@@ -107,8 +107,14 @@ Rationale and decisions: D-058. Tools to build (Sonnet subagent): stage-4 fill i
 #     (5 + 5; declared, seeded draw), labels A / B / something else / unclear; key private
 python src/make_intent_check.py --run hw1 --per-writer 10 --seed 20261102
 # 4b. Part 17: 60 repaired + 60 controls, frozen hash order, EXCLUDING every text in Parts 4/11;
-#     3 raters per item, raters = people who did not do Parts 4/11 (P02 P07 P09 P10 P11 P14)
+#     3 raters per item, raters = people who did not do Parts 4 / 11 (P02 P07 P09 P10 P11 P14).
+#     Added 2026-11-01 before any return: + 20 original_failed + 20 strip_only (10 per pool), 80 items per rater.
+#     The 120 base rows, ids and raters are asserted identical to the committed key; --no-arms draws only the 120.
 python src/make_repair_audit_v2.py --n 60 --raters P02,P07,P09,P10,P11,P14 --per-item 3
+# 4b2. Part 19 (added 2026-11-01 before any return): human check of the arbiter's labels + "Can you" requests.
+#      130 items x 2 coders over all 20 people (13 each); seeded draw (20261101); key annotation/arbiter_check_key.csv
+python src/make_arbiter_check.py                    # -> stage4/<ID>_part19.json; returns -> annotation/returns_arbiter_check/
+python src/score_arbiter_check.py                   # (python src/score_arbiter_check.py --self-check on simulated returns)
 # 4c. (roster chosen Nov 1: P05 P16 P17 P18; `make_assignments.py --stage 4` rebuilds sheets/stage4.csv/placeholders;
 #     annotation/assignments/stage4_plan.json is kept unless --rebuild or --writers/--raters/--checkers is given)
 #     Part 15: 4 writers x 15 speech-act pairs; writers = people who never wrote speech_act; dedup against ALL
@@ -140,3 +146,30 @@ sensitivity check counts unknown as unusable). Estimate: repaired − control, N
 
 Part 4 is reported as the pilot (n = 20 + 20, raters not independent), never combined selectively. Neither audit is
 chosen because it is more favourable.
+
+#### Secondary comparisons (added 2026-11-01 before any return)
+Added to address the confound "controls never failed, so repaired hard cases are compared with easy ones". The
+primary repaired − control rule above is unchanged and stays the only deployment rule. 20 items per arm, 10 per pool,
+same 6 raters, 3 per item (key arms `original_failed`, `strip_only`; `paired_source_id` = the repaired item's source id):
+- **original_failed:** the pre-repair first-pass output that the guard flagged and then repaired, for the first 10 per
+  pool of the already-drawn repaired items in their frozen hash order (all 20 paired with their repaired item).
+- **strip_only:** the deterministic "please"-strip output (G1s) for an input where the strip changed the first pass and
+  differs from the repair (a sentence cannot be shown twice; G1s often equals the first pass or the repair itself:
+  of the 60 repaired items, 20 have a strip-only output identical to the repair and 33 are left unchanged by the
+  strip, see `annotation/repair_audit_v2_sample.json`). Paired-first, then the remaining eligible repaired units of the
+  pool in hash order (8 of 20 paired).
+- **Reported endpoints** (item-level consensus as above; `score_repair_audit.py`):
+  repaired − original_failed (did the repair make the sentence usable?) and repaired − strip_only, each as independent
+  arms (Newcombe 95% CI, pooled and per pool) and paired by `paired_source_id` where both items have a consensus
+  (paired difference, Newcombe method 10 CI, exact sign test, n pairs). No decision threshold is attached; the
+  results are read as context for the primary rule and never replace it. "Usable" on original_failed shows how bad
+  the unrepaired sentences were; "repaired − original_failed" > 0 means the repair helped. The strip-only contrast is
+  limited to inputs where the strip and the repair differ, and the scorer says so.
+
+#### Part 19 (added 2026-11-01 before any return)
+Human check of the arbiter's labels (`runs/r2c1`, `hw1`, `elic1` `arbiter.jsonl`) and of the "Can you ...?" request
+rule. Reported descriptively (agreement with Wilson CIs per coding and per item, per precedent tag, per run and
+dimension; human vs arbiter, J1 and J2; human-human; the share of "Can you" outputs coded as request or question, by
+coders with and without earlier labelling work). No pass/fail threshold is set; tags with few items are shown with
+their counts. The 38 arbiter units already labelled by people in Parts 10/12/13 are not re-drawn (their gold labels
+can be compared with the arbiter separately).
