@@ -1,0 +1,106 @@
+Design review answers
+
+Q: How important is R1?
+A: Important
+
+Q: Is anything wrong with R1, or missing from it?
+A: Keep the selected meaning as a constraint on the draft and the sent message. A question button must stay a question, and NOT must negate the intended action. Explain ASK as asking the listener to act and TELL as making a statement; neither should be copied as the verb ask or tell. When two selections conflict, show the conflict beside those selections so it can be fixed directly.
+
+Q: How important is R2?
+A: Important
+
+Q: Is anything wrong with R2, or missing from it?
+A: Keep exact typed wording by default, including direct or unusual wording. Offer an optional Rewrite action with an editable preview, the original beside it, and Undo. Choosing Rewrite should authorize a draft, not send it. Do not interrupt with a separate confirmation for every spelling or punctuation suggestion. The bad example under R2 uses keywords and PLAIN; add a bad example that actually rewrites a fully typed sentence.
+
+Q: How important is R3?
+A: Important
+
+Q: Is anything wrong with R3, or missing from it?
+A: Avoid silent decisions about who acts, negation, time, or whether the message is a question. This does not need a chain of questions. Show a small number of meaningfully different drafts, with the difference highlighted, and let the person edit or choose one. Ask a focused question only when the unresolved meaning prevents a useful draft. A preview must not be spoken or sent automatically.
+
+Q: How important is R4?
+A: Important
+
+Q: Is anything wrong with R4, or missing from it?
+A: Preserve relationships as well as individual button labels: who reads, what is negated, and what the sentence is about. Adding TELL must not create a new event of telling someone. If a new button conflicts with an earlier selection, explain that local conflict and offer a direct change. Do not make the person reconfirm every unchanged part of the message.
+
+Q: How important is R5?
+A: Important
+
+Q: Is anything wrong with R5, or missing from it?
+A: Check that each example really supports its buttons before using it to score the system. Would be nice can express a preference rather than uncertainty; as soon as possible does not mean maybe. Keep incorrect test inputs visible as test-design problems. Also judge whether the output invents a speaker, event, or time: following one incorrect button does not make every other change correct.
+
+Q: Is there a rule we forgot? What would you add?
+A: Add a rule for control over delivery: drafting and editing must never send or speak a message. Provide a clear Send or Speak action, an editable preview, and a quick Undo for edits. Preserve the selected words while the person explores alternatives. Keep essential meaning choices close to the draft and make a completed message sendable in one deliberate action.
+
+Q: What should a system never change without asking?
+A: Never silently change yes versus no, refusal versus agreement, question versus instruction or statement, who acts or receives the action, named people and places, amounts, dates, event time, uncertainty, or selected politeness. Keep fully typed wording unless rewriting was requested. Ordinary grammar repairs can be offered within an authorized rewrite, but a change to these meanings needs a visible choice before delivery, not a separate pop-up for every word.
+
+Q: Which is easier to imagine using: a button (chip) or a plain word?
+A: It depends (please say on what)
+
+Q: Why?
+A: Use whichever route takes fewer reliable selections with the person's access method and vocabulary layout. Stable buttons can make a few repeated meanings easy to find; words in the existing vocabulary may avoid navigating to another row. Both routes should set the same visible meaning and allow correction in place. Compare navigation and correction effort with users before choosing a default, rather than assuming that a chip is always quicker.
+
+Q: Example E01: acceptable to send?
+A: Not sure
+
+Q: Example E01: why?
+A: The fixed sentence is a clear request, but on was not selected. Leave light might mean leave it on or leave the light where it is. Show the on interpretation in the editable preview or offer those two choices. Removing please alone does not resolve that uncertainty.
+
+Q: Example E02: acceptable to send?
+A: Not acceptable to send
+
+Q: Example E02: why?
+A: TELL selects a statement; it does not supply a new action of telling. Tell you to send a note is also incomplete. You send a note would preserve the stated action and listener as the actor without adding a reporting event.
+
+Q: Example E03: acceptable to send?
+A: Not sure
+
+Q: Example E03: why?
+A: Later is preserved, but the person might mean playing guitar music or listening to it, and I was not selected. This is a useful possible draft, not a justified automatic message. Offer Play and Listen as concise alternatives and keep the actor editable.
+
+Q: Example E04: acceptable to send?
+A: Not acceptable to send
+
+Q: Example E04: why?
+A: The sentence invents a future conversation with you. YES and TELL do not mean that somebody will tell you something. Clarify what club offer means while preserving the selected third-party actor; do not fill that gap with a reporting event.
+
+Q: Example E05: acceptable to send?
+A: Not acceptable to send
+
+Q: Example E05: why?
+A: The selected negation has disappeared, and tell has become an unrelated verb. We do not schedule training is a possible draft that keeps NOT, WE, and the statement form. It still needs to be available for review before sending.
+
+Q: Example E06: acceptable to send?
+A: Fine to send
+
+Q: Example E06: why?
+A: Get the chair is a direct request to the listener with no added polite marker. It keeps ASK, YOU, and PLAIN. The original You get the chair can read as a statement, so the correction makes the selected request explicit.
+
+Q: Example E07: acceptable to send?
+A: Fine to send
+
+Q: Example E07: why?
+A: Ring the council about the permit gives a clear, ordinary request using all the selected content. About connects the council and permit without inventing an appointment, outcome, or deadline. The fixed version is fine to offer for sending; an extra confirmation dialog would add little.
+
+Q: Example E08: acceptable to send?
+A: Fine to send
+
+Q: Example E08: why?
+A: This is a statement about the speaker adjusting the lamp in the past. It adds only the grammar needed for a complete sentence and keeps all three selected meanings.
+
+Q: Example E09: acceptable to send?
+A: Not acceptable to send
+
+Q: Example E09: why?
+A: They practice guitar is the selected statement. They tell me they practice guitar adds a second event and a recipient. TELL should control sentence form rather than become a spoken reporting verb.
+
+Q: Example E10: acceptable to send?
+A: Not acceptable to send
+
+Q: Example E10: why?
+A: Please directly conflicts with PLAIN. Show the receptionist the pass keeps the requested action without adding politeness or assuming whose pass it is. Offer that correction in the draft and retain a quick way to restore an edit.
+
+Q: Anything else you want the authors to know about the design or these pages.
+A: The main screen should help someone finish a message, not turn every uncertainty into a questionnaire. Make drafts editable, show meaningful changes, keep selected meanings visible, and require one clear delivery action. Test the number of selections needed to correct a wrong draft as well as to create a good one. In the packet, use the same underlying message when comparing chips with words: the current examples also differ in tense and add now, which can distract from the interface choice.
