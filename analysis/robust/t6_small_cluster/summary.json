@@ -1,0 +1,494 @@
+{
+ "name": "hw1",
+ "items": [
+  "data/items/hw.jsonl"
+ ],
+ "runs": [
+  "runs/hw1"
+ ],
+ "seed": 20261101,
+ "writers_by_contrast": {},
+ "contrasts": {
+  "P1": {
+   "contrast": "P1",
+   "writers": 6,
+   "rows": 536,
+   "estimate": 0.35261194029850745,
+   "se_cr1": 0.024878557306725477,
+   "t_ci_low": 0.28865957278900184,
+   "t_ci_high": 0.41656430780801307,
+   "t_p_two_sided": 3.14815348634998e-05,
+   "t_p_one_sided": 1.57407674317499e-05,
+   "mean_of_writer_means": 0.3536029942279942,
+   "writer_mean_t_ci_low": 0.2892627943192812,
+   "writer_mean_t_ci_high": 0.41794319413670716,
+   "writer_means": {
+    "P01": 0.32142857142857145,
+    "P03": 0.2916666666666667,
+    "P04": 0.3977272727272727,
+    "P08": 0.3125,
+    "P14": 0.34375,
+    "P15": 0.45454545454545453
+   },
+   "writer_rows": {
+    "P01": 112,
+    "P03": 72,
+    "P04": 88,
+    "P08": 112,
+    "P14": 64,
+    "P15": 88
+   },
+   "share_of_rows_largest_writer": 0.208955223880597,
+   "effective_writers": 5.7625160462130935,
+   "wild_rademacher": {
+    "p_two_sided": 0.03125,
+    "p_one_sided": 0.015625,
+    "ci_low": 0.2902270593513502,
+    "ci_high": 0.41499682124566484,
+    "draws": 64,
+    "exact": true,
+    "min_attainable_p_two_sided": 0.03125
+   },
+   "wild_webb": {
+    "p_two_sided": 0.0034501725086254313,
+    "p_one_sided": 0.0017500875043752187,
+    "ci_low": 0.2736624556524582,
+    "ci_high": 0.43082921560124393,
+    "draws": 19999,
+    "exact": false,
+    "min_attainable_p_two_sided": 5e-05
+   },
+   "sign_flip_randomization": {
+    "p_one_sided": 0.015625,
+    "p_two_sided": 0.03125,
+    "n_patterns": 64,
+    "min_attainable_one_sided": 0.015625,
+    "all_writer_signs_positive": true
+   },
+   "leave_one_writer_out": {
+    "P01": {
+     "estimate": 0.3608490566037736,
+     "t_ci_low": 0.27614857136281623,
+     "t_ci_high": 0.44554954184473095
+    },
+    "P03": {
+     "estimate": 0.3620689655172414,
+     "t_ci_low": 0.2860890241615767,
+     "t_ci_high": 0.43804890687290604
+    },
+    "P04": {
+     "estimate": 0.34375,
+     "t_ci_low": 0.26547303812723444,
+     "t_ci_high": 0.42202696187276556
+    },
+    "P08": {
+     "estimate": 0.3632075471698113,
+     "t_ci_low": 0.2817449186207638,
+     "t_ci_high": 0.4446701757188588
+    },
+    "P14": {
+     "estimate": 0.3538135593220339,
+     "t_ci_low": 0.27377878147859847,
+     "t_ci_high": 0.43384833716546933
+    },
+    "P15": {
+     "estimate": 0.3325892857142857,
+     "t_ci_low": 0.2842483468865314,
+     "t_ci_high": 0.38093022454204
+    }
+   },
+   "loo_range": [
+    0.3325892857142857,
+    0.3632075471698113
+   ],
+   "loo_t_ci_excludes_zero_all": true,
+   "stored_percentile_bootstrap": {
+    "estimate": 0.35261194029850745,
+    "ci_low": 0.3125,
+    "ci_high": 0.4027829601990049,
+    "p_holm": 0.00029997000299970003
+   },
+   "per_model": {
+    "gemma3-4b": {
+     "estimate": 0.3656716417910448,
+     "t_ci_low": 0.24337709157722165,
+     "t_ci_high": 0.4879661920048679,
+     "t_p_two_sided": 0.0005943221673748285,
+     "rows": 134,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.015625,
+     "all_writer_means_positive": true
+    },
+    "gpt-6.1-terra": {
+     "estimate": 0.5074626865671642,
+     "t_ci_low": 0.3864270837720387,
+     "t_ci_high": 0.6284982893622897,
+     "t_p_two_sided": 0.00011924617753558242,
+     "rows": 134,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.015625,
+     "all_writer_means_positive": true
+    },
+    "llama3.1-8b": {
+     "estimate": 0.1865671641791045,
+     "t_ci_low": 0.05637114741736987,
+     "t_ci_high": 0.3167631809408391,
+     "t_p_two_sided": 0.014240578822522809,
+     "rows": 134,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.03125,
+     "all_writer_means_positive": false
+    },
+    "qwen2.5-7b": {
+     "estimate": 0.35074626865671643,
+     "t_ci_low": 0.2728440473271735,
+     "t_ci_high": 0.4286484899862594,
+     "t_p_two_sided": 8.449010791525132e-05,
+     "rows": 134,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.015625,
+     "all_writer_means_positive": true
+    }
+   },
+   "heterogeneity_model_permutation": {
+    "statistic": 6.930970149253732,
+    "p": 0.0001,
+    "permutations": 9999,
+    "models": [
+     "gemma3-4b",
+     "gpt-6.1-terra",
+     "llama3.1-8b",
+     "qwen2.5-7b"
+    ]
+   }
+  },
+  "P2": {
+   "contrast": "P2",
+   "writers": 6,
+   "rows": 356,
+   "estimate": 0.07584269662921349,
+   "se_cr1": 0.015226732076378962,
+   "t_ci_low": 0.0367011357375729,
+   "t_ci_high": 0.11498425752085407,
+   "t_p_two_sided": 0.004172527245311683,
+   "t_p_one_sided": 0.0020862636226558415,
+   "mean_of_writer_means": 0.07619047619047618,
+   "writer_mean_t_ci_low": 0.0371282383882045,
+   "writer_mean_t_ci_high": 0.11525271399274786,
+   "writer_means": {
+    "P02": 0.05,
+    "P04": 0.06666666666666667,
+    "P11": 0.13333333333333333,
+    "P12": 0.03333333333333333,
+    "P16": 0.06666666666666667,
+    "P18": 0.10714285714285714
+   },
+   "writer_rows": {
+    "P02": 60,
+    "P04": 60,
+    "P11": 60,
+    "P12": 60,
+    "P16": 60,
+    "P18": 56
+   },
+   "share_of_rows_largest_writer": 0.16853932584269662,
+   "effective_writers": 5.996214988644966,
+   "wild_rademacher": {
+    "p_two_sided": 0.03125,
+    "p_one_sided": 0.015625,
+    "ci_low": 0.03517759168839179,
+    "ci_high": 0.11650780157003518,
+    "draws": 64,
+    "exact": true,
+    "min_attainable_p_two_sided": 0.03125
+   },
+   "wild_webb": {
+    "p_two_sided": 0.011950597529876494,
+    "p_one_sided": 0.006200310015500775,
+    "ci_low": 0.034853881163407936,
+    "ci_high": 0.11696483597130389,
+    "draws": 19999,
+    "exact": false,
+    "min_attainable_p_two_sided": 5e-05
+   },
+   "sign_flip_randomization": {
+    "p_one_sided": 0.015625,
+    "p_two_sided": 0.03125,
+    "n_patterns": 64,
+    "min_attainable_one_sided": 0.015625,
+    "all_writer_signs_positive": true
+   },
+   "leave_one_writer_out": {
+    "P02": {
+     "estimate": 0.08108108108108109,
+     "t_ci_low": 0.03227128996460571,
+     "t_ci_high": 0.12989087219755646
+    },
+    "P04": {
+     "estimate": 0.0777027027027027,
+     "t_ci_low": 0.026169284483339814,
+     "t_ci_high": 0.1292361209220656
+    },
+    "P11": {
+     "estimate": 0.06418918918918919,
+     "t_ci_low": 0.03105537970564623,
+     "t_ci_high": 0.09732299867273214
+    },
+    "P12": {
+     "estimate": 0.08445945945945946,
+     "t_ci_low": 0.041517698384335534,
+     "t_ci_high": 0.1274012205345834
+    },
+    "P16": {
+     "estimate": 0.0777027027027027,
+     "t_ci_low": 0.026169284483339814,
+     "t_ci_high": 0.1292361209220656
+    },
+    "P18": {
+     "estimate": 0.07,
+     "t_ci_low": 0.02280950743392427,
+     "t_ci_high": 0.11719049256607575
+    }
+   },
+   "loo_range": [
+    0.06418918918918919,
+    0.08445945945945946
+   ],
+   "loo_t_ci_excludes_zero_all": true,
+   "stored_percentile_bootstrap": {
+    "estimate": 0.07584269662921349,
+    "ci_low": 0.05,
+    "ci_high": 0.10393258426966293,
+    "p_holm": 0.00029997000299970003
+   },
+   "per_model": {
+    "gemma3-4b": {
+     "estimate": 0.2247191011235955,
+     "t_ci_low": 0.12404485232747214,
+     "t_ci_high": 0.32539334991971886,
+     "t_p_two_sided": 0.002252497049364933,
+     "rows": 89,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.015625,
+     "all_writer_means_positive": true
+    },
+    "gpt-6.1-terra": {
+     "estimate": 0.06741573033707865,
+     "t_ci_low": 0.02262812201753145,
+     "t_ci_high": 0.11220333865662585,
+     "t_p_two_sided": 0.011768344030697141,
+     "rows": 89,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.03125,
+     "all_writer_means_positive": false
+    },
+    "llama3.1-8b": {
+     "estimate": 0.011235955056179775,
+     "t_ci_low": -0.01758383557866087,
+     "t_ci_high": 0.04005574569102042,
+     "t_p_two_sided": 0.36225577590929253,
+     "rows": 89,
+     "writers": 6,
+     "sign_flip_p_one_sided": 0.5,
+     "all_writer_means_positive": false
+    },
+    "qwen2.5-7b": {
+     "estimate": 0.0,
+     "t_ci_low": 0.0,
+     "t_ci_high": 0.0,
+     "t_p_two_sided": NaN,
+     "rows": 89,
+     "writers": 6,
+     "sign_flip_p_one_sided": 1.0,
+     "all_writer_means_positive": false
+    }
+   },
+   "heterogeneity_model_permutation": {
+    "statistic": 2.8623595505617976,
+    "p": 0.0001,
+    "permutations": 9999,
+    "models": [
+     "gemma3-4b",
+     "gpt-6.1-terra",
+     "llama3.1-8b",
+     "qwen2.5-7b"
+    ]
+   }
+  },
+  "P3": {
+   "contrast": "P3",
+   "writers": 7,
+   "rows": 414,
+   "estimate": 0.4975845410628019,
+   "se_cr1": 0.002443665511231928,
+   "t_ci_low": 0.49160510696313425,
+   "t_ci_high": 0.5035639751624695,
+   "t_p_two_sided": 9.466470632781776e-13,
+   "t_p_one_sided": 4.733235316390888e-13,
+   "mean_of_writer_means": 0.4974025974025974,
+   "writer_mean_t_ci_low": 0.49104698220481824,
+   "writer_mean_t_ci_high": 0.5037582126003766,
+   "writer_means": {
+    "P05": 0.5,
+    "P07": 0.5,
+    "P09": 0.4818181818181818,
+    "P14": 0.5,
+    "P17": 0.5,
+    "P18": 0.5,
+    "P19": 0.5
+   },
+   "writer_rows": {
+    "P05": 60,
+    "P07": 59,
+    "P09": 55,
+    "P14": 60,
+    "P17": 60,
+    "P18": 60,
+    "P19": 60
+   },
+   "share_of_rows_largest_writer": 0.14492753623188406,
+   "effective_writers": 6.994042275361136,
+   "wild_rademacher": {
+    "p_two_sided": 0.015625,
+    "p_one_sided": 0.0078125,
+    "ci_low": 0.4933729971048955,
+    "ci_high": 0.5017960850207084,
+    "draws": 128,
+    "exact": true,
+    "min_attainable_p_two_sided": 0.015625
+   },
+   "wild_webb": {
+    "p_two_sided": 0.0,
+    "p_one_sided": 0.0,
+    "ci_low": 0.4932320265867923,
+    "ci_high": 0.5019358518302188,
+    "draws": 19999,
+    "exact": false,
+    "min_attainable_p_two_sided": 5e-05
+   },
+   "sign_flip_randomization": {
+    "p_one_sided": 0.0078125,
+    "p_two_sided": 0.015625,
+    "n_patterns": 128,
+    "min_attainable_one_sided": 0.0078125,
+    "all_writer_signs_positive": true
+   },
+   "leave_one_writer_out": {
+    "P05": {
+     "estimate": 0.4971751412429379,
+     "t_ci_low": 0.48981512175998787,
+     "t_ci_high": 0.5045351607258879
+    },
+    "P07": {
+     "estimate": 0.4971830985915493,
+     "t_ci_low": 0.4898400360180197,
+     "t_ci_high": 0.504526161165079
+    },
+    "P09": {
+     "estimate": 0.5,
+     "t_ci_low": 0.5,
+     "t_ci_high": 0.5
+    },
+    "P14": {
+     "estimate": 0.4971751412429379,
+     "t_ci_low": 0.48981512175998787,
+     "t_ci_high": 0.5045351607258879
+    },
+    "P17": {
+     "estimate": 0.4971751412429379,
+     "t_ci_low": 0.48981512175998787,
+     "t_ci_high": 0.5045351607258879
+    },
+    "P18": {
+     "estimate": 0.4971751412429379,
+     "t_ci_low": 0.48981512175998787,
+     "t_ci_high": 0.5045351607258879
+    },
+    "P19": {
+     "estimate": 0.4971751412429379,
+     "t_ci_low": 0.48981512175998787,
+     "t_ci_high": 0.5045351607258879
+    }
+   },
+   "loo_range": [
+    0.4971751412429379,
+    0.5
+   ],
+   "loo_t_ci_excludes_zero_all": true,
+   "stored_percentile_bootstrap": {
+    "estimate": 0.4975845410628019,
+    "ci_low": 0.49257425742574257,
+    "ci_high": 0.5,
+    "p_holm": 0.00029997000299970003
+   },
+   "per_model": {
+    "gemma3-4b": {
+     "estimate": 0.5,
+     "t_ci_low": 0.5,
+     "t_ci_high": 0.5,
+     "t_p_two_sided": NaN,
+     "rows": 104,
+     "writers": 7,
+     "sign_flip_p_one_sided": 0.0078125,
+     "all_writer_means_positive": true
+    },
+    "gpt-6.1-terra": {
+     "estimate": 0.5,
+     "t_ci_low": 0.5,
+     "t_ci_high": 0.5,
+     "t_p_two_sided": NaN,
+     "rows": 104,
+     "writers": 7,
+     "sign_flip_p_one_sided": 0.0078125,
+     "all_writer_means_positive": true
+    },
+    "llama3.1-8b": {
+     "estimate": 0.49038461538461536,
+     "t_ci_low": 0.4666303860604454,
+     "t_ci_high": 0.5141388447087853,
+     "t_p_two_sided": 4.0377638510478355e-09,
+     "rows": 104,
+     "writers": 7,
+     "sign_flip_p_one_sided": 0.0078125,
+     "all_writer_means_positive": true
+    },
+    "qwen2.5-7b": {
+     "estimate": 0.5,
+     "t_ci_low": 0.5,
+     "t_ci_high": 0.5,
+     "t_p_two_sided": NaN,
+     "rows": 102,
+     "writers": 7,
+     "sign_flip_p_one_sided": 0.0078125,
+     "all_writer_means_positive": true
+    }
+   },
+   "heterogeneity_model_permutation": {
+    "statistic": 0.00719992567818658,
+    "p": 1.0,
+    "permutations": 9999,
+    "models": [
+     "gemma3-4b",
+     "gpt-6.1-terra",
+     "llama3.1-8b",
+     "qwen2.5-7b"
+    ]
+   }
+  }
+ },
+ "holm_t_two_sided": {
+  "P3": 2.8399411898345327e-12,
+  "P1": 6.29630697269996e-05,
+  "P2": 0.004172527245311683
+ },
+ "holm_wild_webb_two_sided": {
+  "P3": 0,
+  "P1": 0.006900345017250863,
+  "P2": 0.011950597529876494
+ },
+ "holm_signflip_one_sided": {
+  "P3": 0.0234375,
+  "P1": 0.03125,
+  "P2": 0.03125
+ }
+}
