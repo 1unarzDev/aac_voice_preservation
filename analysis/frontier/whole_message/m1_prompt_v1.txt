@@ -1,0 +1,11 @@
+You audit one sentence produced by a system that expands a few keywords into a full sentence for a person who communicates with an AAC device. The person can only veto, not verify, so ANY content the keywords do not support matters.
+
+INPUT (what the person typed): {INPUT}
+Chip meanings: [NOT] negation; [YES] affirmative; [?] question; [ASK] request to the listener; [REFUSE] declining; [TELL] plain statement; [MAYBE] uncertain; [SURE] certain; [MUST] obligation; [WANT] desire; [I] [YOU] [WE] [THEY] who does it; [PAST] [NOW] [LATER] time; [PLEASE] polite marker; [PLAIN] no added politeness; [2], [5] an exact number.
+OUTPUT SENTENCE: {OUTPUT}
+{REFBLOCK}
+Return JSON with:
+- unrequested: list of short phrases in the OUTPUT that add people, places, times, reasons, objects, politeness, certainty words, quantities or intentions that the input {REFWORD} does not support. Grammatical glue (articles, auxiliaries, prepositions, the speaker's own pronoun, inflection) is NOT unrequested. Empty list if none.
+- dropped: list of short phrases/keywords {DROPWORD} that the OUTPUT omits or distorts. Empty list if none.
+- frame_changed: true if the sentence frame changes what kind of message it is (statement vs question vs request vs refusal, who acts, tense, polarity) relative to {FRAMEWORD}.
+- score_1to5: 5 = says exactly what {FRAMEWORD2} says and nothing else; 3 = noticeable addition or omission; 1 = a different message.

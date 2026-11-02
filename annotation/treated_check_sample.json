@@ -1,0 +1,421 @@
+{
+ "seed": 20261102,
+ "rule": "= 6 classes x 20; seeded, declared; seed 20261102). One item = ONE real output occurrence (a sentence that a\nmodel really produced in one run, family, variant and channel); the same sentence is never shown twice.\n  G1       guard repairs: outputs of prompt G1 that the guard CHANGED   (runs/guard1 discovery, runs/guard_wc W-C)\n  G1r      no-feedback retries: prompt G1r outputs that CHANGED         (runs/guard_baseline_disc, guard_baseline_wc)\n  chip1    outputs under channel chip1 (one chip)                        (runs/hw1, prompt P0, four models)\n  nlcue    outputs under channel nlcue (the cue as a plain word)         (runs/hwctl1, prompt P0, four models)\n  newmodel Qwen2.5-14B and Mistral-Nemo-12B, channels chip1 and bare     (runs/ext_hw_qwen14, runs/ext_hw_nemo)\n  gemini   gemini-3.1-flash-lite outputs                                 (runs/gem_31-flash-lite_{legend,hwctl,hw})\nFrame of a class: judged, valid outputs with a production critical label (arbiter where the judges disagreed; rows with\nan unresolved disagreement are not in the frame), of families not quarantined, minus the exclusions below.\nAllocation: 20 per class spread EQUALLY over the dimensions present in the class frame (round robin, order rotated by\nhash, capped by availability; newmodel: 10 per model); inside a dimension, units are taken in ascending\nsha1(seed | class | output_id | family | channel) order, but always from the least-used run/model/channel/prompt cell\nfirst, so the class is also spread over models and channels. The key records the stratum size and the draw size per\nclass x dimension (weight = frame size / drawn), so a class result can be re-weighted over its dimensions.\nExclusions (frame level): a sentence (normalised text, any dimension) already labelled by people in Parts 1-3/10/12/13\n(annotation/gold_key_*.csv), used in Part 19 (arbiter_check_key.csv), or shown in the sentence audits of Parts 4/11/17/18\n(Stage 4 has returned, so those keys are known); an output whose text is arm-revealing (square\nbrackets, \"keywords\", chip/guard/feedback wording, model or vendor names, assistant boilerplate); a sentence already drawn\nfor another class. Coder level (assignment): never a person who WROTE or CHECKED the pair (hw: writer_id, check_key.csv\nincl. tie-breaks) or chose the keywords of the message (same rule and code as Part 19).",
+ "annotators": [
+  "P01",
+  "P02",
+  "P03",
+  "P04",
+  "P05",
+  "P06",
+  "P07",
+  "P08",
+  "P09",
+  "P10",
+  "P11",
+  "P12",
+  "P13",
+  "P14",
+  "P15",
+  "P16",
+  "P17",
+  "P18",
+  "P19",
+  "P20"
+ ],
+ "per_item": 2,
+ "frame_sizes_after_exclusions": {
+  "G1": 288,
+  "G1r": 149,
+  "chip1": 4174,
+  "nlcue": 4011,
+  "newmodel": 3584,
+  "gemini": 519
+ },
+ "frame_exclusions": {
+  "G1": {
+   "already labelled or shown to people (Parts 1-3/4/10-13/17-19)": 215,
+   "arm-revealing text": 1
+  },
+  "G1r": {
+   "already labelled or shown to people (Parts 1-3/4/10-13/17-19)": 11
+  },
+  "chip1": {
+   "already labelled or shown to people (Parts 1-3/4/10-13/17-19)": 394,
+   "arm-revealing text": 24
+  },
+  "nlcue": {
+   "already labelled or shown to people (Parts 1-3/4/10-13/17-19)": 259,
+   "arm-revealing text": 106
+  },
+  "newmodel": {
+   "already labelled or shown to people (Parts 1-3/4/10-13/17-19)": 265,
+   "arm-revealing text": 527
+  },
+  "gemini": {
+   "same sentence twice in class": 220,
+   "already labelled or shown to people (Parts 1-3/4/10-13/17-19)": 33,
+   "arm-revealing text": 8
+  }
+ },
+ "strata": {
+  "G1": {
+   "G1|polarity": {
+    "frame_n": 6,
+    "drawn": 3
+   },
+   "G1|speech_act": {
+    "frame_n": 209,
+    "drawn": 4
+   },
+   "G1|politeness": {
+    "frame_n": 46,
+    "drawn": 3
+   },
+   "G1|certainty": {
+    "frame_n": 5,
+    "drawn": 3
+   },
+   "G1|agent": {
+    "frame_n": 14,
+    "drawn": 4
+   },
+   "G1|time_quantity": {
+    "frame_n": 8,
+    "drawn": 3
+   }
+  },
+  "G1r": {
+   "G1r|polarity": {
+    "frame_n": 1,
+    "drawn": 1
+   },
+   "G1r|speech_act": {
+    "frame_n": 108,
+    "drawn": 5
+   },
+   "G1r|politeness": {
+    "frame_n": 22,
+    "drawn": 4
+   },
+   "G1r|certainty": {
+    "frame_n": 5,
+    "drawn": 4
+   },
+   "G1r|agent": {
+    "frame_n": 8,
+    "drawn": 4
+   },
+   "G1r|time_quantity": {
+    "frame_n": 2,
+    "drawn": 2
+   }
+  },
+  "chip1": {
+   "chip1|polarity": {
+    "frame_n": 769,
+    "drawn": 3
+   },
+   "chip1|speech_act": {
+    "frame_n": 642,
+    "drawn": 4
+   },
+   "chip1|politeness": {
+    "frame_n": 606,
+    "drawn": 3
+   },
+   "chip1|certainty": {
+    "frame_n": 664,
+    "drawn": 3
+   },
+   "chip1|agent": {
+    "frame_n": 760,
+    "drawn": 4
+   },
+   "chip1|time_quantity": {
+    "frame_n": 733,
+    "drawn": 3
+   }
+  },
+  "nlcue": {
+   "nlcue|polarity": {
+    "frame_n": 728,
+    "drawn": 3
+   },
+   "nlcue|speech_act": {
+    "frame_n": 506,
+    "drawn": 4
+   },
+   "nlcue|politeness": {
+    "frame_n": 607,
+    "drawn": 3
+   },
+   "nlcue|certainty": {
+    "frame_n": 659,
+    "drawn": 3
+   },
+   "nlcue|agent": {
+    "frame_n": 766,
+    "drawn": 4
+   },
+   "nlcue|time_quantity": {
+    "frame_n": 710,
+    "drawn": 3
+   }
+  },
+  "newmodel": {
+   "ext_hw_qwen14|polarity": {
+    "frame_n": 292,
+    "drawn": 2
+   },
+   "ext_hw_qwen14|speech_act": {
+    "frame_n": 216,
+    "drawn": 2
+   },
+   "ext_hw_qwen14|politeness": {
+    "frame_n": 250,
+    "drawn": 2
+   },
+   "ext_hw_qwen14|certainty": {
+    "frame_n": 271,
+    "drawn": 1
+   },
+   "ext_hw_qwen14|agent": {
+    "frame_n": 262,
+    "drawn": 2
+   },
+   "ext_hw_qwen14|time_quantity": {
+    "frame_n": 270,
+    "drawn": 1
+   },
+   "ext_hw_nemo|polarity": {
+    "frame_n": 367,
+    "drawn": 2
+   },
+   "ext_hw_nemo|speech_act": {
+    "frame_n": 251,
+    "drawn": 2
+   },
+   "ext_hw_nemo|politeness": {
+    "frame_n": 308,
+    "drawn": 2
+   },
+   "ext_hw_nemo|certainty": {
+    "frame_n": 338,
+    "drawn": 1
+   },
+   "ext_hw_nemo|agent": {
+    "frame_n": 380,
+    "drawn": 2
+   },
+   "ext_hw_nemo|time_quantity": {
+    "frame_n": 346,
+    "drawn": 1
+   }
+  },
+  "gemini": {
+   "gemini|polarity": {
+    "frame_n": 499,
+    "drawn": 10
+   },
+   "gemini|speech_act": {
+    "frame_n": 17,
+    "drawn": 10
+   }
+  }
+ },
+ "composition": {
+  "G1": {
+   "n": 20,
+   "by_dimension": {
+    "agent": 4,
+    "certainty": 3,
+    "polarity": 3,
+    "politeness": 3,
+    "speech_act": 4,
+    "time_quantity": 3
+   },
+   "by_run": {
+    "guard1": 17,
+    "guard_wc": 3
+   },
+   "by_model": {
+    "gemma3-4b": 14,
+    "gpt-6.1-terra": 2,
+    "llama3.1-8b": 2,
+    "qwen2.5-7b": 2
+   },
+   "by_channel": {
+    "bare": 5,
+    "chip1": 6,
+    "chipall": 3,
+    "full": 1,
+    "noncrit": 5
+   },
+   "by_judge_critical_source": {
+    "agree": 20
+   }
+  },
+  "G1r": {
+   "n": 20,
+   "by_dimension": {
+    "agent": 4,
+    "certainty": 4,
+    "polarity": 1,
+    "politeness": 4,
+    "speech_act": 5,
+    "time_quantity": 2
+   },
+   "by_run": {
+    "guard_baseline_disc": 15,
+    "guard_baseline_wc": 5
+   },
+   "by_model": {
+    "gemma3-4b": 3,
+    "gpt-6.1-terra": 8,
+    "llama3.1-8b": 6,
+    "qwen2.5-7b": 3
+   },
+   "by_channel": {
+    "bare": 3,
+    "chip1": 6,
+    "chipall": 6,
+    "full": 2,
+    "noncrit": 3
+   },
+   "by_judge_critical_source": {
+    "agree": 20
+   }
+  },
+  "chip1": {
+   "n": 20,
+   "by_dimension": {
+    "agent": 4,
+    "certainty": 3,
+    "polarity": 3,
+    "politeness": 3,
+    "speech_act": 4,
+    "time_quantity": 3
+   },
+   "by_run": {
+    "hw1": 20
+   },
+   "by_model": {
+    "gemma3-4b": 5,
+    "gpt-6.1-terra": 5,
+    "llama3.1-8b": 5,
+    "qwen2.5-7b": 5
+   },
+   "by_channel": {
+    "chip1": 20
+   },
+   "by_judge_critical_source": {
+    "agree": 20
+   }
+  },
+  "nlcue": {
+   "n": 20,
+   "by_dimension": {
+    "agent": 4,
+    "certainty": 3,
+    "polarity": 3,
+    "politeness": 3,
+    "speech_act": 4,
+    "time_quantity": 3
+   },
+   "by_run": {
+    "hwctl1": 20
+   },
+   "by_model": {
+    "gemma3-4b": 5,
+    "gpt-6.1-terra": 5,
+    "llama3.1-8b": 5,
+    "qwen2.5-7b": 5
+   },
+   "by_channel": {
+    "nlcue": 20
+   },
+   "by_judge_critical_source": {
+    "agree": 20
+   }
+  },
+  "newmodel": {
+   "n": 20,
+   "by_dimension": {
+    "agent": 4,
+    "certainty": 2,
+    "polarity": 4,
+    "politeness": 4,
+    "speech_act": 4,
+    "time_quantity": 2
+   },
+   "by_run": {
+    "ext_hw_nemo": 10,
+    "ext_hw_qwen14": 10
+   },
+   "by_model": {
+    "mistral-nemo-12b": 10,
+    "qwen2.5-14b": 10
+   },
+   "by_channel": {
+    "bare": 10,
+    "chip1": 10
+   },
+   "by_judge_critical_source": {
+    "agree": 20
+   }
+  },
+  "gemini": {
+   "n": 20,
+   "by_dimension": {
+    "polarity": 10,
+    "speech_act": 10
+   },
+   "by_run": {
+    "gem_31-flash-lite_hw": 1,
+    "gem_31-flash-lite_hwctl": 12,
+    "gem_31-flash-lite_legend": 7
+   },
+   "by_model": {
+    "gemini-3.1-flash-lite": 20
+   },
+   "by_channel": {
+    "bare": 7,
+    "nlcue": 12,
+    "noncrit": 1
+   },
+   "by_judge_critical_source": {
+    "agree": 20
+   }
+  }
+ },
+ "codings": 240,
+ "items_per_person": {
+  "P01": 12,
+  "P02": 12,
+  "P03": 12,
+  "P04": 12,
+  "P05": 12,
+  "P06": 12,
+  "P07": 12,
+  "P08": 12,
+  "P09": 12,
+  "P10": 12,
+  "P11": 12,
+  "P12": 12,
+  "P13": 12,
+  "P14": 12,
+  "P15": 12,
+  "P16": 12,
+  "P17": 12,
+  "P18": 12,
+  "P19": 12,
+  "P20": 12
+ },
+ "min_max_items_per_person": [
+  12,
+  12
+ ],
+ "note": "Gemini and guard-baseline runs were still accumulating when the frame was drawn; the key stores the text, so the draw is frozen.",
+ "key_sha256": "749b13272fa07dfc151dfb082732cca0eec7ff6015f6d7e38f26d18eb55ba1d9"
+}
