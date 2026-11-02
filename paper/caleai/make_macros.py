@@ -403,7 +403,8 @@ for _pre, _f in (("ra", "repair_audit"), ("rt", "repair_audit_transfer")):
         _inp = r["input_text"].replace("Keywords: ", "")
         put(f"{_pre}_ex{_i}_in", _inp); put(f"{_pre}_ex{_i}_out", r["text"])
         put(f"{_pre}_ex{_i}_model", r.get("assigned_model", ""))
-    put(f"{_pre}_ex_echo", sum(1 for r in _bad if r["text"].startswith(("Ask you", "Tell you"))))
+    put(f"{_pre}_ex_echo", sum(1 for r in _bad[:3] if r["text"].startswith(("Ask you", "Tell you"))))  # among the three SHOWN (caption)
+    put(f"{_pre}_echo_all", sum(1 for r in _bad if r["text"].startswith(("Ask you", "Tell you"))))
 # Part 17 design constants (typed; frozen in annotation/COORDINATOR_STEPS.md section 4)
 put("p18_per_writer", 10); put("p17_texts", 120); put("p17_raters", 3); put("p17_margin", 10)
 # hw1 human-written replication
@@ -431,6 +432,68 @@ for _f, _t in (("judge_validation_elic.json", "jve"), ("judge_validation_hw.json
     _jp = ROOT / "annotation" / _f
     put(_t + "_ready", 1) if _jp.exists() else None
 
+
+# ---------------- cycle-2 additions (all read from stored files; design assumptions typed and labelled)
+import math as _m
+import re as _re
+
+
+def _newcombe(k1, n1, k0, n0, z=1.96):
+    """Newcombe hybrid-score 95% CI for p1 - p0 (the interval the audit's frozen rule names)."""
+    def wil(k, n):
+        p = k / n
+        d = 1 + z * z / n
+        c = (p + z * z / (2 * n)) / d
+        h = z * _m.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+        return c - h, c + h
+    l1, u1 = wil(k1, n1); l0, u0 = wil(k0, n0)
+    p1, p0 = k1 / n1, k0 / n0
+    return (p1 - p0, p1 - p0 - _m.sqrt((p1 - l1) ** 2 + (u0 - p0) ** 2), p1 - p0 + _m.sqrt((u1 - p1) ** 2 + (p0 - l0) ** 2))
+
+
+# pooled pilots (descriptive, post hoc; the frozen decision rule applies to the larger audit, not to this)
+_kr = _ra["per_arm"]["repaired"]["usable"]; _kc = _ra["per_arm"]["control"]["usable"]
+_tr = _rt["per_arm"]["repaired"]["usable"]; _tc = _rt["per_arm"]["control"]["usable"]
+_g, _lo, _hi = _newcombe(_kr["k"] + _tr["k"], _kr["n"] + _tr["n"], _kc["k"] + _tc["k"], _kc["n"] + _tc["n"])
+put("pp_gap", f"{100 * _g:.1f}"); put("pp_gap_lo", f"{100 * _lo:.1f}"); put("pp_gap_hi", f"{100 * _hi:.1f}")
+put("pp_rep_k", _kr["k"] + _tr["k"]); put("pp_rep_n", _kr["n"] + _tr["n"])
+put("pp_ctl_k", _kc["k"] + _tc["k"]); put("pp_ctl_n", _kc["n"] + _tc["n"])
+put("pp_rep", f"{100 * (_kr['k'] + _tr['k']) / (_kr['n'] + _tr['n']):.1f}")
+put("pp_ctl", f"{100 * (_kc['k'] + _tc['k']) / (_kc['n'] + _tc['n']):.1f}")
+# do raters agree that scored-passing repairs preserve the meaning? (all repaired items are scorer passes)
+for _pre, _f in (("ra", "repair_audit"), ("rt", "repair_audit_transfer")):
+    _rows = [r for r in _csv.DictReader((ROOT / f"analysis/{_f}/items.csv").open()) if r["arm"] == "repaired"]
+    _res = [r for r in _rows if r["cons_preserving"] in ("True", "False")]
+    kn(f"{_pre}_pres", sum(r["cons_preserving"] == "True" for r in _res), len(_res))
+# input vs target accounting for the guard display (definitions printed in the caption)
+put("g_amb_req", f"{EV['guard']['report']['cost']['inputs'] - EV['guard']['n_cue_targets']:,}")
+# page-1 examples: real stored strings, each chosen by its declared rule (see figs/make_caleai_figs.py)
+for _ex in json.loads((ROOT / "analysis/guard_wc/examples.json").read_text()):
+    if _ex["category"] == "correct-text-changed":
+        put("bx1_in", _ex["input_text"].replace("Keywords: ", "")); put("bx1_before", _ex["before"]); put("bx1_after", _ex["after"])
+        put("bx1_k", _ex["event_k"]); put("bx1_n", f"{_ex['eligible_n']:,}")
+for _x in EV["span"]["gallery"]:
+    if _x["kind"] == "loss":
+        put("bx2_in", _x["bare"]); put("bx2_before", _x["P2"]["texts"][2]); put("bx2_after", _x["I2"]["texts"][2])
+for _x in EV["guard"]["gallery"]:
+    if (_x["category"], _x["rank"]) == ("fixed", 2):
+        put("bx3_in", _x["input"].replace("Keywords: ", "")); put("bx3_before", _x["before"]); put("bx3_after", _x["after"])
+# ---- design constants for the pre-specified human-effect study (TYPED assumptions, labelled as such in the paper)
+_z = 1.96 + 0.8416                                     # two-sided 5% size, 80% power
+_pc = _kc["k"] / _kc["n"]                              # control usable rate taken from the pilot
+put("dz_ctl_assumed", f"{100 * _pc:.0f}")
+put("dz_mde", f"{100 * _z * _m.sqrt(2 * _pc * (1 - _pc) / 60):.0f}")   # detectable gap with 60 vs 60 texts (3 raters, consensus)
+_writers = {m for l in (ROOT / "data/items/hw.jsonl").read_text().splitlines()
+            for m in _re.findall(r"writer (P\d+)", json.loads(l).get("notes") or "")}
+put("hw_writers", len(_writers))
+_icc, _m_per = 0.2, 10                                 # assumed within-writer correlation; outputs judged per writer
+_neff = len(_writers) * _m_per / (1 + (_m_per - 1) * _icc)
+put("dz_icc", _icc); put("dz_p18_judg", len(_writers) * _m_per); put("dz_p18_neff", f"{_neff:.0f}")
+put("dz_p18_mde", f"{100 * _z * _m.sqrt(2 * 0.25 / _neff):.0f}")      # detectable agreement gap, worst case p = .5
+_d_mrt, _T, _rho = 0.2, 40, 0.3                        # standardized proximal effect, decision points per user, within-user correlation
+put("mrt_d", _d_mrt); put("mrt_T", _T); put("mrt_rho", _rho)
+put("mrt_msgs", f"{_m.ceil(_T / (EV['guard']['report']['cost']['flagged'] / EV['guard']['report']['cost']['inputs']))}")
+put("mrt_users", f"{_m.ceil(2 * (_z / _d_mrt) ** 2 * (1 + (_T - 1) * _rho) / _T)}")
 
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")

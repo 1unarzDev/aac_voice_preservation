@@ -214,7 +214,7 @@ def chips_part() -> dict:
         w[c] = w[c].astype(float)
     w["d_chip1_noncrit"] = w.chip1 - w.noncrit
     w["lost_with_chip"] = np.where(w.noncrit == 1, (w.chip1 == 0).astype(float), np.nan)
-    w["miss_persists"] = np.where(w.bare == 0, (w.chip1 == 0).astype(float), np.nan)
+    w["miss_persists"] = np.where(w.noncrit == 0, (w.chip1 == 0).astype(float), np.nan)  # same comparator as lost_with_chip: length-matched word
     out = {k: fb(w, k) for k in ("bare", "noncrit", "chip1", "chipall", "full", "d_chip1_noncrit",
                                   "lost_with_chip", "miss_persists")}
     out["by_model"] = {mm: {"noncrit": float(t.noncrit.mean()), "chip1": float(t.chip1.mean()), "n": int(len(t))}
