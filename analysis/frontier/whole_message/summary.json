@@ -1,0 +1,79 @@
+{
+ "gates": {
+  "a_ref_y_eq_r_pass": 0.97,
+  "a_n": 100,
+  "b_ref_other_family_fail": 1.0,
+  "b_n": 100,
+  "c_free_keywords_no_UC": 1.0,
+  "c_n": 100,
+  "c_free_keywords_WMFpass": 0.61,
+  "pass": true,
+  "pass_by_gate": {
+   "a": true,
+   "b": true,
+   "c": true
+  }
+ },
+ "decision": {
+  "s_M1ref": {
+   "holdout_auroc": 0.8876811594202898,
+   "holdout_ci": [
+    0.8118729096989966,
+    0.9633722527472527
+   ],
+   "full_chip1_delta_vs_M0": 0.3496877787689563,
+   "delta_ci": [
+    0.2907415254237288,
+    0.4107142857142857
+   ],
+   "validated": true,
+   "all200_delta_vs_M0": 0.18143695834498186,
+   "all200_delta_ci": [
+    0.14772102813659405,
+    0.21454523480431983
+   ],
+   "all200_auroc": 0.9177383282079955
+  },
+  "s_M1free": {
+   "holdout_auroc": 0.8206521739130435,
+   "holdout_ci": [
+    0.7087098133264195,
+    0.9118899835796386
+   ],
+   "full_chip1_delta_vs_M0": 0.23215878679750224,
+   "delta_ci": [
+    0.1493745404411765,
+    0.3099293697453699
+   ],
+   "validated": true,
+   "all200_delta_vs_M0": 0.030192899077439272,
+   "all200_delta_ci": [
+    -0.043156355942640445,
+    0.09867826347564139
+   ],
+   "all200_auroc": 0.7664942689404529
+  }
+ },
+ "slp_L4": {
+  "s_M0": {
+   "auroc": 0.65625,
+   "lo": 0.5816188637617209,
+   "hi": 0.7343979779411761,
+   "n_ratings": 100,
+   "n_notyes": 64
+  },
+  "s_M1free": {
+   "auroc": 0.8385416666666666,
+   "lo": 0.7413793103448276,
+   "hi": 0.9182787248004639,
+   "n_ratings": 100,
+   "n_notyes": 64
+  }
+ },
+ "n_items": 200,
+ "L1_usable": 195,
+ "seed": 20261102,
+ "B": 5000,
+ "m1_prompt_sha": "fe9af5fdb506a36f757f7600343dec77994da60c8f39714ddee7d3ebac906b9c",
+ "missing_calls": 0
+}

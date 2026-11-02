@@ -6,7 +6,7 @@ SEED = 20261102
 NEG_TOKENS = ["not", "no", "never", "n't", "none", "nothing", "without", "neither", "nor", "cannot"]
 TEMPLATES = {
     "polarity": {
-        "N": "What happened with {topic}?",
+        "N": "What about {topic}?",
         "D": "I guess {topic} worked out as planned.",
         "X": "I heard {topic} did not work out.",
         "Q": "Did {topic} happen?",
@@ -30,8 +30,8 @@ CHECKER = (
     "Reading 1: {r1}\nReading 2: {r2}\n"
     "Which reply does the partner's remark make more likely? Answer with exactly one of: 1, 2, neither."
 )
-READINGS = {"aff": "about \"{kw}\": the thing happened / is so (affirmative)",
-            "neg": "about \"{kw}\": the thing did not happen / is not so (negated)"}
+READINGS = {"aff": "the user's sentence will say that \"{kw}\" is so / happened (an affirmative sentence)",
+            "neg": "the user's sentence will say that \"{kw}\" is not so / did not happen (a negated sentence)"}
 
 def sha():
     return hashlib.sha256(json.dumps([TEMPLATES, INSTRUCTION, RETRY_SUFFIX, CHECKER, READINGS, NEG_TOKENS], sort_keys=True).encode()).hexdigest()

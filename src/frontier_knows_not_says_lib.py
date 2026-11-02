@@ -81,7 +81,7 @@ def r1_class(ratio_samples, lo_eq=0.67, hi_eq=1.5, lo_mis=0.5, hi_mis=2.0, level
     """90% CI of the ratio sampled-share/target. calibrated: CI inside [lo_eq,hi_eq]; miscalibrated: CI wholly outside [lo_mis,hi_mis]
     (below or above); else inconclusive."""
     r = np.asarray(ratio_samples, float); r = np.where(np.isfinite(r), r, np.inf)   # share / 0 posterior -> inf
-    a = (100 - level) / 2; lo, hi = np.percentile(r, [a, 100 - a])
+    a = (100 - level) / 2; lo, hi = np.percentile(r, [a, 100 - a], method='nearest')
     if lo >= lo_eq and hi <= hi_eq: c = "calibrated"
     elif hi < lo_mis: c = "overconfident (default too strong)"
     elif lo > hi_mis: c = "underconfident (default too weak)"
@@ -230,3 +230,32 @@ def contraction_toggle(sent: str):
 
 
 def drop_final_period(sent: str): return sent[:-1] if sent.endswith(".") else None
+
+
+# ---------------------------------------------------------------------------------------------- units (replicates the T2 frame, src/robust_t2_posterior.py)
+def build_units(exclude_items=()):
+    """One row per (message, keyword channel): E-human = 3 human keyword sets per message, E-cap4 = POS-cap4. Source labels = detector labels,
+    HT weight w = 1 / inclusion probability (message level). `input` is the exact string the model receives after the prompt template."""
+    import json
+    from pathlib import Path
+    ROOT = Path(__file__).resolve().parent.parent
+    msg = pd.read_csv(ROOT / "analysis/elicitation/messages.csv"); rat = pd.read_csv(ROOT / "analysis/elicitation/ratings.csv")
+    key = {j["item_id"]: j for j in map(json.loads, open(ROOT / "annotation/elicitation_key.jsonl"))}
+    elic = {(e["family_id"], ch): v["input"] for e in map(json.loads, open(ROOT / "data/items/elic.jsonl"))
+            for ch, v in e["custom_channels"]["A"].items()}
+    msg["neg"] = [key[i]["detector_labels"]["polarity"] == "negated" for i in msg.item_id]
+    msg["polite"] = [key[i]["detector_labels"]["politeness"] != "none" for i in msg.item_id]
+    msg["nonstmt"] = [key[i]["detector_labels"]["speech_act"] != "statement" for i in msg.item_id]
+    msg["w"] = 1 / msg.inclusion_prob; msg["fam"] = "elic-" + msg.source_id; mi = msg.set_index("item_id"); rows = []
+    for r in rat.itertuples():
+        m = mi.loc[r.item_id]; ch = "human_" + r.annotator
+        rows.append(dict(item_id=r.item_id, fam=m.fam, channel=ch, dataset="human", kw=str(r.keywords), neg=m.neg, polite=m.polite, nonstmt=m.nonstmt,
+                         lost_act=r.speech_act_lenient_lost, w=m.w, sample=m["sample"], input=elic[(m.fam, ch)]))
+    for m in msg.itertuples():
+        rows.append(dict(item_id=m.item_id, fam=m.fam, channel="pos_cap4", dataset="cap4", kw=str(m.pos_cap4), neg=m.neg, polite=m.polite, nonstmt=m.nonstmt,
+                         lost_act=m.speech_act_lenient_pos_loss, w=m.w, sample=m.sample, input=elic[(m.fam, "pos_cap4")]))
+    U = pd.DataFrame(rows); U = U[~U.item_id.isin(set(exclude_items))].reset_index(drop=True)
+    U["kw_neg"] = U.kw.str.contains(NEG); U["kw_pol"] = U.kw.str.contains(POL); U["kw_act"] = U.kw.str.contains(ACT)
+    U["nocue_neg"] = ~U.kw_neg; U["nocue_pol"] = ~U.kw_pol
+    U["nocue_act"] = np.where(U.nonstmt, U.lost_act.fillna(1).astype(bool), ~U.kw_act)
+    return U

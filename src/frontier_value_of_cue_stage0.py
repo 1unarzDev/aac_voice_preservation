@@ -99,10 +99,15 @@ def perdim_policy(P, wv, q=Q, rho=RHO, Yr=Y):
             eff = np.where(a_a, rho[d], np.where(a_s, q, 0)); res += wv[d] * Yr[:, d] * (1 - eff); T[li] += np.where(a_a, 2, np.where(a_s, 1, 0))
         L[li] = res
     return T, L
+_CACHE = {}
 def at_budget(Tm, Gm, wb, B):
-    """interpolated gain per 1000 at tap budget B; Tm,Gm [L,n]; wb weights [n]"""
-    s = wb.sum(); t = 1000 * (Tm @ wb) / s; g = 1000 * (Gm @ wb) / s
-    o = np.argsort(t); t, g = t[o], g[o]; g = np.maximum.accumulate(g); return np.interp(B, t, g)
+    """interpolated gain per 1000 at tap budget B; Tm,Gm [L,n]; wb weights [n] (curve cached per (policy matrices, weights))"""
+    key = (id(Tm), id(Gm), id(wb))
+    if key not in _CACHE:
+        if len(_CACHE) > 64: _CACHE.clear()
+        s = wb.sum(); t = 1000 * (Tm @ wb) / s; g = 1000 * (Gm @ wb) / s
+        o = np.argsort(t); _CACHE[key] = (t[o], np.maximum.accumulate(g[o]), wb)   # keep wb alive so ids are not reused
+    t, g, _ = _CACHE[key]; return np.interp(B, t, g)
 def frac_acted(Tm, wb, B):
     s = wb.sum(); t = 1000 * (Tm @ wb) / s; sh = ((Tm > 0) @ wb) / s; o = np.argsort(t); return np.interp(B, t[o], sh[o])
 
@@ -199,7 +204,7 @@ def sens_row(tag, wv, q=Q, rho=RHO, Yr=Y, P=None, nb=300):
 for k, v in wvec_variants.items(): sens_row(f"weights={k}", v)
 for q in (0.7, 1.0): sens_row(f"q={q}", WV, q=q)
 sens_row("rho=1", WV, rho=np.ones(5))
-Ysp = np.stack([U[f"r_{d}"] + 0.5 * U[f"s_{d}"] for d in DIMS], 1); Ysp2 = np.stack([U[f"r_{d}"] + 2 * U[f"s_{d}"] for d in DIMS], 1)
+Ysp = np.stack([U[f"r_{d}"].fillna(0) + 0.5 * U[f"s_{d}"].fillna(0) for d in DIMS], 1); Ysp2 = np.stack([U[f"r_{d}"].fillna(0) + 2 * U[f"s_{d}"].fillna(0) for d in DIMS], 1)
 # spurious reweighting changes the outcome the policy is scored on (model refit not repeated: same P_K)
 sens_row("spurious x0.5 (scored)", WV, Yr=np.clip(Ysp, 0, 2)); sens_row("spurious x2 (scored)", WV, Yr=np.clip(Ysp2, 0, 2))
 for m in MODELS:
