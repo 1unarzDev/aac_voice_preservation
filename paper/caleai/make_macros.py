@@ -600,6 +600,18 @@ put("lg_n_models", len(_lg["per_model_class_d1"]))
 assert _lg["unresolved_valid_rows"] == 0 and all(v["cls"] == "not_artifact" for m in _lg["per_model_class_d1"].values() for v in m.values())
 assert min(_lg["pooled_d1"][_a]["aff"] for _a in ("b_nolegend", "c_markers_missing")) >= 0.9
 
+# ---- cycle 7: chip controls (C52-C53)
+_CC = json.loads((ROOT / "analysis/chip_controls/summary.json").read_text())
+_cd = _CC["decision_by_dimension"]
+assert _CC["unresolved_valid_ctl_rows"] == 0
+put("cc_irrel_min", f"{100 * min(v['chip1_minus_irrel'] for v in _cd.values()):.1f}")
+put("cc_irrel_max", f"{100 * max(v['chip1_minus_irrel'] for v in _cd.values()):.1f}")
+put("cc_nl_act", f"{-100 * _cd['speech_act']['chip1_minus_nlcue']:.1f}")
+_near = [k for k, v in _cd.items() if abs(v["chip1_minus_nlcue"]) < 0.05]
+assert "speech_act" not in _near
+put("cc_nl_near", len(_near)); put("cc_nl_dims", len(_cd))
+put("cc_nl_near_max", f"{100 * max(abs(_cd[k]['chip1_minus_nlcue']) for k in _near):.1f}")
+
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
     return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus

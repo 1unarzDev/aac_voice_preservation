@@ -1454,6 +1454,24 @@ from c3_exports import macros as c3_macros
 for _key, _value in c3_macros().items():
     put(_key, _value, "analysis/evidence_c3/current.json (C35/C36; populations separate)", "raw")
 
+# cycle 7: chip controls (C52-C53): irrelevant chip and plain-word cue
+_CC = "analysis/chip_controls/summary.json"
+_cc = json.load(open(ROOT / _CC))
+_d = _cc["decision_by_dimension"]
+assert _cc["unresolved_valid_ctl_rows"] == 0
+put("cc_irrel_min", min(v["chip1_minus_irrel"] for v in _d.values()), _CC, "f1x")
+put("cc_irrel_max", max(v["chip1_minus_irrel"] for v in _d.values()), _CC, "f1x")
+put("cc_irrel_lo_min", min(v["irrel_ci"][0] for v in _d.values()), _CC, "f1x")
+put("cc_nl_act", -_d["speech_act"]["chip1_minus_nlcue"], _CC, "f1x")
+put("cc_nl_act_lo", -_d["speech_act"]["nl_ci"][1], _CC, "f1x")
+put("cc_nl_act_hi", -_d["speech_act"]["nl_ci"][0], _CC, "f1x")
+_near = [k for k, v in _d.items() if abs(v["chip1_minus_nlcue"]) < 0.05]
+assert "speech_act" not in _near
+put("cc_nl_near", len(_near), _CC, "int")
+put("cc_nl_dims", len(_d), _CC, "int")
+put("cc_nl_near_max", max(abs(_d[k]["chip1_minus_nlcue"]) for k in _near), _CC, "f1x")
+
+
 def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()[:12]
 

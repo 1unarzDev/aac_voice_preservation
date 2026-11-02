@@ -64,7 +64,7 @@ We built a test harness and tested its oracle with seeded mutants, identity chec
 On real outputs it caught \kof{orr_j_mut} seeded mutants with \kof{orr_j_fa} false alarms.
 On natural outputs labelled by human coders, in two sets not used to build it, its violation verdicts have \pct{nat_ho_viol_p} precision \cip{nat_ho_viol_p} and \pct{nat_ho_viol_r} recall.
 Two defects in our own harness, each traced to a regression test, show why such tests matter: a relaxed rule let the oracle accept a changed sentence, and an input-builder bug showed models chips that contradicted the source.
-With the harness, human-written pairs show that four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and that a one-tap speech-act chip raises the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp.
+With the harness, human-written pairs show that four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and that supplying the missing speech-act cue, as a one-tap chip or a plain word, raises the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp.
 The harness, tests and stored outputs are released.
 \end{abstract}
 
@@ -118,6 +118,7 @@ A \emph{family} is a minimal pair of source messages that share content words an
 Each variant is rendered through five \emph{channels}, which say how much of the message the user supplied: \emph{bare} keywords; \emph{+word}, which adds one noncritical content word; \emph{+chip}, which adds the critical value as a chip such as \chip{NOT}; \emph{+all}, with every chip the variant needs; and \emph{full}, the source sentence itself.
 Every variant needs at least one chip, so the unmarked reading gets a counter-chip (e.g., \chip{PLAIN}).
 A chip is a \emph{probe} of whether supplied information is used, not a proposed interface: its real cost depends on the access method (a dwell, a menu traversal, a grid button), and it adds a vocabulary to learn and an error-recovery path.
+The tested lever is the missing cue; the chip is one encoding of it, and two controls (Sec.~\ref{sec:results}) score an irrelevant chip and a plain word.
 
 \paragraph*{Requirements}
 For output $y$ from input $x$, let $L_d(y)$ be the extracted value on dimension $d$ and $C(x)$ the commitments that $x$ carries.
@@ -211,6 +212,7 @@ The chip table in \texttt{src/labels.py} gets \RES{ec_new_entry_lines} new entry
 The verdict code (\texttt{src/attribute.py}, \RES{ec_loc_attribute} lines) and the R5 validator (\texttt{src/validate\_cue\_inputs.py}, \RES{ec_loc_validator} lines) both read that table, so neither changes.
 In a dry run (\texttt{extend\_cost.py}) the validator then marks \kw{Keywords: [THANKS] extra pillow} compatible with a thanks/apology source and conflicting with a plain one, and re-scoring all \RES{ec_rescored_rows} stored human-written-pair output rows took \RES{ec_rescore_seconds}\,s with \RES{ec_model_calls} model calls.
 A new dimension, not just a new chip, also needs a codebook option and an extractor question, which means new extractor calls; we did not measure that cost.
+A new input encoding is likewise one more channel: the plain-word control above was added as a channel and re-scored with the same critical-match metric, with no change to the verdict code.
 A codebook change works the same way: recoding \say{Can you\ldots?} from request to question re-scored \RES{cb_nchanged_wc} stored confirmation-set rows with no model calls (\S\ref{sec:results}), because verdicts are computed in code.
 No developer other than the authors has used the harness; the new-chip cost above is the authors' own.
 Regenerating outputs needs the API models, whose versions may be retired and whose outputs are not bit-reproducible.
@@ -242,8 +244,13 @@ The effects are heterogeneous across models for the act chip (Llama \RES{t6p1_ll
 We claim direction and consistency, not interval width.
 The chip gain is positive on all six dimensions, between \RES{hw_gain_min} and \RES{hw_gain_max}\,pp, with every percentile-bootstrap lower bound above \RES{hw_gain_lo_min}\,pp; the writer-level $t$ interval for the speech-act chip in Table~\ref{tab:primary} is wider, with lower bound \RES{t6p1_tlo}\,pp.
 Collapsing near-duplicate pairs, excluding one writer, reversing the arbiter's judgment calls or using all candidates flips no decision; the largest shift is \RES{hw_shift_max}\,pp (\RES{hw_shift_all}\,pp with all candidates).
-Because the chip text enters the model's prompt, Act-chip gain and Affirmative default are close to manipulation checks of whether the harness separates supplied from missing information, which is their purpose.
-They bound what a chip can do rather than show how often systems fail.
+Because the cue text enters the model's prompt, Act-chip gain and Affirmative default are close to manipulation checks of whether the harness separates supplied from missing information, which is their purpose.
+They bound what a supplied cue can do rather than show how often systems fail.
+\paragraph*{Controls: the cue, not the chip}
+Two controls on the human-written pairs (\texttt{analysis/chip\_controls/}) show that restoring the missing cue is what fixes the default.
+An irrelevant chip, from another dimension and true of both sources, adds little to the critical value; the cue chip beats it by \RES{cc_irrel_min} to \RES{cc_irrel_max}\,pp by dimension, which rules out \say{any added chip helps}.
+The same cue written as a plain word (\kw{not}, \kw{please}) is within \RES{cc_nl_near_max}\,pp of the chip on \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions and beats it on speech act by \RES{cc_nl_act}\,pp.
+An AAC system can therefore surface the cue as an ordinary word with no new interface vocabulary, and the chip is the probe we used rather than a requirement.
 The politeness figures use two readings, named once: \emph{added} is the share of plain sources that gained a marker, \emph{removed} is the share of polite sources that lost one, and \emph{net} is added minus removed.
 
 \begin{table}[t]
@@ -519,7 +526,7 @@ Selection counts omit reading, navigation and fatigue~\cite{frisch2026complicate
 An oracle for meaning preservation is software and needs tests of its own.
 Ours caught a repair that hid real substitutions and a builder that supplied the wrong chip, and its labels agree with trained human coders on two sets of outputs.
 With it, human-written pairs show that bare keywords leave a default reading and that some models change typed text.
-They also show that a supplied speech-act chip helps but is not always kept.
+They also show that a supplied speech-act cue helps, as a chip or as a plain word, but is not always kept.
 Families, requirements, harness, oracle tests, stored outputs and analysis code are available at \url{https://github.com/1unarzDev/aac_voice_preservation}.
 
 \section*{Ethics and Positionality}

@@ -102,7 +102,7 @@ On \RES{gt_fam} fresh speech-act families the guard raises the pass rate (joint 
 Its feedback beats plain retrying by +\RES{bw_gr} points [\RES{bw_gr_lo}, \RES{bw_gr_hi}] (guard at temperature 0, resampling at 0.7).
 The ledger shows what a gain-only report hides: the repair rate fell from \RES{g_fix}\% in development, \RES{gt_res_g1}\% of targets still fail, and in a 40-text pilot repairs were usable in \RES{ra_rep}\% of resolved items against \RES{ra_ctl}\% for controls.
 \slotAuditAbs{} % PART17
-Models commit to the affirmative reading in \RES{lg_c}\% of committed answers even when told not to assume, so their rare errors are silent reversals.
+Models commit to the affirmative reading in \RES{lg_c}\% of committed answers even when told not to assume, so their rare errors are silent reversals; supplying the missing cue, as a chip or a plain word, restores the value.
 The ledger yields falsifiable predictions and a pre-specified human-effect design.
 \end{abstract}
 
@@ -179,7 +179,7 @@ LLM judges~\cite{zheng2023judging} can agree with each other more than with peop
 \toprule
 \multicolumn{4}{@{}l}{\textbf{Glossary}}\\
 \midrule
-\emph{Family} & Two source sentences differing on one critical dimension, with the same bare keywords & \emph{Cue, chip} & One tap that adds a commitment, such as \chip{NOT}, \chip{?}, \chip{PLAIN}\\
+\emph{Family} & Two source sentences differing on one critical dimension, with the same bare keywords & \emph{Cue, chip} & A commitment the user adds, as one tap such as \chip{NOT}, \chip{?}, \chip{PLAIN}, or as a plain word\\
 \emph{Critical dimension} & Polarity, agent, certainty, speech act (ask, tell, request), politeness, time/quantity & \emph{Input conditions} & Keywords only; keywords plus a length-matched neutral word; plus the critical cue; plus all cues; the typed sentence (``typed input'', the full channel)\\
 \emph{Pass} (joint pass) & Keeps the critical value and every other scored supplied predicate; the headline metric & \emph{First pass} & The model's single greedy sentence, before any intervention\\
 \emph{Strict-check pass} & Keeps the critical value, contradicts no supplied dimension, adds no politeness; a failure is a \emph{strict-check failure}, and \emph{repair rate} is the share of these that the intervention fixes & \emph{Strip-only} & Free baseline: delete an unrequested \say{please}, \say{pls} or \say{plz} (no model call)\\
@@ -227,12 +227,11 @@ The strip-only baseline covers one failure type (an added \say{please}); it is a
 
 \paragraph{The menu (secondary; keywords only).}
 Starting from a baseline menu of three suggestions, the complete menu keeps the top suggestion and, for polarity then certainty, rewrites the third (then second) slot into a missing reading with one model call, checked by the monitor with one feedback retry.
-It was chosen over a variant on a 12-family pilot before the test run.
 
 \paragraph{The cue (secondary; user side).}
 The user adds one commitment cue, such as \chip{NOT}, \chip{MAYBE}, \chip{?} or \chip{PLAIN}.
-We treat it as a \emph{probe} of whether information the user supplies is used, not as a proposed interface.
-Its real cost depends on the access method (one dwell in eye gaze, a menu traversal in scanning, a fixed button in a symbol grid), and it adds a vocabulary to learn, a decision for every message, and a risk that cues are copied literally into the output; none of these is measured here.
+We treat the chip as a \emph{probe} of whether information the user supplies is used, not as a proposed interface; the lever is the missing cue, which a plain word can also supply (Sec.~\ref{sec:realistic}).
+The chip's real cost depends on the access method (a dwell, a menu traversal, a grid button), and it adds a decision for every message and a risk that cues are copied literally into the output; none of these is measured here.
 
 %% =====================================================================
 \section{Evaluation Design}
@@ -418,15 +417,19 @@ Cue & Critical value kept: \RES{c_noncrit}\% to \RES{c_chip1}\% (\RES{c_ratio}\%
 \caption{Two secondary ledger rows. Menu rows use development keyword-only sets; the politeness and speech-act sets are different families from the gain.}
 \label{tab:secondary}
 \end{table}
-Both rows show the pattern of the guard: a gain in one place, a cost or a failed clause in another.
 The complete menu raises coverage of both polarity or certainty readings, but on other dimensions it removes the polite option: for \kw{knock come}, \say{Please knock before you come in.} became \say{Don't knock before you come in.} (Figure~\ref{fig:examples}).
 A menu prompt that asks for different meanings also departs from a value the input already fixes (\RES{app_full_p2}\% of baseline menus against \RES{app_full_s3}\% of sample sets for typed input), so a menu belongs on dimensions the input leaves open.
 The cue's gain over the length-matched word replicates on \RES{wc_act_fam} fresh speech-act families (\RES{t4_wc_base} points, or \RES{t4_wc_alt} [\RES{t4_wc_alt_lo}, \RES{t4_wc_alt_hi}] if \say{Can you\ldots?} counts as a question), but one cue reaches \RES{wc_act_ratio}\% of typed input, below its 80\% line, and question cues fail most visibly: \kw{\chip{?} parcel signature} became \say{Can you sign for this parcel?}.
 \slotLegend{} % LEGEND_TEST
 
 \subsection{Realistic-input checks}
+\label{sec:realistic}
 Constructed families may not look like what people write, so we ran the pipeline on \RES{hw_kept} minimal pairs written by \RES{hw_writers} non-author annotators and on keywords that \RES{el_annot} annotators typed for \RES{el_msgs} AACText messages.
 On the human-written pairs the cue gain replicates on all \RES{hw_chip_dims} dimensions (\RES{hw_chip_min} to \RES{hw_chip_max} points), and the three confirmation contrasts replicate in direction: speech-act cue +\RES{t6_p1} points, politeness addition +\RES{t6_p2}, and a bare affirmative default of \RES{hw_p3}\% \ci{hw_p3}.
+Two controls on these pairs show that the missing cue, not the chip, is the lever.
+An irrelevant chip from another dimension adds little: the cue chip beats it by \RES{cc_irrel_min} to \RES{cc_irrel_max} points by dimension, which rules out \say{any added chip helps}.
+The same cue as a plain word (\kw{not}, \kw{please}) is within \RES{cc_nl_near_max} points of the chip on \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions and beats it on speech act by \RES{cc_nl_act} points.
+Any AAC system can surface the cue as an ordinary word, so the chip's vocabulary-learning cost is avoidable.
 With \RES{hw_wr_min}--\RES{hw_wr_max} writers per contrast we claim direction and consistency: every writer's mean has the same sign, and writer-level intervals are [\RES{t6_p1_lo}, \RES{t6_p1_hi}] and [\RES{t6_p2_lo}, \RES{t6_p2_hi}] points for the first two (exact sign-flip one-sided $p=\RES{t6_p1_rp}$, \RES{t6_p2_rp} and \RES{t6_p3_rp}; smallest attainable \RES{t6_minp}); the replication is exploratory.
 In the keyword study about one keyword set in five lost the negation (\RES{el_pol_h}\% \ci{el_pol_h}; \RES{t2_d_h}\% [\RES{t2_d_h_lo}, \RES{t2_d_h_hi}] after resampling messages and reweighting to the sampling frame), on cue-enriched messages that carry a negation; a rule-based four-word compressor lost it \RES{el_pol_c}\% of the time, and people lost the polite cue more often (\RES{el_pt_h}\%) than the compressor (\RES{el_pt_c}\%).
 
@@ -483,8 +486,7 @@ All annotators were adult non-authors recruited from the authors' university pee
 
 \section{Conclusion}
 On fresh speech-act confirmation families the guard raises the pass rate by +\RES{gt_jgain_g1} points, repairs \RES{gt_rep_g1}\% of strict-check failures with \RES{gt_pf_g1_k} strict-check pass-to-fail changes, and its feedback beats resampling (+\RES{bw_tr} points at matched temperature).
-The ledger places beside that gain what a gain-only report omits: deletion alone earns +\RES{gt_jgain_g1s} of the +\RES{gt_jgain_g1} points, the repair rate fell from development to confirmation, scored passes can be fragments, a pilot points to a usability cost which the frozen-rule audit will test, and a default right on average still reverses meaning silently at a rate accuracy cannot show.
-The menu and the cue show the same pattern: a gain in one place, a loss or a failed clause in another.
+The ledger places beside that gain what a gain-only report omits: deletion alone earns +\RES{gt_jgain_g1s} of the +\RES{gt_jgain_g1} points, the repair rate fell from development to confirmation, scored passes can be fragments, a pilot points to a usability cost which the frozen-rule audit will test, and a default right on average still reverses meaning silently at a rate accuracy cannot show; a plain word restores the missing cue as well as a chip does.
 The pre-specified study turns these offline findings into predictions that people, above all people who use AAC, can confirm or falsify.
 Analysis code, stored outputs and scripts that rebuild every number and figure accompany the submission as anonymized supplementary material. % VERIFY: attach the anonymized archive before submission
 
