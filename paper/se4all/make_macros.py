@@ -1407,6 +1407,30 @@ assert sorted(m_["op"] for m_ in _miss) == ["speech_act_to_question", "time_shif
 put("orr_nboost", _or["booster_only"]["n_mut"], _OR, "int")
 put("orr_nmiss", len(_miss), _OR, "int")
 
+# ---- cycle 5: oracle precision/recall on natural (unseeded) outputs vs human-consensus verdicts
+_NP = "analysis/oracle_natural/summary.json"
+_np = json.load(open(ROOT / _NP))
+for _vn, _tag in (("violation", "viol"), ("preservation_failure", "pres")):
+    _pl = _np["pooled_failure_sets"][_vn]
+    for _m_, _mk in (("precision", "p"), ("recall", "r")):
+        put(f"nat_{_tag}_{_mk}", _pl[_m_], _NP, "pct")
+        put(f"nat_{_tag}_{_mk}_lo", _pl[_m_ + "_ci"][0], _NP, "pct")
+        put(f"nat_{_tag}_{_mk}_hi", _pl[_m_ + "_ci"][1], _NP, "pct")
+    put("nat_%s_f1" % _tag, _pl["f1"], _NP, "pct")
+    put("nat_%s_npos" % _tag, _pl["n_ref_pos"], _NP, "int")
+    for _m_, _mk in (("precision", "p"), ("recall", "r")):
+        _vals = [_np["sets"][k_][_vn][_m_] for k_ in ("main1", "new", "hw")]
+        put(f"nat_{_tag}_{_mk}_setmin", min(_vals), _NP, "pct")
+        put(f"nat_{_tag}_{_mk}_setmax", max(_vals), _NP, "pct")
+    put(f"nat_{_tag}_posmin", min(_np["sets"][k_][_vn]["n_ref_pos"] for k_ in ("main1", "new", "hw")), _NP, "int")
+    put(f"nat_{_tag}_posmax", max(_np["sets"][k_][_vn]["n_ref_pos"] for k_ in ("main1", "new", "hw")), _NP, "int")
+_ea = _np["sets"]["elic"]["assumption"]
+put("nat_elic_p", _ea["precision"], _NP, "pct")
+put("nat_elic_r", _ea["recall"], _NP, "pct")
+put("nat_elic_n", _ea["n_units"], _NP, "int")
+put("nat_nsets", 4, _NP, "int")
+put("nat_nunits_viol", sum(_np["sets"][k_]["violation"]["n_units"] for k_ in ("main1", "new", "hw")), _NP, "int")
+
 # ------------------------------------------------------------------ write ---
 from c3_exports import macros as c3_macros
 for _key, _value in c3_macros().items():

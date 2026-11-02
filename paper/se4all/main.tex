@@ -58,14 +58,15 @@ nicholasicheng6@gmail.com}}
 \maketitle
 
 \begin{abstract}
-When a language model expands a few AAC keywords into a sentence, \kw{supervisor read} can lose a \say{not}. Catching that needs a test oracle, an automated checker that is itself software and can be wrong.
-We built a test harness and tested its oracle by mutation.
-Two defects in our harness, each traced to a regression test, show why: relaxing a rule to remove a false alarm made the oracle accept a changed sentence (the relaxed rule detected only \kof{or_acc_mut_det} acceptance mutants), and an input-builder bug showed models chips that contradicted the source in \RES{wb_conflicts} of \RES{wb_msgs_restored} inputs.
-On real model outputs the oracle caught \kof{orr_j_mut} seeded mutants with \kof{orr_j_fa} false alarms, against \kof{orr_o_mut} for string overlap with \kof{orr_o_fa} false alarms; a near-circular surface lexicon matched its detection but not its false alarms.
-Its labels agree with human coders ($\kappa=\RES{jve_kappa}$, $\RES{jvh_kappa}$ on two output sets).
-On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare keywords as affirmative in \pct{hwaff} of outputs, and a prompt legend does not change this.
-A one-tap speech-act chip raised the intended speech act by \RES{hwp1}\,pp, positive for every writer, and the harness locates the remaining gap (\pct{wcm_act_chip1} kept on the confirmation set) for the next fix.
-The harness, oracle tests and stored outputs are released so that others can check meaning preservation before deployment; evaluation with AAC users is the next step.
+When a language model expands a few AAC keywords into a sentence, \kw{supervisor read} can lose a \say{not}, and the person's words are then spoken as theirs.
+Catching that needs a test oracle, an automated checker that is itself software and can be wrong.
+We built a test harness and tested its oracle three ways.
+On faults nobody seeded, in natural model outputs labelled by human coders, the oracle reaches \pct{nat_viol_p} precision and \pct{nat_viol_r} recall for violations (\pct{nat_pres_p} and \pct{nat_pres_r} for preservation failures).
+On real outputs with seeded mutants it caught \kof{orr_j_mut} with \kof{orr_j_fa} false alarms, where string overlap caught \pct{orr_o_mut}.
+Two defects in our own harness, each traced to a regression test, show why such tests matter: a relaxed rule let the oracle accept a changed sentence, and an input-builder bug showed models chips that contradicted the source.
+On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and a prompt legend does not change this.
+A one-tap speech-act chip raised the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp, however \say{Can you\ldots?} is coded, positive for every writer, and the harness locates the remaining gap for the next fix.
+The harness, oracle tests and stored outputs are released so that others can check meaning preservation before deployment.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -81,7 +82,7 @@ Typing \kw{supervisor read} might mean \say{The supervisor read} or \say{The sup
 Whether the model erred depends on what the user supplied, and a text-similarity score cannot know that.
 Symbol- and grid-based AAC is out of scope.
 
-\begin{figure}[t]
+\begin{figure}[b]
   \centering
   \footnotesize
   \begin{minipage}{\columnwidth}
@@ -212,7 +213,7 @@ The verdict code (\texttt{src/attribute.py}, \RES{ec_loc_attribute} lines) and t
 In a dry run (\texttt{extend\_cost.py}) the validator then marks \kw{Keywords: [THANKS] extra pillow} compatible with a thanks/apology source and conflicting with a plain one, and re-scoring all \RES{ec_rescored_rows} stored human-written-pair output rows took \RES{ec_rescore_seconds}\,s with \RES{ec_model_calls} model calls.
 A new dimension, not just a new chip, also needs a codebook option and an extractor question, which means new extractor calls; we did not measure that cost.
 A codebook change works the same way: recoding \say{Can you\ldots?} from request to question re-scored \RES{cb_nchanged_wc} stored confirmation-set rows with no model calls (\S\ref{sec:results}), because verdicts are computed in code.
-No developer other than the authors has used the harness.
+No developer other than the authors has used the harness; the new-chip cost above is the authors' own.
 Regenerating outputs needs the API models, whose versions may be retired and whose outputs are not bit-reproducible.
 
 \paragraph*{Evidence sets}
@@ -233,7 +234,6 @@ Table~\ref{tab:primary} gives three contrasts.
 \emph{Act-chip gain} is the speech-act chip minus a length-matched word.
 \emph{Net politeness addition} is politeness added to plain typed sentences minus politeness removed from polite ones.
 \emph{Affirmative default} is the share of bare polarity outputs that are affirmative.
-The plan called them P1--P3 (unrelated to prompts).
 They were pre-specified for the confirmation set; on the human-written pairs they are an exploratory replication and were not preregistered.
 Each rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers, so a percentile bootstrap cannot give a $p$ below its resampling floor and its intervals are probably too narrow.
 We therefore recomputed inference at the writer level.
@@ -397,10 +397,10 @@ It is an inventory of what happened in this project, not a seeded-fault sweep, s
     Defect class & Identity & Scoped mutants & Keyed challenge & R5 validator & Human gate\\
     \midrule
     Over-strict acceptance rule: a verbatim source fails & caught (\RES{id_fail_raw}/\RES{id_n}) & -- & missed (\kof{or_new_ctrl_fa_raw} control false alarms) & -- & --\\
-    Over-relaxed acceptance rule: a statement substitution passes & missed (\kof{or_identity_fa} false alarms) & missed (\kof{or_mut_det} detected, but its acceptance mutants were refusals) & caught (\kof{or_acc_mut_det} vs.\ \kof{or_new_mut_det_raw} without the relaxation) & -- & --\\
+    Over-relaxed acceptance rule: a statement substitution passes & missed (\kof{or_identity_fa} false alarms) & missed (\kof{or_mut_det} detected, but its acceptance mutants were refusals) & caught (\kof{or_acc_mut_det} acceptance mutants under the production rule vs.\ all \kof{or_new_mut_det_raw} under the strict rule) & -- & --\\
     Builder shows a chip that contradicts the source & -- & -- & -- & caught (\RES{r5_rej}/\RES{r5_conf}) & --\\
-    Extractor error shared by machine coders (\say{I can't wait} read as negated) & -- & -- & caught (round-1 labels match the key in \kof{or_r1_label_ok}; the misses include this sentence) & -- & caught (both human coders as keyed)\\
-    Extractor insensitive to a one-value edit & -- & none found (\kof{or_mut_det}) & none found (\kof{or_new_mut_det_raw}, raw rule) & -- & --\\
+    Extractor error shared by machine coders (\say{I can't wait} read as negated) & -- & -- & caught (round-1 extractor labels equal the key on \kof{or_r1_label_ok} items; the misses include this sentence) & -- & caught (both human coders as keyed)\\
+    Extractor insensitive to a one-value edit & -- & none found (\kof{or_mut_det}) & none found (\kof{or_new_mut_det_raw}, strict rule) & -- & --\\
     \bottomrule
   \end{tabularx}
 \end{table*}
@@ -408,7 +408,8 @@ It is an inventory of what happened in this project, not a seeded-fault sweep, s
 \paragraph*{Mutation and identity evidence}
 Table~\ref{tab:oracle} lists the evidence, first on authored inputs.
 The keyed challenge set has four groups of six controls and six one-feature mutants.
-Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) passes when pooled, with no slack; we read 22/24 as passing a floor, not as evidence of high sensitivity (Wilson interval \cip{or_new_mut_det}).
+Its pre-specified gate tolerates at most two missed mutants and one false alarm among 24 each.
+Under the production rule, which carries the acceptance relaxation of Defect A, the oracle detected \kof{or_new_mut_det} mutants (Wilson interval \cip{or_new_mut_det}) and raised \kof{or_new_ctrl_fa} false alarms, so it passes with the relaxation's two misses using the whole miss tolerance; the strict rule without the relaxation detected \kof{or_new_mut_det_raw}.
 
 \begin{table}[t]
   \caption{Oracle evidence. Mutation and identity checks are on authored sentences or, in the real-output rows, on rule-seeded edits of stored outputs (Wilson 95\% intervals); neither is an error rate on unedited outputs. Human rows compare extractor labels with the plurality of trained human coders; items whose human labels have no determinate critical value (all coders unsure, or a tied plurality) are excluded.}
@@ -421,15 +422,19 @@ Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) p
     \midrule
     Identity: unchanged source, false alarms & \kof{or_identity_fa}\\
     Scoped single-value mutants detected & \kof{or_mut_det}\\
-    Keyed challenge mutants detected (gate) & \kof{or_new_mut_det}\\
+    Keyed challenge mutants detected, production rule (gate) & \kof{or_new_mut_det}\\
     Keyed challenge controls, false alarms & \kof{or_new_ctrl_fa}\\
-    \quad acceptance group, relaxed rule & \kof{or_acc_mut_det}\\
-    \quad all groups, without the relaxation & \kof{or_new_mut_det_raw}\\
+    \quad acceptance group only, production rule & \kof{or_acc_mut_det}\\
+    \quad all groups, strict rule (no relaxation) & \kof{or_new_mut_det_raw}\\
     \midrule
     Real outputs (\RES{orr_j_mut_den} mutants, \RES{orr_nctl} controls): mutants caught; false alarms & \\
     \quad judge (J1+J2, arbiter) & \kof{orr_j_mut}; \kof{orr_j_fa}\\
     \quad surface lexicon (near-circular) & \kof{orr_s_mut}; \kof{orr_s_fa}\\
     \quad string overlap & \kof{orr_o_mut}; \kof{orr_o_fa}\\
+    \midrule
+    Natural outputs, judge verdict vs human-consensus verdict (positives \RES{nat_viol_npos} violations, \RES{nat_pres_npos} preservation failures; three sets pooled): precision; recall &\\
+    \quad violation & \pct{nat_viol_p} \cip{nat_viol_p}; \pct{nat_viol_r} \cip{nat_viol_r}\\
+    \quad preservation failure & \pct{nat_pres_p} \cip{nat_pres_p}; \pct{nat_pres_r} \cip{nat_pres_r}\\
     \midrule
     Human gate, development items (\RES{human_n_items} items, two coders): held-out $\kappa$, \RES{human_gate_n} fields & \RES{human_gkappa_min}--\RES{human_gkappa_max}\\
     Outputs for human-elicited keywords (\RES{jve_coders} coders, \RES{jve_n} of \RES{jve_items} items): critical $\kappa$ [CI] & \RES{jve_kappa} [\RES{jve_kappa_lo}, \RES{jve_kappa_hi}]\\
@@ -448,6 +453,14 @@ Table~\ref{tab:oracle} gives the result: the judge caught \kof{orr_j_mut} mutant
 Of its \RES{orr_nmiss} misses, two are time shifts that left an explicit past-tense phrase (\say{in the past}) beside the shifted verb, so the mutant is mixed-signal; the third is an equivalent mutant (the source was already a question).
 A surface lexicon (negation, hedge, politeness, tense and question cues) scores \kof{orr_s_mut} with \kof{orr_s_fa} false alarms, and string overlap \kof{orr_o_mut} with \kof{orr_o_fa}.
 The lexicon is near-circular, since it matches the cues the operators insert and delete; its score shows that the operators are lexically shallow, not that a lexicon is an adequate oracle, and the judge's edge shows mainly on controls.
+
+\paragraph*{The oracle on faults nobody seeded}
+The mutant tests use faults we wrote.
+The human-labelled sets contain natural model outputs whose labels were made by people independent of any seeded fault, so they also test the oracle on faults nobody seeded.
+We took the verdict-level counts that the gold-set scoring already computes (judge verdict against human-consensus verdict) on the development items, Part 10 (a fresh gold set) and the human-written pairs, with violation and preservation failure as the positive classes; the human-elicited-keyword set supports only the assumption verdict.
+Pooled over \RES{nat_nunits_viol} verdicts, the oracle's precision and recall are \pct{nat_viol_p} and \pct{nat_viol_r} for violations and \pct{nat_pres_p} and \pct{nat_pres_r} for preservation failures (Table~\ref{tab:oracle}); per set they range over \RES{nat_viol_p_setmin}--\RES{nat_viol_p_setmax}\% and \RES{nat_viol_r_setmin}--\RES{nat_viol_r_setmax}\% for violations.
+On the elicited keywords the assumption verdict has precision \RES{nat_elic_p}\% and recall \RES{nat_elic_r}\% on \RES{nat_elic_n} items.
+Each set has only \RES{nat_viol_posmin}--\RES{nat_viol_posmax} violation positives, so single-set intervals are wide; the pooled intervals are the better guide.
 
 \paragraph*{Human gate}
 The first human gate, with two annotators, was run on the development items (the extraction inventory used to develop the codebook), with plurality references and tied items excluded rather than adjudicated.
@@ -487,8 +500,9 @@ Accessibility engineering spans the life cycle~\cite{paiva2021accessibility}, bu
 Passing the checker is weaker than keeping the typed wording, and a scored repair is not necessarily a sentence someone could say.
 \emph{Oracle.} All rates depend on an LLM extractor and arbiter; the arbiter ran after outcomes were known, and human coders were taught the codebook.
 The first human gate's $\kappa$ is on development items, not on confirmation data.
-The defect trace has two defects, both found by our own process; it shows that the process works, not that it finds defects we did not anticipate. The surface baseline is near-circular because its lexicon matches the mutation operators, and we ran no NLI baseline.
+The defect trace has two defects, both found by our own process; it shows that the process works, not that it finds defects we did not anticipate. The natural-output precision and recall rest on three human-labelled sets whose coders were taught the codebook. The surface baseline is near-circular because its lexicon matches the mutation operators, and we ran no NLI baseline.
 \emph{Internal.} The confirmation set has early cached requests and post-hoc arbitration; the human-written pairs are not preregistered and have few writers per contrast.
+\emph{Use.} No outside developer has used the harness yet, and R1--R5 were not validated with AAC users or clinicians.
 \emph{External.} Four models, three small and quantized; one prompt; English; constructed and crowd-written, not AAC-user, messages.
 Model versions may be retired, and API outputs are not bit-reproducible.
 \emph{Conclusion.} Effects are model-specific, and zero observed events do not establish zero risk.
