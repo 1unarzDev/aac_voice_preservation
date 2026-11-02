@@ -11,6 +11,15 @@ usage:
   python src/make_assignments.py --stage 4 --fill-checks [--absent P05]
                                                                        # after Part 15 returns + collect_written_pairs.py --batch hw2
 
+  python src/make_assignments.py --stage 5                            # Stage 5 (Parts 20, 21; everyone): sheets, stage5.csv, hand-out block
+
+Stage 5 (added after Stage 4 had been returned; Parts 20 and 21, all annotators, 18 min each)
+  Part 20   annotate.html + stage5/<ID>_part20.json (src/make_treated_check.py): 12 labelled sentences from treated outputs.
+  Part 21   source_check.html + stage5/<ID>_part21.json (src/make_source_check.py): 20 source messages, 3 quick questions.
+  The part files and keys come from the two make_* scripts (seeded, frozen); --stage 5 only writes the sheets
+  annotation_package/assignments/<ID>_stage5.md, annotation/assignments/stage5.csv and the hand-out block, and checks that
+  each person's part files exist. No roster is chosen: everyone gets both parts, in this order.
+
 Stage 1 (Nov 2-4, ~3-4 h each; ORDER IS MANDATORY: elicitation -> audits -> writing)
   roles     hash order of the IDs (sha1(SALT|roles|ID)): first 3 do Part 10, next 3 Parts 1-3 (extra coders),
             next 4 are the Part 12 coders (Stage 2 gold on elicited-keyword outputs), the rest are "regular".
@@ -88,6 +97,9 @@ DATES.update({"stage4_open": "Mon Nov 2", "stage4": "Mon Nov 2", "stage4_due": "
               "stage4_check_open": "once Part 15 is back (Mon Nov 2 evening at the earliest; the coordinator tells you)",
               "stage4_check_due": "Tue Nov 3, 23:59", "stage4_end": "Tue Nov 3"})
 S4_PLAN = ASSIGN_DIR / "stage4_plan.json"
+# Stage 5 (Parts 20 and 21, built after Stage 4 had been returned). Dates are assumptions the coordinator can change here.
+STAGE5_DIR = PKG / "stage5"
+DATES.update({"stage5_open": "Tue Nov 3", "stage5": "Tue Nov 3", "stage5_due": "Tue Nov 3, 23:59", "stage5_end": "Tue Nov 3"})
 S4_WRITTEN = WRITTEN / "hw2"
 S4_BATCH = "hw2"
 PART17_RATERS = ["P02", "P07", "P09", "P10", "P11", "P14"]   # people who did not do Parts 4/11 (D-058)
@@ -142,6 +154,13 @@ TASKS4 = {
                 "repair_audit_v2.html + stage4/{ID}_repair_v2.json", "repair_audit_v2_{ID}.csv", "annotation/returns_repair_v2/"),
     "check2": ("Part 16", "Check about 30 new sentence pairs written by other people (same task as Part 8)", 22,
                "check_pairs.html + stage4/{x}.json", "check_pairs_{x}_{ID}.csv", "annotation/returns_hwcheck_hw2/"),
+}
+# Stage 5 tasks (Parts 20 and 21): everyone, in this order
+TASKS5 = {
+    "part20": ("Part 20", "Label sentences: 12 sentences, 5 practice items first (same task as Part 10)", 10,
+               "annotate.html + stage5/{ID}_part20.json", "labels_part20_{ID}.csv", "annotation/returns_treated_check/"),
+    "part21": ("Part 21", "Check messages: 20 short messages, 3 quick questions each, 3 practice messages first", 8,
+               "source_check.html + stage5/{ID}_part21.json", "labels_part21_{ID}.csv", "annotation/returns_source_check/"),
 }
 AUDITS_FLEX = ["part4", "part11", "part5", "part6"]
 AUDIT_ORDER = ["parts13", "part10", "part4", "part11", "part5", "part6"]   # order within the audit block
@@ -647,6 +666,8 @@ def handout(plan, tab, later: bool = LATER) -> str:
     if S4_PLAN.exists():
         s4 = json.loads(S4_PLAN.read_text())
         txt = insert_stage4_section(txt, stage4_handout_section(s4, rows_stage4(s4, plan["annotators"])))
+    if (ASSIGN_DIR / "stage5.csv").exists():
+        txt = insert_stage5_section(txt, stage5_handout_section(rows_stage5(plan["annotators"])))
     return txt
 
 
@@ -1218,7 +1239,7 @@ def insert_stage4_section(txt: str, section: str) -> str:
     if "<!-- stage4:start -->" in txt:
         a, rest = txt.split("<!-- stage4:start -->", 1)
         txt = a.rstrip("\n") + "\n" + rest.split("<!-- stage4:end -->\n", 1)[1]
-    anchor = "\n**Return method:**"
+    anchor = "\n<!-- stage5:start -->" if "<!-- stage5:start -->" in txt else "\n**Return method:**"
     assert anchor in txt, "HANDOUT.md layout changed"
     txt = txt.replace(anchor, "\n" + section + anchor, 1)
     return txt.replace("subject `AAC annotation <ID> stage <1|2>`", "subject `AAC annotation <ID> stage <1|2|3|4>`")
@@ -1366,9 +1387,101 @@ def run_stage4_fill(plan_path=ASSIGN_DIR / "plan.json", cand_path=S4_WRITTEN / "
     return summ
 
 
+# ---------------------------------------------------------------- Stage 5 (Parts 20 and 21)
+def rows_stage5(ids) -> list[dict]:
+    out = []
+    for a in ids:
+        for o, task in enumerate(TASKS5, 1):
+            T = TASKS5[task]
+            out.append({"annotator": a, "stage": "5", "order": o, "part": T[0], "task": task, "description": T[1],
+                        "file_or_link": T[3].format(ID=a), "expected_minutes": T[2], "return_file": T[4].format(ID=a),
+                        "return_folder": T[5], "due": DATES["stage5_due"]})
+    return out
+
+
+def stage5_item_line(r, a) -> str:
+    head = f"- [ ] **{r['order']}. {r['part']}: {r['description']}** (about {r['expected_minutes']} min)"
+    if r["task"] == "part20":
+        body = (f"Open `annotate.html`, enter `{a}`, load `stage5/{a}_part20.json`, do the 5 practice items, then every item "
+                "(12 sentences). Same tool and questions as Part 10 (README: Part 10 and Part 20). Label only what the words on the "
+                "page say; the codebook is not needed, the short definitions on the screen are enough. Click **Download CSV** at "
+                f"the end. The file name will be `labels_part20_{a}.csv`.")
+    else:
+        body = (f"Open `source_check.html`, click the file button, choose `stage5/{a}_part21.json`, enter `{a}`. Do the 3 practice "
+                "messages, then every message (20): is it negated, is it polite, and is it a statement, a question or a request. "
+                f"README: Part 21. Click **Download CSV** at the end. The file name will be `labels_part21_{a}.csv`.")
+    return f"{head}  \n  {body} Return: `{r['return_file']}`."
+
+
+def stage5_sheet(rows: list[dict], a: str) -> str:
+    rs = [r for r in rows if r["annotator"] == a]
+    tot = sum(r["expected_minutes"] for r in rs)
+    split = ", ".join(f"{r['part']} {r['expected_minutes']} min" for r in rs)
+    L = [f"# Stage 5 task sheet for {a} (OPTIONAL; {DATES['stage5']}; due {DATES['stage5_due']})", "",
+         "Stage 5 is a short top-up and **optional**: if you cannot do it, tell the coordinator now so it can be planned without you. "
+         "Download the current `annotation_package.zip`: your files are in its `stage5/` folder and the tools are in the package "
+         f"folder. About **{tot} min** in total ({split}), plus breaks.", "",
+         RULES.format(ID=a, END=DATES["stage5_end"]), "",
+         "**Extra rules for Stage 5**",
+         "- **Part 20:** label what each sentence says, using only the words on the page. Do not search for the sentences or ask "
+         "anyone or any tool; if a sentence is odd or unclear, say so with the unsure key (`S`).",
+         "- **Part 21:** answer from the words of the message only. Use unsure when you cannot tell. Do not look for patterns "
+         "across messages.", "",
+         "## Steps (in this order)", "", "Order: **Part 20 first**, then **Part 21**.", ""]
+    L += [stage5_item_line(r, a) for r in rs] + [""]
+    L += ["**Return files (names must be exact):** " + "; ".join(f"`{r['return_file']}` ({r['part']})" for r in rs) + ".", ""]
+    L += [f"Return: email the CSV files for {', '.join(r['part'] for r in rs)} to the coordinator by {DATES['stage5_due']} "
+          f"(subject `AAC annotation {a} stage 5`), with the time you spent and any notes.", "",
+          "Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time."]
+    return "\n".join(L) + "\n"
+
+
+def stage5_handout_section(rows: list[dict]) -> str:
+    ids = sorted({r["annotator"] for r in rows})
+    tot = sum(r["expected_minutes"] for r in rows)
+    return (f"""<!-- stage5:start -->
+- **Stage 5, optional** (opens **{DATES['stage5_open']}**, built after Stage 4 had been returned): Parts 20 and 21, due
+  **{DATES['stage5_due']}**. Files appear in `stage5/`; re-download the zip. About {tot / 60:.1f} person-hours:
+  all {len(ids)} people do the same two short parts, in this order. Sheets: `assignments/<ID>_stage5.md`.
+  - Part 20, 10 min (`annotate.html` + `stage5/<ID>_part20.json`, 12 sentences). Return `labels_part20_<ID>.csv`.
+  - Part 21, 8 min (`source_check.html` + `stage5/<ID>_part21.json`, 20 short messages). Return `labels_part21_<ID>.csv`.
+<!-- stage5:end -->
+""")
+
+
+def insert_stage5_section(txt: str, section: str) -> str:
+    if "<!-- stage5:start -->" in txt:
+        a, rest = txt.split("<!-- stage5:start -->", 1)
+        txt = a.rstrip("\n") + "\n" + rest.split("<!-- stage5:end -->\n", 1)[1]
+    anchor = "\n**Return method:**"
+    assert anchor in txt, "HANDOUT.md layout changed"
+    txt = txt.replace(anchor, "\n" + section + anchor, 1)
+    return txt.replace("stage <1|2|3|4>`", "stage <1|2|3|4|5>`")
+
+
+def run_stage5(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, stage5_dir=STAGE5_DIR,
+               pkg=PKG, handout_path=None, quiet=False) -> dict:
+    plan = json.loads(Path(plan_path).read_text())
+    ids = plan["annotators"]
+    rows = rows_stage5(ids)
+    missing = [str(stage5_dir / f"{a}_{t}.json") for a in ids for t in ("part20", "part21") if not (stage5_dir / f"{a}_{t}.json").exists()]
+    if missing and not quiet:
+        print(f"WARNING: {len(missing)} part files missing (run src/make_treated_check.py and src/make_source_check.py first), e.g. {missing[:2]}")
+    write_csv(out_assign / "stage5.csv", rows, S4_COLS)
+    out_sheets.mkdir(parents=True, exist_ok=True)
+    for a in ids:
+        (out_sheets / f"{a}_stage5.md").write_text(stage5_sheet(rows, a))
+    hp = Path(handout_path or pkg / "HANDOUT.md")
+    hp.write_text(insert_stage5_section(hp.read_text(), stage5_handout_section(rows)))
+    if not quiet:
+        print(f"Stage 5: {len(ids)} sheets, {sum(r['expected_minutes'] for r in rows) / 60:.1f} person-hours, "
+              f"{sum(r['expected_minutes'] for r in rows if r['annotator'] == ids[0])} min each")
+    return {"plan": plan, "rows": rows, "missing": missing}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--stage", choices=["1", "2", "3", "4"], required=True)
+    ap.add_argument("--stage", choices=["1", "2", "3", "4", "5"], required=True)
     ap.add_argument("--annotators", default="P01..P20", help="e.g. P01..P20 or P01,P02,...")
     ap.add_argument("--absent", default="", help="stage 2/3: people who will not do that stage")
     ap.add_argument("--still-checking", default="", help="stage 2: non-returning writers who still check")
@@ -1393,6 +1506,8 @@ def main(argv=None) -> int:
     elif a.stage == "4" and a.fill_checks:
         run_stage4_fill(cand_path=S4_WRITTEN / "hw_candidates.jsonl" if a.candidates == str(WRITTEN / "hw_candidates.jsonl")
                         else Path(a.candidates), absent=split(a.absent))
+    elif a.stage == "5":
+        run_stage5()
     elif a.stage == "4":
         run_stage4(writers=split(a.writers), raters=split(a.raters), checkers=split(a.checkers), rebuild=a.rebuild)
     return 0

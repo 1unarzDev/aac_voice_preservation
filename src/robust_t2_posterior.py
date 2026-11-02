@@ -1,8 +1,17 @@
 """T2: is the affirmative default Bayes-rational?  P(message negated | no negation word among its keywords).
 
     . .venv/bin/activate && python src/robust_t2_posterior.py
+    python src/robust_t2_posterior.py --human-labels labels.csv --out-dir analysis/source_check/t2_human   # Part 21 (below)
 
 Stored data only (0 generation / 0 judge calls). Writes analysis/robust/t2_posterior/{report.md,summary.json,tables.csv}.
+
+--boot N: bootstrap resamples (default 1000; the committed numbers use 1000).
+--human-labels CSV (columns item_id, p_neg; item_id = the el-xxxxxx message id): replaces the DETECTOR polarity label of the
+SOURCE message by P(human says negated) = p_neg (Part 21, src/score_source_check.py writes the file). Each message is split
+into a negated part (weight w * p_neg) and a not-negated part (w * (1 - p_neg)), so every estimator below runs unchanged on
+fractional labels. Messages missing from the file keep the detector label. Only polarity is replaced (politeness and speech act
+stay detector labels); the corpus-prevalence Bayes column still uses the detector prevalence of all 6,142 messages.
+Without the option the outputs are byte-identical to the original run.
 
 Ingredients
  * prevalence pi: detector labels on all 6,142 AACText messages (analysis/s1/message_cues.jsonl; detector polarity
@@ -20,7 +29,13 @@ import numpy as np, pandas as pd
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
 from robust_common import ROOT, SEED, outdir, write_json, pct, ci_str, md_table
 
-OUT = outdir("t2_posterior"); B = 1000
+import argparse
+from pathlib import Path
+_ap = argparse.ArgumentParser(description=__doc__.splitlines()[0]); _ap.add_argument("--human-labels", default=None)
+_ap.add_argument("--out-dir", default=None)
+_ap.add_argument("--boot", type=int, default=1000, help="bootstrap resamples (default 1000; fewer only for tests)")
+ARGS = _ap.parse_args()
+OUT = Path(ARGS.out_dir) if ARGS.out_dir else outdir("t2_posterior"); OUT.mkdir(parents=True, exist_ok=True); B = ARGS.boot
 NEG = re.compile(r"\b(?:not|no|never|none|nothing|nobody|nowhere|neither|nor|without|cannot|cant|dont|doesnt|didnt|wont|isnt|arent|wasnt|werent|couldnt|wouldnt|shouldnt|havent|hasnt|hadnt)\b|n't", re.I)
 POL = re.compile(r"\b(?:please|pls|plz|thanks?|thank|sorry|excuse|pardon|appreciate|could|would|may)\b", re.I)
 # speech-act cue words a keyword set could carry (question word / request marker / modal / imperative frame)
@@ -66,6 +81,17 @@ sc["out_neg"] = sc.polarity.eq("negated"); sc["out_pol"] = sc.politeness.ne("non
 SC = sc.merge(U[["fam", "channel", "item_id", "neg", "polite", "nonstmt", "w", "sample", "nocue_neg", "nocue_pol", "nocue_act", "kw_neg", "kw_pol", "lost_neg", "lost_pol", "lost_act"]],
               on=["fam", "channel"], how="left")
 assert len(SC) == 9600 and SC.item_id.notna().all()
+
+U["hl"] = 1.0; SC["hl"] = 1.0
+if ARGS.human_labels:
+    _hl = pd.read_csv(ARGS.human_labels).set_index("item_id").p_neg.astype(float)
+
+    def _expand(df):
+        p = df.item_id.map(_hl); has = p.notna()
+        a = df[has].assign(neg=True, hl=p[has].to_numpy(), w=df[has].w.to_numpy() * p[has].to_numpy())
+        b = df[has].assign(neg=False, hl=1 - p[has].to_numpy(), w=df[has].w.to_numpy() * (1 - p[has].to_numpy()))
+        out = pd.concat([df[~has], a, b]); return out[out.w > 0].reset_index(drop=True)
+    U, SC = _expand(U), _expand(SC)
 
 DIMS = {"polarity": dict(src="neg", nocue="nocue_neg", out="out_neg", lost="lost_neg", prev="neg", f="neg"),
         "politeness": dict(src="polite", nocue="nocue_pol", out="out_pol", lost="lost_pol", prev="polite", f="polite"),
@@ -113,7 +139,7 @@ def boot_stats(U, SC, d, chan, rng):
 
 
 rng = np.random.default_rng(SEED)
-rows = []; summ = {"corpus_prevalence_detector_6142": corpus, "pos_cap4_f_corpus": cap4_f, "seed": SEED, "n_boot": B}
+rows = []; summ = {**({"human_labels": ARGS.human_labels} if ARGS.human_labels else {}), "corpus_prevalence_detector_6142": corpus, "pos_cap4_f_corpus": cap4_f, "seed": SEED, "n_boot": B}
 KEYS = ["pi_frame", "d_loss", "f_nocue_given_absent", "posterior_empirical", "model_share_cue_given_nocue", "model_miss_given_cue_lost",
         "silent_reversal_per_1000", "spurious_cue_per_1000"]
 for d in DIMS:
@@ -123,8 +149,9 @@ for d in DIMS:
         pi_c = corpus[DIMS[d]["prev"]]; fF = pt["f_nocue_given_absent"]
         bayes = pi_c * pt["d_loss"] / (pi_c * pt["d_loss"] + (1 - pi_c) * fF)
         pt["posterior_bayes_corpus_pi"] = bayes
-        pt["breakeven_cost_ratio"] = (1 - pt["posterior_empirical"]) / pt["posterior_empirical"]
-        pt["queries_per_catch"] = 1 / pt["posterior_empirical"]
+        pe = pt["posterior_empirical"]          # 0 only when every source label is "not negated" (human-label sensitivity runs)
+        pt["breakeven_cost_ratio"] = (1 - pe) / pe if pe else float("inf")
+        pt["queries_per_catch"] = 1 / pe if pe else float("inf")
         row = dict(dimension=d, channel=chan) | pt
         for k in KEYS:
             row[k + "_lo"], row[k + "_hi"] = [float(x) for x in np.nanquantile(bs[k], [.025, .975])]
@@ -133,9 +160,15 @@ T = pd.DataFrame(rows); T.to_csv(OUT / "tables.csv", index=False)
 
 # random half only, unweighted check for polarity
 rnd = U[U["sample"].eq("random") & U.channel.str.startswith("human_")]
-chk = {"random_half_polarity_human": dict(n_messages=int(rnd.item_id.nunique()), negated_messages=int(rnd.drop_duplicates("item_id").neg.sum()),
-       posterior_no_negation_word=float((rnd.neg & rnd.nocue_neg).sum() / rnd.nocue_neg.sum()),
-       cases=int((rnd.neg & rnd.nocue_neg).sum()), of=int(rnd.nocue_neg.sum()))}
+if not ARGS.human_labels:
+    chk = {"random_half_polarity_human": dict(n_messages=int(rnd.item_id.nunique()), negated_messages=int(rnd.drop_duplicates("item_id").neg.sum()),
+           posterior_no_negation_word=float((rnd.neg & rnd.nocue_neg).sum() / rnd.nocue_neg.sum()),
+           cases=int((rnd.neg & rnd.nocue_neg).sum()), of=int(rnd.nocue_neg.sum()))}
+else:   # fractional labels: counts are sums of the label fractions
+    _cases, _of = float((rnd.hl * (rnd.neg & rnd.nocue_neg)).sum()), float((rnd.hl * rnd.nocue_neg).sum())
+    chk = {"random_half_polarity_human": dict(n_messages=int(rnd.item_id.nunique()),
+           negated_messages=float((rnd.hl * rnd.neg).groupby(rnd.item_id).sum().div(rnd.hl.groupby(rnd.item_id).sum()).sum()),
+           posterior_no_negation_word=_cases / _of, cases=round(_cases, 1), of=round(_of, 1))}
 # per-model silent reversal, polarity, human keywords
 pm = []
 for m, g in SC[SC.channel.str.startswith("human_")].groupby("model"):

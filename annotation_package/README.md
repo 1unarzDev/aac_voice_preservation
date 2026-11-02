@@ -35,6 +35,9 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   assigned. **Part 18, `intent_check.html`** (10 sentences from your own pairs): about 15 minutes. **Part 19,
   `stage4/<ID>_part19.json`** (about 13 sentences, same tool as Part 10): about 10 minutes, everyone. See their
   sections below.
+- **Part 20, `stage5/<ID>_part20.json`** (12 sentences, same tool as Part 10): about 10 minutes. **Part 21,
+  `source_check.html` with `stage5/<ID>_part21.json`** (20 short messages, 3 quick questions each): about 8 minutes.
+  Both are for everyone in Stage 5. See their sections below.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -265,12 +268,46 @@ only what the **words on the page** say.
 
 Some sentences may be odd or look like others you have seen. Label each one on its own, and do not look anything up.
 
+## Part 20 (Stage 5, all 20 people, ~10 min): label 12 more sentences, `stage5/<ID>_part20.json`
+This is the same task as Part 10 and Part 19, with only 12 sentences. You use `annotate.html` and the file named with
+your ID. You do not need the codebook: the short definitions on the screen are enough. Label only what the **words on the
+page** say. The sentences are real outputs of writing tools. You are not told which tool or how a sentence was made.
+
+1. Open `annotate.html`, enter **the same annotator ID**, and load `stage5/<ID>_part20.json` (for example
+   `stage5/P02_part20.json`).
+2. Do the 5 practice items, then every sentence, as in Part 10. The main question (question 1) changes from sentence to
+   sentence: read it each time. The last question shows the short input the tool was given; use it only for that
+   question. Press `S` when a sentence is really unclear.
+3. Each sentence is labelled by two people, working alone. Nobody gets a sentence from a pair they wrote or checked, or
+   from a message whose keywords they chose.
+4. Click **Download CSV** at the end: `labels_part20_<ID>.csv`.
+
+Some sentences may be odd. Label each one on its own, and do not look anything up.
+
+## Part 21 (Stage 5, all 20 people, ~8 min): check 20 short messages, `source_check.html`
+You read 20 real short messages and answer three quick questions about each. There are no right answers to look up:
+judge only the words on the page.
+
+1. Open `source_check.html`, click the file button and choose `stage5/<ID>_part21.json` (for example
+   `stage5/P02_part21.json`). Enter **the same annotator ID** and press `Enter`. The tool refuses a file that is not yours.
+2. Three practice messages with feedback come first. Then you see 20 messages, one at a time.
+3. For each message answer:
+   - *Negated?* **yes** if it says "not", "no", "never" (or n't), or refuses; otherwise **no**.
+   - *Polite?* **yes** if it uses please, thanks, sorry, "could you", "would you" or a similar polite form; otherwise **no**.
+   - *Statement, question or request?* A statement tells something, a question asks for information, a request asks
+     someone to do something.
+   Press `S` (or choose **unsure**) when you cannot tell. That is not an error.
+4. Keys: `1`-`4`, `S`, `↑`/`↓`, `Enter`, `Backspace`, as in the other tools. Progress is saved in the browser. A note box is
+   optional. Click **Download CSV** at the end: `labels_part21_<ID>.csv`.
+
+Each message is read by two people, working alone. Nobody gets a message whose keywords they typed in Part 9.
+
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
 `wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `write_pairs_<dimension>_<ID>.csv`,
 `check_pairs_<file>_<ID>.csv` and `keyword_elicitation_<file>_<ID>.csv` for Parts 7–9, `labels_gold_new_<ID>.csv` for Part 10 and
 `repair_audit_transfer_<ID>.csv` for Part 11, `repair_audit_v2_<ID>.csv` for Part 17, `intent_check_<ID>.csv` for
-Part 18 and `labels_part19_<ID>.csv` for Part 19), to the study coordinator. Please also send:
+Part 18, `labels_part19_<ID>.csv` for Part 19, `labels_part20_<ID>.csv` for Part 20 and `labels_part21_<ID>.csv` for Part 21), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

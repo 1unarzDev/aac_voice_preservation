@@ -141,6 +141,21 @@ Order: Part 18 can start at once (outputs exist), then Part 19. Part 17 needs it
 follows Part 15 returns; generation and judging of the new pairs follow Part 16. Task sheets will be
 `assignments/<ID>_stage4.md` once the coordinator confirms who is available.
 
+**Stage 5 (optional; added after Stage 4 had been returned).** Two short label tasks that check the automatic labels
+where the papers' headline numbers rest. **All 20 people** do both, in this order (files in `stage5/`, sheets
+`assignments/<ID>_stage5.md`, about 18 min each, 6.0 h in all):
+
+1. **Part 20 (10 min): do the labels hold on the treated outputs?** 12 sentences per person (120 in all, 20 for each of
+   six kinds of output: repaired by the guard, retried without feedback, chip input, plain-word input, the two newer
+   models, Gemini), the same tool and questions as Part 10, each sentence by two people working alone. People see only
+   the sentence (and the short input for the last question), never which tool made it or what the automatic judges said.
+   Sentences people already labelled or rated before are not used, and nobody labels a pair they wrote or checked.
+2. **Part 21 (8 min): are the labels of the source messages right?** 20 real short messages per person (200 in all,
+   oversampled on messages the rule-based detector calls negated, polite or a question), three quick questions each
+   (negated? polite? statement, question or request?), each message by two people. Nobody reads a message whose keywords
+   they typed in Part 9. The answers check the detector and correct the estimate of how often a message was negated when its
+   keywords contain no negation word.
+
 **After Stage 4.** No further annotation is needed for the SE4All and CALE-AI papers. The next step is a separate
 study with AAC users. It needs its own ethics determination (IRB or equivalent) before anyone is recruited, and it
 is outside this program.
