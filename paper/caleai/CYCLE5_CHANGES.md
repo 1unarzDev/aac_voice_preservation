@@ -1,0 +1,11 @@
+# CALE-AI cycle 5 changes
+
+Build (docker latexmk): 10 pages, body ends on page 8, references follow. No undefined macros or citations. All pages viewed at 70 dpi. No new typed numbers; no new macros needed (all keys already generated). Not committed.
+
+1. Precision. Abstract, contribution (2) and Conclusion now say "0 strict-check pass-to-fail changes among 1,394 texts (26 already-correct texts were rewritten)"; "without turning a correct sentence into a wrong one" removed. Figure 1 caption and Section 6.1 state 26/1,394 changed and that some changed texts are not sentences (row 1).
+2. Metrics. "Pass" = joint pass (headline) everywhere; the strict check is "strict-check pass / failure" with "repair rate" defined in the glossary. Abstract uses joint pass only, and quotes the guard's own contrast over resampling G1-G1r (+6.20 with CI); the strict +13.41 / +7.26 are dropped from the abstract and printed in Table 3 (macros gt_sgain_*, from analysis/guard_wc via make_macros.py). Body calls the matched-decoding G1t-G1r (+6.94 with CI) a confirmation. Table 3 labels G1r, G1t and the T=0 guard; verdict cell reads "passed on the three scored criteria; usability clause open"; "Every scored criterion passed".
+3. Abstract: adds repair rate 78.8% to 52.5%, the cue at 73.8% of typed input against the 80% line, and a factual audit line (120 texts, 3 independent raters, frozen rule keeps the guard only as a detector if the pooled gap is entirely below -10). Ends on the falsifiable-predictions sentence. Body slot text for the audit no longer says "in progress".
+4. Focus. Menu and cue merged into "Two more ledger rows" (6.3) with new Table 5; human pairs and keyword study merged into one paragraph "Realistic-input checks" (6.4); cue-combination probe and lost-with-chip counts dropped; defaults paragraph kept, trimmed.
+5. Tone (Sections 6-8, conclusion). Hedges cut to one limit per result; Limitations rewritten shorter; Section 7 opening and sample-size sentences made direct; "we did not survey the field" removed.
+
+For the orchestrator: the 120-text audit is still not in; the review's strongest ask remains reporting it. Table 3 has a pre-existing wide-minipage overfull warning; render is clean.
