@@ -114,6 +114,9 @@ def body_for(req: dict, spec: M.ModelSpec) -> dict:
 
 
 async def call(client: httpx.AsyncClient, req: dict, spec: M.ModelSpec, retries: int) -> dict:
+    if spec.backend == "gemini":   # Google AI Studio: own request format, quota handling, rate limiter
+        import gemini_backend as GB
+        return await GB.call(client, req, spec, retries)
     body = body_for(req, spec)
     err = None
     for attempt in range(1, retries + 1):
@@ -142,7 +145,7 @@ async def call(client: httpx.AsyncClient, req: dict, spec: M.ModelSpec, retries:
 
 
 async def run(reqs: list[dict], conc: dict[str, int], retries: int, out_rows: list[dict],
-              cache: Path = CACHE) -> dict:
+              cache: Path = CACHE, no_network: bool = False) -> dict:
     sems = {m: asyncio.Semaphore(n) for m, n in conc.items()}
     stats = defaultdict(lambda: {"n": 0, "cached": 0, "errors": 0, "t_first": None, "t_last": None,
                                  "completion_tokens": 0})
@@ -156,6 +159,8 @@ async def run(reqs: list[dict], conc: dict[str, int], retries: int, out_rows: li
             cpath = cache / f"{req['request_key']}.json"
             if cpath.exists():
                 res, cached = json.loads(cpath.read_text()), True
+            elif no_network:   # assemble from cache only: uncached requests are omitted, not failed
+                return
             else:
                 async with sems[req["model"]]:
                     st["t_first"] = st["t_first"] or time.perf_counter()
@@ -188,6 +193,8 @@ def main() -> None:
     ap.add_argument("--api-concurrency", type=int, default=16)
     ap.add_argument("--retries", type=int, default=5)
     ap.add_argument("--limit", type=int, help="first N requests only (debug)")
+    ap.add_argument("--no-network", action="store_true",
+                    help="assemble generations.jsonl from cache only; uncached requests are omitted (partial runs)")
     ap.add_argument("--cache-dir", default=str(CACHE), help="default runs/cache (use a fresh dir to benchmark)")
     a = ap.parse_args()
 
@@ -202,7 +209,7 @@ def main() -> None:
 
     rows: list[dict] = []
     t0 = time.perf_counter()
-    stats = asyncio.run(run(reqs, conc, a.retries, rows, Path(a.cache_dir)))
+    stats = asyncio.run(run(reqs, conc, a.retries, rows, Path(a.cache_dir), a.no_network))
     wall = time.perf_counter() - t0
 
     order = {r["request_key"]: i for i, r in enumerate(reqs)}
