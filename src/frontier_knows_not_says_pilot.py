@@ -64,14 +64,15 @@ def summarise(refs, cnt):
         for t, p in ref.items():
             f = c.get(t, 0) / N
             if p >= 0.01:
-                abs_dev.append(abs(f - p)); zs.append((f - p) / math.sqrt(p * (1 - p) / N))
+                abs_dev.append(abs(f - p))
+                if p < 0.999: zs.append((f - p) / math.sqrt(p * (1 - p) / N))
             if p < 0.02: tail_exp += p * N
         tail_obs += sum(v for t, v in c.items() if ref.get(t, 0) < 0.02)   # includes tokens outside the top-100
         # mass of tokens outside top-100 is in tail_obs only; add it to expected
         tail_exp += max(0.0, 1 - sum(ref.values())) * N
         ncell += 1
     return {"cells_p_ge_0.01": len(abs_dev), "mean_abs_dev": round(sum(abs_dev) / len(abs_dev), 4), "max_abs_dev": round(max(abs_dev), 4),
-            "frac_cells_abs_z_gt_2": round(sum(abs(z) > 2 for z in zs) / len(zs), 3),
+            "frac_cells_abs_z_gt_2": round(sum(abs(z) > 2 for z in zs) / max(len(zs), 1), 3), "n_deterministic_cells_p>=0.999": len(abs_dev) - len(zs),
             "tail_draws_observed(p<0.02)": tail_obs, "tail_draws_expected": round(tail_exp, 1)}
 refs_u, cnt_u = run_draws(UNTRUNC)
 R["untruncated_20x200"] = summarise(refs_u, cnt_u)

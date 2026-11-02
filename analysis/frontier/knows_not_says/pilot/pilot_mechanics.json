@@ -1,0 +1,399 @@
+{
+ "started": "2026-11-02T16:44:53",
+ "model": "qwen2.5-7b",
+ "server_defaults": {
+  "temperature": 0.800000011920929,
+  "top_k": 40,
+  "top_p": 0.949999988079071,
+  "min_p": 0.05000000074505806,
+  "samplers": [
+   "penalties",
+   "dry",
+   "top_n_sigma",
+   "top_k",
+   "typ_p",
+   "top_p",
+   "min_p",
+   "xtc",
+   "temperature"
+  ],
+  "seed": 4294967295
+ },
+ "build_info": "b12019-1052f7e1d",
+ "untruncated_20x200": {
+  "cells_p_ge_0.01": 21,
+  "mean_abs_dev": 0.0055,
+  "max_abs_dev": 0.0283,
+  "frac_cells_abs_z_gt_2": 0.1,
+  "n_deterministic_cells_p>=0.999": 11,
+  "tail_draws_observed(p<0.02)": 16,
+  "tail_draws_expected": 14.1
+ },
+ "server_default_sampling_20x200_vs_untruncated_ref": {
+  "cells_p_ge_0.01": 21,
+  "mean_abs_dev": 0.0064,
+  "max_abs_dev": 0.0346,
+  "frac_cells_abs_z_gt_2": 0.0,
+  "n_deterministic_cells_p>=0.999": 11,
+  "tail_draws_observed(p<0.02)": 0,
+  "tail_draws_expected": 14.1
+ },
+ "logprob_coverage": {
+  "tokens_generated": 7550,
+  "tokens_with_logprob": 7550,
+  "coverage": 1.0
+ },
+ "throughput": {
+  "requests": 1020,
+  "errors": 0,
+  "seconds": 48.1,
+  "req_per_s": 21.21,
+  "tok_per_s": 157.0,
+  "mean_out_tokens": 7.4,
+  "finish_length": 0,
+  "unique_texts_among_16_samples_mean": 2.78
+ },
+ "projection_hours_per_model_unique_inputs_2400_x17": 0.53,
+ "prompt_logprob_endpoints": {
+  "completion_n_predict0_nprobs": {
+   "status": 200,
+   "has_prompt_logprobs_field": false
+  },
+  "completion_echo": {
+   "status": 200,
+   "has_prompt_logprobs_field": false
+  },
+  "v1_completions_echo": {
+   "status": 200,
+   "has_prompt_logprobs_field": false
+  }
+ },
+ "forced_vs_generation_logprob": {
+  "n_checked": 50,
+  "n_within_0.05_nats_every_token": 34,
+  "frac_ok": 0.68,
+  "n_missing_top1000": 0,
+  "skipped_noncanonical_tokenisation": 0,
+  "worst_max_abs_diff": 0.4542,
+  "detail": [
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.2283,
+    "mean_abs_diff": 0.0335
+   },
+   {
+    "k": -1,
+    "n": 6,
+    "max_abs_diff": 0.0024,
+    "mean_abs_diff": 0.0004
+   },
+   {
+    "k": -1,
+    "n": 11,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0081,
+    "mean_abs_diff": 0.0017
+   },
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0646,
+    "mean_abs_diff": 0.0131
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0058,
+    "mean_abs_diff": 0.0013
+   },
+   {
+    "k": -1,
+    "n": 6,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.1813,
+    "mean_abs_diff": 0.029
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0014,
+    "mean_abs_diff": 0.0003
+   },
+   {
+    "k": -1,
+    "n": 4,
+    "max_abs_diff": 0.0005,
+    "mean_abs_diff": 0.0002
+   },
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.0246,
+    "mean_abs_diff": 0.0042
+   },
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.1876,
+    "mean_abs_diff": 0.0269
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0002,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": -1,
+    "n": 4,
+    "max_abs_diff": 0.0221,
+    "mean_abs_diff": 0.0063
+   },
+   {
+    "k": -1,
+    "n": 15,
+    "max_abs_diff": 0.2736,
+    "mean_abs_diff": 0.043
+   },
+   {
+    "k": -1,
+    "n": 6,
+    "max_abs_diff": 0.0178,
+    "mean_abs_diff": 0.003
+   },
+   {
+    "k": -1,
+    "n": 6,
+    "max_abs_diff": 0.325,
+    "mean_abs_diff": 0.0706
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0003,
+    "mean_abs_diff": 0.0001
+   },
+   {
+    "k": -1,
+    "n": 9,
+    "max_abs_diff": 0.0145,
+    "mean_abs_diff": 0.0017
+   },
+   {
+    "k": -1,
+    "n": 7,
+    "max_abs_diff": 0.4542,
+    "mean_abs_diff": 0.1322
+   },
+   {
+    "k": -1,
+    "n": 6,
+    "max_abs_diff": 0.0006,
+    "mean_abs_diff": 0.0001
+   },
+   {
+    "k": -1,
+    "n": 5,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": -1,
+    "n": 10,
+    "max_abs_diff": 0.0973,
+    "mean_abs_diff": 0.0129
+   },
+   {
+    "k": 1,
+    "n": 5,
+    "max_abs_diff": 0.0484,
+    "mean_abs_diff": 0.0097
+   },
+   {
+    "k": 3,
+    "n": 7,
+    "max_abs_diff": 0.4024,
+    "mean_abs_diff": 0.0829
+   },
+   {
+    "k": 4,
+    "n": 5,
+    "max_abs_diff": 0.0002,
+    "mean_abs_diff": 0.0001
+   },
+   {
+    "k": 10,
+    "n": 8,
+    "max_abs_diff": 0.2403,
+    "mean_abs_diff": 0.0301
+   },
+   {
+    "k": 8,
+    "n": 6,
+    "max_abs_diff": 0.0423,
+    "mean_abs_diff": 0.007
+   },
+   {
+    "k": 1,
+    "n": 6,
+    "max_abs_diff": 0.0033,
+    "mean_abs_diff": 0.0006
+   },
+   {
+    "k": 12,
+    "n": 6,
+    "max_abs_diff": 0.0003,
+    "mean_abs_diff": 0.0001
+   },
+   {
+    "k": 14,
+    "n": 4,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": 12,
+    "n": 4,
+    "max_abs_diff": 0.0097,
+    "mean_abs_diff": 0.0034
+   },
+   {
+    "k": 8,
+    "n": 5,
+    "max_abs_diff": 0.0267,
+    "mean_abs_diff": 0.0054
+   },
+   {
+    "k": 15,
+    "n": 5,
+    "max_abs_diff": 0.016,
+    "mean_abs_diff": 0.0032
+   },
+   {
+    "k": 3,
+    "n": 6,
+    "max_abs_diff": 0.0045,
+    "mean_abs_diff": 0.0008
+   },
+   {
+    "k": 0,
+    "n": 6,
+    "max_abs_diff": 0.256,
+    "mean_abs_diff": 0.0439
+   },
+   {
+    "k": 13,
+    "n": 6,
+    "max_abs_diff": 0.0542,
+    "mean_abs_diff": 0.0197
+   },
+   {
+    "k": 10,
+    "n": 5,
+    "max_abs_diff": 0.0005,
+    "mean_abs_diff": 0.0001
+   },
+   {
+    "k": 0,
+    "n": 8,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0
+   },
+   {
+    "k": 10,
+    "n": 8,
+    "max_abs_diff": 0.1737,
+    "mean_abs_diff": 0.0256
+   },
+   {
+    "k": 13,
+    "n": 9,
+    "max_abs_diff": 0.0257,
+    "mean_abs_diff": 0.0042
+   },
+   {
+    "k": 0,
+    "n": 13,
+    "max_abs_diff": 0.4134,
+    "mean_abs_diff": 0.0754
+   },
+   {
+    "k": 3,
+    "n": 5,
+    "max_abs_diff": 0.02,
+    "mean_abs_diff": 0.0043
+   },
+   {
+    "k": 7,
+    "n": 5,
+    "max_abs_diff": 0.0065,
+    "mean_abs_diff": 0.0013
+   },
+   {
+    "k": 11,
+    "n": 7,
+    "max_abs_diff": 0.0547,
+    "mean_abs_diff": 0.0078
+   },
+   {
+    "k": 12,
+    "n": 5,
+    "max_abs_diff": 0.0039,
+    "mean_abs_diff": 0.001
+   },
+   {
+    "k": 10,
+    "n": 11,
+    "max_abs_diff": 0.2199,
+    "mean_abs_diff": 0.0271
+   },
+   {
+    "k": 5,
+    "n": 5,
+    "max_abs_diff": 0.0125,
+    "mean_abs_diff": 0.0026
+   }
+  ]
+ },
+ "forced_check_seconds": 8.7,
+ "pair_scoring": {
+  "n_pairs": 20,
+  "missing_token_probs": 12,
+  "seconds_total": 7.7,
+  "seconds_per_candidate": 0.19
+ },
+ "embedding": {
+  "/embedding": {
+   "status": 501,
+   "body_head": "{\"error\":{\"code\":501,\"message\":\"This server does not support embeddings. Start it with `--embeddings`\",\"type\":\"not_supported_error\"}}"
+  },
+  "/v1/embeddings": {
+   "status": 501,
+   "body_head": "{\"error\":{\"code\":501,\"message\":\"This server does not support embeddings. Start it with `--embeddings`\",\"type\":\"not_supported_error\"}}"
+  }
+ },
+ "finished": "2026-11-02T16:46:50"
+}

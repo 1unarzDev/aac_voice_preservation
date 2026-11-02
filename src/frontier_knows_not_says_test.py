@@ -107,6 +107,69 @@ def test_pair_scoring_and_placebo():
     assert L.contraction_toggle("I'm happy.") is None and L.drop_final_period("Hi.") == "Hi"
 
 
+def _make_fixture(d):
+    """Synthetic units + generations. Model 'inf' samples negated with prob .65 on source-negated units and .03 otherwise (informative);
+    model 'unf' samples negated with prob .12 regardless of the source (uninformative). Keywords are random words (lexical baseline ~ chance)."""
+    import json, pathlib, subprocess
+    import pandas as pd
+    d = pathlib.Path(d); rng = np.random.default_rng(11); vocab = [f"w{i}" for i in range(60)]; rows = []
+    for m in range(420):
+        neg = rng.random() < (0.3 if m < 210 else 0.08); sample = "enriched" if m < 210 else "random"; w = 1.0 if m < 210 else 4.0
+        chans = [("pos_cap4", "cap4")] + [(f"human_P{j}", "human") for j in range(3)]
+        for ch, ds in chans:
+            kw = " ".join(rng.choice(vocab, 3, replace=False)) + (" not" if rng.random() < 0.08 else "")
+            rows.append(dict(item_id=f"m{m:03d}", fam=f"f{m}", channel=ch, dataset=ds, kw=kw, neg=neg, polite=False, nonstmt=False, lost_act=0.0, w=w, sample=sample,
+                             input=f"Keywords: {kw}", kw_neg=" not" in kw, kw_pol=False, kw_act=False, nocue_neg=" not" not in kw, nocue_pol=True, nocue_act=True))
+    U = pd.DataFrame(rows); U.to_csv(d / "units.csv", index=False)
+    inputs = sorted(set(U.input) | {"Keywords: N/A", "Keywords: "}); neg_of = dict(zip(U.input, U.neg))
+    for key, (p_if_neg, p_else) in (("inf", (0.65, 0.03)), ("unf", (0.12, 0.12))):
+        (d / "runs" / key).mkdir(parents=True, exist_ok=True)
+        with open(d / "runs" / key / "gens.jsonl", "w") as f:
+            for inp in inputs:
+                p = (p_if_neg if neg_of.get(inp, False) else p_else)
+                for k in [-1] + list(range(16)):
+                    isneg = (rng.random() < (0.1 if (k < 0 and neg_of.get(inp, False)) else 0.0 if k < 0 else p))
+                    text = ("I do not want it." if isneg else "I want it.") + (" Now." if rng.random() < 0.2 else "")
+                    top = [[["a", -0.1 - 0.3 * (neg_of.get(inp, False) and key == "inf")], ["b", -2.5]] + [["c%d" % i, -6.0 - i] for i in range(18)]] * 3 if k < 0 else None
+                    f.write(json.dumps(dict(input=inp, k=k, text=text, finish="stop", toks=["I", "x", "."], lp=[-0.1, -0.2, -0.1], top=top)) + "\n")
+
+
+def test_analyze_end_to_end():
+    import tempfile, subprocess, pathlib, json
+    import pandas as pd
+    root = pathlib.Path(__file__).resolve().parent.parent
+    with tempfile.TemporaryDirectory() as td:
+        _make_fixture(td)
+        r = subprocess.run([sys.executable, str(root / "src/frontier_knows_not_says_analyze.py"), "inf:model-inf", "unf:model-unf", "--fixture", td, "--boot", "300"],
+                           capture_output=True, text=True, cwd=str(root)); assert r.returncode == 0, r.stderr[-3000:]
+        out = pathlib.Path(td) / "out"
+        for f in ("r1.csv", "r2.csv", "pol.csv", "rel.csv", "pooled.csv", "holm.csv", "summary.json", "pareto.csv", "sens.csv"): assert (out / f).exists(), f
+        r2 = pd.read_csv(out / "r2.csv"); r1 = pd.read_csv(out / "r1.csv"); pol = pd.read_csv(out / "pol.csv"); holm = pd.read_csv(out / "holm.csv")
+        sh = lambda m, ds: r2[(r2.model == m) & (r2.dataset == ds) & (r2.score == "sampled_share(K=16)")].iloc[0]
+        assert sh("model-inf", "cap4").auroc > 0.8 and sh("model-inf", "cap4").lo > 0.7
+        assert abs(sh("model-unf", "cap4").auroc - 0.5) < 0.15 and sh("model-unf", "cap4").lo < 0.55
+        assert 0 <= sh("model-inf", "cap4").tied0_all <= 1 and "EXPLORATORY" in sh("model-inf", "human").status
+        lex = r2[(r2.model == "model-inf") & (r2.dataset == "cap4") & (r2.score == "lexical_cv_logistic")].iloc[0]; assert lex.auroc < 0.65   # planted: keywords uninformative
+        # Holm: 8 tests, adjusted p >= raw, planted informative model rejects R2-a/R3-b, uninformative model does not reject R2-a
+        assert len(holm) == 8 and (holm.p_holm >= holm.p_raw - 1e-12).all() and (holm.p_holm <= 1).all()
+        a_inf = holm[(holm.model == "model-inf") & holm.test.str.startswith("R2-a")].iloc[0]; assert bool(a_inf["reject_at_0.05"])
+        a_unf = holm[(holm.model == "model-unf") & holm.test.str.startswith("R2-a")].iloc[0]; assert not bool(a_unf["reject_at_0.05"])
+        # policies: informative sampled-share ask beats matched random-ask and always-commit on the planted fixture; the uninformative one does not
+        hp = "sampled share (semantic-entropy analogue) @ 10/100"
+        g = lambda m, p: pol[(pol.model == m) & (pol.dataset == "cap4") & (pol.policy == p)].iloc[0]
+        assert g("model-inf", hp).cmr_lo > 0 and g("model-inf", hp)["d_cost_priced_c0.03_hi"] < 0 and bool(g("model-inf", hp).recovers_R3)
+        assert g("model-unf", hp).cmr_lo < 0.0 < g("model-unf", hp).cmr_hi + 5 and not bool(g("model-unf", hp).recovers_R3)
+        rnd = g("model-unf", "random-ask @ 10/100 (expectation)"); assert pd.isna(rnd.recovers_R3) and abs(rnd.cmr_lo) < 1e-9   # random ask passes the priced-cost half (asking resolves the cue at a 10% base rate) but never the matched-random half
+        assert rnd["d_cost_priced_c0.03_hi"] < 0
+        ac = g("model-inf", "always-commit (greedy)"); aa = g("model-inf", "always-ask (every no-cue unit)"); assert aa.reversals_per_1000 == 0 and aa.taps_per_1000 > 100 and ac.taps_per_1000 == 0
+        chip = pol[(pol.model == "model-inf") & (pol.dataset == "cap4") & pol.policy.str.startswith("cue chip")].iloc[0]
+        assert chip.reversals_per_1000 <= ac.reversals_per_1000 * 0.02 + 1e-9 and chip.recall_of_reversals > 0.97       # honour residual 1-0.99 applied to recall too
+        assert (pol.policy.str.startswith("guard G1 (NOT APPLICABLE")).any()
+        refit = pol[pol.policy.str.startswith("Platt-calibrated") & (pol.model == "model-inf") & (pol.dataset == "cap4")]; assert set(refit.w_spur.round(4)) == {1.0, 0.125, round(1 / 36, 4)}
+        assert (r1.model == "model-inf").any() and set(r1.r1_class.dropna()) <= {"calibrated", "inconclusive", "overconfident (default too strong)", "underconfident (default too weak)"}
+        assert json.load(open(out / "summary.json"))["boot"] == 300
+
+
 if __name__ == "__main__":
     for k, f in list(globals().items()):
         if k.startswith("test_"): f(); print("ok", k)

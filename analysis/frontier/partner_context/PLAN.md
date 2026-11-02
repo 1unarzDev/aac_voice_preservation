@@ -142,3 +142,11 @@ by annotators, and none of this licenses a claim about real AAC users.
 - Pilot outcome metrics (descriptive only, paired bootstrap over families, 10,000 resamples, seed 20261102): for bare: share negated on affirmative-intended = share of outputs labelled `negated` (bare outputs are intent-independent, one output per family x turn, so "affirmative-intended" and "negated-intended" cells share the same output; exact-match for A = label affirmative, for B = label negated); for chip: override = label differs from the supplied cue's value. Commitment rate = label not unclear/mixed.
 - Arbiter: disputed critical labels arbitrated blind with src/arbiter_tool.py (output text only), no J1 fallback.
 - Pilot GPU model: qwen2.5-7b via a blocking flock on /tmp/aacv_gpu.lock; terra at concurrency 4; judge --concurrency 3.
+
+### Amendment A2 (2026-11-02, after the first Stage 0 checker run, BEFORE any model-under-test output was generated or seen)
+- Stage 0 v1 FAILED the feasibility gate: checker pass 80% after retry (gate >= 85%); N passed only 40%, X 82.5%, D 100%, Q 97.5% (files kept in `v1_failed_gate/`).
+  Diagnosis from the checker votes only: (a) template N "What happened with {topic}?" presupposes that something happened and was voted "affirmative" in 45/50 attempts that failed; (b) the reading descriptions
+  ("the thing happened / is so") were ambiguous for noun-phrase topics, so X turns such as "...did not work out" were voted affirmative for some topics.
+- Changes (design defects, not outcome based): N template -> "What about {topic}?"; checker readings reworded to be about the sentence the user will say: "the user's sentence will say that <kw> is so / happened (an affirmative sentence)" vs
+  "... will say that <kw> is not so / did not happen (a negated sentence)". D, X, Q templates and all pass rules unchanged. The whole Stage 0 is rerun (same 40 families, same draw); v1 is reported as a failed first attempt, not hidden.
+- If v2 still misses the gate, E0 proceeds only on passing families (the pre-stated drop rule) and the gate failure is reported.
