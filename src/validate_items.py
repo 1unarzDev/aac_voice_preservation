@@ -30,7 +30,7 @@ CUSTOM_SPLITS = {"expB", "expC", "r2d"}
 FACTORIAL_SPLITS = {"expC", "r2d"}
 R2D_CHANNELS = {f"{c}_{e}" for c in ("neither", "pol", "actor", "both") for e in ("TELL", "STATEMENT")}
 R2_PREFIX = {"polarity": "r2pol", "speech_act": "r2act", "politeness": "r2plt"}
-# Human-written families (split hw, B1): hw-<code>-NNN, cluster_id = writer_id.
+# Human-written families (split hw, B1): hw-<code>-NNN (later batches hw2-<code>-NNN), cluster_id = writer_id.
 HW_CODE = {"polarity": "pol", "speech_act": "act", "politeness": "plt", "certainty": "cer", "agent": "agt",
            "time_quantity": "tim"}
 CONSTRUCTIONS = {"seeded", "drafted", "adversarial"}
@@ -130,8 +130,8 @@ def validate_family(fam, where, errs, warns):
         elif fam.get("factorial_family") != fid[:7]:
             E("r2d factorial_family must be the r2d-NNN prefix of family_id")
     elif fam["split"] == "hw":
-        if not re.fullmatch(rf"hw-{HW_CODE[dim]}-\d{{3}}", fid):
-            E(f"hw family_id must be 'hw-{HW_CODE[dim]}-NNN'")
+        if not re.fullmatch(rf"hw\d*-{HW_CODE[dim]}-\d{{3}}", fid):
+            E(f"hw family_id must be 'hw-{HW_CODE[dim]}-NNN' (or 'hw2-...' for a later batch)")
         if not isinstance(fam.get("cluster_id"), str) or not fam["cluster_id"].strip():
             E("hw cluster_id must be the nonempty writer id")
         elif fam.get("writer_id") != fam["cluster_id"]:

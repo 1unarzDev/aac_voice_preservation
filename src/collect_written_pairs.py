@@ -1,7 +1,7 @@
 """B1: turn returned writer CSVs (annotation_package/write_pairs.html) into candidate hw families.
 
 usage: python src/collect_written_pairs.py [CSV ...]          (default: annotation/returns_written/*.csv)
-          [--out-dir annotation/written] [--assignment annotation/written/writer_assignment.csv]
+          [--batch hw2]   [--out-dir annotation/written] [--assignment annotation/written/writer_assignment.csv]
           [--target-per-dim 150] [--no-batches] [--checkers P01,P02,... | --checkers-file ids.txt]
 
 Per returned pair row (row_type == pair):
@@ -15,6 +15,18 @@ Per returned pair row (row_type == pair):
   * run validate_items.validate_family on it; any ERROR rejects the pair.
 Family ids are stable across re-runs: a (writer, dimension, pair_no, content) seen before keeps its id;
 a pair edited after an earlier collection gets a new id (it must be re-checked).
+
+Batches (Stage 4, Part 15): `--batch hw2` collects annotation/returns_written_hw2/*.csv into annotation/written/hw2/
+(own candidates, rejected.csv, quota report, writer_assignment.csv), with family ids `hw2-<code>-NNN` (cannot collide
+with hw-...). Before any check is planned a MANDATORY dedup runs against ALL prior pairs (every earlier batch: the
+accepted candidates, including pairs later dropped by checks, AND rejected.csv rows) and against earlier pairs of the
+same batch. A new pair is rejected when
+  * its two sentences equal those of a prior pair (token-normalised, either order), or
+  * one of its sentences equals a prior sentence (token-normalised; copying one sentence is copying), or
+  * it is a near-duplicate pair: token Jaccard >= .75 on the union of both sentences' tokens, or on the A/B
+    sentences matched in either orientation (the smaller of the two sentence Jaccards >= .75).
+Rejected rows carry the reason and the prior id/writer in rejected.csv; <out>/dedup_report.csv lists every flag and
+also near-matches of single sentences (Jaccard >= .75, reported but not rejected). hw1 (no --batch) is unchanged.
 
 Writes (private: these carry the writers' values, never hand them to checkers):
   <out>/hw_candidates.jsonl   accepted candidate families (NOT data/items: only score_pair_checks.py
@@ -33,6 +45,7 @@ import csv
 import glob
 import hashlib
 import json
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -43,6 +56,56 @@ import hw_rules as H  # noqa: E402
 from validate_items import validate_family  # noqa: E402
 
 DEFAULT_OUT = ROOT / "annotation" / "written"
+JACCARD = 0.75
+
+
+def jac(a: set, b: set) -> float:
+    return len(a & b) / len(a | b) if (a | b) else 0.0
+
+
+def prior_pairs(out: Path, batch: str | None) -> list[dict]:
+    """All earlier pairs (accepted AND rejected) of every batch except the one being collected."""
+    base = DEFAULT_OUT
+    dirs = [base] + sorted(d for d in base.iterdir() if d.is_dir() and (d / "hw_candidates.jsonl").exists())
+    res, seen_dirs = [], set()
+    for d in dirs:
+        if d.resolve() == out.resolve() or d.resolve() in seen_dirs:
+            continue
+        seen_dirs.add(d.resolve())
+        cp, rp = d / "hw_candidates.jsonl", d / "rejected.csv"
+        if cp.exists():
+            for l in cp.open(encoding="utf-8"):
+                if l.strip():
+                    f = json.loads(l)
+                    res.append({"id": f["family_id"], "writer": f["writer_id"], "status": "accepted",
+                                "A": f["variants"]["A"]["source"], "B": f["variants"]["B"]["source"]})
+        if rp.exists():
+            for i, r in enumerate(read_csv(rp), 1):
+                res.append({"id": f"{d.name}:rejected#{i}", "writer": r.get("writer", ""), "status": "rejected",
+                            "A": r["sentence_A"], "B": r["sentence_B"]})
+    for r in res:
+        r["tA"], r["tB"] = H.toks(r["A"]), H.toks(r["B"])
+    return res
+
+
+def dedup_flags(sa: str, sb: str, prior: list[dict]) -> tuple[list[str], list[str]]:
+    """(reject reasons, warnings) for a new pair against prior pairs (see module doc)."""
+    ta, tb = H.toks(sa), H.toks(sb)
+    A, B = set(ta), set(tb)
+    why, warn = [], []
+    for p in prior:
+        tag = f"{p['id']} ({p['writer']}, {p['status']})"
+        if {tuple(ta), tuple(tb)} == {tuple(p["tA"]), tuple(p["tB"])}:
+            why.append(f"exact duplicate pair of {tag}"); continue
+        c, d = set(p["tA"]), set(p["tB"])
+        pair_j, orient_j = jac(A | B, c | d), max(min(jac(A, c), jac(B, d)), min(jac(A, d), jac(B, c)))
+        if max(pair_j, orient_j) >= JACCARD:
+            why.append(f"near-duplicate pair of {tag}: Jaccard {max(pair_j, orient_j):.2f}"); continue
+        if tuple(ta) in (tuple(p["tA"]), tuple(p["tB"])) or tuple(tb) in (tuple(p["tA"]), tuple(p["tB"])):
+            why.append(f"sentence copied from {tag}"); continue
+        if max(jac(A, c), jac(A, d), jac(B, c), jac(B, d)) >= JACCARD:
+            warn.append(f"similar sentence in {tag}")
+    return why, warn
 
 
 def read_csv(p):
@@ -164,12 +227,21 @@ def main(argv=None) -> int:
     ap.add_argument("--target-per-dim", type=int, default=150)
     ap.add_argument("--kept", default=str(ROOT / "analysis" / "hw_checks" / "items.csv"))
     ap.add_argument("--no-batches", action="store_true")
+    ap.add_argument("--batch", default=None, help="batch tag, e.g. hw2: own folders, ids <batch>-<code>-NNN, mandatory dedup")
     ap.add_argument("--checkers"); ap.add_argument("--checkers-file")
     a = ap.parse_args(argv)
+    batch = a.batch
+    if batch and not re.fullmatch(r"hw\d+", batch):
+        raise SystemExit("--batch must look like hw2")
+    if batch and a.out_dir == str(DEFAULT_OUT):
+        a.out_dir = str(DEFAULT_OUT / batch)
+    if batch and a.kept == str(ROOT / "analysis" / "hw_checks" / "items.csv"):
+        a.kept = str(ROOT / "analysis" / f"{batch}_checks" / "items.csv")
     out = Path(a.out_dir); out.mkdir(parents=True, exist_ok=True)
-    paths = a.csv or sorted(glob.glob(str(ROOT / "annotation" / "returns_written" / "*.csv")))
+    rdir = f"returns_written_{batch}" if batch else "returns_written"
+    paths = a.csv or sorted(glob.glob(str(ROOT / "annotation" / rdir / "*.csv")))
     if not paths:
-        print("no writer CSVs found (annotation/returns_written/*.csv)", file=sys.stderr)
+        print(f"no writer CSVs found (annotation/{rdir}/*.csv)", file=sys.stderr)
         return 1
     rows, problems = load_rows(paths)
     cand_path = out / "hw_candidates.jsonl"
@@ -185,6 +257,8 @@ def main(argv=None) -> int:
     cpath = out / "consent_confirmed.csv"
     confirmed = {r["writer"].strip() for r in csv.DictReader(cpath.open())} if cpath.exists() else set()
     accepted, rejected, seen = [], [], {}
+    prior = prior_pairs(out, batch) if batch else []
+    dd_rows = []
     for r in rows:
         dim = r["dimension"]
         why = []
@@ -193,6 +267,12 @@ def main(argv=None) -> int:
         pair = tuple(sorted([" ".join(H.toks(r["sentence_A"])), " ".join(H.toks(r["sentence_B"]))]))
         if pair in seen:
             why.append(f"duplicate of {seen[pair]}")
+        elif batch:
+            dwhy, dwarn = dedup_flags(r["sentence_A"], r["sentence_B"], prior)
+            why += dwhy
+            for m in dwhy + dwarn:
+                dd_rows.append({"writer": r["writer"], "pair_no": r["pair_no"], "sentence_A": r["sentence_A"],
+                                "sentence_B": r["sentence_B"], "flag": m, "rejected": int(bool(dwhy))})
         if why:
             rejected.append({**r, "reasons": "; ".join(why)}); continue
         key = (r["writer"], dim, int(r["pair_no"]), content_sha(r))
@@ -200,7 +280,7 @@ def main(argv=None) -> int:
         fid = id_of.get(key)
         if fid is None:
             next_n[code] += 1
-            fid = f"hw-{code}-{next_n[code]:03d}"
+            fid = f"{batch or 'hw'}-{code}-{next_n[code]:03d}"
         fam, why = build_family(r, dim, fid, det)
         if fam is None:
             if key not in id_of:
@@ -208,6 +288,9 @@ def main(argv=None) -> int:
             rejected.append({**r, "reasons": "; ".join(why)}); continue
         seen[pair] = fid
         accepted.append(fam)
+        if batch:      # later pairs of this batch are also compared against this one
+            prior.append({"id": fid, "writer": r["writer"], "status": "accepted", "A": r["sentence_A"], "B": r["sentence_B"],
+                          "tA": H.toks(r["sentence_A"]), "tB": H.toks(r["sentence_B"])})
     accepted.sort(key=lambda f: f["family_id"])
     with cand_path.open("w", encoding="utf-8") as f:
         for fam in accepted:
@@ -215,6 +298,12 @@ def main(argv=None) -> int:
     head = ["writer", "dimension", "pair_no", "sentence_A", "value_A", "sentence_B", "value_B", "keywords", "reasons", "_file"]
     with open(out / "rejected.csv", "w", newline="", encoding="utf-8") as f:
         wr = csv.DictWriter(f, fieldnames=head, extrasaction="ignore"); wr.writeheader(); wr.writerows(rejected)
+    if batch:
+        with open(out / "dedup_report.csv", "w", newline="", encoding="utf-8") as f:
+            wr = csv.DictWriter(f, fieldnames=["writer", "pair_no", "sentence_A", "sentence_B", "flag", "rejected"])
+            wr.writeheader(); wr.writerows(dd_rows)
+        print(f"dedup vs {len(prior) - len(accepted)} prior pairs: {sum(r['rejected'] for r in dd_rows)} flags rejected, "
+              f"{sum(1 for r in dd_rows if not r['rejected'])} warnings -> {out / 'dedup_report.csv'}")
     asg_path = Path(a.assignment) if a.assignment else out / "writer_assignment.csv"
     assignment = read_csv(asg_path) if asg_path.exists() else []
     kept = []

@@ -25,6 +25,12 @@ the FREEZE.md prespecified first-20-by-SHA256 list) has no design weights: no Ha
 sample rates only, plus a descriptive by-model table.
 Agreement: pairwise Cohen's kappa and percent agreement per question, and Krippendorff's
 nominal alpha across all annotators (Pass A also as yes / not-yes).
+       Part 17 (repair audit v2, make_repair_audit_v2.py; 3 raters per item, 4 strata arm x pool):
+       python src/score_repair_audit.py --key annotation/repair_audit_v2_key.csv
+          (returns annotation/returns_repair_v2/*.csv, output analysis/repair_audit_v2/). Adds the
+          repaired-minus-control Newcombe difference per pool (discovery, transfer) and the count of
+          items with fewer than 3 usable ratings. Consensus = strict majority of the known answers.
+       python src/score_repair_audit.py --self-check     (simulated returns on the real v2 key)
 Outputs: <out>/report.md, <out>/items.csv (key joined with every rating + consensus),
 <out>/summary.json.
 """
@@ -141,17 +147,69 @@ def fmt(r):
     return s + (f"; {r['unknown']} unknown" if r["unknown"] else "")
 
 
-def main() -> int:
+def self_check() -> int:
+    """Simulate returns for the v2 key (repaired usable ~.65, control ~.92) and run the scorer on them."""
+    import contextlib
+    import io
+    import random
+    import tempfile
+    keyp = ROOT / "annotation" / "repair_audit_v2_key.csv"
+    key = read_csv(keyp)
+    rng = random.Random(7)
+    raters = sorted({x for r in key for x in r["raters"].split("|")})
+    rows = {x: [] for x in raters}
+    for r in key:
+        rep_ = r["arm"] == "repaired"
+        for x in r["raters"].split("|"):
+            good = rng.random() < (0.65 if rep_ else 0.92)
+            q = "yes" if good else rng.choice(["minor fix needed", "no"])
+            c = "yes" if rng.random() < (0.85 if rep_ else 0.97) else rng.choice(["partly", "no"])
+            rows[x].append({"item_id": r["item_id"], "annotator": x, "practice": 0, "a_quality": q,
+                            "a_unsure": 0, "a_note": "" if good else "x", "a_time_ms": 4000,
+                            "b_contract": c, "b_added": "yes" if rng.random() < 0.2 else "no", "b_unsure": "",
+                            "b_time_ms": 6000})
+    with tempfile.TemporaryDirectory() as td:
+        paths = []
+        for x, rs in rows.items():
+            p = Path(td) / f"repair_audit_v2_{x}.csv"
+            with open(p, "w", newline="", encoding="utf-8") as fh:
+                w = csv.DictWriter(fh, fieldnames=list(rs[0])); w.writeheader(); w.writerows(rs)
+            paths.append(str(p))
+        out = Path(td) / "out"
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = main([*paths, "--key", str(keyp), "--out", str(out)])
+        S = json.loads((out / "summary.json").read_text())
+    assert rc == 0
+    assert len(key) == 120 and all(len(r["raters"].split("|")) == 3 for r in key)
+    assert S["items_with_fewer_than_3_ratings"] == 0, S["items_with_fewer_than_3_ratings"]
+    d = S["difference_repaired_minus_control"]["usable"]
+    assert d["diff"] < 0 and d["ci"][1] < 0, d
+    for pool in ("discovery", "transfer"):
+        dp = S["difference_by_pool"][pool]["usable"]
+        assert dp is not None and dp["diff"] < 0, (pool, dp)
+        assert S["difference_by_pool"][pool]["n_items"] == {"repaired": 30, "control": 30}
+    assert sum(S["per_arm"][a]["usable"]["n"] for a in ARMS) == 120
+    print(f"self-check OK: usable diff {100 * d['diff']:+.1f} pp {d['ci']}; "
+          f"per pool " + ", ".join(f"{p} {100 * S['difference_by_pool'][p]['usable']['diff']:+.1f}" for p in S["difference_by_pool"]))
+    return 0
+
+
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--self-check", action="store_true", help="run on simulated Part 17 returns and exit")
     ap.add_argument("csv", nargs="*")
     ap.add_argument("--key", default=str(ROOT / "annotation" / "repair_audit_key.csv"))
     ap.add_argument("--out", default=None, help="default: analysis/<key stem without _key>")
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    if a.self_check:
+        return self_check()
     stem = Path(a.key).name.removesuffix(".csv").removesuffix("_key")      # repair_audit[_transfer]
     suffix = stem.removeprefix("repair_audit")                              # "" or "_transfer"
     a.out = a.out or str(ROOT / "analysis" / stem)
     ret_dir = ROOT / "annotation" / f"returns_repair{suffix}"
-    label = {"": "Part 4 repair audit", "_transfer": "Part 11 transfer repair audit (W-C guard)"}.get(
+    label = {"": "Part 4 repair audit", "_transfer": "Part 11 transfer repair audit (W-C guard)",
+                                          "_v2": "Part 17 repair audit v2 (new sentences, 3 raters per item)"}.get(
         suffix, f"{stem} repair audit")
     paths = a.csv or sorted(glob.glob(str(ret_dir / "*.csv")))
     key = {r["item_id"]: r for r in read_csv(a.key)}
@@ -203,6 +261,18 @@ def main() -> int:
     S["difference_repaired_minus_control"] = {
         e: newcombe(S["per_arm"]["repaired"][e], S["per_arm"]["control"][e]) for e in ENDPOINTS}
 
+    # Part 17: items with fewer than 3 usable ratings, and the difference within each pool
+    S["items_with_fewer_than_3_ratings"] = sum(r["n_ratings"] < 3 for r in item_rows) if "raters" in next(iter(key.values())) else None
+    S["difference_by_pool"] = {}
+    if "pool" in next(iter(key.values())):
+        for pool in sorted({k["pool"] for k in key.values()}):
+            pr = {arm: [r for r in item_rows if r["pool"] == pool and r["arm"] == arm and r["n_ratings"]] for arm in ARMS}
+            rt = {arm: {e: rate([r["cons_" + e] for r in pr[arm]]) for e in ENDPOINTS} for arm in ARMS}
+            S["difference_by_pool"][pool] = {
+                "n_items": {arm: sum(1 for r in item_rows if r["pool"] == pool and r["arm"] == arm) for arm in ARMS},
+                "per_arm": rt,
+                **{e: newcombe(rt["repaired"][e], rt["control"][e]) for e in ENDPOINTS}}
+
     # breakdown of consensus by channel group (descriptive)
     S["by_channel_group"] = {}
     for arm in ARMS:
@@ -248,7 +318,7 @@ def main() -> int:
     L = [f"# {label}: human ratings\n",
          f"Generated by `src/score_repair_audit.py`. Returns: {len(paths)} file(s), annotators: {', '.join(annots)}. "
          f"Key: `{Path(a.key).relative_to(ROOT) if Path(a.key).is_relative_to(ROOT) else a.key}` "
-         f"(frozen hash-ordered sample, 20 repaired + 20 controls; `annotation/{stem}_sample.json`).\n",
+         f"(frozen hash-ordered sample, {sum(k["arm"] == "repaired" for k in key.values())} repaired + {sum(k["arm"] == "control" for k in key.values())} controls; `annotation/{stem}_sample.json`).\n",
          "Wilson 95% CIs on item-level consensus (strict majority of known answers; ties/unsure = unknown, excluded "
          "from n and reported). "
          + ("Human ratings of a model-balanced sample: these are sample rates, not pool "
@@ -269,6 +339,15 @@ def main() -> int:
               "| arm/model | items | usable | preserving | usable & preserving |", "|---|---|---|---|---|"]
         for g, x in S["by_model_descriptive"].items():
             L.append(f"| {g} | {x['items']} | {fmt(x['usable'])} | {fmt(x['preserving'])} | {fmt(x['usable_and_preserving'])} |")
+    if S["difference_by_pool"]:
+        L += ["\n## Repaired minus control, per pool (item consensus, Newcombe 95%)\n",
+              f"Items with fewer than 3 usable ratings: {S['items_with_fewer_than_3_ratings']}.\n",
+              "| pool | endpoint | repaired | control | difference |", "|---|---|---|---|---|"]
+        for pool, x in S["difference_by_pool"].items():
+            for e in ENDPOINTS:
+                d = x[e]
+                L.append(f"| {pool} | {e} | {fmt(x['per_arm']['repaired'][e])} | {fmt(x['per_arm']['control'][e])} | "
+                         + (f"{100 * d['diff']:+.1f} pp [{100 * d['ci'][0]:+.1f}, {100 * d['ci'][1]:+.1f}]" if d else "n/a") + " |")
     L += ["\n## Per annotator (items within annotator)\n", "| annotator | arm | usable | preserving | usable & preserving | added stance |",
           "|---|---|---|---|---|---|"]
     for an in annots:

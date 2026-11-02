@@ -109,13 +109,16 @@ python src/make_intent_check.py --run hw1 --per-writer 10 --seed 20261102
 # 4b. Part 17: 60 repaired + 60 controls, frozen hash order, EXCLUDING every text in Parts 4/11;
 #     3 raters per item, raters = people who did not do Parts 4/11 (P02 P07 P09 P10 P11 P14)
 python src/make_repair_audit_v2.py --n 60 --raters P02,P07,P09,P10,P11,P14 --per-item 3
-# 4c. Part 15: 4 writers x 15 speech-act pairs; writers = people who never wrote speech_act; dedup against ALL
+# 4c. (roster chosen Nov 1: P05 P16 P17 P18; `make_assignments.py --stage 4` rebuilds sheets/stage4.csv/placeholders;
+#     annotation/assignments/stage4_plan.json is kept unless --rebuild or --writers/--raters/--checkers is given)
+#     Part 15: 4 writers x 15 speech-act pairs; writers = people who never wrote speech_act; dedup against ALL
 #     prior pairs (exact + Jaccard >= .75) is mandatory before checks
-python src/make_assignments.py --stage 4 --writers <4 IDs>
+python src/make_assignments.py --stage 4            # [--writers <4 IDs>]; returns -> annotation/returns_written_hw2/
 # 4d. after Part 15 returns: collect (batch hw2), fill Part 16 checks (3 per pair, never the writer)
-python src/collect_written_pairs.py --batch hw2 --no-batches && python src/make_assignments.py --stage 4 --fill-checks
+python src/collect_written_pairs.py --batch hw2 --no-batches     # -> annotation/written/hw2/ (see dedup_report.csv, rejected.csv)
+python src/make_assignments.py --stage 4 --fill-checks           # [--absent <ID>]; returns -> annotation/returns_hwcheck_hw2/
 # 4e. after Part 16: score, generate (P0, 5 channels, 4 models; ~1,000 requests), judge, arbiter, attribute
-python src/score_pair_checks.py --batch hw2
+python src/score_pair_checks.py --batch hw2        # -> data/items/hw2.jsonl, analysis/hw2_checks/ (hw1 untouched)
 python src/build_requests.py --items data/items/hw2.jsonl --split hw --prompts P0 --out runs/requests/hw2.jsonl
 bash src/run_sequential.sh runs/requests/hw2.jsonl hw2 > runs/hw2_seq.log 2>&1
 python src/judge.py --run hw2 --items data/items/hw2.jsonl --concurrency 8 > runs/hw2_judge.log 2>&1

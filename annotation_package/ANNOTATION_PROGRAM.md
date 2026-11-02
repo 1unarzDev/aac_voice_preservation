@@ -13,8 +13,8 @@ below for reference but are **superseded**.
 **Sources.**
 - The plan comes from `src/make_assignments.py --stage 1 --annotators P01..P20` and is frozen in
   `annotation/assignments/plan.json`.
-- Assignment lists are in `annotation/assignments/stage{1,2,3}.csv`; per-person sheets are in
-  `annotation_package/assignments/<ID>.md` (Stage 1), `<ID>_stage2.md` and `<ID>_stage3.md`.
+- Assignment lists are in `annotation/assignments/stage{1,2,3,4}.csv`; per-person sheets are in
+  `annotation_package/assignments/<ID>.md` (Stage 1), `<ID>_stage2.md`, `<ID>_stage3.md` and `<ID>_stage4.md`.
 - The coordinator hand-out is `HANDOUT.md`. The commands between stages are in `annotation/COORDINATOR_STEPS.md`
   (private).
 
@@ -27,7 +27,7 @@ below for reference but are **superseded**.
 | 2 | Nov 1 (due Nov 1, 23:59) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
 | between | Nov 1 (as Stage 2 returns) | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
 | 3 (optional) | Nov 1 (due Nov 1, 23:59) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
-| 4 (optional, proposed) | Nov 2-5 | Part 15 speech-act writing (4), Part 16 checks (6), Part 17 repair audit (6), Part 18 writer intent (20) | ~12 h |
+| 4 (optional) | Parts 15, 17, 18: Mon Nov 2 (due 23:59); Part 16: opens when Part 15 is back, due Tue Nov 3, 23:59 | Part 18 writer intent, all 20 (15 min, first); Part 15 speech-act writing, P05 P16 P17 P18 (25 min); Part 17 repair audit v2, P02 P07 P09 P10 P11 P14 (35 min); Part 16 checks, P01 P06 P08 P12 P13 P19 (about 22 min, about 30 pairs each) | 12.4 h (40 / 50 / 37 / 15 min per person by role) |
 
 **Deadlines.**
 - SE4All @ ICSE'27: evidence freeze Nov 10, submission Nov 13 AoE. Stages 1-2 feed it, and Stage 3 only if it is
@@ -115,6 +115,17 @@ gaps that more human work can close before the SE4All freeze (Nov 10):
    their **own** pairs and marks whether each one says what they meant in version A or version B, says something
    else, or is unclear (about 15 min). Writers are the people who know the intended meaning, so this is the
    closest check to an intended-speaker judgment this program can make. It is **not** a study with AAC users.
+
+**Roster (fixed Nov 1; `annotation/assignments/stage4_plan.json`).**
+- **Part 15 writers:** P05, P16, P17, P18. They are the four lowest-load people who never wrote speech act, are not
+  P06, and are not in the Part 17 list. Topic rotations 6, 3, 9, 0 (the ones no earlier speech-act writer used). Pairs go
+  into batch `hw2` (ids `hw2-act-NNN`).
+- **Part 17 raters:** P02, P07, P09, P10, P11, P14.
+- **Part 16 checkers:** P01, P06, P08, P12, P13, P19 (neither Part 15 writers nor Part 17 raters; lowest load);
+  reserves in order P03, P04, P15, P20. Each pair gets 3 checkers, never its writer; about 30 pairs each.
+- **Part 18:** all 20, first. P03, P04, P15 and P20 do only Part 18 (15 min).
+- **Dedup before checks:** hw2 pairs are compared with every earlier pair (hw1 accepted and rejected); exact copies and
+  pairs with token Jaccard >= .75 are rejected before any check is planned.
 
 Order: Part 18 can start at once (outputs exist). Part 17 needs its sample drawn (no new generation). Part 16
 follows Part 15 returns; generation and judging of the new pairs follow Part 16. Task sheets will be
