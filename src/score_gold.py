@@ -479,6 +479,10 @@ def verdict_agreement(run: str, key: dict, cons_all: dict) -> dict:
     from build_requests import custom_spec
     runs = key_runs(key)
     items = runio.load_items()
+    cand = ROOT / "annotation/written/hw_candidates.jsonl"  # hw1 was judged on all candidates (D-052)
+    if cand.exists():
+        for fid, it in runio.load_items(cand).items():
+            items.setdefault(fid, it)
     cols = ["output_id", "text_id", "family_id", "input_text", "variant", "channel",
             "valid", "violation", "constraint_preserving", "assumption"]
     stored = {}
