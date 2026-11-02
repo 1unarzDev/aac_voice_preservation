@@ -94,3 +94,35 @@ python src/score_gold.py --run hw --human 'annotation/returns_gold_hw/*.csv'
 A 4th check settles a 2-1 split by majority: 3/4 keeps the pair, 2/4 drops it. 1-2 splits are never routed, because
 a 4th check cannot change them. If a pair is dropped after hw1 has run, drop its outputs at analysis time, not by
 regenerating.
+
+## 4. Stage 4 (proposed Nov 1; build after the user confirms who is available)
+
+Rationale and decisions: D-058. Tools to build (Sonnet subagent): stage-4 fill in `make_assignments.py --stage 4`,
+`make_repair_audit_v2.py` (Part 17 sample), `intent_check.html` + `make_intent_check.py` + `score_intent_check.py`
+(Part 18). Parts 15/16 reuse `write_pairs.html` / `check_pairs.html` and `collect_written_pairs.py` /
+`score_pair_checks.py` with a new batch tag `hw2` (ids must not collide with hw1).
+
+```bash
+# 4a. Part 18 (start at once): 10 outputs per writer from their own KEPT pairs, hw1, P0, channels bare + chip1
+#     (5 + 5; declared, seeded draw), labels A / B / something else / unclear; key private
+python src/make_intent_check.py --run hw1 --per-writer 10 --seed 20261102
+# 4b. Part 17: 60 repaired + 60 controls, frozen hash order, EXCLUDING every text in Parts 4/11;
+#     3 raters per item, raters = people who did not do Parts 4/11 (P02 P07 P09 P10 P11 P14)
+python src/make_repair_audit_v2.py --n 60 --raters P02,P07,P09,P10,P11,P14 --per-item 3
+# 4c. Part 15: 4 writers x 15 speech-act pairs; writers = people who never wrote speech_act; dedup against ALL
+#     prior pairs (exact + Jaccard >= .75) is mandatory before checks
+python src/make_assignments.py --stage 4 --writers <4 IDs>
+# 4d. after Part 15 returns: collect (batch hw2), fill Part 16 checks (3 per pair, never the writer)
+python src/collect_written_pairs.py --batch hw2 --no-batches && python src/make_assignments.py --stage 4 --fill-checks
+# 4e. after Part 16: score, generate (P0, 5 channels, 4 models; ~1,000 requests), judge, arbiter, attribute
+python src/score_pair_checks.py --batch hw2
+python src/build_requests.py --items data/items/hw2.jsonl --split hw --prompts P0 --out runs/requests/hw2.jsonl
+bash src/run_sequential.sh runs/requests/hw2.jsonl hw2 > runs/hw2_seq.log 2>&1
+python src/judge.py --run hw2 --items data/items/hw2.jsonl --concurrency 8 > runs/hw2_judge.log 2>&1
+# then blind arbiter -> runs/hw2/arbiter.jsonl; attribute.py WITHOUT fallback
+```
+
+Analysis rules fixed now (before any Stage 4 data): hw1 + hw2 are analysed together, clustered by writer;
+hw1-only results are reported as a sensitivity. P06's remaining speech-act pair is excluded (D-058); P06's 15
+time pairs stay, with an exclude-P06 sensitivity. Part 17 is the primary repair-usability estimate; Part 4 is
+reported as the pilot. Part 18 is reported as writer-intent agreement, never as AAC-user validation.
