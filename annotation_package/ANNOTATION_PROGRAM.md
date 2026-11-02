@@ -27,6 +27,7 @@ below for reference but are **superseded**.
 | 2 | Nov 1 (due Nov 1, 23:59) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
 | between | Nov 1 (as Stage 2 returns) | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
 | 3 (optional) | Nov 1 (due Nov 1, 23:59) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
+| 4 (optional, proposed) | Nov 2-5 | Part 15 speech-act writing (4), Part 16 checks (6), Part 17 repair audit (6), Part 18 writer intent (20) | ~12 h |
 
 **Deadlines.**
 - SE4All @ ICSE'27: evidence freeze Nov 10, submission Nov 13 AoE. Stages 1-2 feed it, and Stage 3 only if it is
@@ -96,7 +97,30 @@ below for reference but are **superseded**.
 - **If codex-lb is congested,** run S3 only on the local models and keep terra at P0. That cuts elic1 terra
   requests to 2,400.
 
-**After Stage 3.** No further annotation is needed for the SE4All and CALE-AI papers. The next step is a separate
+**Stage 4 (optional top-up; proposed Nov 1, runs Nov 2-5 if annotators are available).** Stages 1-3 left two
+gaps that more human work can close before the SE4All freeze (Nov 10):
+
+1. **Part 15: more speech-act pairs (writing).** Speech act has the fewest kept pairs (69 of the 150 target),
+   and it carries the study's main test (the speech-act chip). **4 writers who have not written speech-act pairs
+   before** each write 15 new pairs in `write_pairs.html` (speech act only, about 25 min). That gives about 60 new
+   candidates and about 125 kept in total. Same rules as Part 7: your own sentences, no copying or adapting other
+   people's sentences, and no AI tools.
+2. **Part 16: blind checks of the new pairs.** Same task and tool as Part 8 (`check_pairs.html`). Every new pair
+   gets 3 checkers, never its writer. About 6 people check 30 pairs each (about 22 min).
+3. **Part 17: larger repair audit (new sentences).** Same task and tool as Part 4, on new sentences that were not in
+   Parts 4 or 11: 60 repaired outputs and 60 unrepaired controls, 3 independent raters per sentence. Raters
+   who did **not** do Parts 4 or 11 (P02, P07, P09, P10, P11, P14) rate 60 sentences each (about 35 min).
+   Part 4 had 20+20 sentences, so its repaired-vs-control gap has a wide interval. Part 17 triples the items.
+4. **Part 18 (optional): did it say what you meant?** Each writer sees 10 model sentences generated from
+   their **own** pairs and marks whether each one says what they meant in version A or version B, says something
+   else, or is unclear (about 15 min). Writers are the people who know the intended meaning, so this is the
+   closest check to an intended-speaker judgment this program can make. It is **not** a study with AAC users.
+
+Order: Part 18 can start at once (outputs exist). Part 17 needs its sample drawn (no new generation). Part 16
+follows Part 15 returns; generation and judging of the new pairs follow Part 16. Task sheets will be
+`assignments/<ID>_stage4.md` once the coordinator confirms who is available.
+
+**After Stage 4.** No further annotation is needed for the SE4All and CALE-AI papers. The next step is a separate
 study with AAC users. It needs its own ethics determination (IRB or equivalent) before anyone is recruited, and it
 is outside this program.
 
