@@ -129,3 +129,14 @@ Analysis rules fixed now (before any Stage 4 data): hw1 + hw2 are analysed toget
 hw1-only results are reported as a sensitivity. P06's remaining speech-act pair is excluded (D-058); P06's 15
 time pairs stay, with an exclude-P06 sensitivity. Part 17 is the primary repair-usability estimate; Part 4 is
 reported as the pilot. Part 18 is reported as writer-intent agreement, never as AAC-user validation.
+
+### Part 17 decision rule (frozen 2026-11-01 before any Part 17 return; D-062)
+Primary endpoint: item-level consensus "usable" (strict majority of 3 raters; ties/unsure = unknown, and a
+sensitivity check counts unknown as unusable). Estimate: repaired − control, Newcombe 95% CI, pooled over both pools, plus per pool.
+- If the pooled CI lies entirely below −10 pp: the guard fails a new deployment clause ("usable ≥ control − 10 pp").
+  It is reported as "killed for deployment, kept as a detector".
+- If the CI includes −10 pp but excludes 0: report it as a usability cost of uncertain size.
+- If the CI includes 0: report no detectable cost, pooled with Part 4 as a sensitivity check.
+
+Part 4 is reported as the pilot (n = 20 + 20, raters not independent), never combined selectively. Neither audit is
+chosen because it is more favourable.
