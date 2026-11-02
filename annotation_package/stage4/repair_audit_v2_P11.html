@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentence Check (Part 17)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  label { font-weight: 600; }
+  input[type=text] { font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 10em; }
+  textarea { font: inherit; font-size: 1rem; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.6rem; font-weight: 600; padding: 16px; border: 3px solid var(--fg); margin: 8px 0 16px; background: var(--panel); overflow-wrap: anywhere; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  fieldset.active { border: 4px solid var(--accent); }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  .unsure { font-style: italic; color: var(--muted); }
+  .input-box { padding: 8px 12px; border: 2px dashed var(--fg); margin: 4px 0 8px; overflow-wrap: anywhere; }
+  .input-box .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+  .input-box ul { margin: 4px 0 0; padding-left: 1.2em; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sentence check (Part 17)</h1>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Enter your annotator ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="itemview" class="hidden">
+        <div id="phasetag" class="tag"></div>
+        <div id="inputwrap" class="hidden">
+          <div class="q">What the user selected or typed:</div>
+          <div class="input-box" id="inputbox"></div>
+        </div>
+        <div class="q">Sentence:</div>
+        <div class="sentence" id="sentence"></div>
+        <form id="form" onsubmit="return false"></form>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div>
+          <button type="button" id="back">Back (Backspace)</button>
+          <button type="button" id="next" class="primary">Next (Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to judge</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">1</span>–<span class="key">3</span> choose an option for the highlighted question</li>
+        <li><span class="key">S</span> can't judge / skip the highlighted question</li>
+        <li><span class="key">↑</span> <span class="key">↓</span> move between questions</li>
+        <li><span class="key">Tab</span> go to the note box; type your note</li>
+        <li><span class="key">Enter</span> next item (also from the note box)</li>
+        <li><span class="key">Esc</span> leave the note box</li>
+        <li><span class="key">Backspace</span> previous item (outside the note box)</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+/* Items are embedded (no file loading). Blind: id, sentence and visible input only. */
+const ITEMS = /*AUDIT_ITEMS_BEGIN*/[
+{
+"item_id": "rv-01b7fb",
+"text": "Check your account.",
+"input": {
+"kind": "keywords",
+"words": "check account",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-04bc53",
+"text": "You printed the boarding passes.",
+"input": {
+"kind": "typed",
+"typed": "You printed the boarding passes."
+}
+},
+{
+"item_id": "rv-077206",
+"text": "Ask you for water and tomatoes.",
+"input": {
+"kind": "keywords",
+"words": "water tomatoes",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-0dc409",
+"text": "Can you print the passes?",
+"input": {
+"kind": "keywords",
+"words": "print passes",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+}
+]
+}
+},
+{
+"item_id": "rv-192f18",
+"text": "Yes, I can afford the tickets.",
+"input": {
+"kind": "keywords",
+"words": "afford tickets",
+"chips": [
+{
+"chip": "[YES]",
+"meaning": "affirmative (not negated)"
+}
+]
+}
+},
+{
+"item_id": "rv-23b200",
+"text": "I sort the recycling.",
+"input": {
+"kind": "keywords",
+"words": "sort recycling",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+}
+]
+}
+},
+{
+"item_id": "rv-23c430",
+"text": "Ask me to charge the wheelchair.",
+"input": {
+"kind": "keywords",
+"words": "charge wheelchair",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+}
+]
+}
+},
+{
+"item_id": "rv-26f56e",
+"text": "I think my boss is angry about the sales report.",
+"input": {
+"kind": "typed",
+"typed": "I think my boss is angry about the sales report."
+}
+},
+{
+"item_id": "rv-2818a6",
+"text": "I have headaches.",
+"input": {
+"kind": "keywords",
+"words": "have headaches",
+"chips": []
+}
+},
+{
+"item_id": "rv-320307",
+"text": "Maybe I need some more time to study for the test.",
+"input": {
+"kind": "keywords",
+"words": "need time test",
+"chips": [
+{
+"chip": "[MAYBE]",
+"meaning": "uncertain"
+}
+]
+}
+},
+{
+"item_id": "rv-34d37d",
+"text": "Ask you the book.",
+"input": {
+"kind": "keywords",
+"words": "book table",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-3c51fb",
+"text": "My sister will visit later.",
+"input": {
+"kind": "keywords",
+"words": "sister visit",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[THEY]",
+"meaning": "someone else does it"
+},
+{
+"chip": "[LATER]",
+"meaning": "future time"
+}
+]
+}
+},
+{
+"item_id": "rv-4007bf",
+"text": "Can you get tickets?",
+"input": {
+"kind": "keywords",
+"words": "get tickets",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-414742",
+"text": "My sister visited last weekend.",
+"input": {
+"kind": "typed",
+"typed": "My sister visited last weekend."
+}
+},
+{
+"item_id": "rv-42c670",
+"text": "Can you pick up milk on your way home?",
+"input": {
+"kind": "typed",
+"typed": "Can you pick up milk on your way home?"
+}
+},
+{
+"item_id": "rv-4b3070",
+"text": "Are we going to the nightclub tonight?",
+"input": {
+"kind": "keywords",
+"words": "night club",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+}
+]
+}
+},
+{
+"item_id": "rv-4f5498",
+"text": "I walked the dog after lunch.",
+"input": {
+"kind": "typed",
+"typed": "I walked the dog after lunch."
+}
+},
+{
+"item_id": "rv-512e38",
+"text": "Please drop me at the side entrance.",
+"input": {
+"kind": "typed",
+"typed": "Could you drop me at the side entrance?"
+}
+},
+{
+"item_id": "rv-54d6a1",
+"text": "Yes, I tell that I eat dairy.",
+"input": {
+"kind": "keywords",
+"words": "eat dairy",
+"chips": [
+{
+"chip": "[YES]",
+"meaning": "affirmative (not negated)"
+},
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[I]",
+"meaning": "I do it"
+}
+]
+}
+},
+{
+"item_id": "rv-567cff",
+"text": "Tell me if you’re wearing headphones.",
+"input": {
+"kind": "keywords",
+"words": "wear headphones",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-5b20af",
+"text": "The passes are printed.",
+"input": {
+"kind": "keywords",
+"words": "print passes",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+}
+]
+}
+},
+{
+"item_id": "rv-5c3d3a",
+"text": "Are you going to renew the tax?",
+"input": {
+"kind": "keywords",
+"words": "renew tax",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+}
+]
+}
+},
+{
+"item_id": "rv-628bea",
+"text": "Call me when the test results come in.",
+"input": {
+"kind": "typed",
+"typed": "Call me when the test results come in."
+}
+},
+{
+"item_id": "rv-6535fa",
+"text": "Ask you for tickets.",
+"input": {
+"kind": "keywords",
+"words": "get tickets",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-66dcf2",
+"text": "I want to eat the leftover pasta.",
+"input": {
+"kind": "keywords",
+"words": "leftover eat pasta",
+"chips": []
+}
+},
+{
+"item_id": "rv-6be4f3",
+"text": "Please wear headphones for your music.",
+"input": {
+"kind": "typed",
+"typed": "Wear headphones for your music, please."
+}
+},
+{
+"item_id": "rv-6ca13c",
+"text": "I might have lost the card.",
+"input": {
+"kind": "keywords",
+"words": "lose card",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[MAYBE]",
+"meaning": "uncertain"
+},
+{
+"chip": "[I]",
+"meaning": "I do it"
+},
+{
+"chip": "[PAST]",
+"meaning": "past time"
+}
+]
+}
+},
+{
+"item_id": "rv-75bdc6",
+"text": "You tell you to drive to the station.",
+"input": {
+"kind": "keywords",
+"words": "drive station",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+}
+]
+}
+},
+{
+"item_id": "rv-7a1547",
+"text": "come and knock on the door",
+"input": {
+"kind": "keywords",
+"words": "knock come",
+"chips": []
+}
+},
+{
+"item_id": "rv-7a1809",
+"text": "I eat test.",
+"input": {
+"kind": "keywords",
+"words": "eat test",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[I]",
+"meaning": "I do it"
+}
+]
+}
+},
+{
+"item_id": "rv-7c36de",
+"text": "Move my wheelchair closer to the bed.",
+"input": {
+"kind": "typed",
+"typed": "Move my wheelchair closer to the bed."
+}
+},
+{
+"item_id": "rv-7e1df9",
+"text": "Can you upload pictures?",
+"input": {
+"kind": "keywords",
+"words": "upload pics",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+}
+]
+}
+},
+{
+"item_id": "rv-852118",
+"text": "Can I skip lunch?",
+"input": {
+"kind": "keywords",
+"words": "skip lunch",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+}
+]
+}
+},
+{
+"item_id": "rv-89f442",
+"text": "Pay for the taxi.",
+"input": {
+"kind": "keywords",
+"words": "pay taxi",
+"chips": []
+}
+},
+{
+"item_id": "rv-8afedc",
+"text": "Ask you to mail documents.",
+"input": {
+"kind": "keywords",
+"words": "mail documents",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-918636",
+"text": "My brother is not telling that their brother is coming for graduation.",
+"input": {
+"kind": "keywords",
+"words": "brother coming graduation",
+"chips": [
+{
+"chip": "[NOT]",
+"meaning": "negation"
+},
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[THEY]",
+"meaning": "someone else does it"
+}
+]
+}
+},
+{
+"item_id": "rv-a0c554",
+"text": "Speak more slowly.",
+"input": {
+"kind": "keywords",
+"words": "speak more slowly",
+"chips": []
+}
+},
+{
+"item_id": "rv-a1a9e2",
+"text": "Speak slowly.",
+"input": {
+"kind": "keywords",
+"words": "speak slowly",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-a33395",
+"text": "Tell the manager about the noise in the office.",
+"input": {
+"kind": "keywords",
+"words": "office tell manager noise",
+"chips": []
+}
+},
+{
+"item_id": "rv-a4a822",
+"text": "The train has been cancelled.",
+"input": {
+"kind": "keywords",
+"words": "train cancelled",
+"chips": []
+}
+},
+{
+"item_id": "rv-aeafb0",
+"text": "Do you have my spare key?",
+"input": {
+"kind": "typed",
+"typed": "Do you have my spare key?"
+}
+},
+{
+"item_id": "rv-b0b8c2",
+"text": "Save the seat for me.",
+"input": {
+"kind": "keywords",
+"words": "save seat gig",
+"chips": []
+}
+},
+{
+"item_id": "rv-b488e5",
+"text": "I want to start a new job.",
+"input": {
+"kind": "keywords",
+"words": "start new job",
+"chips": []
+}
+},
+{
+"item_id": "rv-b64d02",
+"text": "I will tell my sister about the wedding.",
+"input": {
+"kind": "keywords",
+"words": "sister coming wedding",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+}
+]
+}
+},
+{
+"item_id": "rv-b87206",
+"text": "I must finish the slides.",
+"input": {
+"kind": "keywords",
+"words": "need finish slides",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+},
+{
+"chip": "[MUST]",
+"meaning": "obligation"
+},
+{
+"chip": "[I]",
+"meaning": "I do it"
+}
+]
+}
+},
+{
+"item_id": "rv-bc4e17",
+"text": "Am I at the bus stop near the hospital?",
+"input": {
+"kind": "keywords",
+"words": "bus stop hospital",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+}
+]
+}
+},
+{
+"item_id": "rv-c3afac",
+"text": "Are you picking up milk?",
+"input": {
+"kind": "keywords",
+"words": "pick up milk",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+}
+]
+}
+},
+{
+"item_id": "rv-c54ebe",
+"text": "Do you clear the snow?",
+"input": {
+"kind": "keywords",
+"words": "clear snow",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+}
+]
+}
+},
+{
+"item_id": "rv-c87cb8",
+"text": "Is Mom here?",
+"input": {
+"kind": "keywords",
+"words": "mom here",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+}
+]
+}
+},
+{
+"item_id": "rv-ca9eb9",
+"text": "Do you need groceries?",
+"input": {
+"kind": "keywords",
+"words": "need groceries",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+}
+]
+}
+},
+{
+"item_id": "rv-cd07b5",
+"text": "I want to charge my wheelchair tonight.",
+"input": {
+"kind": "keywords",
+"words": "charge wheelchair tonight",
+"chips": []
+}
+},
+{
+"item_id": "rv-d163b3",
+"text": "Maybe my friend is still upset with me.",
+"input": {
+"kind": "typed",
+"typed": "Maybe my friend is still upset with me."
+}
+},
+{
+"item_id": "rv-e1499c",
+"text": "Do you mail documents?",
+"input": {
+"kind": "keywords",
+"words": "mail documents",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+}
+]
+}
+},
+{
+"item_id": "rv-e5397e",
+"text": "Find the TV remote for me.",
+"input": {
+"kind": "typed",
+"typed": "Find the TV remote for me."
+}
+},
+{
+"item_id": "rv-e63cfa",
+"text": "I would like to know about the waiting list.",
+"input": {
+"kind": "keywords",
+"words": "waiting list",
+"chips": [
+{
+"chip": "[TELL]",
+"meaning": "a plain statement"
+}
+]
+}
+},
+{
+"item_id": "rv-edc24f",
+"text": "Put the bins away.",
+"input": {
+"kind": "keywords",
+"words": "put bins",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+}
+]
+}
+},
+{
+"item_id": "rv-ee33c4",
+"text": "Are they taking the bus to the hospital?",
+"input": {
+"kind": "keywords",
+"words": "bus stop hospital",
+"chips": [
+{
+"chip": "[?]",
+"meaning": "a question"
+},
+{
+"chip": "[THEY]",
+"meaning": "someone else does it"
+}
+]
+}
+},
+{
+"item_id": "rv-f05a81",
+"text": "Ask you for mail documents.",
+"input": {
+"kind": "keywords",
+"words": "mail documents",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+},
+{
+"item_id": "rv-fa2e46",
+"text": "Bring me the salt.",
+"input": {
+"kind": "keywords",
+"words": "bring salt",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+}
+]
+}
+},
+{
+"item_id": "rv-fb3b69",
+"text": "Give me the receipt.",
+"input": {
+"kind": "keywords",
+"words": "give receipt",
+"chips": [
+{
+"chip": "[ASK]",
+"meaning": "a request to the listener"
+},
+{
+"chip": "[YOU]",
+"meaning": "the listener does it"
+},
+{
+"chip": "[PLAIN]",
+"meaning": "no added politeness"
+}
+]
+}
+}
+]/*AUDIT_ITEMS_END*/;
+const RUN = "repair_audit_v2_P11";
+const ASSIGNED = "P11";
+
+const PRACTICE = [
+  {item_id: "prac-1", practice: true, text: "I don't want soup.",
+   input: {kind: "keywords", words: "want soup", chips: [{chip: "[NOT]", meaning: "negation"}, {chip: "[I]", meaning: "I do it"}]},
+   expected: {quality: "yes", contract: "yes", added: "no"},
+   fbA: "A complete, natural sentence that someone could send as it is.",
+   fbB: "It keeps the negation ([NOT]) and the speaker as the one doing it ([I]), uses the keywords, and adds nothing the input did not give."},
+  {item_id: "prac-2", practice: true, text: "rain later maybe",
+   input: {kind: "keywords", words: "rain later", chips: [{chip: "[MAYBE]", meaning: "uncertain"}]},
+   expected: {quality: "no", contract: "yes", added: "no"},
+   fbA: "This is a list of words, not a sentence. Answer 'no' (or 'minor fix needed' if you think one small edit, such as 'It might rain later.', would fix it) and write a short note, e.g. 'fragment, no verb'.",
+   fbB: "The two passes are judged separately. Even though it is not a good sentence, it says what the input specifies (rain, later, uncertain) and adds nothing, so the answer here is 'yes' and 'no'."},
+  {item_id: "prac-3", practice: true, text: "Could you please feed the cat now?",
+   input: {kind: "keywords", words: "feed cat", chips: [{chip: "[TELL]", meaning: "a plain statement"}, {chip: "[PLAIN]", meaning: "no added politeness"}]},
+   expected: {quality: "yes", contract: "no", added: "yes"},
+   fbA: "Judged on its own, this is a complete, natural sentence. Pass A does not look at the input.",
+   fbB: "The input asks for a plain statement with no added politeness, but the sentence is a polite request: it contradicts [TELL] and [PLAIN], so 'no'. It also adds politeness ('could you please') and a time ('now') the input did not give, so 'yes'."},
+];
+
+const Q_A = [{dim: "quality", title: "Sentence quality",
+  text: "Is this a complete, natural sentence a person could send as-is?",
+  options: ["yes", "minor fix needed", "no"]}];
+const Q_B = [
+  {dim: "contract", title: "Says what the input specifies",
+   text: "Does the sentence say everything the input specifies, and nothing that contradicts it?",
+   options: ["yes", "partly", "no"]},
+  {dim: "added", title: "Adds something",
+   text: "Does it add meaning, certainty, politeness, or a different speaker that the input did not give?",
+   options: ["yes", "no"]}];
+
+const HELP = {
+  A: "<p><strong>Pass A.</strong> You see each sentence alone. Judge only whether it is a complete, natural sentence that a person could send as it is. Do not guess what the person wanted to say.</p>" +
+     "<dl><dt>yes</dt><dd>Fine to send unchanged.</dd><dt>minor fix needed</dt><dd>One small edit (a missing word, wrong word form, punctuation that changes how it reads) would make it fine.</dd>" +
+     "<dt>no</dt><dd>A fragment, garbled, or would need rewriting.</dd></dl><p>If you do not answer 'yes', write a short note (a few words) saying what is wrong.</p>",
+  B: "<p><strong>Pass B.</strong> You now also see what the user selected or typed. Keywords are content words; chips (in brackets) are meanings the user chose on purpose.</p>" +
+     "<dl><dt>Says what the input specifies</dt><dd>'yes': every chip meaning and the keywords' content are expressed, nothing contradicts them. 'partly': some is missing or slightly off. 'no': a chip meaning or the typed sentence's meaning is contradicted or lost.</dd>" +
+     "<dt>Adds something</dt><dd>'yes' if the sentence adds meaning (facts, reasons, people, times), certainty or doubt, politeness ('please', 'could you'), or makes a different person the speaker or the one doing it, when the input did not give it. Grammar words don't count.</dd></dl>" +
+     "<p>Chips: [NOT] negation, [YES] affirmative, [?] question, [ASK] request to the listener, [TELL] plain statement, [MAYBE] uncertain, [SURE] certain, [I] [YOU] [WE] [THEY] who does it, [PAST] [NOW] [LATER] time, [PLEASE] polite, [PLAIN] no added politeness, [3] an exact number.</p>",
+};
+
+let S = null;          // saved state for the current annotator
+let shownAt = null, showingFeedback = false, active = 0;
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+const store = {
+  key(id) { return "repairaudit:v2:" + id; },
+  load(id) { try { const s = localStorage.getItem(this.key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.annot), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+
+/* deterministic per-annotator shuffle (FNV-1a seed + mulberry32) */
+function seedOf(str) { let h = 2166136261 >>> 0; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
+function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function shuffled(ids, seedStr) { const a = ids.slice(), r = rng(seedOf(seedStr)); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function newState(id) {
+  const ids = ITEMS.map(x => x.item_id);
+  return {annot: id, run: RUN, phase: "introA", idx: 0,
+          orderA: shuffled(ids, id + "|A"), orderB: shuffled(ids, id + "|B"),
+          A: {}, B: {}, PA: {}, PB: {}, startedB: null};
+}
+const BYID = Object.fromEntries([...ITEMS, ...PRACTICE].map(x => [x.item_id, x]));
+const PHASES = {
+  introA: {intro: true, next: "PA"}, PA: {pass: "A", practice: true, next: "A"},
+  A: {pass: "A", next: "introB"}, introB: {intro: true, next: "PB"},
+  PB: {pass: "B", practice: true, next: "B"}, B: {pass: "B", next: "done"}, done: {intro: true},
+};
+function seq(ph) { return ph === "PA" || ph === "PB" ? PRACTICE.map(p => p.item_id) : ph === "A" ? S.orderA : S.orderB; }
+function questions(ph) { return PHASES[ph].pass === "A" ? Q_A : Q_B; }
+function rec(ph, id) { if (!S[ph][id]) S[ph][id] = {answers: {}, unsure: {}, note: "", time_ms: 0}; return S[ph][id]; }
+function needsNote(ph, r) { return PHASES[ph].pass === "A" && r.answers.quality && r.answers.quality !== "yes"; }
+function complete(ph, id) {
+  const r = S[ph][id]; if (!r) return false;
+  if (!questions(ph).every(q => r.answers[q.dim] || r.unsure[q.dim])) return false;
+  return !needsNote(ph, r) || r.note.trim().length >= 2;
+}
+function nDone(ph) { return seq(ph).filter(id => complete(ph, id)).length; }
+
+function stopClock() {
+  if (shownAt !== null && S && !PHASES[S.phase].intro) { rec(S.phase, seq(S.phase)[S.idx]).time_ms += Date.now() - shownAt; }
+  shownAt = null;
+}
+
+function renderProgress() {
+  const total = 2 * ITEMS.length, done = S ? nDone("A") + nDone("B") : 0;
+  const pct = Math.round(100 * done / total);
+  let t = "Enter your annotator ID to begin.";
+  if (S) {
+    const ph = S.phase;
+    t = PHASES[ph].intro ? (ph === "done" ? "Finished" : ph === "introA" ? "Ready for Pass A" : "Ready for Pass B")
+      : (PHASES[ph].practice ? "Practice " : "") + "Pass " + PHASES[ph].pass + ": item " + (S.idx + 1) + " of " + seq(ph).length;
+    t += " (" + done + " of " + total + " judgments complete, " + pct + "%)";
+  }
+  $("progtext").textContent = t;
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+
+function renderIntro() {
+  const ph = S.phase, v = $("introview");
+  $("itemview").classList.add("hidden"); v.classList.remove("hidden");
+  $("help").innerHTML = ph === "introA" ? HELP.A : HELP.B;
+  if (ph === "introA") v.innerHTML = "<h2>Pass A: sentence quality</h2><p>You will see " + ITEMS.length +
+    " short sentences, one at a time, without any context. For each, decide whether it is a complete, natural sentence a person could send as it is.</p>" +
+    "<p>First come 3 practice items with feedback. Press <span class='key'>Enter</span> or the button to start.</p><button type='button' class='primary' id='go'>Start practice (Enter)</button>";
+  else if (ph === "introB") v.innerHTML = "<h2>Pass B: does it say what the user specified?</h2><p>Pass A is complete and now locked. You will see the same " + ITEMS.length +
+    " sentences again in a new order, this time with what the user selected or typed. Answer two questions for each.</p>" +
+    "<p>Keywords are content words; chips such as <strong>[NOT]</strong> are meanings the user chose on purpose. Their meanings are listed beside the input and in the help panel.</p>" +
+    "<p>First come 3 practice items with feedback. Press <span class='key'>Enter</span> or the button to start.</p><button type='button' class='primary' id='go'>Start practice (Enter)</button>";
+  else v.innerHTML = "<h2>All done. Thank you!</h2><p>Please press <strong>Download CSV</strong> and send the file to the study coordinator.</p>";
+  const go = $("go"); if (go) go.addEventListener("click", advanceIntro);
+  v.focus();
+}
+function advanceIntro() {
+  if (S.phase === "introA") { S.phase = "PA"; }
+  else if (S.phase === "introB") { S.phase = "PB"; if (!S.startedB) S.startedB = new Date().toISOString(); }
+  else return;
+  S.idx = 0; active = 0; store.save(); render();
+}
+
+function inputNode(inp) {
+  const box = $("inputbox"); box.innerHTML = "";
+  if (inp.kind === "typed") {
+    box.append("Typed sentence: "); const s = document.createElement("span"); s.className = "mono"; s.textContent = inp.typed; box.append(s);
+    return;
+  }
+  box.append("Keywords: "); const w = document.createElement("span"); w.className = "mono"; w.textContent = inp.words; box.append(w);
+  if (inp.chips.length) {
+    const ul = document.createElement("ul"); ul.setAttribute("aria-label", "Chips");
+    for (const c of inp.chips) { const li = document.createElement("li"); const m = document.createElement("span"); m.className = "mono"; m.textContent = c.chip; li.append("Chip ", m, " = " + c.meaning); ul.append(li); }
+    box.append(ul);
+  } else { const p = document.createElement("div"); p.textContent = "No chips selected."; box.append(p); }
+}
+
+function render() {
+  if (!S) return;
+  renderProgress();
+  if (PHASES[S.phase].intro) { renderIntro(); return; }
+  const ph = S.phase, info = PHASES[ph], id = seq(ph)[S.idx], it = BYID[id], r = rec(ph, id);
+  $("introview").classList.add("hidden"); $("itemview").classList.remove("hidden");
+  $("help").innerHTML = info.pass === "A" ? HELP.A : HELP.B;
+  $("phasetag").textContent = (info.practice ? "Practice (you will see feedback) - " : "") + "Pass " + info.pass;
+  $("inputwrap").classList.toggle("hidden", info.pass !== "B");
+  if (info.pass === "B") inputNode(it.input);
+  $("sentence").textContent = it.text;
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  const form = $("form"); form.innerHTML = "";
+  const qs = questions(ph);
+  qs.forEach((q, qi) => {
+    const fs = document.createElement("fieldset"); fs.id = "q" + qi; fs.className = qi === active ? "active" : "";
+    const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + q.title; fs.append(lg);
+    const p = document.createElement("p"); p.className = "q"; p.textContent = q.text; fs.append(p);
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", q.title);
+    q.options.forEach((o, oi) => {
+      const lab = document.createElement("label"); lab.className = "opt" + (r.answers[q.dim] === o ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.value = o; inp.checked = r.answers[q.dim] === o;
+      inp.disabled = showingFeedback;
+      inp.addEventListener("change", () => answer(qi, o));
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(oi + 1);
+      lab.append(inp, k, document.createTextNode(" " + o)); opts.append(lab);
+    });
+    fs.append(opts);
+    if (r.unsure[q.dim]) { const u = document.createElement("p"); u.className = "unsure"; u.textContent = "Marked can't judge / skipped."; fs.append(u); }
+    fs.addEventListener("click", () => { if (active !== qi) { active = qi; render(); } });
+    form.append(fs);
+  });
+  if (needsNote(ph, r)) {
+    const wrap = document.createElement("div");
+    const lab = document.createElement("label"); lab.htmlFor = "note"; lab.textContent = "Short note: what is wrong or what would you fix? (required)";
+    const ta = document.createElement("textarea"); ta.id = "note"; ta.value = r.note; ta.maxLength = 300; ta.disabled = showingFeedback;
+    ta.addEventListener("input", () => { r.note = ta.value; store.save(); renderProgress(); });
+    wrap.append(lab, ta); form.append(wrap);
+  }
+  const a = $("q" + active); if (a && a.scrollIntoView) a.scrollIntoView({block: "nearest"});
+  if (shownAt === null) shownAt = Date.now();
+}
+
+function answer(qi, value) {
+  const ph = S.phase, id = seq(ph)[S.idx], q = questions(ph)[qi], r = rec(ph, id);
+  if (showingFeedback) return;
+  r.answers[q.dim] = value; delete r.unsure[q.dim];
+  active = Math.min(qi + 1, questions(ph).length - 1);
+  store.save(); render();
+  if (needsNote(ph, r) && !r.note.trim()) { $("note").focus(); say("Type a short note, then press Enter."); }
+}
+function markUnsure() {
+  const ph = S.phase, id = seq(ph)[S.idx], q = questions(ph)[active], r = rec(ph, id);
+  if (showingFeedback) return;
+  r.unsure[q.dim] = true; delete r.answers[q.dim];
+  active = Math.min(active + 1, questions(ph).length - 1);
+  store.save(); render();
+}
+
+function showFeedback(it) {
+  const ph = S.phase, r = rec(ph, it.item_id), fb = $("feedback"); fb.innerHTML = "";
+  const h = document.createElement("p"); h.innerHTML = "<strong>Feedback.</strong> Press Enter to continue."; fb.append(h);
+  const ul = document.createElement("ul");
+  for (const q of questions(ph)) {
+    const exp = it.expected[q.dim], got = r.answers[q.dim] || "(can't judge)";
+    const li = document.createElement("li"); const s = document.createElement("span");
+    s.className = got === exp ? "ok" : "bad"; s.textContent = got === exp ? "Matches" : "Different";
+    li.append(s, document.createTextNode(" - " + q.title + ": you chose " + got + "; suggested answer: " + exp)); ul.append(li);
+  }
+  fb.append(ul);
+  const p = document.createElement("p"); p.textContent = PHASES[ph].pass === "A" ? it.fbA : it.fbB; fb.append(p);
+  showingFeedback = true; render(); fb.classList.remove("hidden"); fb.focus();
+}
+
+function next() {
+  if (!S) return;
+  if (PHASES[S.phase].intro) { advanceIntro(); return; }
+  const ph = S.phase, id = seq(ph)[S.idx], it = BYID[id], r = rec(ph, id);
+  if (!complete(ph, id)) {
+    const qs = questions(ph), miss = qs.findIndex(q => !(r.answers[q.dim] || r.unsure[q.dim]));
+    if (miss >= 0) { active = miss; say("Please answer every question, or press S for can't judge."); render(); return; }
+    say("Please type a short note (a few words) about what is wrong."); render(); $("note").focus(); return;
+  }
+  if (it.practice && !showingFeedback) { showFeedback(it); return; }
+  showingFeedback = false;
+  stopClock(); say("");
+  if (S.idx < seq(ph).length - 1) { S.idx++; active = 0; }
+  else {
+    if (ph === "A" && nDone("A") < ITEMS.length) { S.idx = seq("A").findIndex(x => !complete("A", x)); say("Some Pass A items are incomplete."); }
+    else { S.phase = PHASES[ph].next; S.idx = 0; active = 0; }
+  }
+  store.save(); render();
+}
+function back() {
+  if (!S || PHASES[S.phase].intro || S.idx === 0) return;   // never back across a pass boundary: Pass A locks
+  showingFeedback = false; stopClock(); S.idx--; active = 0; store.save(); render();
+}
+
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your annotator ID first."); $("annot").focus(); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["item_id", "annotator", "practice", "a_order", "a_quality", "a_unsure", "a_note", "a_time_ms",
+                "b_order", "b_contract", "b_added", "b_unsure", "b_time_ms", "b_started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  const row = (id, practice, a, b, ao, bo) => [id, S.annot, practice ? 1 : 0,
+    ao, a ? a.answers.quality || "" : "", a && a.unsure.quality ? 1 : 0, a ? a.note.trim() : "", a ? Math.round(a.time_ms) : "",
+    bo, b ? b.answers.contract || "" : "", b ? b.answers.added || "" : "", b ? Object.keys(b.unsure).join("|") : "", b ? Math.round(b.time_ms) : "",
+    S.startedB || "", RUN, now].map(csvCell).join(",");
+  PRACTICE.forEach((p, i) => { if (S.PA[p.item_id] || S.PB[p.item_id]) lines.push(row(p.item_id, true, S.PA[p.item_id], S.PB[p.item_id], i + 1, i + 1)); });
+  for (const it of ITEMS) {
+    const a = S.A[it.item_id], b = S.B[it.item_id]; if (!a && !b) continue;
+    lines.push(row(it.item_id, false, a, b, S.orderA.indexOf(it.item_id) + 1, S.orderB.indexOf(it.item_id) + 1));
+  }
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "repair_audit_v2_" + S.annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (lines.length - 1) + " rows, " + (nDone("A") + nDone("B")) + " of " + 2 * ITEMS.length + " judgments complete).");
+  return lines.join("\n");
+}
+
+function startFor(id) {
+  if (!id) { S = null; return; }
+  if (id.trim().toUpperCase() !== ASSIGNED) {
+    S = null; renderProgress();
+    say("This file is for annotator " + ASSIGNED + ". Ask the study coordinator for your own file.");
+    return;
+  }
+  id = ASSIGNED;
+  stopClock(); store.save(); showingFeedback = false;
+  const saved = store.load(id);
+  S = saved && saved.run === RUN ? saved : newState(id);
+  active = 0; store.save();
+  say(saved ? "Resumed saved progress for " + id + "." : "Started a new session for " + id + ".");
+  render();
+}
+$("annot").addEventListener("change", () => startFor(annotId()));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); startFor(annotId()); const v = $("introview"); if (!v.classList.contains("hidden")) v.focus(); } });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && !PHASES[S.phase].intro && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!S || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && t.id === "annot") return;
+  if (t && t.tagName === "TEXTAREA") {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); next(); }
+    else if (e.key === "Escape") { e.preventDefault(); t.blur(); $("form").focus(); }
+    return;
+  }
+  if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) {
+    if (e.key === "Enter") { e.preventDefault(); t.click(); }
+    return;
+  }
+  if (PHASES[S.phase].intro) { if (e.key === "Enter") { e.preventDefault(); next(); } return; }
+  const qs = questions(S.phase);
+  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1; if (n < qs[active].options.length) { e.preventDefault(); answer(active, qs[active].options[n]); } }
+  else if (e.key === "s" || e.key === "S") { e.preventDefault(); markUnsure(); }
+  else if (e.key === "Enter") { e.preventDefault(); next(); }
+  else if (e.key === "Backspace") { e.preventDefault(); back(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, qs.length - 1); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+});
+$("form").tabIndex = -1;
+renderProgress();
+$("annot").focus();
+</script>
+</body>
+</html>

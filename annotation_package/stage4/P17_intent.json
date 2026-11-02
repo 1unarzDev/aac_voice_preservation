@@ -1,0 +1,144 @@
+{
+ "check_id": "intent_P17",
+ "tool": "intent_check_v1",
+ "version": 1,
+ "n_items": 10,
+ "owner": "0c8f140f",
+ "items": [
+  {
+   "item_id": "ic-002e33",
+   "A": "The concert may be loud indoors.",
+   "B": "The concert will be loud indoors.",
+   "input": {
+    "kind": "keywords",
+    "words": "concert loud",
+    "chips": []
+   },
+   "text": "The concert was loud."
+  },
+  {
+   "item_id": "ic-2c50fd",
+   "A": "The soup contains dairy ingredients.",
+   "B": "The soup does not contain dairy ingredients.",
+   "input": {
+    "kind": "keywords",
+    "words": "soup contain",
+    "chips": []
+   },
+   "text": "The soup contains."
+  },
+  {
+   "item_id": "ic-3d26ed",
+   "A": "The curry might contain sesame seeds.",
+   "B": "The curry will contain sesame seeds.",
+   "input": {
+    "kind": "keywords",
+    "words": "curry contain",
+    "chips": [
+     {
+      "chip": "[MAYBE]",
+      "meaning": "uncertain"
+     }
+    ]
+   },
+   "text": "Maybe the curry contains something."
+  },
+  {
+   "item_id": "ic-556e0c",
+   "A": "The lamp makes a buzzing sound.",
+   "B": "The lamp does not make a buzzing sound.",
+   "input": {
+    "kind": "keywords",
+    "words": "lamp make",
+    "chips": []
+   },
+   "text": "I will make the lamp."
+  },
+  {
+   "item_id": "ic-81d26a",
+   "A": "The clerk understands my request.",
+   "B": "The clerk does not understand my request.",
+   "input": {
+    "kind": "keywords",
+    "words": "clerk understand",
+    "chips": [
+     {
+      "chip": "[YES]",
+      "meaning": "affirmative (not negated)"
+     }
+    ]
+   },
+   "text": "The clerk understands."
+  },
+  {
+   "item_id": "ic-87bbef",
+   "A": "The shuttle may stop near the library.",
+   "B": "The shuttle will stop near the library.",
+   "input": {
+    "kind": "keywords",
+    "words": "shuttle stop",
+    "chips": []
+   },
+   "text": "I need to know the shuttle stop."
+  },
+  {
+   "item_id": "ic-c93b90",
+   "A": "The headphones may block the traffic noise.",
+   "B": "The headphones will block the traffic noise.",
+   "input": {
+    "kind": "keywords",
+    "words": "headphones block",
+    "chips": [
+     {
+      "chip": "[SURE]",
+      "meaning": "certain"
+     }
+    ]
+   },
+   "text": "Sure, headphones block."
+  },
+  {
+   "item_id": "ic-e880fc",
+   "A": "My aunt remembers the new address.",
+   "B": "My aunt does not remember the new address.",
+   "input": {
+    "kind": "keywords",
+    "words": "aunt remember",
+    "chips": []
+   },
+   "text": "I remember my aunt."
+  },
+  {
+   "item_id": "ic-e9b9af",
+   "A": "Our friends know the meeting place.",
+   "B": "Our friends do not know the meeting place.",
+   "input": {
+    "kind": "keywords",
+    "words": "friends know",
+    "chips": [
+     {
+      "chip": "[NOT]",
+      "meaning": "negation"
+     }
+    ]
+   },
+   "text": "My friends don't know."
+  },
+  {
+   "item_id": "ic-f26e57",
+   "A": "The office may approve my ramp request.",
+   "B": "The office will approve my ramp request.",
+   "input": {
+    "kind": "keywords",
+    "words": "office approve",
+    "chips": [
+     {
+      "chip": "[SURE]",
+      "meaning": "certain"
+     }
+    ]
+   },
+   "text": "I am sure the office will approve."
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+{
+  "design": "see make_repair_audit_v2.py docstring",
+  "n_per_arm_requested": 60,
+  "per_item": 3,
+  "raters": [
+    "P02",
+    "P07",
+    "P09",
+    "P10",
+    "P11",
+    "P14"
+  ],
+  "exclusion": {
+    "normalised_texts_in_parts_4_11": 80
+  },
+  "pool_sizes_after_exclusion": {
+    "discovery": {
+      "repaired": 99,
+      "control": 1016
+    },
+    "transfer": {
+      "repaired": 224,
+      "control": 723
+    }
+  },
+  "dropped_as_prior": {
+    "discovery": {
+      "repaired": 23,
+      "control": 25
+    },
+    "transfer": {
+      "repaired": 20,
+      "control": 24
+    }
+  },
+  "selected": {
+    "discovery/repaired": 30,
+    "discovery/control": 30,
+    "transfer/repaired": 30,
+    "transfer/control": 30
+  },
+  "shortfalls": "none",
+  "selected_by_model": {
+    "discovery/repaired": {
+      "gemma3-4b": 8,
+      "gpt-6.1-terra": 8,
+      "llama3.1-8b": 8,
+      "qwen2.5-7b": 6
+    },
+    "discovery/control": {
+      "gemma3-4b": 8,
+      "gpt-6.1-terra": 8,
+      "llama3.1-8b": 8,
+      "qwen2.5-7b": 6
+    },
+    "transfer/repaired": {
+      "gemma3-4b": 11,
+      "gpt-6.1-terra": 4,
+      "llama3.1-8b": 13,
+      "qwen2.5-7b": 2
+    },
+    "transfer/control": {
+      "gemma3-4b": 11,
+      "gpt-6.1-terra": 6,
+      "llama3.1-8b": 6,
+      "qwen2.5-7b": 7
+    }
+  },
+  "selected_by_channel_group": {
+    "discovery/repaired": {
+      "cue": 18,
+      "ambiguous": 12
+    },
+    "discovery/control": {
+      "cue": 18,
+      "ambiguous": 12
+    },
+    "transfer/repaired": {
+      "cue": 30
+    },
+    "transfer/control": {
+      "cue": 30
+    }
+  },
+  "ratings_total": 360,
+  "per_rater_load": {
+    "P02": {
+      "items": 60,
+      "discovery/repaired": 15,
+      "discovery/control": 15,
+      "transfer/repaired": 15,
+      "transfer/control": 15
+    },
+    "P07": {
+      "items": 60,
+      "discovery/repaired": 15,
+      "discovery/control": 15,
+      "transfer/repaired": 15,
+      "transfer/control": 15
+    },
+    "P09": {
+      "items": 60,
+      "discovery/repaired": 15,
+      "discovery/control": 15,
+      "transfer/repaired": 15,
+      "transfer/control": 15
+    },
+    "P10": {
+      "items": 60,
+      "discovery/repaired": 15,
+      "discovery/control": 15,
+      "transfer/repaired": 15,
+      "transfer/control": 15
+    },
+    "P11": {
+      "items": 60,
+      "discovery/repaired": 15,
+      "discovery/control": 15,
+      "transfer/repaired": 15,
+      "transfer/control": 15
+    },
+    "P14": {
+      "items": 60,
+      "discovery/repaired": 15,
+      "discovery/control": 15,
+      "transfer/repaired": 15,
+      "transfer/control": 15
+    }
+  },
+  "shared_items_per_rater_pair": {
+    "P02-P07": 24,
+    "P02-P09": 24,
+    "P02-P10": 24,
+    "P02-P11": 24,
+    "P02-P14": 24,
+    "P07-P09": 24,
+    "P07-P10": 24,
+    "P07-P11": 24,
+    "P07-P14": 24,
+    "P09-P10": 24,
+    "P09-P11": 24,
+    "P09-P14": 24,
+    "P10-P11": 24,
+    "P10-P14": 24,
+    "P11-P14": 24
+  }
+}

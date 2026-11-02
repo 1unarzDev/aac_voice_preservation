@@ -6,6 +6,10 @@ usage:
   python src/make_assignments.py --stage 2 [--absent P07,...] [--still-checking P09,...]
                                                                        # between stages: fill the fixed Stage 2 files
   python src/make_assignments.py --stage 3 [--absent P11,...]         # after Stage 2 scoring: route Part 14 tie-breaks
+  python src/make_assignments.py --stage 4 [--writers P05,..] [--raters ..] [--checkers ..]
+                                                                       # Stage 4 roster, sheets, stage4.csv, empty check placeholders
+  python src/make_assignments.py --stage 4 --fill-checks [--absent P05]
+                                                                       # after Part 15 returns + collect_written_pairs.py --batch hw2
 
 Stage 1 (Nov 2-4, ~3-4 h each; ORDER IS MANDATORY: elicitation -> audits -> writing)
   roles     hash order of the IDs (sha1(SALT|roles|ID)): first 3 do Part 10, next 3 Parts 1-3 (extra coders),
@@ -78,6 +82,16 @@ DATES = {"stage1": "Mon Nov 2 - Wed Nov 4", "stage1_due": "Wed Nov 4, 23:59", "s
          "stage2": "Sun Nov 1", "stage2_due": "Sun Nov 1, 23:59", "stage3_open": "Sun Nov 1",
          "stage3": "Sun Nov 1", "stage3_due": "Sun Nov 1, 23:59"}   # D-051: all stages compressed to Nov 1
 STAGE3_DIR = PKG / "stage3"
+STAGE4_DIR = PKG / "stage4"
+# Stage 4 (D-058). Dates are easy to change here; the sheets, stage4.csv and HANDOUT.md read them.
+DATES.update({"stage4_open": "Mon Nov 2", "stage4": "Mon Nov 2", "stage4_due": "Mon Nov 2, 23:59",
+              "stage4_check_open": "once Part 15 is back (Mon Nov 2 evening at the earliest; the coordinator tells you)",
+              "stage4_check_due": "Tue Nov 3, 23:59", "stage4_end": "Tue Nov 3"})
+S4_PLAN = ASSIGN_DIR / "stage4_plan.json"
+S4_WRITTEN = WRITTEN / "hw2"
+S4_BATCH = "hw2"
+PART17_RATERS = ["P02", "P07", "P09", "P10", "P11", "P14"]   # people who did not do Parts 4/11 (D-058)
+N_S4_WRITERS, N_S4_CHECKERS, S4_PAIRS, S4_PER_PAIR = 4, 6, 15, 3
 N_PART13, N_TIEBREAK, TIEBREAK_CAP = 3, 6, 40
 PAIRS_PER_SESSION, CHUNK, N_REPLICA, N_SESSIONS_WRITE = 15, 5, 3, 2
 N_PART10, N_PARTS13, N_PART12 = 3, 3, 4
@@ -115,6 +129,17 @@ TASKS = {
                "annotate.html + stage3/part13_gold_hw.json", "labels_gold_hw_{ID}.csv", "annotation/returns_gold_hw/"),
     "tiebreak": ("Part 14", f"Tie-break checks of sentence pairs (up to {TIEBREAK_CAP} pairs; your file may have fewer or none)", 30,
                  "check_pairs.html + stage3/{x}.json", "check_pairs_{x}_{ID}.csv", "annotation/returns_hwcheck/"),
+}
+# Stage 4 tasks (D-058); kept apart from TASKS so the frozen plan.json "minutes" field (TASKS_MIN) is unchanged
+TASKS4 = {
+    "intent": ("Part 18", "Did it say what you meant? (10 sentences made from your own pairs)", 15,
+               "intent_check.html + stage4/{ID}_intent.json", "intent_check_{ID}.csv", "annotation/returns_intent/"),
+    "write2": ("Part 15", f"Write {S4_PAIRS} new speech-act sentence pairs (your own sentences)", 25, "write_pairs.html{x}",
+               "write_pairs_speech_act_{ID}.csv", "annotation/returns_written_hw2/"),
+    "repair2": ("Part 17", "Sentence check on new sentences (60 sentences; same task as Part 4)", 35,
+                "repair_audit_v2.html + stage4/{ID}_repair_v2.json", "repair_audit_v2_{ID}.csv", "annotation/returns_repair_v2/"),
+    "check2": ("Part 16", "Check about 30 new sentence pairs written by other people (same task as Part 8)", 22,
+               "check_pairs.html + stage4/{x}.json", "check_pairs_{x}_{ID}.csv", "annotation/returns_hwcheck_hw2/"),
 }
 AUDITS_FLEX = ["part4", "part11", "part5", "part6"]
 AUDIT_ORDER = ["parts13", "part10", "part4", "part11", "part5", "part6"]   # order within the audit block
@@ -564,6 +589,26 @@ def item_line(r, a) -> str:
         body = (f"Open `check_pairs.html`, click **Check file**, choose `{f}` (arrives on {DATES['stage3_open']}), enter `{a}`. "
                 "Same task as Part 8 (README: Part 8). Your file may be empty: if the tool says \"This is not a check file "
                 "(no check_id or items)\", you have no pairs and nothing to do or send.")
+    elif t == "intent":
+        body = (f"Open `intent_check.html`, choose `stage4/{a}_intent.json`, enter `{a}`. Do this first: it needs nothing else. "
+                "README: Part 18.")
+    elif t == "write2":
+        frag = r["file_or_link"][len("write_pairs.html"):]
+        body = (f"Open `write_pairs.html`, add `{frag}` to the end of the address in the address bar, press Enter, then "
+                f"**reload the page** (F5). The page shows dimension *speech act* and your ID. Same tool and rules as Part 7 "
+                "(README: Part 7, including the CC BY 4.0 release you agree to in the tool). "
+                "**Write every sentence yourself: do not copy, reuse, adapt or paraphrase any sentence you have seen "
+                "anywhere (earlier parts, examples in the tool, model sentences from Part 18, anyone else's work).** "
+                "Your pairs are compared with every earlier pair, and near-copies are rejected.")
+    elif t == "repair2":
+        body = (f"Open the Part 17 file named in README Part 17 (the tool `repair_audit_v2.html` with "
+                f"`stage4/{a}_repair_v2.json`, or your self-contained per-rater HTML), enter `{a}`. Same task as Part 4. "
+                "README: Part 17.")
+    elif t == "check2":
+        f = r["file_or_link"].split(" + ")[1]
+        body = (f"Open `check_pairs.html`, click **Check file**, choose `{f}` (arrives {DATES['stage4_check_open']}; "
+                "re-download the zip then, the file in the zip before that is an empty placeholder), enter "
+                f"`{a}`. Same task as Part 8 (README: Part 8). You never get a pair you wrote.")
     else:
         body = f"Open `{r['file_or_link']}`, enter `{a}`. README: {r['part']}."
     ret = f" Return: `{r['return_file']}`." if r["return_file"] else ""
@@ -590,6 +635,16 @@ def stage3_readme(plan) -> str:
 
 
 def handout(plan, tab, later: bool = LATER) -> str:
+    """Stage 1 hand-out text; once the Stage 4 roster exists (stage4_plan.json) its section is included, so a
+    regeneration reproduces the committed HANDOUT.md."""
+    txt = _handout_stage1(plan, tab, later)
+    if S4_PLAN.exists():
+        s4 = json.loads(S4_PLAN.read_text())
+        txt = insert_stage4_section(txt, stage4_handout_section(s4, rows_stage4(s4, plan["annotators"])))
+    return txt
+
+
+def _handout_stage1(plan, tab, later: bool = LATER) -> str:
     ids = plan["annotators"]
     if later:
         return f"""# Hand-out (coordinator, one page)
@@ -1005,15 +1060,316 @@ def run_stage3(plan_path=ASSIGN_DIR / "plan.json", items_path=ROOT / "analysis" 
     return res
 
 
+# ---------------------------------------------------------------- Stage 4 (D-058)
+S4_COLS = ["annotator", "stage", "order", "part", "task", "description", "file_or_link", "expected_minutes",
+           "return_file", "return_folder", "due"]
+
+
+def select_stage4(plan: dict, tab: dict, prior_writers: dict[str, set], used_rots: set, writers=None, raters=None,
+                  checkers=None) -> dict:
+    """Roster for Stage 4.
+    writers  4 people who never wrote speech_act in Stage 1 (and not P06, whose speech-act pair is excluded, D-058);
+             preferring people NOT in the Part 17 rater list, then the lowest total Stage 1-3 planned load, then hash.
+             Topic rotations are the speech-act rotations not used by any earlier speech-act writer.
+    checkers 6 people who are neither Part 15 writers nor Part 17 raters, lowest load, hash tie-break; the rest of that
+             pool are ordered reserves (used by --absent in the check fill)."""
+    ids = plan["annotators"]
+    raters = list(raters or PART17_RATERS)
+    load = {a: tab[a]["total"] for a in ids}
+    hs = hord(ids, "stage4")
+    key = lambda a: (a in raters, load[a], hs.index(a))  # noqa: E731
+    never = [a for a in ids if a not in prior_writers.get("speech_act", set()) and a != "P06"]
+    if writers:
+        bad = [w for w in writers if w not in never]
+        if bad:
+            raise SystemExit(f"Part 15 writers must never have written speech_act and not be P06: {bad}")
+        writers = list(writers)
+    else:
+        writers = sorted(never, key=key)[:N_S4_WRITERS]
+    if len(writers) != N_S4_WRITERS and not writer_override_ok(writers):
+        raise SystemExit(f"need {N_S4_WRITERS} Part 15 writers, got {writers}")
+    free = [r for r in range(len(H.TOPICS)) if r not in used_rots]
+    if len(free) < len(writers):
+        raise SystemExit(f"only {len(free)} unused speech_act topic rotations for {len(writers)} writers")
+    rot = {w: free[i] for i, w in enumerate(sorted(writers, key=lambda a: hs.index(a)))}
+    pool = sorted((a for a in ids if a not in writers and a not in raters), key=lambda a: (load[a], hs.index(a)))
+    if checkers:
+        checkers = list(checkers)
+        bad = [c for c in checkers if c in writers or c in raters]
+        if bad:
+            raise SystemExit(f"Part 16 checkers must not be Part 15 writers or Part 17 raters: {bad}")
+    else:
+        checkers = pool[:N_S4_CHECKERS]
+    reserve = [a for a in pool if a not in checkers]
+    return {"salt": SALT, "batch": S4_BATCH, "writers": writers, "writer_rot": rot, "raters": raters, "checkers": checkers,
+            "check_reserve": reserve, "absent_checkers": [], "everyone_part18": list(ids),
+            "load_before_stage4": load, "speech_act_rotations_used_before": sorted(used_rots), "dates": {
+                k: v for k, v in DATES.items() if k.startswith("stage4")}}
+
+
+def writer_override_ok(writers) -> bool:
+    return len(writers) >= 1       # explicit --writers may name fewer/more than 4 (coordinator's call)
+
+
+def prior_dimension_writers(path=WRITTEN / "writer_assignment.csv"):
+    by, rots = defaultdict(set), defaultdict(set)
+    with open(path, newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            by[r["dimension"]].add(r["writer_id"]); rots[r["dimension"]].add(int(r["rot"]))
+    return by, rots
+
+
+def rows_stage4(s4: dict, ids) -> list[dict]:
+    out = []
+    for a in ids:
+        o = 0
+
+        def add(task, file, ret_x=None, due=None):
+            nonlocal o
+            T = TASKS4[task]; o += 1
+            out.append({"annotator": a, "stage": "4", "order": o, "part": T[0], "task": task, "description": T[1],
+                        "file_or_link": file, "expected_minutes": T[2],
+                        "return_file": T[4].format(ID=a, x=ret_x or ""), "return_folder": T[5],
+                        "due": due or DATES["stage4_due"]})
+        add("intent", T4("intent", a))
+        if a in s4["writers"]:
+            w = s4["writer_rot"][a]
+            add("write2", "write_pairs.html" + WL.link_fragment("speech_act", w, S4_PAIRS, a))
+        if a in s4["raters"]:
+            add("repair2", T4("repair2", a))
+        if a in s4["checkers"]:
+            add("check2", f"check_pairs.html + stage4/{a}_check_hw2.json", ret_x=f"{a}_check_hw2", due=DATES["stage4_check_due"])
+    return out
+
+
+def T4(task: str, a: str) -> str:
+    return TASKS4[task][3].format(ID=a)
+
+
+def stage4_sheet(s4: dict, rows: list[dict], a: str) -> str:
+    rs = [r for r in rows if r["annotator"] == a]
+    tot = sum(r["expected_minutes"] for r in rs)
+    split = ", ".join(f"{r['part']} {r['expected_minutes']} min" for r in rs)
+    late = [r for r in rs if r["task"] == "check2"]
+    L = [f"# Stage 4 task sheet for {a} (OPTIONAL; {DATES['stage4']}; due {DATES['stage4_due']}"
+         + (f", Part 16 due {DATES['stage4_check_due']}" if late else "") + ")", "",
+         f"Stage 4 is a short top-up and **optional**: if you cannot do it, tell the coordinator now so someone else can be asked. "
+         f"Download the current `annotation_package.zip`: your files are in its `stage4/` folder and the tools are in the "
+         f"package folder. About **{tot} min** in total ({split}), plus breaks.", "",
+         RULES.format(ID=a, END=DATES["stage4_end"]), ""]
+    extra = ["- **Your own words only.** Every sentence you write or rate is your own work or your own judgment: do not copy, "
+             "reuse or adapt anyone else's sentences, and do not ask anyone for examples."]
+    if a in s4["writers"]:
+        extra += ["- **Part 15 (writing): stress.** Write every sentence yourself. Do not copy, adapt, shorten, extend or "
+                  "paraphrase any sentence you have seen anywhere: examples in the tool or README, sentences from earlier "
+                  "parts, the model sentences in Part 18, other people's pairs. Every new pair is compared with all earlier "
+                  "pairs (exact and near-copies), and copies are rejected before anyone checks them."]
+    if a in s4["raters"]:
+        extra += ["- **Part 17:** rate each sentence on its own, as in Part 4. Do not look for patterns across sentences "
+                  "and do not discuss them."]
+    if late:
+        extra += [f"- **Part 16** opens {DATES['stage4_check_open']}. Do Part 18 first, then wait for the message that Part 15 is "
+                  "back; re-download the zip then."]
+    L += ["**Extra rules for Stage 4**"] + extra + ["", "## Steps (in this order)", "",
+          "Order: **Part 18 first** (it needs no other context), then the rest of the list."]
+    L += [""] + [item_line(r, a) for r in rs] + [""]
+    early = [r for r in rs if r["due"] == DATES["stage4_due"]]
+    L += [f"**Return files (names must be exact):** " + "; ".join(f"`{r['return_file']}` ({r['part']})" for r in rs) + ".", ""]
+    L += [f"Return: email the CSV files for {', '.join(r['part'] for r in early)} to the coordinator by {DATES['stage4_due']} "
+          f"(subject `AAC annotation {a} stage 4`), with the time you spent and any notes."]
+    if late:
+        L += [f"Email the Part 16 CSV by {DATES['stage4_check_due']} (same subject)."]
+    L += ["", "Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time."]
+    return "\n".join(L) + "\n"
+
+
+def stage4_handout_section(s4: dict, rows: list[dict]) -> str:
+    mins = lambda a: sum(r["expected_minutes"] for r in rows if r["annotator"] == a)  # noqa: E731
+    only18 = [a for a in s4["everyone_part18"] if a not in s4["writers"] + s4["raters"] + s4["checkers"]]
+    tot = sum(r["expected_minutes"] for r in rows)
+    fmt = lambda ids: ", ".join(f"{a} ({mins(a)} min)" for a in ids)  # noqa: E731
+    return (f"""<!-- stage4:start -->
+- **Stage 4, optional** (opens **{DATES['stage4_open']}**): Parts 15, 17, 18 due **{DATES['stage4_due']}**; Part 16 opens
+  {DATES['stage4_check_open']} and is due **{DATES['stage4_check_due']}**. Files appear in `stage4/`; re-download the zip.
+  About {tot / 60:.1f} person-hours. **Everyone does Part 18 first** (15 min, all 20: `intent_check.html` +
+  `stage4/<ID>_intent.json`, return `intent_check_<ID>.csv`). Sheets: `assignments/<ID>_stage4.md`.
+  - Part 15, speech-act writing, 25 min (`write_pairs.html` link on the sheet): {fmt(s4['writers'])}.
+    Return `write_pairs_speech_act_<ID>.csv`.
+  - Part 17, new-sentence check, 35 min (`repair_audit_v2.html` or the per-rater file named in README Part 17):
+    {fmt(s4['raters'])}. Return `repair_audit_v2_<ID>.csv`.
+  - Part 16, blind checks of the Part 15 pairs, about 22 min, after Part 15 is back:
+    {fmt(s4['checkers'])}. Reserves in order: {', '.join(s4['check_reserve'])}. Return `check_pairs_<ID>_check_hw2_<ID>.csv`.
+  - Part 18 only (15 min): {', '.join(only18)}.
+<!-- stage4:end -->
+""")
+
+
+def insert_stage4_section(txt: str, section: str) -> str:
+    if "<!-- stage4:start -->" in txt:
+        a, rest = txt.split("<!-- stage4:start -->", 1)
+        txt = a.rstrip("\n") + "\n" + rest.split("<!-- stage4:end -->\n", 1)[1]
+    anchor = "\n**Return method:**"
+    assert anchor in txt, "HANDOUT.md layout changed"
+    txt = txt.replace(anchor, "\n" + section + anchor, 1)
+    return txt.replace("subject `AAC annotation <ID> stage <1|2>`", "subject `AAC annotation <ID> stage <1|2|3|4>`")
+
+
+def update_handout(section: str, path=PKG / "HANDOUT.md") -> None:
+    Path(path).write_text(insert_stage4_section(Path(path).read_text(), section))
+
+
+def check_placeholder(cid: str) -> dict:
+    import make_check_batches as MB
+    return {"check_id": cid, "tool": MB.TOOL, "version": 1, "n_items": 0, "exclude": [], "items": []}
+
+
+def write_stage4_outputs(s4: dict, plan: dict, out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, out_stage4=STAGE4_DIR,
+                         written=S4_WRITTEN, pkg=PKG, placeholders=True, handout_path=None) -> list[dict]:
+    rows = rows_stage4(s4, plan["annotators"])
+    write_csv(out_assign / "stage4.csv", rows, S4_COLS)
+    (out_assign / "stage4_plan.json").write_text(json.dumps(s4, indent=1) + "\n")
+    out_sheets.mkdir(parents=True, exist_ok=True)
+    for a in plan["annotators"]:
+        (out_sheets / f"{a}_stage4.md").write_text(stage4_sheet(s4, rows, a))
+    written.mkdir(parents=True, exist_ok=True)
+    write_csv(written / "writer_assignment.csv",
+              [{"writer_id": w, "dimension": "speech_act", "rot": s4["writer_rot"][w], "n_pairs": S4_PAIRS,
+                "first_topics": WL.first_topics(s4["writer_rot"][w]),
+                "link_fragment": WL.link_fragment("speech_act", s4["writer_rot"][w], S4_PAIRS, w), "session": 1}
+               for w in s4["writers"]],
+              ["writer_id", "dimension", "rot", "n_pairs", "first_topics", "link_fragment", "session"])
+    if placeholders:
+        out_stage4.mkdir(parents=True, exist_ok=True)
+        keep = {f"{c}_check_hw2.json" for c in s4["checkers"]}
+        for old in out_stage4.glob("*_check_hw2.json"):
+            if old.name not in keep:
+                old.unlink()
+        for c in s4["checkers"]:
+            f = out_stage4 / f"{c}_check_hw2.json"
+            if not f.exists() or json.loads(f.read_text()).get("n_items", 0) == 0:   # never clobber a filled file
+                f.write_text(json.dumps(check_placeholder(f"{c}_check_hw2"), indent=1) + "\n")
+    update_handout(stage4_handout_section(s4, rows), handout_path or pkg / "HANDOUT.md")
+    return rows
+
+
+def run_stage4(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, out_stage4=STAGE4_DIR,
+               written=S4_WRITTEN, pkg=PKG, writers=None, raters=None, checkers=None, rebuild=False,
+               prior_path=WRITTEN / "writer_assignment.csv", quiet=False, handout_path=None) -> dict:
+    plan = json.loads(Path(plan_path).read_text())
+    plan_file = out_assign / "stage4_plan.json"
+    if plan_file.exists() and not (rebuild or writers or raters or checkers):
+        s4 = json.loads(plan_file.read_text())          # roster is frozen once chosen
+    else:
+        tab = minutes_table(plan, rows_for(plan))
+        by, rots = prior_dimension_writers(prior_path)
+        s4 = select_stage4(plan, tab, by, rots["speech_act"], writers, raters, checkers)
+    rows = write_stage4_outputs(s4, plan, out_assign, out_sheets, out_stage4, written, pkg, handout_path=handout_path)
+    if not quiet:
+        mins = lambda a: sum(r["expected_minutes"] for r in rows if r["annotator"] == a)  # noqa: E731
+        print("Part 15 writers:", {w: (s4["writer_rot"][w], mins(w)) for w in s4["writers"]}, "(rot, minutes)")
+        print("Part 17 raters:", {a: mins(a) for a in s4["raters"]})
+        print("Part 16 checkers:", {a: mins(a) for a in s4["checkers"]}, "reserves:", s4["check_reserve"])
+        print("Part 18 only:", [a for a in plan["annotators"] if mins(a) == TASKS4["intent"][2]])
+        print(f"person-hours {sum(r['expected_minutes'] for r in rows) / 60:.1f}")
+    return {"plan": plan, "stage4": s4, "rows": rows}
+
+
+def assign_checkers(fids: list[str], checkers: list[str], writer_of: dict, per_pair=S4_PER_PAIR) -> dict[str, list[str]]:
+    """3 distinct checkers per pair, never its writer; lowest load first, then least co-assignment, then hash."""
+    load, co = Counter(), Counter()
+    res = {}
+    for fid in sorted(fids, key=lambda f: sha(f"{SALT}|s4check|{f}")):
+        elig = [c for c in checkers if c != writer_of[fid]]
+        chosen = []
+        for _ in range(min(per_pair, len(elig))):
+            c = min((c for c in elig if c not in chosen),
+                    key=lambda c: (load[c], sum(co[tuple(sorted((c, x)))] for x in chosen), sha(f"{SALT}|s4|{fid}|{c}")))
+            chosen.append(c)
+        for c in chosen:
+            load[c] += 1
+        for x, y in itertools.combinations(sorted(chosen), 2):
+            co[(x, y)] += 1
+        res[fid] = sorted(chosen)
+    return res
+
+
+def run_stage4_fill(plan_path=ASSIGN_DIR / "plan.json", cand_path=S4_WRITTEN / "hw_candidates.jsonl",
+                    out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, out_stage4=STAGE4_DIR, written=S4_WRITTEN, pkg=PKG,
+                    absent=(), handout_path=None, quiet=False) -> dict:
+    """Part 16: fill stage4/<ID>_check_hw2.json (3 checkers per accepted hw2 pair, never the writer)."""
+    import make_check_batches as MB
+    plan = json.loads(Path(plan_path).read_text())
+    s4 = json.loads((out_assign / "stage4_plan.json").read_text())
+    absent = sorted(set(absent) | set(s4.get("absent_checkers", [])))
+    if absent:
+        pool = [c for c in s4["checkers"] + s4["check_reserve"] if c not in absent]
+        s4["checkers"] = pool[:N_S4_CHECKERS]
+        s4["check_reserve"] = pool[N_S4_CHECKERS:]
+        s4["absent_checkers"] = absent
+    cands = [c for c in map(json.loads, (l for l in Path(cand_path).open(encoding="utf-8") if l.strip()))]
+    by = {c["family_id"]: c for c in cands}
+    checkers = s4["checkers"]
+    assert not set(checkers) & set(s4["writers"]) and not set(checkers) & set(s4["raters"])
+    asg = assign_checkers(list(by), checkers, {f: c["writer_id"] for f, c in by.items()})
+    files = defaultdict(list)
+    for fid, cs in asg.items():
+        for c in cs:
+            assert c != by[fid]["writer_id"]
+            files[c].append(fid)
+    out_stage4.mkdir(parents=True, exist_ok=True)
+    rows_out, fill_rows = write_stage4_outputs(s4, plan, out_assign, out_sheets, out_stage4, written, pkg,
+                                               placeholders=False, handout_path=handout_path), []
+    for old in out_stage4.glob("*_check_hw2.json"):
+        old.unlink()
+    for c in checkers:
+        fids = files.get(c, [])
+        items = []
+        for fid in sorted(fids, key=MB.item_id):
+            x = by[fid]
+            items.append({"item_id": MB.item_id(fid), "dimension": x["dimension"], "options": x["critical_options"],
+                          "context": x["context"], "A": x["variants"]["A"]["source"], "B": x["variants"]["B"]["source"],
+                          "bare": x["bare"], "noncritical": x["noncritical"]})
+        assert all(set(i) == set(MB.BLIND_FIELDS) for i in items)
+        writers = sorted({by[f]["writer_id"] for f in fids})
+        cid = f"{c}_check_hw2"
+        doc = ({"check_id": cid, "tool": MB.TOOL, "version": 1, "n_items": len(items),
+                "exclude": sorted(MB.id_hash(w) for w in writers), "items": items} if items else check_placeholder(cid))
+        (out_stage4 / f"{cid}.json").write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n")
+        fill_rows.append({"check_id": cid, "file": f"annotation_package/stage4/{cid}.json", "checker": c, "n_pairs": len(items),
+                          "writers": " ".join(writers)})
+    with open(written / "check_key.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["item_id", "check_id", "family_id", "writer_id", "dimension", "value_A", "value_B", "source_A", "source_B", "bare"])
+        for fid in sorted(by):
+            c = by[fid]
+            w.writerow([MB.item_id(fid), " ".join(f"{x}_check_hw2" for x in asg[fid]), fid, c["writer_id"], c["dimension"],
+                        c["variants"]["A"]["critical_value"], c["variants"]["B"]["critical_value"],
+                        c["variants"]["A"]["source"], c["variants"]["B"]["source"], c["bare"]])
+    write_csv(out_assign / "stage4_fill.csv", fill_rows, ["check_id", "file", "checker", "n_pairs", "writers"])
+    summ = {"candidates": len(by), "checkers": checkers, "reserve": s4["check_reserve"], "absent": absent,
+            "pairs_by_n_checkers": dict(Counter(len(v) for v in asg.values())),
+            "load_pairs": {r["checker"]: r["n_pairs"] for r in fill_rows}}
+    (out_assign / "stage4_fill.json").write_text(json.dumps(summ, indent=1) + "\n")
+    if not quiet:
+        print(f"{len(by)} hw2 candidates -> {len(fill_rows)} check files in {out_stage4}; pairs by #checkers "
+              f"{summ['pairs_by_n_checkers']}; load {summ['load_pairs']}; absent {absent}")
+    return summ
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--stage", choices=["1", "2", "3"], required=True)
+    ap.add_argument("--stage", choices=["1", "2", "3", "4"], required=True)
     ap.add_argument("--annotators", default="P01..P20", help="e.g. P01..P20 or P01,P02,...")
     ap.add_argument("--absent", default="", help="stage 2/3: people who will not do that stage")
     ap.add_argument("--still-checking", default="", help="stage 2: non-returning writers who still check")
     ap.add_argument("--candidates", default=str(WRITTEN / "hw_candidates.jsonl"))
     ap.add_argument("--prepare", action="store_true",
                     help="with --stage 2: only write the Stage 2/3 sheets and CSVs from the frozen plan.json")
+    ap.add_argument("--writers", default="", help="stage 4: override the Part 15 writers (default: chosen by rule)")
+    ap.add_argument("--raters", default="", help="stage 4: override the Part 17 raters")
+    ap.add_argument("--checkers", default="", help="stage 4: override the Part 16 checkers")
+    ap.add_argument("--fill-checks", action="store_true", help="stage 4: fill Part 16 check files from hw2 candidates")
+    ap.add_argument("--rebuild", action="store_true", help="stage 4: re-choose the roster (default: keep stage4_plan.json)")
     a = ap.parse_args(argv)
     if a.stage == "1":
         run_stage1(parse_ids(a.annotators))
@@ -1024,6 +1380,11 @@ def main(argv=None) -> int:
         run_stage2(cand_path=Path(a.candidates), absent=split(a.absent), still_checking=split(a.still_checking))
     elif a.stage == "3":
         run_stage3(cand_path=Path(a.candidates), absent=split(a.absent))
+    elif a.stage == "4" and a.fill_checks:
+        run_stage4_fill(cand_path=S4_WRITTEN / "hw_candidates.jsonl" if a.candidates == str(WRITTEN / "hw_candidates.jsonl")
+                        else Path(a.candidates), absent=split(a.absent))
+    elif a.stage == "4":
+        run_stage4(writers=split(a.writers), raters=split(a.raters), checkers=split(a.checkers), rebuild=a.rebuild)
     return 0
 
 

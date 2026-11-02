@@ -1,0 +1,144 @@
+{
+ "check_id": "intent_P09",
+ "tool": "intent_check_v1",
+ "version": 1,
+ "n_items": 10,
+ "owner": "d52d8626",
+ "items": [
+  {
+   "item_id": "ic-10231f",
+   "A": "I need captions during the meeting.",
+   "B": "I don't need captions during the meeting.",
+   "input": {
+    "kind": "keywords",
+    "words": "need captions",
+    "chips": []
+   },
+   "text": "I need captions."
+  },
+  {
+   "item_id": "ic-2383bf",
+   "A": "I asked for an interpreter at the clinic yesterday.",
+   "B": "I will ask for an interpreter at the clinic tomorrow.",
+   "input": {
+    "kind": "keywords",
+    "words": "ask interpreter",
+    "chips": [
+     {
+      "chip": "[LATER]",
+      "meaning": "future time"
+     }
+    ]
+   },
+   "text": "I’ll ask for an interpreter later."
+  },
+  {
+   "item_id": "ic-24f0cd",
+   "A": "I waited for the bus at the station yesterday.",
+   "B": "I am waiting for the bus at the station now.",
+   "input": {
+    "kind": "keywords",
+    "words": "wait bus",
+    "chips": [
+     {
+      "chip": "[PAST]",
+      "meaning": "past time"
+     }
+    ]
+   },
+   "text": "I waited for the bus."
+  },
+  {
+   "item_id": "ic-465811",
+   "A": "I take medicine with breakfast.",
+   "B": "I don't take medicine with breakfast.",
+   "input": {
+    "kind": "keywords",
+    "words": "take medicine",
+    "chips": []
+   },
+   "text": "I want to take medicine."
+  },
+  {
+   "item_id": "ic-6f88fa",
+   "A": "The bright light bothers me in the bedroom.",
+   "B": "The bright light doesn't bother me in the bedroom.",
+   "input": {
+    "kind": "keywords",
+    "words": "bright light",
+    "chips": [
+     {
+      "chip": "[NOT]",
+      "meaning": "negation"
+     }
+    ]
+   },
+   "text": "I don’t want a bright light."
+  },
+  {
+   "item_id": "ic-72afb1",
+   "A": "The soup tasted salty at lunch yesterday.",
+   "B": "The soup tastes salty at lunch today.",
+   "input": {
+    "kind": "keywords",
+    "words": "soup salty",
+    "chips": [
+     {
+      "chip": "[NOW]",
+      "meaning": "present time"
+     }
+    ]
+   },
+   "text": "The soup is salty now."
+  },
+  {
+   "item_id": "ic-c10aba",
+   "A": "I finished the report before lunch.",
+   "B": "I didn't finish the report before lunch.",
+   "input": {
+    "kind": "keywords",
+    "words": "finish report",
+    "chips": []
+   },
+   "text": "I will finish the report."
+  },
+  {
+   "item_id": "ic-e875c8",
+   "A": "I closed the bedroom door before bed last night.",
+   "B": "I will close the bedroom door before bed tonight.",
+   "input": {
+    "kind": "keywords",
+    "words": "close door",
+    "chips": []
+   },
+   "text": "Please close the door."
+  },
+  {
+   "item_id": "ic-ee19e1",
+   "A": "I want a quiet weekend at home.",
+   "B": "I don't want a quiet weekend at home.",
+   "input": {
+    "kind": "keywords",
+    "words": "want quiet",
+    "chips": [
+     {
+      "chip": "[YES]",
+      "meaning": "affirmative (not negated)"
+     }
+    ]
+   },
+   "text": "I want quiet."
+  },
+  {
+   "item_id": "ic-f75a86",
+   "A": "My train left the platform ten minutes ago.",
+   "B": "My train will leave the platform in ten minutes.",
+   "input": {
+    "kind": "keywords",
+    "words": "train platform",
+    "chips": []
+   },
+   "text": "I will go to the train platform now."
+  }
+ ]
+}

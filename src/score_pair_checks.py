@@ -4,6 +4,11 @@ usage: python src/score_pair_checks.py [CSV ...]            (default: annotation
           [--key annotation/written/check_key.csv] [--candidates annotation/written/hw_candidates.jsonl]
           [--exclude P07,P09:P12,... | --exclude-file pairs.txt] [--min-pass 2] [--planned 3]
           [--out analysis/hw_checks] [--items-out data/items/hw.jsonl] [--no-write]
+          [--batch hw2]
+
+--batch hw2 (Stage 4, Part 16) switches every default to that batch: returns annotation/returns_hwcheck_hw2/*.csv,
+key and candidates annotation/written/hw2/{check_key.csv,hw_candidates.jsonl}, outputs analysis/hw2_checks/ and
+data/items/hw2.jsonl. The hw1 outputs are never touched.
 
 Independence: a check is used only if the checker is not the pair's writer (always enforced; such rows
 are dropped and listed) and is not excluded. --exclude takes checker IDs (all their checks dropped)
@@ -94,10 +99,21 @@ def main(argv=None) -> int:
     ap.add_argument("--out", default=str(ROOT / "analysis" / "hw_checks"))
     ap.add_argument("--items-out", default=str(ROOT / "data" / "items" / "hw.jsonl"))
     ap.add_argument("--no-write", action="store_true", help="do not write the items file")
+    ap.add_argument("--batch", default=None, help="batch tag (hw2): batch-specific defaults for all paths")
     a = ap.parse_args(argv)
-    paths = a.csv or sorted(glob.glob(str(ROOT / "annotation" / "returns_hwcheck" / "*.csv")))
+    rdir = "returns_hwcheck"
+    if a.batch:
+        b = a.batch
+        rdir = f"returns_hwcheck_{b}"
+        for attr, old, new in (("key", ROOT / "annotation" / "written" / "check_key.csv", ROOT / "annotation" / "written" / b / "check_key.csv"),
+                               ("candidates", ROOT / "annotation" / "written" / "hw_candidates.jsonl", ROOT / "annotation" / "written" / b / "hw_candidates.jsonl"),
+                               ("out", ROOT / "analysis" / "hw_checks", ROOT / "analysis" / f"{b}_checks"),
+                               ("items_out", ROOT / "data" / "items" / "hw.jsonl", ROOT / "data" / "items" / f"{b}.jsonl")):
+            if getattr(a, attr) == str(old):
+                setattr(a, attr, str(new))
+    paths = a.csv or sorted(glob.glob(str(ROOT / "annotation" / rdir / "*.csv")))
     if not paths:
-        print("no check CSVs found (annotation/returns_hwcheck/*.csv)", file=sys.stderr)
+        print(f"no check CSVs found (annotation/{rdir}/*.csv)", file=sys.stderr)
         return 1
     key = {r["item_id"]: r for r in read_csv(a.key)}
     cands = {f["family_id"]: f for f in map(json.loads, Path(a.candidates).open()) if f}

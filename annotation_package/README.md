@@ -205,11 +205,45 @@ sentence alone, then Pass B with the input; 3 practice items per pass). Everythi
 
 Don't compare these sentences with the ones in Part 4. Judge each sentence on its own.
 
+## Part 17 (if assigned, ~35 min): third sentence check, your own `repair_audit_v2_<ID>.html`
+This is the same task as Part 4, with 60 new sentences. Follow the Part 4 instructions above (Pass A sentence alone,
+then Pass B with the input; 3 practice items per pass). Everything is inside one file, made for you.
+
+1. Open the file named with your ID (for example `repair_audit_v2_P02.html`, in the `stage4` folder). Enter **the same
+   annotator ID** and press `Enter`. The file will not start with a different ID.
+2. Its progress is saved separately from Parts 4 and 11.
+3. Click **Download CSV** at the end: `repair_audit_v2_<ID>.csv`.
+
+These sentences are new. Do not look for the ones from Parts 4 or 11, and do not talk about the sentences with anyone
+until everyone has finished. Judge each sentence on its own.
+
+## Part 18 (if assigned, ~15 min): did it say what you meant? `intent_check.html`
+This part uses **your own sentence pairs** from Part 7. A writing tool was given keywords (and sometimes chips) taken
+from your pairs and wrote a sentence. You say whether the sentence says what **you** meant. There are no right answers.
+
+1. Open `intent_check.html`, click **Your file** and choose the file named with your ID (for example
+   `P01_intent.json`, in the `stage4` folder). Enter **the same annotator ID** and press `Enter`. The tool refuses a
+   file that is not yours.
+2. Two practice sentences with feedback come first. Then you see 10 sentences, one at a time. For each you see your
+   two versions (A and B), what the writing tool was given, and the sentence it wrote.
+3. Answer two questions:
+   - *This sentence says what I meant in:* **version A**, **version B**, **something else**, or **unclear**. Choose
+     "something else" if it says another thing, mixes both, or loses what made your two versions different.
+   - *Would you accept it as your message?* **yes**, **with a small edit**, or **no**.
+4. Type a short note if you choose "something else" or "with a small edit" (what it says, or the edit). A note is
+   welcome at any time.
+5. Keys: `1`–`4`, `S` (can't judge), `↑`/`↓`, `Tab` for the note box, `Enter`, `Backspace`, as in the other tools.
+   Progress is saved in the browser. Click **Download CSV** at the end: `intent_check_<ID>.csv`.
+
+Some sentences will be poor. That is expected: answer honestly. You are not told how a sentence was made or how it
+was scored. This part checks what the writers meant. It is not a test with AAC users.
+
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
 `wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `write_pairs_<dimension>_<ID>.csv`,
 `check_pairs_<file>_<ID>.csv` and `keyword_elicitation_<file>_<ID>.csv` for Parts 7–9, `labels_gold_new_<ID>.csv` for Part 10 and
-`repair_audit_transfer_<ID>.csv` for Part 11), to the study coordinator. Please also send:
+`repair_audit_transfer_<ID>.csv` for Part 11, `repair_audit_v2_<ID>.csv` for Part 17 and `intent_check_<ID>.csv` for
+Part 18), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

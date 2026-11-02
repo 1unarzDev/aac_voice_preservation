@@ -1,0 +1,144 @@
+{
+ "check_id": "intent_P19",
+ "tool": "intent_check_v1",
+ "version": 1,
+ "n_items": 10,
+ "owner": "598acb45",
+ "items": [
+  {
+   "item_id": "ic-03a3a4",
+   "A": "You lowered the television volume for dinner.",
+   "B": "My brother lowered the television volume for dinner.",
+   "input": {
+    "kind": "keywords",
+    "words": "lower volume",
+    "chips": []
+   },
+   "text": "I want to speak at a lower volume."
+  },
+  {
+   "item_id": "ic-17a0c4",
+   "A": "I sent the tutor my assignment.",
+   "B": "You sent the tutor my assignment.",
+   "input": {
+    "kind": "keywords",
+    "words": "send assignment",
+    "chips": []
+   },
+   "text": "Send the assignment."
+  },
+  {
+   "item_id": "ic-25e84c",
+   "A": "The guest respects my personal space.",
+   "B": "The guest does not respect my personal space.",
+   "input": {
+    "kind": "keywords",
+    "words": "guest respect",
+    "chips": [
+     {
+      "chip": "[NOT]",
+      "meaning": "negation"
+     }
+    ]
+   },
+   "text": "I do not show guest respect."
+  },
+  {
+   "item_id": "ic-31b6c6",
+   "A": "You carried the guitar into the studio.",
+   "B": "My friend carried the guitar into the studio.",
+   "input": {
+    "kind": "keywords",
+    "words": "carry guitar",
+    "chips": [
+     {
+      "chip": "[THEY]",
+      "meaning": "someone else does it"
+     }
+    ]
+   },
+   "text": "They carry a guitar."
+  },
+  {
+   "item_id": "ic-32e60c",
+   "A": "The therapist records my symptoms accurately.",
+   "B": "The therapist does not record my symptoms accurately.",
+   "input": {
+    "kind": "keywords",
+    "words": "therapist record",
+    "chips": []
+   },
+   "text": "I need to record a therapist session."
+  },
+  {
+   "item_id": "ic-5f8932",
+   "A": "The museum permits visitors to sketch.",
+   "B": "The museum does not permit visitors to sketch.",
+   "input": {
+    "kind": "keywords",
+    "words": "museum permit",
+    "chips": [
+     {
+      "chip": "[YES]",
+      "meaning": "affirmative (not negated)"
+     }
+    ]
+   },
+   "text": "We need a museum permit."
+  },
+  {
+   "item_id": "ic-6c4e14",
+   "A": "I collected the tablets from the clinic.",
+   "B": "You collected the tablets from the clinic.",
+   "input": {
+    "kind": "keywords",
+    "words": "collect tablets",
+    "chips": []
+   },
+   "text": "I will collect the tablets."
+  },
+  {
+   "item_id": "ic-7d631d",
+   "A": "The shop accepts that voucher.",
+   "B": "The shop does not accept that voucher.",
+   "input": {
+    "kind": "keywords",
+    "words": "shop accept",
+    "chips": []
+   },
+   "text": "I want to accept shopping."
+  },
+  {
+   "item_id": "ic-af204b",
+   "A": "The library lends board games.",
+   "B": "The library does not lend board games.",
+   "input": {
+    "kind": "keywords",
+    "words": "library lend",
+    "chips": [
+     {
+      "chip": "[NOT]",
+      "meaning": "negation"
+     }
+    ]
+   },
+   "text": "The library does not lend."
+  },
+  {
+   "item_id": "ic-baad16",
+   "A": "You booked the table near the window.",
+   "B": "My sister booked the table near the window.",
+   "input": {
+    "kind": "keywords",
+    "words": "book table",
+    "chips": [
+     {
+      "chip": "[YOU]",
+      "meaning": "the listener does it"
+     }
+    ]
+   },
+   "text": "You book the table."
+  }
+ ]
+}
