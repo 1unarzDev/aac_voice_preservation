@@ -60,3 +60,18 @@ Consequence, fixed before inspecting any Gemini output:
   With a 20/day quota every prefix is then a random sample of families, not an alphabetical block. (Amends the "family-ordered prefix" sentence above; request keys are unchanged.
   Flash-lite's first 262 tier-1 requests were sent in the old order, hw1 families first, before this change; they are kept and the rest completes the tier.)
 - The Pro subset rule is moot (Pro unavailable). The report states n per cell for every number.
+
+## Discovered limits and projections (measured 2026-11-02 UTC, free tier, this key; every 429 is in `runs/gemini_429.jsonl`)
+| model | RPM | RPD | notes |
+|---|---|---|---|
+| gemini-3.5-flash | 5 | 20 | runner sends at 4.5/min |
+| gemini-3.1-flash-lite | >= 14 measured, runner uses 12/min | 500 | exhausted after 500 requests (quota value 500 in the 429) |
+| gemini-3.6-flash, gemini-3.7-flash | not measured | 20 | not queued |
+| gemini-3.1-pro-preview / gemini-pro-latest | n/a | 0 | free-tier limit 0 (input-token metric) |
+| gemini-2.5-* | n/a | n/a | 404, not available to new users |
+Quota resets at midnight Pacific (08:00 UTC while PST). The reset instant was confirmed only from the 429 `retryDelay` (about 2 h 20 min at 05:37 UTC).
+
+Requests completed on the first day (up to 06:16 UTC): flash-lite 486 (tier 1 complete 356/356, tier 2 130/1030), flash 12 (tier 1, 6 family pairs).
+Projection (one daily batch each, after the reset at 08:00 UTC; judging adds a few hours of latency, no Gemini quota):
+- gemini-3.1-flash-lite: tier 2 completes with the 2nd daily batch from now (900 left: 500 + 400), tier 3 (2,205) with the 7th (5 more full batches after tier 2 ends, ~Nov 8 PT). Whole queue: about 7 more daily batches.
+- gemini-3.5-flash: tier 1 has 344 left = 18 daily batches (about Nov 19), tier 2 1,030 = 52 more batches, tier 3 2,205 = 111 more. At 20/day only tier 1 is realistic; tier 2 for this model would need a quota change or a different model.

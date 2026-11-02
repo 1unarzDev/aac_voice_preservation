@@ -1,0 +1,351 @@
+{
+ "models": [
+  "qwen2.5-7b",
+  "llama3.1-8b",
+  "gemma3-4b",
+  "gpt-6.1-terra",
+  "qwen2.5-14b"
+ ],
+ "new_models": [
+  "qwen2.5-14b"
+ ],
+ "meta": {
+  "hw_unresolved_valid": 0,
+  "hw_rows_by_model": {
+   "gemma3-4b": 5470,
+   "gpt-6.1-terra": 5470,
+   "llama3.1-8b": 5470,
+   "qwen2.5-14b": 5470,
+   "qwen2.5-7b": 5470
+  },
+  "hw_families_analysed": 546,
+  "hw_writers": 20,
+  "ctl_unresolved_valid": 0,
+  "legend_unresolved_valid": 0
+ },
+ "checks": {
+  "qwen2.5-7b": {
+   "bare_affirmative_share": 1.0,
+   "bare_default_holds(share>=0.90)": true,
+   "legend_arms_d1": {
+    "a_legend": 0.9945054945054945,
+    "b_nolegend": 0.9891304347826086,
+    "c_markers_missing": 1.0
+   },
+   "not_legend_artifact(b and c >=0.90)": true,
+   "speech_act_chip_contrast_pp": 35.07462686567165,
+   "speech_act_chip_contrast_writer_lo_gt0": true,
+   "per_dimension": {
+    "polarity": {
+     "chip_over_noncrit_pp": 49.519230769230774,
+     "chip_over_irrel_pp": 49.519230769230774,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.9615384615384616,
+     "word_equals_chip_within5": true
+    },
+    "speech_act": {
+     "chip_over_noncrit_pp": 35.07462686567165,
+     "chip_over_irrel_pp": 33.582089552238806,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -8.955223880597014,
+     "word_equals_chip_within5": false
+    },
+    "politeness": {
+     "chip_over_noncrit_pp": 45.50561797752809,
+     "chip_over_irrel_pp": 45.50561797752809,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.5617977528089888,
+     "word_equals_chip_within5": true
+    },
+    "agent": {
+     "chip_over_noncrit_pp": 65.19607843137256,
+     "chip_over_irrel_pp": 68.13725490196079,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "time_quantity": {
+     "chip_over_noncrit_pp": 78.35051546391753,
+     "chip_over_irrel_pp": 82.4742268041237,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "certainty": {
+     "chip_over_noncrit_pp": 51.724137931034484,
+     "chip_over_irrel_pp": 50.57471264367817,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.5747126436781609,
+     "word_equals_chip_within5": true
+    }
+   },
+   "full_critical_match": {
+    "polarity": 1.0,
+    "speech_act": 1.0,
+    "politeness": 1.0,
+    "agent": 1.0,
+    "time_quantity": 1.0,
+    "certainty": 1.0
+   }
+  },
+  "llama3.1-8b": {
+   "bare_affirmative_share": 0.9903846153846154,
+   "bare_default_holds(share>=0.90)": true,
+   "legend_arms_d1": {
+    "a_legend": 0.9945652173913043,
+    "b_nolegend": 0.9836956521739131,
+    "c_markers_missing": 1.0
+   },
+   "not_legend_artifact(b and c >=0.90)": true,
+   "speech_act_chip_contrast_pp": 18.65671641791045,
+   "speech_act_chip_contrast_writer_lo_gt0": true,
+   "per_dimension": {
+    "polarity": {
+     "chip_over_noncrit_pp": 49.03846153846153,
+     "chip_over_irrel_pp": 49.03846153846153,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -0.4807692307692308,
+     "word_equals_chip_within5": true
+    },
+    "speech_act": {
+     "chip_over_noncrit_pp": 18.65671641791045,
+     "chip_over_irrel_pp": 11.940298507462686,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -14.925373134328357,
+     "word_equals_chip_within5": false
+    },
+    "politeness": {
+     "chip_over_noncrit_pp": 41.01123595505618,
+     "chip_over_irrel_pp": 41.01123595505618,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 1.6853932584269662,
+     "word_equals_chip_within5": false
+    },
+    "agent": {
+     "chip_over_noncrit_pp": 71.56862745098039,
+     "chip_over_irrel_pp": 74.01960784313727,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "time_quantity": {
+     "chip_over_noncrit_pp": 82.9896907216495,
+     "chip_over_irrel_pp": 82.4742268041237,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 2.5773195876288657,
+     "word_equals_chip_within5": false
+    },
+    "certainty": {
+     "chip_over_noncrit_pp": 54.59770114942529,
+     "chip_over_irrel_pp": 50.57471264367817,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -1.1494252873563218,
+     "word_equals_chip_within5": true
+    }
+   },
+   "full_critical_match": {
+    "polarity": 1.0,
+    "speech_act": 0.9776119402985075,
+    "politeness": 0.9943820224719101,
+    "agent": 1.0,
+    "time_quantity": 1.0,
+    "certainty": 1.0
+   }
+  },
+  "gemma3-4b": {
+   "bare_affirmative_share": 1.0,
+   "bare_default_holds(share>=0.90)": true,
+   "legend_arms_d1": {
+    "a_legend": 0.994535519125683,
+    "b_nolegend": 0.9891304347826086,
+    "c_markers_missing": 1.0
+   },
+   "not_legend_artifact(b and c >=0.90)": true,
+   "speech_act_chip_contrast_pp": 36.56716417910448,
+   "speech_act_chip_contrast_writer_lo_gt0": true,
+   "per_dimension": {
+    "polarity": {
+     "chip_over_noncrit_pp": 49.519230769230774,
+     "chip_over_irrel_pp": 49.519230769230774,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.9615384615384616,
+     "word_equals_chip_within5": true
+    },
+    "speech_act": {
+     "chip_over_noncrit_pp": 36.56716417910448,
+     "chip_over_irrel_pp": 29.850746268656714,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -13.432835820895523,
+     "word_equals_chip_within5": false
+    },
+    "politeness": {
+     "chip_over_noncrit_pp": 16.853932584269664,
+     "chip_over_irrel_pp": 16.853932584269664,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -12.921348314606742,
+     "word_equals_chip_within5": false
+    },
+    "agent": {
+     "chip_over_noncrit_pp": 62.745098039215684,
+     "chip_over_irrel_pp": 64.2156862745098,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "time_quantity": {
+     "chip_over_noncrit_pp": 88.14432989690721,
+     "chip_over_irrel_pp": 84.5360824742268,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -0.5154639175257731,
+     "word_equals_chip_within5": true
+    },
+    "certainty": {
+     "chip_over_noncrit_pp": 45.97701149425287,
+     "chip_over_irrel_pp": 36.206896551724135,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.5747126436781609,
+     "word_equals_chip_within5": true
+    }
+   },
+   "full_critical_match": {
+    "polarity": 1.0,
+    "speech_act": 1.0,
+    "politeness": 0.8764044943820225,
+    "agent": 1.0,
+    "time_quantity": 1.0,
+    "certainty": 1.0
+   }
+  },
+  "gpt-6.1-terra": {
+   "bare_affirmative_share": 1.0,
+   "bare_default_holds(share>=0.90)": true,
+   "legend_arms_d1": {
+    "a_legend": 0.9945054945054945,
+    "b_nolegend": 0.9728260869565217,
+    "c_markers_missing": 0.994475138121547
+   },
+   "not_legend_artifact(b and c >=0.90)": true,
+   "speech_act_chip_contrast_pp": 50.74626865671642,
+   "speech_act_chip_contrast_writer_lo_gt0": true,
+   "per_dimension": {
+    "polarity": {
+     "chip_over_noncrit_pp": 50.0,
+     "chip_over_irrel_pp": 50.0,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 1.9230769230769231,
+     "word_equals_chip_within5": true
+    },
+    "speech_act": {
+     "chip_over_noncrit_pp": 50.74626865671642,
+     "chip_over_irrel_pp": 44.776119402985074,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 4.477611940298507,
+     "word_equals_chip_within5": false
+    },
+    "politeness": {
+     "chip_over_noncrit_pp": 49.43820224719101,
+     "chip_over_irrel_pp": 49.43820224719101,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 2.247191011235955,
+     "word_equals_chip_within5": true
+    },
+    "agent": {
+     "chip_over_noncrit_pp": 69.6078431372549,
+     "chip_over_irrel_pp": 65.19607843137256,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.49019607843137253,
+     "word_equals_chip_within5": true
+    },
+    "time_quantity": {
+     "chip_over_noncrit_pp": 81.44329896907216,
+     "chip_over_irrel_pp": 74.22680412371135,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "certainty": {
+     "chip_over_noncrit_pp": 63.793103448275865,
+     "chip_over_irrel_pp": 52.87356321839081,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.5747126436781609,
+     "word_equals_chip_within5": true
+    }
+   },
+   "full_critical_match": {
+    "polarity": 1.0,
+    "speech_act": 1.0,
+    "politeness": 0.9662921348314607,
+    "agent": 1.0,
+    "time_quantity": 1.0,
+    "certainty": 1.0
+   }
+  },
+  "qwen2.5-14b": {
+   "bare_affirmative_share": 1.0,
+   "bare_default_holds(share>=0.90)": true,
+   "legend_arms_d1": {
+    "a_legend": 1.0,
+    "b_nolegend": 1.0,
+    "c_markers_missing": 1.0
+   },
+   "not_legend_artifact(b and c >=0.90)": true,
+   "speech_act_chip_contrast_pp": 35.07462686567165,
+   "speech_act_chip_contrast_writer_lo_gt0": true,
+   "per_dimension": {
+    "polarity": {
+     "chip_over_noncrit_pp": 50.0,
+     "chip_over_irrel_pp": 50.0,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "speech_act": {
+     "chip_over_noncrit_pp": 35.07462686567165,
+     "chip_over_irrel_pp": 32.83582089552239,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -2.9850746268656714,
+     "word_equals_chip_within5": false
+    },
+    "politeness": {
+     "chip_over_noncrit_pp": 50.0,
+     "chip_over_irrel_pp": 50.0,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "agent": {
+     "chip_over_noncrit_pp": 63.725490196078425,
+     "chip_over_irrel_pp": 62.745098039215684,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "time_quantity": {
+     "chip_over_noncrit_pp": 82.9896907216495,
+     "chip_over_irrel_pp": 89.17525773195877,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -1.0309278350515463,
+     "word_equals_chip_within5": true
+    },
+    "certainty": {
+     "chip_over_noncrit_pp": 52.87356321839081,
+     "chip_over_irrel_pp": 50.0,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.5747126436781609,
+     "word_equals_chip_within5": true
+    }
+   },
+   "full_critical_match": {
+    "polarity": 1.0,
+    "speech_act": 1.0,
+    "politeness": 0.9157303370786517,
+    "agent": 1.0,
+    "time_quantity": 0.9896907216494846,
+    "certainty": 1.0
+   }
+  }
+ },
+ "seed": 20261031,
+ "n_boot": 10000,
+ "cluster": "writer_id (hw1/chip/full/P1-P3; 6-7 writers) and family_id (legend pooled over hw1+W-C, 184 families)"
+}
