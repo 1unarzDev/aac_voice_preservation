@@ -44,7 +44,7 @@
 
 \begin{document}
 
-\title{Testing the Test Oracle: An Evaluation Harness\\for Meaning Preservation in LLM-Expanded AAC Text}
+\title{Testing the Test Oracle: A Harness for\\Meaning Preservation in LLM-Expanded AAC}
 
 %% Single-blind review: names are visible to reviewers.
 \author{\IEEEauthorblockN{Liam Bray}
@@ -58,12 +58,20 @@ nicholasicheng6@gmail.com}}
 \maketitle
 
 \begin{abstract}
-Developers of LLM keyword-to-sentence expansion for augmentative and alternative communication (AAC) need tests for whether a person's meaning survives, but the test oracle, an automated checker of what the output says, is itself software that can be wrong.
-We present a small evaluation harness built around that problem: five input-conditioned requirements that score a choice only when the input carried it, minimal-pair families rendered through five input channels, an LLM-extractor oracle whose verdicts are computed in code, and tests of the oracle itself.
-On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers (an exploratory replication, not preregistered, with \RES{hw_wr_min}--\RES{hw_wr_max} writers per contrast), four models gave the affirmative reading on \pct{hwaff} of bare polarity outputs, a speech-act tag raised preservation by \RES{hwp1}\,pp over a length-matched word \ci{hwp1}, and fully typed plain requests gained a politeness marker in \pct{hwpzadd} of outputs against \pct{hwpzrem} removals, driven mainly by one model.
-The direction of all three results held on a machine-written confirmatory set whose contrasts were pre-specified and git-timestamped.
-Testing the oracle mattered: relaxing a rule to remove a false alarm hid real substitutions, and an input-builder defect (\RES{wb_conflicts}/\RES{wb_msgs_restored} restorations) was found by auditing against an executable requirement, which now rejects it before generation.
-The oracle's critical labels agreed with human coders at $\kappa=\RES{jve_kappa}$ and $\RES{jvh_kappa}$ on two new sets of outputs.
+Some people who cannot speak compose a message from a few keywords, and a language model expands them into a sentence (augmentative and alternative communication, AAC).
+The keywords \kw{supervisor read} can lose a \say{not}, and catching that needs an oracle: an automated checker that decides pass or fail and is itself software that can be wrong.
+We built a small test harness for such systems and then tested its oracle.
+Two defects in our own harness, each traced to a regression test, show why.
+First, relaxing a rule to remove a false alarm made the oracle accept a changed sentence.
+\say{You borrowed my car this weekend} passed as the acceptance \say{Yes, you can borrow my car}, and the relaxed rule detected only \kof{or_acc_mut_det} keyed acceptance mutants.
+Second, a bug in our input builder showed models chips that contradicted the source message in \RES{wb_conflicts} of \RES{wb_msgs_restored} inputs; a validator now rejects them before generation.
+On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare keywords as affirmative in \pct{hwaff} of outputs, which is an Assumption by design because bare keywords carry no negation.
+A speech-act chip, a bracketed tag, raised the intended speech act by \RES{hwp1} percentage points (pp) over a length-matched word.
+This is a manipulation check: on a pre-specified machine-written confirmation set the speech act was kept in only \pct{wcm_act_chip1} of targets even with the chip.
+Plain typed requests gained a politeness marker in \pct{hwpzadd} of outputs against \pct{hwpzrem} removed (net \RES{hwp2}\,pp), driven by Gemma-3-4B (net \RES{hwpz_gemma}\,pp).
+On the confirmation set all three contrasts have the same sign and intervals above zero, but the net politeness effect is small (+\RES{wcp2}\,pp \ci{wcp2}).
+The oracle's labels agreed with trained human coders at $\kappa=\RES{jve_kappa}$ and $\RES{jvh_kappa}$ on critical labels in two sets of outputs; verdict-level $\kappa$ was \RES{jvh_vk_min}--\RES{jvh_vk_max} on the human-written pairs.
+No AAC users took part, and the harness is for developers.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -73,38 +81,39 @@ accessibility, AAC, LLM testing, test oracle, requirements, regression testing
 %% =====================================================================
 \section{Introduction}
 %% =====================================================================
-Many people who use AAC with letter or word selection compose a message from a few keywords, because each selection costs time and effort~\cite{valencia2023less,cai2024speakfaster}; LLM systems expand such a selection into a sentence~\cite{shen2022kwickchat,cai2024speakfaster}.
-Symbol- and grid-based AAC is out of scope here.
-A test for such a system must decide whether an edit is a defect, and that depends on what the input carried.
-From the keywords \kw{supervisor read} no model can know whether the supervisor does \emph{not} read; the affirmative guess is a default, not a violation (Fig.~\ref{fig:gallery}, card~1).
-When a person supplies a cue, or a whole sentence, the output must keep it, and a changed value is a violation.
+Some people who use augmentative and alternative communication (AAC) compose a message from a few keywords, because each selection costs time and effort~\cite{valencia2023less,cai2024speakfaster}.
+A language model then expands the keywords into a sentence~\cite{shen2022kwickchat,cai2024speakfaster}.
+Typing \kw{supervisor read} might mean \say{The supervisor read} or \say{The supervisor did not read} (Fig.~\ref{fig:gallery}).
+Whether the model erred depends on what the user supplied, and a text-similarity score cannot know that.
+Symbol- and grid-based AAC is out of scope.
 
-\begin{figure*}[t]
+\begin{figure}[t]
   \centering
   \footnotesize
-  \setlength{\tabcolsep}{3.5pt}
-  \renewcommand{\arraystretch}{1.12}
-  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{3.5cm}@{}}
-    \toprule
-    & Exact stored input $\Rightarrow$ stored output (judged label) & What it shows, and who would own the fix & Rate in the example's stratum (hw1, prompt P0, four models)\\
-    \midrule
-    \csname @@input\endcsname hw_gallery_table.tex
-    \bottomrule
-  \end{tabularx}
-  \caption{Selected stored outputs on \emph{human-written} pairs, verbatim; each input is the exact string sent to the model, wrapper included. Selection is by a declared rule: per dimension, the first family in SHA-256 order of its ID with a bare output that commits to a wrong value while the chip output for the same family, variant and model is right. The examples are therefore not typical, and the right column gives the rate in each stratum. For a binary dimension the bare rate is near 50\% by design, so it is not a finding. The ``owner'' labels are a design choice of our taxonomy, not an empirical result. Source: \texttt{analysis/hw1/examples.md}.}
+  \begin{minipage}{\columnwidth}
+  \raggedright
+  \input{hw_card1}
+  \end{minipage}\par\medskip
+  \begin{minipage}{\columnwidth}
+  \raggedright
+  \textbf{Assumption vs.\ Violation.}
+  The user typed no word for \say{not}, so the affirmative output is an \emph{Assumption}, charged to the input design and not to the model.
+  If the user supplies \chip{NOT} and the output drops it, that is a \emph{Violation}, charged to the model.
+  \end{minipage}
+  \caption{A stored output on a human-written pair (Gemma-3-4B); each input is the exact string sent to the model. The example is the first match in SHA-256 order of family ID with a wrong bare output and a right chip output, so it favours failures and is not typical. For this binary dimension a bare output is wrong in about half of cases by design (\RES{hwe_pol_wrong}\% \cip{hwe_pol_wrong}, \RES{hwe_pol_wr} writers), which is not a finding; with the chip the output is right in \RES{hwe_pol_fix}\% \cip{hwe_pol_fix}. The charging rule is our design choice, not a result.}
   \label{fig:gallery}
-\end{figure*}
+\end{figure}
 
+This paper asks which output changes count as failures, given exactly what the user supplied, and how to test the checker that decides.
 The software-engineering problem is the oracle.
-Deciding whether an output ``kept the meaning'' needs a checker, here an LLM that extracts a few explicit labels, and an unvalidated checker silently decides every result.
-We therefore treat \emph{testing the oracle} as a first-class contribution beside testing the models.
+Deciding whether an output kept the meaning needs a checker, here an LLM that extracts a few explicit labels.
+An unvalidated checker silently decides every result, so we treat testing the oracle as a first-class contribution beside testing the models.
 We contribute:
 (1)~a harness with five requirements R1--R5 that have stated sources and executable tests (\S\ref{sec:harness});
-(2)~tests of the oracle, including two defects we introduced ourselves, each traced from symptom to regression test (\S\ref{sec:oracle});
-(3)~evidence from a human-written replication (hw1, primary) and a machine-written confirmatory set (W-C) that these tests find real, model-specific behavior (\S\ref{sec:results}); and
+(2)~tests of the oracle, a fault-by-test matrix, and two defects we made ourselves, each traced from symptom to regression test (\S\ref{sec:oracle});
+(3)~evidence on human-written pairs and on a machine-written confirmation set that the tests find real, model-specific behavior (\S\ref{sec:results}); and
 (4)~the harness and stored outputs as an artifact.
-The harness is for developers; it is not a tool for assessing AAC users or their messages.
-We ran no study with AAC users and make no claim about benefit, effort or preference.
+The harness is for developers, not for assessing AAC users or their messages.
 
 %% =====================================================================
 \section{Requirements and Harness}
@@ -112,49 +121,50 @@ We ran no study with AAC users and make no claim about benefit, effort or prefer
 %% =====================================================================
 \paragraph*{Families and channels}
 A \emph{family} is a minimal pair of source messages that share content words and differ on one \emph{critical} dimension: polarity, agent (who acts), certainty, speech act (question, request or statement), politeness, or time/quantity.
-Each variant is rendered through five channels: \emph{bare} keywords; \emph{+word}, which adds one noncritical content word; \emph{+chip}, which adds the critical cue as a bracketed tag (\chip{NOT}); \emph{+all}, with every tag the variant needs; and \emph{full}, the source sentence itself.
-Every variant needs at least one tag, so the unmarked reading gets a counter-tag (e.g., \chip{PLAIN}).
+Each variant is rendered through five \emph{channels}, which say how much of the message the user supplied: \emph{bare} keywords; \emph{+word}, which adds one noncritical content word; \emph{+chip}, which adds the critical value as a chip such as \chip{NOT}; \emph{+all}, with every chip the variant needs; and \emph{full}, the source sentence itself.
+Every variant needs at least one chip, so the unmarked reading gets a counter-chip (e.g., \chip{PLAIN}).
 A chip is a \emph{probe} of whether supplied information is used, not a proposed interface: its real cost depends on the access method (a dwell, a menu traversal, a grid button), and it adds a vocabulary to learn and an error-recovery path.
 
 \paragraph*{Requirements}
 For output $y$ from input $x$, let $L_d(y)$ be the extracted value on dimension $d$ and $C(x)$ the commitments that $x$ carries.
 Table~\ref{tab:trace} states each requirement with its source and its test.
 A \emph{Violation} means a supplied value was not kept (R1, R2); an \emph{Assumption} means the output committed to a value the input left open (R3).
-A reference-fidelity score would instead charge the model for what the interface omitted, and a similarity score would pass an added \say{please} on a typed sentence.
+A reference-fidelity score would charge the model for what the interface omitted, and a similarity score would pass an added \say{please} on a typed sentence.
 All five requirements are our proposal, derived from the structure of the task and from defects we met; none was derived with AAC users or clinicians.
-The declared policy behind R2, do not change typed wording unless the person asks for rewriting, protects authorship; some users prefer that a system rewrite their text, so R2 is a policy to test, not a recommendation.
+The declared policy behind R2, do not change typed wording unless the person asks for rewriting, protects authorship.
+Some users prefer that a system rewrite their text, so R2 is a policy to test, not a recommendation.
 
 \begin{table*}[t]
-  \caption{Traceability of requirements R1--R5: where each comes from, which test checks it, and what that test has found. All checks run on stored outputs and re-score without model calls.}
+  \caption{Traceability of requirements R1--R5: where each comes from, which test checks it, and what that test has found. All checks run on stored outputs and re-score without model calls. R1--R4 test the system under test; R5 tests the input builder.}
   \label{tab:trace}
   \footnotesize
-  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.45cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}X@{}}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.45cm}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}X@{}}
     \toprule
     Requirement & Source & Executable test & What the test has found\\
     \midrule
-    \textbf{R1} supplied cue: if $C(x)$ fixes $d$ to $c$, $L_d(y)$ must be admissible for $c$ &
-    Interface contract: a cue the person supplied is information the person paid for &
-    Cue check on \emph{+chip}/\emph{+all} outputs; Violation if the value differs &
-    Speech-act tags kept in \pct{wcm_act_chip1} of W-C targets vs.\ \pct{wcm_act_full} for the typed sentence; \RES{wc_qfail_k} of \RES{wc_qfail_n} \chip{?} targets not kept\\
+    \textbf{R1} supplied chip: if $C(x)$ fixes $d$ to $c$, $L_d(y)$ must be admissible for $c$ &
+    Interface contract: a chip the person supplied is information the person paid for &
+    Chip check on \emph{+chip}/\emph{+all} outputs; Violation if the value differs &
+    Speech-act chips kept in \pct{wcm_act_chip1} of confirmation-set targets vs.\ \pct{wcm_act_full} for the typed sentence; \RES{wc_qfail_k} of \RES{wc_qfail_n} \chip{?} targets not kept\\
     \addlinespace
     \textbf{R2} full input: each scored explicit value of a typed sentence is kept, including the absence of a politeness marker &
     Declared policy (above); exact copy satisfies it &
     Full-input check on \emph{full} outputs &
-    Politeness added to plain typed sentences: \pct{hwpzadd} (hw1), \pct{wcpzadd} (W-C)\\
+    Politeness added to plain typed sentences: \pct{hwpzadd} (human-written pairs), \pct{wcpzadd} (confirmation set)\\
     \addlinespace
     \textbf{R3} ambiguity: if $C(x)$ leaves $d$ open, $L_d(y)$ is not pass/fail; log an Assumption and report its direction &
     Bare keywords under-specify; a systematic default decides which reading is free &
     Default report on \emph{bare}/\emph{+word} outputs; 50\% paired match is a design ceiling &
-    Affirmative reading on \pct{hwaff} (hw1) and \pct{wcaff} (W-C) of bare polarity outputs\\
+    Affirmative reading on \pct{hwaff} (human-written pairs) and \pct{wcaff} (confirmation set) of bare polarity outputs\\
     \addlinespace
-    \textbf{R4} composition: adding a compatible cue for $e$ must not break a kept value on $d\neq e$ &
-    Cues are supplied together in practice &
+    \textbf{R4} composition: adding a compatible chip for $e$ must not break a kept value on $d\neq e$ &
+    Chips are supplied together in practice &
     Composition check: pass$\to$fail transitions of the protected value, minus the repeat-draw floor &
-    One exploratory study (W-D), omitted here: Llama lost a kept negation in \kn{wdll} transitions\\
+    Composition study (\S\ref{sec:comp}): Qwen loses the agent under \chip{TELL} (\RES{wdqa_d}\,pp), Llama loses polarity under \chip{STATEMENT} (\RES{wdll_d}\,pp)\\
     \addlinespace
-    \textbf{R5} input builder: a test input that claims to supply $c$ must display a cue for $c$ &
+    \textbf{R5} input builder: a test input that claims to supply $c$ must display a chip for $c$ &
     Defect B below: failures cannot be attributed to a model if the input lied &
-    Validator on the rendered input (\texttt{validate\_cue\_inputs.py}), run before generation &
+    Validator on the rendered input (\texttt{validate\_cue\_inputs}), run before generation &
     \RES{wb_conflicts}/\RES{wb_msgs_restored} restorations contradicted their source; the validator rejects \RES{r5_rej}/\RES{r5_conf}\\
     \bottomrule
   \end{tabularx}
@@ -162,10 +172,13 @@ The declared policy behind R2, do not change typed wording unless the person ask
 
 \paragraph*{Harness}
 Fig.~\ref{fig:harness} shows the pipeline.
-A family specification is rendered into channels; the R5 validator checks that each displayed cue matches the claim; a generator produces outputs; an extractor (gpt-6.1-sol, a different model from the one under test) answers the family's critical question and five general questions from the output alone, with added-content extraction also seeing the visible input.
-Two extractor prompts (J1, J2) differ in wording and option order; critical disagreements go to a cross-family arbiter (claude-opus-5-5) or stay unknown.
+A family specification is rendered into channels, and the R5 validator checks that each displayed chip matches the claim.
+A generator produces outputs.
+An extractor (gpt-6.1-sol, a different model from those under test) answers the family's critical question and five general questions from the output alone; added-content extraction also sees the visible input.
+Two extractor prompts (J1, J2) differ in wording and option order, and critical disagreements go to a cross-family arbiter (claude-opus-5-5) or stay unknown.
 Verdicts are then computed in code from labels, item specification and channel, so a rule change re-scores every stored output without model calls.
-The oracle decides only whether a fixed set of explicit, text-level values is kept; it does not judge fluency, referents or whether anyone would accept the sentence.
+The oracle decides only whether a fixed set of explicit, text-level values is kept.
+It does not judge fluency, referents or whether anyone would accept the sentence.
 
 \begin{figure*}[t]
   \centering
@@ -175,7 +188,7 @@ The oracle decides only whether a fixed set of explicit, text-level values is ke
       box/.style={draw, rounded corners=1.5pt, minimum height=9mm, minimum width=22mm, align=center, inner sep=2pt, fill=black!4},
       test/.style={draw, dashed, rounded corners=1.5pt, minimum height=8mm, minimum width=30mm, align=center, inner sep=2pt},
       arr/.style={-{Stealth[length=1.6mm]}, thick},
-      lab/.style={font=\tiny\itshape, text=black!70}]
+      lab/.style={font=\scriptsize\itshape, text=black!70}]
     \node[box] (fam) {Family spec\\(minimal pair)};
     \node[box, right=of fam] (chan) {Channel renderer\\bare / +word / +chip\\+all / full};
     \node[box, right=of chan, fill=black!12] (val) {R5 input\\validator};
@@ -187,87 +200,136 @@ The oracle decides only whether a fixed set of explicit, text-level values is ke
     \draw[arr] (val) -- (gen);
     \draw[arr] (gen) -- (ext);
     \draw[arr] (ext) -- node[above, lab]{labels} (ver);
-    \node[test, below=10mm of $(ext)!0.5!(ver)$, minimum width=7.6cm, minimum height=12mm, text width=7.3cm] (orc) {\textbf{Tests of the oracle (\S\ref{sec:oracle})}\\identity: an unchanged source passes\\keyed mutants: one-value changes are detected\\human gate: extractor labels vs.\ human coders ($\kappa$)};
+    \node[test, below=10mm of $(ext)!0.5!(ver)$, minimum width=7.6cm, minimum height=12mm, text width=7.3cm] (orc) {\textbf{Tests of the oracle (\S\ref{sec:oracle})}\\identity: an unchanged source passes\\mutants: a one-value change is detected\\human gate: extractor labels vs.\ human coders ($\kappa$)};
     \draw[arr, dashed] ([xshift=-14mm]orc.north) -- ([xshift=-14mm]orc.north |- ext.south);
     \draw[arr, dashed] ([xshift=14mm]orc.north) -- ([xshift=14mm]orc.north |- ver.south);
-    \node[lab, below=1mm of val] {tests the \emph{input}};
-    \node[lab, left=3mm of orc, align=right] {tests the \emph{checker}};
+    \node[lab, below=1mm of val] {Is the input honest?};
+    \node[lab, left=3mm of orc, align=right] {Is the checker right?};
   \end{tikzpicture}
-  \caption{Evaluation harness. Solid arrows: data flow for one run. Dashed box: tests of the oracle itself (\S\ref{sec:oracle}). Shaded boxes: the code-level components that enforce R5 and R1--R4. Because verdicts are code over stored labels, a rule change re-scores every output without model calls.}
+  \caption{How a test runs. A message pair is shown to the model with more or less of the information (bare to full). The validator first checks that what we show matches the source (R5), the extractor reads each output into labels, and code, not the LLM, decides Violation or Assumption (R1--R4). The dashed box tests the checker: an unchanged sentence must pass, a one-value change must be caught, and the labels must match human coders. Because verdicts come from stored labels, changing a rule re-scores every output without calling a model.}
   \label{fig:harness}
 \end{figure*}
 
-\paragraph*{Reuse}
-A developer adds a requirement as a function of labels, item specification and channel, re-scores stored outputs without any model call, and runs the identity and keyed-mutant tests before trusting the new rule.
-Re-scoring and the oracle tests need no API access; regenerating outputs needs the API models, whose versions may be retired and whose outputs are not bit-reproducible.
+\paragraph*{Adding a chip: worked example and cost}
+Suppose a developer wants a \chip{THANKS} chip for the politeness dimension.
+The chip table in \texttt{src/labels.py} gets \RES{ec_new_entry_lines} new entry:
+\begin{center}\footnotesize\texttt{"[THANKS]": ("politeness", frozenset(\{"thanks/apology"\}))}\end{center}
+The verdict code (\texttt{src/attribute.py}, \RES{ec_loc_attribute} lines) and the R5 validator (\texttt{src/validate\_cue\_inputs.py}, \RES{ec_loc_validator} lines) both read that table, so neither changes.
+In a dry run (\texttt{extend\_cost.py}) the validator then marks \kw{Keywords: [THANKS] extra pillow} compatible with a thanks/apology source and conflicting with a plain one, and re-scoring all \RES{ec_rescored_rows} stored human-written-pair output rows took \RES{ec_rescore_seconds}\,s with \RES{ec_model_calls} model calls.
+A new dimension, not just a new chip, also needs a codebook option and an extractor question, which means new extractor calls; we did not measure that cost.
+No developer other than the authors has used the harness.
+Regenerating outputs needs the API models, whose versions may be retired and whose outputs are not bit-reproducible.
 
-\paragraph*{Evidence populations}
+\paragraph*{Evidence sets}
 All items are authored or crowd-written, not messages from AAC users.
-\emph{hw1} (primary): \RES{hw_nkept} pairs kept of \RES{hw_ncand} candidates, written by \RES{hw_nwriters} non-author writers over six dimensions, each kept after three blind independent checks; \RES{hw_nfam} families are analysed.
-\emph{W-C} (confirmatory, machine-written): \RES{wc_n_fam} fresh families on three dimensions, whose three contrasts were pre-specified in a git-timestamped plan frozen before generation.
-\emph{Discovery}: \RES{n_fam_test} authored families, used to develop prompts and codebooks.
-\emph{W-B}: crowd-written fictional messages from AACText~\cite{vertanen2011imagination}, used for corpus transfer (\S\ref{sec:oracle}).
-Four models run with a single one-sentence prompt (P0, greedy): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it, three open models run locally with 4-bit quantization, and one API model, gpt-6.1-terra.
-All intervals are pointwise 95\% percentile intervals from writer-cluster (hw1) or seed/construction-cluster (W-C) bootstraps, with 10,000 resamples over a fixed model roster.
+The \emph{human-written pairs} (primary) are \RES{hw_nkept} pairs kept of \RES{hw_ncand} candidates, written by \RES{hw_nwriters} non-author writers over six dimensions and kept after three blind independent checks; \RES{hw_nfam} families are analysed.
+The \emph{confirmation set} has \RES{wc_n_fam} fresh machine-written families on three dimensions, whose three contrasts were pre-specified in a git-timestamped plan frozen before generation.
+The \emph{development set} has \RES{n_fam_test} authored families used to develop prompts and codebooks.
+\emph{Corpus transfer} uses crowd-written fictional messages from AACText~\cite{vertanen2011imagination}, and the \emph{composition study} (R4) adds a second chip to \RES{wd_nscen} scenarios.
+Four models run with one fixed one-sentence prompt (greedy): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it, three open models run locally with 4-bit quantization, and one API model, gpt-6.1-terra.
+All intervals are pointwise 95\% percentile intervals from writer-cluster (human-written pairs) or seed/construction-cluster (confirmation set) bootstraps, with 10,000 resamples over a fixed model roster.
 
 %% =====================================================================
 \section{Results: Does the Harness Find Real Behavior?}
 \label{sec:results}
 %% =====================================================================
-\subsection{Primary replication on human-written pairs (hw1)}
-Table~\ref{tab:primary} gives the three contrasts, which we name \emph{Act-gain} (speech-act chip minus a length-matched word), \emph{Politeness} (politeness added to plain typed sentences minus removed from polite ones) and \emph{Default} (share of bare polarity outputs that are affirmative).
-They were pre-specified for W-C as P1--P3 (unrelated to prompts); in hw1 they are a replication and were not preregistered.
-All hold under Holm correction, but each rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers, so we claim direction and consistency, not interval width; a writer-cluster percentile interval with so few clusters is probably too narrow.
+\subsection{Primary replication on human-written pairs}
+Table~\ref{tab:primary} gives three contrasts.
+\emph{Act-chip gain} is the speech-act chip minus a length-matched word.
+\emph{Net politeness addition} is politeness added to plain typed sentences minus politeness removed from polite ones.
+\emph{Affirmative default} is the share of bare polarity outputs that are affirmative.
+The plan called them P1--P3 (unrelated to prompts).
+They were pre-specified for the confirmation set; on the human-written pairs they are an exploratory replication and were not preregistered.
+All hold under Holm correction, but each rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers.
+We therefore claim direction and consistency, not interval width, because a writer-cluster percentile interval with so few clusters is probably too narrow.
 The chip gain is positive on all six dimensions, between \RES{hw_gain_min} and \RES{hw_gain_max}\,pp, with every lower bound above \RES{hw_gain_lo_min}\,pp.
 Collapsing near-duplicate pairs, excluding one writer, reversing the arbiter's judgment calls or using all candidates flips no decision; the largest shift is \RES{hw_shift_max}\,pp (\RES{hw_shift_all}\,pp with all candidates).
-Because the chip text enters the model's prompt, Act-gain and Default are close to manipulation checks of whether the harness separates supplied from missing information, which is their purpose.
+Because the chip text enters the model's prompt, Act-chip gain and Affirmative default are close to manipulation checks of whether the harness separates supplied from missing information, which is their purpose.
+They bound what a chip can do rather than show how often systems fail.
+The politeness figures use two readings, named once: \emph{added} is the share of plain sources that gained a marker, \emph{removed} is the share of polite sources that lost one, and \emph{net} is added minus removed.
 
 \begin{table}[t]
-  \caption{hw1 (primary, human-written, \RES{hw_nfam} families) and W-C (confirmatory, machine-written, \RES{wc_n_fam} families): the three contrasts, prompt P0, four models, 95\% cluster-bootstrap intervals, Holm over the three. hw1 writers per contrast in parentheses. Pre-specified names: Act-gain = P1, Politeness = P2, Default = P3.}
+  \caption{The three contrasts on human-written pairs (\RES{hw_nfam} families; writers per contrast in parentheses) and on the confirmation set (\RES{wc_n_fam} families): one fixed prompt, four models, 95\% cluster-bootstrap intervals, Holm-adjusted $p$ over the three. $p=.0003$ is the smallest Holm value that 10,000 resamples can give. Politeness is net; its added/removed shares (\%) are below it.}
   \label{tab:primary}
   \footnotesize
-  \setlength{\tabcolsep}{3pt}
-  \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}Xcc@{}}
+  \setlength{\tabcolsep}{2.2pt}
+  \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}Xlclc@{}}
     \toprule
-    Contrast & hw1 [95\% CI] (writers) & W-C [95\% CI]\\
+    & Human-written & $p$ & Confirmation & $p$\\
     \midrule
-    Act-gain, pp & +\RES{hwp1} \ci{hwp1} (\RES{hwp1_wr}) & +\RES{wcp1} \ci{wcp1}\\
-    Politeness, pp & +\RES{hwp2} \ci{hwp2} (\RES{hwp2_wr}) & +\RES{wcp2} \ci{wcp2}\\
-    Default, \% affirmative & \RES{hwaff} \cip{hwaff} (\RES{hwp3_wr}) & \RES{wcaff} \cip{wcaff}\\
-    Holm $p$ & \RES{hwp1_holm} (all three) & \RES{wcp1_holm} (all three)\\
+    Act-chip gain, pp & +\RES{hwp1} \ci{hwp1} (\RES{hwp1_wr}) & \RES{hwp1_holm} & +\RES{wcp1} \ci{wcp1} & \RES{wcp1_holm}\\
+    Net politeness, pp & +\RES{hwp2} \ci{hwp2} (\RES{hwp2_wr}) & \RES{hwp2_holm} & +\RES{wcp2} \ci{wcp2} & \RES{wcp2_holm}\\
+    \quad added / removed & \RES{hwpzadd} / \RES{hwpzrem} & & \RES{wcpzadd} / \RES{wcpzrem} &\\
+    Affirmative default, \% & \RES{hwaff} \cip{hwaff} (\RES{hwp3_wr}) & \RES{hwp3_holm} & \RES{wcaff} \cip{wcaff} & \RES{wcp3_holm}\\
+    \addlinespace
+    Act-chip gain, arbitrated labels masked, pp & & & +\RES{wcp1_um} \ci{wcp1_um} & \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\subsection{Confirmatory machine-written set (W-C)}
-The same three contrasts hold on W-C with the same direction and a similar or smaller size (Table~\ref{tab:primary}).
+\subsection{Confirmation set}
+All three contrasts have the same sign on the confirmation set, and every interval excludes zero (Table~\ref{tab:primary}).
+Act-chip gain and Affirmative default are of similar size to the human-written pairs.
+Net politeness addition is small, with a lower bound of \RES{wcp2_lo}\,pp.
 Confirmation is qualified.
 First, \RES{wc_prefreeze} cached requests predate the final item freeze.
-Second, Act-gain relies on post-hoc arbitration of judge disagreements (\RES{wc_arb_rows} rows); with those labels masked as unknown it is \RES{wcp1_um}\,pp \ci{wcp1_um}, a sensitivity analysis, and Politeness and Default contain no arbitrated rows.
-``Pre-specified and git-timestamped'' means the plan was committed to a private repository before generation; it is not independently verifiable.
-A hash of the protocol was deposited publicly as GitHub release \texttt{\RES{hash_release}}; it post-dates the W-C freeze and so does not certify it.
+Second, Act-chip gain relies on post-hoc arbitration of extractor disagreements (\RES{wc_arb_rows} rows); with those labels masked as unknown it is \RES{wcp1_um}\,pp, a sensitivity analysis in the last row of Table~\ref{tab:primary}.
+Net politeness addition and Affirmative default contain no arbitrated rows.
+``Pre-specified and git-timestamped'' means the plan was committed to a private repository before generation, which is not independently verifiable.
+A hash of the protocol was deposited publicly as GitHub release \texttt{\RES{hash_release}}; it post-dates the confirmation-set freeze and so does not certify it.
 
 \subsection{Assumptions, full-input violations and model heterogeneity}
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{r2c/fig_ratchet_col}
-  \caption{W-C, full input (the source sentence is visible to the model), P0, \RES{wc_nfam_pz} politeness families: politeness marker added to a plain source vs.\ removed from a polite one, per model and pooled; 95\% cluster-bootstrap intervals; counts at right.}
-  \label{fig:ratchet}
-\end{figure}
+Table~\ref{tab:ladder} separates the two kinds of evidence.
+In the italic cells the input is ambiguous, so the match is the model's default and is bounded by a 50\% design ceiling; it is not accuracy.
+In the other cells the chip or sentence is visible, so the match measures preservation.
+Under bare input, \kn{wcaff} directional polarity outputs on the confirmation set were affirmative; these are Assumptions, not failures, and the interface decides who pays an extra selection to say \say{not}.
+That default may be an artifact of heavy compression, so we asked humans: \RES{el_nann} annotators typed keywords for \RES{el_nmsg} crowd-written AACText messages (\RES{el_nsets} sets).
+On the \RES{el_neg_c_n} messages with a negation cue they dropped it in \pct{el_neg_h} of sets, against \pct{el_neg_c} for a deliberately crude four-word rule-based compressor.
+So the Assumption channel is realistic but the compressor is not a user model.
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.85\textwidth]{r2c/fig_channel_ladder}
-  \caption{W-C critical-value match by channel (P0, four models pooled; markers: individual models). Left of the shading, input is ambiguous: match is the chosen default, bounded by a 50\% design ceiling, not accuracy. In the shaded region the cue is visible and match measures preservation. Orange squares also require every other supplied predicate to be kept.}
-  \label{fig:ladder}
-\end{figure*}
+\begin{table}[t]
+  \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values and intervals are in \texttt{analysis/r2c/channel\_ladder.csv}.}
+  \label{tab:ladder}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lrrrrrr@{}}
+    \toprule
+    Dimension & bare & +word & +chip & +all & full & $n$ per cell\\
+    \midrule
+    \csname @@input\endcsname wc_ladder_table.tex 
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-Fig.~\ref{fig:ladder} separates the two kinds of evidence.
-Under bare input, \kn{wcaff} directional polarity outputs in W-C were affirmative; these are Assumptions, not failures, and the interface decides who pays an extra selection to say \say{not}.
-That default may be an artifact of heavy compression, so we asked humans: \RES{el_nann} annotators typed keywords for \RES{el_nmsg} crowd-written AACText messages (\RES{el_nsets} sets); on the \RES{el_neg_c_n} messages with a negation cue they dropped it in \pct{el_neg_h} of sets, against \pct{el_neg_c} for a deliberately crude four-word rule-based compressor, so the Assumption channel is realistic but the compressor is not a user model.
-Full-input violations are model-specific: in hw1 the Politeness contrast is \RES{hwpz_gemma}\% of outputs for Gemma, \RES{hwpz_terra}\% for gpt-6.1-terra, \RES{hwpz_llama}\% for Llama and \RES{hwpz_qwen}\% for Qwen (net additions minus removals); in W-C, plain typed sentences gained a politeness marker in \kn{wcpzadd} outputs, driven by Gemma (\kn{wcpzadd_gemma}) and gpt-6.1-terra (\kn{wcpzadd_terra}), while Llama and Qwen removed markers more often than they added them.
-This is a regression to test for per model, not a property of LLMs (Fig.~\ref{fig:ratchet}).
-Question tags are the weakest supplied cue: one tag kept the act in \pct{wcm_act_chip1} of W-C targets, and \RES{wc_q2req_k} of the \RES{wc_qfail_k} failures were coded as requests (\say{Can you\ldots?}), a codebook decision that we flag rather than resolve.
+Question chips are the weakest supplied chip: one chip kept the act in \pct{wcm_act_chip1} of confirmation-set targets, and \RES{wc_q2req_k} of the \RES{wc_qfail_k} failures were coded as requests (\say{Can you\ldots?}), a codebook decision that we flag rather than resolve.
+Full-input violations are model-specific (Table~\ref{tab:pol}): Gemma-3-4B and gpt-6.1-terra added markers, while Llama and Qwen removed markers more often than they added them on the confirmation set.
+This is a regression to test for per model, not a property of LLMs.
+
+\begin{table}[t]
+  \caption{Full-input politeness change by model. Human-written pairs: net addition (pp). Confirmation set: counts of plain sources that gained a marker (added) and polite sources that lost one (removed), out of 80 families each.}
+  \label{tab:pol}
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    Model & Human-written, net pp & Added & Removed\\
+    \midrule
+    \csname @@input\endcsname wc_pol_table.tex 
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Composition (R4)}
+\label{sec:comp}
+The composition study adds a second chip to a single-chip input and counts pass$\to$fail transitions of the first chip's value, minus the disagreement between two greedy repeats of the identical input.
+It has \RES{wd_nscen} scenarios, nine inputs each, two encodings of the speech-act chip (\chip{TELL} and its alias \chip{STATEMENT}), four models and two draws (\RES{wd_nreq} requests).
+Failures depend on both model and encoding.
+Qwen loses the agent in \kn{wdqa} transitions under \chip{TELL} (\RES{wdqa_d}\,pp above the repeat floor \ci{wdqa_d}) and in \RES{wdqa_stmt_k} under \chip{STATEMENT}.
+Llama loses polarity in \kn{wdll} transitions under \chip{STATEMENT} (\RES{wdll_d}\,pp \ci{wdll_d}) and in \RES{wd_tellpol_llama_k} under \chip{TELL}.
+The single-chip repeat floor is \RES{wdll_rep_k}/\RES{wdll_rep_n} for Llama.
+An R4 test must therefore fix the encoding, because a failure that appears under one encoding of the same meaning is an encoding defect before it is a model property.
+This study is exploratory and machine-scored.
+Critical labels fell back to J1 on \RES{wd_j1_rows} of \RES{wd_rows} scored rows, and the Qwen \chip{TELL} examples expose a codebook-rule ambiguity that agreement of the two prompts does not settle.
 
 %% =====================================================================
 \section{Testing the Oracle}
@@ -275,18 +337,22 @@ Question tags are the weakest supplied cue: one tag kept the act in \pct{wcm_act
 %% =====================================================================
 Every result above is only as good as the checker, so we test it as software, in the spirit of the test-oracle literature~\cite{weyuker1982nontestable,barr2015oracle} and of mutation analysis~\cite{jia2011mutation}: an authorized change must pass and an unauthorized one must fail.
 \emph{Identity test:} an unchanged source injected as its own full-channel output must pass.
-\emph{Keyed mutants:} a hand-written one-value change, with keys hashed before the first judge call, must be detected.
+\emph{Scoped mutants:} a hand-written one-value change to a development-set source must be detected.
+\emph{Keyed challenge:} hand-written controls and one-feature mutants, with keys hashed before the first extractor call, must be classified as keyed.
 \emph{Human gate:} extractor labels against human coders.
 
 \paragraph*{Two defects, two regression tests}
-Table~\ref{tab:trace2} traces the two defects we introduced ourselves.
+Table~\ref{tab:trace2} traces the two defects we made while building the harness; neither was seeded.
 In Defect A, the identity test failed \RES{id_fail_raw} of \RES{id_n} reproductions, all one sentence, \say{Yes, you can borrow my car this weekend.}, coded \emph{\RES{id_fail_got}} against the target \emph{\RES{id_fail_want}}.
 The model had done its job; the checker demanded a distinction the text need not force.
-The obvious repair, accepting \emph{statement} for an acceptance target, passed identity but failed the next test: the relaxed oracle detected only \kof{or_acc_mut_det} acceptance mutants and missed both statement substitutions (\say{You borrowed my car this weekend.}), whereas without the relaxation it detected \kof{or_new_mut_det_raw} mutants across groups.
-Removing a false alarm removed fault sensitivity, so both refusal/acceptance families are quarantined from every primary result (leaving \RES{n_fam_primary} of \RES{n_fam_test} discovery families) until a predicate passes both tests.
-In Defect B, an audit of \RES{wb_msgs_restored} restored-cue inputs built from AACText messages found \RES{wb_conflicts} whose displayed chip contradicted the stored source, e.g., \chip{MAYBE} for a plain assertion, after a silent fallback in our builder.
+The obvious repair, accepting \emph{statement} for an acceptance target, passed identity but failed the next test.
+The relaxed oracle detected only \kof{or_acc_mut_det} acceptance mutants and missed both statement substitutions (\say{You borrowed my car this weekend.}), whereas without the relaxation it detected \kof{or_new_mut_det_raw} mutants across groups.
+Removing a false alarm removed fault sensitivity.
+Both refusal/acceptance families are therefore quarantined from every primary result (leaving \RES{n_fam_primary} of \RES{n_fam_test} development families) until a predicate passes both tests.
+In Defect B, an audit of \RES{wb_msgs_restored} restored-chip inputs built from AACText messages found \RES{wb_conflicts} whose displayed chip contradicted the stored source, e.g., \chip{MAYBE} for a plain assertion, after a silent fallback in our builder.
 In the \RES{wb_maybe_msgs} \chip{MAYBE} messages, all \RES{wb_maybe_n} outputs followed the visible chip and failed the source, which a source-fidelity score counts as model failures.
-The R5 validator, which decodes only the rendered input, now rejects all \RES{r5_conf} before generation, matches the audit on \RES{r5_agree}/\RES{r5_n}, and never certifies the \RES{r5_sure} coarser \chip{SURE} restorations.
+The R5 validator decodes only the rendered input and now rejects all \RES{r5_conf} before generation.
+It matches the audit on \RES{r5_agree}/\RES{r5_n} and never certifies the \RES{r5_sure} coarser \chip{SURE} restorations.
 
 \begin{table}[t]
   \caption{Defect-to-regression-test trace.}
@@ -306,12 +372,36 @@ The R5 validator, which decodes only the rendered input, now rejects all \RES{r5
   \end{tabularx}
 \end{table}
 
+\paragraph*{Which test caught which defect}
+Table~\ref{tab:matrix} lists, for each defect class we met, which test caught it, which ran on the affected rule and missed it, and which does not exercise it.
+No single test catches every class, and the cheapest test (identity) passed the harmful relaxation.
+It is an inventory of what happened in this project, not a seeded-fault sweep, so it shows that the tests are complementary and not that they find faults we did not anticipate.
+
+\begin{table*}[t]
+  \caption{Fault-by-test matrix. \emph{caught}: the test failed on the defect. \emph{missed}: the test ran on the affected rule and passed. \texttt{--}: the test does not exercise this fault. Counts are from the identity, scoped-mutant and keyed-challenge runs (\texttt{analysis/oracle/}), the R5 replay and the two human-agreement sets.}
+  \label{tab:matrix}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    Defect class & Identity & Scoped mutants & Keyed challenge & R5 validator & Human gate\\
+    \midrule
+    Over-strict acceptance rule: a verbatim source fails & caught (\RES{id_fail_raw}/\RES{id_n}) & -- & missed (\kof{or_new_ctrl_fa_raw} control false alarms) & -- & --\\
+    Over-relaxed acceptance rule: a statement substitution passes & missed (\kof{or_identity_fa} false alarms) & missed (\kof{or_mut_det} detected, but its acceptance mutants were refusals) & caught (\kof{or_acc_mut_det} vs.\ \kof{or_new_mut_det_raw} without the relaxation) & -- & --\\
+    Builder shows a chip that contradicts the source & -- & -- & -- & caught (\RES{r5_rej}/\RES{r5_conf}) & --\\
+    Extractor error shared by machine coders (\say{I can't wait} read as negated) & -- & -- & caught (round-1 labels match the key in \kof{or_r1_label_ok}; the misses include this sentence) & -- & caught (both human coders as keyed)\\
+    Extractor insensitive to a one-value edit & -- & none found (\kof{or_mut_det}) & none found (\kof{or_new_mut_det_raw}, raw rule) & -- & --\\
+    \bottomrule
+  \end{tabularx}
+\end{table*}
+
 \paragraph*{Mutation and identity evidence}
 Table~\ref{tab:oracle} lists the evidence on authored inputs.
-The keyed challenge set has four groups of six controls and six one-feature mutants; its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) passes when pooled, with no slack.
+The keyed challenge set has four groups of six controls and six one-feature mutants.
+Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) passes when pooled, with no slack; we read 22/24 as passing a floor, not as evidence of high sensitivity (Wilson interval \cip{or_new_mut_det}).
 
 \begin{table}[t]
-  \caption{Oracle evidence. Mutation and identity checks are on clean authored sentences (Wilson 95\% intervals), not error rates on model outputs. Human rows compare extractor labels with a plurality of human coders.}
+  \caption{Oracle evidence. Mutation and identity checks are on clean authored sentences (Wilson 95\% intervals), not error rates on model outputs. Human rows compare extractor labels with the plurality of trained human coders; items whose human labels have no determinate critical value (all coders unsure, or a tied plurality) are excluded.}
   \label{tab:oracle}
   \footnotesize
   \setlength{\tabcolsep}{3pt}
@@ -320,27 +410,31 @@ The keyed challenge set has four groups of six controls and six one-feature muta
     Check & Result\\
     \midrule
     Identity: unchanged source, false alarms & \kof{or_identity_fa}\\
-    Scoped single-value mutations detected & \kof{or_mut_det}\\
+    Scoped single-value mutants detected & \kof{or_mut_det}\\
     Keyed challenge mutants detected (gate) & \kof{or_new_mut_det}\\
     Keyed challenge controls, false alarms & \kof{or_new_ctrl_fa}\\
     \quad acceptance group, relaxed rule & \kof{or_acc_mut_det}\\
     \quad all groups, without the relaxation & \kof{or_new_mut_det_raw}\\
     \midrule
-    Human gate, discovery items (\RES{human_n_items} items, two coders): held-out $\kappa$, \RES{human_gate_n} fields & \RES{human_gkappa_min}--\RES{human_gkappa_max}\\
-    Outputs for human-elicited keywords (\RES{jve_coders} coders, \RES{jve_n} items): critical $\kappa$ [CI] & \RES{jve_kappa} [\RES{jve_kappa_lo}, \RES{jve_kappa_hi}]\\
+    Human gate, development items (\RES{human_n_items} items, two coders): held-out $\kappa$, \RES{human_gate_n} fields & \RES{human_gkappa_min}--\RES{human_gkappa_max}\\
+    Outputs for human-elicited keywords (\RES{jve_coders} coders, \RES{jve_n} of \RES{jve_items} items): critical $\kappa$ [CI] & \RES{jve_kappa} [\RES{jve_kappa_lo}, \RES{jve_kappa_hi}]\\
+    \quad raw agreement, critical label & \RES{jve_acc}\%\\
     \quad verdict agreement & \RES{jve_va_k}/\RES{jve_va_n}\\
-    Outputs for hw1 pairs (\RES{jvh_coders} coders, \RES{jvh_n} items): critical $\kappa$ [CI] & \RES{jvh_kappa} [\RES{jvh_kappa_lo}, \RES{jvh_kappa_hi}]\\
+    Outputs for human-written pairs (\RES{jvh_coders} coders, \RES{jvh_n} of \RES{jvh_items} items): critical $\kappa$ [CI] & \RES{jvh_kappa} [\RES{jvh_kappa_lo}, \RES{jvh_kappa_hi}]\\
+    \quad raw agreement, critical label & \RES{jvh_acc}\%\\
     \quad verdict $\kappa$ & \RES{jvh_vk_min}--\RES{jvh_vk_max}\\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \paragraph*{Human gate}
-The first human gate, with two annotators, was run on the \emph{discovery} items (the extraction inventory used to develop the codebook), with plurality references and tied items excluded rather than adjudicated; its pre-specified criterion ($\kappa\geq0.6$) passes on all \RES{human_gate_n} fields.
-It validates extraction of explicit markers on those items, not repaired text or W-B readings.
-Two later checks use outputs the harness had not been developed on: outputs for human-elicited keywords and outputs for hw1 pairs (Table~\ref{tab:oracle}).
-They are the oracle's evidence on the headline-type data, though their coders were also taught the codebook, and the verdict $\kappa$ values on hw1 rest on small counts of positive verdicts.
-Machine agreement is not validation: on \say{I can't wait to go to the party.}, both judge prompts, the rule-based extractor and two further machine coders answered \emph{negated}, and both human annotators answered \emph{affirmative}, as keyed.
+The first human gate, with two annotators, was run on the development items (the extraction inventory used to develop the codebook), with plurality references and tied items excluded rather than adjudicated.
+Its pre-specified criterion ($\kappa\geq0.6$) passes on all \RES{human_gate_n} fields.
+It validates extraction of explicit markers on those items, not repaired text or corpus-transfer readings.
+Two later checks use outputs the harness had not been developed on: outputs for human-elicited keywords and outputs for human-written pairs (Table~\ref{tab:oracle}).
+The excluded items are \RES{jve_excl} of \RES{jve_items} and \RES{jvh_excl} of \RES{jvh_items}.
+Those checks are the oracle's evidence on the headline-type data, though their coders were also taught the codebook, and the verdict $\kappa$ values on human-written pairs rest on small counts of positive verdicts.
+Machine agreement is not validation: on \say{I can't wait to go to the party.}, both extractor prompts, the rule-based extractor and two further machine coders answered \emph{negated}, and both human annotators answered \emph{affirmative}, as keyed.
 
 %% =====================================================================
 \section{Related Work}
@@ -354,11 +448,11 @@ Requirements engineering for ML stresses that data-dependent behavior needs expl
 CheckList organizes behavioral tests into minimum-functionality, invariance and directional tests~\cite{ribeiro2020checklist}; Cho et al.\ catalogue metamorphic relations for LLM-based NLP~\cite{cho2025metamorphic}; COLLIE tests compositional constraints~\cite{yao2024collie}; Sensei combines a user simulator with assertions and metamorphic relations~\cite{delara2026sensei}.
 We claim no new testing technique.
 LLM judges show position, verbosity and self-preference biases~\cite{zheng2023judging,panickssery2024selfpreference}, and similarity metrics can miss negation~\cite{koch2022selfeval}.
-Pauli et al.\ show that preservation metrics look valid when test data confound style change with content errors~\cite{pauli2025stylegap}; our identity and keyed-mutant tests apply that idea to a checker.
+Pauli et al.\ show that preservation metrics look valid when test data confound style change with content errors~\cite{pauli2025stylegap}; our identity and mutant tests apply that idea to a checker.
 
 \paragraph*{Preservation and LLMs in AAC}
 Qu et al.\ evaluate speech-act retention in style transfer~\cite{qu2023conditioning}; rewriting can keep semantic similarity while erasing pragmatic markers~\cite{navneet2026voice}; and LLMs favor particular politeness strategies~\cite{zhao2025politeness}.
-AAC systems studied with users expose intent controls~\cite{valencia2023less,valencia2024compa,mao2025designprobes,xiang2025socializechat}; Lacosse et al.\ keep bracketed function words such as \say{not}~\cite{lacosse2026cognitivesteering}; Choudhury et al.\ test whether affect cues reach the output~\cite{choudhury2025alignment}; Gorenshtein et al.\ benchmark intent drift~\cite{gorenshtein2026intentdrift}; R-SPEAK scores faithfulness and was co-designed with people with aphasia~\cite{altamimi2026rspeak}.
+AAC systems studied with users expose intent controls~\cite{valencia2023less,valencia2024compa,mao2025designprobes,xiang2025socializechat}; Lacosse et al.\ keep bracketed function words such as \say{not}~\cite{lacosse2026cognitivesteering}; Choudhury et al.\ test whether affect cues reach the output~\cite{choudhury2025alignment}; R-SPEAK scores faithfulness and was co-designed with people with aphasia~\cite{altamimi2026rspeak}.
 We add a conditional specification of which commitments are testable under each input, and tests of the oracle that checks them.
 Accessibility engineering spans the life cycle~\cite{paiva2021accessibility}, but conformance checks do not see whether generated text keeps a user's meaning.
 
@@ -367,10 +461,11 @@ Accessibility engineering spans the life cycle~\cite{paiva2021accessibility}, bu
 \label{sec:threats}
 %% =====================================================================
 \emph{Construct.} Labels are coarse, explicit categories; \say{plain} means no explicit marker, and referents, negation scope and certainty degree are only partly covered.
-Passing the checker is weaker than keeping the typed wording, and a scored repair is not necessarily a sentence someone could say; a small human audit of one companion repair method, not reported here, supports that caution.
+Passing the checker is weaker than keeping the typed wording, and a scored repair is not necessarily a sentence someone could say.
 \emph{Oracle.} All rates depend on an LLM extractor and arbiter; the arbiter ran after outcomes were known, and human coders were taught the codebook.
-The first human gate's $\kappa$ is on discovery items, not on confirmatory data.
-\emph{Internal.} W-C has early cached requests and post-hoc arbitration; hw1 is not preregistered and has few writers per contrast.
+The first human gate's $\kappa$ is on development items, not on confirmation data.
+The defect trace has two defects, both found by our own process; it shows that the process works, not that it finds defects we did not anticipate, and the harness has not been compared with a baseline oracle such as embedding similarity.
+\emph{Internal.} The confirmation set has early cached requests and post-hoc arbitration; the human-written pairs are not preregistered and have few writers per contrast.
 \emph{External.} Four models, three small and quantized; one prompt; English; constructed and crowd-written, not AAC-user, messages.
 Model versions may be retired, and API outputs are not bit-reproducible.
 \emph{Conclusion.} Effects are model-specific, and zero observed events do not establish zero risk.
@@ -380,8 +475,9 @@ Selection counts omit reading, navigation and fatigue~\cite{frisch2026complicate
 \section{Conclusion}
 %% =====================================================================
 An oracle for meaning preservation is software and needs tests of its own.
-Ours caught a repair that hid real substitutions and a builder that supplied the wrong cue, and its labels agree with human coders on two new sets of outputs.
-With it, a human-written replication finds that bare keywords leave a default reading, that supplied speech-act cues help but are not always kept, and that some models change typed text.
+Ours caught a repair that hid real substitutions and a builder that supplied the wrong chip, and its labels agree with trained human coders on two sets of outputs.
+With it, human-written pairs show that bare keywords leave a default reading and that some models change typed text.
+They also show that a supplied speech-act chip helps but is not always kept.
 Families, requirements, harness, oracle tests, stored outputs and analysis code are available at \url{https://github.com/1unarzDev/aac_voice_preservation}.
 
 \section*{Ethics and Positionality}
