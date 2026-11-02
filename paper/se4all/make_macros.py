@@ -1429,6 +1429,24 @@ put("nat_elic_p", _ea["precision"], _NP, "pct")
 put("nat_elic_r", _ea["recall"], _NP, "pct")
 put("nat_elic_n", _ea["n_units"], _NP, "int")
 put("nat_nsets", 4, _NP, "int")
+# cycle 6: held-out sets only (Part 10 = second gold set, Part 13 = human-written pairs); not used to build the codebook
+for _vn, _tag in (("violation", "viol"), ("preservation_failure", "pres")):
+    _ph = _np["pooled_heldout_sets"][_vn]
+    for _m_, _mk in (("precision", "p"), ("recall", "r")):
+        put(f"nat_ho_{_tag}_{_mk}", _ph[_m_], _NP, "pct")
+        put(f"nat_ho_{_tag}_{_mk}_lo", _ph[_m_ + "_ci"][0], _NP, "pct")
+        put(f"nat_ho_{_tag}_{_mk}_hi", _ph[_m_ + "_ci"][1], _NP, "pct")
+    put(f"nat_ho_{_tag}_npos", _ph["n_ref_pos"], _NP, "int")
+put("nat_ho_nunits_viol", sum(_np["sets"][k_]["violation"]["n_units"] for k_ in ("new", "hw")), _NP, "int")
+put("nat_dev_nunits_viol", _np["sets"]["main1"]["violation"]["n_units"], _NP, "int")
+put("nat_dev_viol_p", _np["sets"]["main1"]["violation"]["precision"], _NP, "pct")
+put("nat_dev_viol_r", _np["sets"]["main1"]["violation"]["recall"], _NP, "pct")
+# cycle 6: R4 both-cue floor (analysis/r2d/headline.json), shown beside the single-cue floor
+_DQ = "tell_agent_qwen_"
+put("wdqa_rep_k", _D[_DQ + "repeat_disagreement_k"], _DS, "int"); put("wdqa_rep_n", _D[_DQ + "repeat_disagreement_n"], _DS, "int")
+put("wdqa_brep_k", _D[_DQ + "both_repeat_disagreement_k"], _DS, "int"); put("wdqa_brep_n", _D[_DQ + "both_repeat_disagreement_n"], _DS, "int")
+put("wdqa_db", _D[_DQ + "damage_minus_both_repeat"], _DS, "pp2")
+put("wdqa_db_lo", _D[_DQ + "damage_minus_both_repeat_ci_low"], _DS, "pp2"); put("wdqa_db_hi", _D[_DQ + "damage_minus_both_repeat_ci_high"], _DS, "pp2")
 put("nat_nunits_viol", sum(_np["sets"][k_]["violation"]["n_units"] for k_ in ("main1", "new", "hw")), _NP, "int")
 
 # ------------------------------------------------------------------ write ---

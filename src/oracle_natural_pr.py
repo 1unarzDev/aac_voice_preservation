@@ -48,6 +48,7 @@ def counts(c, flip):
 def main():
     res = {"scope": "primary", "reference": "human consensus", "sets": {}}
     pool = {}
+    held = {}
     for key, label in SETS:
         v = json.load(open(ROOT / f"annotation/judge_validation_{key}.json"))["human"]["verdict"]
         res["sets"][key] = {"label": label}
@@ -63,7 +64,10 @@ def main():
             res["sets"][key][name] = r
             if name != "assumption" and key != "elic":
                 p = pool.setdefault(name, [0, 0, 0]); p[0] += tp; p[1] += fp; p[2] += fn
+                if key in ("new", "hw"):   # held-out sets: not used to build the codebook/extractor prompts
+                    h = held.setdefault(name, [0, 0, 0]); h[0] += tp; h[1] += fp; h[2] += fn
     res["pooled_failure_sets"] = {k: prf(*p) for k, p in pool.items()}
+    res["pooled_heldout_sets"] = {k: prf(*p) for k, p in held.items()}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "summary.json").write_text(json.dumps(res, indent=1))
     L = ["# Oracle on faults nobody seeded", "",
@@ -75,6 +79,7 @@ def main():
     rows = [(res["sets"][k]["label"], n, res["sets"][k][n]) for k, _ in SETS
             for n in ("violation", "preservation_failure", "assumption") if n in res["sets"][k]]
     rows += [("pooled main1+new+hw", n, dict(r, n_units=None)) for n, r in res["pooled_failure_sets"].items()]
+    rows += [("held-out pooled new+hw", n, dict(r, n_units=None)) for n, r in res["pooled_heldout_sets"].items()]
     for lab, n, r in rows:
         L.append(f"| {lab} | {n} | {r['n_units'] or ''} | {r['n_ref_pos']} | {r['tp']} | {r['fp']} | {r['fn']} | "
                  f"{ci(r['precision'], r['precision_ci'])} | {ci(r['recall'], r['recall_ci'])} | {f(r['f1'])} |")

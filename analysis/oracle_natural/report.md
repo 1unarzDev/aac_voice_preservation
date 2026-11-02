@@ -16,5 +16,7 @@ Judge verdict vs human-consensus verdict on the four human-labelled sets of natu
 | Part 13 (human-written) | assumption | 75 | 55 | 55 | 4 | 0 | 93.2 [83.8, 97.3] | 100.0 [93.5, 100.0] | 96.5 |
 | pooled main1+new+hw | violation |  | 63 | 58 | 6 | 5 | 90.6 [81.0, 95.6] | 92.1 [82.7, 96.6] | 91.3 |
 | pooled main1+new+hw | preservation_failure |  | 83 | 77 | 10 | 6 | 88.5 [80.1, 93.6] | 92.8 [85.1, 96.6] | 90.6 |
+| held-out pooled new+hw | violation |  | 39 | 36 | 5 | 3 | 87.8 [74.5, 94.7] | 92.3 [79.7, 97.3] | 90.0 |
+| held-out pooled new+hw | preservation_failure |  | 53 | 49 | 9 | 4 | 84.5 [73.1, 91.6] | 92.5 [82.1, 97.0] | 88.3 |
 
 Notes: few positives in single sets (violation positives are few per set), so intervals are wide; pooled rows sum main1, Part 10 and Part 13 (distinct items). Part 12 supports only the assumption verdict (positive = assumption made; 8 negatives). Reference is human consensus, with ties/unsure excluded.
