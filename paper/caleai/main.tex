@@ -201,7 +201,7 @@ The \emph{keyword study} has \RES{el_annot} annotators type their own keywords f
 The AAC input studied is word input only; symbol and grid-based AAC are out of scope.
 
 \paragraph{Scoring and attribution.}
-Four fixed models write each sentence: Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it (4-bit, llama.cpp) and one commercial API model (gpt-6.1-terra).
+Four primary models write each sentence: Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it (4-bit, llama.cpp) and one commercial API model (gpt-6.1-terra); Section~\ref{sec:realistic} adds three more.
 An LLM extractor (two prompt variants) labels each output's dimensions without seeing the source, model or condition; a second-family arbiter resolves disagreements on critical labels; deterministic code turns labels into verdicts, identically for treated and untreated outputs.
 A target is one (item, model, input condition) outcome.
 Because the input condition fixes which values the model was given, a miss is attributed to one of three causes: \emph{loss} (the input never carried the value), \emph{violation} (it carried the value and the output changed it) or \emph{assumption} (the input was ambiguous and the output committed anyway).
@@ -430,6 +430,7 @@ Two controls on these pairs show that the missing cue, not the chip, is the leve
 An irrelevant chip from another dimension adds little: the cue chip beats it by \RES{cc_irrel_min} to \RES{cc_irrel_max} points by dimension, which rules out \say{any added chip helps}.
 The same cue as a plain word (\kw{not}, \kw{please}) is within \RES{cc_nl_near_max} points of the chip on \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions and beats it on speech act by \RES{cc_nl_act} points.
 Any AAC system can surface the cue as an ordinary word, so the chip's vocabulary-learning cost is avoidable.
+On Qwen2.5-14B and Mistral-Nemo-12B the speech-act gain is +\RES{mb_act_lo} and +\RES{mb_act_hi} points, the chip beats an irrelevant chip by at least \RES{mb_irrel_min} on every dimension, and a plain word is within \RES{mb_word_max} of it on the other five.
 With \RES{hw_wr_min}--\RES{hw_wr_max} writers per contrast we claim direction and consistency: every writer's mean has the same sign, and writer-level intervals are [\RES{t6_p1_lo}, \RES{t6_p1_hi}] and [\RES{t6_p2_lo}, \RES{t6_p2_hi}] points for the first two (exact sign-flip one-sided $p=\RES{t6_p1_rp}$, \RES{t6_p2_rp} and \RES{t6_p3_rp}; smallest attainable \RES{t6_minp}); the replication is exploratory.
 In the keyword study about one keyword set in five lost the negation (\RES{el_pol_h}\% \ci{el_pol_h}; \RES{t2_d_h}\% [\RES{t2_d_h_lo}, \RES{t2_d_h_hi}] after resampling messages and reweighting to the sampling frame), on cue-enriched messages that carry a negation; a rule-based four-word compressor lost it \RES{el_pol_c}\% of the time, and people lost the polite cue more often (\RES{el_pt_h}\%) than the compressor (\RES{el_pt_c}\%).
 
@@ -439,6 +440,7 @@ That is the Bayes-preferred guess: \RES{t2_neg_prev}\% of AACText messages are n
 The harm is the asymmetric cost: about \RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t2_rev_h_hi}] of every 1,000 messages are silently reversed when the user types keywords unaided, against \RES{t2_spur_h} spurious negations, and the guess breaks even only if a reversal costs under \RES{t2_ratio_h} times a spurious negation.
 For politeness the models match the preferred guess (they add polite wording to \RES{t2_pol_model}\% of no-cue inputs against a posterior of \RES{t2_pol_post}\%); for speech act \say{statement} is not preferred (the source was a question or request \RES{t2_sa_post}\% of the time, models asserted one \RES{t2_sa_model}\%), and they over-commit to it.
 The finding is not that models are biased: an average-accuracy metric rewards exactly the behavior that silently reverses meaning, so a ledger puts the cost of a default beside its hit rate.
+The default holds on \RES{mb_nmod} models from \RES{mb_nfam} families (at least \RES{mb_bare_min}\% affirmative; no legend arm below \RES{mb_leg_min}\%) and on a lite commercial Gemini model (\RES{mb_gem_a}\% and \RES{mb_gem_c}\% on the legend arms, \RES{mb_gem_n} families each).
 These figures rest on detector labels of source messages and one greedy draw per model.
 
 %% =====================================================================
@@ -473,22 +475,21 @@ Both can demote the ledger's endpoints; the trial tests effects on people.
 \section{Limitations}
 \label{sec:limits}
 %% =====================================================================
-\emph{Human outcomes.} The results are changes in stored text; communication success, agency, effort and trust are untested, which is what Section~\ref{sec:protocol} addresses.
-\emph{Repair audit.} The pilot has \RES{ra_rep_items} + \RES{ra_ctl_items} items, about \RES{ra_effn} effective independent raters and outcome-selected controls; the \RES{p17_texts}-text audit is the primary estimate.
-\emph{Machine labels.} Endpoints use an LLM extractor and deterministic verdicts, validated by two human annotators on untreated outputs; guard repairs and menu rewrites are checked only by the usability audit.
-\emph{Baselines.} Strip-only covers one failure type; the resample baseline uses one retry seed per attempt and temperature 0.7 against the guard's 0, which the matched-decoding contrast addresses, and is exploratory.
-\emph{Scope.} The guard was developed on the development set and confirmed on a separate one, whose status is qualified by early cached requests and post-outcome arbitration; the menu was run on neither the confirmation set nor supplied input; the human-written pairs have few writers.
-\emph{Constructed items, fixed models.} Four fixed models describe these systems, not other models; AACText is crowd-written fiction, word input is the only modality, and many AAC users compose by rewriting or choosing among options, which we do not model.
-Examples follow declared, outcome-conditioned rules and illustrate rather than sample.
-\emph{Community involvement.} No AAC user or autistic adviser contributed to the design or analysis; we draw on guidance such as AASPIRE~\cite{nicolaidis2019aaspire} and on the double-empathy~\cite{milton2012double} and heterogeneity~\cite{zisk2019aac} cautions, assume no \say{autistic style}, and limit claims to commitments explicit in the text; claims about benefit need AAC users and advisers.
+\emph{Human outcomes.} The results are changes in stored text; communication success, agency, effort and trust are untested (Section~\ref{sec:protocol}).
+\emph{Repair audit.} The pilot has \RES{ra_rep_items} + \RES{ra_ctl_items} items, about \RES{ra_effn} effective independent raters and outcome-selected controls; the \RES{p17_texts}-text audit is primary.
+\emph{Machine labels.} Endpoints use an LLM extractor and deterministic verdicts, validated by two annotators on untreated outputs; repairs and menu rewrites are checked only by the usability audit.
+\emph{Baselines.} Strip-only covers one failure type; the resample baseline (temperature 0.7 against the guard's 0) is exploratory, and the matched-decoding contrast addresses the mismatch.
+\emph{Scope.} The guard was confirmed on a separate set, qualified by early cached requests and post-outcome arbitration; the menu was run on neither the confirmation set nor supplied input; the human-written pairs have few writers.
+\emph{Constructed items, fixed models.} Six models from five families (open models at most 14B, 4-bit; one lite Gemini model, legend arms only) describe these systems, not others; AACText is crowd-written fiction, and word input is the only modality.
+\emph{Community involvement.} No AAC user or autistic adviser contributed to the design or analysis; we draw on AASPIRE~\cite{nicolaidis2019aaspire} and on the double-empathy~\cite{milton2012double} and heterogeneity~\cite{zisk2019aac} cautions, assume no \say{autistic style}, and limit claims to commitments explicit in the text; claims about benefit need AAC users and advisers.
 \emph{Ethics.} No data were collected from AAC users.
 All annotators were adult non-authors recruited from the authors' university peers, identified only by an ID; each consented and was reimbursed for their time. They labelled model outputs and audited items under a fixed codebook, blinded to model, condition and source; some also chose keywords for public AACText messages or wrote new sentence pairs, released under CC~BY~4.0 with recorded consent. No personal or health data were collected, and we did not seek an institutional review determination.
 
 \section{Conclusion}
-On fresh speech-act confirmation families the guard raises the pass rate by +\RES{gt_jgain_g1} points, repairs \RES{gt_rep_g1}\% of strict-check failures with \RES{gt_pf_g1_k} strict-check pass-to-fail changes, and its feedback beats resampling (+\RES{bw_tr} points at matched temperature).
-The ledger places beside that gain what a gain-only report omits: deletion alone earns +\RES{gt_jgain_g1s} of the +\RES{gt_jgain_g1} points, the repair rate fell from development to confirmation, scored passes can be fragments, a pilot points to a usability cost which the frozen-rule audit will test, and a default right on average still reverses meaning silently at a rate accuracy cannot show; a plain word restores the missing cue as well as a chip does.
-The pre-specified study turns these offline findings into predictions that people, above all people who use AAC, can confirm or falsify.
-Analysis code, stored outputs and scripts that rebuild every number and figure accompany the submission as anonymized supplementary material. % VERIFY: attach the anonymized archive before submission
+On fresh speech-act confirmation families the guard raises the pass rate by +\RES{gt_jgain_g1} points, repairs \RES{gt_rep_g1}\% of strict-check failures with \RES{gt_pf_g1_k} strict-check pass-to-fail changes, and beats resampling (+\RES{bw_tr} points at matched temperature).
+The ledger places beside that gain what a gain-only report omits: deletion alone earns +\RES{gt_jgain_g1s} of the +\RES{gt_jgain_g1} points, the repair rate fell from development to confirmation, scored passes can be fragments, a pilot points to a usability cost the audit will test, and a default right on average still reverses meaning silently at a rate accuracy cannot show; a plain word restores the missing cue as well as a chip does.
+The pre-specified study turns these offline findings into predictions that AAC users can confirm or falsify.
+Code, outputs and scripts that rebuild every number accompany this submission. % VERIFY: attach the anonymized archive before submission
 
 %% GenAI disclosure: the lab supplies the format (placeholder).
 

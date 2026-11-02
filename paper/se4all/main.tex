@@ -64,7 +64,7 @@ We built a test harness and tested its oracle with seeded mutants, identity chec
 On real outputs it caught \kof{orr_j_mut} seeded mutants with \kof{orr_j_fa} false alarms.
 On natural outputs labelled by human coders, in two sets not used to build it, its violation verdicts have \pct{nat_ho_viol_p} precision \cip{nat_ho_viol_p} and \pct{nat_ho_viol_r} recall.
 Two defects in our own harness, each traced to a regression test, show why such tests matter: a relaxed rule let the oracle accept a changed sentence, and an input-builder bug showed models chips that contradicted the source.
-With the harness, human-written pairs show that four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and that supplying the missing speech-act cue, as a one-tap chip or a plain word, raises the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp.
+With the harness, human-written pairs show that four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and that supplying the missing speech-act cue, as a one-tap chip or a plain word, raises the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp; the patterns replicate on \RES{mb_nmod} models from \RES{mb_nfam} families.
 The harness, tests and stored outputs are released.
 \end{abstract}
 
@@ -223,7 +223,7 @@ The \emph{human-written pairs} (primary) are \RES{hw_nkept} pairs kept of \RES{h
 The \emph{confirmation set} has \RES{wc_n_fam} fresh machine-written families on three dimensions, whose three contrasts were pre-specified in a git-timestamped plan frozen before generation.
 The \emph{development set} has \RES{n_fam_test} authored families used to develop prompts and codebooks.
 \emph{Corpus transfer} uses crowd-written fictional messages from AACText~\cite{vertanen2011imagination}, and the \emph{composition study} (R4) adds a second chip to \RES{wd_nscen} scenarios.
-Four models run with one fixed one-sentence prompt (greedy): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it, three open models run locally with 4-bit quantization, and one API model, gpt-6.1-terra.
+Four models run with one fixed one-sentence prompt (greedy): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it, three open models run locally with 4-bit quantization, and one API model, gpt-6.1-terra. Two larger open models, Qwen2.5-14B and Mistral-Nemo-12B, and a lite commercial Gemini model were added later under the same prompts (Section~\ref{sec:results}, Model breadth).
 Unless labelled, intervals are pointwise 95\% percentile-bootstrap intervals from writer-cluster (human-written pairs) or seed/construction-cluster (confirmation set) resamples, 10,000 over a fixed model roster; the exceptions are the writer-level $t$ intervals of Table~\ref{tab:primary}, Wilson intervals for proportions in Table~\ref{tab:oracle}, and cluster-bootstrap $\kappa$ intervals.
 
 %% =====================================================================
@@ -251,6 +251,11 @@ Two controls on the human-written pairs (\texttt{analysis/chip\_controls/}) show
 An irrelevant chip, from another dimension and true of both sources, adds little to the critical value; the cue chip beats it by \RES{cc_irrel_min} to \RES{cc_irrel_max}\,pp by dimension, which rules out \say{any added chip helps}.
 The same cue written as a plain word (\kw{not}, \kw{please}) is within \RES{cc_nl_near_max}\,pp of the chip on \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions and beats it on speech act by \RES{cc_nl_act}\,pp.
 An AAC system can therefore surface the cue as an ordinary word with no new interface vocabulary, and the chip is the probe we used rather than a requirement.
+\paragraph*{Model breadth}
+The same analyses on Qwen2.5-14B and Mistral-Nemo-12B (a fourth open family; same prompts, greedy decoding, 4-bit) reproduce each pattern across all \RES{mb_nmod} models from \RES{mb_nfam} families.
+Bare polarity is affirmative in at least \pct{mb_bare_min} of outputs, and no legend arm (legend, no legend, markers may be missing) falls below \pct{mb_leg_min}.
+The speech-act chip gain is \RES{mb_act_lo} and \RES{mb_act_hi}\,pp on the two new models, the cue chip beats an irrelevant chip by at least \RES{mb_irrel_min}\,pp on every dimension, and a plain word is within \RES{mb_word_max}\,pp of the chip on the other five dimensions.
+A lite commercial Gemini model, on the legend arms only so far (\RES{mb_gem_n} families per arm), gives \pct{mb_gem_a} affirmative with the legend and \pct{mb_gem_c} when markers may be missing.
 The politeness figures use two readings, named once: \emph{added} is the share of plain sources that gained a marker, \emph{removed} is the share of polite sources that lost one, and \emph{net} is added minus removed.
 
 \begin{table}[t]
@@ -515,7 +520,7 @@ The first human gate's $\kappa$ is on development items, not on confirmation dat
 The defect trace has two defects, both found by our own process; it shows that the process works, not that it finds defects we did not anticipate. The natural-output precision and recall rest on three human-labelled sets whose coders were taught the codebook. The surface baseline is near-circular because its lexicon matches the mutation operators, and we ran no NLI baseline.
 \emph{Internal.} The confirmation set has early cached requests and post-hoc arbitration; the human-written pairs are not preregistered and have few writers per contrast.
 \emph{Use.} No outside developer has used the harness yet, and R1--R5 were not validated with AAC users or clinicians.
-\emph{External.} Four models, three small and quantized; one prompt; English; constructed and crowd-written, not AAC-user, messages.
+\emph{External.} Six models from five families (open models at most 14B and 4-bit quantized, no frontier-size open model), plus one lite Gemini model on the legend arms only; one prompt; English; constructed and crowd-written, not AAC-user, messages.
 Model versions may be retired, and API outputs are not bit-reproducible.
 \emph{Conclusion.} Effects are model-specific, and zero observed events do not establish zero risk.
 Selection counts omit reading, navigation and fatigue~\cite{frisch2026complicated}.
