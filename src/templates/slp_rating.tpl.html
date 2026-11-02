@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expert Rating Panel: Two Tasks</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676; --panel: #f3f3f3;
+    --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff; --ok: #0a5c2b; --focus: #c25400; --chip: #fff3d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a; --panel: #1f1f1f;
+      --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a; --ok: #7fd89c; --focus: #ffb366; --chip: #3a3016;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 18px; }
+  html[data-size="large"] { font-size: 23px; }
+  html[data-size="xlarge"] { font-size: 28px; }
+  body { margin: 0; background: var(--bg); color: var(--fg); line-height: 1.5;
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  a { color: var(--accent); }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--bg); padding: 8px; border: 2px solid var(--fg); }
+  .skip:focus { left: 8px; z-index: 10; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 2px solid var(--line); }
+  .bar { max-width: 1000px; margin: 0 auto; padding: 8px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+  main { max-width: 1000px; margin: 0 auto; padding: 8px 16px 80px; }
+  h1 { font-size: 1.15rem; margin: 0; }
+  h2 { font-size: 1.3rem; margin: 28px 0 8px; border-bottom: 2px solid var(--line); padding-bottom: 4px; }
+  h3 { font-size: 1.1rem; margin: 0 0 6px; }
+  label { font-weight: 600; }
+  input[type=text], select { font: inherit; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  input[type=text] { width: 9em; }
+  textarea { font: inherit; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font: inherit; padding: 6px 12px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .box { border: 2px solid var(--line); background: var(--panel); padding: 10px 14px; margin: 10px 0; }
+  .card { border: 3px solid var(--line); padding: 12px 14px 14px; margin: 16px 0; background: var(--bg); }
+  .card.done { border-color: var(--ok); }
+  .card:target { border-color: var(--accent); }
+  fieldset { border: 2px solid var(--line); margin: 10px 0 0; padding: 6px 12px 10px; }
+  legend { font-weight: 700; padding: 0 6px; }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opts.col { flex-direction: column; }
+  .opt { display: inline-flex; align-items: flex-start; gap: 8px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.15em; height: 1.15em; margin-top: .25em; flex: none; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .ex { border-left: 6px solid var(--line); padding: 4px 12px; margin: 8px 0; }
+  .lbl { font-size: .85rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+  .sel, .sent { font-size: 1.15rem; overflow-wrap: anywhere; }
+  .sent { font-weight: 700; background: var(--panel); border: 2px solid var(--fg); padding: 8px 12px; margin: 2px 0 8px; }
+  .chip { display: inline-block; background: var(--chip); border: 2px solid var(--fg); border-radius: 6px; padding: 0 6px; margin: 0 2px; font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+  .gloss { font-size: .9rem; color: var(--muted); margin: 2px 0 6px; }
+  .note { font-size: .95rem; margin: 4px 0 0; }
+  .status { min-height: 1.4em; font-weight: 600; }
+  .meter { height: 12px; border: 2px solid var(--fg); width: 180px; background: var(--bg); }
+  .meter > div { height: 100%; background: var(--accent); width: 0; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 2px solid var(--line); padding: 4px 8px; text-align: left; vertical-align: top; }
+  .small { font-size: .9rem; color: var(--muted); }
+  .hidden { display: none; }
+  @media (max-width: 640px) { html { font-size: 17px; } }
+  @media print { header { position: static; } button { display: none; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the tasks</a>
+<header>
+  <div class="bar">
+    <h1>Expert rating panel</h1>
+    <div><label for="rid">Your ID</label> <input id="rid" type="text" autocomplete="off" aria-describedby="idhelp" maxlength="16"></div>
+    <button id="export" class="primary" type="button">Download CSV</button>
+    <button id="importbtn" type="button">Resume from a CSV</button>
+    <input id="importfile" type="file" accept=".csv,text/csv" class="hidden" aria-label="Choose a CSV file to resume from">
+    <label for="size" class="small">Text size</label>
+    <select id="size"><option value="normal">Normal</option><option value="large">Large</option><option value="xlarge">Extra large</option></select>
+    <div class="small" id="prog" aria-live="polite">Enter your ID to begin.</div>
+    <div class="meter" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meter"><div id="meterfill"></div></div>
+  </div>
+</header>
+<main id="main">
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+
+  <section aria-labelledby="h-intro">
+    <h2 id="h-intro">Before you start</h2>
+    <p id="idhelp">Type the ID you were given (for example <strong>SLP1</strong> or <strong>SLP2</strong>). It is the only identifier in this tool. Do not type your name or any personal details, including in the note boxes.</p>
+    <div class="box">
+      <p><strong>Time and mechanics.</strong> About 60 minutes: Task 1 about 15 minutes, Task 2 about 40 minutes, plus a short break if you want one. Your answers save in this browser as you go. Press <strong>Download CSV</strong> when you finish and again before you close the tab. If you need to stop, download the CSV; <strong>Resume from a CSV</strong> loads it back. You may leave any question blank. Please work alone.</p>
+      <p><strong>The situation.</strong> A person who uses AAC picks a few keywords. They may also pick a small meaning button (a <em>chip</em>, such as <span class="chip">[NOT]</span>) or a plain word that does the same job. A writing assistant turns the selection into a sentence, and the sentence is spoken as the client's message. We are asking you, as a clinician, to judge the <strong>sentences and the kinds of change</strong>. We are not asking about any person.</p>
+      <details>
+        <summary>What the chips mean (open to see)</summary>
+        <table>
+          <caption class="small">Meaning buttons that may appear in a selection</caption>
+          <tr><th scope="col">Chip</th><th scope="col">Meaning</th></tr>
+          <tr><td><span class="chip">[NOT]</span></td><td>not (negative)</td></tr>
+          <tr><td><span class="chip">[YES]</span></td><td>yes (positive)</td></tr>
+          <tr><td><span class="chip">[?]</span></td><td>this is a question</td></tr>
+          <tr><td><span class="chip">[TELL]</span></td><td>this is a statement</td></tr>
+          <tr><td><span class="chip">[ASK]</span></td><td>this is a request</td></tr>
+          <tr><td><span class="chip">[I]</span> <span class="chip">[YOU]</span> <span class="chip">[THEY]</span> <span class="chip">[WE]</span></td><td>who does it: I, you, someone else, we</td></tr>
+          <tr><td><span class="chip">[MAYBE]</span> <span class="chip">[SURE]</span></td><td>unsure, or very sure</td></tr>
+          <tr><td><span class="chip">[PLEASE]</span> <span class="chip">[PLAIN]</span></td><td>polite, or plain with no polite words</td></tr>
+          <tr><td><span class="chip">[PAST]</span> <span class="chip">[NOW]</span> <span class="chip">[LATER]</span></td><td>when: already happened, happening now, will happen later</td></tr>
+        </table>
+        <p class="small">In some selections the same cue is typed as an ordinary word instead (for example <em>not</em>, <em>question</em>, <em>please</em>, <em>later</em>). Read such a word as a meaning the person chose. Some items are a whole typed sentence instead of keywords.</p>
+      </details>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-t1">
+    <h2 id="h-t1">Task 1: How serious is each kind of change? (about 15 minutes)</h2>
+    <p>Below are seven kinds of <strong>silent meaning change</strong>, each with two real examples from stored system output. For each kind, imagine the sentence were <strong>spoken as a client's message</strong>. Rate how serious that kind of change is, and say whether you would want a system to block or flag it. Rate the <em>kind</em> of change, using the examples as illustrations; if the two examples differ a lot for you, say so in the note.</p>
+    <div class="box">
+      <p><strong>Severity scale</strong></p>
+      <ol class="scale" style="margin:0 0 0 1.2em;padding:0">
+        <li><strong>1 Trivial:</strong> the listener would understand the same message. No practical consequence.</li>
+        <li><strong>2 Minor:</strong> a small shift in tone or detail. Easily cleared up in conversation.</li>
+        <li><strong>3 Moderate:</strong> a noticeably different message. Likely confusion or an awkward exchange, usually repairable.</li>
+        <li><strong>4 Serious:</strong> a clearly wrong or misleading message. Could lead to a wrong action, or damage trust or the client's standing.</li>
+        <li><strong>5 Critical:</strong> could cause real harm (health, safety, money, legal), or makes the client say the opposite of what they mean.</li>
+      </ol>
+    </div>
+    <div id="t1"></div>
+  </section>
+
+  <section aria-labelledby="h-t2">
+    <h2 id="h-t2">Task 2: Is each sentence acceptable? (about 40 minutes)</h2>
+    <p>Each card shows what the person selected and the sentence a system wrote. You do not know which system or setting produced it. Answer two questions for each, and add a note if you like.</p>
+    <ul>
+      <li><strong>(a) Does it say what the selected words mean?</strong> <em>Yes</em> if it keeps everything the selection means and adds nothing that matters. <em>Partly</em> if it keeps some of it, or adds or shifts something. <em>No</em> if the meaning is lost or contradicted.</li>
+      <li><strong>(b) Would it be acceptable to speak this as the client's message?</strong> <em>Yes</em> as it stands; <em>Yes, with an edit</em> if you would accept it after a small fix; <em>No</em>.</li>
+    </ul>
+    <p>Judge the sentence against the selection only. Do not guess what the person might have wanted beyond it. Some selections are very short, and some sentences are awkward; rate what is on the page. Some inputs appear more than once with different sentences. Rate each card on its own.</p>
+    <div class="box"><button type="button" id="nextun">Go to the next unanswered card</button> <span class="small" id="t2count" aria-live="polite"></span></div>
+    <div id="t2"></div>
+  </section>
+
+  <section aria-labelledby="h-end">
+    <h2 id="h-end">Finished</h2>
+    <p>Press <strong>Download CSV</strong> (top of the page) and return the file as described in the instructions. Thank you.</p>
+    <p class="small">Anonymous tool. It collects no personal information, makes no recordings and sends nothing over the network. Answers stay in this browser and in the CSV you download.</p>
+  </section>
+</main>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const TOOL = "slp_rating v1";
+const $ = id => document.getElementById(id);
+const TYPES = [
+  {code: "NEG", title: "A negation dropped or added", desc: "A 'not' or 'no' is missing from the sentence although the person chose it, or a 'not' appears that the person did not choose."},
+  {code: "ACT", title: "Kind of sentence changed", desc: "A question comes out as a statement, or a statement comes out as a command or request."},
+  {code: "AGT", title: "The actor is switched (I, you, they)", desc: "The sentence says a different person does the action than the one the person selected."},
+  {code: "CRT", title: "Certainty added or removed", desc: "A hedge such as 'maybe' or 'I think' is lost, or a hedge or a strong word such as 'sure' appears that the person did not choose."},
+  {code: "POL", title: "Politeness added or removed", desc: "Polite words such as 'please' or 'could you' are added to a plain message, or lost from a polite one."},
+  {code: "TIM", title: "Time changed", desc: "The sentence puts the event at a different time (past, now, later) than the person selected."},
+  {code: "ADD", title: "Added content", desc: "The sentence states a fact, reason, person, place or time that the person did not choose."}
+];
+const SEV = [[1, "Trivial"], [2, "Minor"], [3, "Moderate"], [4, "Serious"], [5, "Critical"]];
+const BLK = [["block", "Block it (do not let it be spoken)"], ["flag", "Flag it (ask the client to confirm first)"], ["neither", "Neither (let it through)"], ["unsure", "Not sure"]];
+const A_OPTS = [["yes", "Yes"], ["partly", "Partly"], ["no", "No"]];
+const B_OPTS = [["yes", "Yes"], ["edit", "Yes, with an edit"], ["no", "No"]];
+
+let S = null; // {rid, ans: {key: {severity, flag, a, b, note}}}
+const key = id => "slp_rating_v1_" + id;
+function say(m) { $("status").textContent = m; }
+function store() { if (!S) return; try { localStorage.setItem(key(S.rid), JSON.stringify(S)); $("status").textContent = "Saved " + new Date().toLocaleTimeString(); } catch (e) { say("Autosave is not available in this browser. Please press Download CSV often."); } }
+function loadStore(id) { try { const s = localStorage.getItem(key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+function rec(k) { return S.ans[k] || (S.ans[k] = {}); }
+
+function chipSpan(c) { const s = document.createElement("span"); s.className = "chip"; s.textContent = c; return s; }
+function renderInput(inp) {
+  const w = document.createElement("div");
+  const sel = document.createElement("div"); sel.className = "sel";
+  if (inp.mode === "typed") { sel.append(document.createTextNode("Typed sentence: " + inp.text)); w.append(sel); return w; }
+  sel.append(document.createTextNode("Keywords: "));
+  inp.text.split(/(\[[A-Z?]+\])/).forEach(p => { if (!p) return; if (/^\[[A-Z?]+\]$/.test(p)) sel.append(chipSpan(p)); else sel.append(document.createTextNode(p)); });
+  w.append(sel);
+  if (inp.chips && inp.chips.length) {
+    const g = document.createElement("div"); g.className = "gloss";
+    g.textContent = "Meaning buttons: " + inp.chips.map(c => c.chip + " = " + c.meaning).join("; ");
+    w.append(g);
+  }
+  return w;
+}
+function radioGroup(name, legendText, opts, k, field, col) {
+  const fs = document.createElement("fieldset"); const lg = document.createElement("legend"); lg.textContent = legendText; fs.append(lg);
+  const box = document.createElement("div"); box.className = "opts" + (col ? " col" : ""); fs.append(box);
+  opts.forEach(([v, t]) => {
+    const l = document.createElement("label"); l.className = "opt";
+    const i = document.createElement("input"); i.type = "radio"; i.name = name; i.value = String(v);
+    i.checked = S && S.ans[k] && String(S.ans[k][field]) === String(v);
+    if (i.checked) l.classList.add("checked");
+    i.addEventListener("change", () => { if (!S) { say("Enter your ID first."); i.checked = false; $("rid").focus(); return; } rec(k)[field] = String(v); box.querySelectorAll(".opt").forEach(o => o.classList.toggle("checked", o.querySelector("input").checked)); store(); refresh(); });
+    l.append(i); l.append(document.createTextNode(String(v).length === 1 ? v + " " + t : t)); box.append(l);
+  });
+  return fs;
+}
+function noteBox(k, idp) {
+  const d = document.createElement("div"); d.style.marginTop = "8px";
+  const l = document.createElement("label"); l.htmlFor = idp; l.textContent = "Note (optional, no personal details)";
+  const t = document.createElement("textarea"); t.id = idp; t.value = (S.ans[k] && S.ans[k].note) || "";
+  t.addEventListener("input", () => { if (!S) { say("Enter your ID first."); t.value = ""; $("rid").focus(); return; } rec(k).note = t.value; store(); });
+  d.append(l, t); return d;
+}
+function build() {
+  $("t1").textContent = ""; $("t2").textContent = "";
+  TYPES.forEach((T, i) => {
+    const ex = DATA.task1.filter(p => p.type === T.code);
+    const c = document.createElement("section"); c.className = "card"; c.id = "c-" + T.code; c.setAttribute("aria-labelledby", "h-" + T.code);
+    const h = document.createElement("h3"); h.id = "h-" + T.code; h.textContent = (i + 1) + ". " + T.title; c.append(h);
+    const p = document.createElement("p"); p.textContent = T.desc; c.append(p);
+    ex.forEach((e, j) => {
+      const d = document.createElement("div"); d.className = "ex";
+      const a = document.createElement("div"); a.className = "lbl"; a.textContent = "Example " + (j + 1) + ": what the person selected"; d.append(a, renderInput(e.input));
+      const b = document.createElement("div"); b.className = "lbl"; b.textContent = "Sentence the system wrote"; const s = document.createElement("div"); s.className = "sent"; s.textContent = e.text; d.append(b, s);
+      const n = document.createElement("div"); n.className = "note"; n.textContent = "What changed: " + e.note; d.append(n);
+      c.append(d);
+    });
+    c.append(radioGroup("sev-" + T.code, "How serious is this kind of change if spoken as a client's message? (1 = trivial, 5 = critical)", SEV.map(([v, t]) => [v, t]), T.code, "severity"));
+    c.append(radioGroup("flag-" + T.code, "Would you want a system to block or flag this kind of change?", BLK, T.code, "flag", true));
+    c.append(noteBox(T.code, "n-" + T.code));
+    $("t1").append(c);
+  });
+  DATA.task2.forEach((it, i) => {
+    const c = document.createElement("section"); c.className = "card"; c.id = "c-" + it.id; c.setAttribute("aria-labelledby", "h-" + it.id);
+    const h = document.createElement("h3"); h.id = "h-" + it.id; h.textContent = "Card " + it.id + " (" + (i + 1) + " of " + DATA.task2.length + ")"; c.append(h);
+    const a = document.createElement("div"); a.className = "lbl"; a.textContent = "What the person selected"; c.append(a, renderInput(it.input));
+    const b = document.createElement("div"); b.className = "lbl"; b.style.marginTop = "6px"; b.textContent = "Sentence the system wrote"; const s = document.createElement("div"); s.className = "sent"; s.textContent = it.text; c.append(b, s);
+    c.append(radioGroup("a-" + it.id, "(a) Does it say what the selected words mean?", A_OPTS, it.id, "a"));
+    c.append(radioGroup("b-" + it.id, "(b) Would it be acceptable to speak this as the client's message?", B_OPTS, it.id, "b"));
+    c.append(noteBox(it.id, "n-" + it.id));
+    $("t2").append(c);
+  });
+  refresh();
+}
+function done1(code) { const r = S && S.ans[code]; return !!(r && r.severity && r.flag); }
+function done2(id) { const r = S && S.ans[id]; return !!(r && r.a && r.b); }
+function refresh() {
+  if (!S) return;
+  const n1 = TYPES.filter(t => done1(t.code)).length, n2 = DATA.task2.filter(i => done2(i.id)).length, tot = TYPES.length + DATA.task2.length;
+  $("prog").textContent = "Task 1: " + n1 + " of " + TYPES.length + ". Task 2: " + n2 + " of " + DATA.task2.length + ".";
+  $("t2count").textContent = n2 + " of " + DATA.task2.length + " cards answered.";
+  const pct = Math.round(100 * (n1 + n2) / tot); $("meterfill").style.width = pct + "%"; $("meter").setAttribute("aria-valuenow", pct);
+  TYPES.forEach(t => $("c-" + t.code).classList.toggle("done", done1(t.code)));
+  DATA.task2.forEach(i => $("c-" + i.id).classList.toggle("done", done2(i.id)));
+}
+function csvCell(v) { const s = v == null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your ID first."); $("rid").focus(); return; }
+  const head = ["rater_id", "task", "item_id", "severity", "block_flag", "says_selected", "acceptable", "note", "saved_at", "tool"];
+  const now = new Date().toISOString(), L = [head.join(",")];
+  TYPES.forEach(t => { const r = S.ans[t.code] || {}; if (r.severity || r.flag || r.note) L.push([S.rid, 1, t.code, r.severity || "", r.flag || "", "", "", (r.note || "").trim(), now, TOOL].map(csvCell).join(",")); });
+  DATA.task2.forEach(i => { const r = S.ans[i.id] || {}; if (r.a || r.b || r.note) L.push([S.rid, 2, i.id, "", "", r.a || "", r.b || "", (r.note || "").trim(), now, TOOL].map(csvCell).join(",")); });
+  const blob = new Blob([L.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "slp_rating_" + S.rid + ".csv";
+  document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (L.length - 1) + " rows).");
+}
+function parseCSV(text) {
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += c;
+  }
+  if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+  return rows.filter(r => r.length > 1);
+}
+function importCSV(text) {
+  const rows = parseCSV(text); if (rows.length < 2) { say("That file has no answers."); return; }
+  const h = rows[0], ix = n => h.indexOf(n); let rid = $("rid").value.trim();
+  if (!rid) rid = (rows[1][ix("rater_id")] || "").trim();
+  if (!rid) { say("Enter your ID first."); return; }
+  $("rid").value = rid; start(rid, true);
+  rows.slice(1).forEach(r => {
+    const id = r[ix("item_id")]; if (!id) return; const o = rec(id);
+    if (r[ix("task")] === "1") { o.severity = r[ix("severity")]; o.flag = r[ix("block_flag")]; } else { o.a = r[ix("says_selected")]; o.b = r[ix("acceptable")]; }
+    o.note = r[ix("note")] || "";
+  });
+  store(); build(); say("Resumed from the CSV.");
+}
+function start(id, noBuild) {
+  if (!/^[A-Za-z0-9_-]{1,16}$/.test(id)) { S = null; $("prog").textContent = "Enter your ID to begin (letters and digits only)."; return; }
+  S = loadStore(id) || {rid: id, ans: {}}; S.rid = id;
+  if (!noBuild) build();
+}
+$("rid").addEventListener("change", () => start($("rid").value.trim()));
+$("export").addEventListener("click", exportCSV);
+$("importbtn").addEventListener("click", () => $("importfile").click());
+$("importfile").addEventListener("change", e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => importCSV(String(r.result)); r.readAsText(f); e.target.value = ""; });
+$("nextun").addEventListener("click", () => {
+  if (!S) { say("Enter your ID first."); $("rid").focus(); return; }
+  const t = DATA.task2.find(i => !done2(i.id));
+  if (!t) { say("Every card in Task 2 is answered."); return; }
+  const el = $("c-" + t.id); el.scrollIntoView(); const rb = el.querySelector("input[type=radio]"); if (rb) rb.focus();
+});
+$("size").addEventListener("change", () => { document.documentElement.dataset.size = $("size").value; try { localStorage.setItem("slp_rating_size", $("size").value); } catch (e) {} });
+try { const sz = localStorage.getItem("slp_rating_size"); if (sz) { $("size").value = sz; document.documentElement.dataset.size = sz; } } catch (e) {}
+S = {rid: "", ans: {}}; build(); S = null;
+window.addEventListener("beforeunload", store);
+</script>
+</body>
+</html>

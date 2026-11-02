@@ -27,6 +27,7 @@ MODELS_DIR = ROOT / "models"
 SECRETS_FILE = Path.home() / ".config/caelestia/.env.secrets"
 API_BASE = "https://codex.lunarz.dev/v1"
 API_KEY_ENV = "CODEX_LB_API_KEY"
+GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta"
 
 
 @dataclass(frozen=True)
@@ -41,6 +42,8 @@ class ModelSpec:
     sha256: str | None = None
     concurrency: int = 8   # max in-flight requests to this endpoint
     supports_seed: bool = True
+    backend: str = "openai"            # "openai" (chat/completions) | "gemini" (src/gemini_backend.py)
+    thinking_budget: int | None = None  # gemini only; 0 = thinking off (recorded in every cache entry)
 
 
 REGISTRY: dict[str, ModelSpec] = {m.name: m for m in [
@@ -53,6 +56,17 @@ REGISTRY: dict[str, ModelSpec] = {m.name: m for m in [
     ModelSpec("gemma3-4b", "http://127.0.0.1:8093/v1", "gemma3-4b", "local", "under_test",
               "Q4_K_M", "google_gemma-3-4b-it-Q4_K_M.gguf",
               "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94"),
+    # model-breadth extension: role "ext_under_test" keeps UNDER_TEST (and every default model list) unchanged
+    ModelSpec("qwen2.5-14b", "http://127.0.0.1:8094/v1", "qwen2.5-14b", "local", "ext_under_test",
+              "Q4_K_M", "qwen2.5-14b/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf", "a09ea5e7b1eafb1b30b241726c3cc3c905c96f14ad41e246ffa5f44e53904f68"),
+    ModelSpec("mistral-nemo-12b", "http://127.0.0.1:8095/v1", "mistral-nemo-12b", "local", "ext_under_test",
+              "Q4_K_M", "mistral-nemo-12b/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf", "7c1a10d202d8788dbe5628dc962254d10654c853cae6aaeca0618f05490d4a46"),
+    # Google AI Studio (free-tier daily allowance), see src/gemini_backend.py, src/gemini_daily.py.
+    # Flash can switch thinking off (budget 0); Pro cannot (min 128), so its budget is the minimum.
+    ModelSpec("gemini-2.5-flash", GEMINI_BASE, "gemini-2.5-flash", "api", "ext_under_test",
+              concurrency=1, supports_seed=False, backend="gemini", thinking_budget=0),
+    ModelSpec("gemini-2.5-pro", GEMINI_BASE, "gemini-2.5-pro", "api", "ext_under_test",
+              concurrency=1, supports_seed=False, backend="gemini", thinking_budget=128),
     ModelSpec("gpt-6.1-terra", API_BASE, "gpt-6.1-terra", "api", "under_test",
               concurrency=16, supports_seed=False),
     ModelSpec("gpt-6.1-sol", API_BASE, "gpt-6.1-sol", "api", "judge",
@@ -85,7 +99,7 @@ def api_key() -> str:
 
 
 def headers(spec: ModelSpec) -> dict[str, str]:
-    if spec.kind == "api":
+    if spec.kind == "api" and spec.backend == "openai":
         return {"Authorization": f"Bearer {api_key()}"}
     return {}
 

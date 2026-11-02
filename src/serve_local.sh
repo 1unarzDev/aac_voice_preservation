@@ -2,7 +2,7 @@
 # Serve the three local GGUFs concurrently with llama.cpp server (docker, CUDA).
 #
 #   src/serve_local.sh            # start all three (default)
-#   src/serve_local.sh qwen       # start only one (qwen | llama | gemma), e.g. for sequential mode
+#   src/serve_local.sh qwen       # start only one (qwen | llama | gemma | qwen14 | nemo), e.g. for sequential mode
 #
 # Ports: qwen2.5-7b 8091, llama3.1-8b 8092, gemma3-4b 8093. Containers: aacv-<name>.
 # Each server: --parallel 8 slots, CTX_PER_SLOT tokens per slot (total ctx = 8*CTX_PER_SLOT),
@@ -21,10 +21,13 @@ declare -A FILE=(
   [qwen]="Qwen2.5-7B-Instruct-Q4_K_M.gguf"
   [llama]="Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
   [gemma]="google_gemma-3-4b-it-Q4_K_M.gguf"
+  # model-breadth extension (2026-11-02): larger models, each in its own subdirectory (split GGUF: pass shard 1)
+  [qwen14]="qwen2.5-14b/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
+  [nemo]="mistral-nemo-12b/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"
 )
-declare -A SIZE=([qwen]=4683074240 [llama]=4920739232 [gemma]=2489758112)
-declare -A PORT=([qwen]=8091 [llama]=8092 [gemma]=8093)
-declare -A ALIAS=([qwen]=qwen2.5-7b [llama]=llama3.1-8b [gemma]=gemma3-4b)
+declare -A SIZE=([qwen]=4683074240 [llama]=4920739232 [gemma]=2489758112 [qwen14]=3991999872 [nemo]=7477208192)
+declare -A PORT=([qwen]=8091 [llama]=8092 [gemma]=8093 [qwen14]=8094 [nemo]=8095)
+declare -A ALIAS=([qwen]=qwen2.5-7b [llama]=llama3.1-8b [gemma]=gemma3-4b [qwen14]=qwen2.5-14b [nemo]=mistral-nemo-12b)
 
 wait_for_downloads() {
   # Ready when SHA256SUMS exists, or every file has reached its expected size.

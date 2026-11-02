@@ -1,0 +1,416 @@
+{
+ "requirements": {
+  "R1_good": [
+   {
+    "input": {
+     "mode": "keywords",
+     "text": "[?] brother call",
+     "chips": [
+      {
+       "chip": "[?]",
+       "meaning": "this is a question"
+      }
+     ]
+    },
+    "text": "Did my brother call?",
+    "src": "hw1 P0 b3ef089a9ec2b64a",
+    "family": "hw-act-086",
+    "types": []
+   }
+  ],
+  "R1_bad": [
+   {
+    "input": {
+     "mode": "keywords",
+     "text": "[NOT] guest respect",
+     "chips": [
+      {
+       "chip": "[NOT]",
+       "meaning": "not (negative)"
+      }
+     ]
+    },
+    "text": "We must respect the guest.",
+    "src": "hw1 P0 a01a9bea2aea3c32",
+    "family": "hw-pol-094",
+    "types": [
+     "NEG"
+    ]
+   }
+  ],
+  "R2_good": [
+   {
+    "input": {
+     "mode": "typed",
+     "text": "The dog waits outside the kitchen door.",
+     "chips": []
+    },
+    "text": "The dog waits outside the kitchen door.",
+    "src": "hw1 P0 6c4241bdeef156c8",
+    "family": "hw-act-051",
+    "types": []
+   }
+  ],
+  "R2_bad": [
+   {
+    "input": {
+     "mode": "keywords",
+     "text": "[PLAIN] check receipt",
+     "chips": [
+      {
+       "chip": "[PLAIN]",
+       "meaning": "plain, no polite words"
+      }
+     ]
+    },
+    "text": "Please check the receipt.",
+    "src": "hw1 P0 ab676360b347d1fa",
+    "family": "hw-plt-086",
+    "types": [
+     "POL"
+    ]
+   }
+  ],
+  "R3_a": [
+   {
+    "input": {
+     "mode": "keywords",
+     "text": "band play",
+     "chips": []
+    },
+    "text": "The band plays now.",
+    "src": "hw1 P0 bfcf219b9a81b2a5",
+    "family": "hw-pol-005",
+    "types": [
+     "ADD"
+    ]
+   }
+  ],
+  "R3_b": [
+   {
+    "input": {
+     "mode": "keywords",
+     "text": "shop close",
+     "chips": []
+    },
+    "text": "The shop is closed.",
+    "src": "hw1 P0 770dc30294a663fe",
+    "family": "hw-act-008",
+    "types": []
+   }
+  ],
+  "R4": [
+   {
+    "one_chip": {
+     "input": {
+      "mode": "keywords",
+      "text": "[NOT] supervisor read",
+      "chips": [
+       {
+        "chip": "[NOT]",
+        "meaning": "not (negative)"
+       }
+      ]
+     },
+     "text": "The supervisor will not read."
+    },
+    "more_chips": {
+     "input": {
+      "mode": "keywords",
+      "text": "[NOT] [TELL] [THEY] supervisor read",
+      "chips": [
+       {
+        "chip": "[NOT]",
+        "meaning": "not (negative)"
+       },
+       {
+        "chip": "[TELL]",
+        "meaning": "this is a statement"
+       },
+       {
+        "chip": "[THEY]",
+        "meaning": "someone else does it"
+       }
+      ]
+     },
+     "text": "They will not tell the supervisor to read."
+    },
+    "src": "hw1 P0 447d007d616b9183 / 5d739943f47054bf",
+    "family": "hw-pol-075",
+    "types": [
+     "ADD"
+    ]
+   }
+  ]
+ },
+ "r5": [
+  {
+   "source": "An extra pillow would be nice.",
+   "input": {
+    "mode": "keywords",
+    "text": "[MAYBE] extra pillow nice",
+    "chips": [
+     {
+      "chip": "[MAYBE]",
+      "meaning": "unsure (maybe)"
+     }
+    ]
+   },
+   "text": "Maybe I want an extra pillow.",
+   "src": "wb1 8fd4cbf445c69cec",
+   "family": "wb-aactext-test-00113"
+  },
+  {
+   "source": "i will tell you as soon as possible",
+   "input": {
+    "mode": "keywords",
+    "text": "[MAYBE] tell possible",
+    "chips": [
+     {
+      "chip": "[MAYBE]",
+      "meaning": "unsure (maybe)"
+     }
+    ]
+   },
+   "text": "Maybe I told you something.",
+   "src": "wb1 c6670eedde1005c0",
+   "family": "wb-aactext-train-01930"
+  }
+ ],
+ "examples": [
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[ASK] leave light",
+    "chips": [
+     {
+      "chip": "[ASK]",
+      "meaning": "this is a request"
+     }
+    ]
+   },
+   "text": "Leave the light on.",
+   "first_try": "Please leave the light on.",
+   "kind": "repaired",
+   "src": "guard_wc P0 5ec6bee8637f4367 -> G1 3587b5836b69fe49",
+   "family": "r2act-056",
+   "types": [],
+   "id": "E01"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[TELL] [YOU] send note",
+    "chips": [
+     {
+      "chip": "[TELL]",
+      "meaning": "this is a statement"
+     },
+     {
+      "chip": "[YOU]",
+      "meaning": "you (the listener does it)"
+     }
+    ]
+   },
+   "text": "Tell you to send a note.",
+   "src": "hw1 P0 39de8e2a84c47f94",
+   "family": "hw-act-049",
+   "types": [
+    "ACT"
+   ],
+   "kind": "bad",
+   "id": "E02"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "later guitar music",
+    "chips": []
+   },
+   "text": "I will play guitar music later.",
+   "src": "hwctl1 P0 38f98d6a8992f821",
+   "family": "hw-tim-026",
+   "types": [
+    "ADD"
+   ],
+   "kind": "bad",
+   "id": "E03"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[YES] [TELL] [THEY] club offer",
+    "chips": [
+     {
+      "chip": "[YES]",
+      "meaning": "yes (positive)"
+     },
+     {
+      "chip": "[TELL]",
+      "meaning": "this is a statement"
+     },
+     {
+      "chip": "[THEY]",
+      "meaning": "someone else does it"
+     }
+    ]
+   },
+   "text": "They will tell you about the club offer.",
+   "src": "hw1 P0 2d14dd6a07531047",
+   "family": "hw-pol-055",
+   "types": [],
+   "kind": "good",
+   "id": "E04"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[NOT] [TELL] [WE] schedule training",
+    "chips": [
+     {
+      "chip": "[NOT]",
+      "meaning": "not (negative)"
+     },
+     {
+      "chip": "[TELL]",
+      "meaning": "this is a statement"
+     },
+     {
+      "chip": "[WE]",
+      "meaning": "we do it together"
+     }
+    ]
+   },
+   "text": "We tell schedule training.",
+   "src": "hw1 P0 3a4668839680bd7e",
+   "family": "hw-pol-043",
+   "types": [
+    "NEG"
+   ],
+   "kind": "bad",
+   "id": "E05"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[ASK] [YOU] [PLAIN] get chair",
+    "chips": [
+     {
+      "chip": "[ASK]",
+      "meaning": "this is a request"
+     },
+     {
+      "chip": "[YOU]",
+      "meaning": "you (the listener does it)"
+     },
+     {
+      "chip": "[PLAIN]",
+      "meaning": "plain, no polite words"
+     }
+    ]
+   },
+   "text": "Get the chair.",
+   "first_try": "You get the chair.",
+   "kind": "repaired",
+   "src": "guard_wc P0 261f783434f6346e -> G1 f1e076a8af3caa76",
+   "family": "r2act-027",
+   "types": [],
+   "id": "E06"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[ASK] ring council permit",
+    "chips": [
+     {
+      "chip": "[ASK]",
+      "meaning": "this is a request"
+     }
+    ]
+   },
+   "text": "Ring the council about the permit.",
+   "first_try": "Please ring the council about the permit.",
+   "kind": "repaired",
+   "src": "guard_wc P0 efc73fe24c450493 -> G1 4059fe0ab46bcea8",
+   "family": "r2act-062",
+   "types": [],
+   "id": "E07"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[TELL] [I] [PAST] adjust lamp",
+    "chips": [
+     {
+      "chip": "[TELL]",
+      "meaning": "this is a statement"
+     },
+     {
+      "chip": "[I]",
+      "meaning": "I (the speaker does it)"
+     },
+     {
+      "chip": "[PAST]",
+      "meaning": "it already happened"
+     }
+    ]
+   },
+   "text": "I adjusted the lamp.",
+   "src": "hw1 P0 744aa8b5db16512e",
+   "family": "hw-agt-085",
+   "types": [],
+   "kind": "good",
+   "id": "E08"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[TELL] [THEY] practice guitar",
+    "chips": [
+     {
+      "chip": "[TELL]",
+      "meaning": "this is a statement"
+     },
+     {
+      "chip": "[THEY]",
+      "meaning": "someone else does it"
+     }
+    ]
+   },
+   "text": "They tell me they practice guitar.",
+   "src": "hw1 P0 ddde840ae79674b2",
+   "family": "hw-agt-013",
+   "types": [],
+   "kind": "good",
+   "id": "E09"
+  },
+  {
+   "input": {
+    "mode": "keywords",
+    "text": "[ASK] [YOU] [PLAIN] show receptionist pass",
+    "chips": [
+     {
+      "chip": "[ASK]",
+      "meaning": "this is a request"
+     },
+     {
+      "chip": "[YOU]",
+      "meaning": "you (the listener does it)"
+     },
+     {
+      "chip": "[PLAIN]",
+      "meaning": "plain, no polite words"
+     }
+    ]
+   },
+   "text": "Please show the receptionist my pass.",
+   "src": "hw1 P0 d1b7cf71b0cb165e",
+   "family": "hw-plt-070",
+   "types": [
+    "POL"
+   ],
+   "kind": "bad",
+   "id": "E10"
+  }
+ ]
+}
