@@ -1,0 +1,79 @@
+{
+ "n_scored_rows": 5152,
+ "unresolved_valid_rows": 0,
+ "verdict_d1": "default is NOT a legend artifact (b and c both >= 90%)",
+ "pooled_d1": {
+  "a_legend": {
+   "aff": 0.9945280437756497,
+   "lo": 0.989041095890411,
+   "hi": 0.9986357435197817,
+   "aff_all": 0.9877717391304348,
+   "commit": 0.9932065217391305,
+   "n": 731
+  },
+  "b_nolegend": {
+   "aff": 0.9836956521739131,
+   "lo": 0.9741847826086957,
+   "hi": 0.9918478260869565,
+   "aff_all": 0.9836956521739131,
+   "commit": 1.0,
+   "n": 736
+  },
+  "c_markers_missing": {
+   "aff": 0.9986320109439124,
+   "lo": 0.9958791208791209,
+   "hi": 1.0,
+   "aff_all": 0.9918478260869565,
+   "commit": 0.9932065217391305,
+   "n": 731
+  }
+ },
+ "per_model_class_d1": {
+  "gemma3-4b": {
+   "b_nolegend": {
+    "aff": 0.9891304347826086,
+    "cls": "not_artifact"
+   },
+   "c_markers_missing": {
+    "aff": 1.0,
+    "cls": "not_artifact"
+   }
+  },
+  "gpt-6.1-terra": {
+   "b_nolegend": {
+    "aff": 0.9728260869565217,
+    "cls": "not_artifact"
+   },
+   "c_markers_missing": {
+    "aff": 0.994475138121547,
+    "cls": "not_artifact"
+   }
+  },
+  "llama3.1-8b": {
+   "b_nolegend": {
+    "aff": 0.9836956521739131,
+    "cls": "not_artifact"
+   },
+   "c_markers_missing": {
+    "aff": 1.0,
+    "cls": "not_artifact"
+   }
+  },
+  "qwen2.5-7b": {
+   "b_nolegend": {
+    "aff": 0.9891304347826086,
+    "cls": "not_artifact"
+   },
+   "c_markers_missing": {
+    "aff": 1.0,
+    "cls": "not_artifact"
+   }
+  }
+ },
+ "d2_pooled": {
+  "a_legend": 0.9931787175989086,
+  "b_nolegend": 0.9864130434782609,
+  "c_markers_missing": 0.9986357435197817
+ },
+ "d0_arm_a_pooled": 0.9959072305593452
+}
