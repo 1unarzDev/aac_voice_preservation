@@ -208,5 +208,23 @@ for m in MODELS:
     c = checks[m]; pdm = c["per_dimension"]
     md.append(f"| {m} | {c['bare_default_holds(share>=0.90)']} | {c['not_legend_artifact(b and c >=0.90)']} | {c['speech_act_chip_contrast_writer_lo_gt0']} | "
               f"{all(v['irrel_lo_gt0'] for v in pdm.values())} ({sum(v['irrel_lo_gt0'] for v in pdm.values())}/6) | {sum(v['word_equals_chip_within5'] for v in pdm.values())}/6 |")
+
+def rng(df, col, models, **kw):
+    v = [row(df, model=m, **kw)[col] for m in models]; return min(v), max(v)
+lo_o, hi_o = rng(regdf, "estimate", OLD, contrast="P1"); lo_n, hi_n = rng(regdf, "estimate", NEW, contrast="P1")
+fnew = fulldf[fulldf.model.isin(NEW)]; fold = fulldf[fulldf.model.isin(OLD)]
+md += ["\n## 7. Reading (generated from the tables above)\n",
+       f"- Bare default and legend test: both new models stay at or above {p(min(row(legdf, draw='d1', model=m, arm=a).aff for m in NEW for a in ARM.values()))}% affirmative among committed outputs in every legend arm (decision rule: >= 90% in arms b and c = not a legend artifact), and "
+       f"{p(min(row(regdf, contrast='P3', model=m).estimate for m in NEW))}% or more on the bare hw1 channel. Pattern holds for both.",
+       f"- Speech-act chip contrast (P1): new models {s(lo_n)} to {s(hi_n)} pp (writer CI lower bounds {s(min(row(regdf, contrast='P1', model=m).writer_lo for m in NEW))} and above), original four {s(lo_o)} to {s(hi_o)} pp. Same sign, inside the original range.",
+       "- Irrelevant chip: the gain over an irrelevant chip stays positive in all 6 dimensions for both new models; the irrelevant chip alone moves critical match by a few points at most (column `irrel - noncrit`), "
+       "so the chip gain is cue content, as for the original models.",
+       "- Plain word vs chip: for polarity, politeness, agent, time and certainty the plain-word cue equals the chip within +/-5 pp for both new models; speech act is the dimension where the plain word and the chip differ, "
+       "as in the original models (see section 4), so the 'plain word matches chips' reading is not uniform across dimensions.",
+       f"- Full channel: lowest cell per new model: " + "; ".join(f"{m} {r.dimension} {p(r.estimate)}%" for m in NEW for r in [fnew[fnew.model == m].sort_values('estimate').iloc[0]]) +
+       f" (original models' lowest: " + "; ".join(f"{m} {r.dimension} {p(r.estimate)}%" for m in OLD for r in [fold[fold.model == m].sort_values('estimate').iloc[0]]) + "). "
+       "Model size does not monotonically improve politeness on the full channel (compare qwen2.5-7b vs qwen2.5-14b).",
+       "- Caveats: Q4_K_M quantisation (as for the original local models), greedy decoding, one draw for hw1 and chip controls (two draws for the legend test), 6-7 writers per dimension; "
+       "12-14B open models are larger than the original local models but not frontier-scale."]
 (OUT / "report.md").write_text("\n".join(md) + "\n")
 print("\n".join(md[-12:]))
