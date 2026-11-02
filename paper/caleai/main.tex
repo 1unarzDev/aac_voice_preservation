@@ -441,6 +441,7 @@ The harm is the asymmetric cost: about \RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t
 For politeness the models match the preferred guess (they add polite wording to \RES{t2_pol_model}\% of no-cue inputs against a posterior of \RES{t2_pol_post}\%); for speech act \say{statement} is not preferred (the source was a question or request \RES{t2_sa_post}\% of the time, models asserted one \RES{t2_sa_model}\%), and they over-commit to it.
 The finding is not that models are biased: an average-accuracy metric rewards exactly the behavior that silently reverses meaning, so a ledger puts the cost of a default beside its hit rate.
 The default holds on \RES{mb_nmod} models from \RES{mb_nfam} families (at least \RES{mb_bare_min}\% affirmative; no legend arm below \RES{mb_leg_min}\%) and on a lite commercial Gemini model (\RES{mb_gem_a}\% and \RES{mb_gem_c}\% on the legend arms, \RES{mb_gem_n} families each).
+Chen et al.~\cite{chen2023say} reported a positivity bias in keyword-to-sentence generation; we price that default against a human base rate (\RES{t2_post_h}\%) as about \RES{t2_rev_h} silent reversals per 1,000 messages, show that it survives \say{do not assume} prompting, find it on \RES{mb_nmod} models from \RES{mb_nfam} families, and, because attribution is by construction, separate it from cue violations and compression loss.
 These figures rest on detector labels of source messages and one greedy draw per model.
 
 %% =====================================================================
