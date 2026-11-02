@@ -81,8 +81,15 @@
 \newcommand{\slotAuditAbs}{A larger audit of \RES{p17_texts} texts with three independent raters each, its decision rule fixed in advance, is in progress.} % PART17
 \newcommand{\slotAuditBody}{The audit is still in progress; its result will replace this sentence.} % PART17
 \newcommand{\slotIntent}{Its result is not yet in.} % PART18
-\newcommand{\slotBaseline}{Until then the increment over strip-only is an upper bound on what the feedback message itself contributes.} % BASELINE
-\newcommand{\slotLegend}{Whether the prompt's cue legend alone shifts the bare-keyword default (a three-arm test) is not yet in.} % LEGEND_TEST
+\newcommand{\slotBaseline}{The no-feedback baseline (G1r) keeps the monitor, trigger and retry budget but regenerates from the original prompt with no feedback turn, at temperature 0.7 because a temperature-0 retry repeats the first pass; the guard at the same temperature (G1t) isolates the feedback message.} % BASELINE
+\newcommand{\slotBaselineRes}{Regenerating without feedback is no better than deletion: it repaired \kof{bd_rep_g1r} development failures (\RES{bd_rep_g1r}\%) against \kof{bd_rep_g1} with the guard, and \kof{bw_rep_g1r} confirmation failures (\RES{bw_rep_g1r}\%) against \kof{bw_rep_g1}.
+Feedback adds value beyond trying again: the guard's joint-pass increment over resampling is +\RES{bd_gr} [\RES{bd_gr_lo}, \RES{bd_gr_hi}] points in development and +\RES{bw_gr} [\RES{bw_gr_lo}, \RES{bw_gr_hi}] in confirmation, and at matched temperature (G1t $-$ G1r) +\RES{bd_tr} and +\RES{bw_tr}.
+A retry often reproduced the first text (\kof{bd_same} and \kof{bw_same} flagged requests), so these small models are nearly deterministic even at temperature 0.7; more retries or a hotter setting were not tried, for budget parity.
+No arm turned a strict pass into a failure (\RES{bd_ptf_all} and \RES{bw_ptf_all} cases).} % BASELINE
+\newcommand{\slotLegend}{The bare-keyword default is not a prompt artifact.
+On bare polarity inputs (\RES{lg_n_models} models, both sources), affirmative output among committed answers was \RES{lg_a}\% with the cue legend, \RES{lg_b}\% with the legend removed and \RES{lg_c}\% when the prompt said markers may be missing and not to assume one (a second draw: \RES{lg_a_d2}, \RES{lg_b_d2} and \RES{lg_c_d2}\%).
+Models answered \say{unclear} in at most \RES{lg_unclear_max}\% of outputs even when told.
+You cannot prompt the default away, so the ledger must measure it.} % LEGEND_TEST
 
 \begin{document}
 \maketitle
@@ -93,14 +100,14 @@ The model can quietly change the meaning, for example by dropping a ``not''.
 Work on such systems commonly reports accuracy- or similarity-style gains.
 We argue that gain-only reports hide failures, and propose a \emph{ledger} that records, beside each gain, what the fix leaves broken, what it breaks that was fine, what it costs, where it applies, and what a default costs when it is wrong, against a free baseline and a pass line set in advance.
 Our test case is a \emph{guard} that makes the model try again when its sentence contradicts what the user supplied.
-Throughout, a pass means the strict check (keeps the critical meaning, contradicts nothing supplied, adds no politeness).
+A pass means the strict check (keeps the critical meaning, contradicts nothing supplied, adds no politeness).
 \textbf{Does it work?}
-On \RES{gt_fam} fresh item families the guard raises the pass rate from \RES{gt_sp_p0}\% to \RES{gt_sp_g1}\% (+\RES{gt_sgain_g1} points, of which deleting an unrequested \say{please} alone earns +\RES{gt_sgain_g1s}), yet \RES{gt_res_g1}\% of targets still fail, and it repaired \RES{gt_rep_g1}\% of failures against \RES{g_fix}\% in development.
+Yes, and feedback beats plain retrying (+\RES{bw_gr} points [\RES{bw_gr_lo}, \RES{bw_gr_hi}]).
+On \RES{gt_fam} fresh item families the guard raises the pass rate from \RES{gt_sp_p0}\% to \RES{gt_sp_g1}\% (+\RES{gt_sgain_g1} points, of which deleting an unrequested \say{please} earns +\RES{gt_sgain_g1s}), yet \RES{gt_res_g1}\% of targets still fail, and it repaired \RES{gt_rep_g1}\% of failures against \RES{g_fix}\% in development.
 A passing sentence can also be unusable: \say{\RES{bx1_before}} became \say{\RES{bx1_after}} and still counted as correct.
-A 40-text pilot is a warning sign, not a result: repaired sentences were rated usable \RES{ra_unk_rep}\% of the time against \RES{ra_unk_ctl}\% for never-failed controls (unresolved items counted unusable; gap \RES{ra_unk_gap} points [\RES{ra_unk_gap_lo}, \RES{ra_unk_gap_hi}]), but its raters were about \RES{ra_effn} effective independent raters and its controls had all passed, and a second pool showed no gap.
+A 40-text pilot is a warning sign, not a result: repaired sentences were rated usable \RES{ra_unk_rep}\% of the time against \RES{ra_unk_ctl}\% for never-failed controls (gap \RES{ra_unk_gap} points [\RES{ra_unk_gap_lo}, \RES{ra_unk_gap_hi}]), but its raters were about \RES{ra_effn} independent raters and its controls had all passed.
 \slotAuditAbs{} % PART17
-When \RES{el_annot} people typed keywords for messages that carried a negation (a cue-enriched sample), \RES{el_pol_h}\% of sets lost it.
-Models then default to affirmative, which is the better guess (the message was negated in only \RES{t2_post_h}\% of such cases), but average-accuracy metrics reward exactly that behavior, which silently reverses about \RES{t2_rev_h} in 1,000 messages against \RES{t2_spur_h} spurious negations.
+Models default to affirmative, the better guess (a message was negated in only \RES{t2_post_h}\% of such cases), but accuracy metrics reward exactly the behavior that silently reverses about \RES{t2_rev_h} in 1,000 messages; removing the prompt's cue legend or telling the model not to assume leaves the default at \RES{lg_b}\% and \RES{lg_c}\%.
 We study stored text, not people, and no AAC user took part; we give a pre-specified design for testing our predictions on people.
 \end{abstract}
 
@@ -220,8 +227,7 @@ After the first pass, a deterministic lexical monitor (regexes and lexicons for 
 It also flags a politeness marker that was not supplied.
 On a flag, the same conversation receives one feedback turn (\say{Your sentence must keep: negated; no added politeness. Write the sentence again with the same meaning otherwise.}) and is regenerated, up to two retries.
 The guard returns the first unflagged attempt, else the attempt with fewest flags, ties going to the original.
-The strip-only baseline covers one failure type (an added \say{please}); it is a floor for a trivial rule, not a competitor that handles negation, person or sentence type.
-% BASELINE: when the no-feedback resample baseline (regenerate up to two times when flagged, same monitor, no feedback turn) is in, redefine \slotBaseline with its description and add its row to Table 3 and its contrast to Sec. 6.1. Do not claim it exists until its numbers are in a macro.
+The strip-only baseline covers one failure type (an added \say{please}); it is a floor for a trivial rule, not a competitor that handles negation, person or sentence type; the second free baseline is plain retrying.
 \slotBaseline{} % BASELINE
 
 \paragraph{The menu (secondary; keywords only).}
@@ -296,6 +302,11 @@ Strict failures repaired & \kof{g_fixc} (\RES{g_fix}\%) & \kof{gt_rep_g1} (\RES{
 Strip-only $-$ first pass, points & +\RES{g_s_gain} strict & +\RES{gt_jgain_g1s} [\RES{gt_jgain_g1s_lo}, \RES{gt_jgain_g1s_hi}] joint\\
 Guard $-$ strip-only, points & \textbf{+\RES{c3_guard_increment}} [\RES{c3_guard_increment_lo}, \RES{c3_guard_increment_hi}] strict & +\RES{gt_cmp_joint} [\RES{gt_cmp_joint_lo}, \RES{gt_cmp_joint_hi}] joint\\
 Pass only with guard / only with strip-only & \RES{c3_guard_g1_only} / \RES{c3_guard_strip_only} & \RES{gt_cmp_joint_g1only} / \RES{gt_cmp_joint_g1sonly}\\
+\multicolumn{3}{@{}l}{\emph{Free baseline 2: resample without feedback, T=0.7, same budget}}\\
+Joint pass: resample / guard at T=0.7 & \RES{bd_jp_g1r} / \RES{bd_jp_g1t} & \RES{bw_jp_g1r} / \RES{bw_jp_g1t}\\
+Strict failures repaired: resample & \kof{bd_rep_g1r} (\RES{bd_rep_g1r}\%) & \kof{bw_rep_g1r} (\RES{bw_rep_g1r}\%)\\
+Guard $-$ resample, points (joint) & \textbf{+\RES{bd_gr}} [\RES{bd_gr_lo}, \RES{bd_gr_hi}] & \textbf{+\RES{bw_gr}} [\RES{bw_gr_lo}, \RES{bw_gr_hi}]\\
+Guard at T=0.7 $-$ resample (joint) & +\RES{bd_tr} [\RES{bd_tr_lo}, \RES{bd_tr_hi}] & +\RES{bw_tr} [\RES{bw_tr_lo}, \RES{bw_tr_hi}]\\
 \multicolumn{3}{@{}l}{\emph{What remains (offline failure indicators)}}\\
 Residual strict failures & \kof{g_res} (\RES{g_res}\%) & \kof{gt_res_g1} (\RES{gt_res_g1}\%)\\
 Correct text changed & \kof{g_oc_cue} cue; \kof{g_occ_all} all inputs & \kof{gt_cc_g1} (\RES{gt_cc_g1}\%)\\
@@ -344,11 +355,11 @@ On the development cue conditions, strict pass rose from \RES{g_spx_p0}\% to \RE
 Of the \RES{g_fixc_n} initial failures the guard repaired \RES{g_fixc_k} (\pci{g_fix}), far above its 30\% pass line.
 A gain-only report stops there.
 Deleting an unrequested \say{please} at zero calls already reaches \RES{c3_guard_pass_g1s} passes, so regeneration's increment is \RES{c3_guard_increment} points [\RES{c3_guard_increment_lo}, \RES{c3_guard_increment_hi}]: \RES{c3_guard_g1_only} targets pass only with the guard and \RES{c3_guard_strip_only} only with deletion.
-This compares stored configurations and does not isolate the feedback message.
+This contrast alone does not isolate the feedback message; the no-feedback baseline below does.
 \RES{g_unfixed_k} of \RES{g_unfixed_n} failures remained, \RES{g_res_act_k} of them involving speech act, and \kof{g_res_flag} were still flagged after both retries: detected, not repaired.
 The guard changed the text of \kof{g_occ_all} already-correct outputs, none into a scored failure; yet \say{Would you mind repeating the last question} became \say{Please repeat the last question}, still polite by the label and no longer what was typed.
 It flagged \kof{g_flagged} inputs and added \RES{g_calls} model calls per input.
-\slotBaseline{} % BASELINE
+\slotBaselineRes{} % BASELINE
 
 \paragraph{Confirmation.}
 Speech act was the guard's weakest dimension, so we reran the guard unchanged on the confirmation set's speech-act families (\RES{gt_fam} families, four models, three cue conditions, \RES{gt_targets} targets).
@@ -437,7 +448,7 @@ When keywords carry no negation word, the models write an affirmative sentence f
 That is the Bayes-preferred guess: \RES{t2_neg_prev}\% of AACText messages are negated, and among human keyword sets with no negation word the source was negated only \RES{t2_post_h}\% [\RES{t2_post_h_lo}, \RES{t2_post_h_hi}] of the time (\RES{t2_post_h_bayes}\% from corpus prevalence), against \RES{t2_post_c}\% for the crude compressor; guessing affirmative is right \RES{t2_acc_h}\% of the time.
 The harm is the asymmetric cost: about \RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t2_rev_h_hi}] of every 1,000 messages are silently reversed when the user types keywords unaided, against \RES{t2_spur_h} spurious negations, and the guess breaks even only if a reversal costs under \RES{t2_ratio_h} times a spurious negation.
 For politeness the models match the preferred guess (they add polite wording to \RES{t2_pol_model}\% of no-cue inputs against a posterior of \RES{t2_pol_post}\%); for speech act \say{statement} is not preferred (the source was a question or request \RES{t2_sa_post}\% of the time, models asserted one \RES{t2_sa_model}\%), and they over-commit to it.
-So the finding is not that models are biased: an average-accuracy metric rewards exactly the behavior that silently reverses meaning, and a ledger needs the cost of a default beside its hit rate.
+So the finding is not that models are biased: an average-accuracy metric rewards exactly the behavior that silently reverses meaning, and a ledger needs the cost of a default beside its hit rate; because the default survives removing the legend and an explicit instruction not to assume, it must be measured rather than prompted away.
 These rest on detector labels of source messages, not human gold, and on one greedy draw per model.
 
 %% =====================================================================
@@ -475,7 +486,7 @@ Both can demote the ledger's endpoints; neither stands in for the trial.
 \emph{No human outcomes.} Nothing here measures communication success, agency, effort or trust; offline failure indicators are not experienced harms.
 \emph{Repair audit.} The pilot has \RES{ra_rep_items} + \RES{ra_ctl_items} items, about \RES{ra_effn} effective independent raters and outcome-selected controls; the larger audit is the primary estimate and is not yet in.
 \emph{Machine labels.} Endpoints use an LLM extractor and deterministic verdicts, validated by two human annotators on untreated outputs only; guard repairs, menu rewrites and new boundary cases are not covered, and shared monitor and extractor errors can inflate repairs.
-\emph{Baseline.} The only free baseline deletes an unrequested \say{please}, one failure type; a resample baseline without feedback text is not in these results, and the prompt-legend test of the default is not in either.
+\emph{Baseline.} The only free baseline deletes an unrequested \say{please}, one failure type; the no-feedback resample baseline gives the same increment-over-retrying answer on both sets but uses one retry seed per attempt, runs at temperature 0.7 (the guard's retries run at 0), and is exploratory.
 \emph{Scope.} The guard has two separate populations and was developed on the development set; the menu was run on neither the confirmation set nor supplied input; the confirmation set's status is qualified by early cached requests and post-outcome arbitration; the applicability contrast and the cue-combination probe are exploratory; the human-written pairs are exploratory with few writers.
 \emph{Constructed items, fixed models.} Four fixed models describe these systems, not other models; AACText is crowd-written fiction, and word input is the only modality studied.
 \emph{Authorship and selection.} Many AAC users compose by rewriting or choosing among options, which we do not model; examples follow declared, outcome-conditioned rules and illustrate rather than sample.
@@ -486,7 +497,7 @@ All annotators were adult non-authors recruited from the authors' university pee
 
 \section{Conclusion}
 Gain-only reporting would have credited the guard with its confirmation gain and stopped.
-The ledger adds that deletion alone explains part of it (+\RES{gt_sgain_g1s} of +\RES{gt_sgain_g1} points, strict), that scored passes can be fragments, that its repair rate fell from development to confirmation, that a small pilot points to a usability cost that a larger audit with a frozen rule will test, and that a default that is right on average still reverses meaning silently at a rate accuracy cannot show.
+The ledger adds that deletion alone explains part of it (+\RES{gt_sgain_g1s} of +\RES{gt_sgain_g1} points, strict) while plain retrying explains little more, so the feedback message earns its increment, that scored passes can be fragments, that its repair rate fell from development to confirmation, that a small pilot points to a usability cost that a larger audit with a frozen rule will test, and that a default that is right on average still reverses meaning silently at a rate accuracy cannot show.
 The two bounded rows show the same pattern: the menu gains target readings and loses others, and the cue passed its development test but failed one clause of its fresh-item test.
 Human-written pairs and human-chosen keywords point the same way in a small sample of writers, but only people who use AAC can say whether any of it matters to them.
 The pre-specified study turns these offline findings into predictions that people can falsify.

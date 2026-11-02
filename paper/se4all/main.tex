@@ -37,20 +37,6 @@
 \newcommand{\ci}[1]{[\RES{#1_lo}, \RES{#1_hi}]}
 \newcommand{\cip}[1]{[\RES{#1_lo}, \RES{#1_hi}]\%}
 
-%% ---------- slots for experiments still running (default: print nothing) ----------
-%% LEGEND_TEST: three-arm prompt-legend test of the affirmative default. To fill, \renewcommand{\LegendTestSlot}{...}
-%%   or generate the sentence in make_macros.py from the new analysis file. Sentence pattern (macros, no typed numbers):
-%%   ``Telling the model in its prompt how to read bare keywords (a legend) changed the affirmative share from
-%%   \RES{lg_base}\% (no legend) to \RES{lg_arm2}\% (legend A) and \RES{lg_arm3}\% (legend B) [\RES{lg_ci}], which shows
-%%   whether the default is prompt-licensed; the Assumption stays an Assumption only if the share does not move.''
-\newcommand{\LegendTestSlot}{}
-%% ORACLE_REAL: mutation testing on real model outputs vs baseline oracles (e.g. embedding similarity, exact match).
-%%   Sentence pattern: ``On \RES{or_real_n} real outputs we seeded one-value mutants and compared oracles: our verdict code
-%%   detected \RES{or_real_ours}\% [\RES{or_real_ours_ci}], embedding similarity \RES{or_real_emb}\% and exact match
-%%   \RES{or_real_exact}\% at the same false-alarm rate (\RES{or_real_fa}\%).''  Then delete the Threats sentence
-%%   that says no baseline oracle was compared and add a row to Table~\ref{tab:oracle}.
-\newcommand{\OracleRealSlot}{}
-
 %% ---------- notation ----------
 \newcommand{\chip}[1]{\texttt{[#1]}}
 \newcommand{\kw}[1]{\texttt{#1}}
@@ -72,20 +58,14 @@ nicholasicheng6@gmail.com}}
 \maketitle
 
 \begin{abstract}
-Some people who cannot speak compose a message from a few keywords, and a language model expands them into a sentence (augmentative and alternative communication, AAC).
-The keywords \kw{supervisor read} can lose a \say{not}, and catching that needs an oracle: an automated checker that decides pass or fail and is itself software that can be wrong.
-We built a small test harness for such systems and then tested its oracle.
-Two defects in our own harness, each traced to a regression test, show why.
-First, relaxing a rule to remove a false alarm made the oracle accept a changed sentence.
-\say{You borrowed my car this weekend} passed as the acceptance \say{Yes, you can borrow my car}, and the relaxed rule detected only \kof{or_acc_mut_det} keyed acceptance mutants.
-Second, a bug in our input builder showed models chips that contradicted the source message in \RES{wb_conflicts} of \RES{wb_msgs_restored} inputs; a validator now rejects them before generation.
-On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare keywords as affirmative in \pct{hwaff} of outputs, which is an Assumption by design because bare keywords carry no negation.
-A speech-act chip, a bracketed tag, raised the intended speech act by \RES{hwp1} percentage points (pp) over a length-matched word, positive for every writer (exact writer-level Holm $p=\RES{t6p1_holm}$).
-This is a manipulation check: on a pre-specified machine-written confirmation set the speech act was kept in only \pct{wcm_act_chip1} of targets even with the chip.
-Plain typed requests gained a politeness marker in \pct{hwpzadd} of outputs against \pct{hwpzrem} removed (net \RES{hwp2}\,pp), driven by Gemma-3-4B (net \RES{hwpz_gemma}\,pp).
-On the confirmation set all three contrasts have the same sign and intervals above zero, but the net politeness effect is small (+\RES{wcp2}\,pp \ci{wcp2}).
-The oracle's labels agreed with trained human coders at $\kappa=\RES{jve_kappa}$ and $\RES{jvh_kappa}$ on critical labels in two sets of outputs ($\RES{t7e_k}$ and $\RES{t7h_k}$ when ties count as disagreement); verdict-level $\kappa$ was \RES{jvh_vk_min}--\RES{jvh_vk_max} on the human-written pairs.
-No AAC users took part, and the harness is for developers.
+When a language model expands a few AAC keywords into a sentence, \kw{supervisor read} can lose a \say{not}. Catching that needs a test oracle, an automated checker that is itself software and can be wrong.
+We built a test harness and tested its oracle by mutation.
+Two defects in our harness, each traced to a regression test, show why: relaxing a rule to remove a false alarm made the oracle accept a changed sentence (the relaxed rule detected only \kof{or_acc_mut_det} acceptance mutants), and an input-builder bug showed models chips that contradicted the source in \RES{wb_conflicts} of \RES{wb_msgs_restored} inputs.
+On real model outputs the oracle caught \kof{orr_j_mut} seeded mutants with \kof{orr_j_fa} false alarms, against \kof{orr_o_mut} for string overlap with \kof{orr_o_fa} false alarms; a near-circular surface lexicon matched its detection but not its false alarms.
+Its labels agree with human coders ($\kappa=\RES{jve_kappa}$, $\RES{jvh_kappa}$ on two output sets).
+On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare keywords as affirmative in \pct{hwaff} of outputs, and a prompt legend does not change this.
+A speech-act chip raised the intended speech act by \RES{hwp1}\,pp, positive for every writer, yet kept it in only \pct{wcm_act_chip1} of targets on the confirmation set.
+No AAC users took part.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -308,8 +288,8 @@ So the Assumption channel is realistic but the compressor is not a user model.
 The affirmative default is also the better guess: among human keyword strings with no negation word, only \pct{t2_post} \cip{t2_post} came from a negated message, and the models answered affirmatively for \pct{t2_modelshare} of them.
 It is correct on average, but its errors are costly and silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations.
 No default removes that exposure, which is why the harness needs a requirement (R3) that logs the Assumption and a test that exposes its direction.
-%% LEGEND_TEST slot: \LegendTestSlot prints nothing until the three-arm prompt-legend result exists (see below).
-\LegendTestSlot
+A pre-declared three-arm test shows the default is not a prompt-legend artifact: on bare polarity input the affirmative share among committed outputs was \pct{lg_a} with the legend, \pct{lg_b} with none and \pct{lg_c} when the prompt also said markers may be missing and not to assume, across \RES{lg_nmodels} models and both the confirmation set and the human-written pairs (a second draw: \pct{lg_a_d2}, \pct{lg_b_d2}, \pct{lg_c_d2}).
+Models almost never answered \say{unclear} (at most \pct{lg_unclear_max} of outputs in any arm), so a prompt instruction is not a substitute for the requirement and the test.
 
 \begin{table}[t]
   \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values and intervals are in \texttt{analysis/r2c/channel\_ladder.csv}.}
@@ -426,12 +406,12 @@ It is an inventory of what happened in this project, not a seeded-fault sweep, s
 \end{table*}
 
 \paragraph*{Mutation and identity evidence}
-Table~\ref{tab:oracle} lists the evidence on authored inputs.
+Table~\ref{tab:oracle} lists the evidence, first on authored inputs.
 The keyed challenge set has four groups of six controls and six one-feature mutants.
 Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) passes when pooled, with no slack; we read 22/24 as passing a floor, not as evidence of high sensitivity (Wilson interval \cip{or_new_mut_det}).
 
 \begin{table}[t]
-  \caption{Oracle evidence. Mutation and identity checks are on clean authored sentences (Wilson 95\% intervals), not error rates on model outputs. Human rows compare extractor labels with the plurality of trained human coders; items whose human labels have no determinate critical value (all coders unsure, or a tied plurality) are excluded.}
+  \caption{Oracle evidence. Mutation and identity checks are on authored sentences or, in the real-output rows, on rule-seeded edits of stored outputs (Wilson 95\% intervals); neither is an error rate on unedited outputs. Human rows compare extractor labels with the plurality of trained human coders; items whose human labels have no determinate critical value (all coders unsure, or a tied plurality) are excluded.}
   \label{tab:oracle}
   \footnotesize
   \setlength{\tabcolsep}{3pt}
@@ -446,6 +426,11 @@ Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) p
     \quad acceptance group, relaxed rule & \kof{or_acc_mut_det}\\
     \quad all groups, without the relaxation & \kof{or_new_mut_det_raw}\\
     \midrule
+    Real outputs (\RES{orr_j_mut_den} mutants, \RES{orr_nctl} controls): mutants caught; false alarms & \\
+    \quad judge (J1+J2, arbiter) & \kof{orr_j_mut}; \kof{orr_j_fa}\\
+    \quad surface lexicon (near-circular) & \kof{orr_s_mut}; \kof{orr_s_fa}\\
+    \quad string overlap & \kof{orr_o_mut}; \kof{orr_o_fa}\\
+    \midrule
     Human gate, development items (\RES{human_n_items} items, two coders): held-out $\kappa$, \RES{human_gate_n} fields & \RES{human_gkappa_min}--\RES{human_gkappa_max}\\
     Outputs for human-elicited keywords (\RES{jve_coders} coders, \RES{jve_n} of \RES{jve_items} items): critical $\kappa$ [CI] & \RES{jve_kappa} [\RES{jve_kappa_lo}, \RES{jve_kappa_hi}]\\
     \quad raw agreement, critical label & \RES{jve_acc}\%\\
@@ -457,8 +442,12 @@ Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) p
   \end{tabularx}
 \end{table}
 
-%% ORACLE_REAL slot: \OracleRealSlot prints nothing until mutation testing on real outputs vs baseline oracles exists.
-\OracleRealSlot
+\paragraph*{Mutation testing on real outputs, with baselines}
+Authored sentences are easy, so we also seeded one-value mutants into real stored outputs of the human-written pairs (seed fixed in advance; operators re-implemented because the authored mutants were hand-written) and drew \RES{orr_nctl} surface-edited controls (case, punctuation, contraction; \RES{orr_nboost} boosters, which the contract tolerates, are excluded from the mutants) from outputs the oracle scored as preserving.
+Table~\ref{tab:oracle} gives the result: the judge caught \kof{orr_j_mut} mutants with \kof{orr_j_fa} false alarms, matching the authored-sentence result (\kof{orr_wa}).
+Of its \RES{orr_nmiss} misses, two are time shifts that left an explicit past-tense phrase (\say{in the past}) beside the shifted verb, so the mutant is mixed-signal; the third is an equivalent mutant (the source was already a question).
+A surface lexicon (negation, hedge, politeness, tense and question cues) scores \kof{orr_s_mut} with \kof{orr_s_fa} false alarms, and string overlap \kof{orr_o_mut} with \kof{orr_o_fa}.
+The lexicon is near-circular, since it matches the cues the operators insert and delete; its score shows that the operators are lexically shallow, not that a lexicon is an adequate oracle, and the judge's edge shows mainly on controls.
 
 \paragraph*{Human gate}
 The first human gate, with two annotators, was run on the development items (the extraction inventory used to develop the codebook), with plurality references and tied items excluded rather than adjudicated.
@@ -498,7 +487,7 @@ Accessibility engineering spans the life cycle~\cite{paiva2021accessibility}, bu
 Passing the checker is weaker than keeping the typed wording, and a scored repair is not necessarily a sentence someone could say.
 \emph{Oracle.} All rates depend on an LLM extractor and arbiter; the arbiter ran after outcomes were known, and human coders were taught the codebook.
 The first human gate's $\kappa$ is on development items, not on confirmation data.
-The defect trace has two defects, both found by our own process; it shows that the process works, not that it finds defects we did not anticipate, and the harness has not been compared with a baseline oracle such as embedding similarity.
+The defect trace has two defects, both found by our own process; it shows that the process works, not that it finds defects we did not anticipate. The surface baseline is near-circular because its lexicon matches the mutation operators, and we ran no NLI baseline.
 \emph{Internal.} The confirmation set has early cached requests and post-hoc arbitration; the human-written pairs are not preregistered and have few writers per contrast.
 \emph{External.} Four models, three small and quantized; one prompt; English; constructed and crowd-written, not AAC-user, messages.
 Model versions may be retired, and API outputs are not bit-reproducible.

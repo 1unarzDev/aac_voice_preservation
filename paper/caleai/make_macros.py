@@ -568,6 +568,38 @@ _q = 0.5
 put("mrt_q", f"{100 * _q:.0f}"); put("mrt_Teff", f"{_T * _q:.0f}")
 put("mrt_users_q", f"{_m.ceil(2 * (_z / _d_mrt) ** 2 * (1 + (_T * _q - 1) * _rho) / (_T * _q))}")
 
+# ---- cycle 4: no-feedback resample baseline (analysis/guard_baseline) and legend test (analysis/legend_test)
+_gb = json.loads((ROOT / "analysis/guard_baseline/summary.json").read_text())
+for _sk, _pre in (("disc", "bd"), ("wc", "bw")):
+    _S = _gb[_sk]
+    for _a in ("G1", "G1s", "G1r", "G1t"):
+        pc(f"{_pre}_jp_{_a.lower()}", _S["arms"][_a]["joint_pass"])
+        pc(f"{_pre}_sp_{_a.lower()}", _S["arms"][_a]["strict_pass"])
+        _r = _S["paired"][_a]["strict_repair"]
+        kn(f"{_pre}_rep_{_a.lower()}", round(_r["k"]), _r["n"])
+        _ci = (100 * _r["ci_low"], 100 * _r["ci_high"]); put(f"{_pre}_rep_{_a.lower()}_lo", f"{_ci[0]:.1f}"); put(f"{_pre}_rep_{_a.lower()}_hi", f"{_ci[1]:.1f}")
+    for _c, _n in (("G1-G1r", "gr"), ("G1t-G1r", "tr"), ("G1r-G1s", "rs")):
+        pc(f"{_pre}_{_n}", _S["contrasts"][_c]["joint"], d=2)
+        pc(f"{_pre}_{_n}_strict", _S["contrasts"][_c]["strict"], d=2)
+    _ptf = sum(_S["paired"][_a]["strict_pass_to_fail"]["k"] for _a in ("G1", "G1s", "G1r", "G1t"))
+    put(f"{_pre}_ptf_all", f"{int(_ptf)}")
+    _cs = _gb[_sk]["cost"]["G1r"]
+    kn(f"{_pre}_same", _cs["identical_to_original"], _cs["flagged_requests"])
+# resampling alone is no better than strip-only: both sets, joint, G1r minus G1s
+assert _gb["disc"]["contrasts"]["G1r-G1s"]["joint"]["estimate"] <= 0 and _gb["wc"]["contrasts"]["G1r-G1s"]["joint"]["ci_low"] < 0 < _gb["wc"]["contrasts"]["G1r-G1s"]["joint"]["ci_high"]
+assert _gb["disc"]["contrasts"]["G1-G1r"]["joint"]["ci_low"] > 0 and _gb["wc"]["contrasts"]["G1-G1r"]["joint"]["ci_low"] > 0
+
+_lg = json.loads((ROOT / "analysis/legend_test/summary.json").read_text())
+for _a, _n in (("a_legend", "a"), ("b_nolegend", "b"), ("c_markers_missing", "c")):
+    put(f"lg_{_n}", f"{100 * _lg['pooled_d1'][_a]['aff']:.1f}")
+    put(f"lg_{_n}_lo", f"{100 * _lg['pooled_d1'][_a]['lo']:.1f}"); put(f"lg_{_n}_hi", f"{100 * _lg['pooled_d1'][_a]['hi']:.1f}")
+    put(f"lg_{_n}_d2", f"{100 * _lg['d2_pooled'][_a]:.1f}")
+    put(f"lg_{_n}_commit", f"{100 * _lg['pooled_d1'][_a]['commit']:.1f}")
+put("lg_unclear_max", f"{100 * max(1 - _lg['pooled_d1'][_a]['commit'] for _a in _lg['pooled_d1']):.1f}")
+put("lg_n_models", len(_lg["per_model_class_d1"]))
+assert _lg["unresolved_valid_rows"] == 0 and all(v["cls"] == "not_artifact" for m in _lg["per_model_class_d1"].values() for v in m.values())
+assert min(_lg["pooled_d1"][_a]["aff"] for _a in ("b_nolegend", "c_markers_missing")) >= 0.9
+
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
     return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus

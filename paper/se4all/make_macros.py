@@ -1380,6 +1380,33 @@ put("t9_compat", sum(c_["verdicts"].get("compatible", 0) for c_ in _c9), _T9, "i
 put("t9_unknown", sum(c_["verdicts"].get("unknown", 0) for c_ in _c9), _T9, "int")
 put("t9_conflicts", sum(len(c_["conflicts"]) for c_ in _c9), _T9, "int")
 
+# cycle 4: legend test (E1) and oracle on real outputs (C49)
+_LG = "analysis/legend_test/summary.json"
+_lg = json.load(open(ROOT / _LG))
+assert _lg["unresolved_valid_rows"] == 0 and _lg["verdict_d1"].startswith("default is NOT")
+for _a_, _n in (("a_legend", "lg_a"), ("b_nolegend", "lg_b"), ("c_markers_missing", "lg_c")):
+    put(_n, _lg["pooled_d1"][_a_]["aff"], _LG, "pct")
+    put(_n + "_d2", _lg["d2_pooled"][_a_], _LG, "pct")
+    put(_n + "_unclear", 1 - _lg["pooled_d1"][_a_]["commit"], _LG, "pct")
+put("lg_min", min(_lg["pooled_d1"][a_]["aff"] for a_ in _lg["pooled_d1"]), _LG, "pct")
+put("lg_unclear_max", max(1 - _lg["pooled_d1"][a_]["commit"] for a_ in _lg["pooled_d1"]), _LG, "pct")
+put("lg_nmodels", len(_lg["per_model_class_d1"]), _LG, "int")
+
+_OR = "analysis/oracle_real/summary.json"
+_or = json.load(open(ROOT / _OR))
+_oh = _or["headline"]
+assert _or["n_unresolved_judge"] == 0
+for _o_, _n in (("judge", "orr_j"), ("surface", "orr_s"), ("overlap", "orr_o")):
+    put_frac(_n + "_mut", _oh[_o_ + "_mut"]["k"], _oh[_o_ + "_mut"]["n"], _OR)
+    put_frac(_n + "_fa", _oh[_o_ + "_fa"]["k"], _oh[_o_ + "_fa"]["n"], _OR)
+put("orr_nctl", _oh["judge_fa"]["n"], _OR, "int")
+put("orr_nmut_all", _or["n_mutants"], _OR, "int")
+put_frac("orr_wa", _or["wa"]["W-A injection / all"]["judge_mut"]["k"], _or["wa"]["W-A injection / all"]["judge_mut"]["n"], _OR)
+_miss = [m_ for m_ in _or["judge_missed_mutants"] if m_["op"] != "booster_insert"]
+assert sorted(m_["op"] for m_ in _miss) == ["speech_act_to_question", "time_shift", "time_shift"]
+put("orr_nboost", _or["booster_only"]["n_mut"], _OR, "int")
+put("orr_nmiss", len(_miss), _OR, "int")
+
 # ------------------------------------------------------------------ write ---
 from c3_exports import macros as c3_macros
 for _key, _value in c3_macros().items():
