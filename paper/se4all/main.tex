@@ -58,15 +58,14 @@ nicholasicheng6@gmail.com}}
 \maketitle
 
 \begin{abstract}
-When a language model expands a few AAC keywords into a sentence, \kw{supervisor read} can lose a \say{not}, and the person's words are then spoken as theirs.
+When a language model expands a few AAC keywords into a sentence, it can lose a \say{not}, and the person's words are then spoken as theirs.
 Catching that needs a test oracle, an automated checker that is itself software and can be wrong.
-We built a test harness and tested its oracle three ways.
-On faults nobody seeded, in natural model outputs labelled by human coders, the oracle reaches \pct{nat_viol_p} precision and \pct{nat_viol_r} recall for violations (\pct{nat_pres_p} and \pct{nat_pres_r} for preservation failures).
-On real outputs with seeded mutants it caught \kof{orr_j_mut} with \kof{orr_j_fa} false alarms, where string overlap caught \pct{orr_o_mut}.
+We built a test harness and tested its oracle with seeded mutants, identity checks and human labels.
+On real outputs it caught \kof{orr_j_mut} seeded mutants with \kof{orr_j_fa} false alarms.
+On natural outputs labelled by human coders, in two sets not used to build it, its violation verdicts have \pct{nat_ho_viol_p} precision \cip{nat_ho_viol_p} and \pct{nat_ho_viol_r} recall.
 Two defects in our own harness, each traced to a regression test, show why such tests matter: a relaxed rule let the oracle accept a changed sentence, and an input-builder bug showed models chips that contradicted the source.
-On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and a prompt legend does not change this.
-A one-tap speech-act chip raised the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp, however \say{Can you\ldots?} is coded, positive for every writer, and the harness locates the remaining gap for the next fix.
-The harness, oracle tests and stored outputs are released so that others can check meaning preservation before deployment.
+With the harness, human-written pairs show that four models read bare polarity input as affirmative in \pct{hwaff} of outputs, and that a one-tap speech-act chip raises the intended speech act by \RES{cb_hw_q}--\RES{cb_hw_base}\,pp.
+The harness, tests and stored outputs are released.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -154,7 +153,7 @@ Some users prefer that a system rewrite their text, so R2 is a policy to test, n
     \addlinespace
     \textbf{R4} composition: adding a compatible chip for $e$ must not break a kept value on $d\neq e$ &
     Chips are supplied together in practice &
-    Composition check: pass$\to$fail transitions of the protected value, minus the repeat-draw floor &
+    Composition check: pass$\to$fail transitions of the protected value, with the repeat-draw floor reported (0 for a single-chip repeat) &
     Composition study (\S\ref{sec:comp}): Qwen loses the agent under \chip{TELL} (\RES{wdqa_d}\,pp), Llama loses polarity under \chip{STATEMENT} (\RES{wdll_d}\,pp)\\
     \addlinespace
     \textbf{R5} input builder: a test input that claims to supply $c$ must display a chip for $c$ &
@@ -223,7 +222,7 @@ The \emph{confirmation set} has \RES{wc_n_fam} fresh machine-written families on
 The \emph{development set} has \RES{n_fam_test} authored families used to develop prompts and codebooks.
 \emph{Corpus transfer} uses crowd-written fictional messages from AACText~\cite{vertanen2011imagination}, and the \emph{composition study} (R4) adds a second chip to \RES{wd_nscen} scenarios.
 Four models run with one fixed one-sentence prompt (greedy): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it, three open models run locally with 4-bit quantization, and one API model, gpt-6.1-terra.
-All intervals are pointwise 95\% percentile intervals from writer-cluster (human-written pairs) or seed/construction-cluster (confirmation set) bootstraps, with 10,000 resamples over a fixed model roster.
+Unless labelled, intervals are pointwise 95\% percentile-bootstrap intervals from writer-cluster (human-written pairs) or seed/construction-cluster (confirmation set) resamples, 10,000 over a fixed model roster; the exceptions are the writer-level $t$ intervals of Table~\ref{tab:primary}, Wilson intervals for proportions in Table~\ref{tab:oracle}, and cluster-bootstrap $\kappa$ intervals.
 
 %% =====================================================================
 \section{Results: Does the Harness Find Real Behavior?}
@@ -238,17 +237,17 @@ They were pre-specified for the confirmation set; on the human-written pairs the
 Each rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers, so a percentile bootstrap cannot give a $p$ below its resampling floor and its intervals are probably too narrow.
 We therefore recomputed inference at the writer level.
 An exact sign-flip randomization over writers gives one-sided $p=\RES{t6p1_p1s}$, $\RES{t6p2_p1s}$ and $\RES{t6p3_p1s}$ (Holm \RES{t6p1_holm}, \RES{t6p2_holm}, \RES{t6p3_holm}), the smallest values possible with so few writers, and every writer's mean is positive in all three contrasts.
-The $t$ intervals are wider than the percentile ones (Table~\ref{tab:primary}).
+The writer-level $t$ intervals in Table~\ref{tab:primary} are wider than the percentile-bootstrap intervals on the same contrasts.
 The effects are heterogeneous across models for the act chip (Llama \RES{t6p1_llama}\,pp, gpt-6.1-terra \RES{t6p1_terra}) and for politeness (Gemma \RES{t6p2_gemma}, Llama \RES{t6p2_llama}; permutation $p=\RES{t6p1_het_p}$ for each).
 We claim direction and consistency, not interval width.
-The chip gain is positive on all six dimensions, between \RES{hw_gain_min} and \RES{hw_gain_max}\,pp, with every lower bound above \RES{hw_gain_lo_min}\,pp.
+The chip gain is positive on all six dimensions, between \RES{hw_gain_min} and \RES{hw_gain_max}\,pp, with every percentile-bootstrap lower bound above \RES{hw_gain_lo_min}\,pp; the writer-level $t$ interval for the speech-act chip in Table~\ref{tab:primary} is wider, with lower bound \RES{t6p1_tlo}\,pp.
 Collapsing near-duplicate pairs, excluding one writer, reversing the arbiter's judgment calls or using all candidates flips no decision; the largest shift is \RES{hw_shift_max}\,pp (\RES{hw_shift_all}\,pp with all candidates).
 Because the chip text enters the model's prompt, Act-chip gain and Affirmative default are close to manipulation checks of whether the harness separates supplied from missing information, which is their purpose.
 They bound what a chip can do rather than show how often systems fail.
 The politeness figures use two readings, named once: \emph{added} is the share of plain sources that gained a marker, \emph{removed} is the share of polite sources that lost one, and \emph{net} is added minus removed.
 
 \begin{table}[t]
-  \caption{The three contrasts on human-written pairs (\RES{hw_nfam} families; writers per contrast in parentheses) and on the confirmation set (\RES{wc_n_fam} families): one fixed prompt, four models, 95\% cluster-bootstrap intervals, Holm-adjusted $p$ over the three. Human-written pairs: $t$ intervals over writers (df = writers $-1$; percentile interval for the default, whose $t$ interval passes 100\%), and Holm $p$ from the exact one-sided writer-level randomization, whose smallest possible value with 6--7 writers is $1/2^G$. Confirmation set: percentile intervals; $p=.0003$ is the smallest Holm value that 10,000 resamples can give. Politeness is net; its added/removed shares (\%) are below it.}
+  \caption{The three contrasts on human-written pairs (\RES{hw_nfam} families; writers per contrast in parentheses) and on the confirmation set (\RES{wc_n_fam} families): one fixed prompt, four models, Holm-adjusted $p$ over the three. Human-written pairs: 95\% $t$ intervals over writers (df = writers $-1$; percentile interval for the default, whose $t$ interval passes 100\%), and Holm $p$ from the exact one-sided writer-level randomization, whose smallest possible value with 6--7 writers is $1/2^G$. Confirmation set: 95\% percentile-bootstrap intervals (cluster resampling); $p=.0003$ is the smallest Holm value that 10,000 resamples can give. Politeness is net; its added/removed shares (\%) are below it.}
   \label{tab:primary}
   \footnotesize
   \setlength{\tabcolsep}{2.2pt}
@@ -292,7 +291,7 @@ A pre-declared three-arm test shows the default is not a prompt-legend artifact:
 Models almost never answered \say{unclear} (at most \pct{lg_unclear_max} of outputs in any arm), so a prompt instruction is not a substitute for the requirement and the test.
 
 \begin{table}[t]
-  \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values and intervals are in \texttt{analysis/r2c/channel\_ladder.csv}.}
+  \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values are in the released artifact.}
   \label{tab:ladder}
   \footnotesize
   \setlength{\tabcolsep}{4pt}
@@ -329,12 +328,13 @@ This is a regression to test for per model, not a property of LLMs.
 
 \subsection{Composition (R4)}
 \label{sec:comp}
-The composition study adds a second chip to a single-chip input and counts pass$\to$fail transitions of the first chip's value, minus the disagreement between two greedy repeats of the identical input.
+The composition study adds a second chip to a single-chip input and counts pass$\to$fail transitions of the first chip's value, and compares them with the disagreement between two greedy repeats (the floor).
 It has \RES{wd_nscen} scenarios, nine inputs each, two encodings of the speech-act chip (\chip{TELL} and its alias \chip{STATEMENT}), four models and two draws (\RES{wd_nreq} requests).
 Failures depend on both model and encoding.
-Qwen loses the agent in \kn{wdqa} transitions under \chip{TELL} (\RES{wdqa_d}\,pp above the repeat floor \ci{wdqa_d}) and in \RES{wdqa_stmt_k} under \chip{STATEMENT}.
+Qwen loses the agent in \kn{wdqa} transitions under \chip{TELL} (\RES{wdqa_d}\,pp \ci{wdqa_d}) and in \RES{wdqa_stmt_k} under \chip{STATEMENT}.
 Llama loses polarity in \kn{wdll} transitions under \chip{STATEMENT} (\RES{wdll_d}\,pp \ci{wdll_d}) and in \RES{wd_tellpol_llama_k} under \chip{TELL}.
-The single-chip repeat floor is \RES{wdll_rep_k}/\RES{wdll_rep_n} for Llama.
+The floor comes from \texttt{analysis/r2d/}: two greedy repeats of the identical single-chip input disagreed on \kn{wdqa_rep} of Qwen and \kn{wdll_rep} of Llama inputs, so for these contrasts the raw rate is the floor-adjusted rate.
+A stricter floor, repeat disagreement on the two-chip inputs, is \kn{wdqa_brep} and \kn{wdll_brep}, which leaves \RES{wdqa_db}\,pp \ci{wdqa_db} for Qwen and \RES{wdll_db}\,pp \ci{wdll_db} for Llama.
 An R4 test must therefore fix the encoding, because a failure that appears under one encoding of the same meaning is an encoding defect before it is a model property.
 This study is exploratory and machine-scored.
 Critical labels fell back to J1 on \RES{wd_j1_rows} of \RES{wd_rows} scored rows, and the Qwen \chip{TELL} examples expose a codebook-rule ambiguity that agreement of the two prompts does not settle.
@@ -383,12 +383,12 @@ It matches the audit on \RES{r5_agree}/\RES{r5_n} and never certifies the \RES{r
 \end{table}
 
 \paragraph*{Which test caught which defect}
-Table~\ref{tab:matrix} lists, for each defect class we met, which test caught it, which ran on the affected rule and missed it, and which does not exercise it.
+Table~\ref{tab:matrix} lists, for each defect class we met, which test caught it, which ran on the affected rule and passed it, and which does not exercise it.
 No single test catches every class, and the cheapest test (identity) passed the harmful relaxation.
 It is an inventory of what happened in this project, not a seeded-fault sweep, so it shows that the tests are complementary and not that they find faults we did not anticipate.
 
 \begin{table*}[t]
-  \caption{Fault-by-test matrix. \emph{caught}: the test failed on the defect. \emph{missed}: the test ran on the affected rule and passed. \texttt{--}: the test does not exercise this fault. Counts are from the identity, scoped-mutant and keyed-challenge runs (\texttt{analysis/oracle/}), the R5 replay and the two human-agreement sets.}
+  \caption{Fault-by-test matrix. \emph{caught}: the test failed on the defect. \emph{passed the bad rule}: the test ran on the affected rule and did not fail. \texttt{--}: the test does not exercise this fault. Counts are from the identity, scoped-mutant and keyed-challenge runs (\texttt{analysis/oracle/}), the R5 replay and the two human-agreement sets.}
   \label{tab:matrix}
   \footnotesize
   \setlength{\tabcolsep}{4pt}
@@ -396,8 +396,8 @@ It is an inventory of what happened in this project, not a seeded-fault sweep, s
     \toprule
     Defect class & Identity & Scoped mutants & Keyed challenge & R5 validator & Human gate\\
     \midrule
-    Over-strict acceptance rule: a verbatim source fails & caught (\RES{id_fail_raw}/\RES{id_n}) & -- & missed (\kof{or_new_ctrl_fa_raw} control false alarms) & -- & --\\
-    Over-relaxed acceptance rule: a statement substitution passes & missed (\kof{or_identity_fa} false alarms) & missed (\kof{or_mut_det} detected, but its acceptance mutants were refusals) & caught (\kof{or_acc_mut_det} acceptance mutants under the production rule vs.\ all \kof{or_new_mut_det_raw} under the strict rule) & -- & --\\
+    Over-strict acceptance rule: a verbatim source fails & caught (\RES{id_fail_raw}/\RES{id_n}) & -- & passed the bad rule (\kof{or_new_ctrl_fa_raw} control false alarms) & -- & --\\
+    Over-relaxed acceptance rule: a statement substitution passes & passed the bad rule (\kof{or_identity_fa} false alarms) & passed the bad rule (\kof{or_mut_det} detected, but its acceptance mutants were refusals) & caught (\kof{or_acc_mut_det} acceptance mutants under the production rule vs.\ all \kof{or_new_mut_det_raw} under the strict rule) & -- & --\\
     Builder shows a chip that contradicts the source & -- & -- & -- & caught (\RES{r5_rej}/\RES{r5_conf}) & --\\
     Extractor error shared by machine coders (\say{I can't wait} read as negated) & -- & -- & caught (round-1 extractor labels equal the key on \kof{or_r1_label_ok} items; the misses include this sentence) & -- & caught (both human coders as keyed)\\
     Extractor insensitive to a one-value edit & -- & none found (\kof{or_mut_det}) & none found (\kof{or_new_mut_det_raw}, strict rule) & -- & --\\
@@ -432,9 +432,10 @@ Under the production rule, which carries the acceptance relaxation of Defect A, 
     \quad surface lexicon (near-circular) & \kof{orr_s_mut}; \kof{orr_s_fa}\\
     \quad string overlap & \kof{orr_o_mut}; \kof{orr_o_fa}\\
     \midrule
-    Natural outputs, judge verdict vs human-consensus verdict (positives \RES{nat_viol_npos} violations, \RES{nat_pres_npos} preservation failures; three sets pooled): precision; recall &\\
-    \quad violation & \pct{nat_viol_p} \cip{nat_viol_p}; \pct{nat_viol_r} \cip{nat_viol_r}\\
-    \quad preservation failure & \pct{nat_pres_p} \cip{nat_pres_p}; \pct{nat_pres_r} \cip{nat_pres_r}\\
+    Natural outputs, judge verdict vs human-consensus verdict, held-out sets (positives \RES{nat_ho_viol_npos} violations, \RES{nat_ho_pres_npos} preservation failures): precision; recall &\\
+    \quad violation & \pct{nat_ho_viol_p} \cip{nat_ho_viol_p}; \pct{nat_ho_viol_r} \cip{nat_ho_viol_r}\\
+    \quad preservation failure & \pct{nat_ho_pres_p} \cip{nat_ho_pres_p}; \pct{nat_ho_pres_r} \cip{nat_ho_pres_r}\\
+    \quad all three sets pooled, violation (secondary) & \pct{nat_viol_p}; \pct{nat_viol_r}\\
     \midrule
     Human gate, development items (\RES{human_n_items} items, two coders): held-out $\kappa$, \RES{human_gate_n} fields & \RES{human_gkappa_min}--\RES{human_gkappa_max}\\
     Outputs for human-elicited keywords (\RES{jve_coders} coders, \RES{jve_n} of \RES{jve_items} items): critical $\kappa$ [CI] & \RES{jve_kappa} [\RES{jve_kappa_lo}, \RES{jve_kappa_hi}]\\
@@ -456,11 +457,15 @@ The lexicon is near-circular, since it matches the cues the operators insert and
 
 \paragraph*{The oracle on faults nobody seeded}
 The mutant tests use faults we wrote.
-The human-labelled sets contain natural model outputs whose labels were made by people independent of any seeded fault, so they also test the oracle on faults nobody seeded.
-We took the verdict-level counts that the gold-set scoring already computes (judge verdict against human-consensus verdict) on the development items, Part 10 (a fresh gold set) and the human-written pairs, with violation and preservation failure as the positive classes; the human-elicited-keyword set supports only the assumption verdict.
-Pooled over \RES{nat_nunits_viol} verdicts, the oracle's precision and recall are \pct{nat_viol_p} and \pct{nat_viol_r} for violations and \pct{nat_pres_p} and \pct{nat_pres_r} for preservation failures (Table~\ref{tab:oracle}); per set they range over \RES{nat_viol_p_setmin}--\RES{nat_viol_p_setmax}\% and \RES{nat_viol_r_setmin}--\RES{nat_viol_r_setmax}\% for violations.
+Human-labelled sets of natural model outputs, labelled by people independent of any seeded fault, test the oracle on faults nobody seeded.
+We took the verdict-level counts that the gold-set scoring already computes (judge verdict against human-consensus verdict), with violation and preservation failure as the positive classes.
+Three sets support them, in two groups.
+The \emph{development items} (\RES{nat_dev_nunits_viol} verdicts) are the set used to build the codebook and extractor prompts, so they are reported separately.
+Two \emph{held-out sets} were not used to build either: a second gold set of fresh outputs and the human-written pairs (\RES{nat_ho_nunits_viol} verdicts).
+On the held-out sets, violation verdicts have precision \pct{nat_ho_viol_p} \cip{nat_ho_viol_p} and recall \pct{nat_ho_viol_r} \cip{nat_ho_viol_r} (\RES{nat_ho_viol_npos} positives), and preservation failures \pct{nat_ho_pres_p} \cip{nat_ho_pres_p} and \pct{nat_ho_pres_r} \cip{nat_ho_pres_r} (Table~\ref{tab:oracle}; Wilson intervals).
+The development items give \pct{nat_dev_viol_p} and \pct{nat_dev_viol_r} for violations, in line with the held-out sets, and pooling all three sets gives \pct{nat_viol_p} and \pct{nat_viol_r} (\RES{nat_viol_npos} positives), the secondary figure.
 On the elicited keywords the assumption verdict has precision \RES{nat_elic_p}\% and recall \RES{nat_elic_r}\% on \RES{nat_elic_n} items.
-Each set has only \RES{nat_viol_posmin}--\RES{nat_viol_posmax} violation positives, so single-set intervals are wide; the pooled intervals are the better guide.
+Each set has only \RES{nat_viol_posmin}--\RES{nat_viol_posmax} violation positives, so the intervals are wide.
 
 \paragraph*{Human gate}
 The first human gate, with two annotators, was run on the development items (the extraction inventory used to develop the codebook), with plurality references and tied items excluded rather than adjudicated.
@@ -481,7 +486,7 @@ Mutation analysis measures a test suite by whether it detects seeded faults~\cit
 Requirements engineering for ML stresses that data-dependent behavior needs explicit, testable requirements~\cite{vogelsang2019re4ml}; our R1--R5 are one such set, with sources and tests stated.
 
 \paragraph*{Testing LLM systems}
-CheckList organizes behavioral tests into minimum-functionality, invariance and directional tests~\cite{ribeiro2020checklist}; Cho et al.\ catalogue metamorphic relations for LLM-based NLP~\cite{cho2025metamorphic}; COLLIE tests compositional constraints~\cite{yao2024collie}; Sensei combines a user simulator with assertions and metamorphic relations~\cite{delara2026sensei}.
+CheckList organizes behavioral tests into minimum-functionality, invariance and directional tests~\cite{ribeiro2020checklist}; Cho et al.\ catalogue metamorphic relations for LLM-based NLP~\cite{cho2025metamorphic}; COLLIE tests compositional constraints~\cite{yao2024collie}.
 We claim no new testing technique.
 LLM judges show position, verbosity and self-preference biases~\cite{zheng2023judging,panickssery2024selfpreference}, and similarity metrics can miss negation~\cite{koch2022selfeval}.
 Pauli et al.\ show that preservation metrics look valid when test data confound style change with content errors~\cite{pauli2025stylegap}; our identity and mutant tests apply that idea to a checker.
