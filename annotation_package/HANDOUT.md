@@ -26,6 +26,14 @@ files from `annotation/` (answer keys, model labels).
   - Parts 18 and 19 only (25 min): P03, P04, P15, P20.
 <!-- stage4:end -->
 
+<!-- stage5:start -->
+- **Stage 5, optional** (opens **Tue Nov 3**, built after Stage 4 had been returned): Parts 20 and 21, due
+  **Tue Nov 3, 23:59**. Files appear in `stage5/`; re-download the zip. About 6.0 person-hours:
+  all 20 people do the same two short parts, in this order. Sheets: `assignments/<ID>_stage5.md`.
+  - Part 20, 10 min (`annotate.html` + `stage5/<ID>_part20.json`, 12 sentences). Return `labels_part20_<ID>.csv`.
+  - Part 21, 8 min (`source_check.html` + `stage5/<ID>_part21.json`, 20 short messages). Return `labels_part21_<ID>.csv`.
+<!-- stage5:end -->
+
 **Return method:** annotators email the CSVs named on their sheet, unchanged, to the coordinator: one email per stage,
 subject `AAC annotation <ID> stage <N>`, with the time spent and any notes. The coordinator saves each file into the
 `return_folder` given in `annotation/assignments/stage1.csv` and commits it.

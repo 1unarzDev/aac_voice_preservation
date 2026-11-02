@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check Messages (Part 21)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  label { font-weight: 600; }
+  input[type=text] { font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 10em; }
+  textarea { font: inherit; font-size: 1rem; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.4rem; font-weight: 600; padding: 10px 14px; border: 3px solid var(--fg); margin: 4px 0 10px; background: var(--panel); overflow-wrap: anywhere; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  fieldset.active { border: 4px solid var(--accent); }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Check messages (Part 21)</h1>
+  <div><label for="file">Your message file (JSON)</label> <input id="file" type="file" accept=".json,application/json"></div>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Load your message file and enter your annotator ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="itemview" class="hidden">
+        <div id="phasetag" class="tag"></div>
+        <p>Read the message. Answer the three questions about <strong>what the words say</strong>.</p>
+        <div class="q">Message:</div>
+        <div class="sentence" id="msg"></div>
+        <form id="form" onsubmit="return false"></form>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div>
+          <button type="button" id="back">Back (Backspace)</button>
+          <button type="button" id="next" class="primary">Next (Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to judge</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">1</span>–<span class="key">4</span> choose an option for the highlighted question</li>
+        <li><span class="key">S</span> unsure about the highlighted question</li>
+        <li><span class="key">↑</span> <span class="key">↓</span> move between questions</li>
+        <li><span class="key">Tab</span> go to the note box (optional)</li>
+        <li><span class="key">Enter</span> next message (also from the note box)</li>
+        <li><span class="key">Esc</span> leave the note box</li>
+        <li><span class="key">Backspace</span> previous message (outside the note box)</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+/* Items are loaded from a message file (JSON) made by src/make_source_check.py (stage5/<ID>_part21.json). Blind: the file
+   carries only an id and the message text; the loader refuses a file with any other field and a file made for someone else. */
+const ALLOWED_TOP = ["check_id", "tool", "version", "n_items", "for", "items"];
+const ALLOWED_ITEM = ["item_id", "text"];
+const TOOL = "source_check_v1";
+let DATA = null, ITEMS = [];
+function RUNID() { return TOOL + ":" + (DATA ? DATA.check_id : ""); }
+
+const YN = ["yes", "no", "unsure"];
+const QS = [
+  {dim: "negated", title: "Negated?", text: "Does the message say \"not\", \"no\", \"never\" (or n't), or refuse something?", options: YN},
+  {dim: "polite", title: "Polite?", text: "Does it use a polite word or form: please, thanks / thank you, sorry, could you, would you ...?", options: YN},
+  {dim: "act", title: "Statement, question or request?", text: "Does the message tell something (statement), ask for information (question), or ask someone to do something (request)?",
+   options: ["statement", "question", "request", "unsure"]},
+];
+const HELP = "<p>Each message is a real sentence that a person might want to say. Judge only the words on the page.</p>" +
+  "<dl><dt>Negated?</dt><dd>yes if the message says not / no / never / n't / nothing, or refuses (\"No thanks.\", \"I won't go.\"). no if nothing is negated.</dd>" +
+  "<dt>Polite?</dt><dd>yes if it contains please, thanks / thank you, sorry, excuse me, could you, would you, or a similar polite form. no if none of these.</dd>" +
+  "<dt>Statement, question or request?</dt><dd><strong>statement</strong> tells something (including \"I want tea.\"). <strong>question</strong> asks for information or permission. <strong>request</strong> asks someone to do something (\"Please close the door.\").</dd>" +
+  "<dt>unsure</dt><dd>Use it when you cannot tell. It is not an error.</dd></dl>";
+
+const PRACTICE = [
+  {item_id: "prac-1", practice: true, text: "Please pass me the salt.", expected: {negated: "no", polite: "yes", act: "request"},
+   fb: "No negation. \"Please\" is a polite word. It asks the listener to do something, so it is a request."},
+  {item_id: "prac-2", practice: true, text: "I never eat fish.", expected: {negated: "yes", polite: "no", act: "statement"},
+   fb: "\"Never\" negates it. No polite word. It tells something: a statement."},
+  {item_id: "prac-3", practice: true, text: "Where is the bathroom?", expected: {negated: "no", polite: "no", act: "question"},
+   fb: "No negation and no polite word. It asks for information: a question."},
+];
+
+let S = null;
+let shownAt = null, showingFeedback = false, active = 0;
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+const store = {
+  key(id) { return "sourcecheck:v1:" + (DATA ? DATA.check_id : "") + ":" + id; },
+  load(id) { try { const s = localStorage.getItem(this.key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.annot), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function seedOf(str) { let h = 2166136261 >>> 0; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
+function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function shuffled(ids, seedStr) { const a = ids.slice(), r = rng(seedOf(seedStr)); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function idHash(id) { return (seedOf(String(id).trim().toUpperCase() + "|part21") >>> 0).toString(16).padStart(8, "0"); }
+
+function newState(id) {
+  return {annot: id, run: RUNID(), check_id: DATA.check_id, phase: "intro", idx: 0, order: shuffled(ITEMS.map(x => x.item_id), id + "|" + DATA.check_id),
+          M: {}, P: {}, started: null};
+}
+let BYID = Object.fromEntries(PRACTICE.map(x => [x.item_id, x]));
+function validateData(d) {
+  if (!d || typeof d !== "object" || !Array.isArray(d.items) || !d.items.length || !d.check_id) return "This is not a message file (no check_id or items).";
+  const extraTop = Object.keys(d).filter(k => !ALLOWED_TOP.includes(k));
+  if (extraTop.length) return "This file has fields a blind message file must not have: " + extraTop.join(", ") + ". Ask the coordinator for a new file.";
+  if (d.tool !== TOOL) return "This file was not made for this tool.";
+  for (const it of d.items) {
+    const extra = Object.keys(it).filter(k => !ALLOWED_ITEM.includes(k));
+    if (extra.length) return "Item " + it.item_id + " has fields a blind message file must not have: " + extra.join(", ") + ".";
+    if (!it.item_id || typeof it.text !== "string" || !it.text.trim()) return "Item " + it.item_id + " is incomplete.";
+  }
+  if (new Set(d.items.map(x => x.item_id)).size !== d.items.length) return "Duplicate item ids in the file.";
+  return null;
+}
+function loadData(d) {
+  const err = validateData(d);
+  if (err) { say(err); return false; }
+  stopClock(); store.save();
+  DATA = d; ITEMS = d.items; S = null;
+  BYID = Object.fromEntries([...ITEMS, ...PRACTICE].map(x => [x.item_id, x]));
+  say("Loaded message file (" + ITEMS.length + " messages).");
+  if (annotId()) startFor(annotId()); else { renderProgress(); $("annot").focus(); }
+  return true;
+}
+const PHASES = {intro: {intro: true, next: "P"}, P: {practice: true, next: "M"}, M: {next: "done"}, done: {intro: true}};
+function seq(ph) { return ph === "P" ? PRACTICE.map(p => p.item_id) : S.order; }
+function rec(ph, id) { if (!S[ph][id]) S[ph][id] = {answers: {}, note: "", time_ms: 0}; return S[ph][id]; }
+function complete(ph, id) { const r = S[ph][id]; return !!r && QS.every(q => r.answers[q.dim]); }
+function nDone(ph) { return seq(ph).filter(id => complete(ph, id)).length; }
+function stopClock() {
+  if (shownAt !== null && S && !PHASES[S.phase].intro) rec(S.phase, seq(S.phase)[S.idx]).time_ms += Date.now() - shownAt;
+  shownAt = null;
+}
+function renderProgress() {
+  const total = ITEMS.length, done = S ? nDone("M") : 0, pct = total ? Math.round(100 * done / total) : 0;
+  let t = "Enter your annotator ID to begin.";
+  if (S) {
+    const ph = S.phase;
+    t = PHASES[ph].intro ? (ph === "done" ? "Finished" : "Ready to start")
+      : (PHASES[ph].practice ? "Practice: message " : "Message ") + (S.idx + 1) + " of " + seq(ph).length;
+    t += " (" + done + " of " + total + " messages complete, " + pct + "%)";
+  }
+  $("progtext").textContent = t;
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+function renderIntro() {
+  const ph = S.phase, v = $("introview");
+  $("itemview").classList.add("hidden"); v.classList.remove("hidden");
+  $("help").innerHTML = HELP;
+  if (ph === "intro") v.innerHTML = "<h2>Message check</h2><p>You will see " + ITEMS.length +
+    " short messages, one at a time. For each, answer three quick questions: is it negated, is it polite, and is it a statement, a question or a request. " +
+    "Judge only the words on the page. You work alone and nobody sees your answers but the coordinator. It takes about 8 minutes.</p>" +
+    "<p>First come 3 practice messages with feedback. Press <span class='key'>Enter</span> or the button to start.</p><button type='button' class='primary' id='go'>Start practice (Enter)</button>";
+  else v.innerHTML = "<h2>All done. Thank you!</h2><p>Please press <strong>Download CSV</strong> and send the file <code>labels_part21_" + S.annot.replace(/[<>&"]/g, "") + ".csv</code> to the study coordinator.</p>";
+  const go = $("go"); if (go) go.addEventListener("click", advanceIntro);
+  v.focus();
+}
+function advanceIntro() {
+  if (S.phase !== "intro") return;
+  S.phase = "P"; S.idx = 0; active = 0; if (!S.started) S.started = new Date().toISOString(); store.save(); render();
+}
+function render() {
+  if (!S) return;
+  renderProgress();
+  if (PHASES[S.phase].intro) { renderIntro(); return; }
+  const ph = S.phase, id = seq(ph)[S.idx], it = BYID[id], r = rec(ph, id);
+  $("introview").classList.add("hidden"); $("itemview").classList.remove("hidden");
+  $("help").innerHTML = HELP;
+  $("phasetag").textContent = PHASES[ph].practice ? "Practice (you will see feedback)" : "Message " + (S.idx + 1) + " of " + seq(ph).length;
+  $("msg").textContent = it.text;
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  const form = $("form"); form.innerHTML = "";
+  QS.forEach((q, qi) => {
+    const fs = document.createElement("fieldset"); fs.id = "q" + qi; fs.className = qi === active ? "active" : "";
+    const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + q.title; fs.append(lg);
+    const p = document.createElement("p"); p.className = "q"; p.textContent = q.text; fs.append(p);
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", q.title);
+    q.options.forEach((o, oi) => {
+      const lab = document.createElement("label"); lab.className = "opt" + (r.answers[q.dim] === o ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.value = o; inp.checked = r.answers[q.dim] === o;
+      inp.disabled = showingFeedback; inp.addEventListener("change", () => answer(qi, o));
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(oi + 1);
+      lab.append(inp, k, document.createTextNode(" " + o)); opts.append(lab);
+    });
+    fs.append(opts);
+    fs.addEventListener("click", () => { if (active !== qi) { active = qi; render(); } });
+    form.append(fs);
+  });
+  const wrap = document.createElement("div");
+  const lab = document.createElement("label"); lab.htmlFor = "note"; lab.textContent = "Optional note";
+  const ta = document.createElement("textarea"); ta.id = "note"; ta.value = r.note; ta.maxLength = 300; ta.disabled = showingFeedback;
+  ta.addEventListener("input", () => { r.note = ta.value; store.save(); });
+  wrap.append(lab, ta); form.append(wrap);
+  const a = $("q" + active); if (a && a.scrollIntoView) a.scrollIntoView({block: "nearest"});
+  if (shownAt === null) shownAt = Date.now();
+}
+function cur() { const ph = S.phase, id = seq(ph)[S.idx]; return {ph, id, it: BYID[id], r: rec(ph, id)}; }
+function answer(qi, value) {
+  if (showingFeedback) return;
+  const {r} = cur(), q = QS[qi];
+  r.answers[q.dim] = value;
+  active = Math.min(qi + 1, QS.length - 1);
+  store.save(); render();
+}
+function markUnsure() { const q = QS[active]; answer(active, "unsure"); return q; }
+function showFeedback(it) {
+  const {r} = cur(), fb = $("feedback"); fb.innerHTML = "";
+  const h = document.createElement("p"); h.innerHTML = "<strong>Feedback.</strong> Press Enter to continue."; fb.append(h);
+  const ul = document.createElement("ul");
+  for (const q of QS) {
+    const exp = it.expected[q.dim], got = r.answers[q.dim];
+    const li = document.createElement("li"); const s = document.createElement("span");
+    s.className = got === exp ? "ok" : "bad"; s.textContent = got === exp ? "Matches" : "Different";
+    li.append(s, document.createTextNode(" - " + q.title + " you chose " + got + "; suggested answer: " + exp)); ul.append(li);
+  }
+  fb.append(ul);
+  const p = document.createElement("p"); p.textContent = it.fb; fb.append(p);
+  showingFeedback = true; render(); fb.classList.remove("hidden"); fb.focus();
+}
+function next() {
+  if (!S) return;
+  if (PHASES[S.phase].intro) { advanceIntro(); return; }
+  const {ph, id, it, r} = cur();
+  if (!complete(ph, id)) {
+    const miss = QS.findIndex(q => !r.answers[q.dim]);
+    active = miss; say("Please answer every question, or press S for unsure."); render(); return;
+  }
+  if (it.practice && !showingFeedback) { showFeedback(it); return; }
+  showingFeedback = false; stopClock(); say("");
+  if (S.idx < seq(ph).length - 1) { S.idx++; active = 0; }
+  else if (ph === "M" && nDone("M") < ITEMS.length) { S.idx = seq("M").findIndex(x => !complete("M", x)); active = 0; say("Some messages are incomplete."); }
+  else { S.phase = PHASES[ph].next; S.idx = 0; active = 0; }
+  store.save(); render();
+}
+function back() {
+  if (!S || PHASES[S.phase].intro || S.idx === 0) return;
+  showingFeedback = false; stopClock(); S.idx--; active = 0; store.save(); render();
+}
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your annotator ID first."); $("annot").focus(); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["item_id", "annotator", "check_id", "practice", "order", "negated", "polite", "act", "note", "time_ms", "started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  const row = (it, practice, r, o) => [it.item_id, S.annot, DATA.check_id, practice ? 1 : 0, o,
+    r.answers.negated || "", r.answers.polite || "", r.answers.act || "", r.note.trim(), Math.round(r.time_ms), S.started || "", TOOL, now].map(csvCell).join(",");
+  PRACTICE.forEach((p, i) => { if (S.P[p.item_id]) lines.push(row(p, true, S.P[p.item_id], i + 1)); });
+  for (const it of ITEMS) { const r = S.M[it.item_id]; if (r) lines.push(row(it, false, r, S.order.indexOf(it.item_id) + 1)); }
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "labels_" + DATA.check_id + "_" + S.annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (lines.length - 1) + " rows, " + nDone("M") + " of " + ITEMS.length + " messages complete).");
+  return lines.join("\n");
+}
+function startFor(id) {
+  if (!id) { S = null; return; }
+  if (!DATA) { say("Load your message file first (the file button)."); $("file").focus(); return; }
+  if (DATA["for"] && DATA["for"] !== idHash(id)) {
+    S = null; renderProgress(); $("itemview").classList.add("hidden");
+    const v = $("introview"); v.classList.remove("hidden");
+    v.innerHTML = "<h2>This is not your file</h2><p>This message file was made for another annotator. Use the file named with your own ID (for example <code>stage5/P01_part21.json</code>).</p>";
+    say("This message file is not yours."); v.focus(); return;
+  }
+  stopClock(); store.save(); showingFeedback = false;
+  const saved = store.load(id);
+  S = saved && saved.run === RUNID() ? saved : newState(id);
+  active = 0; store.save();
+  say(saved ? "Resumed saved progress for " + id + "." : "Started a new session for " + id + ".");
+  render();
+}
+$("file").addEventListener("change", (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { loadData(JSON.parse(rd.result)); } catch (err) { say("Could not read that file: " + err.message); } };
+  rd.readAsText(f);
+});
+$("annot").addEventListener("change", () => startFor(annotId()));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); startFor(annotId()); const v = $("introview"); if (!v.classList.contains("hidden")) v.focus(); } });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && !PHASES[S.phase].intro && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!S || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.id === "annot" || t.id === "file")) return;
+  if (t && t.tagName === "TEXTAREA") {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); next(); }
+    else if (e.key === "Escape") { e.preventDefault(); t.blur(); $("form").focus(); }
+    return;
+  }
+  if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) { if (e.key === "Enter") { e.preventDefault(); t.click(); } return; }
+  if (PHASES[S.phase].intro) { if (e.key === "Enter") { e.preventDefault(); next(); } return; }
+  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1; if (n < QS[active].options.length) { e.preventDefault(); answer(active, QS[active].options[n]); } }
+  else if (e.key === "s" || e.key === "S") { e.preventDefault(); markUnsure(); }
+  else if (e.key === "Enter") { e.preventDefault(); next(); }
+  else if (e.key === "Backspace") { e.preventDefault(); back(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, QS.length - 1); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+});
+$("form").tabIndex = -1;
+renderProgress();
+$("annot").focus();
+</script>
+</body>
+</html>
