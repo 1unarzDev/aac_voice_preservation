@@ -495,6 +495,79 @@ put("mrt_d", _d_mrt); put("mrt_T", _T); put("mrt_rho", _rho)
 put("mrt_msgs", f"{_m.ceil(_T / (EV['guard']['report']['cost']['flagged'] / EV['guard']['report']['cost']['inputs']))}")
 put("mrt_users", f"{_m.ceil(2 * (_z / _d_mrt) ** 2 * (1 + (_T - 1) * _rho) / _T)}")
 
+# ---------------- cycle 3: robustness analyses (analysis/robust/*/summary.json); no typed results
+RB = ROOT / "analysis/robust"
+def _rj(name):
+    return json.loads((RB / name / "summary.json").read_text())
+
+def _f(x, d=1):
+    return f"{100 * x:.{d}f}"
+
+# Part 4 repair-audit confounds
+_ac = _rj("repair_audit_confounds")
+_u = next(e for e in _ac["endpoints"] if e["endpoint"] == "usable")["unknown = unusable/failing"]
+put("ra_unk_gap", _f(_u["diff"])); put("ra_unk_gap_lo", _f(_u["diff_ci"][0])); put("ra_unk_gap_hi", _f(_u["diff_ci"][1]))
+put("ra_unk_rep", _f(_u["repaired"]["p"], 0)); put("ra_unk_ctl", _f(_u["control"]["p"], 0))
+put("ra_effn", f"{_ac['rater_patterns']['design_effect_effective_raters']:.1f}")
+put("ra_rho", f"{_ac['rater_patterns']['mean_pairwise_correlation_usable']:.2f}")
+put("ra_usable_patterns", _ac["rater_patterns"]["distinct_usable_binary_patterns"])
+_pf = _ac["composition"]["p0_strict_fail"]
+assert _pf["control"] == {"False": 20}
+kn("ra_repfail", _pf["repaired"]["True"], sum(_pf["repaired"].values()))
+put("ra_ctl_passed_n", sum(_pf["control"].values()))
+_dm = _ac["composition"]["dim"]
+put("ra_dim_pol_rep", _dm["table"]["repaired"]["politeness"]); put("ra_dim_pol_ctl", _dm["table"]["control"]["politeness"])
+put("ra_dim_p", f"{_dm['perm_p']:.3f}")
+
+# T2: affirmative default as the Bayes-preferred guess; asymmetric cost
+_t2 = _rj("t2_posterior"); _tt = {(r["dimension"], r["channel"]): r for r in _t2["table"]}
+_ph, _pcx = _tt[("polarity", "human")], _tt[("polarity", "pos_cap4")]
+put("t2_post_h", _f(_ph["posterior_empirical"])); put("t2_post_h_lo", _f(_ph["posterior_empirical_lo"])); put("t2_post_h_hi", _f(_ph["posterior_empirical_hi"]))
+put("t2_post_c", _f(_pcx["posterior_empirical"])); put("t2_post_c_lo", _f(_pcx["posterior_empirical_lo"])); put("t2_post_c_hi", _f(_pcx["posterior_empirical_hi"]))
+put("t2_rev_h", f"{_ph['silent_reversal_per_1000']:.0f}"); put("t2_rev_h_lo", f"{_ph['silent_reversal_per_1000_lo']:.0f}"); put("t2_rev_h_hi", f"{_ph['silent_reversal_per_1000_hi']:.0f}")
+put("t2_acc_h", _f(1 - _ph["posterior_empirical"])); put("t2_post_h_bayes", _f(_ph["posterior_bayes_corpus_pi"]))
+put("t2_spur_h", f"{_ph['spurious_cue_per_1000']:.1f}")
+put("t2_aff_h", _f(1 - _ph["model_share_cue_given_nocue"]))
+put("t2_ratio_h", f"{_ph['breakeven_cost_ratio']:.0f}")
+put("t2_neg_prev", _f(_t2["corpus_prevalence_detector_6142"]["neg"]))
+_po = _tt[("politeness", "human")]
+put("t2_pol_post", _f(_po["posterior_empirical"])); put("t2_pol_model", _f(_po["model_share_cue_given_nocue"]))
+_sa = _tt[("speech_act", "human")]
+put("t2_sa_post", _f(_sa["posterior_empirical"])); put("t2_sa_model", _f(_sa["model_share_cue_given_nocue"]))
+put("t2_d_h", _f(_ph["d_loss"])); put("t2_d_h_lo", _f(_ph["d_loss_lo"])); put("t2_d_h_hi", _f(_ph["d_loss_hi"]))
+
+# T4: "Can you ...?" coded as a statement-request (base) or as a question
+_t4 = {(r["run"], r["variant"]): r for r in _rj("t4_codebook")["speech_act_chip_gain"]}
+_b, _a = _t4[("W-C r2c1", "base")], _t4[("W-C r2c1", "a_can_you_question")]
+put("t4_wc_base", _f(_b["estimate"])); put("t4_wc_alt", _f(_a["estimate"])); put("t4_wc_alt_lo", _f(_a["ci_low"])); put("t4_wc_alt_hi", _f(_a["ci_high"]))
+put("t4_hw_base", _f(_t4[("hw1", "base")]["estimate"])); put("t4_hw_alt", _f(_t4[("hw1", "a_can_you_question")]["estimate"]))
+
+# T6: human-written pairs, writer-level inference (t intervals; exact writer sign-flip randomization)
+_t6 = _rj("t6_small_cluster")
+for _c, _n in (("P1", "t6_p1"), ("P2", "t6_p2"), ("P3", "t6_p3")):
+    _r = _t6["contrasts"][_c]
+    put(_n + "_w", _r["writers"]); put(_n + "_rp", f"{_r['sign_flip_randomization']['p_one_sided']:.3f}")
+    put(_n + "_holm", f"{_t6['holm_signflip_one_sided'][_c]:.3f}")
+    assert _r["sign_flip_randomization"]["all_writer_signs_positive"]
+    if _c != "P3":
+        put(_n, _f(_r["estimate"])); put(_n + "_lo", _f(_r["t_ci_low"])); put(_n + "_hi", _f(_r["t_ci_high"]))
+put("t6_minp", f"{min(r['sign_flip_randomization']['min_attainable_one_sided'] for r in _t6['contrasts'].values()):.4f}")
+
+# T7: ties and unresolved items counted as disagreement (R1)
+_t7 = _rj("t7_human_gate"); _gs = ("main1_H7_A1A2", "part12_elic", "part13_hw")
+_crit = [_t7[g]["dims"]["critical"]["test/R1"]["kappa"] for g in _gs]
+put("t7_crit_min", f"{min(_crit):.3f}"); put("t7_crit_max", f"{max(_crit):.3f}")
+_ac_k = [_t7[g]["dims"]["added_content"]["test/R1"]["kappa"] for g in _gs]
+put("t7_ac_min", f"{min(_ac_k):.3f}"); put("t7_ac_max", f"{max(_ac_k):.3f}")
+for _g in _gs:  # added_content is lowest, or within 0.02 of the lowest, among the seven fields in every gate
+    _ks = [v["test/R1"]["kappa"] for k, v in _t7[_g]["dims"].items() if k != "critical" and "test/R1" in v]
+    assert _t7[_g]["dims"]["added_content"]["test/R1"]["kappa"] <= min(_ks) + 0.02, _g
+
+# MRT: proximal outcome on a random subset of sends (typed assumption: collection probability)
+_q = 0.5
+put("mrt_q", f"{100 * _q:.0f}"); put("mrt_Teff", f"{_T * _q:.0f}")
+put("mrt_users_q", f"{_m.ceil(2 * (_z / _d_mrt) ** 2 * (1 + (_T * _q - 1) * _rho) / (_T * _q))}")
+
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
     return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus
