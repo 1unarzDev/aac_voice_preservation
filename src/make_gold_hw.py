@@ -82,7 +82,11 @@ def main(argv=None) -> int:
     plan = json.loads(Path(a.plan).read_text())
     coders = set(plan["part13_coders"])
     items = runio.load_items(a.items)
-    units = G.build_units_multi([a.run], set(), {a.run: a.run_dir} if a.run_dir else None, items)
+    import pandas as pd
+    rd = Path(a.run_dir) if a.run_dir else ROOT / "runs" / a.run
+    # run was judged on ALL candidates (D-052); the frame is the kept pairs only
+    not_kept = set(pd.read_parquet(rd / "scored.parquet", columns=["family_id"]).family_id) - set(items)
+    units = G.build_units_multi([a.run], not_kept, {a.run: a.run_dir} if a.run_dir else None, items)
     kept, why = frame(units, items, coders, checked_by(Path(a.check_key), coders), a.n, a.keep_checked)
     design = {"run": a.run, "frame_units_before_exclusions": len(units), "exclusions": why,
               "part13_coders": sorted(coders),
