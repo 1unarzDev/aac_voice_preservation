@@ -47,6 +47,11 @@ PROMPTS: dict[str, PromptSpec] = {p.prompt_id: p for p in [
     # P0 template + extended legend (alias chips, [·] padding = ignore, "Meaning:" line).
     # Separate id so P0's sha / request_keys / cache stay valid. Not in DEFAULT_PROMPTS.
     PromptSpec("P0x", "P0.txt", 0.0, 1, 1, 96, "chip_legend_x.txt"),
+    # E1 legend test (2026-11-02): P0n = P0 wording with NO chip legend (template without {legend});
+    # P0m = P0 + legend + one extra "markers may be missing" line (prompts/chip_legend_m.txt).
+    # New ids: P0's sha / request_keys / cache are untouched. Not in DEFAULT_PROMPTS.
+    PromptSpec("P0n", "P0_nolegend.txt", 0.0, 1, 1, 96, "chip_legend_none.txt"),
+    PromptSpec("P0m", "P0.txt", 0.0, 1, 1, 96, "chip_legend_m.txt"),
 ]}
 DEFAULT_PROMPTS = ["P0", "S3", "P1", "P2"]   # what build_requests uses when --prompts is omitted
 

@@ -1,0 +1,512 @@
+{
+ "missing_from_requests": {
+  "W-C r2c1": 0,
+  "hw1": 0,
+  "W-D r2d1": 0
+ },
+ "bare_noncrit_identical_A_B": {
+  "W-C r2c1": {
+   "bare": {
+    "family_channels": 240,
+    "differing_between_A_and_B": 0
+   },
+   "noncrit": {
+    "family_channels": 240,
+    "differing_between_A_and_B": 15
+   }
+  },
+  "hw1": {
+   "bare": {
+    "family_channels": 574,
+    "differing_between_A_and_B": 0
+   },
+   "noncrit": {
+    "family_channels": 574,
+    "differing_between_A_and_B": 13
+   }
+  }
+ },
+ "generation_calls": 0,
+ "judge_calls": 0,
+ "raw": {
+  "W-C r2c1": {
+   "cue_inputs": 960,
+   "verdicts": {
+    "compatible": 960
+   },
+   "by_channel_dim_verdict": [
+    {
+     "channel": "chip1",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chip1",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chip1",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chipall",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chipall",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chipall",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 160
+    }
+   ],
+   "conflicts": [],
+   "no_cue_inputs": 960,
+   "leaks": 0
+  },
+  "W-D r2d1": {
+   "cue_inputs": 10240,
+   "verdicts": {
+    "compatible": 7680,
+    "unknown": 2560
+   },
+   "by_channel_dim_verdict": [
+    {
+     "channel": "actor_STATEMENT",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "actor_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "unknown",
+     "n": 640
+    },
+    {
+     "channel": "actor_TELL",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "actor_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_STATEMENT",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_STATEMENT",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "unknown",
+     "n": 640
+    },
+    {
+     "channel": "both_TELL",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_TELL",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "neither_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "unknown",
+     "n": 640
+    },
+    {
+     "channel": "neither_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_STATEMENT",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "unknown",
+     "n": 640
+    },
+    {
+     "channel": "pol_TELL",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    }
+   ],
+   "conflicts": [],
+   "no_cue_inputs": 2560,
+   "leaks": 0
+  },
+  "hw1": {
+   "cue_inputs": 2296,
+   "verdicts": {
+    "compatible": 1888,
+    "unknown": 408
+   },
+   "by_channel_dim_verdict": [
+    {
+     "channel": "chip1",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 204
+    },
+    {
+     "channel": "chip1",
+     "dimension": "certainty",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chip1",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 208
+    },
+    {
+     "channel": "chip1",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chip1",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 176
+    },
+    {
+     "channel": "chip1",
+     "dimension": "time_quantity",
+     "verdict": "unknown",
+     "n": 204
+    },
+    {
+     "channel": "chipall",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 204
+    },
+    {
+     "channel": "chipall",
+     "dimension": "certainty",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chipall",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 208
+    },
+    {
+     "channel": "chipall",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chipall",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 176
+    },
+    {
+     "channel": "chipall",
+     "dimension": "time_quantity",
+     "verdict": "unknown",
+     "n": 204
+    }
+   ],
+   "conflicts": [],
+   "no_cue_inputs": 2296,
+   "leaks": 0
+  }
+ },
+ "alias_normalised": {
+  "W-C r2c1": {
+   "cue_inputs": 960,
+   "verdicts": {
+    "compatible": 960
+   },
+   "by_channel_dim_verdict": [
+    {
+     "channel": "chip1",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chip1",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chip1",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chipall",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chipall",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 160
+    },
+    {
+     "channel": "chipall",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 160
+    }
+   ],
+   "conflicts": [],
+   "no_cue_inputs": 960,
+   "leaks": 0
+  },
+  "W-D r2d1": {
+   "cue_inputs": 10240,
+   "verdicts": {
+    "compatible": 10240
+   },
+   "by_channel_dim_verdict": [
+    {
+     "channel": "actor_STATEMENT",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "actor_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "actor_TELL",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "actor_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_STATEMENT",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_STATEMENT",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_TELL",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_TELL",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "both_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "neither_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "neither_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_STATEMENT",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_STATEMENT",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_TELL",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 640
+    },
+    {
+     "channel": "pol_TELL",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 640
+    }
+   ],
+   "conflicts": [],
+   "no_cue_inputs": 2560,
+   "leaks": 0
+  },
+  "hw1": {
+   "cue_inputs": 2296,
+   "verdicts": {
+    "compatible": 1888,
+    "unknown": 408
+   },
+   "by_channel_dim_verdict": [
+    {
+     "channel": "chip1",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 204
+    },
+    {
+     "channel": "chip1",
+     "dimension": "certainty",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chip1",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 208
+    },
+    {
+     "channel": "chip1",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chip1",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 176
+    },
+    {
+     "channel": "chip1",
+     "dimension": "time_quantity",
+     "verdict": "unknown",
+     "n": 204
+    },
+    {
+     "channel": "chipall",
+     "dimension": "agent",
+     "verdict": "compatible",
+     "n": 204
+    },
+    {
+     "channel": "chipall",
+     "dimension": "certainty",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chipall",
+     "dimension": "polarity",
+     "verdict": "compatible",
+     "n": 208
+    },
+    {
+     "channel": "chipall",
+     "dimension": "politeness",
+     "verdict": "compatible",
+     "n": 178
+    },
+    {
+     "channel": "chipall",
+     "dimension": "speech_act",
+     "verdict": "compatible",
+     "n": 176
+    },
+    {
+     "channel": "chipall",
+     "dimension": "time_quantity",
+     "verdict": "unknown",
+     "n": 204
+    }
+   ],
+   "conflicts": [],
+   "no_cue_inputs": 2296,
+   "leaks": 0
+  }
+ }
+}
