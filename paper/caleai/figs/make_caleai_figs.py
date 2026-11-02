@@ -47,7 +47,7 @@ WC_NONC, WC_CHIP, WC_FULL = (wc_ladder("speech_act", c) for c in ("noncrit", "ch
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#898781"
 GRID, AXIS = "#e1e0d9", "#c3c2b7"
 BLUE, ORANGE, BASE = "#256abf", "#eb6834", "#898781"   # intervention, cheap comparator, baseline
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.edgecolor": AXIS,
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.edgecolor": AXIS,
                      "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK,
                      "axes.linewidth": 0.6, "xtick.major.width": 0.6, "ytick.major.width": 0,
                      "pdf.fonttype": 42, "ps.fonttype": 42})
@@ -91,8 +91,8 @@ def ledger():
     verdict = lambda ok: "PASS" if ok else "FAIL"
     n_cue = g["n_cue_targets"]
     rows = [
-        dict(name="I2 Complete set", sub="fill missing readings\nin k = 3 suggestions\n(system side)",
-             benefit=[("sets offering both polarity\nor both certainty readings", p(pc["P2"]), p(pc["I2"]), None,
+        dict(name="Menu", sub="adds missing readings\nto 3 suggestions\n(system side)",
+             benefit=[("sets with both readings", p(pc["P2"]), p(pc["I2"]), None,
                        f"{frac(sc['polarity+certainty']['p2'], sc['polarity+certainty']['n'])}→{frac(sc['polarity+certainty']['i2'], sc['polarity+certainty']['n'])}",
                        100 * pc["P2"]["estimate"] + 30)],
              harm=[("politeness", lvl(sc["politeness"], "p2"), lvl(sc["politeness"], "i2"), None,
@@ -101,41 +101,41 @@ def ledger():
                    ("speech act", lvl(sc["speech_act"], "p2"), lvl(sc["speech_act"], "i2"), None,
                     f"{frac(sc['speech_act']['p2'], sc['speech_act']['n'])}→{frac(sc['speech_act']['i2'], sc['speech_act']['n'])}, "
                     f"{100 * sr['speech_act']['diff_I2']['estimate']:.1f} pp".replace("-", "−"), None),
-                   ("rewrites changing act", None, p(s["act_drift"]), None,
+                   ("rewrites changing type", None, p(s["act_drift"]), None,
                     f"{int(s['act_drift']['k'])} of {s['act_drift']['n']}", None)],
              cost=[f"+{sr['cost_I2']['calls_per_set']:.2f} calls / set",
                    f"+{sr['cost_I2']['lat_per_set']:.2f} s / set¹",
                    f"{sr['cost_I2']['verified']}/{sr['cost_I2']['rewrites']} self-verified"],
-             kill=f"gain ≥30 pp: {verdict(kv['I2'])}"),
-        dict(name="Chip", sub="user adds one\ncommitment marker\n(user side)",
-             benefit=[("critical value matched,\ndiscovery (6 dimensions)", p(c["noncrit"]), p(c["chip1"]), None,
+             tests=[("gain ≥30 pp:", False), (verdict(kv['I2']), True)]),
+        dict(name="Cue (chip)", sub="user adds one\ncue such as [NOT]\n(user side)",
+             benefit=[("value kept: development", p(c["noncrit"]), p(c["chip1"]), None,
                        f"{int(c['noncrit']['k'])}→{int(c['chip1']['k'])} of {c['chip1']['n']}",
                        100 * c["noncrit"]["estimate"] + 10),
-                      ("W-C speech act", p(WC_NONC), p(WC_CHIP), None,
+                      ("value kept: confirmation", p(WC_NONC), p(WC_CHIP), None,
                        f"{int(WC_NONC['k'])}→{int(WC_CHIP['k'])} of {WC_CHIP['n']}",
                        80 * WC_FULL["estimate"])],
-             harm=[("lost after adding chip", None, p(c["lost_with_chip"]), None,
+             harm=[("kept, lost with cue", None, p(c["lost_with_chip"]), None,
                     f"{int(c['lost_with_chip']['k'])} of {c['lost_with_chip']['n']}", None),
-                   ("bare miss still missed", None, p(c["miss_persists"]), None,
+                   ("missed, still missed", None, p(c["miss_persists"]), None,
                     f"{int(c['miss_persists']['k'])} of {c['miss_persists']['n']}", None),
-                   ("supplied value contradicted", None, p(c["chip1_contra"]), None,
+                   ("cue given, contradicted", None, p(c["chip1_contra"]), None,
                     f"{int(c['chip1_contra']['k'])} of {c['chip1_contra']['n']}", None)],
              cost=["+1 selection²", "+0 calls",
                    f"all chips: {c['chipall_mean_chips']:.1f} selections"],
-             kill=f"gain ≥10 pp, ≥80% of full: discovery {verdict(kv['chip'])}",
-             kill2=f"W-C speech act: {verdict(kv['chip_wc'])}"),
+             tests=[("gain ≥10 pp, ≥80% of typed", False), ("development: " + verdict(kv['chip']), True),
+                    ("confirmation: " + verdict(kv['chip_wc']), True)]),
     ]
 
-    W, H = 7.0, 3.25
+    W, H = 7.0, 4.7
     fig = plt.figure(figsize=(W, H))
-    X_NAME, X_BEN, W_BEN, X_HARM, W_HARM, X_COST = 0.03, 1.30, 1.95, 3.50, 1.95, 5.68
-    TOP, ROW_H, GAP = 2.75, 1.02, 0.12
+    X_NAME, X_BEN, W_BEN, X_HARM, W_HARM, X_COST = 0.03, 1.25, 1.75, 3.35, 1.75, 5.30
+    TOP, ROW_H, GAP = 4.1, 1.62, 0.14
     def axes(x, y, w, hgt):
         return fig.add_axes([x / W, y / H, w / W, hgt / H])
 
     def item(ax, y, lab, val, b0, b1, cmp_, kill, xmax):
-        ax.text(0, y + 0.36, lab, fontsize=6.5, color=INK, va="bottom", ha="left", linespacing=0.95)
-        ax.text(xmax, y + 0.36, val, fontsize=6.3, color=INK2, va="bottom", ha="right")
+        ax.text(0, y + 0.40, lab, fontsize=7.8, color=INK, va="bottom", ha="left")
+        ax.text(0, y + 0.14, val, fontsize=7.2, color=INK2, va="bottom", ha="left")
         if b0 is not None:
             ax.plot([b0[0], b1[0]], [y, y], color=AXIS, lw=1.6, zorder=1, solid_capstyle="round")
             ax.errorbar(b0[0], y, xerr=[[b0[0] - b0[1]], [b0[2] - b0[0]]], fmt="o", mfc="white", mec=BASE,
@@ -151,12 +151,12 @@ def ledger():
     def style(ax, xmax, ticks, n, last, xlabel):
         ax.set_xlim(0, xmax); ax.set_ylim(-0.4, n - 0.25)
         ax.set_yticks([]); ax.set_xticks(ticks)
-        ax.tick_params(axis="x", labelsize=6.3, length=2, labelbottom=last)
+        ax.tick_params(axis="x", labelsize=7.4, length=2, labelbottom=last)
         ax.grid(axis="x", color=GRID, lw=0.5); ax.set_axisbelow(True)
         for sp in ("top", "right", "left"):
             ax.spines[sp].set_visible(False)
         if last:
-            ax.set_xlabel(xlabel, fontsize=6.5, labelpad=2)
+            ax.set_xlabel(xlabel, fontsize=7.6, labelpad=2)
 
     y0 = TOP
     for i, r in enumerate(rows):
@@ -164,42 +164,38 @@ def ledger():
         hgt = ROW_H
         ybot = y0 - hgt
         last = i == len(rows) - 1
-        fig.text(X_NAME / W, (y0 - 0.12) / H, r["name"], fontsize=7.6, fontweight="bold", color=INK, va="top")
-        fig.text(X_NAME / W, (y0 - 0.33) / H, r["sub"], fontsize=6.5, color=INK2, va="top", linespacing=1.05)
+        fig.text(X_NAME / W, (y0 - 0.12) / H, r["name"], fontsize=9, fontweight="bold", color=INK, va="top")
+        fig.text(X_NAME / W, (y0 - 0.33) / H, r["sub"], fontsize=7.6, color=INK2, va="top", linespacing=1.05)
         ax = axes(X_BEN, ybot, W_BEN, hgt)
         ys = [2, 1, 0][:len(r["benefit"])] if len(r["benefit"]) > 1 else [1.6]
         if len(r["benefit"]) == 2:
             ys = [1.9, 0.5]
         for y, (lab, b0, b1, cmp_, val, kill) in zip(ys, r["benefit"]):
             item(ax, y, lab, val, b0, b1, cmp_, kill, 100)
-        style(ax, 100, [0, 25, 50, 75, 100], n, last, "% of targets, sets or violations")
+        style(ax, 100, [0, 25, 50, 75, 100], n, last, "% of targets or sets")
         ax = axes(X_HARM, ybot, W_HARM, hgt)
         for y, (lab, h0, h1, hcmp, val, kill) in zip([2, 1, 0], r["harm"]):
             item(ax, y, lab, val, h0, h1, hcmp, kill, 100)
         # Every plotted harm value is a percent LEVEL; percentage-point changes are printed, never plotted.
-        style(ax, 100, [0, 25, 50, 75, 100], n, last, "% of sets, rewrites or targets (levels)")
+        style(ax, 100, [0, 25, 50, 75, 100], n, last, "% (levels, not changes)")
         for k, line in enumerate(r["cost"]):
-            fig.text(X_COST / W, (y0 - 0.16 - k * 0.19) / H, line, fontsize=6.6 if k else 7.0,
+            fig.text(X_COST / W, (y0 - 0.16 - k * 0.22) / H, line, fontsize=7.8 if k else 8.2,
                      color=INK if k < 2 else INK2, fontweight="bold" if k == 0 else "normal", va="top")
-        kl = r["kill"].split(": ")
-        fig.text(X_COST / W, (y0 - 0.16 - 3 * 0.19 - 0.04) / H, "Kill test: " + kl[-1], fontsize=6.6,
-                 color=INK, fontweight="bold", va="top")
-        fig.text(X_COST / W, (y0 - 0.16 - 4 * 0.19 - 0.04) / H, ": ".join(kl[:-1]), fontsize=6.0,
-                 color=INK2, va="top")
-        if "kill2" in r:
-            fig.text(X_COST / W, (y0 - 0.16 - 5 * 0.19 - 0.04) / H, r["kill2"], fontsize=6.6,
-                     color=INK, fontweight="bold", va="top")
+        yy = y0 - 0.16 - len(r["cost"]) * 0.22 - 0.06
+        fig.text(X_COST / W, yy / H, "Pre-set test", fontsize=7.8, color=INK, fontweight="bold", va="top")
+        for k2, (t, b) in enumerate(r["tests"]):
+            fig.text(X_COST / W, (yy - 0.2 - k2 * 0.2) / H, t, fontsize=7.6, color=INK, fontweight="bold" if b else "normal", va="top")
         y0 = ybot - GAP - (0.0 if last else 0.06)
     # column heads
-    for x, t in ((X_BEN, "Benefit (targeted endpoint)"), (X_HARM, "Offline failure indicators"), (X_COST, "Cost")):
-        fig.text(x / W, (TOP + 0.08) / H, t, fontsize=7.8, fontweight="bold", color=INK, va="bottom")
-    fig.text(X_NAME / W, 0.04 / H, "¹ local server, partial CPU offload   ² nominal; dwell, scanning and learning not counted   W-C tick: 80% of full-input match",
-             fontsize=5.8, color=INK2, va="bottom", linespacing=1.1)
+    for x, t in ((X_BEN, "Benefit"), (X_HARM, "What it leaves or breaks"), (X_COST, "Cost and test")):
+        fig.text(x / W, (TOP + 0.08) / H, t, fontsize=9, fontweight="bold", color=INK, va="bottom")
+    fig.text(X_NAME / W, 0.04 / H, "¹ local server, partial CPU offload   ² nominal; dwell, scanning, learning not counted\nTick on confirmation row: 80% of the typed-sentence rate",
+             fontsize=7.0, color=INK2, va="bottom", linespacing=1.1)
     from matplotlib.lines import Line2D
-    h = [Line2D([], [], marker="o", ls="", mfc="white", mec=BASE, mew=1.2, ms=5, label="comparator (P2 set; length-matched word)"),
+    h = [Line2D([], [], marker="o", ls="", mfc="white", mec=BASE, mew=1.2, ms=5, label="comparator (baseline menu; length-matched word)"),
          Line2D([], [], marker="o", ls="", color=BLUE, ms=5.5, label="intervention"),
-         Line2D([], [], marker="|", ls="", color=INK, ms=8, mew=1.0, label="pre-specified kill line")]
-    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.0, 1.0), ncol=4, frameon=False, fontsize=6.5,
+         Line2D([], [], marker="|", ls="", color=INK, ms=8, mew=1.0, label="pre-set pass line")]
+    fig.legend(handles=h, loc="upper left", bbox_to_anchor=(0.0, 1.0), ncol=3, frameon=False, fontsize=7.6,
                handletextpad=0.3, columnspacing=1.1)
     for ext in ("pdf", "png"):
         fig.savefig(HERE / f"fig_ledger.{ext}", dpi=400 if ext == "png" else None)
@@ -222,6 +218,7 @@ def kw(s: str) -> str:
     return r"\texttt{" + tex(s) + "}"
 
 
+CH = {"chip1": "one cue", "chipall": "all cues", "full": "typed input"}
 SHORT = {"qwen2.5-7b": "Qwen", "llama3.1-8b": "Llama", "gemma3-4b": "Gemma", "gpt-6.1-terra": "Terra"}
 READ = {"A": "A", "B": "B", "unclear": "?", "other": "o"}
 
@@ -272,23 +269,23 @@ def guard_examples():
         return rf"{kw(inp)} & {q(before)} & {q(after)}\\[2pt]"
     L = [r"% AUTO-GENERATED by figs/make_caleai_figs.py from evidence.json and analysis/guard_wc/examples.json -- do not edit by hand."]
     x = G[("fixed", 1)]
-    L += [head(rf"\textbf{{Discovery, repaired}} ({SHORT[x['model']]}, {tex(x['family_id'])}/{x['variant']}, {x['channel']}; "
+    L += [head(rf"\textbf{{Development set, repaired}} ({SHORT[x['model']]}, {CH[x['channel']]}; "
                rf"1st by hash order; {frac(x['pool_k'], x['pool_n'])} scored failures repaired)"),
           strings(x["input"][10:], x["before"], x["after"])]
     x = G[("fixed", 2)]
-    L += [head(rf"\textbf{{Discovery, scored repair that is a fragment}} ({SHORT[x['model']]}, {tex(x['family_id'])}/{x['variant']}, "
-               rf"{x['channel']}; 2nd by hash order; {frac(g['ask_you_prefix']['k'], g['ask_you_prefix']['n'])} scored repairs "
+    L += [head(rf"\textbf{{Development set, scored repair that is a fragment}} ({SHORT[x['model']]}, "
+               rf"{CH[x['channel']]}; 2nd by hash order; {frac(g['ask_you_prefix']['k'], g['ask_you_prefix']['n'])} scored repairs "
                r"begin ``Ask you'', a post hoc lexical count, not a fluency rate)"),
           strings(x["input"][10:], x["before"], x["after"])]
     x = G[("unfixed", 1)]
-    L += [head(rf"\textbf{{Discovery, residual}} ({SHORT[x['model']]}, {tex(x['family_id'])}/{x['variant']}, {x['channel']}; "
+    L += [head(rf"\textbf{{Development set, failure that remains}} ({SHORT[x['model']]}, {CH[x['channel']]}; "
                rf"1st by hash order; {frac(x['pool_k'], x['pool_n'])} failures remain, {g['residual_flagged']['k']}/{g['residual_flagged']['n']} "
                r"still flagged; the source asks whether the listener is charging it)"),
           strings(x["input"][10:], x["before"], x["after"])]
     T = {e["category"]: e for e in json.loads((ROOT / "analysis/guard_wc/examples.json").read_text())}
     x = T["correct-text-changed"]
-    L += [head(rf"\textbf{{W-C transfer, correct text changed, still a scored pass}} ({SHORT[x['model']]}, {tex(x['family_id'])}/{x['variant']}, "
-               rf"{x['channel']}; 1st by SHA-256 order; {frac(x['event_k'], x['eligible_n'])} strict-correct targets changed, "
+    L += [head(rf"\textbf{{Confirmation set, correct text changed, still a scored pass}} ({SHORT[x['model']]}, "
+               rf"{CH[x['channel']]}; 1st by SHA-256 order; {frac(x['event_k'], x['eligible_n'])} strict-correct targets changed, "
                r"none to a scored failure)"),
           strings(x["input_text"][10:], x["before"], x["after"])]
     (HERE / "guard_examples.tex").write_text("\n".join(L) + "\n")

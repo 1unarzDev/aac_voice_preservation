@@ -91,6 +91,17 @@
 \resdef{app_full_s3c_k}{50}
 \resdef{app_full_s3c_n}{1,850}
 \resdef{app_ready}{1}
+\resdef{bx1_after}{Is [I] bring a friend?}
+\resdef{bx1_before}{Is it okay if I bring a friend?}
+\resdef{bx1_in}{[?] [I] bring friend}
+\resdef{bx1_k}{26}
+\resdef{bx1_n}{1,394}
+\resdef{bx2_after}{Don't knock before you come in.}
+\resdef{bx2_before}{Please knock before you come in.}
+\resdef{bx2_in}{knock come}
+\resdef{bx3_after}{Ask you to wear headphones.}
+\resdef{bx3_before}{You wear headphones.}
+\resdef{bx3_in}{[ASK] [YOU] [PLAIN] wear headphones}
 \resdef{c3_app_first_p0}{2.05}
 \resdef{c3_app_first_p0_clusters}{210}
 \resdef{c3_app_first_p0_hi}{2.76}
@@ -177,11 +188,11 @@
 \resdef{c_lostwithchip_k}{7}
 \resdef{c_lostwithchip_lo}{1.0}
 \resdef{c_lostwithchip_n}{194}
-\resdef{c_misspersists}{7.4}
-\resdef{c_misspersists_hi}{12.6}
-\resdef{c_misspersists_k}{21}
-\resdef{c_misspersists_lo}{3.0}
-\resdef{c_misspersists_n}{284}
+\resdef{c_misspersists}{6.3}
+\resdef{c_misspersists_hi}{10.5}
+\resdef{c_misspersists_k}{17}
+\resdef{c_misspersists_lo}{2.6}
+\resdef{c_misspersists_n}{270}
 \resdef{c_n}{464}
 \resdef{c_nchips}{3.1}
 \resdef{c_noncrit}{41.8}
@@ -207,6 +218,12 @@
 \resdef{c_tq_noncrit}{11.2}
 \resdef{copy_k}{116}
 \resdef{copy_n}{116}
+\resdef{dz_ctl_assumed}{89}
+\resdef{dz_icc}{0.2}
+\resdef{dz_mde}{16}
+\resdef{dz_p18_judg}{200}
+\resdef{dz_p18_mde}{23}
+\resdef{dz_p18_neff}{71}
 \resdef{el_alpha}{0.61}
 \resdef{el_annot}{20}
 \resdef{el_msgs}{600}
@@ -226,6 +243,7 @@
 \resdef{g_amb_fix}{100.0}
 \resdef{g_amb_fix_k}{86}
 \resdef{g_amb_fix_n}{86}
+\resdef{g_amb_req}{464}
 \resdef{g_ask}{6.3}
 \resdef{g_ask_k}{4}
 \resdef{g_ask_n}{63}
@@ -988,6 +1006,7 @@
 \resdef{hw_p3_lo}{99.3}
 \resdef{hw_wr_max}{7}
 \resdef{hw_wr_min}{6}
+\resdef{hw_writers}{20}
 \resdef{jve_ready}{1}
 \resdef{jvh_ready}{1}
 \resdef{kill_chip}{passed}
@@ -1002,6 +1021,11 @@
 \resdef{mon_rep_n}{96}
 \resdef{mon_tn}{1293}
 \resdef{mon_tp}{77}
+\resdef{mrt_T}{40}
+\resdef{mrt_d}{0.2}
+\resdef{mrt_msgs}{473}
+\resdef{mrt_rho}{0.3}
+\resdef{mrt_users}{125}
 \resdef{n_cue_targets}{1,392}
 \resdef{n_fam}{58}
 \resdef{n_models}{4}
@@ -1013,6 +1037,15 @@
 \resdef{p17_raters}{3}
 \resdef{p17_texts}{120}
 \resdef{p18_per_writer}{10}
+\resdef{pp_ctl}{83.8}
+\resdef{pp_ctl_k}{31}
+\resdef{pp_ctl_n}{37}
+\resdef{pp_gap}{$-$15.2}
+\resdef{pp_gap_hi}{4.5}
+\resdef{pp_gap_lo}{$-$33.8}
+\resdef{pp_rep}{68.6}
+\resdef{pp_rep_k}{24}
+\resdef{pp_rep_n}{35}
 \resdef{ra_ctl}{89.5}
 \resdef{ra_ctl_c}{89.5}
 \resdef{ra_ctl_c_k}{17}
@@ -1021,6 +1054,7 @@
 \resdef{ra_ctl_items}{20}
 \resdef{ra_ctl_lo}{68.6}
 \resdef{ra_ctl_unk}{1}
+\resdef{ra_echo_all}{3}
 \resdef{ra_ex0_in}{[ASK] [YOU] [PLAIN] speak slowly}
 \resdef{ra_ex0_model}{gemma3-4b}
 \resdef{ra_ex0_out}{Speak slowly to you.}
@@ -1030,10 +1064,13 @@
 \resdef{ra_ex2_in}{evening take pills}
 \resdef{ra_ex2_model}{gemma3-4b}
 \resdef{ra_ex2_out}{Take pills evening.}
-\resdef{ra_ex_echo}{3}
+\resdef{ra_ex_echo}{1}
 \resdef{ra_gap}{$-$30.7}
 \resdef{ra_gap_hi}{$-$2.0}
 \resdef{ra_gap_lo}{$-$54.7}
+\resdef{ra_pres}{87.5}
+\resdef{ra_pres_k}{14}
+\resdef{ra_pres_n}{16}
 \resdef{ra_raters}{14}
 \resdef{ra_rep}{58.8}
 \resdef{ra_rep_c}{58.8}
@@ -1054,6 +1091,7 @@
 \resdef{rt_ctl_hi}{91.0}
 \resdef{rt_ctl_items}{20}
 \resdef{rt_ctl_lo}{54.8}
+\resdef{rt_echo_all}{1}
 \resdef{rt_ex0_in}{[ASK] [YOU] [PLAIN] email manager}
 \resdef{rt_ex0_model}{gemma3-4b}
 \resdef{rt_ex0_out}{Ask you email manager.}
@@ -1064,6 +1102,9 @@
 \resdef{rt_ex2_model}{llama3.1-8b}
 \resdef{rt_ex2_out}{The plumber.}
 \resdef{rt_ex_echo}{1}
+\resdef{rt_pres}{84.2}
+\resdef{rt_pres_k}{16}
+\resdef{rt_pres_n}{19}
 \resdef{rt_rep}{77.8}
 \resdef{rt_rep_c}{77.8}
 \resdef{rt_rep_c_k}{14}
