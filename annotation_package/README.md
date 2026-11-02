@@ -209,6 +209,14 @@ sentence alone, then Pass B with the input; 3 practice items per pass). Everythi
 
 Don't compare these sentences with the ones in Part 4. Judge each sentence on its own.
 
+## Part 15 (if assigned, ~25 min): write 15 new speech-act sentence pairs, `write_pairs.html`
+
+Same tool and rules as Part 7 (see Part 7 above), but speech act only, and only for the four people named on their Stage 4 sheet. Use the link fragment on your sheet. Write every sentence yourself. Do not copy, adapt or paraphrase any sentence you have seen: not from earlier parts, not from the tool's examples, not from Part 18, and not from anyone else's work. Every new pair is compared with all earlier pairs, and copies or near-copies are rejected before anyone checks them. Return: `write_pairs_speech_act_<ID>.csv`.
+
+## Part 16 (if assigned, ~22 min): check the new pairs, `check_pairs.html`
+
+Same task and tool as Part 8 (see Part 8 above). It opens only after Part 15 is back. The coordinator will tell you, and you then re-download the zip, because the `stage4/<ID>_check_hw2.json` file in the zip before that is an empty placeholder. You never get a pair you wrote. Return: `check_pairs_<ID>_check_hw2_<ID>.csv`.
+
 ## Part 17 (if assigned, ~47 min): third sentence check, your own `repair_audit_v2_<ID>.html`
 This is the same task as Part 4, with 80 new sentences. Follow the Part 4 instructions above (Pass A sentence alone,
 then Pass B with the input; 3 practice items per pass). Everything is inside one file, made for you.
