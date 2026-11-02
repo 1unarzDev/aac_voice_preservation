@@ -24,6 +24,14 @@
 %%   SUPPORTED: "Writers said the output said what they meant in X% of outputs the scorer passed against Y% of those it failed (gap G [LO, HI], writer-clustered), so H1 survives its first test."
 %%   DEMOTED:   "... gap G [LO, HI] includes zero, so the scored endpoint is demoted as a proxy for writer intent (H1 not supported)."
 %%   Report overall and per input condition (no cue vs one cue). It measures writer intent, never AAC-user validation.
+%%
+%% (C) \slotBaseline (Sec. 4 and Sec. 6.1, marked "% BASELINE"): the no-feedback resample baseline (same monitor, regenerate up to two times, no feedback turn). Fill from its analysis file via a macro. Patterns:
+%%   FEEDBACK HELPS: "Regeneration without the feedback message repaired X% of strict failures against Y% with it (increment G points [LO, HI]), so the feedback message, not extra draws, earns the increment."
+%%   NO DIFFERENCE:  "Regeneration without the feedback message repaired X% against Y% (increment G [LO, HI], including zero): extra draws explain the increment, and the guard's credit shrinks to detection plus resampling."
+%%
+%% (D) \slotLegend (Sec. 5, cue probe; marked "% LEGEND_TEST"): the three-arm test of whether the prompt's cue legend alone shifts the bare-keyword default. Patterns:
+%%   LEGEND MATTERS: "Adding the cue legend to a prompt with no cue changed affirmative output from X% to Y% (gap G [LO, HI]), so the default findings are partly a prompt effect."
+%%   NO EFFECT:      "The cue legend alone moved affirmative output by G points [LO, HI], including zero, so the default is not a legend artifact."
 %% =========================================================================================
 \documentclass[letterpaper]{article} % DO NOT CHANGE THIS
 \ifdefined\XeTeXversion\input{xetex_preview_shim}\fi % local Tectonic preview only; inert under pdflatex
@@ -73,24 +81,26 @@
 \newcommand{\slotAuditAbs}{A larger audit of \RES{p17_texts} texts with three independent raters each, its decision rule fixed in advance, is in progress.} % PART17
 \newcommand{\slotAuditBody}{The audit is still in progress; its result will replace this sentence.} % PART17
 \newcommand{\slotIntent}{Its result is not yet in.} % PART18
+\newcommand{\slotBaseline}{Until then the increment over strip-only is an upper bound on what the feedback message itself contributes.} % BASELINE
+\newcommand{\slotLegend}{Whether the prompt's cue legend alone shifts the bare-keyword default (a three-arm test) is not yet in.} % LEGEND_TEST
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-People who use AAC (augmentative and alternative communication) apps pick a few words, and a large language model can now turn them into a full sentence that the app may speak for them, sometimes after the user reviews it.
+People who use AAC (augmentative and alternative communication) apps pick a few words, and a large language model can turn them into a full sentence that the app may speak for them.
 The model can quietly change the meaning, for example by dropping a ``not''.
-Fixes are usually reported only by how many such errors they remove.
-We argue that this hides failures, and propose a \emph{ledger} that records, beside each gain, what the fix leaves broken, what it breaks that was fine, what it costs and where it applies, compared with a free baseline and a pass line set in advance.
+Work on such systems commonly reports accuracy- or similarity-style gains.
+We argue that gain-only reports hide failures, and propose a \emph{ledger} that records, beside each gain, what the fix leaves broken, what it breaks that was fine, what it costs, where it applies, and what a default costs when it is wrong, against a free baseline and a pass line set in advance.
 Our test case is a \emph{guard} that makes the model try again when its sentence contradicts what the user supplied.
+Throughout, a pass means the strict check (keeps the critical meaning, contradicts nothing supplied, adds no politeness).
 \textbf{Does it work?}
-On \RES{gt_fam} fresh item families it raises the automatic pass rate from \RES{gt_jp_p0}\% to \RES{gt_jp_g1}\% (+\RES{gt_jgain_g1} points, of which deleting an unrequested \say{please} alone earns +\RES{gt_jgain_g1s}), yet \RES{gt_res_g1}\% of targets still fail.
+On \RES{gt_fam} fresh item families the guard raises the pass rate from \RES{gt_sp_p0}\% to \RES{gt_sp_g1}\% (+\RES{gt_sgain_g1} points, of which deleting an unrequested \say{please} alone earns +\RES{gt_sgain_g1s}), yet \RES{gt_res_g1}\% of targets still fail, and it repaired \RES{gt_rep_g1}\% of failures against \RES{g_fix}\% in development.
 A passing sentence can also be unusable: \say{\RES{bx1_before}} became \say{\RES{bx1_after}} and still counted as correct.
-In a small pilot, people rated repaired sentences usable \RES{ra_rep}\% of the time against \RES{ra_ctl}\% for sentences that never needed repair (\RES{ra_rep_items}+\RES{ra_ctl_items} texts, raters not independent: a warning sign, not a proven cost).
-A second pilot pool showed no gap (\RES{rt_rep}\% vs.\ \RES{rt_ctl}\%).
+A 40-text pilot is a warning sign, not a result: repaired sentences were rated usable \RES{ra_unk_rep}\% of the time against \RES{ra_unk_ctl}\% for never-failed controls (unresolved items counted unusable; gap \RES{ra_unk_gap} points [\RES{ra_unk_gap_lo}, \RES{ra_unk_gap_hi}]), but its raters were about \RES{ra_effn} effective independent raters and its controls had all passed, and a second pool showed no gap.
 \slotAuditAbs{} % PART17
-Two other add-ons show the same pattern: a menu of readings loses polite readings, and a one-tap cue passed on development items but missed its pass line on fresh ones.
-When \RES{el_annot} people typed their own keywords, \RES{el_pol_h}\% of keyword sets lost the negation before the model saw it.
+When \RES{el_annot} people typed keywords for messages that carried a negation (a cue-enriched sample), \RES{el_pol_h}\% of sets lost it.
+Models then default to affirmative, which is the better guess (the message was negated in only \RES{t2_post_h}\% of such cases), but average-accuracy metrics reward exactly that behavior, which silently reverses about \RES{t2_rev_h} in 1,000 messages against \RES{t2_spur_h} spurious negations.
 We study stored text, not people, and no AAC user took part; we give a pre-specified design for testing our predictions on people.
 \end{abstract}
 
@@ -121,25 +131,27 @@ LLM keyword expansion turns \kw{want go party} into a full sentence~\cite{shen20
 But the model decides more than words: whether something happened or did not, whether the sentence asks or tells, whether it says \say{please}.
 Given \kw{not like medication}, a sentence that drops the negation, turns it into a question or adds politeness is fluent and wrong.
 Three kinds of fix are being explored: check the output against the user's words and regenerate on a conflict~\cite{madaan2023selfrefine,gou2024critic}, offer suggestions that span the readings the words leave open, or let the user add a one-tap cue such as \chip{NOT}~\cite{valencia2024compa,mao2025designprobes,xiang2025socializechat}.
-Each is usually judged by how many errors it removes.
-That hides what a fix leaves unfixed, what it changes that was already right, and whether the repaired text is something a person could use.
+Such work commonly reports gains of the accuracy or similarity kind: exact-expansion accuracy~\cite{cai2022abbrev}, a semantic-consistency rating with keystroke saving~\cite{shen2022kwickchat}, entry-rate and motor savings~\cite{cai2024speakfaster}.
+These are real gains; we did not survey the field, and some work reports collateral change (Section~\ref{sec:related}).
+A gain-only report hides what a fix leaves unfixed, what it changes that was already right, and whether the repaired text is something a person could use.
 
 
 \paragraph{Thesis and ledger.}
-Gain-only evaluation hides failures, so we report a ledger.
-Beside each benefit it records \emph{offline failure indicators} (events in stored text that a gain-only report omits: failures that remain, correct outputs the fix changed, readings a menu no longer offers), the cost, and where the intervention applies.
+Where only gains are reported, failures stay hidden, so we report a ledger.
+Beside each benefit it records \emph{offline failure indicators} (events in stored text that a gain-only report omits: failures that remain, correct outputs the fix changed, readings a menu no longer offers, silent reversals under a default that is right on average), the cost, and where the intervention applies.
 None of these indicators is a measured harm to a person.
 Our running case is keyword-to-sentence expansion with four LLMs on minimal-pair item families, defined in Section~\ref{sec:setting}.
 
 \paragraph{Contributions.}
 (1)~A ledger and its design rules: attribution decides what an intervention may be credited with; a free baseline and pass lines fixed in advance decide whether it merits a human study (\S\ref{sec:design}).
 (2)~One lead case, a commitment guard, evaluated end to end: a confirmation set with a frozen rule, a modest increment over a free baseline, and a human usability check on its repairs (\S\ref{sec:results}).
-(3)~Two bounded secondary rows, and a bridge to human-written pairs and human-chosen keywords.
+(3)~Two bounded secondary rows, and a bridge to human-written pairs and human-chosen keywords, where the default of answering affirmative is analyzed as a good guess with an asymmetric cost.
 (4)~A pre-specified human-effect design that turns the ledger into falsifiable predictions about people (\S\ref{sec:protocol}).
 We ran no study with AAC users; every result is a change in stored text.
 
 %% =====================================================================
 \section{Related Work}
+\label{sec:related}
 %% =====================================================================
 \paragraph{LLMs in AAC.}
 LLM expansion and suggestion systems for AAC include KWickChat~\cite{shen2022kwickchat} and SpeakFaster~\cite{cai2024speakfaster}, and AAC users have described how such systems help and hinder them~\cite{valencia2023less}.
@@ -166,7 +178,7 @@ LLM judges~\cite{zheng2023judging} can agree with each other more than with peop
 \multicolumn{4}{@{}l}{\textbf{Glossary}}\\
 \midrule
 \emph{Family} & Two source sentences differing on one critical dimension, with the same bare keywords & \emph{Cue, chip} & One tap that adds a commitment, such as \chip{NOT}, \chip{?}, \chip{PLAIN}\\
-\emph{Critical dimension} & Polarity, agent, certainty, speech act (ask, tell, request), politeness, time/quantity & \emph{Input conditions} & Keywords only; keywords plus a length-matched neutral word; plus the critical cue; plus all cues; the typed sentence\\
+\emph{Critical dimension} & Polarity, agent, certainty, speech act (ask, tell, request), politeness, time/quantity & \emph{Input conditions} & Keywords only; keywords plus a length-matched neutral word; plus the critical cue; plus all cues; the typed sentence (``typed input'', the full channel)\\
 \emph{Strict pass} & Keeps the critical value, contradicts no supplied dimension, adds no politeness & \emph{First pass} & The model's single greedy sentence, before any intervention\\
 \emph{Joint pass} & Keeps the critical value and every other scored supplied predicate & \emph{Strip-only} & Free baseline: delete an unrequested \say{please}, \say{pls} or \say{plz} (no model call)\\
 \emph{Violation} & The input carried a value and the output changed it & \emph{Offline failure indicator} & Event in stored text that a gain-only report omits\\
@@ -194,7 +206,8 @@ Because the input condition fixes which values the model was given, a miss is at
 This holds only as far as the extractor and the conditions are right.
 A checker can enforce only a value the user supplied, so the guard is credited with violations alone; when the keywords leave a dimension open, the remedies are to show alternatives (menu) or to let the user supply the cue.
 In the confirmation set, \RES{wc_arb_rows} disagreement rows (\RES{wc_arb_units} units) were resolved by a single arbiter after outcomes were known, blind to reference, model and condition; masking them as unknown gives the same three conclusions.
-Against two human annotators on \RES{human_sampleditems} sampled untreated outputs, extractor labels agree at held-out $\kappa=\RES{human_gkappa_min}$--$\RES{human_gkappa_max}$ on all \RES{human_gate_n} label fields (pre-specified gate 0.6).
+Against two human annotators on \RES{human_sampleditems} sampled untreated outputs, extractor labels agree at held-out $\kappa=\RES{human_gkappa_min}$--$\RES{human_gkappa_max}$ on all \RES{human_gate_n} label fields (pre-specified gate 0.6; per-field $n$ is smaller because ties and unsure items are excluded).
+Counting ties and unresolved items as disagreement instead, the critical-dimension $\kappa$ is \RES{t7_crit_min}--\RES{t7_crit_max} across the three human gates, and added content is the weakest field (\RES{t7_ac_min}--\RES{t7_ac_max}).
 That check covers untreated outputs only; it does not validate repaired or rewritten text, and the pilot audit (Section~\ref{sec:repaircost}) gives the only human check of repairs.
 The item construction and scorer are specified in an anonymous concurrent paper~\cite{anon2027contracts}; nothing in this paper's argument depends on it beyond the description above.
 
@@ -208,8 +221,8 @@ It also flags a politeness marker that was not supplied.
 On a flag, the same conversation receives one feedback turn (\say{Your sentence must keep: negated; no added politeness. Write the sentence again with the same meaning otherwise.}) and is regenerated, up to two retries.
 The guard returns the first unflagged attempt, else the attempt with fewest flags, ties going to the original.
 The strip-only baseline covers one failure type (an added \say{please}); it is a floor for a trivial rule, not a competitor that handles negation, person or sentence type.
-% BASELINE: if the orchestrator adds a no-feedback resample baseline (regenerate up to two times when flagged, same monitor, no feedback turn), describe it here and add its row to Table 3 and its contrast to Sec. 6.1. Do not claim it exists until its numbers are in a macro.
-Until then the increment over strip-only is an upper bound on what the feedback message itself contributes.
+% BASELINE: when the no-feedback resample baseline (regenerate up to two times when flagged, same monitor, no feedback turn) is in, redefine \slotBaseline with its description and add its row to Table 3 and its contrast to Sec. 6.1. Do not claim it exists until its numbers are in a macro.
+\slotBaseline{} % BASELINE
 
 \paragraph{The menu (secondary; keywords only).}
 Starting from a baseline menu of three suggestions, the complete menu keeps the top suggestion and, for polarity then certainty, rewrites the third (then second) slot into a missing reading with one model call, checked by the monitor with one feedback retry.
@@ -236,7 +249,7 @@ Defect targeted & Violation of a supplied value & Assumption under ambiguous inp
 Comparison & Stored first pass for the same request; strip-only (0 calls) & Stored baseline menu, same request & Length-matched neutral word\\
 Population & Development: \RES{n_cue_targets} cue targets; confirmation: \RES{gt_targets} speech-act targets & Development, keywords-only sets of three & Development: \RES{c_n} targets; confirmation speech act: \RES{wc_act_chip1c_n} targets\\
 Primary benefit & Strict pass; joint pass on confirmation & Sets offering both readings & Critical value kept\\
-Offline failure indicators & Failures that remain; correct text changed; passes that are fragments; \emph{human-rated usability of repairs} & Coverage lost on other dimensions; rewrites changing sentence type & Matches lost; misses unrepaired; gap to typed input\\
+Offline failure indicators & Failures that remain; correct text changed; passes that are fragments; \emph{human-rated usability of repairs} & Coverage lost on other dimensions; rewrites changing sentence type & Matches lost; misses unrepaired; gap to typed input; silent reversals when no cue is typed\\
 Applicability & Supplied cues only & Ambiguous input only & Dimension-specific\\
 Cost & Model calls, latency & Model calls, latency & Selections (access-dependent)\\
 Pass line (fixed in advance) & Repair $\geq$30\% of failures \emph{and} change $\leq$10\% of correct outputs; confirmation joint-pass gain with lower bound $>0$; deployment clause: usable $\geq$ control $-$\RES{p17_margin} points (Section~\ref{sec:repaircost}) & Gain $\geq$30 points over baseline menu & Gain $\geq$10 points \emph{and} $\geq$80\% of typed-input rate\\
@@ -335,12 +348,15 @@ This compares stored configurations and does not isolate the feedback message.
 \RES{g_unfixed_k} of \RES{g_unfixed_n} failures remained, \RES{g_res_act_k} of them involving speech act, and \kof{g_res_flag} were still flagged after both retries: detected, not repaired.
 The guard changed the text of \kof{g_occ_all} already-correct outputs, none into a scored failure; yet \say{Would you mind repeating the last question} became \say{Please repeat the last question}, still polite by the label and no longer what was typed.
 It flagged \kof{g_flagged} inputs and added \RES{g_calls} model calls per input.
+\slotBaseline{} % BASELINE
 
 \paragraph{Confirmation.}
 Speech act was the guard's weakest dimension, so we reran the guard unchanged on the confirmation set's speech-act families (\RES{gt_fam} families, four models, three cue conditions, \RES{gt_targets} targets).
 Criteria were frozen before any retry: at least 30\% of strict failures repaired, at most 10\% of strict-correct texts changed, and a joint-pass gain whose lower 95\% bound exceeds zero.
 Joint pass rose from \RES{gt_jp_p0}\% to \RES{gt_jp_g1}\%, \RES{gt_jgain_g1} points [\RES{gt_jgain_g1_lo}, \RES{gt_jgain_g1_hi}]; the guard repaired \kof{gt_rep_g1} strict failures (\pci{gt_rep_g1}), changed \kof{gt_cc_g1} strict-correct texts and turned \RES{gt_pf_g1_k} into scored failures.
 Every criterion passed within the call caps.
+The strict repair rate nonetheless fell from \RES{g_fix}\% in development to \RES{gt_rep_g1}\% in confirmation (joint-pass repair \RES{gt_jrep_g1}\%).
+Speech act was the development weak spot and the guard was tuned there, so a harder population and optimism from development tuning both fit; we cannot separate them.
 Deletion alone gained \RES{gt_jgain_g1s} points, so the increment over it is \RES{gt_cmp_joint} points [\RES{gt_cmp_joint_lo}, \RES{gt_cmp_joint_hi}], and \RES{gt_res_g1}\% of targets remain strict failures.
 Row 1 of Figure~\ref{fig:examples} shows what a changed-correct text can look like: the question label survives, so the output remains a scored pass.
 
@@ -370,12 +386,16 @@ For \kw{\chip{ASK} \chip{YOU} \chip{PLAIN} wear headphones}, the guard turns \sa
 We therefore had people judge repaired text.
 In a pilot audit, \RES{ra_raters} reimbursed non-author raters judged \RES{ra_rep_items} repaired outputs and \RES{ra_ctl_items} unchanged controls (outputs that had never failed) for usability, blind to which was which.
 By item consensus, repaired texts were usable in \kof{ra_rep_c} rated items (\RES{ra_rep}\%) against \kof{ra_ctl_c} (\RES{ra_ctl}\%) for controls, a gap of \RES{ra_gap} points [\RES{ra_gap_lo}, \RES{ra_gap_hi}], with \RES{ra_rep_unk} and \RES{ra_ctl_unk} items unresolved.
-The raters are not independent, the controls had never failed so repaired and control items differ in difficulty, and the interval is wide: the pilot is a warning sign, not an established cost.
+Counting unresolved items as unusable, the gap is \RES{ra_unk_gap} points [\RES{ra_unk_gap_lo}, \RES{ra_unk_gap_hi}] (\RES{ra_unk_rep}\% against \RES{ra_unk_ctl}\%).
+Three limits keep this a warning sign from 40 items.
+(i)~Raters' answers were highly redundant: their usable/unusable answers collapse to \RES{ra_usable_patterns} distinct patterns (pairwise correlation \RES{ra_rho}), about \RES{ra_effn} effective independent raters.
+(ii)~Controls were outcome-selected: all \RES{ra_ctl_passed_n} passed the strict check at first pass, whereas \kof{ra_repfail} repaired items were known first-pass failures, so repaired and control items differ in difficulty.
+(iii)~The dimension mix differs (politeness: \RES{ra_dim_pol_rep} of 20 repaired against \RES{ra_dim_pol_ctl} of 20 controls; permutation $p=\RES{ra_dim_p}$).
 A second pool of the same design (confirmation-set outputs) showed no gap: \RES{rt_rep}\% against \RES{rt_ctl}\%.
-Pooling the two pilot pools, a descriptive post hoc view, gives \RES{pp_rep}\% against \RES{pp_ctl}\%, a gap of \RES{pp_gap} points [\RES{pp_gap_lo}, \RES{pp_gap_hi}]: it includes both zero and the $-$\RES{p17_margin}-point line, so it neither shows nor rules out a cost.
+Pooling the two pilot pools, a descriptive post hoc view, gives a gap of \RES{pp_gap} points [\RES{pp_gap_lo}, \RES{pp_gap_hi}], which includes both zero and the $-$\RES{p17_margin}-point line.
 Raters mostly agreed that the meaning of a scored-passing repair was kept (pilot: \kof{ra_pres} resolved items; second pool: \kof{rt_pres}), so the problem is more often fluency and form (Table~\ref{tab:unusable}) than lost meaning: chip echoes, dropped content words and fragments, all passing the scored predicates.
 \textbf{The decisive test.}
-A larger audit of \RES{p17_texts} new texts (half repaired, half never-failed controls, none from the pilots, \RES{p17_raters} independent raters each, plus original-failed and strip-only arms to separate repair from item difficulty) has a decision rule frozen before any return: a pooled interval entirely below $-$\RES{p17_margin} points means the guard is killed for deployment and kept as a detector; one that includes $-$\RES{p17_margin} but excludes 0 means a cost of uncertain size; one that includes 0 means no detectable cost.
+The pilot cannot decide; a larger audit of \RES{p17_texts} new texts (half repaired, half never-failed controls, none from the pilots, \RES{p17_raters} independent raters each, plus original-failed and strip-only arms to separate repair from item difficulty) has a decision rule frozen before any return: a pooled interval entirely below $-$\RES{p17_margin} points means the guard is killed for deployment and kept as a detector; one that includes $-$\RES{p17_margin} but excludes 0 means a cost of uncertain size; one that includes 0 means no detectable cost.
 Neither audit is selected for being favorable.
 \slotAuditBody{} % PART17
 
@@ -390,23 +410,35 @@ That gap reflects prompt design (one prompt asks for different readings, the oth
 
 \paragraph{Cue probe (bounded).}
 On the development set, one cue raised critical-value match from \pct{c_noncrit} with the length-matched word to \pct{c_chip1} (\RES{c_ratio}\% of typed input), passing both clauses.
-On \RES{wc_act_fam} fresh confirmation-set speech-act families, a contrast pre-specified and git-timestamped, it raised preservation from \pct{wc_act_noncrit} to \pct{wc_act_chip1}, \RES{wc_p1} points \ci{wc_p1}, so the gain clause replicates.
-The $\geq$80\% clause does \emph{not}: typed input preserved speech act in \pct{wc_act_full}, so one cue reaches \RES{wc_act_ratio}\% of it.
+On \RES{wc_act_fam} fresh confirmation-set speech-act families, a contrast pre-specified and git-timestamped, it raised preservation from \pct{wc_act_noncrit} to \pct{wc_act_chip1}, \RES{t4_wc_base} points when \say{Can you\ldots?} counts as a request and \RES{t4_wc_alt} [\RES{t4_wc_alt_lo}, \RES{t4_wc_alt_hi}] when it counts as a question, so the gain clause replicates under both codings.
+The $\geq$80\% clause does \emph{not}: typed input (the full channel) preserved speech act in \pct{wc_act_full}, so one cue reaches \RES{wc_act_ratio}\% of it.
 The cue passed its development test and failed one clause of its fresh-item test.
 Question cues fail most visibly: \kof{wc_qfail} question targets became non-questions, as when \kw{\chip{?} parcel signature} became \say{Can you sign for this parcel?}.
 Cues can also interact: a single local model lost an already-kept negation in \kof{wd_llpolc} cases where the cues \chip{NOT} and \chip{YOU} appeared together (other combinations \kof{wd_othercells}), which argues for per-model regression tests of cue combinations.
 Among the \RES{c_lostwithchip_n} targets kept by the neutral word, the cue lost \RES{c_lostwithchip_k}; among the \RES{c_misspersists_n} it missed, \RES{c_misspersists_k} stayed missed.
+\slotLegend{} % LEGEND_TEST
 
 \subsection{Bridge to realistic input}
 \paragraph{Human-written pairs.}
 Constructed families may not look like what people write, so non-author annotators wrote \RES{hw_kept} kept minimal pairs, run through the same pipeline with the same four models.
-The cue gain over the length-matched word replicates on all \RES{hw_chip_dims} dimensions (\RES{hw_chip_min} to \RES{hw_chip_max} points); the three confirmation contrasts replicate in direction: speech-act cue +\RES{hw_p1} points \ci{hw_p1} (confirmation set +\RES{wc_p1}), politeness addition +\RES{hw_p2} \ci{hw_p2} (+\RES{wc_p2}), and a bare affirmative default \RES{hw_p3}\% \ci{hw_p3}.
-This replication is exploratory and not pre-specified, each contrast rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers (so we claim direction and consistency, not interval width), and on binary dimensions the design caps the gain near 50 points; sensitivity checks moved no estimate by more than \RES{hw_maxshift} points.
+The cue gain over the length-matched word replicates on all \RES{hw_chip_dims} dimensions (\RES{hw_chip_min} to \RES{hw_chip_max} points).
+The three confirmation contrasts replicate in direction: speech-act cue +\RES{t6_p1} points (\RES{t4_hw_alt} under the question coding of \say{Can you\ldots?}; confirmation set +\RES{t4_wc_base} and +\RES{t4_wc_alt}), politeness addition +\RES{t6_p2}, and a bare affirmative default (\RES{hw_p3}\% \ci{hw_p3}, where the pair design fixes the true rate near 50\%).
+With only \RES{hw_wr_min}--\RES{hw_wr_max} writers per contrast we infer over writers: $t$-based intervals over writers are [\RES{t6_p1_lo}, \RES{t6_p1_hi}] and [\RES{t6_p2_lo}, \RES{t6_p2_hi}] points for the first two, every writer's mean has the same sign, and an exact writer sign-flip randomization test gives one-sided $p=\RES{t6_p1_rp}$, \RES{t6_p2_rp} and \RES{t6_p3_rp} (Holm \RES{t6_p1_holm}, \RES{t6_p2_holm}, \RES{t6_p3_holm}), where the smallest attainable is \RES{t6_minp}; a cluster-bootstrap interval cannot be narrower than its few clusters allow, so we do not use it.
+We claim direction and consistency, not interval width; the replication is exploratory and not pre-specified, and sensitivity checks moved no estimate by more than \RES{hw_maxshift} points.
 \paragraph{Human-chosen keywords.}
 In the keyword study, \RES{el_annot} annotators typed keywords for \RES{el_msgs} AACText messages (\RES{el_sets} sets).
 About one keyword set in five lost the negation: \RES{el_pol_h}\% \ci{el_pol_h}.
+This rate is on the cue-enriched messages that carry a negation, not on messages in general, and its interval treats sets as independent; resampling messages and reweighting to the sampling frame gives \RES{t2_d_h}\% [\RES{t2_d_h_lo}, \RES{t2_d_h_hi}], and the 20 annotators are not resampled.
 A rule-based four-word compressor lost it \RES{el_pol_c}\% of the time; that comparison only shows that human keywording is not that crude rule, and it does not say how often real AAC users drop negation.
 Politeness reverses: people lost the polite cue more often (\RES{el_pt_h}\%) than the compressor (\RES{el_pt_c}\%), and raters disagree on what keywords carry (Krippendorff $\alpha=\RES{el_alpha}$).
+
+\paragraph{Defaults: a good guess with an asymmetric cost.}
+When keywords carry no negation word, the models write an affirmative sentence for \RES{t2_aff_h}\% of such inputs.
+That is the Bayes-preferred guess: \RES{t2_neg_prev}\% of AACText messages are negated, and among human keyword sets with no negation word the source was negated only \RES{t2_post_h}\% [\RES{t2_post_h_lo}, \RES{t2_post_h_hi}] of the time (\RES{t2_post_h_bayes}\% from corpus prevalence), against \RES{t2_post_c}\% for the crude compressor; guessing affirmative is right \RES{t2_acc_h}\% of the time.
+The harm is the asymmetric cost: about \RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t2_rev_h_hi}] of every 1,000 messages are silently reversed when the user types keywords unaided, against \RES{t2_spur_h} spurious negations, and the guess breaks even only if a reversal costs under \RES{t2_ratio_h} times a spurious negation.
+For politeness the models match the preferred guess (they add polite wording to \RES{t2_pol_model}\% of no-cue inputs against a posterior of \RES{t2_pol_post}\%); for speech act \say{statement} is not preferred (the source was a question or request \RES{t2_sa_post}\% of the time, models asserted one \RES{t2_sa_model}\%), and they over-commit to it.
+So the finding is not that models are biased: an average-accuracy metric rewards exactly the behavior that silently reverses meaning, and a ledger needs the cost of a default beside its hit rate.
+These rest on detector labels of source messages, not human gold, and on one greedy draw per model.
 
 %% =====================================================================
 \section{From Ledger to a Pre-Specified Human-Effect Study}
@@ -429,8 +461,9 @@ H1 and H2 are testable now on writers and raters; H3 needs AAC users.
 \emph{Arms and unit.} Randomization is per flagged message within user~\cite{klasnja2015mrt}, with fixed probabilities, among three arms: silent regeneration, flag-and-confirm (the user sees the flag and chooses), and the original. The guard's detection value motivates the confirm arm.
 Cues can only be offered, an encouragement design with its own estimand, so they enter as a separate between-user factor, not randomized per message.
 \emph{Outcomes.} Proximal: sent without edit, one-tap \say{said what I meant} on a random subset of sends (not every send, to limit burden), time to send. Longitudinal: weekly rates of both, abandonment of the feature, and reliance (whether acceptance of flagged text rises over weeks), with week as a pre-specified moderator.
-\emph{Sample-size reasoning.} The monitor flags about \RES{g_flagged}\% of inputs, so only a small share of messages are randomized: \RES{mrt_T} randomized decision points per user need roughly \RES{mrt_msgs} messages, which is weeks of use.
-Assuming a standardized proximal effect of \RES{mrt_d}, within-user correlation \RES{mrt_rho} and 80\% power at the 5\% level (typed assumptions, to be replaced by estimates from a first small pilot), about \RES{mrt_users} users are needed; we make no claim to be powered before that pilot.
+\emph{Sample-size reasoning.} The monitor flagged about \RES{g_flagged}\% of inputs on constructed items (the rate in real AAC use is unknown), so only a small share of messages are randomized: \RES{mrt_T} randomized decision points per user need roughly \RES{mrt_msgs} messages, which is weeks of use.
+The \say{said what I meant} outcome is collected on a random \RES{mrt_q}\% of sends, so only about \RES{mrt_Teff} of those points per user carry it.
+Assuming a standardized proximal effect of \RES{mrt_d}, within-user correlation \RES{mrt_rho} and 80\% power at the 5\% level (typed assumptions, to be replaced by estimates from a first small pilot), about \RES{mrt_users_q} users are needed for that outcome (\RES{mrt_users} if every send were rated); we make no claim to be powered before that pilot.
 \emph{Analysis.} Weighted and centered least squares on the pre-specified proximal outcome with user-clustered errors; moderators and the longitudinal contrasts are reported with intervals and without selection.
 \emph{What the human audits can and cannot do.} The audit's 60 versus 60 texts can detect a gap of about \RES{dz_mde} points when the control rate is near \RES{dz_ctl_assumed}\%, so a finding of no detectable cost is not evidence of no cost; the writer-intent check has \RES{dz_p18_judg} judgments, an effective \RES{dz_p18_neff} at an assumed within-writer correlation of \RES{dz_icc}, enough to detect a gap of about \RES{dz_p18_mde} points in the worst case.
 Both can demote the ledger's endpoints; neither stands in for the trial.
@@ -440,9 +473,9 @@ Both can demote the ledger's endpoints; neither stands in for the trial.
 \label{sec:limits}
 %% =====================================================================
 \emph{No human outcomes.} Nothing here measures communication success, agency, effort or trust; offline failure indicators are not experienced harms.
-\emph{Repair audit.} The pilot has \RES{ra_rep_items} + \RES{ra_ctl_items} items and non-independent raters, and its controls never failed; the larger audit is the primary estimate and is not yet in.
+\emph{Repair audit.} The pilot has \RES{ra_rep_items} + \RES{ra_ctl_items} items, about \RES{ra_effn} effective independent raters and outcome-selected controls; the larger audit is the primary estimate and is not yet in.
 \emph{Machine labels.} Endpoints use an LLM extractor and deterministic verdicts, validated by two human annotators on untreated outputs only; guard repairs, menu rewrites and new boundary cases are not covered, and shared monitor and extractor errors can inflate repairs.
-\emph{Baseline.} The only free baseline deletes an unrequested \say{please}, one failure type; a resample baseline without feedback text is not in these results.
+\emph{Baseline.} The only free baseline deletes an unrequested \say{please}, one failure type; a resample baseline without feedback text is not in these results, and the prompt-legend test of the default is not in either.
 \emph{Scope.} The guard has two separate populations and was developed on the development set; the menu was run on neither the confirmation set nor supplied input; the confirmation set's status is qualified by early cached requests and post-outcome arbitration; the applicability contrast and the cue-combination probe are exploratory; the human-written pairs are exploratory with few writers.
 \emph{Constructed items, fixed models.} Four fixed models describe these systems, not other models; AACText is crowd-written fiction, and word input is the only modality studied.
 \emph{Authorship and selection.} Many AAC users compose by rewriting or choosing among options, which we do not model; examples follow declared, outcome-conditioned rules and illustrate rather than sample.
@@ -453,9 +486,9 @@ All annotators were adult non-authors recruited from the authors' university pee
 
 \section{Conclusion}
 Gain-only reporting would have credited the guard with its confirmation gain and stopped.
-The ledger adds that deletion alone explains part of it (+\RES{gt_jgain_g1s} of +\RES{gt_jgain_g1} points), that scored passes can be fragments, and that a small pilot points to a usability cost that a larger audit with a frozen rule will test.
+The ledger adds that deletion alone explains part of it (+\RES{gt_sgain_g1s} of +\RES{gt_sgain_g1} points, strict), that scored passes can be fragments, that its repair rate fell from development to confirmation, that a small pilot points to a usability cost that a larger audit with a frozen rule will test, and that a default that is right on average still reverses meaning silently at a rate accuracy cannot show.
 The two bounded rows show the same pattern: the menu gains target readings and loses others, and the cue passed its development test but failed one clause of its fresh-item test.
-Human-written pairs and human-chosen keywords suggest the effects are not artifacts of authored items, but only people who use AAC can say whether any of it matters to them.
+Human-written pairs and human-chosen keywords point the same way in a small sample of writers, but only people who use AAC can say whether any of it matters to them.
 The pre-specified study turns these offline findings into predictions that people can falsify.
 Analysis code, stored outputs and scripts that rebuild every number and figure accompany the submission as anonymized supplementary material. % VERIFY: attach the anonymized archive before submission
 
