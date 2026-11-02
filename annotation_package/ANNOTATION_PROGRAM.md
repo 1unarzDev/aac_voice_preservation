@@ -27,7 +27,7 @@ below for reference but are **superseded**.
 | 2 | Nov 1 (due Nov 1, 23:59) | Part 8: 3 check files of 30 pairs each; Part 12 (4 people) | 28.0 h (66 min; Part 12 coders 156 min) |
 | between | Nov 1 (as Stage 2 returns) | score checks, route tie-breaks, hw1 generation + judging, draw Part 13 | compute only |
 | 3 (optional) | Nov 1 (due Nov 1, 23:59) | Part 13 (3 people, ~90 min), Part 14 tie-breaks (6 people, ~30 min) | 7.5 h |
-| 4 (optional) | Parts 15, 17, 18: Mon Nov 2 (due 23:59); Part 16: opens when Part 15 is back, due Tue Nov 3, 23:59 | Part 18 writer intent, all 20 (15 min, first); Part 15 speech-act writing, P05 P16 P17 P18 (25 min); Part 17 repair audit v2, P02 P07 P09 P10 P11 P14 (35 min); Part 16 checks, P01 P06 P08 P12 P13 P19 (about 22 min, about 30 pairs each) | 12.4 h (40 / 50 / 37 / 15 min per person by role) |
+| 4 (optional) | Parts 15, 17, 18, 19: Mon Nov 2 (due 23:59); Part 16: opens when Part 15 is back, due Tue Nov 3, 23:59 | Part 18 writer intent, all 20 (15 min, first); Part 19 label check, all 20 (10 min, second); Part 15 speech-act writing, P05 P16 P17 P18 (25 min); Part 17 repair audit v2, P02 P07 P09 P10 P11 P14 (47 min); Part 16 checks, P01 P06 P08 P12 P13 P19 (about 22 min, about 30 pairs each) | 16.9 h (25 / 47 / 50 / 72 min per person by role) |
 
 **Deadlines.**
 - SE4All @ ICSE'27: evidence freeze Nov 10, submission Nov 13 AoE. Stages 1-2 feed it, and Stage 3 only if it is
@@ -108,13 +108,22 @@ gaps that more human work can close before the SE4All freeze (Nov 10):
 2. **Part 16: blind checks of the new pairs.** Same task and tool as Part 8 (`check_pairs.html`). Every new pair
    gets 3 checkers, never its writer. About 6 people check 30 pairs each (about 22 min).
 3. **Part 17: larger repair audit (new sentences).** Same task and tool as Part 4, on new sentences that were not in
-   Parts 4 or 11: 60 repaired outputs and 60 unrepaired controls, 3 independent raters per sentence. Raters
-   who did **not** do Parts 4 or 11 (P02, P07, P09, P10, P11, P14) rate 60 sentences each (about 35 min).
-   Part 4 had 20+20 sentences, so its repaired-vs-control gap has a wide interval. Part 17 triples the items.
+   Parts 4 or 11: 60 repaired outputs and 60 unrepaired controls, plus 20 sentences from before the repair and 20
+   from a simpler fix (deleting "please"), so repaired sentences can be compared with hard cases as well as easy ones.
+   3 independent raters per sentence. Raters who did **not** do Parts 4 or 11 (P02, P07, P09, P10, P11, P14) rate
+   80 sentences each (about 47 min). Part 4 had 20+20 sentences, so its repaired-vs-control gap has a wide interval.
+   Part 17 triples those items and adds the two comparison groups. The raters are not told which group a sentence is in.
 4. **Part 18 (optional): did it say what you meant?** Each writer sees 10 model sentences generated from
    their **own** pairs and marks whether each one says what they meant in version A or version B, says something
    else, or is unclear (about 15 min). Writers are the people who know the intended meaning, so this is the
    closest check to an intended-speaker judgment this program can make. It is **not** a study with AAC users.
+5. **Part 19: a check of the labels the arbiter settled.** Where the two automatic judges disagreed, a third
+   reader (the arbiter) decided, and it added some rules of its own (for example how to read "I hope", a sentence
+   with no time word, or "Sure,"). **All 20 people** label about 13 sentences each (about 10 min; the same
+   tool as Part 10), each sentence by two people working alone: 100 sentences the arbiter settled, chosen to include
+   the new rules, and 30 outputs that read "Can you ...?" or "Could you ...?" (to check that people read these as
+   requests, not questions). Nobody labels a sentence from a pair they wrote or checked, or from a message whose
+   keywords they chose. People see only the sentence, never the arbiter's or the judges' labels.
 
 **Roster (fixed Nov 1; `annotation/assignments/stage4_plan.json`).**
 - **Part 15 writers:** P05, P16, P17, P18. They are the four lowest-load people who never wrote speech act, are not
@@ -123,11 +132,12 @@ gaps that more human work can close before the SE4All freeze (Nov 10):
 - **Part 17 raters:** P02, P07, P09, P10, P11, P14.
 - **Part 16 checkers:** P01, P06, P08, P12, P13, P19 (neither Part 15 writers nor Part 17 raters; lowest load);
   reserves in order P03, P04, P15, P20. Each pair gets 3 checkers, never its writer; about 30 pairs each.
-- **Part 18:** all 20, first. P03, P04, P15 and P20 do only Part 18 (15 min).
+- **Part 18:** all 20, first. **Part 19:** all 20, second (10 min). P03, P04, P15 and P20 do only Parts 18 and 19
+  (25 min).
 - **Dedup before checks:** hw2 pairs are compared with every earlier pair (hw1 accepted and rejected); exact copies and
   pairs with token Jaccard >= .75 are rejected before any check is planned.
 
-Order: Part 18 can start at once (outputs exist). Part 17 needs its sample drawn (no new generation). Part 16
+Order: Part 18 can start at once (outputs exist), then Part 19. Part 17 needs its sample drawn (no new generation). Part 16
 follows Part 15 returns; generation and judging of the new pairs follow Part 16. Task sheets will be
 `assignments/<ID>_stage4.md` once the coordinator confirms who is available.
 

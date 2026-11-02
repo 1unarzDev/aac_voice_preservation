@@ -30,6 +30,11 @@ nominal alpha across all annotators (Pass A also as yes / not-yes).
           (returns annotation/returns_repair_v2/*.csv, output analysis/repair_audit_v2/). Adds the
           repaired-minus-control Newcombe difference per pool (discovery, transfer) and the count of
           items with fewer than 3 usable ratings. Consensus = strict majority of the known answers.
+          Secondary comparisons (frozen in COORDINATOR_STEPS section 4, "added 2026-11-01 before any return"; the
+          primary repaired-minus-control rule is unchanged): repaired - original_failed (did the repair make the
+          sentence usable?) and repaired - strip_only, each (a) as two independent arms, pooled and per pool
+          (Newcombe), and (b) paired by paired_source_id where both items have a consensus (paired difference,
+          Newcombe method 10 CI, exact sign test on the discordant pairs, n pairs reported).
        python src/score_repair_audit.py --self-check     (simulated returns on the real v2 key)
 Outputs: <out>/report.md, <out>/items.csv (key joined with every rating + consensus),
 <out>/summary.json.
@@ -52,6 +57,7 @@ from score_gold import alpha_nominal, wilson  # noqa: E402
 
 Q = {"quality": ["yes", "minor fix needed", "no"], "contract": ["yes", "partly", "no"], "added": ["yes", "no"]}
 ARMS = ("repaired", "control")
+EXTRA_ARMS = ("original_failed", "strip_only")      # Part 17 secondary arms (added 2026-11-01 before any return)
 
 
 def read_csv(p):
@@ -127,6 +133,28 @@ def newcombe(a, b):
     return {"diff": d, "ci": [round(max(-1, lo), 3), round(min(1, hi), 3)]}
 
 
+def paired_diff(pairs):
+    """pairs = [(a, b)] booleans (a = repaired, b = comparator). Difference mean(a) - mean(b) with the Newcombe
+    (1998, method 10) paired score CI, and an exact two-sided sign test on the discordant pairs."""
+    from math import comb, sqrt
+    n = len(pairs)
+    if not n:
+        return None
+    a = sum(x and y for x, y in pairs); b = sum(x and not y for x, y in pairs)
+    c = sum((not x) and y for x, y in pairs); d = n - a - b - c
+    p1, p2 = (a + b) / n, (a + c) / n
+    (l1, u1), (l2, u2) = wilson(a + b, n), wilson(a + c, n)
+    A = (a + b) * (c + d) * (a + c) * (b + d)
+    phi = ((a * d - b * c) / sqrt(A)) if A else 0.0
+    diff = p1 - p2
+    lo = diff - sqrt(max(0.0, (p1 - l1) ** 2 + (u2 - p2) ** 2 - 2 * phi * (p1 - l1) * (u2 - p2)))
+    hi = diff + sqrt(max(0.0, (u1 - p1) ** 2 + (p2 - l2) ** 2 - 2 * phi * (u1 - p1) * (p2 - l2)))
+    m = b + c
+    p = 1.0 if m == 0 else min(1.0, 2 * sum(comb(m, i) for i in range(0, min(b, c) + 1)) / 2 ** m)
+    return {"n_pairs": n, "both_usable": a, "only_repaired": b, "only_comparator": c, "neither": d,
+            "diff": diff, "ci": [round(max(-1, lo), 3), round(min(1, hi), 3)], "sign_test_p": round(p, 4)}
+
+
 def consensus(vals):
     known = [v for v in vals if v is not None]
     if not known:
@@ -159,9 +187,10 @@ def self_check() -> int:
     raters = sorted({x for r in key for x in r["raters"].split("|")})
     rows = {x: [] for x in raters}
     for r in key:
-        rep_ = r["arm"] == "repaired"
+        pu = {"repaired": 0.65, "control": 0.92, "original_failed": 0.35, "strip_only": 0.55}[r["arm"]]
+        rep_ = r["arm"] != "control"
         for x in r["raters"].split("|"):
-            good = rng.random() < (0.65 if rep_ else 0.92)
+            good = rng.random() < pu
             q = "yes" if good else rng.choice(["minor fix needed", "no"])
             c = "yes" if rng.random() < (0.85 if rep_ else 0.97) else rng.choice(["partly", "no"])
             rows[x].append({"item_id": r["item_id"], "annotator": x, "practice": 0, "a_quality": q,
@@ -181,7 +210,7 @@ def self_check() -> int:
             rc = main([*paths, "--key", str(keyp), "--out", str(out)])
         S = json.loads((out / "summary.json").read_text())
     assert rc == 0
-    assert len(key) == 120 and all(len(r["raters"].split("|")) == 3 for r in key)
+    assert len(key) in (120, 160) and all(len(r["raters"].split("|")) == 3 for r in key)
     assert S["items_with_fewer_than_3_ratings"] == 0, S["items_with_fewer_than_3_ratings"]
     d = S["difference_repaired_minus_control"]["usable"]
     assert d["diff"] < 0 and d["ci"][1] < 0, d
@@ -190,6 +219,22 @@ def self_check() -> int:
         assert dp is not None and dp["diff"] < 0, (pool, dp)
         assert S["difference_by_pool"][pool]["n_items"] == {"repaired": 30, "control": 30}
     assert sum(S["per_arm"][a]["usable"]["n"] for a in ARMS) == 120
+    if len(key) == 160:
+        assert sum(S["per_arm"][a]["usable"]["n"] for a in EXTRA_ARMS) == 40
+        for other, lo_ok in (("original_failed", True), ("strip_only", True)):
+            sec = S["secondary"][other]
+            assert sec["unpaired"]["usable"]["diff"] > 0, (other, sec["unpaired"]["usable"])
+            pd_ = sec["paired"]["usable"]
+            assert pd_ and pd_["n_pairs"] >= 5 and pd_["diff"] > 0 and pd_["ci"][0] <= pd_["diff"] <= pd_["ci"][1], (other, pd_)
+        assert S["secondary"]["original_failed"]["items_with_a_paired_repaired_item"] == 20
+        assert S["secondary"]["original_failed"]["paired"]["usable"]["n_pairs"] >= 15
+        assert paired_diff([(True, False)] * 6 + [(False, True)] * 2 + [(True, True)] * 2)["sign_test_p"] == 0.2891
+    if len(key) == 160:
+        sec = S["secondary"]
+        print("self-check secondary: repaired - original_failed paired usable "
+              f"{100 * sec['original_failed']['paired']['usable']['diff']:+.1f} pp "
+              f"({sec['original_failed']['paired']['usable']['n_pairs']} pairs); repaired - strip_only paired "
+              f"{100 * sec['strip_only']['paired']['usable']['diff']:+.1f} pp ({sec['strip_only']['paired']['usable']['n_pairs']} pairs)")
     print(f"self-check OK: usable diff {100 * d['diff']:+.1f} pp {d['ci']}; "
           f"per pool " + ", ".join(f"{p} {100 * S['difference_by_pool'][p]['usable']['diff']:+.1f}" for p in S["difference_by_pool"]))
     return 0
@@ -240,7 +285,8 @@ def main(argv=None) -> int:
                 row[f"{an}_{f}"] = m[f] if m else None
         item_rows.append(row)
 
-    for arm in ARMS:
+    present = [x for x in ARMS + EXTRA_ARMS if any(k["arm"] == x for k in key.values())]
+    for arm in present:
         its = [r for r in item_rows if r["arm"] == arm]
         S["per_arm"][arm] = {"items": len(its), "rated_items": sum(r["n_ratings"] > 0 for r in its)}
         for e in ENDPOINTS:
@@ -272,6 +318,37 @@ def main(argv=None) -> int:
                 "n_items": {arm: sum(1 for r in item_rows if r["pool"] == pool and r["arm"] == arm) for arm in ARMS},
                 "per_arm": rt,
                 **{e: newcombe(rt["repaired"][e], rt["control"][e]) for e in ENDPOINTS}}
+
+    # Part 17 secondary comparisons (added 2026-11-01 before any return)
+    S["secondary"] = {}
+    byid = {r["item_id"]: r for r in item_rows}
+    rep_by_src = {(r["pool"], r["source_id"]): r for r in item_rows if r["arm"] == "repaired"}
+    for other in EXTRA_ARMS:
+        if other not in present:
+            continue
+        sec = {"unpaired": {}, "by_pool": {}, "paired": {}, "paired_by_pool": {}}
+        for e in ENDPOINTS:
+            sec["unpaired"][e] = newcombe(S["per_arm"]["repaired"][e], S["per_arm"][other][e])
+        for pool in sorted({k["pool"] for k in key.values()}):
+            rt = {arm: {e: rate([r["cons_" + e] for r in item_rows if r["pool"] == pool and r["arm"] == arm and r["n_ratings"]])
+                        for e in ENDPOINTS} for arm in ("repaired", other)}
+            sec["by_pool"][pool] = {"per_arm": rt, **{e: newcombe(rt["repaired"][e], rt[other][e]) for e in ENDPOINTS}}
+        pr_all = defaultdict(list)
+        n_items = [r for r in item_rows if r["arm"] == other]
+        for r in n_items:
+            rp = rep_by_src.get((r["pool"], r.get("paired_source_id")))
+            for e in ENDPOINTS:
+                if rp is not None and rp["cons_" + e] is not None and r["cons_" + e] is not None:
+                    pr_all[(e, "all")].append((rp["cons_" + e], r["cons_" + e]))
+                    pr_all[(e, r["pool"])].append((rp["cons_" + e], r["cons_" + e]))
+        for e in ENDPOINTS:
+            sec["paired"][e] = paired_diff(pr_all[(e, "all")])
+            for pool in sorted({k["pool"] for k in key.values()}):
+                sec["paired_by_pool"].setdefault(pool, {})[e] = paired_diff(pr_all[(e, pool)])
+        sec["items"] = len(n_items)
+        sec["items_with_a_paired_repaired_item"] = sum(
+            (r["pool"], r.get("paired_source_id")) in rep_by_src for r in n_items)
+        S["secondary"][other] = sec
 
     # breakdown of consensus by channel group (descriptive)
     S["by_channel_group"] = {}
@@ -318,7 +395,7 @@ def main(argv=None) -> int:
     L = [f"# {label}: human ratings\n",
          f"Generated by `src/score_repair_audit.py`. Returns: {len(paths)} file(s), annotators: {', '.join(annots)}. "
          f"Key: `{Path(a.key).relative_to(ROOT) if Path(a.key).is_relative_to(ROOT) else a.key}` "
-         f"(frozen hash-ordered sample, {sum(k["arm"] == "repaired" for k in key.values())} repaired + {sum(k["arm"] == "control" for k in key.values())} controls; `annotation/{stem}_sample.json`).\n",
+         f"(frozen hash-ordered sample, {sum(k["arm"] == "repaired" for k in key.values())} repaired + {sum(k["arm"] == "control" for k in key.values())} controls{(" + " + str(sum(k["arm"] == "original_failed" for k in key.values())) + " original-failed + " + str(sum(k["arm"] == "strip_only" for k in key.values())) + " strip-only") if any(k["arm"] in EXTRA_ARMS for k in key.values()) else ""}; `annotation/{stem}_sample.json`).\n",
          "Wilson 95% CIs on item-level consensus (strict majority of known answers; ties/unsure = unknown, excluded "
          "from n and reported). "
          + ("Human ratings of a model-balanced sample: these are sample rates, not pool "
@@ -348,10 +425,29 @@ def main(argv=None) -> int:
                 d = x[e]
                 L.append(f"| {pool} | {e} | {fmt(x['per_arm']['repaired'][e])} | {fmt(x['per_arm']['control'][e])} | "
                          + (f"{100 * d['diff']:+.1f} pp [{100 * d['ci'][0]:+.1f}, {100 * d['ci'][1]:+.1f}]" if d else "n/a") + " |")
+    if S["secondary"]:
+        L += ["\n## Secondary comparisons (added 2026-11-01 before any return; the primary rule above is unchanged)\n",
+              "Original-failed = the pre-repair first-pass output of a repaired item (guard flagged it, then repaired). "
+              "Strip-only = the deterministic please-strip output for an input where it differs from the first pass and from the "
+              "repair. Item-level consensus; Newcombe 95% CI for independent arms; paired rows use the items linked by "
+              "`paired_source_id` (Newcombe method 10 CI, exact sign test).\n"]
+        for other, sec in S["secondary"].items():
+            L += [f"### repaired - {other} ({sec['items']} {other} items; {sec['items_with_a_paired_repaired_item']} paired with a rated repaired item)\n",
+                  f"| endpoint | repaired | {other} | difference (independent arms) | paired difference [95%] | pairs (only repaired / only {other}) | sign-test p |",
+                  "|---|---|---|---|---|---|---|"]
+            for e in ENDPOINTS:
+                d, pd_ = sec["unpaired"][e], sec["paired"][e]
+                L.append(f"| {e} | {fmt(S['per_arm']['repaired'][e])} | {fmt(S['per_arm'][other][e])} | "
+                         + (f"{100 * d['diff']:+.1f} pp [{100 * d['ci'][0]:+.1f}, {100 * d['ci'][1]:+.1f}]" if d else "n/a") + " | "
+                         + (f"{100 * pd_['diff']:+.1f} pp [{100 * pd_['ci'][0]:+.1f}, {100 * pd_['ci'][1]:+.1f}] | "
+                            f"{pd_['n_pairs']} ({pd_['only_repaired']} / {pd_['only_comparator']}) | {pd_['sign_test_p']}" if pd_ else "n/a | 0 | n/a") + " |")
+            L += ["", f"Per pool (usable, independent arms): " + "; ".join(
+                f"{pool} {100 * x['usable']['diff']:+.1f} pp [{100 * x['usable']['ci'][0]:+.1f}, {100 * x['usable']['ci'][1]:+.1f}]"
+                if x["usable"] else f"{pool} n/a" for pool, x in sec["by_pool"].items()), ""]
     L += ["\n## Per annotator (items within annotator)\n", "| annotator | arm | usable | preserving | usable & preserving | added stance |",
           "|---|---|---|---|---|---|"]
     for an in annots:
-        for arm in ARMS:
+        for arm in present:
             x = S["per_annotator"][an][arm]
             L.append(f"| {an} | {arm} | {fmt(x['usable'])} | {fmt(x['preserving'])} | {fmt(x['usable_and_preserving'])} | {fmt(x['added_stance'])} |")
     L += ["\n## By channel group (consensus, descriptive)\n", "| arm/group | usable | preserving | usable & preserving | added stance |", "|---|---|---|---|---|"]

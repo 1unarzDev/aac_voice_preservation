@@ -136,7 +136,9 @@ TASKS4 = {
                "intent_check.html + stage4/{ID}_intent.json", "intent_check_{ID}.csv", "annotation/returns_intent/"),
     "write2": ("Part 15", f"Write {S4_PAIRS} new speech-act sentence pairs (your own sentences)", 25, "write_pairs.html{x}",
                "write_pairs_speech_act_{ID}.csv", "annotation/returns_written_hw2/"),
-    "repair2": ("Part 17", "Sentence check on new sentences (60 sentences; same task as Part 4)", 35,
+    "part19": ("Part 19", "Label sentences: about 13 sentences, 5 practice items first (same task as Part 10)", 10,
+               "annotate.html + stage4/{ID}_part19.json", "labels_part19_{ID}.csv", "annotation/returns_arbiter_check/"),
+    "repair2": ("Part 17", "Sentence check on new sentences (80 sentences; same task as Part 4)", 47,
                 "repair_audit_v2.html + stage4/{ID}_repair_v2.json", "repair_audit_v2_{ID}.csv", "annotation/returns_repair_v2/"),
     "check2": ("Part 16", "Check about 30 new sentence pairs written by other people (same task as Part 8)", 22,
                "check_pairs.html + stage4/{x}.json", "check_pairs_{x}_{ID}.csv", "annotation/returns_hwcheck_hw2/"),
@@ -592,6 +594,11 @@ def item_line(r, a) -> str:
     elif t == "intent":
         body = (f"Open `intent_check.html`, choose `stage4/{a}_intent.json`, enter `{a}`. Do this first: it needs nothing else. "
                 "README: Part 18.")
+    elif t == "part19":
+        body = (f"Open `annotate.html`, enter `{a}`, load `stage4/{a}_part19.json`, do the 5 practice items, then every item "
+                "(about 13 sentences). Same tool and questions as Part 10 (README: Part 10 and Part 19). Label only what the "
+                "words on the page say; the codebook is not needed for this part, the short definitions on the screen are "
+                "enough. Click **Download CSV** at the end. The file name will be `labels_part19_" + a + ".csv`.")
     elif t == "write2":
         frag = r["file_or_link"][len("write_pairs.html"):]
         body = (f"Open `write_pairs.html`, add `{frag}` to the end of the address in the address bar, press Enter, then "
@@ -601,9 +608,8 @@ def item_line(r, a) -> str:
                 "anywhere (earlier parts, examples in the tool, model sentences from Part 18, anyone else's work).** "
                 "Your pairs are compared with every earlier pair, and near-copies are rejected.")
     elif t == "repair2":
-        body = (f"Open the Part 17 file named in README Part 17 (the tool `repair_audit_v2.html` with "
-                f"`stage4/{a}_repair_v2.json`, or your self-contained per-rater HTML), enter `{a}`. Same task as Part 4. "
-                "README: Part 17.")
+        body = (f"Open your own file `stage4/repair_audit_v2_{a}.html` (everything is inside it), enter `{a}`. Same task as "
+                "Part 4, with 80 sentences. README: Part 17.")
     elif t == "check2":
         f = r["file_or_link"].split(" + ")[1]
         body = (f"Open `check_pairs.html`, click **Check file**, choose `{f}` (arrives {DATES['stage4_check_open']}; "
@@ -1132,6 +1138,7 @@ def rows_stage4(s4: dict, ids) -> list[dict]:
                         "return_file": T[4].format(ID=a, x=ret_x or ""), "return_folder": T[5],
                         "due": due or DATES["stage4_due"]})
         add("intent", T4("intent", a))
+        add("part19", T4("part19", a))
         if a in s4["writers"]:
             w = s4["writer_rot"][a]
             add("write2", "write_pairs.html" + WL.link_fragment("speech_act", w, S4_PAIRS, a))
@@ -1164,14 +1171,16 @@ def stage4_sheet(s4: dict, rows: list[dict], a: str) -> str:
                   "paraphrase any sentence you have seen anywhere: examples in the tool or README, sentences from earlier "
                   "parts, the model sentences in Part 18, other people's pairs. Every new pair is compared with all earlier "
                   "pairs (exact and near-copies), and copies are rejected before anyone checks them."]
+    extra += ["- **Part 19:** label what each sentence says, using only the words on the page. Do not search for the sentences "
+              "or ask anyone or any tool; if the sentence is odd or unclear, say so with the unsure key (`S`)."]
     if a in s4["raters"]:
         extra += ["- **Part 17:** rate each sentence on its own, as in Part 4. Do not look for patterns across sentences "
-                  "and do not discuss them."]
+                  "and do not discuss them. Some of the 80 sentences may be weak or odd: answer honestly."]
     if late:
-        extra += [f"- **Part 16** opens {DATES['stage4_check_open']}. Do Part 18 first, then wait for the message that Part 15 is "
-                  "back; re-download the zip then."]
+        extra += [f"- **Part 16** opens {DATES['stage4_check_open']}. Do Parts 18 and 19 first, then wait for the message that "
+                  "Part 15 is back; re-download the zip then."]
     L += ["**Extra rules for Stage 4**"] + extra + ["", "## Steps (in this order)", "",
-          "Order: **Part 18 first** (it needs no other context), then the rest of the list."]
+          "Order: **Part 18 first** (it needs no other context), then **Part 19**, then the rest of the list."]
     L += [""] + [item_line(r, a) for r in rs] + [""]
     early = [r for r in rs if r["due"] == DATES["stage4_due"]]
     L += [f"**Return files (names must be exact):** " + "; ".join(f"`{r['return_file']}` ({r['part']})" for r in rs) + ".", ""]
@@ -1189,17 +1198,18 @@ def stage4_handout_section(s4: dict, rows: list[dict]) -> str:
     tot = sum(r["expected_minutes"] for r in rows)
     fmt = lambda ids: ", ".join(f"{a} ({mins(a)} min)" for a in ids)  # noqa: E731
     return (f"""<!-- stage4:start -->
-- **Stage 4, optional** (opens **{DATES['stage4_open']}**): Parts 15, 17, 18 due **{DATES['stage4_due']}**; Part 16 opens
+- **Stage 4, optional** (opens **{DATES['stage4_open']}**): Parts 15, 17, 18, 19 due **{DATES['stage4_due']}**; Part 16 opens
   {DATES['stage4_check_open']} and is due **{DATES['stage4_check_due']}**. Files appear in `stage4/`; re-download the zip.
   About {tot / 60:.1f} person-hours. **Everyone does Part 18 first** (15 min, all 20: `intent_check.html` +
-  `stage4/<ID>_intent.json`, return `intent_check_<ID>.csv`). Sheets: `assignments/<ID>_stage4.md`.
+  `stage4/<ID>_intent.json`, return `intent_check_<ID>.csv`), **then Part 19** (10 min, all 20: `annotate.html` +
+  `stage4/<ID>_part19.json`, about 13 sentences, return `labels_part19_<ID>.csv`). Sheets: `assignments/<ID>_stage4.md`.
   - Part 15, speech-act writing, 25 min (`write_pairs.html` link on the sheet): {fmt(s4['writers'])}.
     Return `write_pairs_speech_act_<ID>.csv`.
-  - Part 17, new-sentence check, 35 min (`repair_audit_v2.html` or the per-rater file named in README Part 17):
+  - Part 17, new-sentence check, 80 sentences, 47 min (your own file `stage4/repair_audit_v2_<ID>.html`):
     {fmt(s4['raters'])}. Return `repair_audit_v2_<ID>.csv`.
   - Part 16, blind checks of the Part 15 pairs, about 22 min, after Part 15 is back:
     {fmt(s4['checkers'])}. Reserves in order: {', '.join(s4['check_reserve'])}. Return `check_pairs_<ID>_check_hw2_<ID>.csv`.
-  - Part 18 only (15 min): {', '.join(only18)}.
+  - Parts 18 and 19 only (25 min): {', '.join(only18)}.
 <!-- stage4:end -->
 """)
 
@@ -1269,7 +1279,7 @@ def run_stage4(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sh
         print("Part 15 writers:", {w: (s4["writer_rot"][w], mins(w)) for w in s4["writers"]}, "(rot, minutes)")
         print("Part 17 raters:", {a: mins(a) for a in s4["raters"]})
         print("Part 16 checkers:", {a: mins(a) for a in s4["checkers"]}, "reserves:", s4["check_reserve"])
-        print("Part 18 only:", [a for a in plan["annotators"] if mins(a) == TASKS4["intent"][2]])
+        print("Parts 18 + 19 only:", [a for a in plan["annotators"] if mins(a) == TASKS4["intent"][2] + TASKS4["part19"][2]])
         print(f"person-hours {sum(r['expected_minutes'] for r in rows) / 60:.1f}")
     return {"plan": plan, "stage4": s4, "rows": rows}
 
