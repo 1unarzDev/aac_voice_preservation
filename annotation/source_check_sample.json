@@ -1,0 +1,85 @@
+{
+ "seed": 20261102,
+ "rule": "messages; seeded, declared; seed 20261102). Frame: the 600 AACText messages of the keyword-elicitation sample\n(annotation/elicitation_key.jsonl; 300 uniform-random + 300 enriched; the sample behind analysis/elicitation and T2).\nW-B messages are not used: they have no keyword sets, so they cannot enter the T2 correction.\nStrata by DETECTOR label, disjoint, first match: negated (polarity = negated; 122 messages) -> 55; polite (politeness != none;\n115) -> 55; question_request (speech act question or request/command; 181) -> 45; plain_other (the rest; 182) -> 45.\nThis oversamples what the detector calls negated, polite or question so the positives are well covered; negated + polite +\nquestion_request are 155 of the 200. Within a stratum messages are taken in ascending sha1(seed | stratum | item_id) order.\nWeights (kept in the key): w_stratum = stratum size / drawn (the 600-message frame); w_total = w_stratum / elicitation\ninclusion probability (Horvitz-Thompson back to the 4,560-message frame, the weights T2 uses). The scorer reports\nunweighted and w_total-reweighted agreement.\nQuestions (per message, shown with 3 practice messages first): (1) negated? yes / no / unsure; (2) polite? yes / no / unsure;\n(3) statement / question / request / unsure. Only the message is shown: no keywords, no detector label, no stratum.",
+ "annotators": [
+  "P01",
+  "P02",
+  "P03",
+  "P04",
+  "P05",
+  "P06",
+  "P07",
+  "P08",
+  "P09",
+  "P10",
+  "P11",
+  "P12",
+  "P13",
+  "P14",
+  "P15",
+  "P16",
+  "P17",
+  "P18",
+  "P19",
+  "P20"
+ ],
+ "per_item": 2,
+ "frame_n": 600,
+ "frame_by_stratum": {
+  "polite": 115,
+  "question_request": 181,
+  "plain_other": 182,
+  "negated": 122
+ },
+ "quota": {
+  "negated": 55,
+  "polite": 55,
+  "question_request": 45,
+  "plain_other": 45
+ },
+ "composition": {
+  "n": 200,
+  "by_stratum": {
+   "negated": 55,
+   "polite": 55,
+   "question_request": 45,
+   "plain_other": 45
+  },
+  "detector_negated": 55,
+  "detector_polite": 59,
+  "detector_question": 27,
+  "detector_request": 84,
+  "by_elic_sample": {
+   "enriched": 109,
+   "random": 91
+  }
+ },
+ "codings": 400,
+ "items_per_person": {
+  "P01": 20,
+  "P02": 20,
+  "P03": 20,
+  "P04": 20,
+  "P05": 20,
+  "P06": 20,
+  "P07": 20,
+  "P08": 20,
+  "P09": 20,
+  "P10": 20,
+  "P11": 20,
+  "P12": 20,
+  "P13": 20,
+  "P14": 20,
+  "P15": 20,
+  "P16": 20,
+  "P17": 20,
+  "P18": 20,
+  "P19": 20,
+  "P20": 20
+ },
+ "min_max_items_per_person": [
+  20,
+  20
+ ],
+ "key_sha256": "85ebe1b3bd7b3a0d2712d8185765235540bdbd524aae7a1fdc54be886f2d1dc7"
+}
