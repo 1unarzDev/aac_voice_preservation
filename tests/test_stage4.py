@@ -11,7 +11,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -307,6 +307,179 @@ def test_part17_comparison_arms_in_key_and_files():
         ids = set(re.findall(r'"item_id":\s*"(rv-[0-9a-f]{6})"', txt))
         assert ids == {r["item_id"] for r in key if rid in r["raters"].split("|")}, rid
         assert not re.search(r"original_failed|strip_only|paired_source", txt)
+
+
+# ---------------------------------------------------------------- Stage 5: Parts 20 and 21 (added after Stage 4 had been returned)
+import make_source_check as MS  # noqa: E402
+import make_treated_check as MT  # noqa: E402
+from explode import normalise  # noqa: E402
+
+STAGE5 = ROOT / "annotation_package" / "stage5"
+ARM_WORDS = re.compile(r"r2c1|hw1|hwctl|guard|ext_hw|gem_|elic1|G1r?\b|P0\b|chip1|nlcue|gemma|llama|qwen|mistral|nemo|gemini|terra|"
+                       r"arbiter|J1|J2|detector|stratum", re.I)
+
+
+def test_stage5_sheets_csv_and_stage4_untouched(tmp_path=None):
+    tmp = Path(tmp_path or tempfile.mkdtemp())
+    s4_before = digest([ROOT / "annotation" / "assignments" / "stage4.csv", ROOT / "annotation" / "assignments" / "stage4_plan.json"])
+    hand = tmp / "HANDOUT.md"
+    shutil.copy(ROOT / "annotation_package" / "HANDOUT.md", hand)
+    res = MA.run_stage5(out_assign=tmp / "assign", out_sheets=tmp / "sheets", pkg=tmp, handout_path=hand, quiet=True)
+    assert res["missing"] == [], res["missing"][:3]
+    rows = list(csv.DictReader(open(tmp / "assign" / "stage5.csv")))
+    plan = json.loads(PLAN.read_text())
+    assert len(rows) == 40 and {r["annotator"] for r in rows} == set(plan["annotators"])
+    for a in plan["annotators"]:
+        mine = sorted((r for r in rows if r["annotator"] == a), key=lambda r: int(r["order"]))
+        assert [r["task"] for r in mine] == ["part20", "part21"] and [int(r["expected_minutes"]) for r in mine] == [10, 8]
+        assert mine[0]["return_file"] == f"labels_part20_{a}.csv" and mine[0]["return_folder"] == "annotation/returns_treated_check/"
+        assert mine[1]["return_file"] == f"labels_part21_{a}.csv" and mine[1]["return_folder"] == "annotation/returns_source_check/"
+        assert f"stage5/{a}_part20.json" in mine[0]["file_or_link"] and f"source_check.html + stage5/{a}_part21.json" == mine[1]["file_or_link"]
+        txt = (tmp / "sheets" / f"{a}_stage5.md").read_text()
+        for needle in ("Work **alone**", "No AI tools", "(in this order)", "18 min", f"labels_part20_{a}.csv", f"labels_part21_{a}.csv", "stage 5"):
+            assert needle in txt, (a, needle)
+        assert txt.index("1. Part 20") < txt.index("2. Part 21")
+    h = hand.read_text()
+    assert "Stage 5, optional" in h and "labels_part20_<ID>" in h and "<!-- stage4:start -->" in h
+    assert MA.insert_stage5_section(h, MA.stage5_handout_section(MA.rows_stage5(plan["annotators"]))).count("<!-- stage5:start -->") == 1
+    # committed Stage 5 files equal a fresh build; Stage 4 files are not touched by Stage 5
+    assert (ROOT / "annotation" / "assignments" / "stage5.csv").read_text() == (tmp / "assign" / "stage5.csv").read_text()
+    for a in plan["annotators"]:
+        assert (ROOT / "annotation_package" / "assignments" / f"{a}_stage5.md").read_text() == (tmp / "sheets" / f"{a}_stage5.md").read_text()
+        assert not list((ROOT / "annotation_package" / "stage4").glob(f"{a}_part2[01].json")), "Stage 5 files must not be in stage4/"
+        assert "Part 20" not in (ROOT / "annotation_package" / "assignments" / f"{a}_stage4.md").read_text()
+    assert "part20" not in (ROOT / "annotation" / "assignments" / "stage4.csv").read_text()
+    assert digest([ROOT / "annotation" / "assignments" / "stage4.csv", ROOT / "annotation" / "assignments" / "stage4_plan.json"]) == s4_before
+    for d in ("returns_treated_check", "returns_source_check"):
+        assert (ROOT / "annotation" / d / ".gitkeep").exists() or list((ROOT / "annotation" / d).glob("labels_*.csv"))
+
+
+def test_part20_key_exclusions_loads_and_blind_files():
+    key = list(csv.DictReader(open(ROOT / "annotation" / "treated_check_key.csv")))
+    items = MT.load_all_items()
+    blocked = _recompute_blocked(items)
+    plan = json.loads(PLAN.read_text())
+    assert len(key) == 120 and Counter(k["class"] for k in key) == {c: 20 for c in MT.CLASSES}
+    assert len({k["item_id"] for k in key}) == 120 and all(k["item_id"].startswith("p20-") for k in key)
+    norms = [normalise(k["text"]) for k in key]
+    assert len(set(norms)) == 120, "a sentence is shown twice"
+    # exclusions: already labelled / shown to people, arm-revealing text, quarantined families
+    seen = MT.labelled_texts()
+    assert len(seen) > 1000 and not set(norms) & seen
+    for f in ("gold_key_new.csv", "gold_key_elic.csv", "gold_key_hw.csv", "gold_key_main1.csv", "arbiter_check_key.csv",
+              "repair_audit_v2_key.csv", "intent_check_key.csv"):
+        got = {normalise(r["text"]) for r in csv.DictReader(open(ROOT / "annotation" / f))}
+        assert not set(norms) & got, f
+    assert not any(MT.ARM_REVEALING.search(k["text"]) for k in key)
+    from attribute import quarantined
+    assert not any(quarantined(items[k["family_id"]]) for k in key)
+    # class composition: runs, channels, prompts, models, spread over dimensions
+    by = defaultdict(list)
+    for k in key:
+        by[k["class"]].append(k)
+    assert {k["run"] for k in by["G1"]} <= {"guard1", "guard_wc"} and {k["prompt_id"] for k in by["G1"]} == {"G1"}
+    assert {k["run"] for k in by["G1r"]} <= {"guard_baseline_disc", "guard_baseline_wc"} and {k["prompt_id"] for k in by["G1r"]} == {"G1r"}
+    assert {k["run"] for k in by["chip1"]} == {"hw1"} and {k["channel"] for k in by["chip1"]} == {"chip1"}
+    assert {k["run"] for k in by["nlcue"]} == {"hwctl1"} and {k["channel"] for k in by["nlcue"]} == {"nlcue"}
+    assert Counter(k["run"] for k in by["newmodel"]) == {"ext_hw_qwen14": 10, "ext_hw_nemo": 10}
+    assert {k["channel"] for k in by["newmodel"]} <= {"chip1", "bare"}
+    assert {k["model"] for k in by["gemini"]} == {"gemini-3.1-flash-lite"} and "irrel" not in {k["channel"] for k in by["gemini"]}
+    for c in ("chip1", "nlcue", "G1"):
+        assert len({k["dimension"] for k in by[c]}) == 6, c
+        assert max(Counter(k["dimension"] for k in by[c]).values()) <= 4
+    assert all(k["critical"] and k["critical"] in k["critical_options"].split("|") and k["family_id"] in items for k in key)
+    assert all(float(k["weight"]) >= 1 and int(k["drawn_n"]) >= 1 for k in key)
+    # coders: two different people, never one who wrote / checked the pair, 12 each
+    load = Counter()
+    for k in key:
+        cs = k["coders"].split("|")
+        assert len(cs) == 2 and len(set(cs)) == 2 and set(cs) <= set(plan["annotators"])
+        assert not set(cs) & blocked.get(k["family_id"], set()), (k["item_id"], cs)
+        load.update(cs)
+    assert set(load) == set(plan["annotators"]) and set(load.values()) == {12}, load
+    # blind part files
+    by_id = {k["item_id"]: k for k in key}
+    for a in plan["annotators"]:
+        doc = json.loads((STAGE5 / f"{a}_part20.json").read_text())
+        assert doc["run"] == "part20" and len(doc["practice"]) == 5 and len(doc["items"]) == 12
+        assert {i["item_id"] for i in doc["items"]} == {k["item_id"] for k in key if a in k["coders"].split("|")}
+        for it in doc["items"]:
+            assert sorted(it) == ["critical", "input_text", "item_id", "text"] and it["text"] == by_id[it["item_id"]]["text"]
+            assert it["critical"]["dimension"] == by_id[it["item_id"]]["dimension"]
+        blob = json.dumps(doc["items"]) + json.dumps(doc["practice"])
+        assert not ARM_WORDS.search(blob.replace("Keywords", "")), ARM_WORDS.search(blob)
+
+
+def test_part21_key_exclusions_loads_and_blind_files():
+    key = list(csv.DictReader(open(ROOT / "annotation" / "source_check_key.csv")))
+    plan = json.loads(PLAN.read_text())
+    assert len(key) == 200 and Counter(k["stratum"] for k in key) == MS.QUOTA
+    assert len({k["item_id"] for k in key}) == 200 and len({k["source_item_id"] for k in key}) == 200
+    frame = {r["item_id"]: r for r in map(json.loads, open(ROOT / "annotation" / "elicitation_key.jsonl"))}
+    assert len(frame) == 600
+    sets = {}
+    for r in csv.DictReader(open(ROOT / "annotation" / "elicitation_assignment.csv")):
+        sets.setdefault(r["set"], set()).add(r["annotator"])
+    typed = defaultdict(set)
+    for r in csv.DictReader(open(ROOT / "analysis" / "elicitation" / "ratings.csv")):
+        typed[r["item_id"]].add(r["annotator"])
+    load = Counter()
+    for k in key:
+        f = frame[k["source_item_id"]]
+        assert k["text"] == f["text"] and float(k["inclusion_prob"]) == f["inclusion_prob"]
+        d = f["detector_labels"]
+        assert int(k["detector_negated"]) == int(d["polarity"] == "negated") and int(k["detector_polite"]) == int(d["politeness"] != "none")
+        assert MS.stratum_of(d) == k["stratum"]
+        cs = k["coders"].split("|")
+        assert len(cs) == 2 and len(set(cs)) == 2 and set(cs) <= set(plan["annotators"])
+        assert not set(cs) & sets[f["set"]], "a coder typed (or had) this message's keywords in Part 9"
+        assert not set(cs) & typed[k["source_item_id"]]
+        assert abs(float(k["w_stratum"]) * int(k["drawn_n"]) - int(k["stratum_n"])) < 1e-3
+        assert abs(float(k["w_total"]) - float(k["w_stratum"]) / f["inclusion_prob"]) < 1e-3
+        load.update(cs)
+    assert set(load) == set(plan["annotators"]) and set(load.values()) == {20}, load
+    sizes = Counter(MS.stratum_of(f["detector_labels"]) for f in frame.values())
+    assert all(int(k["stratum_n"]) == sizes[k["stratum"]] for k in key)
+    # oversampling: the positives are well covered
+    assert sum(int(k["detector_negated"]) for k in key) >= 50 and sum(int(k["detector_polite"]) for k in key) >= 50
+    assert sum(k["detector_qr"] in ("question", "request") for k in key) >= 90
+    # blind files
+    by_id = {k["item_id"]: k for k in key}
+    for a in plan["annotators"]:
+        doc = json.loads((STAGE5 / f"{a}_part21.json").read_text())
+        assert sorted(doc) == ["check_id", "for", "items", "n_items", "tool", "version"] and doc["for"] == MS.id_hash(a)
+        assert doc["tool"] == "source_check_v1" and doc["check_id"] == "part21" and doc["n_items"] == len(doc["items"]) == 20
+        assert {i["item_id"] for i in doc["items"]} == {k["item_id"] for k in key if a in k["coders"].split("|")}
+        for it in doc["items"]:
+            assert sorted(it) == ["item_id", "text"] and it["text"] == by_id[it["item_id"]]["text"]
+    assert MS.id_hash(" p03 ") == MS.id_hash("P03")
+    html = (ROOT / "annotation_package" / "source_check.html").read_text()
+    for needle in ("source_check_v1", "labels_", "Download CSV", "localStorage", "PRACTICE", "negated", "polite"):
+        assert needle in html
+    assert not re.search(r"https?://", html), "tool must be self-contained"
+
+
+def test_stage5_helpers():
+    assert MT.equal_alloc({"a": 10, "b": 10, "c": 1}, 7) == {"a": 3, "b": 3, "c": 1} or sum(MT.equal_alloc({"a": 10, "b": 10, "c": 1}, 7).values()) == 7
+    a = MT.equal_alloc({"a": 10, "b": 2, "c": 0}, 8)
+    assert a["b"] == 2 and a["a"] == 6 and a["c"] == 0
+    assert MT.ARM_REVEALING.search("The nurse needs a ramp [PLEASE].") and MT.ARM_REVEALING.search("Keywords: go home")
+    assert not MT.ARM_REVEALING.search("Please bring my medicine to the kitchen.")
+    used, forbid = Counter(), set()
+    pool = [{"class": "c", "output_id": f"o{i}", "family_id": "f", "channel": "x", "run": "r", "model": "m" if i % 2 else "n",
+             "prompt_id": "P0", "norm": "same" if i < 3 else f"n{i}"} for i in range(8)]
+    got = MT.pick(pool, 6, used, forbid)
+    assert len({u["norm"] for u in got}) == len(got) == 6 and abs(used[("r", "m", "x", "P0")] - used[("r", "n", "x", "P0")]) <= 1
+    assert MS.stratum_of({"polarity": "negated", "politeness": "please", "speech_act": "question"}) == "negated"
+    assert MS.stratum_of({"polarity": "affirmative", "politeness": "please", "speech_act": "question"}) == "polite"
+    assert MS.stratum_of({"polarity": "affirmative", "politeness": "none", "speech_act": "request/command"}) == "question_request"
+    assert MS.stratum_of({"polarity": "affirmative", "politeness": "none", "speech_act": "refusal"}) == "plain_other"
+
+
+def test_stage5_scorers_self_check():
+    for script in ("score_treated_check.py", "score_source_check.py"):
+        r = subprocess.run([sys.executable, str(ROOT / "src" / script), "--self-check"], capture_output=True, text=True, cwd=str(ROOT))
+        assert r.returncode == 0 and "self-check OK" in r.stdout, (script, r.stdout[-800:], r.stderr[-1500:])
 
 
 if __name__ == "__main__":

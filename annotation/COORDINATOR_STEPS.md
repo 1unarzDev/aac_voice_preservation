@@ -173,3 +173,61 @@ dimension; human vs arbiter, J1 and J2; human-human; the share of "Can you" outp
 coders with and without earlier labelling work). No pass/fail threshold is set; tags with few items are shown with
 their counts. The 38 arbiter units already labelled by people in Parts 10/12/13 are not re-drawn (their gold labels
 can be compared with the arbiter separately).
+
+### Stage 5: Parts 20 and 21 (added 2026-11-02 before any return)
+Built after Stage 4 had been returned, so they are a separate Stage 5 (files in `annotation_package/stage5/`, sheets
+`assignments/<ID>_stage5.md`, `annotation/assignments/stage5.csv`, `make_assignments.py --stage 5`); every Stage 4 item, key and
+assignment is unchanged. All 20 people do both parts (10 + 8 min). Returns: `labels_part20_<ID>.csv` ->
+`annotation/returns_treated_check/`, `labels_part21_<ID>.csv` -> `annotation/returns_source_check/`.
+```bash
+python src/make_treated_check.py        # Part 20: 120 outputs (6 classes x 20), seed 20261102, 2 coders each, 12 per person; frozen (--force to redraw)
+python src/score_treated_check.py       # (python src/score_treated_check.py --self-check)
+python src/make_source_check.py         # Part 21: 200 messages (negated 55 / polite 55 / question-request 45 / plain 45), 2 coders, 20 per person
+python src/score_source_check.py        # writes analysis/source_check/ and runs src/robust_t2_posterior.py --human-labels (1.5 min; --no-t2 skips)
+python src/make_assignments.py --stage 5
+```
+
+#### Part 20 analysis rules (added 2026-11-02 before any return)
+Question: does the automatic judge agree with people on real treated outputs, where the headline claims rest?
+- **Items.** One item is one real output occurrence. Classes (20 each): G1 guard repairs (outputs the guard changed; `runs/guard1`,
+  `runs/guard_wc`), G1r no-feedback retries that changed the sentence (`runs/guard_baseline_disc`, `_wc`), chip1 (`runs/hw1`, channel
+  chip1; hwctl1 holds only the irrelevant-chip and plain-word channels, so chip1 comes from hw1, whose arm hwctl1 is contrasted
+  with), nlcue plain-word (`runs/hwctl1`), newmodel (Qwen2.5-14B and Mistral-Nemo-12B, 10 each, channels chip1 and bare, so the
+  default and the chip arm are both covered), gemini (gemini-3.1-flash-lite, irrelevant-chip control rows left out). Spread equally over the
+  dimensions present; the key stores frame size and draw size per class x dimension (weight). The Gemini and guard-baseline runs were
+  still growing when the frame was drawn; the key stores the text, so the draw is frozen.
+- **Exclusions.** Sentences already labelled or shown to people (Parts 1-3/10/12/13, Part 19, the Part 4/11/17 sentence audits, Part
+  18), arm-revealing text (square brackets, "keywords", chip/guard/feedback wording, model or vendor names, assistant boilerplate),
+  quarantined families, rows without a production critical label (unresolved judge disagreement). A coder never gets a pair they
+  wrote or checked.
+- **Reference.** Primary = both coders gave the same label for that field; split or single-coder items have no consensus for that
+  field (counted, listed). Sensitivity = plurality (a single labelled coder counts). Judge = production label.
+- **Endpoints (descriptive, no pass/fail).** Judge vs human consensus accuracy (Wilson) and Cohen kappa (item bootstrap) per field
+  (critical, polarity, speech_act, agent, certainty, politeness, added_content), pooled and per class, critical first; per class the
+  accuracy re-weighted over dimensions; critical by class x dimension; J1 and J2 alone; human-human agreement as the ceiling;
+  verdict agreement per class (Violation / constraint_preserving on cue channels, Assumption on bare/noncrit), recomputed from labels
+  with the production rules. The H7 gate (kappa >= 0.6) is printed for reference only. With about 20 items per class the intervals
+  are wide: results are stated as "no detectable judge failure in class X" or "disagreement concentrated in ...", never as a
+  per-class threshold pass. A class with a visibly lower critical agreement is reported with its items, not tuned away.
+- **No re-labelling.** Human labels never replace production labels in any headline estimate; Part 20 is reported as judge validity
+  on the treated arms, next to the Part 10/12/13 gold results.
+
+#### Part 21 analysis rules (added 2026-11-02 before any return)
+Question: how accurate are the detector labels (negated, polite, question/request) of the source messages behind the T2 posterior,
+and how much does a human-corrected label change P(negated | no negation word in the keywords)?
+- **Items.** 200 messages of the 600-message elicitation sample (the T2 sample; W-B has no keyword sets). Strata by detector label
+  (disjoint, first match): negated 55 of 122, polite 55 of 115, question_request 45 of 181, plain_other 45 of 182. Weights in the key:
+  w_stratum = stratum size / drawn; w_total = w_stratum / elicitation inclusion probability. A person never codes a message whose
+  keywords they typed in Part 9 (blocked = annotators of the message's set).
+- **Human label.** Primary = both coders equal (question and request count as one answer for "question or request vs statement"); unsure
+  is missing. For the T2 correction a yes/no split is p = 0.5, a single labelled coder counts, a message nobody labelled (and every
+  message outside the 200) gets the human-negated rate of its detector stratum among labelled messages. Sensitivity: splits ->
+  stratum rate.
+- **Agreement endpoints (descriptive).** Per label: detector vs human kappa (item bootstrap CI), accuracy, sensitivity, specificity,
+  PPV (Wilson; unweighted and w_total-reweighted with Kish effective n), human-human agreement, human rate per detector stratum, the
+  list of negation disagreements. No pass/fail threshold.
+- **Corrected T2.** `src/robust_t2_posterior.py --human-labels` on the same code path as the committed T2 (HT over the elicitation
+  frame, 1,000 message bootstraps); only the polarity of the source changes. Reported next to the detector-based 2.7% (human keywords)
+  for both keyword channels, with the silent-reversal rate per 1,000, and the splits -> stratum-rate sensitivity. The T2 headline in
+  the papers is restated with the corrected number whichever way it moves; the detector-based number stays as the committed
+  reference. The T2 bootstrap does not carry the sampling error of the Part 21 labels (stated in the report).

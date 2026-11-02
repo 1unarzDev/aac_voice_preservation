@@ -21,7 +21,7 @@ const key = (k) => d.body.dispatchEvent(new w.KeyboardEvent('keydown', {key: k, 
 
 // part file shape
 ok(part.practice.length === 5, '5 practice items');
-ok(part.items.length >= 100, part.items.length + ' items');
+ok(part.items.length >= Number(process.env.MIN_ITEMS || 100), part.items.length + ' items');   // MIN_ITEMS=10 for the short Stage 4/5 part files
 ok(part.items.every(x => Object.keys(x).sort().join() === 'critical,input_text,item_id,text'), 'items carry only id/text/critical/input (blind)');
 ok(part.items.every(x => x.critical.options.length >= 3 && x.critical.question && x.critical.dimension), 'critical question + options');
 ok(new Set(part.items.map(x => x.item_id)).size === part.items.length, 'unique item ids');
