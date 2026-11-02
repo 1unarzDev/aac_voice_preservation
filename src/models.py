@@ -62,10 +62,18 @@ REGISTRY: dict[str, ModelSpec] = {m.name: m for m in [
     ModelSpec("mistral-nemo-12b", "http://127.0.0.1:8095/v1", "mistral-nemo-12b", "local", "ext_under_test",
               "Q4_K_M", "mistral-nemo-12b/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf", "7c1a10d202d8788dbe5628dc962254d10654c853cae6aaeca0618f05490d4a46"),
     # Google AI Studio (free-tier daily allowance), see src/gemini_backend.py, src/gemini_daily.py.
-    # Flash can switch thinking off (budget 0); Pro cannot (min 128), so its budget is the minimum.
-    ModelSpec("gemini-2.5-flash", GEMINI_BASE, "gemini-2.5-flash", "api", "ext_under_test",
+    # Checked 2026-11-01: gemini-2.5-flash / -pro / -flash-lite return 404 "no longer available to new users" for this key;
+    # gemini-3.1-pro-preview has free-tier limit 0. Available: gemini-3.5-flash (primary), gemini-3.1-flash-lite.
+    # thinkingBudget 0 (thinking off) is accepted by both and recorded in every cache entry.
+    ModelSpec("gemini-3.5-flash", GEMINI_BASE, "gemini-3.5-flash", "api", "ext_under_test",
               concurrency=1, supports_seed=False, backend="gemini", thinking_budget=0),
-    ModelSpec("gemini-2.5-pro", GEMINI_BASE, "gemini-2.5-pro", "api", "ext_under_test",
+    ModelSpec("gemini-3.1-flash-lite", GEMINI_BASE, "gemini-3.1-flash-lite", "api", "ext_under_test",
+              concurrency=1, supports_seed=False, backend="gemini", thinking_budget=0),
+    ModelSpec("gemini-3.6-flash", GEMINI_BASE, "gemini-3.6-flash", "api", "ext_under_test",
+              concurrency=1, supports_seed=False, backend="gemini", thinking_budget=0),
+    ModelSpec("gemini-3.7-flash", GEMINI_BASE, "gemini-3.7-flash", "api", "ext_under_test",
+              concurrency=1, supports_seed=False, backend="gemini", thinking_budget=0),
+    ModelSpec("gemini-3.1-pro-preview", GEMINI_BASE, "gemini-3.1-pro-preview", "api", "ext_under_test",
               concurrency=1, supports_seed=False, backend="gemini", thinking_budget=128),
     ModelSpec("gpt-6.1-terra", API_BASE, "gpt-6.1-terra", "api", "under_test",
               concurrency=16, supports_seed=False),

@@ -77,6 +77,9 @@ def main():
                 if r["request_key"] in seen:
                     continue
                 seen.add(r["request_key"]); out.append(r)
+            # priority order inside a tier: families in sha256(seed+family_id) order, a family's requests adjacent (arms stay paired),
+            # so with a tiny daily quota every prefix is a random (not alphabetical) sample of families. Keys are unaffected.
+            out.sort(key=lambda r: hashlib.sha256(("20261101" + r["family_id"]).encode()).hexdigest())
             full = len(out)
             if (name, ti) in caps:
                 out = stratified(out, caps[(name, ti)])

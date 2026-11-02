@@ -37,3 +37,26 @@ limits are known.)
 Single decoding configuration (T=0, thinking off for flash, minimum for pro), unseeded API, free-tier model snapshots can change
 (model_reported is stored per request). Model-breadth evidence only; agreement with Claude arbiter is not human validation.
 
+
+---
+## Amendment 1 (2026-11-02 05:50 UTC, after the first test calls, before any result was inspected): the planned models do not exist for this key
+
+Empirical limits (AI Studio free tier, this key; probes and the first tier-1 sends, `runs/gemini_429.jsonl` has every 429):
+- `gemini-2.5-flash`, `gemini-2.5-pro`, `gemini-2.5-flash-lite`: HTTP 404 "no longer available to new users". They cannot be used.
+- `gemini-3.1-pro-preview` / `gemini-pro-latest`: HTTP 429 with `generate_content_free_tier_input_token_count limit: 0`. No free-tier Pro at all.
+  So tier 4 (Pro) and tier 5 (Pro as arbiter) are blocked unless the allowance changes; they stay in the plan with the model id replaced
+  by `gemini-3.1-pro-preview` and are re-tested at every daily relaunch only if someone sets a non-zero limit in `runs/gemini_limits.json`.
+- `gemini-3.5-flash` (thinkingBudget 0 accepted): **5 requests/min, 20 requests/day** (`GenerateRequestsPerMinutePerProjectPerModel-FreeTier` = 5,
+  `GenerateRequestsPerDayPerProjectPerModel-FreeTier` = 20). `gemini-3.6-flash` and `gemini-3.7-flash` also hit a 20/day cap (3.7 was returning 503 high demand);
+  `gemini-3.8-flash` timed out (overloaded). They are not queued: a 20/day model can not finish any tier in a useful time, and mixing flash snapshots inside one tier would
+  confound the model identity.
+- `gemini-3.1-flash-lite` (thinkingBudget 0 accepted): >= 14 requests/min, daily cap recorded in the discovered-limits section of the report below.
+
+Consequence, fixed before inspecting any Gemini output:
+- Model identity of the "Gemini family" arms: **gemini-3.5-flash** (the named flash; budget 0) gets its 20/day on tier 1 first (priority list unchanged, tier 1 then 2 then 3);
+  **gemini-3.1-flash-lite** (budget 0) runs the same tiers 1, 2, 3 in the same order concurrently, since its quota is independent (using it costs the flash arm nothing).
+  They are reported as two separate models, never pooled.
+- Inside a tier the order is now family-hash order (sha256("20261101"+family_id)), a family's requests adjacent (the a/c arms and the chip/noncrit/irrel/nlcue channels stay paired).
+  With a 20/day quota every prefix is then a random sample of families, not an alphabetical block. (Amends the "family-ordered prefix" sentence above; request keys are unchanged.
+  Flash-lite's first 262 tier-1 requests were sent in the old order, hw1 families first, before this change; they are kept and the rest completes the tier.)
+- The Pro subset rule is moot (Pro unavailable). The report states n per cell for every number.
