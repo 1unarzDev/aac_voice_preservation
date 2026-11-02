@@ -37,6 +37,20 @@
 \newcommand{\ci}[1]{[\RES{#1_lo}, \RES{#1_hi}]}
 \newcommand{\cip}[1]{[\RES{#1_lo}, \RES{#1_hi}]\%}
 
+%% ---------- slots for experiments still running (default: print nothing) ----------
+%% LEGEND_TEST: three-arm prompt-legend test of the affirmative default. To fill, \renewcommand{\LegendTestSlot}{...}
+%%   or generate the sentence in make_macros.py from the new analysis file. Sentence pattern (macros, no typed numbers):
+%%   ``Telling the model in its prompt how to read bare keywords (a legend) changed the affirmative share from
+%%   \RES{lg_base}\% (no legend) to \RES{lg_arm2}\% (legend A) and \RES{lg_arm3}\% (legend B) [\RES{lg_ci}], which shows
+%%   whether the default is prompt-licensed; the Assumption stays an Assumption only if the share does not move.''
+\newcommand{\LegendTestSlot}{}
+%% ORACLE_REAL: mutation testing on real model outputs vs baseline oracles (e.g. embedding similarity, exact match).
+%%   Sentence pattern: ``On \RES{or_real_n} real outputs we seeded one-value mutants and compared oracles: our verdict code
+%%   detected \RES{or_real_ours}\% [\RES{or_real_ours_ci}], embedding similarity \RES{or_real_emb}\% and exact match
+%%   \RES{or_real_exact}\% at the same false-alarm rate (\RES{or_real_fa}\%).''  Then delete the Threats sentence
+%%   that says no baseline oracle was compared and add a row to Table~\ref{tab:oracle}.
+\newcommand{\OracleRealSlot}{}
+
 %% ---------- notation ----------
 \newcommand{\chip}[1]{\texttt{[#1]}}
 \newcommand{\kw}[1]{\texttt{#1}}
@@ -66,11 +80,11 @@ First, relaxing a rule to remove a false alarm made the oracle accept a changed 
 \say{You borrowed my car this weekend} passed as the acceptance \say{Yes, you can borrow my car}, and the relaxed rule detected only \kof{or_acc_mut_det} keyed acceptance mutants.
 Second, a bug in our input builder showed models chips that contradicted the source message in \RES{wb_conflicts} of \RES{wb_msgs_restored} inputs; a validator now rejects them before generation.
 On \RES{hw_nkept} human-written pairs from \RES{hw_nwriters} writers, four models read bare keywords as affirmative in \pct{hwaff} of outputs, which is an Assumption by design because bare keywords carry no negation.
-A speech-act chip, a bracketed tag, raised the intended speech act by \RES{hwp1} percentage points (pp) over a length-matched word.
+A speech-act chip, a bracketed tag, raised the intended speech act by \RES{hwp1} percentage points (pp) over a length-matched word, positive for every writer (exact writer-level Holm $p=\RES{t6p1_holm}$).
 This is a manipulation check: on a pre-specified machine-written confirmation set the speech act was kept in only \pct{wcm_act_chip1} of targets even with the chip.
 Plain typed requests gained a politeness marker in \pct{hwpzadd} of outputs against \pct{hwpzrem} removed (net \RES{hwp2}\,pp), driven by Gemma-3-4B (net \RES{hwpz_gemma}\,pp).
 On the confirmation set all three contrasts have the same sign and intervals above zero, but the net politeness effect is small (+\RES{wcp2}\,pp \ci{wcp2}).
-The oracle's labels agreed with trained human coders at $\kappa=\RES{jve_kappa}$ and $\RES{jvh_kappa}$ on critical labels in two sets of outputs; verdict-level $\kappa$ was \RES{jvh_vk_min}--\RES{jvh_vk_max} on the human-written pairs.
+The oracle's labels agreed with trained human coders at $\kappa=\RES{jve_kappa}$ and $\RES{jvh_kappa}$ on critical labels in two sets of outputs ($\RES{t7e_k}$ and $\RES{t7h_k}$ when ties count as disagreement); verdict-level $\kappa$ was \RES{jvh_vk_min}--\RES{jvh_vk_max} on the human-written pairs.
 No AAC users took part, and the harness is for developers.
 \end{abstract}
 
@@ -217,6 +231,7 @@ The chip table in \texttt{src/labels.py} gets \RES{ec_new_entry_lines} new entry
 The verdict code (\texttt{src/attribute.py}, \RES{ec_loc_attribute} lines) and the R5 validator (\texttt{src/validate\_cue\_inputs.py}, \RES{ec_loc_validator} lines) both read that table, so neither changes.
 In a dry run (\texttt{extend\_cost.py}) the validator then marks \kw{Keywords: [THANKS] extra pillow} compatible with a thanks/apology source and conflicting with a plain one, and re-scoring all \RES{ec_rescored_rows} stored human-written-pair output rows took \RES{ec_rescore_seconds}\,s with \RES{ec_model_calls} model calls.
 A new dimension, not just a new chip, also needs a codebook option and an extractor question, which means new extractor calls; we did not measure that cost.
+A codebook change works the same way: recoding \say{Can you\ldots?} from request to question re-scored \RES{cb_nchanged_wc} stored confirmation-set rows with no model calls (\S\ref{sec:results}), because verdicts are computed in code.
 No developer other than the authors has used the harness.
 Regenerating outputs needs the API models, whose versions may be retired and whose outputs are not bit-reproducible.
 
@@ -240,8 +255,12 @@ Table~\ref{tab:primary} gives three contrasts.
 \emph{Affirmative default} is the share of bare polarity outputs that are affirmative.
 The plan called them P1--P3 (unrelated to prompts).
 They were pre-specified for the confirmation set; on the human-written pairs they are an exploratory replication and were not preregistered.
-All hold under Holm correction, but each rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers.
-We therefore claim direction and consistency, not interval width, because a writer-cluster percentile interval with so few clusters is probably too narrow.
+Each rests on only \RES{hw_wr_min}--\RES{hw_wr_max} writers, so a percentile bootstrap cannot give a $p$ below its resampling floor and its intervals are probably too narrow.
+We therefore recomputed inference at the writer level.
+An exact sign-flip randomization over writers gives one-sided $p=\RES{t6p1_p1s}$, $\RES{t6p2_p1s}$ and $\RES{t6p3_p1s}$ (Holm \RES{t6p1_holm}, \RES{t6p2_holm}, \RES{t6p3_holm}), the smallest values possible with so few writers, and every writer's mean is positive in all three contrasts.
+The $t$ intervals are wider than the percentile ones (Table~\ref{tab:primary}).
+The effects are heterogeneous across models for the act chip (Llama \RES{t6p1_llama}\,pp, gpt-6.1-terra \RES{t6p1_terra}) and for politeness (Gemma \RES{t6p2_gemma}, Llama \RES{t6p2_llama}; permutation $p=\RES{t6p1_het_p}$ for each).
+We claim direction and consistency, not interval width.
 The chip gain is positive on all six dimensions, between \RES{hw_gain_min} and \RES{hw_gain_max}\,pp, with every lower bound above \RES{hw_gain_lo_min}\,pp.
 Collapsing near-duplicate pairs, excluding one writer, reversing the arbiter's judgment calls or using all candidates flips no decision; the largest shift is \RES{hw_shift_max}\,pp (\RES{hw_shift_all}\,pp with all candidates).
 Because the chip text enters the model's prompt, Act-chip gain and Affirmative default are close to manipulation checks of whether the harness separates supplied from missing information, which is their purpose.
@@ -249,7 +268,7 @@ They bound what a chip can do rather than show how often systems fail.
 The politeness figures use two readings, named once: \emph{added} is the share of plain sources that gained a marker, \emph{removed} is the share of polite sources that lost one, and \emph{net} is added minus removed.
 
 \begin{table}[t]
-  \caption{The three contrasts on human-written pairs (\RES{hw_nfam} families; writers per contrast in parentheses) and on the confirmation set (\RES{wc_n_fam} families): one fixed prompt, four models, 95\% cluster-bootstrap intervals, Holm-adjusted $p$ over the three. $p=.0003$ is the smallest Holm value that 10,000 resamples can give. Politeness is net; its added/removed shares (\%) are below it.}
+  \caption{The three contrasts on human-written pairs (\RES{hw_nfam} families; writers per contrast in parentheses) and on the confirmation set (\RES{wc_n_fam} families): one fixed prompt, four models, 95\% cluster-bootstrap intervals, Holm-adjusted $p$ over the three. Human-written pairs: $t$ intervals over writers (df = writers $-1$; percentile interval for the default, whose $t$ interval passes 100\%), and Holm $p$ from the exact one-sided writer-level randomization, whose smallest possible value with 6--7 writers is $1/2^G$. Confirmation set: percentile intervals; $p=.0003$ is the smallest Holm value that 10,000 resamples can give. Politeness is net; its added/removed shares (\%) are below it.}
   \label{tab:primary}
   \footnotesize
   \setlength{\tabcolsep}{2.2pt}
@@ -257,10 +276,10 @@ The politeness figures use two readings, named once: \emph{added} is the share o
     \toprule
     & Human-written & $p$ & Confirmation & $p$\\
     \midrule
-    Act-chip gain, pp & +\RES{hwp1} \ci{hwp1} (\RES{hwp1_wr}) & \RES{hwp1_holm} & +\RES{wcp1} \ci{wcp1} & \RES{wcp1_holm}\\
-    Net politeness, pp & +\RES{hwp2} \ci{hwp2} (\RES{hwp2_wr}) & \RES{hwp2_holm} & +\RES{wcp2} \ci{wcp2} & \RES{wcp2_holm}\\
+    Act-chip gain, pp & +\RES{hwp1} [\RES{t6p1_tlo}, \RES{t6p1_thi}] (\RES{hwp1_wr}) & \RES{t6p1_holm} & +\RES{wcp1} \ci{wcp1} & \RES{wcp1_holm}\\
+    Net politeness, pp & +\RES{hwp2} [\RES{t6p2_tlo}, \RES{t6p2_thi}] (\RES{hwp2_wr}) & \RES{t6p2_holm} & +\RES{wcp2} \ci{wcp2} & \RES{wcp2_holm}\\
     \quad added / removed & \RES{hwpzadd} / \RES{hwpzrem} & & \RES{wcpzadd} / \RES{wcpzrem} &\\
-    Affirmative default, \% & \RES{hwaff} \cip{hwaff} (\RES{hwp3_wr}) & \RES{hwp3_holm} & \RES{wcaff} \cip{wcaff} & \RES{wcp3_holm}\\
+    Affirmative default, \% & \RES{hwaff} \cip{hwaff} (\RES{hwp3_wr}) & \RES{t6p3_holm} & \RES{wcaff} \cip{wcaff} & \RES{wcp3_holm}\\
     \addlinespace
     Act-chip gain, arbitrated labels masked, pp & & & +\RES{wcp1_um} \ci{wcp1_um} & \\
     \bottomrule
@@ -286,6 +305,11 @@ Under bare input, \kn{wcaff} directional polarity outputs on the confirmation se
 That default may be an artifact of heavy compression, so we asked humans: \RES{el_nann} annotators typed keywords for \RES{el_nmsg} crowd-written AACText messages (\RES{el_nsets} sets).
 On the \RES{el_neg_c_n} messages with a negation cue they dropped it in \pct{el_neg_h} of sets, against \pct{el_neg_c} for a deliberately crude four-word rule-based compressor.
 So the Assumption channel is realistic but the compressor is not a user model.
+The affirmative default is also the better guess: among human keyword strings with no negation word, only \pct{t2_post} \cip{t2_post} came from a negated message, and the models answered affirmatively for \pct{t2_modelshare} of them.
+It is correct on average, but its errors are costly and silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations.
+No default removes that exposure, which is why the harness needs a requirement (R3) that logs the Assumption and a test that exposes its direction.
+%% LEGEND_TEST slot: \LegendTestSlot prints nothing until the three-arm prompt-legend result exists (see below).
+\LegendTestSlot
 
 \begin{table}[t]
   \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values and intervals are in \texttt{analysis/r2c/channel\_ladder.csv}.}
@@ -301,7 +325,11 @@ So the Assumption channel is realistic but the compressor is not a user model.
   \end{tabular}
 \end{table}
 
-Question chips are the weakest supplied chip: one chip kept the act in \pct{wcm_act_chip1} of confirmation-set targets, and \RES{wc_q2req_k} of the \RES{wc_qfail_k} failures were coded as requests (\say{Can you\ldots?}), a codebook decision that we flag rather than resolve.
+Question chips are the weakest supplied chip: one chip kept the act in \pct{wcm_act_chip1} of confirmation-set targets, and \RES{wc_q2req_k} of the \RES{wc_qfail_k} failures were coded as requests (\say{Can you\ldots?}), a codebook decision.
+We therefore report both codings of \say{Can you\ldots?}, as a request (stored) and as a question (\RES{cb_nchanged_wc} confirmation-set rows remapped from stored labels).
+The confirmation-set Act-chip gain is \RES{cb_wc_base}\,pp as a request and \RES{cb_wc_q}\,pp \ci{cb_wc_q} as a question; on human-written pairs it is \RES{cb_hw_base}\,pp and \RES{cb_hw_q}\,pp.
+No Holm decision changes under either coding, and masking each arbiter precedent in turn, or all arbitrated units, moves the three contrasts by at most \RES{cb_mask_max_pp}\,pp.
+So the size of the Act-chip gain is codebook-dependent, but its sign is not.
 Full-input violations are model-specific (Table~\ref{tab:pol}): Gemma-3-4B and gpt-6.1-terra added markers, while Llama and Qwen removed markers more often than they added them on the confirmation set.
 This is a regression to test for per model, not a property of LLMs.
 
@@ -352,6 +380,8 @@ Both refusal/acceptance families are therefore quarantined from every primary re
 In Defect B, an audit of \RES{wb_msgs_restored} restored-chip inputs built from AACText messages found \RES{wb_conflicts} whose displayed chip contradicted the stored source, e.g., \chip{MAYBE} for a plain assertion, after a silent fallback in our builder.
 In the \RES{wb_maybe_msgs} \chip{MAYBE} messages, all \RES{wb_maybe_n} outputs followed the visible chip and failed the source, which a source-fidelity score counts as model failures.
 The R5 validator decodes only the rendered input and now rejects all \RES{r5_conf} before generation.
+Replayed on every chip input of the confirmation set, the composition study and the human-written pairs (\RES{t9_inputs} inputs), it found \RES{t9_conflicts} conflicts; \RES{t9_compat} were verified compatible and \RES{t9_unknown} (time chips and one long chip alias) are outside its decoder.
+This covers chip inputs only, not free-text channels.
 It matches the audit on \RES{r5_agree}/\RES{r5_n} and never certifies the \RES{r5_sure} coarser \chip{SURE} restorations.
 
 \begin{table}[t]
@@ -427,12 +457,16 @@ Its pre-specified gate ($\geq$22/24 mutants detected, $\leq$1/24 false alarms) p
   \end{tabularx}
 \end{table}
 
+%% ORACLE_REAL slot: \OracleRealSlot prints nothing until mutation testing on real outputs vs baseline oracles exists.
+\OracleRealSlot
+
 \paragraph*{Human gate}
 The first human gate, with two annotators, was run on the development items (the extraction inventory used to develop the codebook), with plurality references and tied items excluded rather than adjudicated.
 Its pre-specified criterion ($\kappa\geq0.6$) passes on all \RES{human_gate_n} fields.
 It validates extraction of explicit markers on those items, not repaired text or corpus-transfer readings.
 Two later checks use outputs the harness had not been developed on: outputs for human-elicited keywords and outputs for human-written pairs (Table~\ref{tab:oracle}).
 The excluded items are \RES{jve_excl} of \RES{jve_items} and \RES{jvh_excl} of \RES{jvh_items}.
+Recomputed with the stricter rule that ties and unsure count as disagreement, critical $\kappa$ on the test split is \RES{t7g_k} (development items), \RES{t7e_k} \ci{t7e} (human-elicited keywords) and \RES{t7h_k} \ci{t7h} (human-written pairs), so the gate still passes; the weakest field is added content on human-written pairs (\RES{t7h_ac_k}, lower bound \RES{t7h_ac_lo}).
 Those checks are the oracle's evidence on the headline-type data, though their coders were also taught the codebook, and the verdict $\kappa$ values on human-written pairs rest on small counts of positive verdicts.
 Machine agreement is not validation: on \say{I can't wait to go to the party.}, both extractor prompts, the rule-based extractor and two further machine coders answered \emph{negated}, and both human annotators answered \emph{affirmative}, as keyed.
 
