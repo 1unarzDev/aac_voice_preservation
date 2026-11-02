@@ -120,7 +120,7 @@ def ledger():
                     f"{int(c['miss_persists']['k'])} of {c['miss_persists']['n']}", None),
                    ("supplied value contradicted", None, p(c["chip1_contra"]), None,
                     f"{int(c['chip1_contra']['k'])} of {c['chip1_contra']['n']}", None)],
-             cost=["+1 selection (nominal)²", "+0 calls",
+             cost=["+1 selection²", "+0 calls",
                    f"all chips: {c['chipall_mean_chips']:.1f} selections"],
              kill=f"gain ≥10 pp, ≥80% of full: discovery {verdict(kv['chip'])}",
              kill2=f"W-C speech act: {verdict(kv['chip_wc'])}"),
@@ -193,7 +193,7 @@ def ledger():
     # column heads
     for x, t in ((X_BEN, "Benefit (targeted endpoint)"), (X_HARM, "Offline failure indicators"), (X_COST, "Cost")):
         fig.text(x / W, (TOP + 0.08) / H, t, fontsize=7.8, fontweight="bold", color=INK, va="bottom")
-    fig.text(X_NAME / W, 0.04 / H, "¹ local server, partial CPU offload   ² reading time not counted   W-C tick: 80% of full-input match",
+    fig.text(X_NAME / W, 0.04 / H, "¹ local server, partial CPU offload   ² nominal; dwell, scanning and learning not counted   W-C tick: 80% of full-input match",
              fontsize=5.8, color=INK2, va="bottom", linespacing=1.1)
     from matplotlib.lines import Line2D
     h = [Line2D([], [], marker="o", ls="", mfc="white", mec=BASE, mew=1.2, ms=5, label="comparator (P2 set; length-matched word)"),

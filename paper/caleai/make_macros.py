@@ -374,6 +374,64 @@ if JV.exists():
         put("human_gold_ready", 1)
 
 
+# ---------------- cycle-1 additions: repair-usability audits, hw1 replication, human keyword elicitation.
+# Everything below is read from stored analysis files; design constants are typed and marked as such.
+import csv as _csv
+
+def _ci(k, est, lo, hi, d=1):
+    put(k, f"{100 * est:.{d}f}"); put(k + "_lo", f"{100 * lo:.{d}f}"); put(k + "_hi", f"{100 * hi:.{d}f}")
+
+_ra = json.loads((ROOT / "analysis/repair_audit/summary.json").read_text())
+for _arm, _t in (("repaired", "rep"), ("control", "ctl")):
+    _u = _ra["per_arm"][_arm]["usable"]
+    _ci(f"ra_{_t}", _u["p"], *_u["ci"]); kn(f"ra_{_t}_c", _u["k"], _u["n"]); put(f"ra_{_t}_unk", _u["unknown"])
+    put(f"ra_{_t}_items", _ra["per_arm"][_arm]["items"])
+_d = _ra["difference_repaired_minus_control"]["usable"]
+_ci("ra_gap", _d["diff"], *_d["ci"])
+put("ra_raters", len(_ra["annotators"]))
+_rt = json.loads((ROOT / "analysis/repair_audit_transfer/summary.json").read_text())
+for _arm, _t in (("repaired", "rep"), ("control", "ctl")):
+    _u = _rt["per_arm"][_arm]["usable"]
+    _ci(f"rt_{_t}", _u["p"], *_u["ci"]); kn(f"rt_{_t}_c", _u["k"], _u["n"])
+    put(f"rt_{_t}_items", _rt["per_arm"][_arm]["items"])
+# Declared example rule: the first (hash_rank order) consensus-unusable repaired items of each pool.
+for _pre, _f in (("ra", "repair_audit"), ("rt", "repair_audit_transfer")):
+    _rows = [r for r in _csv.DictReader((ROOT / f"analysis/{_f}/items.csv").open()) if r["arm"] == "repaired"]
+    _bad = sorted((r for r in _rows if r["cons_usable"] == "False"), key=lambda r: int(r["hash_rank"]))
+    kn(f"{_pre}_unusable", len(_bad), sum(1 for r in _rows if r["cons_usable"] in ("True", "False")))
+    for _i, r in enumerate(_bad[:3]):
+        _inp = r["input_text"].replace("Keywords: ", "")
+        put(f"{_pre}_ex{_i}_in", _inp); put(f"{_pre}_ex{_i}_out", r["text"])
+        put(f"{_pre}_ex{_i}_model", r.get("assigned_model", ""))
+    put(f"{_pre}_ex_echo", sum(1 for r in _bad if r["text"].startswith(("Ask you", "Tell you"))))
+# Part 17 design constants (typed; frozen in annotation/COORDINATOR_STEPS.md section 4)
+put("p18_per_writer", 10); put("p17_texts", 120); put("p17_raters", 3); put("p17_margin", 10)
+# hw1 human-written replication
+_h = json.loads((ROOT / "analysis/hw1/summary.json").read_text())
+_hc = {(r["contrast"], r["cluster"]): r for r in _csv.DictReader((ROOT / "analysis/hw1/primary_contrasts.csv").open())}
+for _c, _n in (("P1", "hw_p1"), ("P2", "hw_p2")):
+    _r = _hc[(_c, "writer")]; _ci(_n, float(_r["estimate"]), float(_r["ci_low"]), float(_r["ci_high"]))
+_p3 = _h["P3_affirmative_share"]; _ci("hw_p3", _p3["estimate"], _p3["ci_low"], _p3["ci_high"])
+_cg = [r for r in _csv.DictReader((ROOT / "analysis/hw1/chip_gain.csv").open()) if r["model"] == "ALL"]
+put("hw_chip_min", f"{100 * min(float(r['estimate']) for r in _cg):.1f}")
+put("hw_chip_max", f"{100 * max(float(r['estimate']) for r in _cg):.1f}")
+put("hw_chip_dims", len(_cg))
+put("hw_kept", _h["n_kept"]); put("hw_wr_min", min(_h["writers_by_dim"].values())); put("hw_wr_max", max(_h["writers_by_dim"].values()))
+put("hw_maxshift", f"{max(_h['max_shift_pp'].values()):.1f}")
+# human keyword elicitation (Part 9)
+_e = json.loads((ROOT / "analysis/elicitation/summary.json").read_text())
+for _dim, _t in (("polarity", "el_pol"), ("politeness", "el_pt")):
+    _b = _e["by_dimension"][_dim]["lenient"]
+    _ci(_t + "_h", _b["human_pooled"]["p"], *_b["human_pooled"]["ci"])
+    _ci(_t + "_c", _b["pos_cap4"]["p"], *_b["pos_cap4"]["ci"])
+put("el_alpha", f"{_e['agreement']['alpha_lenient_loss']:.2f}")
+put("el_msgs", _e["n_messages_rated"]); put("el_sets", _e["n_ratings_valid"]); put("el_annot", len(_e["annotators"]))
+# judge validation on the new human data
+for _f, _t in (("judge_validation_elic.json", "jve"), ("judge_validation_hw.json", "jvh")):
+    _jp = ROOT / "annotation" / _f
+    put(_t + "_ready", 1) if _jp.exists() else None
+
+
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
     return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus
