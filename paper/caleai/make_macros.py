@@ -612,6 +612,35 @@ assert "speech_act" not in _near
 put("cc_nl_near", len(_near)); put("cc_nl_dims", len(_cd))
 put("cc_nl_near_max", f"{100 * max(abs(_cd[k]['chip1_minus_nlcue']) for k in _near):.1f}")
 
+# ---- model breadth (C54): analysis/model_breadth/summary.json + gemini_summary.json ----
+_MBP = ROOT / "analysis/model_breadth/summary.json"
+_MG = ROOT / "analysis/model_breadth/gemini_summary.json"
+_mb = json.load(open(_MBP))
+_mg = json.load(open(_MG))
+_FAMILY = {"qwen2.5-7b": "Qwen", "qwen2.5-14b": "Qwen", "llama3.1-8b": "Llama", "gemma3-4b": "Gemma",
+           "mistral-nemo-12b": "Mistral", "gpt-6.1-terra": "GPT"}
+_ck, _new = _mb["checks"], _mb["new_models"]
+assert set(_ck) == set(_mb["models"]) == set(_FAMILY)
+_arms = [v for m in _ck for v in _ck[m]["legend_arms_d1"].values()]
+_nd = [d for d in _ck[_new[0]]["per_dimension"] if d != "speech_act"]
+MB = {
+    "mb_nmod": len(_ck), "mb_nfam": len(set(_FAMILY.values())),
+    "mb_bare_min": min(_ck[m]["bare_affirmative_share"] for m in _ck),
+    "mb_bare_min_new": min(_ck[m]["bare_affirmative_share"] for m in _new),
+    "mb_leg_min": min(_arms),
+    "mb_act_lo": min(_ck[m]["speech_act_chip_contrast_pp"] for m in _new) / 100,
+    "mb_act_hi": max(_ck[m]["speech_act_chip_contrast_pp"] for m in _new) / 100,
+    "mb_irrel_min": min(_ck[m]["per_dimension"][d]["chip_over_irrel_pp"] for m in _new for d in _ck[m]["per_dimension"]) / 100,
+    "mb_word_max": max(abs(_ck[m]["per_dimension"][d]["chip_over_word_pp"]) for m in _new for d in _nd) / 100,
+}
+_g = _mg["legend_pooled_sources"]["gemini-3.1-flash-lite"]
+assert _g["n_a"] == 184 and _g["n_c"] == 184  # report only complete cells
+MB.update({"mb_gem_a": _g["a_aff"], "mb_gem_c": _g["c_aff"], "mb_gem_n": _g["n_a"]})
+_MBINT = ("mb_nmod", "mb_nfam", "mb_gem_n")
+for _k, _v in MB.items():
+    put(_k, _v if _k in _MBINT else f"{100 * _v:.1f}")
+
+
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
     return "$-$" + v[1:] if v.startswith("-") and v[1:2].isdigit() else v  # typographic minus
