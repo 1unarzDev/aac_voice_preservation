@@ -51,6 +51,7 @@ QUEUE = ROOT / "runs" / "gemini_queue.json"
 LOCK = ROOT / "runs" / "gemini_daily.lock"
 PT = ZoneInfo("America/Los_Angeles")
 FIN_EVERY_S = 2 * 3600
+MIN_FINALIZE = 20
 ITEMS = {"legend": "data/items_ext/legend_items.jsonl", "hw": "data/items/hw.jsonl",
          "hwctl": "data/items_ext/hwctl_items.jsonl"}
 
@@ -223,7 +224,7 @@ def finalize() -> dict:
         model, name = stem[len("gemini_"):].rsplit("_run_", 1)
         rows = read_rows(rf)
         n_cached = sum(map(cached, rows))
-        if n_cached == 0:
+        if n_cached < MIN_FINALIZE:   # the judge endpoint has a large fixed latency; do not spend it on a handful of rows
             continue
         run_id = f"gem_{model.replace('gemini-2.5-', '').replace('gemini-', '').replace('.', '')}_{name}"
         rd = ROOT / "runs" / run_id
