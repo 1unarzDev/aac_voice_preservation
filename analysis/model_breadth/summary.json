@@ -4,10 +4,12 @@
   "llama3.1-8b",
   "gemma3-4b",
   "gpt-6.1-terra",
-  "qwen2.5-14b"
+  "qwen2.5-14b",
+  "mistral-nemo-12b"
  ],
  "new_models": [
-  "qwen2.5-14b"
+  "qwen2.5-14b",
+  "mistral-nemo-12b"
  ],
  "meta": {
   "hw_unresolved_valid": 0,
@@ -15,6 +17,7 @@
    "gemma3-4b": 5470,
    "gpt-6.1-terra": 5470,
    "llama3.1-8b": 5470,
+   "mistral-nemo-12b": 5470,
    "qwen2.5-14b": 5470,
    "qwen2.5-7b": 5470
   },
@@ -342,6 +345,70 @@
     "agent": 1.0,
     "time_quantity": 0.9896907216494846,
     "certainty": 1.0
+   }
+  },
+  "mistral-nemo-12b": {
+   "bare_affirmative_share": 0.9903846153846154,
+   "bare_default_holds(share>=0.90)": true,
+   "legend_arms_d1": {
+    "a_legend": 0.9728260869565217,
+    "b_nolegend": 0.994535519125683,
+    "c_markers_missing": 0.9782608695652174
+   },
+   "not_legend_artifact(b and c >=0.90)": true,
+   "speech_act_chip_contrast_pp": 37.3134328358209,
+   "speech_act_chip_contrast_writer_lo_gt0": true,
+   "per_dimension": {
+    "polarity": {
+     "chip_over_noncrit_pp": 50.0,
+     "chip_over_irrel_pp": 50.0,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.4807692307692308,
+     "word_equals_chip_within5": true
+    },
+    "speech_act": {
+     "chip_over_noncrit_pp": 37.3134328358209,
+     "chip_over_irrel_pp": 31.343283582089555,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 3.731343283582089,
+     "word_equals_chip_within5": false
+    },
+    "politeness": {
+     "chip_over_noncrit_pp": 49.43820224719101,
+     "chip_over_irrel_pp": 49.43820224719101,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 1.6853932584269662,
+     "word_equals_chip_within5": true
+    },
+    "agent": {
+     "chip_over_noncrit_pp": 64.70588235294117,
+     "chip_over_irrel_pp": 66.17647058823529,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    },
+    "time_quantity": {
+     "chip_over_noncrit_pp": 82.9896907216495,
+     "chip_over_irrel_pp": 73.71134020618557,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": -1.5463917525773196,
+     "word_equals_chip_within5": true
+    },
+    "certainty": {
+     "chip_over_noncrit_pp": 54.02298850574713,
+     "chip_over_irrel_pp": 50.0,
+     "irrel_lo_gt0": true,
+     "chip_over_word_pp": 0.0,
+     "word_equals_chip_within5": true
+    }
+   },
+   "full_critical_match": {
+    "polarity": 0.9951923076923077,
+    "speech_act": 0.9701492537313433,
+    "politeness": 0.9831460674157303,
+    "agent": 1.0,
+    "time_quantity": 1.0,
+    "certainty": 0.9885057471264368
    }
   }
  },
