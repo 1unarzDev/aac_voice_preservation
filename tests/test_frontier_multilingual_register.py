@@ -11,10 +11,10 @@ DE = [("Kannst du mir bitte helfen?", "T"), ("Können Sie mir bitte helfen?", "V
  ("Wir gehen heute ins Kino.", "none"), ("Bitte warten Sie hier.", "V"), ("Sie ist heute krank.", "ambig"), ("Magst du Kaffee?", "T"),
  ("Das ist dein Buch.", "T"), ("Ist das Ihr Buch?", "V"), ("Ich brauche Hilfe.", "none"), ("Willst du mitkommen?", "T")]
 ES = [("¿Puedes ayudarme, por favor?", "T"), ("¿Puede usted ayudarme, por favor?", "V"), ("Trae tus documentos.", "T"),
- ("Traiga sus documentos.", "ambig"), ("Te vi ayer.", "T"), ("Lo vi ayer, usted estaba allí.", "V"), ("La cita es a las nueve.", "none"),
+ ("Traiga sus documentos.", "V"), ("Te vi ayer.", "T"), ("Lo vi ayer, usted estaba allí.", "V"), ("La cita es a las nueve.", "none"),
  ("Hoy hace buen tiempo.", "none"), ("¿Tienes hambre?", "T"), ("¿Tiene usted hambre?", "V"), ("¿Cuándo vienes hoy?", "T"),
- ("¿Podría ayudarme?", "ambig"), ("Quiero un café.", "none"), ("Dame el formulario.", "T"), ("Le doy el formulario, usted lo firma.", "V"),
- ("Tú puedes ayudarle a usted.", "mixed"), ("Vamos al cine hoy.", "none"), ("Espere aquí, por favor.", "ambig"), ("Necesito ayuda.", "none"),
+ ("¿Podría ayudarme?", "V"), ("Quiero un café.", "none"), ("Dame el formulario.", "T"), ("Le doy el formulario, usted lo firma.", "V"),
+ ("Tú puedes ayudarle a usted.", "mixed"), ("Vamos al cine hoy.", "none"), ("Espere aquí, por favor.", "V"), ("Necesito ayuda.", "none"),
  ("¿Es este tu libro?", "T"), ("¿Es este su libro, usted?", "V"), ("Mañana voy al médico.", "none"), ("¿Quieres venir?", "T"), ("Ustedes pueden pasar.", "ambig")]
 FR = [("Peux-tu m'aider, s'il te plaît ?", "T"), ("Pouvez-vous m'aider, s'il vous plaît ?", "V"), ("Apporte tes documents.", "T"),
  ("Apportez vos documents.", "V"), ("Je t'ai vu hier.", "T"), ("Je vous ai vu hier.", "V"), ("Le rendez-vous est à neuf heures.", "none"),

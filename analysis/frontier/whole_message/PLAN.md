@@ -336,3 +336,9 @@ Zero-compute fixes to the write-up (post-hoc amendments, none re-declares a thre
 - Note A6 UC is NaN for 126/144 rows and filled with 0 in the composite; do not headline composite for A6. The +.031 M1-ref match gain is post hoc, capped at .6, under 0.15 rating point: not an AAC improvement.
 - Novelty: no novelty claim for minimal-expansion prompting or two-candidate arms. Open and read Cai 2022, KWickChat, Chen 2023/2024, arXiv 2503.11881 before any positioning paragraph; until verified, cite none as established.
 - Human annotation: R-WM-1 (acceptability of A0/A1/A2 outputs) and the verbatim-copy false-flag check stay in ANNOTATION_REQUEST.md, not sent; no benefit-to-people claim before it returns.
+
+### Follow-up F1 pre-declared rule (2026-11-03, written BEFORE running; CPU only, stored scores only, no new model calls)
+Source: SYNTHESIS.md section 5 item 5. Data: r2_validity_features.csv, chip1 (n=97, 20 writers) as primary, all200 as secondary.
+- Analyses: (a) leave-one-writer-out (LOWO): drop each writer, recompute AUROC of M1free_gpt and T1_wordcount for writer rejection (L1) and the paired delta (M1free - wordcount); (b) writer-jackknife SE and 95% CI (normal, delete-one) of the delta; (c) writer-stratified (within-writer pairs only) AUROC for both scores, to remove between-writer base-rate confounding.
+- Verdict rule: "M1-free beats word count" is SUPPORTED only if the jackknife CI of the delta excludes 0 AND the minimum LOWO delta is > 0. "Parity with word count" is reported if the jackknife CI includes 0 and |delta| < .10 in all LOWO fits. The frontier verdict (null metric) FLIPS only under SUPPORTED. Anything else leaves the verdict unchanged. M1-free vs the .75 threshold: report the LOWO min AUROC; the threshold is met only if min >= .75.
+- Script: src/frontier_whole_message_followup_lowo.py; outputs followup_lowo.csv, followup_summary.json, followup.md.
