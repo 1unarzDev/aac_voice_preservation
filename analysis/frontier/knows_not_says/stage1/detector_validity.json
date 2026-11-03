@@ -1,0 +1,94 @@
+{
+ "note": "reference = machine judge (J1+J2) + blind arbiter on disagreements; NOT human truth; unclear/mixed counted as not negated; human confirmation requested in ANNOTATION_REQUEST.md",
+ "n_unresolved": 0,
+ "ref_source_counts": {
+  "judges agree": 827,
+  "arbiter": 7
+ },
+ "sets": {
+  "model:llama3.1-8b": {
+   "ppv": {
+    "k": 73,
+    "n": 100,
+    "rate": 0.73,
+    "wilson_lo": 0.6356769977376873,
+    "wilson_hi": 0.8073053908233518,
+    "ht_weighted": 0.7514809066864848
+   },
+   "npv": {
+    "k": 300,
+    "n": 300,
+    "rate": 1.0,
+    "wilson_lo": 0.9873565700022643,
+    "wilson_hi": 0.9999999999999999,
+    "ht_weighted": 1.0
+   },
+   "unclear_mixed_by_reference": 27,
+   "confusion": {
+    "det0_ref0": 300,
+    "det0_ref1": 0,
+    "det1_ref0": 27,
+    "det1_ref1": 73
+   },
+   "p_detector_neg_domain_ht": 0.01792150418639624,
+   "derived_sensitivity": 1.0,
+   "derived_specificity": 0.9950970500559713
+  },
+  "model:qwen2.5-7b": {
+   "ppv": {
+    "k": 29,
+    "n": 34,
+    "rate": 0.8529411764705882,
+    "wilson_lo": 0.6987161182594804,
+    "wilson_hi": 0.9355065361737359,
+    "ht_weighted": 0.8533131193610412
+   },
+   "npv": {
+    "k": 300,
+    "n": 300,
+    "rate": 1.0,
+    "wilson_lo": 0.9873565700022643,
+    "wilson_hi": 0.9999999999999999,
+    "ht_weighted": 1.0
+   },
+   "unclear_mixed_by_reference": 4,
+   "confusion": {
+    "det0_ref0": 300,
+    "det0_ref1": 0,
+    "det1_ref0": 5,
+    "det1_ref1": 29
+   },
+   "p_detector_neg_domain_ht": 0.003969717792986528,
+   "derived_sensitivity": 1.0,
+   "derived_specificity": 0.9994142346076279
+  },
+  "source": {
+   "ppv": {
+    "k": 37,
+    "n": 50,
+    "rate": 0.74,
+    "wilson_lo": 0.6044657801100008,
+    "wilson_hi": 0.8412862034863262,
+    "ht_weighted": 0.7523208178298944
+   },
+   "npv": {
+    "k": 50,
+    "n": 50,
+    "rate": 1.0,
+    "wilson_lo": 0.9286499658256813,
+    "wilson_hi": 1.0,
+    "ht_weighted": 1.0
+   },
+   "unclear_mixed_by_reference": 12,
+   "confusion": {
+    "det0_ref0": 50,
+    "det0_ref1": 0,
+    "det1_ref0": 13,
+    "det1_ref1": 37
+   },
+   "p_detector_neg_domain_ht": 0.09803005703003258,
+   "derived_sensitivity": 1.0,
+   "derived_specificity": 0.9725186245804568
+  }
+ }
+}

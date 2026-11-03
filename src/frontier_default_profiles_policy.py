@@ -128,12 +128,13 @@ def prior_scores(df, d, seed=SEED):
     return np.where(eligible, sc_, 0.0)
 def lexgate(df, d): return (~df[{"polarity": "kw_neg", "politeness": "kw_pol", "speech_act": "kw_act"}[d]]).to_numpy()
 
+PQ0 = {}   # secondary readout: only the question about the non-default reading (reported alongside the pre-declared two-framing mean; see report)
 def load_probe():
     P = {}
     for m in ["qwen2.5-7b", "llama3.1-8b", "gemma3-4b", "qwen2.5-14b", "mistral-nemo-12b"]:
         fn = ROOT / f"runs/frontier_default_profiles_probe/{m}.jsonl"
         if not fn.exists(): continue
-        rr = pd.DataFrame([json.loads(l) for l in open(fn)]); rr["q"] = rr[["q0", "q1"]].mean(axis=1); P[m] = rr.pivot(index="unit", columns="dim", values="q")
+        rr = pd.DataFrame([json.loads(l) for l in open(fn)]); rr["q"] = rr[["q0", "q1"]].mean(axis=1); P[m] = rr.pivot(index="unit", columns="dim", values="q"); PQ0[m] = rr.pivot(index="unit", columns="dim", values="q0")
     return P
 PROBE = {} if A.no_probe else load_probe()
 pol_rows, curve_rows, summ = [], [], {"probe_models": sorted(PROBE), "models4": MODELS4, "weights": WGT, "kendall_tau_weighted_vs_unweighted": tau}
@@ -170,6 +171,9 @@ for scope, Uc in (("human", Uh), ("pos_cap4", U[U.channel.eq("pos_cap4")].reset_
             q = Uc.unit.map(P[d]).to_numpy() if d in P else None
             if q is None or np.isnan(q).all(): continue
             q = np.nan_to_num(q, nan=0.0); sc_["conf_raw_" + m] = q; sc_["conf_gated_" + m] = np.where(lexgate(Uc, d), q, -1.0)
+        for m, P in PQ0.items():
+            q = np.nan_to_num(Uc.unit.map(P[d]).to_numpy(), nan=0.0); sc_["conf_gated_q0_" + m] = np.where(lexgate(Uc, d), q, -1.0)
+        if PQ0: sc_["conf_gated_q0_mean_models"] = np.where(lexgate(Uc, d), np.mean([np.nan_to_num(Uc.unit.map(P[d]).to_numpy()) for P in PQ0.values()], 0), -1.0)
         if PROBE:
             ms = [Uc.unit.map(P[d]).to_numpy() for P in PROBE.values() if d in P]
             if ms: sc_["conf_gated_mean_models"] = np.where(lexgate(Uc, d), np.nanmean(ms, 0), -1.0)
@@ -197,6 +201,18 @@ for m, P in PROBE.items():
         y = s[c["out"]].astype(float)[ok]
         rho = spearmanr(q[ok], y)[0] if y.nunique() > 1 else np.nan
         val.append(dict(model=m, dimension=d, n=int(ok.sum()), cue_asserting_output_rate=float(y.mean()), spearman_q_vs_output_asserts_cue=rho, mean_q=float(q[ok].mean())))
+from scipy.stats import rankdata
+def auroc(sc_, y):
+    y = np.asarray(y, bool); r = rankdata(sc_); n1, n0 = y.sum(), (~y).sum()
+    return float((r[y].sum() - n1 * (n1 + 1) / 2) / (n1 * n0)) if n1 and n0 else np.nan
+aur = []
+for m, P in PROBE.items():
+    for d in DIMS:
+        u = Uh[lexgate(Uh, d)]
+        for nm, PP in (("mean_two_framings", P), ("q0_only", PQ0[m] if m in PQ0 else P)):
+            q = u.unit.map(PP[d]); ok = q.notna().to_numpy()
+            aur.append(dict(model=m, dimension=d, variant=nm, n=int(ok.sum()), n_E=int(u["E_" + d][ok].sum()), auroc_q_predicts_exposure=auroc(q[ok], u["E_" + d][ok] > 0)))
+pd.DataFrame(aur).to_csv(OUT / "logprob_auroc_exposure.csv", index=False)
 VAL = pd.DataFrame(val); VAL.to_csv(OUT / "logprob_validity.csv", index=False)
 # calibration of q vs source posterior (is the model's forced-choice probability close to the human base rate?)
 cal = []

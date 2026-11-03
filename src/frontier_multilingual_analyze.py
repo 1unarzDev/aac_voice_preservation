@@ -40,12 +40,17 @@ for m in MODELS:
 jdump(OUT / "register_labels.jsonl", reg)
 
 # validation: detector vs arbiter on non-ambiguous items
+import frontier_multilingual_register_v1 as det1
 val = collections.defaultdict(lambda: [0, 0])
+valin = collections.defaultdict(lambda: [0, 0]); valv1 = collections.defaultdict(lambda: [0, 0])
 for it in arb_items:
-    if it.get("kind") == "validation" and arb.get(str(it["n"])):
-        d = det(it["lang"], it["text"])
-        val[it["lang"]][0] += 1
-        val[it["lang"]][1] += (d == arb[str(it["n"])])
+    if not arb.get(str(it["n"])):
+        continue
+    if it.get("kind") == "validation2":
+        val[it["lang"]][0] += 1; val[it["lang"]][1] += (det(it["lang"], it["text"]) == arb[str(it["n"])])
+    if it.get("kind") == "validation":
+        valin[it["lang"]][0] += 1; valin[it["lang"]][1] += (det(it["lang"], it["text"]) == arb[str(it["n"])])
+        valv1[it["lang"]][0] += 1; valv1[it["lang"]][1] += (det1.label(it["lang"], it["text"]) == arb[str(it["n"])])
 
 
 def boot_ci(fams, stat, rows_by_fam, nb=B):
@@ -77,7 +82,9 @@ def share(num, den):
     return f
 
 
-out = {"models": MODELS, "register": {}, "polarity": {}, "validation": {k: {"n": v[0], "agree": v[1], "rate": v[1] / v[0] if v[0] else None} for k, v in val.items()}}
+out = {"models": MODELS, "register": {}, "polarity": {}, "validation_v1_first_sample": {k: {"n": v[0], "agree": v[1], "rate": v[1] / v[0]} for k, v in valv1.items()},
+       "validation_v2_in_sample_not_a_validation": {k: {"n": v[0], "agree": v[1], "rate": v[1] / v[0]} for k, v in valin.items()},
+       "validation": {k: {"n": v[0], "agree": v[1], "rate": v[1] / v[0] if v[0] else None} for k, v in val.items()}}
 tab = []  # csv rows
 # ---------------- H1/H2 register commitment, bare prompt P0-L
 isadd = lambda r: r["label"] in ("T", "V", "mixed")

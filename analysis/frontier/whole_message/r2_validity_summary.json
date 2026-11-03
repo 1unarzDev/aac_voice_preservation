@@ -1,0 +1,116 @@
+{
+ "agreement": {
+  "Q14_UC|all200": {
+   "spearman": 0.5007371259246609
+  },
+  "Q14_UC|chip1": {
+   "spearman": 0.5391546140957686
+  },
+  "Q14_UC|bare": {
+   "spearman": 0.49843413263770375
+  },
+  "Q14_SC|all200": {
+   "spearman": 0.5258387575003671
+  },
+  "Q14_SC|chip1": {
+   "spearman": 0.4817322453681446
+  },
+  "Q14_SC|bare": {
+   "spearman": 0.525266360822769
+  },
+  "Q14_UC_binary_agreement_with_gpt_UCflag": 0.58,
+  "Nemo_UC|all200": {
+   "spearman": 0.41835864952099305
+  },
+  "Nemo_UC|chip1": {
+   "spearman": 0.48317490075681796
+  },
+  "Nemo_UC|bare": {
+   "spearman": 0.44156580877971063
+  },
+  "Nemo_SC|all200": {
+   "spearman": 0.2480506791512553
+  },
+  "Nemo_SC|chip1": {
+   "spearman": 0.29008962588472237
+  },
+  "Nemo_SC|bare": {
+   "spearman": 0.20775304958762586
+  },
+  "Nemo_UC_binary_agreement_with_gpt_UCflag": 0.725
+ },
+ "verbatim": {
+  "gate_c_n": 100,
+  "gate_c_UC_flag_rate": 0.0,
+  "gate_c_WMFfail_rate": 0.39,
+  "gate_c_dropped_rate": 0.39,
+  "gate_c_frame_rate": 0.24,
+  "p18_zero_novelty_n": 140,
+  "p18_zero_novelty_UCflag_rate": 0.4357142857142857,
+  "p18_zero_novelty_WMFfail_rate": 0.5214285714285715,
+  "p18_zero_novelty_rejected_rate": 0.6544117647058824
+ },
+ "local_models": {
+  "Q14": "qwen2.5-14b",
+  "Nemo": "mistral-nemo-12b"
+ },
+ "mechanism": [
+  {
+   "channel": "chip1",
+   "n_rejected": 59,
+   "a_misres": 51,
+   "b_UC": 38,
+   "c_drop": 59,
+   "excl_a": 51,
+   "excl_b": 4,
+   "excl_c": 4,
+   "excl_d_residual": 0,
+   "ck_true_n": 93,
+   "ck_true_rejected": 55,
+   "reject_given_UC1": 0.8205128205128205,
+   "n_UC1": 39,
+   "reject_given_UC0": 0.42592592592592593,
+   "n_UC0": 54,
+   "reject_given_UC0_frame0": 0.14705882352941177,
+   "n_UC0_frame0": 34
+  },
+  {
+   "channel": "bare",
+   "n_rejected": 87,
+   "a_misres": 83,
+   "b_UC": 76,
+   "c_drop": 87,
+   "excl_a": 83,
+   "excl_b": 3,
+   "excl_c": 1,
+   "excl_d_residual": 0,
+   "ck_true_n": 33,
+   "ck_true_rejected": 22,
+   "reject_given_UC1": 0.7916666666666666,
+   "n_UC1": 24,
+   "reject_given_UC0": 0.3333333333333333,
+   "n_UC0": 9,
+   "reject_given_UC0_frame0": 0.2857142857142857,
+   "n_UC0_frame0": 7
+  },
+  {
+   "channel": "all",
+   "n_rejected": 146,
+   "a_misres": 134,
+   "b_UC": 114,
+   "c_drop": 146,
+   "excl_a": 134,
+   "excl_b": 7,
+   "excl_c": 5,
+   "excl_d_residual": 0,
+   "ck_true_n": 126,
+   "ck_true_rejected": 77,
+   "reject_given_UC1": 0.8095238095238095,
+   "n_UC1": 63,
+   "reject_given_UC0": 0.4126984126984127,
+   "n_UC0": 63,
+   "reject_given_UC0_frame0": 0.17073170731707318,
+   "n_UC0_frame0": 41
+  }
+ ]
+}

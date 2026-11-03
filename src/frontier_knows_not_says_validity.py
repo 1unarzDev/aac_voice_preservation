@@ -78,17 +78,14 @@ def score():
     key = pd.read_csv(ROOT / "annotation/frontier_knows_not_says_key.csv")
     J = {json.loads(l)["family_id"]: json.loads(l) for l in open(JR / "judgments.jsonl")}
     arb = {}
-    dec = JR / "arbiter_decisions.tsv"
-    if dec.exists():
-        for row in csv.reader(open(dec), delimiter="\t"):
-            if len(row) >= 2 and row[0] != "key": arb[row[0]] = row[1]
-    inv = json.load(open(JR / "arbiter_inventory.json")) if (JR / "arbiter_inventory.json").exists() else None
+    ap_ = JR / "arbiter.jsonl"
+    if ap_.exists():
+        for l in open(ap_): r = json.loads(l); arb[(r["text_id"], r["family_id"], r["input_text"])] = r["critical"]
     ref = []; src_of = []
     for r in key.itertuples():
         j = J[r.family_id]; c = j["critical"]
-        if c is None:   # judges disagree -> arbiter decision keyed by a_unit
-            ak = f"{j['text_id']}|polarity|{'/'.join(OPTS)}"
-            c = arb.get(ak) or next((v for k, v in arb.items() if k.startswith(j["text_id"])), None); src_of.append("arbiter" if c else "UNRESOLVED")
+        if c is None:
+            c = arb.get((j["text_id"], j["family_id"], j["input_text"])); src_of.append("arbiter" if c else "UNRESOLVED")
         else: src_of.append("judges agree")
         ref.append(c)
     key["reference"] = ref; key["ref_source"] = src_of; key["ref_neg"] = [1 if c == "negated" else 0 if c in ("affirmative",) else (0 if c == "unclear/mixed" else None) for c in ref]

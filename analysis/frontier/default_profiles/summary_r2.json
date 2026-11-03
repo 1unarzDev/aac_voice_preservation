@@ -1,0 +1,90 @@
+{
+ "probe_models": [
+  "gemma3-4b",
+  "llama3.1-8b",
+  "qwen2.5-7b"
+ ],
+ "models4": [
+  "gemma3-4b",
+  "gpt-6.1-terra",
+  "llama3.1-8b",
+  "qwen2.5-7b"
+ ],
+ "boot": 1000,
+ "verbal_coverage_units": 0.0,
+ "verbal_unique_kw": 38,
+ "verbal_used": false,
+ "n_units": 1800,
+ "unreachable": {
+  "polarity": {
+   "E_units": 76,
+   "E_unreachable_gated": 0,
+   "E_reachable": 76,
+   "gate_eligible_units": 1510,
+   "units": 1800
+  },
+  "politeness": {
+   "E_units": 136,
+   "E_unreachable_gated": 0,
+   "E_reachable": 136,
+   "gate_eligible_units": 1476,
+   "units": 1800
+  },
+  "speech_act": {
+   "E_units": 417,
+   "E_unreachable_gated": 52,
+   "E_reachable": 365,
+   "gate_eligible_units": 1172,
+   "units": 1800
+  }
+ },
+ "heterogeneity": [
+  {
+   "dimension": "polarity",
+   "models": [
+    "gemma3-4b",
+    "llama3.1-8b",
+    "qwen2.5-7b"
+   ],
+   "range_pp": 11.764393770054838,
+   "lo": 10.1411341974788,
+   "hi": 13.305639809749739,
+   "same_sign_all_excl0": true
+  },
+  {
+   "dimension": "politeness",
+   "models": [
+    "gemma3-4b",
+    "llama3.1-8b",
+    "qwen2.5-7b"
+   ],
+   "range_pp": 43.173805038086684,
+   "lo": 42.342091051082335,
+   "hi": 43.98398872736252,
+   "same_sign_all_excl0": false
+  },
+  {
+   "dimension": "speech_act",
+   "models": [
+    "gemma3-4b",
+    "llama3.1-8b",
+    "qwen2.5-7b"
+   ],
+   "range_pp": 28.746290201532474,
+   "lo": 25.49744055769922,
+   "hi": 32.03757432343678,
+   "same_sign_all_excl0": false
+  }
+ ],
+ "weights": {
+  "polarity": 1.0,
+  "speech_act": 0.8,
+  "politeness": 0.5
+ },
+ "margins": {
+  "polarity": 5.0,
+  "politeness": 10.0,
+  "speech_act": 25.0
+ },
+ "slp_note": "2 raters, descriptive"
+}

@@ -75,5 +75,231 @@
  "seed": 20261102,
  "B": 5000,
  "m1_prompt_sha": "fe9af5fdb506a36f757f7600343dec77994da60c8f39714ddee7d3ebac906b9c",
- "missing_calls": 0
+ "missing_calls": 0,
+ "stage2_pilot_api_slice": {
+  "go_no_go": {
+   "A2": {
+    "UC_diff_pp": -22.22222222222222,
+    "CK_diff_pp": 1.851851851851849,
+    "go": true
+   },
+   "A3": {
+    "UC_diff_pp": -17.59259259259259,
+    "CK_diff_pp": -7.4074074074074066,
+    "go": false
+   },
+   "A1": {
+    "UC_diff_pp": -22.22222222222222,
+    "CK_diff_pp": 0.0,
+    "go": true
+   }
+  },
+  "n_outputs": 432,
+  "n_families": 54
+ },
+ "status": "PROVISIONAL: machine-only (LLM judge, writer labels from Part 18 as validation target); no human validation of treated outputs",
+ "round2": {
+  "status": "PROVISIONAL, machine-only (gpt-6.1-sol judge, Qwen2.5-14B and Mistral-Nemo-12B local judges); no human validation",
+  "stop_rule": {
+   "M1free_beats_best_trivial_chip1": false,
+   "delta_vs_wordcount": {
+    "delta": 0.042,
+    "lo": -0.067,
+    "hi": 0.162
+   },
+   "M1free_beats_graded_critical_Q14_chip1": true,
+   "delta_vs_M0g_Q14": {
+    "delta": 0.312,
+    "lo": 0.13,
+    "hi": 0.492
+   },
+   "independent_judge_spearman_chip1": {
+    "Q14_SC": 0.482,
+    "Nemo_SC": 0.29
+   },
+   "independent_judge_spearman_all200": {
+    "Q14_SC": 0.526,
+    "Nemo_SC": 0.248
+   },
+   "holdout_M1free": {
+    "auroc": 0.821,
+    "lo": 0.709,
+    "hi": 0.912
+   },
+   "holdout_threshold_declared": 0.75,
+   "round3_go": false,
+   "reason": "M1-free does not beat word count (CI includes 0); declared match criterion degenerate; two-candidate arm does not beat the equal-budget baseline",
+   "holdout_point_meets_declared_.75": true,
+   "holdout_CI_lower_bound_below_.75_recorded_as_miss_per_director": true
+  },
+  "chip1_auroc": {
+   "M0_binary": {
+    "auroc": 0.534,
+    "lo": 0.508,
+    "hi": 0.567
+   },
+   "M0g_Q14": {
+    "auroc": 0.454,
+    "lo": 0.31,
+    "hi": 0.608
+   },
+   "M0g_Nemo": {
+    "auroc": 0.545,
+    "lo": 0.437,
+    "hi": 0.648
+   },
+   "T1_wordcount": {
+    "auroc": 0.724,
+    "lo": 0.605,
+    "hi": 0.828
+   },
+   "T2_lenratio": {
+    "auroc": 0.683,
+    "lo": 0.556,
+    "hi": 0.792
+   },
+   "T3_lexF1": {
+    "auroc": 0.598,
+    "lo": 0.482,
+    "hi": 0.704
+   },
+   "T4_novelty": {
+    "auroc": 0.619,
+    "lo": 0.553,
+    "hi": 0.683
+   },
+   "T5_edit_kw": {
+    "auroc": 0.646,
+    "lo": 0.524,
+    "hi": 0.767
+   },
+   "T6_cv_logit": {
+    "auroc": 0.651,
+    "lo": 0.523,
+    "hi": 0.764
+   },
+   "M1free_gpt": {
+    "auroc": 0.766,
+    "lo": 0.686,
+    "hi": 0.837
+   },
+   "M1free_gpt_UCflag": {
+    "auroc": 0.713,
+    "lo": 0.634,
+    "hi": 0.781
+   },
+   "Q14_SC": {
+    "auroc": 0.76,
+    "lo": 0.665,
+    "hi": 0.845
+   },
+   "Q14_UC": {
+    "auroc": 0.729,
+    "lo": 0.637,
+    "hi": 0.816
+   },
+   "Nemo_SC": {
+    "auroc": 0.716,
+    "lo": 0.579,
+    "hi": 0.839
+   },
+   "Nemo_UC": {
+    "auroc": 0.694,
+    "lo": 0.59,
+    "hi": 0.793
+   },
+   "M1ref_gpt_UPPERBOUND": {
+    "auroc": 0.884,
+    "lo": 0.839,
+    "hi": 0.932
+   }
+  },
+  "verbatim": {
+   "gate_c_n": 100,
+   "gate_c_UC_flag_rate": 0.0,
+   "gate_c_WMFfail_rate": 0.39,
+   "gate_c_dropped_rate": 0.39,
+   "gate_c_frame_rate": 0.24,
+   "p18_zero_novelty_n": 140,
+   "p18_zero_novelty_UCflag_rate": 0.4357142857142857,
+   "p18_zero_novelty_WMFfail_rate": 0.5214285714285715,
+   "p18_zero_novelty_rejected_rate": 0.6544117647058824
+  },
+  "mechanism": [
+   {
+    "channel": "chip1",
+    "n_rejected": 59,
+    "a_misres": 51,
+    "b_UC": 38,
+    "c_drop": 59,
+    "excl_a": 51,
+    "excl_b": 4,
+    "excl_c": 4,
+    "excl_d_residual": 0,
+    "ck_true_n": 93,
+    "ck_true_rejected": 55,
+    "reject_given_UC1": 0.8205128205128205,
+    "n_UC1": 39,
+    "reject_given_UC0": 0.42592592592592593,
+    "n_UC0": 54,
+    "reject_given_UC0_frame0": 0.14705882352941177,
+    "n_UC0_frame0": 34
+   },
+   {
+    "channel": "bare",
+    "n_rejected": 87,
+    "a_misres": 83,
+    "b_UC": 76,
+    "c_drop": 87,
+    "excl_a": 83,
+    "excl_b": 3,
+    "excl_c": 1,
+    "excl_d_residual": 0,
+    "ck_true_n": 33,
+    "ck_true_rejected": 22,
+    "reject_given_UC1": 0.7916666666666666,
+    "n_UC1": 24,
+    "reject_given_UC0": 0.3333333333333333,
+    "n_UC0": 9,
+    "reject_given_UC0_frame0": 0.2857142857142857,
+    "n_UC0_frame0": 7
+   },
+   {
+    "channel": "all",
+    "n_rejected": 146,
+    "a_misres": 134,
+    "b_UC": 114,
+    "c_drop": 146,
+    "excl_a": 134,
+    "excl_b": 7,
+    "excl_c": 5,
+    "excl_d_residual": 0,
+    "ck_true_n": 126,
+    "ck_true_rejected": 77,
+    "reject_given_UC1": 0.8095238095238095,
+    "n_UC1": 63,
+    "reject_given_UC0": 0.4126984126984127,
+    "n_UC0": 63,
+    "reject_given_UC0_frame0": 0.17073170731707318,
+    "n_UC0_frame0": 41
+   }
+  ],
+  "generation": {
+   "families": 36,
+   "writers": 16,
+   "inputs": 144,
+   "generators": [
+    "gpt-6.1-terra",
+    "gpt-5.6-luna (d0, default decoding)",
+    "llama3.1-8b"
+   ],
+   "arms": [
+    "A0",
+    "A1",
+    "A2",
+    "A6 (terra)"
+   ],
+   "note": "see r2_rates.csv, r2_contrasts.csv, r2_noise.csv, r2_g1sim.csv, r2_twocand*.csv, r2_policies*.csv, r2_selfcheck*.csv"
+  }
+ }
 }

@@ -1,140 +1,100 @@
 {
- "probe_models": [],
- "models4": [
+ "round": 3,
+ "boot": 300,
+ "probe_models": [
   "gemma3-4b",
-  "gpt-6.1-terra",
   "llama3.1-8b",
   "qwen2.5-7b"
  ],
- "weights": {
+ "status": "final; repair-and-reframe; no round 4",
+ "always_commit_model_visible_per_1000": {
   "polarity": {
-   "mean": 1.0,
-   "slp1": 1.0,
-   "slp2": 1.0
-  },
-  "speech_act": {
-   "mean": 0.8,
-   "slp1": 0.8,
-   "slp2": 0.8
+   "est": 23.875109694702324,
+   "lo": 15.952839574124038,
+   "hi": 32.52893860103019
   },
   "politeness": {
-   "mean": 0.5,
-   "slp1": 0.6,
-   "slp2": 0.4
+   "est": 49.43944082644374,
+   "lo": 38.452670743368365,
+   "hi": 63.83244616775316
+  },
+  "speech_act": {
+   "est": 161.87674164395793,
+   "lo": 134.0511506292511,
+   "hi": 187.833751875272
   }
  },
- "kendall_tau_weighted_vs_unweighted": {
-  "mean": 1.0,
-  "slp1": 1.0,
-  "slp2": 0.33333333333333337
+ "always_commit_exposure_per_1000": {
+  "polarity": 24.37023694055702,
+  "politeness": 56.38600218619618,
+  "speech_act": 277.4658599294875
  },
- "profile": [
-  {
-   "dimension": "polarity",
-   "posterior_cue_given_nocue": 0.02676870064958389,
-   "post_ci": [
-    0.01769328032004755,
-    0.03605160184755527
-   ],
-   "gap_default_pp": 2.5364076110153952,
-   "gap_ci": [
-    1.5950379523802238,
-    3.4842122371622946
-   ],
-   "exposure_per_1000": 24.37023694055702,
-   "exposure_ci": [
-    16.250756397479083,
-    32.68881622228494
-   ],
-   "reversals_models_mean_per_1000": 23.875109694702324,
-   "rev_ci": [
-    15.535924534641989,
-    32.16237594513697
-   ],
-   "gap_RE_pp": 2.5418676665196336,
-   "gap_RE_ci": [
-    2.0291065036688587,
-    3.0546288293704085
-   ],
-   "I2": 0.0,
-   "gap_gemma3-4b_pp": 2.6534652929553664,
-   "gap_gpt-6.1-terra_pp": 2.630060520952344,
-   "gap_llama3.1-8b_pp": 2.3091580978820034,
-   "gap_qwen2.5-7b_pp": 2.552946532271866
+ "primary_contrasts": {
+  "p1": {
+   "diff": -4.198447648781691,
+   "lo": -8.53460410431057,
+   "hi": 2.2279825084810794,
+   "bc_lo": -14.959996256803693,
+   "bc_hi": -0.5458008845972351,
+   "boot_mean": -1.5395844279697668,
+   "p_holm": 1.0
   },
-  {
-   "dimension": "politeness",
-   "posterior_cue_given_nocue": 0.06501886776374748,
-   "post_ci": [
-    0.04786910514803182,
-    0.08490279278001116
-   ],
-   "gap_default_pp": -0.18842909711678946,
-   "gap_ci": [
-    -2.1843643232130936,
-    2.017016022600135
-   ],
-   "exposure_per_1000": 56.38600218619618,
-   "exposure_ci": [
-    41.41056560785202,
-    73.17428586908379
-   ],
-   "reversals_models_mean_per_1000": 49.43944082644374,
-   "rev_ci": [
-    36.081284439765646,
-    64.10037967720156
-   ],
-   "gap_RE_pp": -0.13986476198088896,
-   "gap_RE_ci": [
-    -4.273369144689169,
-    3.993639620727391
-   ],
-   "I2": 0.8989453653200631,
-   "gap_gemma3-4b_pp": -6.735869770533339,
-   "gap_gpt-6.1-terra_pp": 1.5800775729963037,
-   "gap_llama3.1-8b_pp": 2.833431092540807,
-   "gap_qwen2.5-7b_pp": 1.5686447165290698
+  "p2": {
+   "diff": -0.3698058596215752,
+   "lo": -4.433048353336438,
+   "hi": 8.040755097770118,
+   "bc_lo": -6.996776469749196,
+   "bc_hi": 2.822865987488429,
+   "boot_mean": 2.3381390230737704,
+   "p_holm": 1.0
   },
-  {
-   "dimension": "speech_act",
-   "posterior_cue_given_nocue": 0.478631570672508,
-   "post_ci": [
-    0.42220277823508384,
-    0.5290806545373546
-   ],
-   "gap_default_pp": 19.695259533729505,
-   "gap_ci": [
-    13.231597349288322,
-    25.156140270772603
-   ],
-   "exposure_per_1000": 277.4658599294875,
-   "exposure_ci": [
-    232.08318901147302,
-    310.12654035409207
-   ],
-   "reversals_models_mean_per_1000": 161.87674164395793,
-   "rev_ci": [
-    133.44256596792522,
-    185.63100511243886
-   ],
-   "gap_RE_pp": 19.610158772387955,
-   "gap_RE_ci": [
-    14.812396509225293,
-    24.407921035550615
-   ],
-   "I2": 0.5837198592881249,
-   "gap_gemma3-4b_pp": 18.326070652324024,
-   "gap_gpt-6.1-terra_pp": 13.82080051670912,
-   "gap_llama3.1-8b_pp": 24.827427226236583,
-   "gap_qwen2.5-7b_pp": 21.806739739648286
+  "p3": {
+   "diff": -5.598370439577842,
+   "lo": -16.44923286922278,
+   "hi": 2.7237336451139313,
+   "bc_lo": -20.816653647318454,
+   "bc_hi": 1.5251767704648769,
+   "boot_mean": -4.635957245022414,
+   "p_holm": 1.0
+  },
+  "p4": {
+   "diff": -6.70207688636399,
+   "lo": -18.382949514671314,
+   "hi": 4.182045821350867,
+   "bc_lo": -23.495417132417497,
+   "bc_hi": 1.9924895799140354,
+   "boot_mean": -5.269316847573305,
+   "p_holm": 1.0
   }
- ],
- "kendall": {
-  "mean": 1.0,
-  "slp1": 1.0,
-  "slp2": 0.33333333333333337
  },
- "validity": [],
- "n_units_human": 1800,
- "n_boot": 100
+ "primary_significant_after_holm": 0,
+ "exploratory_n": 236,
+ "exploratory_q_lt_05": 21,
+ "mde_per_1000_prior_vs_gated_random": {
+  "polarity": 8.52487138334674,
+  "politeness": 14.810111792697523,
+  "speech_act": 15.068141639999297
+ },
+ "g1": {
+  "bare_keyword_flag_rate_per_1000": 176.78844703093006,
+  "bare_keyword_status": "flags by construction; G1 not applicable without a spec",
+  "spec_check_detection_share": {
+   "polarity": 0.8716676959907297,
+   "politeness": 0.9849427038834526,
+   "speech_act": 0.989440578890191
+  },
+  "repair_measured": false,
+  "hypothetical_worst_case_politeness_per_1000_outputs": 100.64477391344512
+ },
+ "clam_implemented": false,
+ "closest_published_benchmark": "UNMET (entropy stand-in only)",
+ "unreachable_speech_act": {
+  "E_units": 417,
+  "E_unreachable_gated": 52,
+  "E_reachable": 365,
+  "gate_eligible_units": 1172,
+  "units": 1800
+ },
+ "labels": "speech act and politeness provisional (detector proxy); annotation request not sent",
+ "acceptability": "descriptive only; arms not comparable"
 }
