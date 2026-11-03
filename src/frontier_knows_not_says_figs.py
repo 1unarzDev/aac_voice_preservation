@@ -20,8 +20,8 @@ for a, ds in zip(ax, ("cap4", "human")):
         a.bar(x + 1, r.greedy_share, 0.8, color="#4c78a8", label="greedy" if i == 0 else None)
         a.bar(x + 2, r.sampled_share, 0.8, color="#f58518", label="sampled (K=16)" if i == 0 else None); a.errorbar(x + 2, r.sampled_share, [[r.sampled_share - r.sampled_lo], [r.sampled_hi - r.sampled_share]], color="k", lw=1)
         a.text(x + 1, -0.012, r.model.split("-")[0], ha="center", va="top", fontsize=8)
-    a.set_xticks([]); a.set_title(f"E-{ds}" + (" (exploratory, ~16 pos.)" if ds == "human" else ""))
-ax[0].set_ylabel("share of no-cue units whose output is negated"); ax[0].legend(frameon=False, fontsize=7); fig.tight_layout(); fig.savefig(F / "fig1_r1_shares.png"); plt.close(fig)
+    a.set_xticks([]); a.set_title(f"E-{ds}" + (" (exploratory)" if ds == "human" else ""))
+ax[0].set_ylabel("share of no-cue units, output negated"); ax[0].legend(frameon=False, fontsize=7); fig.tight_layout(); fig.savefig(F / "fig1_r1_shares.png"); plt.close(fig)
 
 # Fig 2: R2 AUROC with CIs
 fig, ax = plt.subplots(1, 1, figsize=(6.2, 3.0)); d = r2[r2.dataset == "cap4"]; scores = ["sampled_share(K=16)", "greedy_first_token_entropy", "greedy_mean_token_entropy", "lexical_cv_logistic", "greedy_output_negated"]

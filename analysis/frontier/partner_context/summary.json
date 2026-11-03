@@ -1,0 +1,116 @@
+{
+ "n_families": 130,
+ "models": [
+  "qwen2.5-7b",
+  "llama3.1-8b",
+  "gemma3-4b",
+  "gpt-6.1-terra"
+ ],
+ "rows_scored": 42400,
+ "judge_missing_label_rows_dropped": "see round2.md",
+ "confirmatory": [
+  {
+   "contrast": "C1_chip_harm_X_vs_0 (propositional, [YES] cue)",
+   "model": "pooled",
+   "est_pp": 1.217948717948718,
+   "lo_pp": 0.1923076923076922,
+   "hi_pp": 2.1794871794871793,
+   "p_perm": 0.017399130043497826,
+   "n_fam": 130,
+   "analysis": "ITT",
+   "p_holm": 0.017399130043497826,
+   "verdict": "EQUIVALENT within +-5 pp"
+  },
+  {
+   "contrast": "C2_bare_X_vs_0 (propositional negation)",
+   "model": "pooled",
+   "est_pp": 8.717948717948717,
+   "lo_pp": 6.987179487179486,
+   "hi_pp": 10.64102564102564,
+   "p_perm": 4.999750012499375e-05,
+   "n_fam": 130,
+   "analysis": "ITT",
+   "p_holm": 0.00014999250037498125,
+   "verdict": "CONFIRMED (material)"
+  },
+  {
+   "contrast": "C3_bare_Q_vs_0 (share affirmative)",
+   "model": "pooled",
+   "est_pp": -5.961538461538462,
+   "lo_pp": -8.269230769230768,
+   "hi_pp": -3.653846153846154,
+   "p_perm": 4.999750012499375e-05,
+   "n_fam": 130,
+   "analysis": "ITT",
+   "p_holm": 0.00014999250037498125,
+   "verdict": "INCONCLUSIVE"
+  }
+ ],
+ "lex_sensitivity": {
+  "C2_lex": {
+   "est_pp": 9.679487179487179,
+   "lo_pp": 7.7564102564102555,
+   "hi_pp": 11.666666666666666
+  },
+  "C1_lex": {
+   "est_pp": 1.0256410256410255,
+   "lo_pp": -0.12820512820512828,
+   "hi_pp": 1.9230769230769231
+  }
+ },
+ "turn_check_pass_after_retry": {
+  "D": 0.8769230769230769,
+  "Xa": 0.8384615384615385,
+  "Xb": 0.3923076923076923,
+  "Xc": 0.8,
+  "Q": 0.7153846153846154
+ },
+ "turn_check_first_try": {
+  "D": 0.7538461538461538,
+  "Xa": 0.7153846153846154,
+  "Xb": 0.3,
+  "Xc": 0.6230769230769231,
+  "Q": 0.6384615384615384
+ },
+ "frontier": "partner_context",
+ "round": 2,
+ "status": "provisional; machine-only",
+ "stop_rule_triggered": false,
+ "headline": {
+  "C2_prop_pp": [
+   8.7,
+   7.0,
+   10.6
+  ],
+  "C2_all_negation_pp": [
+   36.7,
+   32.6,
+   40.9
+  ],
+  "C1_prop_pp": [
+   1.2,
+   0.2,
+   2.2
+  ],
+  "C1_upper_bound_pp": [
+   7.05,
+   5.2,
+   9.0
+  ],
+  "C3_Q_aff_pp": [
+   -6.0,
+   -8.3,
+   -3.7
+  ]
+ },
+ "judge": {
+  "polarity_agree": 0.991,
+  "kappa": 0.982,
+  "arbiter_units": 145,
+  "arbiter_units_g1": 22,
+  "echo_agree": 0.976,
+  "reply_agree": 0.991
+ },
+ "requests": 29940,
+ "families": 130
+}

@@ -1,0 +1,8 @@
+| dimension | family/variant | input | A0 | A1 | A2 | A3 | writer's sentence |
+|---|---|---|---|---|---|---|---|
+| agent | hw-agt-072/B | Keywords: [I] print report | I want to print the report. (CK=1, UC=1) | I print the report. (CK=1, UC=0) | I print the report. (CK=1, UC=0) | I print report. (CK=1, UC=0) | I printed the report in the office. |
+| certainty | hw-cer-055/A | Keywords: [MAYBE] guitar music | Maybe we could listen to some guitar music. (CK=1, UC=1) | Maybe guitar music. (CK=1, UC=0) | Maybe guitar music. (CK=1, UC=0) | Maybe guitar music. (CK=1, UC=0) | I think the guitar is in the music room. |
+| polarity | hw-pol-028/A | Keywords: [YES] eat rice | Yes, I want to eat rice. (CK=1, UC=1) | Yes, eat rice. (CK=1, UC=0) | Yes, I eat rice. (CK=1, UC=0) | Yes, eat rice. (CK=1, UC=0) | I eat rice for lunch at home. |
+| politeness | hw-plt-049/A | Keywords: [PLAIN] turn radio | Turn on the radio. (CK=1, UC=1) | Turn the radio. (CK=1, UC=0) | Turn the radio. (CK=1, UC=0) | Turn radio. (CK=1, UC=0) | Turn the radio down in the kitchen. |
+| speech_act | hw-act-085/A | Keywords: [TELL] rent payment leave | I need to leave the rent payment. (CK=1, UC=1) | The rent payment is left. (CK=1, UC=0) | I leave the rent payment. (CK=1, UC=0) | Rent payment leave. (CK=0, UC=0) | The rent payment left my account yesterday. |
+| time_quantity | hw-tim-003/B | Keywords: [NOW] ask space | I need some space right now. (CK=1, UC=1) | I’m asking for space now. (CK=1, UC=0) | I am asking for space. (CK=1, UC=0) | Ask space now. (CK=1, UC=0) | I am asking for more space at work now. |

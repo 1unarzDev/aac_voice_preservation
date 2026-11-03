@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentence Labelling</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  label { font-weight: 600; }
+  input[type=text] { font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 10em; }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.6rem; font-weight: 600; padding: 16px; border: 3px solid var(--fg); margin: 8px 0 16px; background: var(--panel); overflow-wrap: anywhere; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  fieldset.active { border: 4px solid var(--accent); }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  .unsure { font-style: italic; color: var(--muted); }
+  .input-box { font-family: ui-monospace, Menlo, Consolas, monospace; padding: 6px 10px; border: 2px dashed var(--fg); margin: 4px 0 8px; overflow-wrap: anywhere; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sentence labelling</h1>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <div><label for="file">Load items (JSON)</label> <input id="file" type="file" accept=".json,application/json"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress" aria-label="Progress">
+    <div id="progtext">No file loaded.</div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section id="itemview" aria-label="Current item" class="hidden">
+      <div id="practicetag" class="tag hidden">Practice item (you will see feedback)</div>
+      <div class="q">Sentence:</div>
+      <div class="sentence" id="sentence"></div>
+      <form id="form" onsubmit="return false"></form>
+      <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+      <div>
+        <button type="button" id="back">Back (Backspace)</button>
+        <button type="button" id="next" class="primary">Next (Enter)</button>
+      </div>
+    </section>
+    <aside aria-label="Definitions and keys">
+      <h2>Definitions</h2>
+      <dl id="defs"><dd>Load a file to see the definitions.</dd></dl>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">1</span>–<span class="key">9</span> choose an option for the highlighted question</li>
+        <li><span class="key">S</span> unsure / skip the highlighted question</li>
+        <li><span class="key">↑</span> <span class="key">↓</span> move between questions</li>
+        <li><span class="key">Enter</span> next item</li>
+        <li><span class="key">Backspace</span> previous item</li>
+      </ul>
+      <p>Label only what the sentence itself says. Do not guess what the writer meant.
+         The full rules are in CODEBOOK.md.</p>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+const GEN_LABEL = {polarity: "Polarity", speech_act: "Speech act", agent: "Agent (who does it)",
+                   certainty: "Certainty", politeness: "Politeness"};
+let DATA = null, ITEMS = [], idx = 0, active = 0, state = {}, shownAt = null, showingFeedback = false;
+
+const $ = (id) => document.getElementById(id);
+const store = {
+  key() { return "annot:" + (DATA ? DATA.run : "none") + ":" + ($("annot").value.trim() || "anon"); },
+  load() { try { const s = localStorage.getItem(this.key()); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { try { localStorage.setItem(this.key(), JSON.stringify({state, idx})); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function say(msg) { $("status").textContent = msg; }
+
+function questionsFor(it) {
+  const qs = [{dim: "critical", title: "Main question", text: it.critical.question, options: it.critical.options}];
+  for (const g of DATA.general_dims) qs.push({dim: g.name, title: GEN_LABEL[g.name] || g.name, text: g.definition, options: g.options});
+  if (DATA.added_content) qs.push({dim: "added_content", title: "Added content", text: DATA.added_content.definition,
+           options: DATA.added_content.options, showInput: true});
+  return qs;
+}
+function rec(it) {
+  if (!state[it.item_id]) state[it.item_id] = {answers: {}, unsure: {}, time_ms: 0, practice: !!it.practice};
+  return state[it.item_id];
+}
+function stopClock() {
+  if (shownAt !== null && ITEMS[idx]) { rec(ITEMS[idx]).time_ms += Date.now() - shownAt; }
+  shownAt = null;
+}
+
+function renderDefs(it) {
+  const dl = $("defs"); dl.innerHTML = "";
+  const add = (t, d) => { const dt = document.createElement("dt"); dt.textContent = t; const dd = document.createElement("dd"); dd.textContent = d; dl.append(dt, dd); };
+  if (it) add("Main question (" + it.critical.dimension + ")", it.critical.question);
+  for (const g of DATA.general_dims) add(GEN_LABEL[g.name] || g.name, g.definition);
+  if (DATA.added_content) add("Added content", DATA.added_content.definition);
+}
+
+function render() {
+  const it = ITEMS[idx];
+  $("itemview").classList.remove("hidden");
+  $("practicetag").classList.toggle("hidden", !it.practice);
+  $("sentence").textContent = it.text;
+  $("feedback").classList.add("hidden"); showingFeedback = false;
+  renderDefs(it);
+  const r = rec(it), form = $("form"); form.innerHTML = "";
+  const qs = questionsFor(it);
+  // The visible input is shown ONLY with the added_content question, and only once the
+  // other questions are answered, so it cannot influence the extraction answers.
+  const othersDone = qs.slice(0, -1).every(q => r.answers[q.dim] || r.unsure[q.dim]);
+  qs.forEach((q, qi) => {
+    const fs = document.createElement("fieldset");
+    fs.className = qi === active ? "active" : "";
+    fs.id = "q" + qi;
+    const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + q.title; fs.append(lg);
+    const p = document.createElement("p"); p.className = "q"; p.textContent = q.text; fs.append(p);
+    if (q.showInput) {
+      const box = document.createElement("div"); box.className = "input-box";
+      box.textContent = othersDone ? "Input the user typed: " + it.input_text
+                                   : "(The input appears after questions 1–" + (qs.length - 1) + " are answered.)";
+      fs.append(box);
+    }
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup");
+    q.options.forEach((o, oi) => {
+      const lab = document.createElement("label"); lab.className = "opt" + (r.answers[q.dim] === o ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.value = o;
+      inp.checked = r.answers[q.dim] === o;
+      inp.disabled = q.showInput && !othersDone;
+      inp.addEventListener("change", () => { answer(qi, o); });
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(oi + 1);
+      lab.append(inp, k, document.createTextNode(" " + o)); opts.append(lab);
+    });
+    fs.append(opts);
+    if (r.unsure[q.dim]) { const u = document.createElement("p"); u.className = "unsure"; u.textContent = "Marked unsure / skipped."; fs.append(u); }
+    fs.addEventListener("click", () => { if (active !== qi) { active = qi; render(); } });
+    form.append(fs);
+  });
+  const done = ITEMS.filter(x => isComplete(x)).length;
+  const pct = Math.round(100 * done / ITEMS.length);
+  $("progtext").textContent = "Item " + (idx + 1) + " of " + ITEMS.length + " (" + done + " complete, " + pct + "%)"
+                              + (it.practice ? " - practice" : "");
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+  const a = $("q" + active); if (a) a.scrollIntoView({block: "nearest"});
+  if (shownAt === null) shownAt = Date.now();
+}
+
+function isComplete(it) {
+  const r = state[it.item_id]; if (!r) return false;
+  return questionsFor(it).every(q => r.answers[q.dim] || r.unsure[q.dim]);
+}
+function answer(qi, value) {
+  const it = ITEMS[idx], q = questionsFor(it)[qi], r = rec(it);
+  r.answers[q.dim] = value; delete r.unsure[q.dim];
+  active = Math.min(qi + 1, questionsFor(it).length - 1);
+  store.save(); render();
+}
+function markUnsure() {
+  const it = ITEMS[idx], q = questionsFor(it)[active], r = rec(it);
+  r.unsure[q.dim] = true; delete r.answers[q.dim];
+  active = Math.min(active + 1, questionsFor(it).length - 1);
+  store.save(); render();
+}
+
+function showFeedback(it) {
+  const r = rec(it), fb = $("feedback"); fb.innerHTML = "";
+  const h = document.createElement("p"); h.innerHTML = "<strong>Feedback.</strong> Press Enter to continue."; fb.append(h);
+  const ul = document.createElement("ul");
+  for (const q of questionsFor(it)) {
+    const exp = it.expected[q.dim], got = r.answers[q.dim] || "(unsure)";
+    const li = document.createElement("li"); const s = document.createElement("span");
+    s.className = got === exp ? "ok" : "bad"; s.textContent = got === exp ? "Correct" : "Different";
+    li.append(s, document.createTextNode(" - " + q.title + ": you chose " + got + "; codebook answer: " + exp));
+    ul.append(li);
+  }
+  fb.append(ul);
+  const p = document.createElement("p"); p.textContent = it.feedback; fb.append(p);
+  fb.classList.remove("hidden"); showingFeedback = true; fb.focus();
+}
+
+function next() {
+  const it = ITEMS[idx];
+  if (!isComplete(it)) {
+    const qs = questionsFor(it), r = rec(it);
+    active = qs.findIndex(q => !(r.answers[q.dim] || r.unsure[q.dim]));
+    say("Please answer or mark unsure (S) every question first."); render(); return;
+  }
+  if (it.practice && !showingFeedback) { showFeedback(it); return; }
+  stopClock();
+  if (idx < ITEMS.length - 1) { idx++; active = 0; say(""); store.save(); render(); }
+  else { store.save(); say("All items done. Press the Download CSV button."); }
+}
+function back() {
+  if (idx === 0) return;
+  stopClock(); idx--; active = 0; store.save(); render();
+}
+
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!DATA) { say("Load a file first."); return; }
+  stopClock(); if (ITEMS[idx]) shownAt = Date.now();
+  const annot = $("annot").value.trim();
+  if (!annot) { say("Enter your annotator ID before downloading."); $("annot").focus(); return; }
+  const dims = ["critical", ...DATA.general_dims.map(g => g.name), ...(DATA.added_content ? ["added_content"] : [])];
+  const head = ["item_id", "annotator", "practice", "critical_dimension", ...dims, "skip", "unsure_dims", "time_ms", "exported_at"];
+  const lines = [head.join(",")];
+  const now = new Date().toISOString();
+  for (const it of ITEMS) {
+    const r = state[it.item_id]; if (!r) continue;
+    const unsure = Object.keys(r.unsure);
+    lines.push([it.item_id, annot, it.practice ? 1 : 0, it.critical.dimension,
+                ...dims.map(d => r.answers[d] || ""), unsure.length ? 1 : 0, unsure.join("|"),
+                Math.round(r.time_ms), now].map(csvCell).join(","));
+  }
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "labels_" + DATA.run + "_" + annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (lines.length - 1) + " rows).");
+}
+
+function load(json) {
+  DATA = json;
+  ITEMS = [...(json.practice || []).map(p => ({...p, practice: true})), ...json.items];
+  const saved = store.load();
+  state = saved ? saved.state : {}; idx = saved ? Math.min(saved.idx, ITEMS.length - 1) : 0; active = 0;
+  say("Loaded " + json.items.length + " items + " + (json.practice || []).length + " practice items" + (saved ? " (resumed saved progress)." : "."));
+  render();
+}
+$("file").addEventListener("change", (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { load(JSON.parse(rd.result)); } catch (err) { say("Could not read that file: " + err.message); } };
+  rd.readAsText(f);
+});
+$("annot").addEventListener("change", () => { if (DATA) load(DATA); });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (DATA && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!DATA || e.target.tagName === "INPUT" && e.target.type === "text") return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const qs = questionsFor(ITEMS[idx]);
+  if (/^[1-9]$/.test(e.key)) {
+    const q = qs[active], n = Number(e.key) - 1;
+    if (q.showInput && !qs.slice(0, -1).every(x => rec(ITEMS[idx]).answers[x.dim] || rec(ITEMS[idx]).unsure[x.dim])) { say("Answer questions 1–" + (qs.length - 1) + " first."); return; }
+    if (n < q.options.length) { e.preventDefault(); answer(active, q.options[n]); }
+  } else if (e.key === "s" || e.key === "S") { e.preventDefault(); markUnsure(); }
+  else if (e.key === "Enter") { e.preventDefault(); next(); }
+  else if (e.key === "Backspace") { e.preventDefault(); back(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, qs.length - 1); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+ "spec": "supplied('The user typed: '+source)",
+ "n_outputs": 7200,
+ "flag_rate_any_per_1000": 541.0375194371316,
+ "politeness_added_flag_per_1000": 77.1999753668037,
+ "politeness_added_flag_on_nonpolite_source_per_1000": 77.1999753668037,
+ "false_flag_correct_outputs_share": 0.40527836206080514,
+ "per_dimension": [
+  {
+   "dimension": "polarity",
+   "reversal_outputs_per_1000": 24.180715286437884,
+   "flagged_reversal_per_1000": 21.07754838113713,
+   "detection_share": 0.8716676959907297,
+   "n_reversal_outputs": 337,
+   "n_flagged": 272,
+   "note": "detection only; repair needs regeneration (not run); spec is oracle intent"
+  },
+  {
+   "dimension": "politeness",
+   "reversal_outputs_per_1000": 34.95850845996336,
+   "flagged_reversal_per_1000": 34.43212784628886,
+   "detection_share": 0.9849427038834526,
+   "n_reversal_outputs": 388,
+   "n_flagged": 376,
+   "note": "detection only; repair needs regeneration (not run); spec is oracle intent"
+  },
+  {
+   "dimension": "speech_act",
+   "reversal_outputs_per_1000": 194.29448986190016,
+   "flagged_reversal_per_1000": 192.24285252413284,
+   "detection_share": 0.989440578890191,
+   "n_reversal_outputs": 1166,
+   "n_flagged": 1144,
+   "note": "detection only; repair needs regeneration (not run); spec is oracle intent"
+  }
+ ],
+ "flag_rate_by_model": {
+  "gemma3-4b": 0.5244444444444445,
+  "gpt-6.1-terra": 0.44222222222222224,
+  "llama3.1-8b": 0.595,
+  "qwen2.5-7b": 0.5383333333333333
+ }
+}

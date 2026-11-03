@@ -1,0 +1,227 @@
+{
+ "probe_models": [
+  "gemma3-4b",
+  "llama3.1-8b",
+  "qwen2.5-7b"
+ ],
+ "models4": [
+  "gemma3-4b",
+  "gpt-6.1-terra",
+  "llama3.1-8b",
+  "qwen2.5-7b"
+ ],
+ "weights": {
+  "polarity": {
+   "mean": 1.0,
+   "slp1": 1.0,
+   "slp2": 1.0
+  },
+  "speech_act": {
+   "mean": 0.8,
+   "slp1": 0.8,
+   "slp2": 0.8
+  },
+  "politeness": {
+   "mean": 0.5,
+   "slp1": 0.6,
+   "slp2": 0.4
+  }
+ },
+ "kendall_tau_weighted_vs_unweighted": {
+  "mean": 1.0,
+  "slp1": 1.0,
+  "slp2": 0.33333333333333337
+ },
+ "profile": [
+  {
+   "dimension": "polarity",
+   "posterior_cue_given_nocue": 0.02676870064958389,
+   "post_ci": [
+    0.017566985769758323,
+    0.03660590318061293
+   ],
+   "gap_default_pp": 2.5364076110153952,
+   "gap_ci": [
+    1.6142991995177756,
+    3.5275394609726964
+   ],
+   "exposure_per_1000": 24.37023694055702,
+   "exposure_ci": [
+    16.096251734958596,
+    33.13126126696553
+   ],
+   "reversals_models_mean_per_1000": 23.875109694702324,
+   "rev_ci": [
+    15.46517699325391,
+    32.548810601416285
+   ],
+   "gap_RE_pp": 2.540578964995605,
+   "gap_RE_ci": [
+    2.051767210138307,
+    3.0293907198529033
+   ],
+   "I2": 0.0,
+   "gap_gemma3-4b_pp": 2.6534652929553664,
+   "gap_gpt-6.1-terra_pp": 2.630060520952344,
+   "gap_llama3.1-8b_pp": 2.3091580978820034,
+   "gap_qwen2.5-7b_pp": 2.552946532271866
+  },
+  {
+   "dimension": "politeness",
+   "posterior_cue_given_nocue": 0.06501886776374748,
+   "post_ci": [
+    0.04952511646917796,
+    0.08445618212217092
+   ],
+   "gap_default_pp": -0.18842909711678946,
+   "gap_ci": [
+    -2.3213559016435275,
+    2.24664255569255
+   ],
+   "exposure_per_1000": 56.38600218619618,
+   "exposure_ci": [
+    43.031987980985924,
+    72.58887406220269
+   ],
+   "reversals_models_mean_per_1000": 49.43944082644374,
+   "rev_ci": [
+    37.293906810039324,
+    64.28160221027542
+   ],
+   "gap_RE_pp": -0.040833949095994165,
+   "gap_RE_ci": [
+    -3.7518448296748543,
+    3.6701769314828665
+   ],
+   "I2": 0.8712955563080469,
+   "gap_gemma3-4b_pp": -6.735869770533339,
+   "gap_gpt-6.1-terra_pp": 1.5800775729963037,
+   "gap_llama3.1-8b_pp": 2.833431092540807,
+   "gap_qwen2.5-7b_pp": 1.5686447165290698
+  },
+  {
+   "dimension": "speech_act",
+   "posterior_cue_given_nocue": 0.478631570672508,
+   "post_ci": [
+    0.4279642427730091,
+    0.5317588520282773
+   ],
+   "gap_default_pp": 19.695259533729505,
+   "gap_ci": [
+    14.125962460062096,
+    25.314661100185837
+   ],
+   "exposure_per_1000": 277.4658599294875,
+   "exposure_ci": [
+    240.38988017759027,
+    314.37552587825104
+   ],
+   "reversals_models_mean_per_1000": 161.87674164395793,
+   "rev_ci": [
+    136.11798026406362,
+    190.58482546112708
+   ],
+   "gap_RE_pp": 19.640648455861896,
+   "gap_RE_ci": [
+    14.861781962952387,
+    24.419514948771404
+   ],
+   "I2": 0.5821786878950582,
+   "gap_gemma3-4b_pp": 18.326070652324024,
+   "gap_gpt-6.1-terra_pp": 13.82080051670912,
+   "gap_llama3.1-8b_pp": 24.827427226236583,
+   "gap_qwen2.5-7b_pp": 21.806739739648286
+  }
+ ],
+ "kendall": {
+  "mean": 1.0,
+  "slp1": 1.0,
+  "slp2": 0.33333333333333337
+ },
+ "validity": [
+  {
+   "model": "qwen2.5-7b",
+   "dimension": "polarity",
+   "n": 1510,
+   "cue_asserting_output_rate": 0.001986754966887417,
+   "spearman_q_vs_output_asserts_cue": 0.05484632116610091,
+   "mean_q": 0.3879848443372051
+  },
+  {
+   "model": "qwen2.5-7b",
+   "dimension": "politeness",
+   "n": 1476,
+   "cue_asserting_output_rate": 0.037940379403794036,
+   "spearman_q_vs_output_asserts_cue": 0.056478094591756615,
+   "mean_q": 0.073643873187385
+  },
+  {
+   "model": "qwen2.5-7b",
+   "dimension": "speech_act",
+   "n": 1072,
+   "cue_asserting_output_rate": 0.23880597014925373,
+   "spearman_q_vs_output_asserts_cue": 0.1438288388224346,
+   "mean_q": 0.485746246347673
+  },
+  {
+   "model": "llama3.1-8b",
+   "dimension": "polarity",
+   "n": 1510,
+   "cue_asserting_output_rate": 0.0033112582781456954,
+   "spearman_q_vs_output_asserts_cue": 0.09410820522390972,
+   "mean_q": 0.37185920826002705
+  },
+  {
+   "model": "llama3.1-8b",
+   "dimension": "politeness",
+   "n": 1476,
+   "cue_asserting_output_rate": 0.03184281842818428,
+   "spearman_q_vs_output_asserts_cue": 0.0030835886617929784,
+   "mean_q": 0.2204447214599479
+  },
+  {
+   "model": "llama3.1-8b",
+   "dimension": "speech_act",
+   "n": 1072,
+   "cue_asserting_output_rate": 0.19402985074626866,
+   "spearman_q_vs_output_asserts_cue": 0.2235654817362232,
+   "mean_q": 0.6162854241788238
+  },
+  {
+   "model": "gemma3-4b",
+   "dimension": "polarity",
+   "n": 1510,
+   "cue_asserting_output_rate": 0.0006622516556291391,
+   "spearman_q_vs_output_asserts_cue": 0.04314091714154781,
+   "mean_q": 0.49049065739304487
+  },
+  {
+   "model": "gemma3-4b",
+   "dimension": "politeness",
+   "n": 1476,
+   "cue_asserting_output_rate": 0.10907859078590786,
+   "spearman_q_vs_output_asserts_cue": -0.009387811782386415,
+   "mean_q": 0.5108071600263872
+  },
+  {
+   "model": "gemma3-4b",
+   "dimension": "speech_act",
+   "n": 1072,
+   "cue_asserting_output_rate": 0.26399253731343286,
+   "spearman_q_vs_output_asserts_cue": 0.10626087965392146,
+   "mean_q": 0.7989427625964822
+  }
+ ],
+ "n_units_human": 1800,
+ "n_boot": 1000,
+ "round": 1,
+ "status": "pilot, machine-only, provisional",
+ "probe_models_used": [
+  "gemma3-4b",
+  "llama3.1-8b",
+  "qwen2.5-7b"
+ ],
+ "h4_primary_met": false,
+ "h2_met": false,
+ "logprob_stop_rule_triggered": true
+}

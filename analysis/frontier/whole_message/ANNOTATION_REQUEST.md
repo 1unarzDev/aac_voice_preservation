@@ -1,26 +1,42 @@
-# Annotation request R-WM-1: treated-output check for whole-message fidelity
+# Annotation request R-WM-1 (updated round 2, 2026-11-02): does removing unrequested content change judged acceptability?
 
-STATUS: specification only. Items and key will be built by `src/frontier_whole_message_build_items.py` after Stage 3 of PLAN.md
-(they sample stored arm outputs). Nothing is sent. Machine-only evidence is provisional until this returns.
+STATUS: items, key and assignment BUILT, NOT SENT. Every machine-only result of this frontier is PROVISIONAL until this returns.
+Files: `annotation/frontier_whole_message_items.json` (items for an annotate.html / check_pairs.html style tool), `annotation/frontier_whole_message_key.csv`
+(PRIVATE: arm, generator, family, judge flags), `annotation/frontier_whole_message_assignment.csv` (item x annotator). Builder: `src/frontier_whole_message_r2_annot_items.py`
+(deterministic, seed string `wm-r2h`).
 
-Purpose: check that the whole-message metric (M1) and the strategy gains are real to people, not only to a model judge, on outputs
-produced by the new strategies (minimal-expansion, exact-copy, contrastive drafts, constrained rewrite) versus the baseline prompts.
+## Purpose
+1. Does the plain prompt's unrequested content (A0: 35% of chip1 outputs flagged by the gpt reference-free judge) make the output less acceptable to
+   a person than the preservation prompt (A1) or the minimal-expansion prompt (A2), which flag 6 to 13%? The round-2 machine evidence says the judge flag moves a lot but the
+   judge's match-to-the-writer's-sentence score barely moves, so only people can say whether the change matters.
+2. Verbatim-copy false-flag check: when the output is just the keywords copied back, does a person see "nothing added" (the gpt UC flag says nothing added for 100/100
+   gate copies, but the binary whole-message flag fails 39% of them for dropped glue words or frame). This sets how much to trust the flags near the copy end.
 
-Who: about 20 adult non-author annotators (the same pool and tool style as Part 18 / Part 20; writers rate pairs written by others
-OR their own, as in Part 18, so the writer-intent question is answerable; no AAC users as participants; no IRB; anonymous IDs).
+## Items and draw rule (120 items)
+- 108 output items = 36 chip1 inputs x 3 arms (A0 plain P0 prompt, A1 preservation P1, A2 minimal-expansion), generator gpt-6.1-terra, greedy d0 outputs, stored in
+  `analysis/frontier/whole_message/r2_outputs.csv`. Inputs: 6 families per dimension (polarity, speech_act, agent, certainty, politeness, time_quantity) ranked by
+  `sha256("wm-r2h|fam|family_id")` ascending, one variant per family by `sha256("wm-r2h|var|family_id|variant")`. (82 distinct input/output pairs: where two arms produced the
+  same sentence the same text appears under two item ids to different annotators.)
+- 12 verbatim-copy items: the Part 18 gate-set inputs (analysis/frontier/whole_message PLAN freeze record), the output being the keywords with chips removed, ranked by
+  `sha256("wm-r2h|vc|item_id")` ascending.
+- Arm labels, judge flags and family ids are not in the items file.
 
-Items and draw rule: 240 outputs = 12 per annotator. Per annotator, from their own kept pairs where possible: 3 baseline P0, 3 P1,
-and 6 from the arms that passed Stage 3 (2 each, or 3 each if two arms), stratified by dimension, chip1 channel, seeded
-`sha256("wm-h|writer|output_id")` ascending, arm labels hidden, order shuffled. For contrastive drafts the annotator sees all 3
-drafts and picks the one that matches (or "none").
+## Who, time
+About 20 adult non-author annotators (anonymous ids R01 to R20). No AAC users as participants, no IRB claim, no demographics. Each item is rated by 3 annotators; each annotator
+gets 18 items (never two arms of the same input), about 10 minutes (about 30 s per item). Order shuffled per annotator.
 
-Questions (same wording as Part 18, so the results are comparable):
-1. Which sentence does this output say, version A / version B / something else / cannot tell?
-2. Does it add anything you did not ask for or leave out something you meant? (added / left out / both / neither). Free text optional.
-3. Would you accept it as your message? (yes / yes with a small edit / no).
+## Questions (exact)
+Output items (108): the annotator sees the keywords with chips, the two candidate messages the writer meant (version A, version B) and the output.
+ Q1. Which version does the output say? A / B / something else / cannot tell.
+ Q2. Does the output add anything you did not ask for or leave out something you meant? added / left out / both / neither.
+ Q3. Would you accept it as the message? yes / yes with a small edit / no.
+Verbatim items (12): the annotator sees the keywords with chips and the output.
+ Q4. Does the output say anything beyond the keywords and chips? yes / no.
+ Q5. Is it a complete sentence you could say as it is? yes / no.
 
-Time: about 12 min per person (about 1 min per item).
-
-Feeds: human WMF-fail rate per arm with writer-cluster CI, agreement of M1 with Q1 and Q2 (kappa, AUROC), and the AAC-terms
-table. No SLP is needed here. Optional R-WM-2 (2 anonymous SLPs, expert rating of materials only): 30 cards of CK-true outputs with
-unrequested content, 'acceptable to speak' yes / with edit / no, about 15 min each.
+## Analysis it feeds (declared)
+- Acceptability (Q3 yes or small edit) and Q1-match per arm with item-cluster (family) bootstrap CI; paired A2 - A0 and A1 - A0 on the same inputs. Added-content rate (Q2 added or both)
+  per arm versus the gpt UC flag (kappa and AUROC of the flag against the majority of 3).
+- Verbatim stratum: share of copies a majority call "adds something" (Q4) and "complete" (Q5), against the gpt flags.
+- This is the only way to claim that removing unrequested content helps people; without it the claim is limited to "the judge flags less".
+- Optional R-WM-2 (2 anonymous SLPs, expert rating of materials only; not built): 30 cards of CK-true outputs with unrequested content, acceptable to speak yes / with edit / no, about 15 minutes each.
