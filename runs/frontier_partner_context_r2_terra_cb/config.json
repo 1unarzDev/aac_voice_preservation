@@ -1,0 +1,119 @@
+{
+  "run_id": "frontier_partner_context_r2_terra_cb",
+  "created_utc": "2026-11-03T04:22:20+00:00",
+  "requests_file": "/home/lunarz/aac-voice-preservation/runs/frontier_partner_context_req/r2_terra_cb.jsonl",
+  "requests_sha256": "a1a77d3fd86b6591e33b6ea268373a295b571e9b16d19ea27fd32ece85bdcf40",
+  "n_requests": 3245,
+  "wall_s": 3192.4,
+  "models": {
+    "gpt-6.1-terra": {
+      "name": "gpt-6.1-terra",
+      "base_url": "https://codex.lunarz.dev/v1",
+      "model": "gpt-6.1-terra",
+      "kind": "api",
+      "role": "under_test",
+      "quant": null,
+      "gguf": null,
+      "sha256": null,
+      "concurrency": 16,
+      "supports_seed": false,
+      "backend": "openai",
+      "thinking_budget": null
+    }
+  },
+  "prompts": {
+    "P0": {
+      "prompt_id": "P0",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "ad8e7920bfeba2badf6d831b7923170cabb5fa1841f44b583088c3167481bcf7"
+    },
+    "S3": {
+      "prompt_id": "S3",
+      "template_file": "P0.txt",
+      "temperature": 0.7,
+      "k": 3,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "ad8e7920bfeba2badf6d831b7923170cabb5fa1841f44b583088c3167481bcf7"
+    },
+    "P1": {
+      "prompt_id": "P1",
+      "template_file": "P1.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend.txt",
+      "sha256": "6e7daa45372809800621e7b2f4824437285665786dd7f83934caf9158c52a854"
+    },
+    "P2": {
+      "prompt_id": "P2",
+      "template_file": "P2.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 3,
+      "max_tokens": 256,
+      "legend_file": "chip_legend.txt",
+      "sha256": "3947e7a150dad5b9b896b22a6862b15803617061d9c61962a30bc9b76ff82985"
+    },
+    "P0x": {
+      "prompt_id": "P0x",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend_x.txt",
+      "sha256": "06d7cff8cda1c117bb10112ac50979dd11ced98ef5d80bdb64560e8a560cb63d"
+    },
+    "P0n": {
+      "prompt_id": "P0n",
+      "template_file": "P0_nolegend.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend_none.txt",
+      "sha256": "33a2971bd34448a2abef26bd03f18fa995a9587535e166ba75a9f8c300a0f5fe"
+    },
+    "P0m": {
+      "prompt_id": "P0m",
+      "template_file": "P0.txt",
+      "temperature": 0.0,
+      "k": 1,
+      "n_suggestions": 1,
+      "max_tokens": 96,
+      "legend_file": "chip_legend_m.txt",
+      "sha256": "86899fd454efed2368d052563932d70614a96672dc3d515f91c2c4522b4d2d47"
+    }
+  },
+  "seed_base": 1000,
+  "cache_dir": "/home/lunarz/aac-voice-preservation/runs/cache",
+  "retries": 5,
+  "code_sha256": "4476a3d62683556fc4e33b13183192f087831c2d928c8b02bab6c23f08027e63",
+  "python": "3.12.15",
+  "httpx": "0.28.1",
+  "throughput": {
+    "gpt-6.1-terra": {
+      "requests": 3245,
+      "cached": 1113,
+      "errors": 0,
+      "fresh_requests": 2132,
+      "active_s": 3191.7,
+      "requests_per_min": 40.1,
+      "outputs_per_min": 40.1,
+      "completion_tok_per_s": 8.2,
+      "concurrency": 4
+    }
+  },
+  "parse_failures": {},
+  "finish_reasons": {
+    "gpt-6.1-terra:stop": 3245
+  }
+}
