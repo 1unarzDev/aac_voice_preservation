@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Answer Questions About Sentences (Parts 22-25)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676;
+    --panel: #f3f3f3; --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff;
+    --ok: #0a5c2b; --bad: #9b1c1c; --focus: #c25400;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a;
+      --panel: #1f1f1f; --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a;
+      --ok: #7fd89c; --bad: #ff9a9a; --focus: #ffb366;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 20px; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  header, main { max-width: 1200px; margin: 0 auto; padding: 12px 16px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; border-bottom: 2px solid var(--line); }
+  h1 { font-size: 1.2rem; margin: 0; }
+  h2 { font-size: 1.1rem; }
+  label { font-weight: 600; }
+  input[type=text] { font-size: 1rem; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); width: 10em; }
+  textarea { font: inherit; font-size: 1rem; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font-size: 1rem; padding: 8px 14px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .progress { flex: 1 1 260px; }
+  .bar { height: 14px; border: 2px solid var(--fg); background: var(--bg); }
+  .bar > div { height: 100%; background: var(--accent); width: 0; }
+  .layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .sentence { font-size: 1.4rem; font-weight: 600; padding: 10px 14px; border: 3px solid var(--fg); margin: 4px 0 10px; background: var(--panel); overflow-wrap: anywhere; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 12px; padding: 8px 12px 10px; }
+  fieldset.active { border: 4px solid var(--accent); }
+  legend { font-weight: 700; padding: 0 6px; }
+  .q { margin: 0 0 6px; color: var(--muted); }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opt { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.1em; height: 1.1em; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .key { display: inline-block; min-width: 1.4em; text-align: center; border: 2px solid var(--fg); font-weight: 700; font-size: .85rem; }
+  aside { background: var(--panel); border: 2px solid var(--line); padding: 10px 14px; font-size: .9rem; align-self: start; }
+  aside h2 { font-size: 1rem; margin: 0 0 6px; }
+  aside dt { font-weight: 700; margin-top: 6px; }
+  aside dd { margin: 0 0 4px; }
+  .keys li { margin: 2px 0; }
+  .feedback { border: 3px solid var(--fg); padding: 10px 14px; margin: 10px 0; }
+  .feedback .ok { color: var(--ok); font-weight: 700; }
+  .feedback .bad { color: var(--bad); font-weight: 700; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .tag { font-weight: 700; border: 2px solid var(--fg); padding: 0 6px; display: inline-block; }
+  .intro { border: 3px solid var(--fg); padding: 10px 16px; margin: 0 0 12px; }
+  .block { margin: 0 0 8px; }
+  .blabel { font-weight: 700; color: var(--muted); font-size: .9rem; }
+  .btext { font-size: 1.25rem; font-weight: 600; padding: 6px 12px; border: 2px solid var(--fg); background: var(--panel); overflow-wrap: anywhere; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Answer questions about sentences</h1>
+  <div><label for="file">Your file (JSON)</label> <input id="file" type="file" accept=".json,application/json"></div>
+  <div><label for="annot">Annotator ID</label> <input id="annot" type="text" autocomplete="off"></div>
+  <button id="export" class="primary" type="button">Download CSV</button>
+  <div class="progress">
+    <div id="progtext">Load your file and enter your annotator ID to begin.</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+<main>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="layout">
+    <section aria-label="Task">
+      <div id="introview" class="intro" tabindex="-1"></div>
+      <div id="itemview" class="hidden">
+        <div id="phasetag" class="tag"></div>
+        <div id="blocks"></div>
+        <form id="form" onsubmit="return false"></form>
+        <div id="feedback" class="feedback hidden" aria-live="assertive" tabindex="-1"></div>
+        <div>
+          <button type="button" id="back">Back (Backspace)</button>
+          <button type="button" id="next" class="primary">Next (Enter)</button>
+        </div>
+      </div>
+    </section>
+    <aside aria-label="Help and keys">
+      <h2>What to judge</h2>
+      <div id="help"></div>
+      <h2>Keys</h2>
+      <ul class="keys">
+        <li><span class="key">1</span>&ndash;<span class="key">9</span> choose an option for the highlighted question</li>
+        <li><span class="key">&uarr;</span> <span class="key">&darr;</span> move between questions</li>
+        <li><span class="key">Tab</span> go to the note box (optional)</li>
+        <li><span class="key">Enter</span> next item (also from the note box)</li>
+        <li><span class="key">Esc</span> leave the note box</li>
+        <li><span class="key">Backspace</span> previous item (outside the note box)</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+/* Items come from a file (JSON) made by src/make_frontier_parts.py (stage5/<ID>_part22..25.json). Blind: the file carries only
+   opaque ids, the text to read and the questions; the loader refuses any other field and a file made for someone else. */
+const ALLOWED_TOP = ["check_id", "tool", "version", "n_items", "for", "title", "intro", "help", "questions", "practice", "items"];
+const ALLOWED_ITEM = ["item_id", "blocks", "qs"];
+const ALLOWED_PRACTICE = ["item_id", "blocks", "qs", "expected", "fb"];
+const TOOL = "item_check_v1";
+let DATA = null, ITEMS = [], PRACTICE = [], QDEF = {}, QORDER = [];
+function RUNID() { return TOOL + ":" + (DATA ? DATA.check_id : ""); }
+
+let S = null;
+let shownAt = null, showingFeedback = false, active = 0, BYID = {};
+const $ = (id) => document.getElementById(id);
+function say(msg) { $("status").textContent = msg; }
+function annotId() { return $("annot").value.trim(); }
+const store = {
+  key(id) { return "itemcheck:v1:" + (DATA ? DATA.check_id : "") + ":" + id; },
+  load(id) { try { const s = localStorage.getItem(this.key(id)); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  save() { if (!S) return; try { localStorage.setItem(this.key(S.annot), JSON.stringify(S)); } catch (e) { /* storage blocked: keep in memory */ } },
+};
+function seedOf(str) { let h = 2166136261 >>> 0; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
+function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function shuffled(ids, seedStr) { const a = ids.slice(), r = rng(seedOf(seedStr)); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function idHash(id, check) { return (seedOf(String(id).trim().toUpperCase() + "|" + check) >>> 0).toString(16).padStart(8, "0"); }
+const optV = (o) => typeof o === "string" ? o : o.v;
+const optL = (o) => typeof o === "string" ? o : o.label;
+
+function validateItem(it, allowed, isPractice) {
+  const extra = Object.keys(it).filter(k => !allowed.includes(k));
+  if (extra.length) return "Item " + it.item_id + " has fields a blind file must not have: " + extra.join(", ") + ".";
+  if (!it.item_id || !Array.isArray(it.blocks) || !it.blocks.length || !Array.isArray(it.qs) || !it.qs.length) return "Item " + it.item_id + " is incomplete.";
+  for (const b of it.blocks) {
+    if (!b || typeof b.label !== "string" || typeof b.text !== "string" || !b.text.trim() || Object.keys(b).some(k => k !== "label" && k !== "text")) return "Item " + it.item_id + " has a bad text block.";
+  }
+  for (const q of it.qs) if (!QDEF[q]) return "Item " + it.item_id + " asks an unknown question " + q + ".";
+  if (isPractice) for (const q of it.qs) if (!it.expected || !it.expected[q] || typeof it.fb !== "string") return "Practice item " + it.item_id + " is incomplete.";
+  return null;
+}
+function validateData(d) {
+  if (!d || typeof d !== "object" || !Array.isArray(d.items) || !d.items.length || !d.check_id) return "This is not an item file (no check_id or items).";
+  const extraTop = Object.keys(d).filter(k => !ALLOWED_TOP.includes(k));
+  if (extraTop.length) return "This file has fields a blind file must not have: " + extraTop.join(", ") + ". Ask the coordinator for a new file.";
+  if (d.tool !== TOOL) return "This file was not made for this tool.";
+  if (!d.questions || typeof d.questions !== "object" || !Object.keys(d.questions).length) return "The file has no questions.";
+  for (const [k, q] of Object.entries(d.questions)) {
+    if (!/^[a-z0-9_]+$/.test(k) || typeof q.title !== "string" || typeof q.text !== "string" || !Array.isArray(q.options) || q.options.length < 2 || q.options.length > 9) return "Question " + k + " is malformed.";
+    if (Object.keys(q).some(x => !["title", "text", "options"].includes(x))) return "Question " + k + " has extra fields.";
+  }
+  QDEF = d.questions;
+  for (const it of d.items) { const e = validateItem(it, ALLOWED_ITEM, false); if (e) return e; }
+  for (const it of (d.practice || [])) { const e = validateItem(it, ALLOWED_PRACTICE, true); if (e) return e; }
+  const all = [...d.items, ...(d.practice || [])].map(x => x.item_id);
+  if (new Set(all).size !== all.length) return "Duplicate item ids in the file.";
+  return null;
+}
+function newState(id) {
+  return {annot: id, run: RUNID(), check_id: DATA.check_id, phase: "intro", idx: 0, order: shuffled(ITEMS.map(x => x.item_id), id + "|" + DATA.check_id),
+          M: {}, P: {}, started: null};
+}
+function loadData(d) {
+  const err = validateData(d);
+  if (err) { say(err); return false; }
+  stopClock(); store.save();
+  DATA = d; ITEMS = d.items; PRACTICE = d.practice || []; QORDER = Object.keys(d.questions); S = null;
+  BYID = Object.fromEntries([...ITEMS, ...PRACTICE].map(x => [x.item_id, x]));
+  $("title").textContent = d.title || "Answer questions about sentences";
+  document.title = (d.title || "Answer questions") + " (" + d.check_id + ")";
+  say("Loaded your file (" + ITEMS.length + " items).");
+  if (annotId()) startFor(annotId()); else { renderProgress(); $("annot").focus(); }
+  return true;
+}
+const PHASES = {intro: {intro: true, next: "P"}, P: {practice: true, next: "M"}, M: {next: "done"}, done: {intro: true}};
+function seq(ph) { return ph === "P" ? PRACTICE.map(p => p.item_id) : S.order; }
+function rec(ph, id) { if (!S[ph][id]) S[ph][id] = {answers: {}, note: "", time_ms: 0}; return S[ph][id]; }
+function complete(ph, id) { const r = S[ph][id]; return !!r && BYID[id].qs.every(q => r.answers[q]); }
+function nDone(ph) { return seq(ph).filter(id => complete(ph, id)).length; }
+function stopClock() {
+  if (shownAt !== null && S && !PHASES[S.phase].intro) rec(S.phase, seq(S.phase)[S.idx]).time_ms += Date.now() - shownAt;
+  shownAt = null;
+}
+function renderProgress() {
+  const total = ITEMS.length, done = S ? nDone("M") : 0, pct = total ? Math.round(100 * done / total) : 0;
+  let t = "Enter your annotator ID to begin.";
+  if (S) {
+    const ph = S.phase;
+    t = PHASES[ph].intro ? (ph === "done" ? "Finished" : "Ready to start")
+      : (PHASES[ph].practice ? "Practice: item " : "Item ") + (S.idx + 1) + " of " + seq(ph).length;
+    t += " (" + done + " of " + total + " items complete, " + pct + "%)";
+  }
+  $("progtext").textContent = t;
+  $("barfill").style.width = pct + "%"; $("bar").setAttribute("aria-valuenow", String(pct));
+}
+function renderHelp() {
+  const h = $("help"); h.textContent = "";
+  const dl = document.createElement("dl");
+  for (const e of (DATA.help || [])) {
+    const dt = document.createElement("dt"); dt.textContent = e.term; const dd = document.createElement("dd"); dd.textContent = e.text; dl.append(dt, dd);
+  }
+  h.append(dl);
+}
+function renderIntro() {
+  const ph = S.phase, v = $("introview");
+  $("itemview").classList.add("hidden"); v.classList.remove("hidden"); v.textContent = "";
+  renderHelp();
+  const h2 = document.createElement("h2");
+  if (ph === "intro") {
+    h2.textContent = DATA.title || "Questions about sentences"; v.append(h2);
+    for (const p of (DATA.intro || [])) { const el = document.createElement("p"); el.textContent = p; v.append(el); }
+    const n = document.createElement("p");
+    n.textContent = PRACTICE.length ? "First come " + PRACTICE.length + " practice items with feedback, then " + ITEMS.length + " items. Press Enter or the button to start."
+      : "You will see " + ITEMS.length + " items. Press Enter or the button to start.";
+    v.append(n);
+    const b = document.createElement("button"); b.type = "button"; b.className = "primary"; b.id = "go"; b.textContent = "Start (Enter)"; b.addEventListener("click", advanceIntro); v.append(b);
+  } else {
+    h2.textContent = "All done. Thank you!"; v.append(h2);
+    const p = document.createElement("p"); p.append("Please press ");
+    const s = document.createElement("strong"); s.textContent = "Download CSV"; p.append(s, " and send the file ");
+    const c = document.createElement("code"); c.textContent = "labels_" + DATA.check_id + "_" + S.annot + ".csv"; p.append(c, " to the study coordinator.");
+    v.append(p);
+  }
+  v.focus();
+}
+function advanceIntro() {
+  if (S.phase !== "intro") return;
+  S.phase = PRACTICE.length ? "P" : "M"; S.idx = 0; active = 0; if (!S.started) S.started = new Date().toISOString(); store.save(); render();
+}
+function render() {
+  if (!S) return;
+  renderProgress();
+  if (PHASES[S.phase].intro) { renderIntro(); return; }
+  const ph = S.phase, id = seq(ph)[S.idx], it = BYID[id], r = rec(ph, id);
+  $("introview").classList.add("hidden"); $("itemview").classList.remove("hidden");
+  renderHelp();
+  $("phasetag").textContent = PHASES[ph].practice ? "Practice (you will see feedback)" : "Item " + (S.idx + 1) + " of " + seq(ph).length;
+  const bl = $("blocks"); bl.textContent = "";
+  for (const b of it.blocks) {
+    const w = document.createElement("div"); w.className = "block";
+    const l = document.createElement("div"); l.className = "blabel"; l.textContent = b.label;
+    const t = document.createElement("div"); t.className = "btext"; t.textContent = b.text;
+    w.append(l, t); bl.append(w);
+  }
+  if (!showingFeedback) $("feedback").classList.add("hidden");
+  const form = $("form"); form.innerHTML = "";
+  it.qs.forEach((qid, qi) => {
+    const q = QDEF[qid];
+    const fs = document.createElement("fieldset"); fs.id = "q" + qi; fs.className = qi === active ? "active" : "";
+    const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + q.title; fs.append(lg);
+    const p = document.createElement("p"); p.className = "q"; p.textContent = q.text; fs.append(p);
+    const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", q.title);
+    q.options.forEach((o, oi) => {
+      const lab = document.createElement("label"); lab.className = "opt" + (r.answers[qid] === optV(o) ? " checked" : "");
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.value = optV(o); inp.checked = r.answers[qid] === optV(o);
+      inp.disabled = showingFeedback; inp.addEventListener("change", () => answer(qi, optV(o)));
+      const k = document.createElement("span"); k.className = "key"; k.textContent = String(oi + 1);
+      lab.append(inp, k, document.createTextNode(" " + optL(o))); opts.append(lab);
+    });
+    fs.append(opts);
+    fs.addEventListener("click", () => { if (active !== qi) { active = qi; render(); } });
+    form.append(fs);
+  });
+  const wrap = document.createElement("div");
+  const lab = document.createElement("label"); lab.htmlFor = "note"; lab.textContent = "Optional note";
+  const ta = document.createElement("textarea"); ta.id = "note"; ta.value = r.note; ta.maxLength = 300; ta.disabled = showingFeedback;
+  ta.addEventListener("input", () => { r.note = ta.value; store.save(); });
+  wrap.append(lab, ta); form.append(wrap);
+  const a = $("q" + active); if (a && a.scrollIntoView) a.scrollIntoView({block: "nearest"});
+  if (shownAt === null) shownAt = Date.now();
+}
+function cur() { const ph = S.phase, id = seq(ph)[S.idx]; return {ph, id, it: BYID[id], r: rec(ph, id)}; }
+function answer(qi, value) {
+  if (showingFeedback) return;
+  const {r, it} = cur();
+  r.answers[it.qs[qi]] = value;
+  active = Math.min(qi + 1, it.qs.length - 1);
+  store.save(); render();
+}
+function showFeedback(it) {
+  const {r} = cur(), fb = $("feedback"); fb.innerHTML = "";
+  const h = document.createElement("p"); h.innerHTML = "<strong>Feedback.</strong> Press Enter to continue."; fb.append(h);
+  const ul = document.createElement("ul");
+  for (const qid of it.qs) {
+    const q = QDEF[qid], exp = it.expected[qid], got = r.answers[qid];
+    const li = document.createElement("li"); const s = document.createElement("span");
+    s.className = got === exp ? "ok" : "bad"; s.textContent = got === exp ? "Matches" : "Different";
+    li.append(s, document.createTextNode(" - " + q.title + " you chose " + got + "; suggested answer: " + exp)); ul.append(li);
+  }
+  fb.append(ul);
+  const p = document.createElement("p"); p.textContent = it.fb; fb.append(p);
+  showingFeedback = true; render(); fb.classList.remove("hidden"); fb.focus();
+}
+function next() {
+  if (!S) return;
+  if (PHASES[S.phase].intro) { advanceIntro(); return; }
+  const {ph, id, it, r} = cur();
+  if (!complete(ph, id)) {
+    active = it.qs.findIndex(q => !r.answers[q]); say("Please answer every question."); render(); return;
+  }
+  if (PHASES[ph].practice && !showingFeedback) { showFeedback(it); return; }
+  showingFeedback = false; stopClock(); say("");
+  if (S.idx < seq(ph).length - 1) { S.idx++; active = 0; }
+  else if (ph === "M" && nDone("M") < ITEMS.length) { S.idx = seq("M").findIndex(x => !complete("M", x)); active = 0; say("Some items are incomplete."); }
+  else { S.phase = PHASES[ph].next; S.idx = 0; active = 0; }
+  store.save(); render();
+}
+function back() {
+  if (!S || PHASES[S.phase].intro || S.idx === 0) return;
+  showingFeedback = false; stopClock(); S.idx--; active = 0; store.save(); render();
+}
+function csvCell(v) { const s = v === undefined || v === null ? "" : String(v); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function exportCSV() {
+  if (!S) { say("Enter your annotator ID first."); $("annot").focus(); return; }
+  const wasShown = shownAt !== null; stopClock(); if (wasShown) shownAt = Date.now();
+  const head = ["item_id", "annotator", "check_id", "practice", "order", ...QORDER, "note", "time_ms", "started_at", "tool", "exported_at"];
+  const lines = [head.join(",")], now = new Date().toISOString();
+  const row = (it, practice, r, o) => [it.item_id, S.annot, DATA.check_id, practice ? 1 : 0, o, ...QORDER.map(q => r.answers[q] || ""),
+    r.note.trim(), Math.round(r.time_ms), S.started || "", TOOL, now].map(csvCell).join(",");
+  PRACTICE.forEach((p, i) => { if (S.P[p.item_id]) lines.push(row(p, true, S.P[p.item_id], i + 1)); });
+  for (const it of ITEMS) { const r = S.M[it.item_id]; if (r) lines.push(row(it, false, r, S.order.indexOf(it.item_id) + 1)); }
+  const blob = new Blob([lines.join("\n") + "\n"], {type: "text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "labels_" + DATA.check_id + "_" + S.annot + ".csv"; document.body.append(a); a.click(); a.remove();
+  say("CSV downloaded (" + (lines.length - 1) + " rows, " + nDone("M") + " of " + ITEMS.length + " items complete).");
+  return lines.join("\n");
+}
+function startFor(id) {
+  if (!id) { S = null; return; }
+  if (!DATA) { say("Load your file first (the file button)."); $("file").focus(); return; }
+  if (DATA["for"] && DATA["for"] !== idHash(id, DATA.check_id)) {
+    S = null; renderProgress(); $("itemview").classList.add("hidden");
+    const v = $("introview"); v.classList.remove("hidden"); v.textContent = "";
+    const h = document.createElement("h2"); h.textContent = "This is not your file";
+    const p = document.createElement("p"); p.textContent = "This file was made for another annotator. Use the file named with your own ID (for example stage5/P01_" + DATA.check_id + ".json).";
+    v.append(h, p);
+    say("This file is not yours."); v.focus(); return;
+  }
+  stopClock(); store.save(); showingFeedback = false;
+  const saved = store.load(id);
+  S = saved && saved.run === RUNID() ? saved : newState(id);
+  active = 0; store.save();
+  say(saved ? "Resumed saved progress for " + id + "." : "Started a new session for " + id + ".");
+  render();
+}
+$("file").addEventListener("change", (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { loadData(JSON.parse(rd.result)); } catch (err) { say("Could not read that file: " + err.message); } };
+  rd.readAsText(f);
+});
+$("annot").addEventListener("change", () => startFor(annotId()));
+$("annot").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); startFor(annotId()); const v = $("introview"); if (!v.classList.contains("hidden")) v.focus(); } });
+$("export").addEventListener("click", exportCSV);
+$("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopClock(); else if (S && !PHASES[S.phase].intro && shownAt === null) shownAt = Date.now(); });
+document.addEventListener("keydown", (e) => {
+  if (!S || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.id === "annot" || t.id === "file")) return;
+  if (t && t.tagName === "TEXTAREA") {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); next(); }
+    else if (e.key === "Escape") { e.preventDefault(); t.blur(); $("form").focus(); }
+    return;
+  }
+  if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) { if (e.key === "Enter") { e.preventDefault(); t.click(); } return; }
+  if (PHASES[S.phase].intro) { if (e.key === "Enter") { e.preventDefault(); next(); } return; }
+  const it = cur().it, q = QDEF[it.qs[active]];
+  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1; if (n < q.options.length) { e.preventDefault(); answer(active, optV(q.options[n])); } }
+  else if (e.key === "Enter") { e.preventDefault(); next(); }
+  else if (e.key === "Backspace") { e.preventDefault(); back(); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, it.qs.length - 1); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+});
+$("form").tabIndex = -1;
+renderProgress();
+$("annot").focus();
+</script>
+</body>
+</html>
