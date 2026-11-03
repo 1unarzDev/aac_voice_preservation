@@ -1,5 +1,5 @@
 {
- "second_back_translator": "gpt-6.1-terra",
+ "second_back_translator": "qwen2.5-14b",
  "survival": {
   "de|POL": {
    "n": 20,
@@ -36,7 +36,7 @@
   "fr|POL": {
    "n": 20,
    "pilot_gate": 20,
-   "strict_gate": 20
+   "strict_gate": 19
   },
   "fr|REG": {
    "n": 20,
@@ -46,8 +46,8 @@
   "fr|all": {
    "n": 40,
    "pilot_gate": 40,
-   "strict_gate": 40,
-   "strict_rate": 1.0
+   "strict_gate": 39,
+   "strict_rate": 0.975
   }
  },
  "rows": [
@@ -59,7 +59,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "es",
@@ -127,11 +127,12 @@
    "family_id": "hw-pol-059",
    "strict": false,
    "why": [
-    "overlap_sol"
+    "overlap_sol",
+    "overlap_back2"
    ],
    "loose": false,
    "ov_sol": 0.0,
-   "ov_back2": 0.5
+   "ov_back2": 0.0
   },
   {
    "lang": "fr",
@@ -201,7 +202,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "de",
@@ -231,7 +232,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 0.5
+   "ov_back2": 1.0
   },
   {
    "lang": "de",
@@ -281,7 +282,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "fr",
@@ -391,7 +392,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 0.5,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "es",
@@ -411,7 +412,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "de",
@@ -421,7 +422,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 0.5,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "es",
@@ -461,17 +462,19 @@
    "why": [],
    "loose": true,
    "ov_sol": 0.5,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "fr",
    "kind": "POL",
    "family_id": "hw-pol-090",
-   "strict": true,
-   "why": [],
+   "strict": false,
+   "why": [
+    "overlap_back2"
+   ],
    "loose": true,
    "ov_sol": 0.5,
-   "ov_back2": 0.5
+   "ov_back2": 0.0
   },
   {
    "lang": "de",
@@ -631,7 +634,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "es",
@@ -681,7 +684,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "de",
@@ -871,7 +874,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "es",
@@ -941,7 +944,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 0.5
+   "ov_back2": 1.0
   },
   {
    "lang": "fr",
@@ -951,7 +954,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 0.5
+   "ov_back2": 1.0
   },
   {
    "lang": "de",
@@ -971,7 +974,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "fr",
@@ -1011,7 +1014,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 0.5,
-   "ov_back2": 0.5
+   "ov_back2": 1.0
   },
   {
    "lang": "de",
@@ -1031,7 +1034,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "fr",
@@ -1091,7 +1094,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "fr",
@@ -1131,7 +1134,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 1.0,
-   "ov_back2": 1.0
+   "ov_back2": 0.5
   },
   {
    "lang": "de",
@@ -1161,7 +1164,7 @@
    "why": [],
    "loose": true,
    "ov_sol": 0.5,
-   "ov_back2": 0.5
+   "ov_back2": 1.0
   },
   {
    "lang": "de",
