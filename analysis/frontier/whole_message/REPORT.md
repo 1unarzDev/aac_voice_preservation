@@ -112,3 +112,10 @@ Defensible novelty is limited to two points. The first is the empirical dissocia
 
 ## 9. Files
 Plan: `analysis/frontier/whole_message/PLAN.md`. Results: `round1.md`, `round2.md`, `summary.json`, `round2_summary.json`, `r2_*.csv`. Critiques: `critique1.md`, `critique2.md`. Figures: `figs/fig1_metric_vs_baselines.png`, `fig2_uc_by_arm.png`, `fig3_intent_match.png`. Annotation: `ANNOTATION_REQUEST.md`, `annotation/frontier_whole_message_{items.json,key.csv,assignment.csv}`.
+
+## 10. Follow-up F1 (2026-11-03, POST-PILOT, CPU only; added after the original report, which is unchanged above)
+Source: SYNTHESIS.md section 5 item 5. Rule pre-declared in PLAN.md before the run. Details: `followup.md`, `followup_lowo.csv`, `followup_summary.json`.
+- Leave-one-writer-out, chip1 (n = 97, 20 writers): M1-free AUROC .766 (LOWO .751 to .784), word count .724 (LOWO .705 to .757), delta +.042 (LOWO +.015 to +.068; every dropped writer leaves it positive). Delete-one writer jackknife 95% CI of the delta [-.076, +.159]. All200 (n = 195): .766 vs .704, delta +.063, LOWO +.042 to +.083, jackknife CI [-.035, +.161].
+- Writer-stratified (within-writer pairs only) AUROC: M1-free .744 vs word count .641 (chip1, 78 pairs); .779 vs .670 (all200, 315 pairs).
+- Declared verdict: PARITY. "M1-free beats word count" is NOT supported because the jackknife CI includes 0. The .75 threshold is met in every LOWO fit, but only by .001 at the minimum.
+- Effect on the frontier verdict: none. The metric stays a null result. The wording in sections 5 (claim 2) and 8 can read "at parity with length, point estimate +.04 to +.06 in favour of M1-free, CI includes 0, no single writer drives it". The limitation "no leave-one-writer-out analysis" (section 7) is closed. Human validation (R-WM-1) is still absent.
