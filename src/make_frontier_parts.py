@@ -2,19 +2,20 @@
 
 Part 22  default_profiles  (analysis/frontier/default_profiles/ANNOTATION_REQUEST.md): 223 source messages x 2 coders
 Part 23  whole_message R-WM-1 (analysis/frontier/whole_message/ANNOTATION_REQUEST.md): 120 items x 3 coders
-Part 24  value_of_cue (analysis/frontier/value_of_cue/ANNOTATION_REQUEST.md): speech-act stratum A (36) + whole stratum B (37) = 73 items x 2
+Part 24  value_of_cue (analysis/frontier/value_of_cue/ANNOTATION_REQUEST.md): speech-act stratum A (36) + whole control stratum B (37, the key holds 37 not the 31 the
+         request text says) = 73 items x 2
 Part 25  partner_context round 3 (analysis/frontier/partner_context/ANNOTATION_REQUEST.md): 258 items x 3 coders
 
 Nothing is drawn here: the items and keys are the ones the requests built (annotation/frontier_*_items.json, *_key.csv). This script
 only decides WHO rates WHAT (seeded, frozen; --force redraws) and writes
-  annotation_package/stage5/<ID>_part22.json ... <ID>_part25.json   blind files for annotation_package/item_check.html
+  annotation_package/stage5/<ID>_part22.json ... <ID>_part25.json   blind files for annotation_package/rate_items.html
   annotation/assignments/stage5_frontier_assignment.csv             part, item_id, annotator (PRIVATE; never in the package)
   annotation/assignments/stage5_frontier.json                       per-person items and minutes + design record (read by make_assignments.py --stage 5)
 Rules (checked by tests/test_stage5_frontier.py):
   * coder counts: Part 22 and 24 two coders, Parts 23 and 25 three, all distinct people.
-  * exclusions: nobody rates an item built on a pair they wrote or checked (Parts 23, 25: hw1 writer, every Part 8 checker, every routed
-    tie-break checker) or on a message whose keywords they typed in Part 9 (Parts 22, 24, 25 r2 seeds: the typed set, and every annotator
-    of that message's elicitation set, a superset, as in Part 21).
+  * exclusions: nobody rates an item built on a pair they wrote or checked (Parts 23, 25 families hw-*: the writer in hw_candidates.jsonl
+    (hw and hw2), every checker in check_key.csv incl. Part 14 tie-breakers) or on a message whose keywords they typed in Part 9
+    (Parts 22, 24: every annotator of that message's elicitation set). Part 25 families r2pol-* exclude no one.
   * Part 23: nobody rates two outputs made from the same input (family and variant).
   * balance: each rating is given to the eligible person with the least work so far, then work is moved from the busiest to the least
     busy person until the spread is under 30 seconds.
@@ -41,9 +42,9 @@ PKG = ROOT / "annotation_package"
 OUT_DIR = PKG / "stage5"
 ASSIGN_CSV = ANN / "assignments" / "stage5_frontier_assignment.csv"
 PLAN_JSON = ANN / "assignments" / "stage5_frontier.json"
-TOOL = "item_check_v1"
+TOOL = "rate_items_v1"
 SALT = "s5f-20261103"
-SEC_PRACTICE = 60          # three practice items, about one minute
+N_PRACTICE = 2             # two practice items per part, counted at the part's own per-rating time
 # seconds per rating, from each request's own estimate (minutes per person x 60 / items per person)
 SEC = {"part22": 21.5, "part23": 33.3, "part24": 49.7, "part25": 23.3}
 K = {"part22": 2, "part23": 3, "part24": 2, "part25": 3}
@@ -83,11 +84,13 @@ def elicitation_blocks():
 def hw_blocks():
     """family_id -> everyone who wrote or checked that pair (hw1): writer, Part 8 checkers, routed Part 14 tie-break checkers."""
     out = defaultdict(set)
-    for j in jl(ANN / "written" / "hw_candidates.jsonl"):
-        out[j["family_id"]].add(j["writer_id"])
-    for r in rows(ANN / "written" / "check_key.csv"):
-        out[r["family_id"]].add(r["writer_id"])
-        out[r["family_id"]].update(c.split("_")[0] for c in r["check_id"].split())
+    for sub in ("", "hw2"):
+        d = ANN / "written" / sub if sub else ANN / "written"
+        for j in jl(d / "hw_candidates.jsonl"):
+            out[j["family_id"]].add(j["writer_id"])
+        for r in rows(d / "check_key.csv"):
+            out[r["family_id"]].add(r["writer_id"])
+            out[r["family_id"]].update(c.split("_")[0] for c in r["check_id"].split())
     hc = ROOT / "analysis" / "hw_checks" / "items.csv"
     if hc.exists():
         for r in rows(hc):
@@ -147,11 +150,7 @@ def part22(blocked_el):
                                             {"label": "Keywords (the short words a person typed to make this sentence)", "text": "open window"}],
              "qs": ["q1", "q2", "q3", "q4"], "expected": {"q1": "request/command", "q2": "polite", "q3": "no", "q4": "no"},
              "fb": "It asks someone to do something (a request) and uses 'please' (polite). The keywords 'open window' show neither."},
-            {"item_id": "prac-2", "blocks": [{"label": "Sentence", "text": "The bus is late."},
-                                            {"label": "Keywords (the short words a person typed to make this sentence)", "text": "bus late"}],
-             "qs": ["q1", "q2", "q3", "q4"], "expected": {"q1": "statement", "q2": "not polite", "q3": "no", "q4": "no"},
-             "fb": "It tells something: a statement, not polite. The keywords do not show a question or politeness."},
-            {"item_id": "prac-3", "blocks": [{"label": "Sentence", "text": "Where are my keys?"},
+            {"item_id": "prac-2", "blocks": [{"label": "Sentence", "text": "Where are my keys?"},
                                             {"label": "Keywords (the short words a person typed to make this sentence)", "text": "where keys"}],
              "qs": ["q1", "q2", "q3", "q4"], "expected": {"q1": "question", "q2": "not polite", "q3": "yes", "q4": "no"},
              "fb": "It asks for information (question), no polite word. The keyword 'where' already shows a question by itself."}]}
@@ -194,19 +193,13 @@ def part23(hw):
             "q4": qdef("Anything beyond the keywords?", "Does the sentence say anything beyond the keywords and buttons?", YN),
             "q5": qdef("A complete sentence?", "Is it a complete sentence you could say as it is?", YN)},
         "practice": [
-            {"item_id": "prac-1", "blocks": [{"label": "Keywords the writer typed", "text": "[I] [PAST] buy bread"},
-                                            {"label": "Message A", "text": "I bought bread this morning."},
-                                            {"label": "Message B", "text": "I buy bread every day."},
-                                            {"label": "Sentence shown", "text": "I bought bread this morning."}],
-             "qs": ["q1", "q2", "q3"], "expected": {"q1": "A", "q2": "neither", "q3": "yes"},
-             "fb": "The sentence is Message A word for word, so it says A, adds and drops nothing, and is acceptable."},
-            {"item_id": "prac-2", "blocks": [{"label": "Keywords the writer typed", "text": "[NOT] go school"},
+            {"item_id": "prac-1", "blocks": [{"label": "Keywords the writer typed", "text": "[NOT] go school"},
                                             {"label": "Message A", "text": "She did not go to school today."},
                                             {"label": "Message B", "text": "She went to school today."},
                                             {"label": "Sentence shown", "text": "She went to school and had lots of fun with her friends."}],
              "qs": ["q1", "q2", "q3"], "expected": {"q1": "B", "q2": "added", "q3": "no"},
              "fb": "It says B (she went), not the 'not' the writer asked for, and adds the fun with friends. Not acceptable."},
-            {"item_id": "prac-3", "blocks": [{"label": "Keywords the writer typed", "text": "[PLEASE] help me"},
+            {"item_id": "prac-2", "blocks": [{"label": "Keywords the writer typed", "text": "[PLEASE] help me"},
                                             {"label": "Sentence shown", "text": "Please help me carry my big heavy bags to the car."}],
              "qs": ["q4", "q5"], "expected": {"q4": "yes", "q5": "yes"},
              "fb": "It says more than the keywords (the bags and the car), and it is a complete sentence."}]}
@@ -233,7 +226,7 @@ def part24(blocked_el):
         "title": "Pick the sentence that says the same thing",
         "intro": ["You will see a message a person wanted to say, the keywords they typed, and two sentences, A and B, a writing tool might offer.",
                   "First say which sentence matches the original message on one feature (it is named in the question). Then say which sentence you would tap if you had typed those keywords."],
-        "help": [{"term": "Same thing", "text": "Judge only the one feature named in question 1 (for example 'not', a question or request, or polite wording). "
+        "help": [{"term": "Same thing", "text": "Look only at the one feature named in question 1 (for example 'not', a question or request, or polite wording). "
                   "both equally if both match it as well as each other; neither if neither does."},
                  {"term": "Which would you tap", "text": "Imagine you typed those keywords and meant the original message. A, B, or neither if you would tap neither."}],
         "questions": {
@@ -252,30 +245,18 @@ def part24(blocked_el):
                                             {"label": "Keywords the writer typed", "text": "open door"},
                                             {"label": "Sentence A", "text": "I open the door."}, {"label": "Sentence B", "text": "Could you open the door?"}],
              "qs": ["q1_act", "q2"], "expected": {"q1_act": "B", "q2": "B"},
-             "fb": "The original asks someone to do something; B does too, A is a plain statement."},
-            {"item_id": "prac-3", "blocks": [{"label": "The original message", "text": "Thank you, the soup is good."},
-                                            {"label": "Keywords the writer typed", "text": "soup good"},
-                                            {"label": "Sentence A", "text": "The soup is good."}, {"label": "Sentence B", "text": "Thanks, the soup is good."}],
-             "qs": ["q1_pol", "q2"], "expected": {"q1_pol": "B", "q2": "B"},
-             "fb": "The original is polite (thank you); B keeps that, A does not."}]}
+             "fb": "The original asks someone to do something; B does too, A is a plain statement."}]}
     return units, spec
 
 
-def part25(hw, blocked_el):
+def part25(hw):
     items = json.load(open(ANN / "frontier_partner_context_r3_items.json"))
     key = {r["id"]: r for r in rows(ANN / "frontier_partner_context_r3_key.csv")}
-    seeds = {}
-    for j in jl(ROOT / "analysis" / "frontier" / "partner_context" / "items_r2.jsonl"):
-        seeds[j["family_id"]] = (j.get("seed_text") or "").strip().lower()
-    el_by_text = {}
-    for j in jl(ANN / "elicitation_key.jsonl"):
-        el_by_text[j["text"].strip().lower()] = j["item_id"]
     units = []
     for it in items:
         fam = key[it["id"]]["family_id"]
+        assert fam.startswith("r2pol-") or fam in hw, fam           # r2pol-* families exclude no one; hw-* must have a writer
         b = set(hw.get(fam, set()))
-        if seeds.get(fam) in el_by_text:
-            b |= blocked_el[el_by_text[seeds[fam]]]
         if it["part"] == "A":
             blocks = [{"label": "Keywords", "text": it["keywords"]}, {"label": "Something the other person said", "text": it["turn"]},
                       {"label": "The sentence", "text": it["sentence"]}]
@@ -305,10 +286,7 @@ def part25(hw, blocked_el):
             {"item_id": "prac-1", "blocks": [{"label": "Keywords", "text": "cook dinner"}, {"label": "Something the other person said", "text": "Nothing was cooked tonight."},
                                             {"label": "The sentence", "text": "No dinner was cooked tonight."}],
              "qs": ["pa"], "expected": {"pa": "a"}, "fb": "It says what the remark says in nearly the same words: it restates it."},
-            {"item_id": "prac-2", "blocks": [{"label": "Keywords", "text": "wash car"}, {"label": "Something the other person said", "text": "Did you see the weather today?"},
-                                            {"label": "The sentence", "text": "I wash the car on Sundays."}],
-             "qs": ["pa"], "expected": {"pa": "d"}, "fb": "It is a plain statement about washing the car that needs no remark."},
-            {"item_id": "prac-3", "blocks": [{"label": "Something the other person said", "text": "No sign of the parcel."},
+            {"item_id": "prac-2", "blocks": [{"label": "Something the other person said", "text": "No sign of the parcel."},
                                             {"label": "The sentence", "text": "Yes, I know, it has not come."}],
              "qs": ["pb1", "pb2"], "expected": {"pb1": "no", "pb2": "yes"},
              "fb": "It does not repeat the remark's wording, and it answers the remark ('Yes, I know'): a reply."}]}
@@ -316,28 +294,85 @@ def part25(hw, blocked_el):
 
 
 # ---------------------------------------------------------------- allocation
+MIN_PART_ITEMS = 6          # a person-part smaller than this is folded into the people who already do that part
+NEW_PART_PENALTY = 360.0    # seconds of "load" charged for opening a part a person does not yet do (keeps people on 2-3 parts)
+
+
 class Alloc:
-    def __init__(self, people, rnd):
+    def __init__(self, people, rnd, base=None):
         self.people, self.rnd = list(people), rnd
-        self.load = {p: 0.0 for p in people}
+        self.load = {p: float(base or 0) for p in people}      # seconds (Parts 20/21 already in `base`)
         self.who = defaultdict(list)                       # (part, item) -> people
         self.mine = {p: [] for p in people}                # person -> [(part, item)]
         self.grp = set()                                   # (person, part, group)
-        self.cost, self.unit = {}, {}
+        self.n = defaultdict(int)                          # (person, part) -> items
+        self.unit = {}
 
     def ok(self, p, part, u):
         return (p not in u["blocked"] and p not in self.who[(part, u["item_id"])]
                 and (u["group"] is None or (p, part, u["group"]) not in self.grp))
 
     def put(self, p, part, u):
+        if self.n[(p, part)] == 0:
+            self.load[p] += N_PRACTICE * SEC[part]
+        self.n[(p, part)] += 1
         self.who[(part, u["item_id"])].append(p); self.mine[p].append((part, u["item_id"])); self.load[p] += SEC[part]
         if u["group"] is not None:
             self.grp.add((p, part, u["group"]))
 
     def drop(self, p, part, u):
         self.who[(part, u["item_id"])].remove(p); self.mine[p].remove((part, u["item_id"])); self.load[p] -= SEC[part]
+        self.n[(p, part)] -= 1
+        if self.n[(p, part)] == 0:
+            self.load[p] -= N_PRACTICE * SEC[part]
         if u["group"] is not None:
             self.grp.discard((p, part, u["group"]))
+
+    def cost(self, p, part):
+        return self.load[p] + (0 if self.n[(p, part)] else NEW_PART_PENALTY + N_PRACTICE * SEC[part])
+
+    def balance(self, tol=30.0, allow_new=True):
+        for _ in range(200000):
+            ps = sorted(self.people, key=lambda p: self.load[p])
+            moved = False
+            for hi in reversed(ps):
+                for lo in ps:
+                    gap = self.load[hi] - self.load[lo]
+                    if gap < tol:
+                        break
+                    mine = self.mine[hi][:]; self.rnd.shuffle(mine)
+                    for part, iid in mine:
+                        u = self.unit[(part, iid)]
+                        new = 0 if self.n[(lo, part)] else N_PRACTICE * SEC[part]
+                        if not allow_new and new:
+                            continue
+                        # moving must strictly shrink the larger of the two loads
+                        after_hi = self.load[hi] - SEC[part] - (N_PRACTICE * SEC[part] if self.n[(hi, part)] == 1 else 0)
+                        after_lo = self.load[lo] + SEC[part] + new
+                        if max(after_hi, after_lo) < self.load[hi] - 1e-9 and self.ok(lo, part, u):
+                            self.drop(hi, part, u); self.put(lo, part, u); moved = True; break
+                    if moved:
+                        break
+                if moved:
+                    break
+            if not moved:
+                return
+
+    def fold_small(self):
+        """Move the items of person-parts below MIN_PART_ITEMS to people who already do that part (when allowed)."""
+        for _ in range(50):
+            small = [(p, part) for (p, part), n in self.n.items() if 0 < n < MIN_PART_ITEMS]
+            if not small:
+                return
+            p, part = min(small, key=lambda t: self.n[t])
+            for pp, iid in list(self.mine[p]):
+                if pp != part:
+                    continue
+                u = self.unit[(part, iid)]
+                cand = [q for q in self.people if q != p and self.n[(q, part)] >= MIN_PART_ITEMS and self.ok(q, part, u)]
+                if cand:
+                    q = min(cand, key=lambda q: (self.load[q], self.rnd.random()))
+                    self.drop(p, part, u); self.put(q, part, u)
 
     def run(self, parts):
         tasks = [(part, u) for part, units in parts.items() for u in units]
@@ -347,54 +382,45 @@ class Alloc:
             for _ in range(K[part]):
                 cand = [p for p in self.people if self.ok(p, part, u)]
                 assert cand, f"no eligible annotator for {part} {u['item_id']}"
-                self.put(min(cand, key=lambda p: (self.load[p], self.rnd.random())), part, u)
-        for _ in range(100000):
-            ps = sorted(self.people, key=lambda p: self.load[p])
-            moved = False
-            for hi in reversed(ps):
-                for lo in ps:
-                    gap = self.load[hi] - self.load[lo]
-                    if gap < 30:
-                        break
-                    mine = self.mine[hi][:]; self.rnd.shuffle(mine)
-                    for part, iid in mine:
-                        u = self.unit[(part, iid)]
-                        if SEC[part] < gap and self.ok(lo, part, u):
-                            self.drop(hi, part, u); self.put(lo, part, u); moved = True; break
-                    if moved:
-                        break
-                if moved:
-                    break
-            if not moved:
-                break
+                self.put(min(cand, key=lambda p: (self.cost(p, part), self.rnd.random())), part, u)
+        self.balance(allow_new=False)
+        self.fold_small()
+        self.balance(allow_new=False)
+        self.balance(tol=30.0, allow_new=True)
 
 
 def build(parts_wanted, old, force=False, write=True):
     plan_ids = json.loads((ANN / "assignments" / "plan.json").read_text())["annotators"]
     be, hw = elicitation_blocks(), hw_blocks()
-    builders = {"part22": lambda: part22(be), "part23": lambda: part23(hw), "part24": lambda: part24(be), "part25": lambda: part25(hw, be)}
+    builders = {"part22": lambda: part22(be), "part23": lambda: part23(hw), "part24": lambda: part24(be), "part25": lambda: part25(hw)}
     built = {p: builders[p]() for p in parts_wanted}
     rnd = random.Random(int(hashlib.sha256(SALT.encode()).hexdigest(), 16) % 2**32)
-    al = Alloc(plan_ids, rnd)
+    al = Alloc(plan_ids, rnd, base=sum(OLD_MIN[o] for o in old) * 60)
     al.run({p: built[p][0] for p in built})
     per = {a: {} for a in plan_ids}
+    if write:
+        OUT_DIR.mkdir(parents=True, exist_ok=True)
+        for old_f in OUT_DIR.glob("*_part2[2-5].json"):
+            old_f.unlink()
     for p in built:
         units, spec = built[p]
         for a in plan_ids:
             mine = [u for u in units if a in al.who[(p, u["item_id"])]]
-            sec = len(mine) * SEC[p] + SEC_PRACTICE
-            per[a][p] = {"n_items": len(mine), "minutes": math.ceil(sec / 60)}
+            if not mine:
+                continue
+            sec = (len(mine) + N_PRACTICE) * SEC[p]
+            per[a][p] = {"n_items": len(mine), "seconds": round(sec, 1), "minutes": round(sec / 60)}
             if write:
                 doc = {"check_id": p, "tool": TOOL, "version": 1, "n_items": len(mine), "for": id_hash(a, p), **{k: spec[k] for k in
                        ("title", "intro", "help", "questions", "practice")},
                        "items": [{"item_id": u["item_id"], "blocks": u["blocks"], "qs": u["qs"]} for u in mine]}
-                OUT_DIR.mkdir(parents=True, exist_ok=True)
                 (OUT_DIR / f"{a}_{p}.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
     tot = {a: sum(v["minutes"] for v in per[a].values()) + sum(OLD_MIN[o] for o in old) for a in plan_ids}
     plan = {"salt": SALT, "parts": list(built), "old_parts": list(old), "seconds_per_rating": {p: SEC[p] for p in built},
-            "practice_seconds": SEC_PRACTICE, "coders": {p: K[p] for p in built}, "n_items": {p: len(built[p][0]) for p in built},
+            "practice_items_per_part": N_PRACTICE, "coders": {p: K[p] for p in built},
+            "n_items": {p: len(built[p][0]) for p in built},
             "per_person": per, "total_minutes": tot,
-            "note": "minutes per part = ceil((items x seconds per rating + 60 s practice) / 60); Parts 20 and 21 are 10 and 8 minutes"}
+            "note": "minutes per part = round((items + 2 practice items) x seconds per rating / 60); Parts 20 and 21 are 10 and 8 minutes"}
     if write:
         PLAN_JSON.write_text(json.dumps(plan, indent=1) + "\n")
         with open(ASSIGN_CSV, "w", newline="", encoding="utf-8") as fh:

@@ -1,0 +1,558 @@
+{
+ "check_id": "part23",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "10de30d6",
+ "title": "Compare a sentence with two possible messages",
+ "intro": [
+  "A writer typed a few keywords (sometimes with buttons in square brackets) to make a sentence. For most items you also see two messages, A and B, that the writer might have meant. Say which one the sentence expresses, and whether it fits what the writer asked for.",
+  "Some items show only the keywords and the sentence; they have two other questions."
+ ],
+ "help": [
+  {
+   "term": "Buttons",
+   "text": "Buttons in square brackets show what the writer pressed: [NOT] not, [YES] yes, [?] a question, [TELL] a statement, [ASK] a request, [I] I, [YOU] you, [THEY] someone else, [WE] we, [MAYBE] unsure, [SURE] very sure, [PLEASE] polite, [PLAIN] plain, [PAST] already happened, [NOW] happening now, [LATER] will happen later."
+  },
+  {
+   "term": "Which message",
+   "text": "A or B if the sentence says that one. something else if it says neither. cannot tell if you cannot decide."
+  },
+  {
+   "term": "Added or left out",
+   "text": "added: the sentence says something the writer did not ask for. left out: it drops something they meant. both, or neither."
+  },
+  {
+   "term": "Accept",
+   "text": "yes if you would be happy to say it as the message; yes with a small edit if a word or two should change; no otherwise."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Which message does the sentence say?",
+   "text": "Compare the sentence with Message A and Message B.",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "something else",
+     "label": "something else"
+    },
+    {
+     "v": "cannot tell",
+     "label": "cannot tell"
+    }
+   ]
+  },
+  "q2": {
+   "title": "Added or left out?",
+   "text": "Does the sentence add anything the writer did not ask for, or leave out something they meant?",
+   "options": [
+    {
+     "v": "added",
+     "label": "added something"
+    },
+    {
+     "v": "left out",
+     "label": "left something out"
+    },
+    {
+     "v": "both",
+     "label": "both"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q3": {
+   "title": "Would you accept it?",
+   "text": "Would you accept the sentence as the writer's message?",
+   "options": [
+    {
+     "v": "yes",
+     "label": "yes"
+    },
+    {
+     "v": "yes with a small edit",
+     "label": "yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "no"
+    }
+   ]
+  },
+  "q4": {
+   "title": "Anything beyond the keywords?",
+   "text": "Does the sentence say anything beyond the keywords and buttons?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  },
+  "q5": {
+   "title": "A complete sentence?",
+   "text": "Is it a complete sentence you could say as it is?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[NOT] go school"
+    },
+    {
+     "label": "Message A",
+     "text": "She did not go to school today."
+    },
+    {
+     "label": "Message B",
+     "text": "She went to school today."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "She went to school and had lots of fun with her friends."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "expected": {
+    "q1": "B",
+    "q2": "added",
+    "q3": "no"
+   },
+   "fb": "It says B (she went), not the 'not' the writer asked for, and adds the fun with friends. Not acceptable."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[PLEASE] help me"
+    },
+    {
+     "label": "Sentence shown",
+     "text": "Please help me carry my big heavy bags to the car."
+    }
+   ],
+   "qs": [
+    "q4",
+    "q5"
+   ],
+   "expected": {
+    "q4": "yes",
+    "q5": "yes"
+   },
+   "fb": "It says more than the keywords (the bags and the car), and it is a complete sentence."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "wm-bf9fe8c5",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[YOU] email supervisor"
+    },
+    {
+     "label": "Message A",
+     "text": "You emailed the supervisor about the meeting."
+    },
+    {
+     "label": "Message B",
+     "text": "The assistant emailed the supervisor about the meeting."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "You email the supervisor."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-192d463b",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[SURE] train crowded"
+    },
+    {
+     "label": "Message A",
+     "text": "The train could be crowded near the station."
+    },
+    {
+     "label": "Message B",
+     "text": "The train is crowded near the station."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "The train is definitely crowded."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-da88a605",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[SURE] band play"
+    },
+    {
+     "label": "Message A",
+     "text": "The band may play at the festival."
+    },
+    {
+     "label": "Message B",
+     "text": "The band will play at the festival."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "The band definitely plays."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-1b5f41ac",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[NOT] money rent"
+    },
+    {
+     "label": "Message A",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Message B",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "I do not have money for rent."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-768d187a",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[NOT] counselor answer"
+    },
+    {
+     "label": "Message A",
+     "text": "The counselor answers my access question."
+    },
+    {
+     "label": "Message B",
+     "text": "The counselor does not answer my access question."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "There is no answer from the counselor."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-56ca6b64",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[NOT] schedule training"
+    },
+    {
+     "label": "Message A",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Message B",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "Training is not scheduled."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-449fd928",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[YES] bank send"
+    },
+    {
+     "label": "Message A",
+     "text": "The bank sends a paper statement."
+    },
+    {
+     "label": "Message B",
+     "text": "The bank does not send a paper statement."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "The bank did send it."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-daf95ec9",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[YES] take medicine"
+    },
+    {
+     "label": "Message A",
+     "text": "I take medicine with breakfast."
+    },
+    {
+     "label": "Message B",
+     "text": "I don't take medicine with breakfast."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "I take medicine."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-33ce1cc1",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[NOT] guest respect"
+    },
+    {
+     "label": "Message A",
+     "text": "The guest respects my personal space."
+    },
+    {
+     "label": "Message B",
+     "text": "The guest does not respect my personal space."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "The guest does not respect."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-8d172159",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[PLEASE] bring board"
+    },
+    {
+     "label": "Message A",
+     "text": "Please bring the chess board to me."
+    },
+    {
+     "label": "Message B",
+     "text": "Bring the chess board to me."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "Please bring me the board."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-98a326be",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[TELL] neighbor feed cat"
+    },
+    {
+     "label": "Message A",
+     "text": "The neighbor feeds our cat this morning."
+    },
+    {
+     "label": "Message B",
+     "text": "Does the neighbor feed our cat this morning?"
+    },
+    {
+     "label": "Sentence shown",
+     "text": "The neighbor feeds the cat."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-003cf12f",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[ASK] put folder"
+    },
+    {
+     "label": "Message A",
+     "text": "You put the blue folder on my desk."
+    },
+    {
+     "label": "Message B",
+     "text": "Put the blue folder on my desk."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "Please put it in the folder."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-2dbe3a08",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[PAST] bank card"
+    },
+    {
+     "label": "Message A",
+     "text": "The bank mailed my new card last Monday."
+    },
+    {
+     "label": "Message B",
+     "text": "The bank will mail my new card next Monday."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "There was a bank card."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-cf6216a6",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[PAST] nurse report"
+    },
+    {
+     "label": "Message A",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Message B",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "There was a nurse report."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  },
+  {
+   "item_id": "wm-ae024000",
+   "blocks": [
+    {
+     "label": "Keywords the writer typed",
+     "text": "[PAST] reserve room"
+    },
+    {
+     "label": "Message A",
+     "text": "I reserved the rehearsal room yesterday."
+    },
+    {
+     "label": "Message B",
+     "text": "I will reserve the rehearsal room tomorrow."
+    },
+    {
+     "label": "Sentence shown",
+     "text": "I reserved a room."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ]
+  }
+ ]
+}

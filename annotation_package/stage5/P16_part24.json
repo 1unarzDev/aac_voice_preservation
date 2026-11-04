@@ -1,0 +1,547 @@
+{
+ "check_id": "part24",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "b4a237ab",
+ "title": "Pick the sentence that says the same thing",
+ "intro": [
+  "You will see a message a person wanted to say, the keywords they typed, and two sentences, A and B, a writing tool might offer.",
+  "First say which sentence matches the original message on one feature (it is named in the question). Then say which sentence you would tap if you had typed those keywords."
+ ],
+ "help": [
+  {
+   "term": "Same thing",
+   "text": "Look only at the one feature named in question 1 (for example 'not', a question or request, or polite wording). both equally if both match it as well as each other; neither if neither does."
+  },
+  {
+   "term": "Which would you tap",
+   "text": "Imagine you typed those keywords and meant the original message. A, B, or neither if you would tap neither."
+  }
+ ],
+ "questions": {
+  "q1_neg": {
+   "title": "Same thing about 'not'?",
+   "text": "Which sentence says the same thing as the original message about whether it is negated (says something is NOT so)?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q1_act": {
+   "title": "Same thing: question or request?",
+   "text": "Which sentence says the same thing as the original message about whether it is a question or request rather than a plain statement?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q1_pol": {
+   "title": "Same thing about politeness?",
+   "text": "Which sentence says the same thing as the original message about whether it uses polite wording (please, thank you, could you)?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q2": {
+   "title": "Which would you tap?",
+   "text": "If you had typed those keywords, which sentence would you tap to say your message?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I do not like loud music."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "like loud music"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I like loud music."
+    },
+    {
+     "label": "Sentence B",
+     "text": "I do not like loud music."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ],
+   "expected": {
+    "q1_neg": "B",
+    "q2": "B"
+   },
+   "fb": "Only B keeps the 'not' of the original message, so B says the same thing about negation and is the one to tap."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can you open the door?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "open door"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I open the door."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Could you open the door?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ],
+   "expected": {
+    "q1_act": "B",
+    "q2": "B"
+   },
+   "fb": "The original asks someone to do something; B does too, A is a plain statement."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "vq041",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "what are you doing now?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "what doing now"
+    },
+    {
+     "label": "Sentence A",
+     "text": "That's not what I'm doing now."
+    },
+    {
+     "label": "Sentence B",
+     "text": "What are you doing now?"
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq054",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "What's your favorite time of day?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "favorite time day"
+    },
+    {
+     "label": "Sentence A",
+     "text": "What is your favorite time of day?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "My favorite time of day is now."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq056",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "What's the weather forecast?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "weather forecast"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I want to know the weather forecast."
+    },
+    {
+     "label": "Sentence B",
+     "text": "What is the weather forecast?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq062",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please speak your heart out to me."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "speak heart out"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I want to speak my heart out."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please speak from your heart."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq067",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please lock the door."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "lock door"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I will lock the door."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please lock the door."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq073",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "What a cute puppy!"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "cute puppy"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Is that a cute puppy?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I want a cute puppy"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq077",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "What classes are offered for summer session at the technical college?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "summer classes"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I plan to enroll in summer classes."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Are there classes in the summer?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq081",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I would love a coffee please"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "love coffee"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I love coffee."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Would you like some coffee?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq082",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Do you found the flash light?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "found flashlight"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Have you found the flashlight?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I found the flashlight."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq089",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please pass me the water, I'm parched!"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "pass water parched"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I am parched and want to pass water."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please pass me some water; I’m parched."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq093",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I am tired I will go to bed now."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "tired bed now"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I'm tired; can you help me get to bed now?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I am tired now."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq102",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I know it might be odd"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "might seem odd"
+    },
+    {
+     "label": "Sentence A",
+     "text": "It might seem odd."
+    },
+    {
+     "label": "Sentence B",
+     "text": "This might seem odd, but could I ask you something?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq103",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Now mum says its time for a bath!"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "mum says bath time"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Mum says it’s bath time, so can you help me?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "Mum says it's bath time."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq139",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "some people are indeed insensitive"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "people indeed insensitive"
+    },
+    {
+     "label": "Sentence A",
+     "text": "People indeed are insensitive."
+    },
+    {
+     "label": "Sentence B",
+     "text": "People can be insensitive indeed, so please be considerate."
+    }
+   ],
+   "qs": [
+    "q1_pol",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq143",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "He is being very cold"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "he very cold"
+    },
+    {
+     "label": "Sentence A",
+     "text": "He is very cold."
+    },
+    {
+     "label": "Sentence B",
+     "text": "He is very cold, please."
+    }
+   ],
+   "qs": [
+    "q1_pol",
+    "q2"
+   ]
+  }
+ ]
+}

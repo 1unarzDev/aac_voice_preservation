@@ -1,0 +1,547 @@
+{
+ "check_id": "part24",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "db3dd2bf",
+ "title": "Pick the sentence that says the same thing",
+ "intro": [
+  "You will see a message a person wanted to say, the keywords they typed, and two sentences, A and B, a writing tool might offer.",
+  "First say which sentence matches the original message on one feature (it is named in the question). Then say which sentence you would tap if you had typed those keywords."
+ ],
+ "help": [
+  {
+   "term": "Same thing",
+   "text": "Look only at the one feature named in question 1 (for example 'not', a question or request, or polite wording). both equally if both match it as well as each other; neither if neither does."
+  },
+  {
+   "term": "Which would you tap",
+   "text": "Imagine you typed those keywords and meant the original message. A, B, or neither if you would tap neither."
+  }
+ ],
+ "questions": {
+  "q1_neg": {
+   "title": "Same thing about 'not'?",
+   "text": "Which sentence says the same thing as the original message about whether it is negated (says something is NOT so)?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q1_act": {
+   "title": "Same thing: question or request?",
+   "text": "Which sentence says the same thing as the original message about whether it is a question or request rather than a plain statement?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q1_pol": {
+   "title": "Same thing about politeness?",
+   "text": "Which sentence says the same thing as the original message about whether it uses polite wording (please, thank you, could you)?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q2": {
+   "title": "Which would you tap?",
+   "text": "If you had typed those keywords, which sentence would you tap to say your message?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I do not like loud music."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "like loud music"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I like loud music."
+    },
+    {
+     "label": "Sentence B",
+     "text": "I do not like loud music."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ],
+   "expected": {
+    "q1_neg": "B",
+    "q2": "B"
+   },
+   "fb": "Only B keeps the 'not' of the original message, so B says the same thing about negation and is the one to tap."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can you open the door?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "open door"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I open the door."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Could you open the door?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ],
+   "expected": {
+    "q1_act": "B",
+    "q2": "B"
+   },
+   "fb": "The original asks someone to do something; B does too, A is a plain statement."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "vq041",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "what are you doing now?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "what doing now"
+    },
+    {
+     "label": "Sentence A",
+     "text": "That's not what I'm doing now."
+    },
+    {
+     "label": "Sentence B",
+     "text": "What are you doing now?"
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq050",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "could you help me in getting up please."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "please help me up"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Please help me up."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please don't help me up."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq051",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please pass the food."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "pass food"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Please pass the food."
+    },
+    {
+     "label": "Sentence B",
+     "text": "I don’t want to pass the food."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq052",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Could you please hand that to me."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "hand that please"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Please give me your hand."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please don't hand me that."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq054",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "What's your favorite time of day?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "favorite time day"
+    },
+    {
+     "label": "Sentence A",
+     "text": "What is your favorite time of day?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "My favorite time of day is now."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq058",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can we go out for a drive?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "go drive"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I will drive you now."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Can we go for a drive?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq060",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "can you speak to the doctor on the phone for me please?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "speak doctor"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I want to speak to the doctor."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Can I speak to the doctor?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq061",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can you find my glasses."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "find glasses"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Can you help me find my glasses?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I need to find my glasses."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq064",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "can you get me a drink?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "get drink"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I want to get a drink."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Can you get me a drink?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq070",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "You don't like it?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "you don't like"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Don't you like it?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "You don't like it."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq075",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Did you have breakfast?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "have breakfast"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I have breakfast now."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Have you had breakfast?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq085",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please check the fridge and get some provisions."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "check fridge buy provisions"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Please check the fridge and buy provisions."
+    },
+    {
+     "label": "Sentence B",
+     "text": "I will check the fridge and buy provisions."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq098",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "You may call him now."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "may call"
+    },
+    {
+     "label": "Sentence A",
+     "text": "You may call me later."
+    },
+    {
+     "label": "Sentence B",
+     "text": "May I make a call?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq101",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Trouble always seems to find me."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "trouble finds me"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Trouble finds me."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Are you having trouble finding me?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq143",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "He is being very cold"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "he very cold"
+    },
+    {
+     "label": "Sentence A",
+     "text": "He is very cold."
+    },
+    {
+     "label": "Sentence B",
+     "text": "He is very cold, please."
+    }
+   ],
+   "qs": [
+    "q1_pol",
+    "q2"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,572 @@
+{
+ "check_id": "part24",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 16,
+ "for": "202cf06e",
+ "title": "Pick the sentence that says the same thing",
+ "intro": [
+  "You will see a message a person wanted to say, the keywords they typed, and two sentences, A and B, a writing tool might offer.",
+  "First say which sentence matches the original message on one feature (it is named in the question). Then say which sentence you would tap if you had typed those keywords."
+ ],
+ "help": [
+  {
+   "term": "Same thing",
+   "text": "Look only at the one feature named in question 1 (for example 'not', a question or request, or polite wording). both equally if both match it as well as each other; neither if neither does."
+  },
+  {
+   "term": "Which would you tap",
+   "text": "Imagine you typed those keywords and meant the original message. A, B, or neither if you would tap neither."
+  }
+ ],
+ "questions": {
+  "q1_neg": {
+   "title": "Same thing about 'not'?",
+   "text": "Which sentence says the same thing as the original message about whether it is negated (says something is NOT so)?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q1_act": {
+   "title": "Same thing: question or request?",
+   "text": "Which sentence says the same thing as the original message about whether it is a question or request rather than a plain statement?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q1_pol": {
+   "title": "Same thing about politeness?",
+   "text": "Which sentence says the same thing as the original message about whether it uses polite wording (please, thank you, could you)?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "both",
+     "label": "both equally"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  },
+  "q2": {
+   "title": "Which would you tap?",
+   "text": "If you had typed those keywords, which sentence would you tap to say your message?",
+   "options": [
+    {
+     "v": "A",
+     "label": "A"
+    },
+    {
+     "v": "B",
+     "label": "B"
+    },
+    {
+     "v": "neither",
+     "label": "neither"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I do not like loud music."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "like loud music"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I like loud music."
+    },
+    {
+     "label": "Sentence B",
+     "text": "I do not like loud music."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ],
+   "expected": {
+    "q1_neg": "B",
+    "q2": "B"
+   },
+   "fb": "Only B keeps the 'not' of the original message, so B says the same thing about negation and is the one to tap."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can you open the door?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "open door"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I open the door."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Could you open the door?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ],
+   "expected": {
+    "q1_act": "B",
+    "q2": "B"
+   },
+   "fb": "The original asks someone to do something; B does too, A is a plain statement."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "vq043",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "My jokes are kinda flat nowdays ha ha ha."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "my jokes flat"
+    },
+    {
+     "label": "Sentence A",
+     "text": "My jokes are flat."
+    },
+    {
+     "label": "Sentence B",
+     "text": "My jokes are not flat."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq045",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Was the movie any good?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "movie good"
+    },
+    {
+     "label": "Sentence A",
+     "text": "This movie is good."
+    },
+    {
+     "label": "Sentence B",
+     "text": "The movie is not good."
+    }
+   ],
+   "qs": [
+    "q1_neg",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq055",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "For how long the medications will continue doctor ?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "medication duration"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I need to know the duration of the medication."
+    },
+    {
+     "label": "Sentence B",
+     "text": "How long do I need to take the medication?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq058",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can we go out for a drive?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "go drive"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I will drive you now."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Can we go for a drive?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq064",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "can you get me a drink?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "get drink"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I want to get a drink."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Can you get me a drink?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq066",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Are you exciting about the new career?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "excited new career"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Are you excited about your new career?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I am excited about my new career."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq068",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I would like to go for a walk."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "like go walk"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I like to go for a walk."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Would you like to go for a walk?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq071",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please get me some biscuits and chips from the store."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "biscuits chips store"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Could you get me some biscuits and chips from the store?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I want to buy biscuits at the store."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq078",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can we go outside please?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "go outside"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Can we go outside?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I want to go outside."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq080",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Can you call my mother?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "call mother"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I will call mother."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please call my mother."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq085",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Please check the fridge and get some provisions."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "check fridge buy provisions"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Please check the fridge and buy provisions."
+    },
+    {
+     "label": "Sentence B",
+     "text": "I will check the fridge and buy provisions."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq088",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Where is my blue shirt?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "blue shirt"
+    },
+    {
+     "label": "Sentence A",
+     "text": "I am wearing a blue shirt."
+    },
+    {
+     "label": "Sentence B",
+     "text": "Is it the blue shirt?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq096",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "I think you need a psychiatrist."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "think need psychiatrist"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Do you think I need a psychiatrist?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "I think I need a psychiatrist."
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq098",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "You may call him now."
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "may call"
+    },
+    {
+     "label": "Sentence A",
+     "text": "You may call me later."
+    },
+    {
+     "label": "Sentence B",
+     "text": "May I make a call?"
+    }
+   ],
+   "qs": [
+    "q1_act",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq141",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "How many days will you be gone?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "how many days gone"
+    },
+    {
+     "label": "Sentence A",
+     "text": "How many days have gone?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "Please, how many days have gone by?"
+    }
+   ],
+   "qs": [
+    "q1_pol",
+    "q2"
+   ]
+  },
+  {
+   "item_id": "vq142",
+   "blocks": [
+    {
+     "label": "The original message",
+     "text": "Where did the cat go?"
+    },
+    {
+     "label": "Keywords the writer typed",
+     "text": "where cat go"
+    },
+    {
+     "label": "Sentence A",
+     "text": "Please, where did the cat go?"
+    },
+    {
+     "label": "Sentence B",
+     "text": "Where does the cat go?"
+    }
+   ],
+   "qs": [
+    "q1_pol",
+    "q2"
+   ]
+  }
+ ]
+}

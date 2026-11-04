@@ -11,14 +11,16 @@ usage:
   python src/make_assignments.py --stage 4 --fill-checks [--absent P05]
                                                                        # after Part 15 returns + collect_written_pairs.py --batch hw2
 
-  python src/make_assignments.py --stage 5                            # Stage 5 (Parts 20, 21; everyone): sheets, stage5.csv, hand-out block
+  python src/make_assignments.py --stage 5                            # Stage 5 (Parts 20, 21 for everyone + each person's share of 22-25): sheets, stage5.csv, hand-out block
 
-Stage 5 (added after Stage 4 had been returned; Parts 20 and 21, all annotators, 18 min each)
+Stage 5 (added after Stage 4 had been returned; Parts 20 and 21 for all annotators, 18 min each, plus Parts 22-25 shares; about 60 min each)
   Part 20   annotate.html + stage5/<ID>_part20.json (src/make_treated_check.py): 12 labelled sentences from treated outputs.
   Part 21   source_check.html + stage5/<ID>_part21.json (src/make_source_check.py): 20 source messages, 3 quick questions.
   The part files and keys come from the two make_* scripts (seeded, frozen); --stage 5 only writes the sheets
   annotation_package/assignments/<ID>_stage5.md, annotation/assignments/stage5.csv and the hand-out block, and checks that
-  each person's part files exist. No roster is chosen: everyone gets both parts, in this order.
+  each person's part files exist. Everyone gets Parts 20 and 21, in this order.
+  Parts 22-25 (src/make_frontier_parts.py; rate_items.html + stage5/<ID>_part22..25.json; item counts, minutes and the private
+  assignment in annotation/assignments/stage5_frontier*.{json,csv}): each person gets a share of each, balanced to the same minutes.
 
 Stage 1 (Nov 2-4, ~3-4 h each; ORDER IS MANDATORY: elicitation -> audits -> writing)
   roles     hash order of the IDs (sha1(SALT|roles|ID)): first 3 do Part 10, next 3 Parts 1-3 (extra coders),
@@ -99,7 +101,8 @@ DATES.update({"stage4_open": "Mon Nov 2", "stage4": "Mon Nov 2", "stage4_due": "
 S4_PLAN = ASSIGN_DIR / "stage4_plan.json"
 # Stage 5 (Parts 20 and 21, built after Stage 4 had been returned). Dates are assumptions the coordinator can change here.
 STAGE5_DIR = PKG / "stage5"
-DATES.update({"stage5_open": "Tue Nov 3", "stage5": "Tue Nov 3", "stage5_due": "Tue Nov 3, 23:59", "stage5_end": "Tue Nov 3"})
+DATES.update({"stage5_open": "Wed Nov 4", "stage5": "Wed Nov 4", "stage5_due": "Thu Nov 5, 23:59", "stage5_end": "Thu Nov 5"})
+S5_FRONTIER = ASSIGN_DIR / "stage5_frontier.json"   # written by src/make_frontier_parts.py: per-person items and minutes for Parts 22-25
 S4_WRITTEN = WRITTEN / "hw2"
 S4_BATCH = "hw2"
 PART17_RATERS = ["P02", "P07", "P09", "P10", "P11", "P14"]   # people who did not do Parts 4/11 (D-058)
@@ -161,6 +164,20 @@ TASKS5 = {
                "annotate.html + stage5/{ID}_part20.json", "labels_part20_{ID}.csv", "annotation/returns_treated_check/"),
     "part21": ("Part 21", "Check messages: 20 short messages, 3 quick questions each, 3 practice messages first", 8,
                "source_check.html + stage5/{ID}_part21.json", "labels_part21_{ID}.csv", "annotation/returns_source_check/"),
+}
+# Parts 22-25 (added before any Stage 5 return): not everyone does every part; the per-person item counts and minutes come from
+# annotation/assignments/stage5_frontier.json (src/make_frontier_parts.py). Names are plain descriptions of the task.
+TASKS5_FRONTIER = {
+    "part22": ("Part 22", "Read a sentence and the keywords typed for it: {n} items, 4 short questions each, 2 practice items first"),
+    "part23": ("Part 23", "Compare a sentence with two possible messages: {n} items, 2 or 3 short questions each, 2 practice items first"),
+    "part24": ("Part 24", "Pick the sentence that says the same thing: {n} items, 2 short questions each, 2 practice items first"),
+    "part25": ("Part 25", "Read a remark and a sentence: {n} items, 1 or 2 short questions each, 2 practice items first"),
+}
+S5_EXTRA_RULES = {
+    "part22": "- **Part 22:** questions 1 and 2 are about the sentence, questions 3 and 4 only about the keywords (ignore the sentence for those two).",
+    "part23": "- **Part 23:** the square-bracket words are buttons the writer pressed; they are not part of the sentence. The questions change between items: read them each time.",
+    "part24": "- **Part 24:** judge only the feature named in question 1; question 2 is which sentence you would pick if you had typed those keywords.",
+    "part25": "- **Part 25:** the question changes between items (a letter choice for some, two yes/no questions for others): read it each time.",
 }
 AUDITS_FLEX = ["part4", "part11", "part5", "part6"]
 AUDIT_ORDER = ["parts13", "part10", "part4", "part11", "part5", "part6"]   # order within the audit block
@@ -1388,14 +1405,31 @@ def run_stage4_fill(plan_path=ASSIGN_DIR / "plan.json", cand_path=S4_WRITTEN / "
 
 
 # ---------------------------------------------------------------- Stage 5 (Parts 20 and 21)
-def rows_stage5(ids) -> list[dict]:
+def frontier_plan(path=None) -> dict | None:
+    p = Path(path or S5_FRONTIER)
+    return json.loads(p.read_text()) if p.exists() else None
+
+
+def rows_stage5(ids, fplan=None) -> list[dict]:
+    """Parts 20 and 21 for everyone, then each person's share of Parts 22-25 (in part order)."""
+    fplan = fplan if fplan is not None else frontier_plan()
     out = []
     for a in ids:
-        for o, task in enumerate(TASKS5, 1):
-            T = TASKS5[task]
+        o = 0
+        for task, T in TASKS5.items():
+            o += 1
             out.append({"annotator": a, "stage": "5", "order": o, "part": T[0], "task": task, "description": T[1],
                         "file_or_link": T[3].format(ID=a), "expected_minutes": T[2], "return_file": T[4].format(ID=a),
                         "return_folder": T[5], "due": DATES["stage5_due"]})
+        for task, (label, desc) in TASKS5_FRONTIER.items():
+            mine = (fplan or {}).get("per_person", {}).get(a, {}).get(task)
+            if not mine:
+                continue
+            o += 1
+            out.append({"annotator": a, "stage": "5", "order": o, "part": label, "task": task,
+                        "description": desc.format(n=mine["n_items"]),
+                        "file_or_link": f"rate_items.html + stage5/{a}_{task}.json", "expected_minutes": mine["minutes"],
+                        "return_file": f"labels_{task}_{a}.csv", "return_folder": f"annotation/returns_{task}/", "due": DATES["stage5_due"]})
     return out
 
 
@@ -1406,28 +1440,53 @@ def stage5_item_line(r, a) -> str:
                 "(12 sentences). Same tool and questions as Part 10 (README: Part 10 and Part 20). Label only what the words on the "
                 "page say; the codebook is not needed, the short definitions on the screen are enough. Click **Download CSV** at "
                 f"the end. The file name will be `labels_part20_{a}.csv`.")
-    else:
+    elif r["task"] == "part21":
         body = (f"Open `source_check.html`, click the file button, choose `stage5/{a}_part21.json`, enter `{a}`. Do the 3 practice "
                 "messages, then every message (20): is it negated, is it polite, and is it a statement, a question or a request. "
                 f"README: Part 21. Click **Download CSV** at the end. The file name will be `labels_part21_{a}.csv`.")
+    else:
+        body = (f"Open `rate_items.html`, click the file button, choose `stage5/{a}_{r['task']}.json`, enter `{a}`. Do the 2 practice "
+                f"items (you see feedback), then every item. README: {r['part']}. Click **Download CSV** at the end. "
+                f"The file name will be `labels_{r['task']}_{a}.csv`.")
     return f"{head}  \n  {body} Return: `{r['return_file']}`."
 
 
+def split_sittings(rs: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Two sittings at a part boundary, as close to half the minutes as possible."""
+    tot = sum(r["expected_minutes"] for r in rs)
+    cum = [sum(r["expected_minutes"] for r in rs[:k]) for k in range(1, len(rs))]
+    best = 1 + min(range(len(cum)), key=lambda k: abs(cum[k] - tot / 2))
+    return rs[:best], rs[best:]
+
+
 def stage5_sheet(rows: list[dict], a: str) -> str:
-    rs = [r for r in rows if r["annotator"] == a]
+    rs = sorted((r for r in rows if r["annotator"] == a), key=lambda r: int(r["order"]))
     tot = sum(r["expected_minutes"] for r in rs)
     split = ", ".join(f"{r['part']} {r['expected_minutes']} min" for r in rs)
+    big = len(rs) > 2
     L = [f"# Stage 5 task sheet for {a} (OPTIONAL; {DATES['stage5']}; due {DATES['stage5_due']})", "",
-         "Stage 5 is a short top-up and **optional**: if you cannot do it, tell the coordinator now so it can be planned without you. "
+         "Stage 5 is a top-up and **optional**: if you cannot do it, tell the coordinator now so it can be planned without you. "
          "Download the current `annotation_package.zip`: your files are in its `stage5/` folder and the tools are in the package "
-         f"folder. About **{tot} min** in total ({split}), plus breaks.", "",
-         RULES.format(ID=a, END=DATES["stage5_end"]), "",
-         "**Extra rules for Stage 5**",
-         "- **Part 20:** label what each sentence says, using only the words on the page. Do not search for the sentences or ask "
-         "anyone or any tool; if a sentence is odd or unclear, say so with the unsure key (`S`).",
-         "- **Part 21:** answer from the words of the message only. Use unsure when you cannot tell. Do not look for patterns "
-         "across messages.", "",
-         "## Steps (in this order)", "", "Order: **Part 20 first**, then **Part 21**.", ""]
+         f"folder. About **{tot} min** in total ({split}), plus breaks."
+         + (" The practice items are included in these times." if big else ""), ""]
+    if big:
+        s1, s2 = split_sittings(rs)
+        L += [f"**Two sittings are fine.** Each tool saves your progress in your browser (use the same browser and computer), so you "
+              f"can stop between items. Suggested split: first sitting {', '.join(r['part'] for r in s1)} "
+              f"(about {sum(r['expected_minutes'] for r in s1)} min), second sitting {', '.join(r['part'] for r in s2)} "
+              f"(about {sum(r['expected_minutes'] for r in s2)} min). Keep the order below, and download each part's CSV as soon as "
+              "you finish that part.", ""]
+    L += [RULES.format(ID=a, END=DATES["stage5_end"]), "",
+          "**Extra rules for Stage 5**",
+          "- **Part 20:** label what each sentence says, using only the words on the page. Do not search for the sentences or ask "
+          "anyone or any tool; if a sentence is odd or unclear, say so with the unsure key (`S`).",
+          "- **Part 21:** answer from the words of the message only. Use unsure when you cannot tell. Do not look for patterns "
+          "across messages."]
+    L += [S5_EXTRA_RULES[r["task"]] for r in rs if r["task"] in S5_EXTRA_RULES]
+    if big:
+        L += ["- **Parts 22-25:** answer from the words on the page only. Do not search for the sentences or ask anyone or any tool. "
+              "If an item is odd, pick the closest answer (or `other` / `cannot tell` where offered) and add a short note."]
+    L += ["", "## Steps (in this order)", "", f"Order: **Part 20 first**, then {', then '.join(r['part'] for r in rs[1:])}.", ""]
     L += [stage5_item_line(r, a) for r in rs] + [""]
     L += ["**Return files (names must be exact):** " + "; ".join(f"`{r['return_file']}` ({r['part']})" for r in rs) + ".", ""]
     L += [f"Return: email the CSV files for {', '.join(r['part'] for r in rs)} to the coordinator by {DATES['stage5_due']} "
@@ -1439,14 +1498,25 @@ def stage5_sheet(rows: list[dict], a: str) -> str:
 def stage5_handout_section(rows: list[dict]) -> str:
     ids = sorted({r["annotator"] for r in rows})
     tot = sum(r["expected_minutes"] for r in rows)
-    return (f"""<!-- stage5:start -->
-- **Stage 5, optional** (opens **{DATES['stage5_open']}**, built after Stage 4 had been returned): Parts 20 and 21, due
-  **{DATES['stage5_due']}**. Files appear in `stage5/`; re-download the zip. About {tot / 60:.1f} person-hours:
-  all {len(ids)} people do the same two short parts, in this order. Sheets: `assignments/<ID>_stage5.md`.
-  - Part 20, 10 min (`annotate.html` + `stage5/<ID>_part20.json`, 12 sentences). Return `labels_part20_<ID>.csv`.
-  - Part 21, 8 min (`source_check.html` + `stage5/<ID>_part21.json`, 20 short messages). Return `labels_part21_<ID>.csv`.
-<!-- stage5:end -->
-""")
+    per = {a: sum(r["expected_minutes"] for r in rows if r["annotator"] == a) for a in ids}
+    fr = [t for t in TASKS5_FRONTIER if any(r["task"] == t for r in rows)]
+    lines = ["<!-- stage5:start -->",
+             f"- **Stage 5, optional** (opens **{DATES['stage5_open']}**, built after Stage 4 had been returned): due **{DATES['stage5_due']}**. "
+             f"Files appear in `stage5/`; re-download the zip. About {tot / 60:.1f} person-hours"
+             + (f", {min(per.values())}-{max(per.values())} min each (two sittings are fine)" if fr else "")
+             + ". Sheets: `assignments/<ID>_stage5.md`.",
+             f"  - Parts 20 and 21 for all {len(ids)} people, in this order:",
+             "    - Part 20, 10 min (`annotate.html` + `stage5/<ID>_part20.json`, 12 sentences). Return `labels_part20_<ID>.csv`.",
+             "    - Part 21, 8 min (`source_check.html` + `stage5/<ID>_part21.json`, 20 short messages). Return `labels_part21_<ID>.csv`."]
+    if fr:
+        lines.append("  - Parts 22-25, a share of each (every person's sheet lists which parts and how many items; `rate_items.html` + "
+                     "`stage5/<ID>_part22..25.json`, 2 practice items first). Return `labels_part22_<ID>.csv` ... `labels_part25_<ID>.csv`:")
+        for t in fr:
+            rr = [r for r in rows if r["task"] == t]
+            lines.append(f"    - {rr[0]['part']}: {len(rr)} people, {min(r['expected_minutes'] for r in rr)}-"
+                         f"{max(r['expected_minutes'] for r in rr)} min each ({TASKS5_FRONTIER[t][1].split(':')[0]}).")
+    lines.append("<!-- stage5:end -->")
+    return "\n".join(lines) + "\n"
 
 
 def insert_stage5_section(txt: str, section: str) -> str:
@@ -1460,13 +1530,18 @@ def insert_stage5_section(txt: str, section: str) -> str:
 
 
 def run_stage5(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, stage5_dir=STAGE5_DIR,
-               pkg=PKG, handout_path=None, quiet=False) -> dict:
+               pkg=PKG, handout_path=None, quiet=False, frontier_path=None) -> dict:
     plan = json.loads(Path(plan_path).read_text())
     ids = plan["annotators"]
-    rows = rows_stage5(ids)
-    missing = [str(stage5_dir / f"{a}_{t}.json") for a in ids for t in ("part20", "part21") if not (stage5_dir / f"{a}_{t}.json").exists()]
+    fplan = frontier_plan(frontier_path)
+    if fplan is None and not quiet:
+        print("WARNING: no stage5_frontier.json (run src/make_frontier_parts.py first): writing Parts 20 and 21 only")
+    rows = rows_stage5(ids, fplan)
+    need = [(a, r["task"]) for a in ids for r in rows if r["annotator"] == a]
+    missing = [str(stage5_dir / f"{a}_{t}.json") for a, t in need if not (stage5_dir / f"{a}_{t}.json").exists()]
     if missing and not quiet:
-        print(f"WARNING: {len(missing)} part files missing (run src/make_treated_check.py and src/make_source_check.py first), e.g. {missing[:2]}")
+        print(f"WARNING: {len(missing)} part files missing (run src/make_treated_check.py, src/make_source_check.py and "
+              f"src/make_frontier_parts.py first), e.g. {missing[:2]}")
     write_csv(out_assign / "stage5.csv", rows, S4_COLS)
     out_sheets.mkdir(parents=True, exist_ok=True)
     for a in ids:
@@ -1474,9 +1549,9 @@ def run_stage5(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sh
     hp = Path(handout_path or pkg / "HANDOUT.md")
     hp.write_text(insert_stage5_section(hp.read_text(), stage5_handout_section(rows)))
     if not quiet:
-        print(f"Stage 5: {len(ids)} sheets, {sum(r['expected_minutes'] for r in rows) / 60:.1f} person-hours, "
-              f"{sum(r['expected_minutes'] for r in rows if r['annotator'] == ids[0])} min each")
-    return {"plan": plan, "rows": rows, "missing": missing}
+        per = [sum(r["expected_minutes"] for r in rows if r["annotator"] == a) for a in ids]
+        print(f"Stage 5: {len(ids)} sheets, {sum(per) / 60:.1f} person-hours, minutes per person {min(per)}-{max(per)}")
+    return {"plan": plan, "rows": rows, "missing": missing, "frontier": fplan}
 
 
 def main(argv=None) -> int:
