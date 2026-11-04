@@ -1,0 +1,478 @@
+{
+ "check_id": "part25",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 18,
+ "for": "1f895115",
+ "title": "Read a remark and a sentence",
+ "intro": [
+  "You will see something one person said, and a sentence another person might say in a conversation. Some items also show the keywords that sentence was made from.",
+  "Answer from the words on the page only. The question changes between items: read it each time."
+ ],
+ "help": [
+  {
+   "term": "Restates",
+   "text": "says the same thing as the remark, in the same or different words."
+  },
+  {
+   "term": "Reply",
+   "text": "answers the remark: agrees with it, or acknowledges it (for example starting 'yes', 'oh', 'I know')."
+  },
+  {
+   "term": "Invented",
+   "text": "says something negative that neither the keywords nor the remark support."
+  },
+  {
+   "term": "Plain statement",
+   "text": "something the person could say about the keywords' event without the remark at all."
+  }
+ ],
+ "questions": {
+  "pa": {
+   "title": "Which describes the sentence?",
+   "text": "Compared with the other person's remark, which best describes the sentence?",
+   "options": [
+    {
+     "v": "a",
+     "label": "(a) it restates the remark in other words"
+    },
+    {
+     "v": "b",
+     "label": "(b) it is a reply to the remark (agrees with or acknowledges it)"
+    },
+    {
+     "v": "c",
+     "label": "(c) it adds something negative that neither the keywords nor the remark support (invented)"
+    },
+    {
+     "v": "d",
+     "label": "(d) it is a plain statement about the keywords' event that the person could say without the remark"
+    },
+    {
+     "v": "e",
+     "label": "(e) other or unclear"
+    }
+   ]
+  },
+  "pb1": {
+   "title": "Same wording as the remark?",
+   "text": "Does the sentence re-use the other person's own wording about the outcome (the same negative phrase, word for word or nearly)?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  },
+  "pb2": {
+   "title": "Phrased as a reply?",
+   "text": "Is the sentence phrased as a reply to the other person (starts with yes, oh, I heard, I know, or acknowledges what they said)?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "cook dinner"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Nothing was cooked tonight."
+    },
+    {
+     "label": "The sentence",
+     "text": "No dinner was cooked tonight."
+    }
+   ],
+   "qs": [
+    "pa"
+   ],
+   "expected": {
+    "pa": "a"
+   },
+   "fb": "It says what the remark says in nearly the same words: it restates it."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No sign of the parcel."
+    },
+    {
+     "label": "The sentence",
+     "text": "Yes, I know, it has not come."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ],
+   "expected": {
+    "pb1": "no",
+    "pb2": "yes"
+   },
+   "fb": "It does not repeat the remark's wording, and it answers the remark ('Yes, I know'): a reply."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pc3A000",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "buy groceries"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Nothing was bought yesterday."
+    },
+    {
+     "label": "The sentence",
+     "text": "They didn't buy groceries yesterday."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A020",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "charger work"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not your phone's charger, I've checked."
+    },
+    {
+     "label": "The sentence",
+     "text": "The charger doesn’t work."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A023",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "able make meeting"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one has mentioned a meeting for Friday."
+    },
+    {
+     "label": "The sentence",
+     "text": "I am able to make the meeting."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A040",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "stay up late"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No late night polls have been reported."
+    },
+    {
+     "label": "The sentence",
+     "text": "I don't want to stay up late."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A044",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "landlord fix boiler"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your request for a boiler fix on Friday didn't pan out."
+    },
+    {
+     "label": "The sentence",
+     "text": "The landlord must fix the boiler."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A050",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "charger work"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your phone's charge didn't take."
+    },
+    {
+     "label": "The sentence",
+     "text": "The charger doesn’t work."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A054",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "read email"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Email went unread."
+    },
+    {
+     "label": "The sentence",
+     "text": "I did not read the email."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A063",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "enjoy course"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one shared your enjoyment of the course this evening."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't enjoy the course this evening."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A067",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "accessible entrance open"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Unfortunately, the accessible entrance didn't open today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I couldn't open the accessible entrance today."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A077",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "bear pain"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Bear encounter didn't materialize today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't experience any bear pain today."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A090",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "see film"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of the film before."
+    },
+    {
+     "label": "The sentence",
+     "text": "I haven't seen the film before."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A104",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "client show up"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your appointment didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "The client [did not] show up."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A132",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "come barbecue"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not tomorrow, sorry."
+    },
+    {
+     "label": "The sentence",
+     "text": "I'll come tomorrow."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A172",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "keys drawer"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Alas, the keys didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't find the keys in the drawer."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A174",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "recognise man door"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Alas, the door didn't open."
+    },
+    {
+     "label": "The sentence",
+     "text": "I couldn't recognise the man."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A188",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "eat meat"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one else in your family eats meat, you've mentioned."
+    },
+    {
+     "label": "The sentence",
+     "text": "You don't eat meat."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3B010",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Not having dinner late tonight."
+    },
+    {
+     "label": "The sentence",
+     "text": "I am not having dinner late tonight."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B045",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Not all museums are free on Sundays."
+    },
+    {
+     "label": "The sentence",
+     "text": "Not all museums are free."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  }
+ ]
+}

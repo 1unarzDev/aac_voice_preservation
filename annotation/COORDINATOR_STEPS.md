@@ -231,3 +231,54 @@ and how much does a human-corrected label change P(negated | no negation word in
   for both keyword channels, with the silent-reversal rate per 1,000, and the splits -> stratum-rate sensitivity. The T2 headline in
   the papers is restated with the corrected number whichever way it moves; the detector-based number stays as the committed
   reference. The T2 bootstrap does not carry the sampling error of the Part 21 labels (stated in the report).
+
+### Stage 5 wave 2: Parts 22-25 (added 2026-11-03 before any return; Stage 5 opens Wed Nov 4, due Thu Nov 5, 23:59)
+Parts 20 and 21 are unchanged (12 and 20 items per person). Four more parts use one new tool, `annotation_package/rate_items.html`
+(blind per-person files `stage5/<ID>_part22..25.json`, 2 practice items each, tests `tests/test_rate_items_html.js`, run for every file
+with `NODE_PATH=/tmp/jsd/node_modules`). Items and keys are the ones each frontier request already built; nothing is redrawn.
+```bash
+python src/make_frontier_parts.py          # frozen (seeded, --force redraws): 53 part files, annotation/assignments/stage5_frontier{,_assignment}.{json,csv}
+python src/make_assignments.py --stage 5   # sheets <ID>_stage5.md (neutral names), stage5.csv, HANDOUT.md block
+```
+Returns: `labels_part22_<ID>.csv` ... `labels_part25_<ID>.csv` -> `annotation/returns_part22/` ... `returns_part25/` (columns `item_id, annotator,
+check_id, practice, order, <one column per question>, note, time_ms, ...`; `practice=1` rows are dropped; an item's unasked questions are empty).
+The private item-by-person list is `annotation/assignments/stage5_frontier_assignment.csv`; join item ids to the `annotation/frontier_*_key.csv`
+files only after all returns are in.
+- **Items and coder counts (all at the required count).** Part 22 default_profiles 223 items x 2 coders. Part 23 whole_message R-WM-1 120
+  (108 output + 12 verbatim) x 3. Part 24 value_of_cue 73 x 2: speech-act stratum A (36) plus the whole control stratum B (37; the key holds 37,
+  the request text says 31). Part 25 partner_context round 3, 258 (197 Part A + 61 Part B) x 3. Stratum A polarity (40) and politeness (32)
+  items of value_of_cue are NOT in this wave.
+- **Exclusions (checked by `tests/test_stage5_frontier.py` from the raw files).** Parts 23 and 25 (families `hw-*`): never the writer in
+  `hw_candidates.jsonl` (hw and hw2) nor any checker in `check_key.csv`, incl. Part 14 tie-breakers. Parts 22 and 24: never any annotator of the
+  message's elicitation set. Part 25 families `r2pol-*` exclude no one. Part 23: nobody gets two outputs made from the same input (family + variant).
+- **Missing and split answers.** No answer is imputed and none is re-requested after labels are seen. Consensus needs the full required count:
+  2 coders must agree; for 3 coders the majority (2 of 3) is the label, three different answers = no consensus (counted and listed). A field with no
+  consensus is dropped from that field's accuracy and shown as a count. `other` / `cannot tell` / `neither` are answers, not missing.
+
+Analysis rules (each also stated in the request named; those requests and the plan sections cited are the pre-registered frame):
+- **Part 22 default_profiles** (`analysis/frontier/default_profiles/ANNOTATION_REQUEST.md`; plan: `PLAN.md` sections 1 and 5; key `annotation/frontier_default_profiles_key.csv`
+  with HT weight `w`). Human speech act = Q1 consensus; non-statement = question or request/command, statement = statement, `other` = no consensus
+  (sensitivity: other counted as non-statement). Human polite = Q2 consensus. Detector labels (`detector_nonstmt`, `detector_polite`) vs human consensus per stratum
+  (E_speech_act, politeness exposure, controls): Cohen kappa, precision and recall (Wilson), HT-reweighted with Kish effective n, human-human agreement. Q3 and Q4
+  consensus vs the lexical gate "keywords lack the cue": agreement and the share of exposure the gate cannot reach. Then re-run `src/frontier_default_profiles_r3.py` with
+  human consensus substituted for the detector proxies and regenerate `round3.md` with `src/frontier_default_profiles_r3report.py`; the detector-based numbers stay as the
+  committed reference and the speech-act and politeness results keep the label provisional until this is scored. Negation is not in this part.
+- **Part 23 whole_message R-WM-1** (`analysis/frontier/whole_message/ANNOTATION_REQUEST.md`; plan: `PLAN.md` section 5; key `annotation/frontier_whole_message_key.csv`).
+  Output items: acceptability = Q3 yes or yes with a small edit (consensus by 2-of-3); Q1 match = consensus equals the key's intended variant; added content = Q2 added or
+  both. Per arm A0, A1, A2 with family-cluster bootstrap CIs; paired A2 - A0 and A1 - A0 on the same inputs (family x variant); judge flag (`gpt_UC`) vs human added
+  content: kappa and AUROC against the 3-coder majority. Verbatim items (12): share of copies a majority call "adds something" (Q4 yes) and "complete" (Q5 yes) against the
+  flags. Descriptive, no new threshold; with 36 inputs the intervals are wide and are stated as such. Machine-only results stay provisional until this is scored.
+- **Part 24 value_of_cue** (`analysis/frontier/value_of_cue/ANNOTATION_REQUEST.md` Part B and round-3 addendum; plan: `PLAN.md` sections 6 (Stage 4) and 7; key
+  `annotation/frontier_value_of_cue_key.csv`, `alternative_is`). q-hat (speech act) = share of stratum A speech-act judgments with Q2 = the alternative sentence, every
+  judgment counted (2 per item), message-cluster bootstrap CI; Q1 = alternative as the cross-check. Wrong-pick rate m = stratum B judgments with Q2 = alternative (all 37
+  items, per dimension descriptive, pooled with a cluster bootstrap); share of Q1 "both equally" or "neither" = adequacy of the offered alternative; inter-annotator kappa
+  with CI. q-hat replaces the assumed q = 0.9 only for speech act; polarity and politeness keep the assumed q (not annotated in this wave) and the frontier says so.
+  The result is reported whichever way it moves; SHOW-TWO numbers stay conditional on q for the other dimensions.
+- **Part 25 partner_context round 3** (`analysis/frontier/partner_context/ANNOTATION_REQUEST.md` round-3 revision; plan: `PLAN.md` sections 4 and 5, rules R8 and R9; key
+  `annotation/frontier_partner_context_r3_key.csv`). Part A: the 3-coder consensus category (a restates, b reply, c invented, d plain statement, e other) per group
+  (propositional_negation, licensed anchors, controls); shares with a family-cluster bootstrap; confusion with `machine_class` and `machine_class2`; the +8.7 pp is
+  re-split by the human shares. Part B: human echo (yes/no) and reply (yes/no) consensus vs the machine filter stratified by judge decision (echo-only, neither, reply,
+  arm-0): sensitivity and specificity with Wilson CIs. If the human echo rate on machine-"none" units is above 20%, the filtered numbers (the +1.2 to +1.5 pp lower bound
+  and the filtered propositional C2) are reported as unvalidated. Failing
+  or odd categories are reported, not re-run. Machine results stay PROVISIONAL (R9) until this is scored.
+- **No re-labelling.** Human labels never replace production labels in any headline estimate; they are reported next to the machine results as validity checks.

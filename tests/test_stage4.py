@@ -328,19 +328,29 @@ def test_stage5_sheets_csv_and_stage4_untouched(tmp_path=None):
     assert res["missing"] == [], res["missing"][:3]
     rows = list(csv.DictReader(open(tmp / "assign" / "stage5.csv")))
     plan = json.loads(PLAN.read_text())
-    assert len(rows) == 40 and {r["annotator"] for r in rows} == set(plan["annotators"])
+    fplan = json.loads((ROOT / "annotation" / "assignments" / "stage5_frontier.json").read_text())
+    assert {r["annotator"] for r in rows} == set(plan["annotators"])
     for a in plan["annotators"]:
         mine = sorted((r for r in rows if r["annotator"] == a), key=lambda r: int(r["order"]))
-        assert [r["task"] for r in mine] == ["part20", "part21"] and [int(r["expected_minutes"]) for r in mine] == [10, 8]
+        tasks = [r["task"] for r in mine]
+        assert tasks[:2] == ["part20", "part21"] and tasks[2:] == sorted(fplan["per_person"][a]) and 2 <= len(tasks[2:]) <= 3, (a, tasks)
+        assert [int(r["expected_minutes"]) for r in mine[:2]] == [10, 8]
         assert mine[0]["return_file"] == f"labels_part20_{a}.csv" and mine[0]["return_folder"] == "annotation/returns_treated_check/"
         assert mine[1]["return_file"] == f"labels_part21_{a}.csv" and mine[1]["return_folder"] == "annotation/returns_source_check/"
         assert f"stage5/{a}_part20.json" in mine[0]["file_or_link"] and f"source_check.html + stage5/{a}_part21.json" == mine[1]["file_or_link"]
+        for r in mine[2:]:
+            assert r["file_or_link"] == f"rate_items.html + stage5/{a}_{r['task']}.json" and r["return_file"] == f"labels_{r['task']}_{a}.csv"
+        total = sum(int(r["expected_minutes"]) for r in mine)
+        assert 58 <= total <= 61, (a, total)
         txt = (tmp / "sheets" / f"{a}_stage5.md").read_text()
-        for needle in ("Work **alone**", "No AI tools", "(in this order)", "18 min", f"labels_part20_{a}.csv", f"labels_part21_{a}.csv", "stage 5"):
+        for needle in ("Work **alone**", "No AI tools", "(in this order)", f"{total} min", f"labels_part20_{a}.csv", f"labels_part21_{a}.csv", "stage 5",
+                       "Two sittings are fine", "Thu Nov 5, 23:59", "Wed Nov 4"):
             assert needle in txt, (a, needle)
-        assert txt.index("1. Part 20") < txt.index("2. Part 21")
+        for r in mine[2:]:
+            assert f"labels_{r['task']}_{a}.csv" in txt
+        assert txt.index("1. Part 20") < txt.index("2. Part 21") < txt.index("3. " + mine[2]["part"])
     h = hand.read_text()
-    assert "Stage 5, optional" in h and "labels_part20_<ID>" in h and "<!-- stage4:start -->" in h
+    assert "Stage 5, optional" in h and "labels_part20_<ID>" in h and "<!-- stage4:start -->" in h and "Parts 22-25" in h
     assert MA.insert_stage5_section(h, MA.stage5_handout_section(MA.rows_stage5(plan["annotators"]))).count("<!-- stage5:start -->") == 1
     # committed Stage 5 files equal a fresh build; Stage 4 files are not touched by Stage 5
     assert (ROOT / "annotation" / "assignments" / "stage5.csv").read_text() == (tmp / "assign" / "stage5.csv").read_text()
@@ -350,7 +360,7 @@ def test_stage5_sheets_csv_and_stage4_untouched(tmp_path=None):
         assert "Part 20" not in (ROOT / "annotation_package" / "assignments" / f"{a}_stage4.md").read_text()
     assert "part20" not in (ROOT / "annotation" / "assignments" / "stage4.csv").read_text()
     assert digest([ROOT / "annotation" / "assignments" / "stage4.csv", ROOT / "annotation" / "assignments" / "stage4_plan.json"]) == s4_before
-    for d in ("returns_treated_check", "returns_source_check"):
+    for d in ("returns_treated_check", "returns_source_check", "returns_part22", "returns_part23", "returns_part24", "returns_part25"):
         assert (ROOT / "annotation" / d / ".gitkeep").exists() or list((ROOT / "annotation" / d).glob("labels_*.csv"))
 
 

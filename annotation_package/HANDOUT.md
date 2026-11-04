@@ -27,11 +27,15 @@ files from `annotation/` (answer keys, model labels).
 <!-- stage4:end -->
 
 <!-- stage5:start -->
-- **Stage 5, optional** (opens **Tue Nov 3**, built after Stage 4 had been returned): Parts 20 and 21, due
-  **Tue Nov 3, 23:59**. Files appear in `stage5/`; re-download the zip. About 6.0 person-hours:
-  all 20 people do the same two short parts, in this order. Sheets: `assignments/<ID>_stage5.md`.
-  - Part 20, 10 min (`annotate.html` + `stage5/<ID>_part20.json`, 12 sentences). Return `labels_part20_<ID>.csv`.
-  - Part 21, 8 min (`source_check.html` + `stage5/<ID>_part21.json`, 20 short messages). Return `labels_part21_<ID>.csv`.
+- **Stage 5, optional** (opens **Wed Nov 4**, built after Stage 4 had been returned): due **Thu Nov 5, 23:59**. Files appear in `stage5/`; re-download the zip. About 19.9 person-hours, 59-60 min each (two sittings are fine). Sheets: `assignments/<ID>_stage5.md`.
+  - Parts 20 and 21 for all 20 people, in this order:
+    - Part 20, 10 min (`annotate.html` + `stage5/<ID>_part20.json`, 12 sentences). Return `labels_part20_<ID>.csv`.
+    - Part 21, 8 min (`source_check.html` + `stage5/<ID>_part21.json`, 20 short messages). Return `labels_part21_<ID>.csv`.
+  - Parts 22-25, a share of each (every person's sheet lists which parts and how many items; `rate_items.html` + `stage5/<ID>_part22..25.json`, 2 practice items first). Return `labels_part22_<ID>.csv` ... `labels_part25_<ID>.csv`:
+    - Part 22: 11 people, 13-17 min each (Read a sentence and the keywords typed for it).
+    - Part 23: 13 people, 7-19 min each (Compare a sentence with two possible messages).
+    - Part 24: 9 people, 14-17 min each (Pick the sentence that says the same thing).
+    - Part 25: 20 people, 7-28 min each (Read a remark and a sentence).
 <!-- stage5:end -->
 
 **Return method:** annotators email the CSVs named on their sheet, unchanged, to the coordinator: one email per stage,

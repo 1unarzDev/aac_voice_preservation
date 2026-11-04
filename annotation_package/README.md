@@ -37,7 +37,9 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   sections below.
 - **Part 20, `stage5/<ID>_part20.json`** (12 sentences, same tool as Part 10): about 10 minutes. **Part 21,
   `source_check.html` with `stage5/<ID>_part21.json`** (20 short messages, 3 quick questions each): about 8 minutes.
-  Both are for everyone in Stage 5. See their sections below.
+  Both are for everyone in Stage 5. **Parts 22-25, `rate_items.html` with `stage5/<ID>_part22.json` ... `_part25.json`**
+  (short questions about sentences, messages and remarks): each person gets two or three of these four, as listed on
+  the sheet, so that Stage 5 is about 60 minutes in all (it can be done in two sittings). See their sections below.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -302,12 +304,55 @@ judge only the words on the page.
 
 Each message is read by two people, working alone. Nobody gets a message whose keywords they typed in Part 9.
 
+## Parts 22-25 (Stage 5, about 7-28 min each; your sheet lists which ones you have): `rate_items.html`
+Four short tasks that all use the same tool, `rate_items.html`. For each one you get one file named with your ID and the
+part (for example `stage5/P02_part25.json`); the part file you have is on your sheet. Not everyone has every part.
+
+1. Open `rate_items.html`, click the file button and choose your file (e.g. `stage5/P02_part25.json`). Enter **the same
+   annotator ID** and press `Enter`. The tool refuses a file that is not yours.
+2. Two practice items with feedback come first (the feedback shows a suggested answer; it is not a test). Then you see the
+   items one at a time, in an order that is different for every person. Answer **every question** on the screen. The
+   questions can change from item to item inside one part: read them each time.
+3. Keys: `1`-`9` choose an option for the highlighted question, `↑`/`↓` move between questions, `Tab` goes to the optional
+   note box, `Enter` goes to the next item, `Backspace` goes back. Progress is saved in the browser (use the same browser
+   and computer if you stop and come back). Click **Download CSV** at the end: `labels_part22_<ID>.csv` (and the same for
+   the other part numbers you have).
+4. Answer from the words on the page only. Do not look anything up and do not ask anyone or any tool. If an item is odd,
+   choose the closest answer (or `other` / `cannot tell` where it is offered) and write a short note.
+
+What each part asks (the definitions are also on the screen):
+- **Part 22, read a sentence and the keywords typed for it (about 13-17 min).** You see a real sentence and the few keywords a
+  person typed for it. Questions 1 and 2 are about the *sentence*: is it a statement, a question, a request or command, or
+  something else; and is it polite (please, thank you, sorry, softened wording such as "could you"). Questions 3 and 4 are
+  about the *keywords only* (ignore the sentence): do the keywords by themselves already show a question or request, and
+  do they by themselves already show politeness.
+- **Part 23, compare a sentence with two possible messages (about 7-19 min).** A writer typed keywords. Words in square
+  brackets, such as `[NOT]`, `[YOU]` or `[PAST]`, are buttons the writer pressed (they are not part of the sentence). Most
+  items show two messages the writer might have meant, A and B, and a sentence. Say which message the sentence says (A, B,
+  something else, cannot tell); whether it added something that was not asked for or left something out; and whether you
+  would accept it as the writer's message (yes, yes with a small edit, no). A few items show only the keywords and a
+  sentence, with two other questions: does it say anything beyond the keywords, and is it a complete sentence you could
+  say as it is.
+- **Part 24, pick the sentence that says the same thing (about 14-17 min).** You see a message a person wanted to say, the
+  keywords they typed, and two sentences, A and B. Question 1 names one feature (for example "not", question or request,
+  or polite wording): which sentence says the same thing as the original message on that feature (A, B, both equally,
+  neither). Question 2: if you had typed those keywords, which sentence would you pick (A, B, neither).
+- **Part 25, read a remark and a sentence (about 7-28 min).** You see something one person said and a sentence another person
+  might say in reply or in the conversation. For some items you also see the keywords that sentence was made from, and you
+  choose one of five descriptions (for example: it restates the remark; it replies to the remark; it adds something
+  negative that nothing on the page supports; it is a plain statement that needs no remark). For the others there are two
+  yes/no questions: does the sentence re-use the other person's own wording about the outcome, and is it phrased as a
+  reply to the other person.
+
+Each item is answered by two or three people, working alone. Nobody gets an item built on a pair they wrote or checked, or
+on a message whose keywords they typed in Part 9.
+
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
 `wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `write_pairs_<dimension>_<ID>.csv`,
 `check_pairs_<file>_<ID>.csv` and `keyword_elicitation_<file>_<ID>.csv` for Parts 7–9, `labels_gold_new_<ID>.csv` for Part 10 and
 `repair_audit_transfer_<ID>.csv` for Part 11, `repair_audit_v2_<ID>.csv` for Part 17, `intent_check_<ID>.csv` for
-Part 18, `labels_part19_<ID>.csv` for Part 19, `labels_part20_<ID>.csv` for Part 20 and `labels_part21_<ID>.csv` for Part 21), to the study coordinator. Please also send:
+Part 18, `labels_part19_<ID>.csv` for Part 19, `labels_part20_<ID>.csv` for Part 20, `labels_part21_<ID>.csv` for Part 21 and `labels_part22_<ID>.csv` ... `labels_part25_<ID>.csv` for Parts 22-25), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

@@ -1,0 +1,1456 @@
+{
+ "check_id": "part25",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 69,
+ "for": "ab42f473",
+ "title": "Read a remark and a sentence",
+ "intro": [
+  "You will see something one person said, and a sentence another person might say in a conversation. Some items also show the keywords that sentence was made from.",
+  "Answer from the words on the page only. The question changes between items: read it each time."
+ ],
+ "help": [
+  {
+   "term": "Restates",
+   "text": "says the same thing as the remark, in the same or different words."
+  },
+  {
+   "term": "Reply",
+   "text": "answers the remark: agrees with it, or acknowledges it (for example starting 'yes', 'oh', 'I know')."
+  },
+  {
+   "term": "Invented",
+   "text": "says something negative that neither the keywords nor the remark support."
+  },
+  {
+   "term": "Plain statement",
+   "text": "something the person could say about the keywords' event without the remark at all."
+  }
+ ],
+ "questions": {
+  "pa": {
+   "title": "Which describes the sentence?",
+   "text": "Compared with the other person's remark, which best describes the sentence?",
+   "options": [
+    {
+     "v": "a",
+     "label": "(a) it restates the remark in other words"
+    },
+    {
+     "v": "b",
+     "label": "(b) it is a reply to the remark (agrees with or acknowledges it)"
+    },
+    {
+     "v": "c",
+     "label": "(c) it adds something negative that neither the keywords nor the remark support (invented)"
+    },
+    {
+     "v": "d",
+     "label": "(d) it is a plain statement about the keywords' event that the person could say without the remark"
+    },
+    {
+     "v": "e",
+     "label": "(e) other or unclear"
+    }
+   ]
+  },
+  "pb1": {
+   "title": "Same wording as the remark?",
+   "text": "Does the sentence re-use the other person's own wording about the outcome (the same negative phrase, word for word or nearly)?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  },
+  "pb2": {
+   "title": "Phrased as a reply?",
+   "text": "Is the sentence phrased as a reply to the other person (starts with yes, oh, I heard, I know, or acknowledges what they said)?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "cook dinner"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Nothing was cooked tonight."
+    },
+    {
+     "label": "The sentence",
+     "text": "No dinner was cooked tonight."
+    }
+   ],
+   "qs": [
+    "pa"
+   ],
+   "expected": {
+    "pa": "a"
+   },
+   "fb": "It says what the remark says in nearly the same words: it restates it."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No sign of the parcel."
+    },
+    {
+     "label": "The sentence",
+     "text": "Yes, I know, it has not come."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ],
+   "expected": {
+    "pb1": "no",
+    "pb2": "yes"
+   },
+   "fb": "It does not repeat the remark's wording, and it answers the remark ('Yes, I know'): a reply."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pc3A001",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "eat soup"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Dinner soups didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't eat soup."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A002",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "take medicine"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of your medicine at breakfast."
+    },
+    {
+     "label": "The sentence",
+     "text": "I want to take medicine now."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A005",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "picnic include"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not all our neighbors could make it to the picnic."
+    },
+    {
+     "label": "The sentence",
+     "text": "The picnic didn’t include all our neighbors."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A007",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "visitor knock"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your visitor didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "The visitor didn't knock."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A009",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "guitar fit"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your guitar case didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "The guitar case doesn’t fit."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A015",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "roommate lock"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of your roommate locking the bathroom."
+    },
+    {
+     "label": "The sentence",
+     "text": "My roommate hasn't locked the bathroom."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A017",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "coach bring"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of a spare coach."
+    },
+    {
+     "label": "The sentence",
+     "text": "We need to bring a coach."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A019",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "wifi work"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Wi-Fi connection dropped."
+    },
+    {
+     "label": "The sentence",
+     "text": "The Wi-Fi isn't working."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A026",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "read email"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not received any new emails since last time."
+    },
+    {
+     "label": "The sentence",
+     "text": "I haven't read any new emails since last time."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A032",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "music bother"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your favorite song didn't make it to the radio."
+    },
+    {
+     "label": "The sentence",
+     "text": "My favorite music doesn't bother me."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A037",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "counselor answer"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not all counselors have access to AAC."
+    },
+    {
+     "label": "The sentence",
+     "text": "I don't have access to AAC."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A038",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "game start"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one started the game yet."
+    },
+    {
+     "label": "The sentence",
+     "text": "No one started the game yet."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A041",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "visitor knock"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your visitor didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "They didn't knock."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A042",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "neighbor own"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one's seen your neighbor with a blue car."
+    },
+    {
+     "label": "The sentence",
+     "text": "My neighbor owns a blue car."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A043",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "eat soup"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of soup at dinner."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't eat soup."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A045",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "coach bring"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of a spare coach."
+    },
+    {
+     "label": "The sentence",
+     "text": "I will bring a spare coach."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A046",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "plan meet"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of you at the park today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I did not plan to meet you at the park today."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A051",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "driver know"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No taxi in sight."
+    },
+    {
+     "label": "The sentence",
+     "text": "Driver know where taxi is."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A053",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No, your prescription wasn't delivered yet."
+    },
+    {
+     "label": "The sentence",
+     "text": "I want to ask the pharmacy if they delivered my prescription now."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A055",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "bank charge fee"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of any transfer."
+    },
+    {
+     "label": "The sentence",
+     "text": "I have not received any notification about a bank charge fee."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A073",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "meal contain"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Our order didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "We didn't get the meal."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A080",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "brother visit"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of your brother's visit."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't visit my brother."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A087",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "guitar fit"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of a guitar case here."
+    },
+    {
+     "label": "The sentence",
+     "text": "The guitar doesn't fit."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A092",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "renew insurance"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of a renewal notice."
+    },
+    {
+     "label": "The sentence",
+     "text": "I want to renew insurance."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A098",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "bear pain"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I can't bear the pain."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A103",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "need cream"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not the creamer you're after, is it?"
+    },
+    {
+     "label": "The sentence",
+     "text": "[NOT] I need cream."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A105",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "meal contain"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Our order didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "Our meal doesn't contain."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A106",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "supervisor read"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No new schedules have been sent by your supervisor."
+    },
+    {
+     "label": "The sentence",
+     "text": "My supervisor has not read."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A108",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "coach bring"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Alas, the coach didn't materialize."
+    },
+    {
+     "label": "The sentence",
+     "text": "The coach didn't bring it."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A112",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "pharmacist stock"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your prescription didn't pan out."
+    },
+    {
+     "label": "The sentence",
+     "text": "The pharmacist doesn't have it in stock."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A122",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "brother visit"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of your brother's visit."
+    },
+    {
+     "label": "The sentence",
+     "text": "My brother did not visit."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A124",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "tired walk"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Never spotted you walking this morning."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't walk this morning."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A128",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "soup contain"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No soup contains ground."
+    },
+    {
+     "label": "The sentence",
+     "text": "They don't contain ground."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A129",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "roommate lock"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of your roommate locking the bathroom."
+    },
+    {
+     "label": "The sentence",
+     "text": "My roommate didn’t lock the bathroom."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A133",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "museum permit"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your permit for the museum visit fell through."
+    },
+    {
+     "label": "The sentence",
+     "text": "I am sorry, but I don't have a museum permit."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A134",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "ride clinic"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Our ride clinic was cancelled."
+    },
+    {
+     "label": "The sentence",
+     "text": "The ride clinic was cancelled."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A139",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "charger work"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No sign of your phone charging."
+    },
+    {
+     "label": "The sentence",
+     "text": "My charger isn't working."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A147",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No tutor has reminded you about the deadline."
+    },
+    {
+     "label": "The sentence",
+     "text": "They have not remembered."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A149",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "visitor respect"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No visitors ever closed this place."
+    },
+    {
+     "label": "The sentence",
+     "text": "Visitors never respected this place."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A151",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "museum free"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not all museums are free on Sundays."
+    },
+    {
+     "label": "The sentence",
+     "text": "Not all museums are free on Sundays."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A152",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "museum permit"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No visitors have been recorded today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I need a museum permit."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A155",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "landlord fix boiler"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your request for a boiler fix on Friday didn't pan out."
+    },
+    {
+     "label": "The sentence",
+     "text": "The landlord didn't fix the boiler on Friday."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A156",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No prescriptions were delivered today."
+    },
+    {
+     "label": "The sentence",
+     "text": "Pharmacy did not deliver."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A157",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "clerk understand"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your request didn't go through."
+    },
+    {
+     "label": "The sentence",
+     "text": "The clerk doesn't understand."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A161",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "driver know"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your cab request didn't pan out."
+    },
+    {
+     "label": "The sentence",
+     "text": "The driver doesn't know."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A164",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "dad know party"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Not my dad's idea of a party."
+    },
+    {
+     "label": "The sentence",
+     "text": "My dad doesn't know what a party is."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A170",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "neighbor own"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Your plan to borrow blue paint from your neighbor seems to have fallen through."
+    },
+    {
+     "label": "The sentence",
+     "text": "I don't have my own blue paint."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A171",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "need bring id"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one brought your ID on Thursday."
+    },
+    {
+     "label": "The sentence",
+     "text": "I need you to bring my ID."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A179",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "sister get flat"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of your sister at the park."
+    },
+    {
+     "label": "The sentence",
+     "text": "I haven't seen your sister get flat at the park."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A187",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "bright light"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Alas, the light didn't make it through the night."
+    },
+    {
+     "label": "The sentence",
+     "text": "The light was not bright."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A189",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "rent water"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No one's moved into the flat yet."
+    },
+    {
+     "label": "The sentence",
+     "text": "I want to rent water."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A191",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "bear pain"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "No trace of a bear today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I saw no pain in the bear today."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3A195",
+   "blocks": [
+    {
+     "label": "Keywords",
+     "text": "enjoy course"
+    },
+    {
+     "label": "Something the other person said",
+     "text": "Our evening course was cancelled."
+    },
+    {
+     "label": "The sentence",
+     "text": "I enjoy the course."
+    }
+   ],
+   "qs": [
+    "pa"
+   ]
+  },
+  {
+   "item_id": "pc3B001",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No new trainees scheduled."
+    },
+    {
+     "label": "The sentence",
+     "text": "No new training scheduled."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B014",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No, the cashier didn't give you a receipt."
+    },
+    {
+     "label": "The sentence",
+     "text": "The cashier didn't give me a receipt."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B016",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No, that's not the music bothering you."
+    },
+    {
+     "label": "The sentence",
+     "text": "The music doesn't bother me."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B023",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No trace of soup at dinner."
+    },
+    {
+     "label": "The sentence",
+     "text": "I did not eat soup."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B024",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Not the brightest light in the bedroom."
+    },
+    {
+     "label": "The sentence",
+     "text": "The light is not bright in the bedroom."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B027",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Bear encounter didn't materialize today."
+    },
+    {
+     "label": "The sentence",
+     "text": "I didn't experience any bear pain today."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B029",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No, that's not the music bothering you."
+    },
+    {
+     "label": "The sentence",
+     "text": "Yes, music doesn't bother me."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B032",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No change noted in the rota."
+    },
+    {
+     "label": "The sentence",
+     "text": "I understand there is no change to the rota."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B033",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No sign of the film before."
+    },
+    {
+     "label": "The sentence",
+     "text": "I haven't seen the film yet."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B036",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No new results yet."
+    },
+    {
+     "label": "The sentence",
+     "text": "No new clinic results yet."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B044",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Not my blue neighbor, I never saw them."
+    },
+    {
+     "label": "The sentence",
+     "text": "I haven't seen my own neighbor either."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B047",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Your prescription didn't pan out."
+    },
+    {
+     "label": "The sentence",
+     "text": "The pharmacist doesn't have it in stock."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B049",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "You haven't met your tutor yet, have you?"
+    },
+    {
+     "label": "The sentence",
+     "text": "I understand I haven't met my tutor yet."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B053",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No trace of your brother's visit."
+    },
+    {
+     "label": "The sentence",
+     "text": "My brother did not visit."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B056",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "Your delivery didn't pan out."
+    },
+    {
+     "label": "The sentence",
+     "text": "The parcel did not arrive."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  },
+  {
+   "item_id": "pc3B059",
+   "blocks": [
+    {
+     "label": "Something the other person said",
+     "text": "No, that's not the music bothering you."
+    },
+    {
+     "label": "The sentence",
+     "text": "I don't want the music to bother me."
+    }
+   ],
+   "qs": [
+    "pb1",
+    "pb2"
+   ]
+  }
+ ]
+}

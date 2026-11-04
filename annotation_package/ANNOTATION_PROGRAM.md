@@ -141,9 +141,10 @@ Order: Part 18 can start at once (outputs exist), then Part 19. Part 17 needs it
 follows Part 15 returns; generation and judging of the new pairs follow Part 16. Task sheets will be
 `assignments/<ID>_stage4.md` once the coordinator confirms who is available.
 
-**Stage 5 (optional; added after Stage 4 had been returned).** Two short label tasks that check the automatic labels
-where the papers' headline numbers rest. **All 20 people** do both, in this order (files in `stage5/`, sheets
-`assignments/<ID>_stage5.md`, about 18 min each, 6.0 h in all):
+**Stage 5 (optional; added after Stage 4 had been returned; opens Wed Nov 4, due Thu Nov 5, 23:59).** Label tasks that
+check the automatic labels where the papers' headline numbers rest: Parts 20 and 21 for all 20 people (18 min each,
+6.0 h in all) and a share of Parts 22-25 (below), about 60 min per person in all, balanced across people and doable in two
+sittings (files in `stage5/`, sheets `assignments/<ID>_stage5.md`). Parts 20 and 21, in this order:
 
 1. **Part 20 (10 min): do the labels hold on the treated outputs?** 12 sentences per person (120 in all, 20 for each of
    six kinds of output: repaired by the guard, retried without feedback, chip input, plain-word input, the two newer
@@ -155,6 +156,17 @@ where the papers' headline numbers rest. **All 20 people** do both, in this orde
    (negated? polite? statement, question or request?), each message by two people. Nobody reads a message whose keywords
    they typed in Part 9. The answers check the detector and correct the estimate of how often a message was negated when its
    keywords contain no negation word.
+
+3. **Parts 22-25 (about 42 min per person, all with the tool `rate_items.html`, two practice items each; every item is at
+   its required number of coders).** Part 22: 223 messages, each with one set of keywords typed for it, 2 coders (is the
+   sentence a statement, question or request, is it polite; do the keywords alone already show a question or request, or
+   politeness). Part 23: 120 outputs, 3 coders (which of two messages does the sentence say, was something added or left
+   out, would you accept it; 12 verbatim copies get two other questions); nobody sees two outputs made from the same
+   input. Part 24: 73 pairs of sentences, 2 coders (which sentence keeps a feature of the original message; which would
+   you pick). Part 25: 258 remark-and-sentence items, 3 coders (is the sentence a restatement, a reply or a plain
+   statement; or two yes/no questions). People are excluded from items built on a pair they wrote or checked or on a
+   message whose keywords they typed, so the shares are set by `src/make_frontier_parts.py` (seeded, frozen); the private
+   item-by-person assignment is `annotation/assignments/stage5_frontier_assignment.csv` and is never in the package.
 
 **After Stage 4.** No further annotation is needed for the SE4All and CALE-AI papers. The next step is a separate
 study with AAC users. It needs its own ethics determination (IRB or equivalent) before anyone is recruited, and it

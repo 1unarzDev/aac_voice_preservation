@@ -1,0 +1,839 @@
+{
+ "check_id": "part22",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 37,
+ "for": "b042fc52",
+ "title": "Read a sentence and its keywords",
+ "intro": [
+  "You will see a sentence and the few keywords a person typed for it. Answer four short questions about the words on the page.",
+  "Questions 1 and 2 are about the sentence. Questions 3 and 4 are about the keywords only: ignore the sentence for those two."
+ ],
+ "help": [
+  {
+   "term": "What it does",
+   "text": "statement tells something (including 'I want tea.'). question asks for information or permission. request/command asks someone to do something. other if none of these fits."
+  },
+  {
+   "term": "Polite",
+   "text": "polite if it has please, thank you, sorry, excuse me, could you, would you or a similar polite or softened form."
+  },
+  {
+   "term": "Keywords only",
+   "text": "For questions 3 and 4, look only at the keywords. Would a reader of the keywords alone already know it is a question or request (or polite)? Words like 'where', 'can you', 'please' would show it."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "What does the sentence do?",
+   "text": "Look at the sentence.",
+   "options": [
+    {
+     "v": "statement",
+     "label": "statement"
+    },
+    {
+     "v": "question",
+     "label": "question"
+    },
+    {
+     "v": "request/command",
+     "label": "request or command"
+    },
+    {
+     "v": "other",
+     "label": "other"
+    }
+   ]
+  },
+  "q2": {
+   "title": "Is the sentence polite?",
+   "text": "Please, thank you, sorry, softened wording like 'could you'.",
+   "options": [
+    {
+     "v": "polite",
+     "label": "polite"
+    },
+    {
+     "v": "not polite",
+     "label": "not polite"
+    }
+   ]
+  },
+  "q3": {
+   "title": "Keywords only: a question or request?",
+   "text": "Look ONLY at the keywords. Do the keywords by themselves already show a question or a request (not a plain statement)?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  },
+  "q4": {
+   "title": "Keywords only: polite?",
+   "text": "Look ONLY at the keywords. Do the keywords by themselves already show politeness?",
+   "options": [
+    "yes",
+    "no"
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Please open the window."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "open window"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ],
+   "expected": {
+    "q1": "request/command",
+    "q2": "polite",
+    "q3": "no",
+    "q4": "no"
+   },
+   "fb": "It asks someone to do something (a request) and uses 'please' (polite). The keywords 'open window' show neither."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Where are my keys?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "where keys"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ],
+   "expected": {
+    "q1": "question",
+    "q2": "not polite",
+    "q3": "yes",
+    "q4": "no"
+   },
+   "fb": "It asks for information (question), no polite word. The keyword 'where' already shows a question by itself."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "dp-1ea82c47",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Can you help me?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "help me"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0b8efa68",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Do we go for the tests, today?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "tests today together"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-a96b069b",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Please check the fridge and get some provisions."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "check fridge buy provisions"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-45f1ab1a",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Did you have breakfast?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "did you eat breakfast"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-34ffe09d",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Was the movie any good?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "movie good"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-2867f445",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Can you help me get up?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "help me get up"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0ea700c5",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "I have something to tell you."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "something tell you"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-192aa8f0",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "That was sure an exciting game of football."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "football game exciting"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-2b64a488",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Can we go to the market later?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "market later together"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-1716a182",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Maybe we should get some fresh air."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "maybe fresh air together"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-64bde1a2",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Could you please open that door back up while I"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "open door"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-1973d10a",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Please come over to my place for dinner."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "come dinner place"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0f13f11e",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "please do what i say!"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "do what say"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-4a51e3ae",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "i would like that you do dinner with me!"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "dinner with me"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-03b79d06",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "I think that was very go with that."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "think that was good"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-024a210a",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Is the other person involved in accident safe now?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "accident safe"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-166f69fb",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Will you stay the night."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "stay night"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-54f89e3b",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Can we go out for a drive?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "we drive outside question"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-49c4d76b",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "I would like to have the cat sit on my lap."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "cat sit lap"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-fa027d3f",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Mom thank you for being patient and helping me to communicate better"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "mom patient helping"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0dd7ebc4",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "This wheelchair is getting old"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "wheelchair old"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-596f809a",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Have a look at my childs, please."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "look children"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-12de0ac8",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "I hope I can finish on time."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "hope finish on time"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0860621f",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Are you going shopping?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "are you shopping"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0dcefe29",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "I am not well today, I feel sad."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "not well sad"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-5359f0dc",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Will I get to see your brother?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "see brother"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-aada7be2",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Would you like to meet again tomorrow"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "meet tomorrow"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-22321de8",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "I'm not sure if that would work"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "not sure work"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-362ad27c",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Can I date you?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "can I date you"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-11e53f56",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "It is nice to meet you."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "nice meet you"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-2cea0fcf",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "You don't like it?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "you don't like"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-1963630e",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "You sleepy too?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "you sleepy too"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-0c495960",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "how horrible accident was"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "horrible accident"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-61f2bb23",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "can i bum a cigarette?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "cigarette borrow"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-54cee599",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Can you call my mom?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "call mom"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-abd587e9",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "Please lock the door."
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "lock door"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  },
+  {
+   "item_id": "dp-35ebf2ee",
+   "blocks": [
+    {
+     "label": "Sentence",
+     "text": "mom I want to know if you can come over and watch new series on TV with me?"
+    },
+    {
+     "label": "Keywords (the short words a person typed to make this sentence)",
+     "text": "mom come watch series"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ]
+  }
+ ]
+}
