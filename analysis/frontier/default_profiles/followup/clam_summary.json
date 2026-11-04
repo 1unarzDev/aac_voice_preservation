@@ -1,0 +1,79 @@
+{
+ "clam_null_rate": {
+  "qwen2.5-7b": 0.0,
+  "llama3.1-8b": 0.0038888888888888888,
+  "gemma3-4b": 0.0
+ },
+ "boot": 1000,
+ "seed": 20261103,
+ "probe_models_r3": [
+  "gemma3-4b",
+  "llama3.1-8b",
+  "qwen2.5-7b"
+ ],
+ "named": [
+  {
+   "dimension": "polarity",
+   "kind": "contrast",
+   "name": "clam_mean_gated - random_gated",
+   "tag": "named",
+   "diff": -0.017886319820750174,
+   "lo": -3.009637481654139,
+   "hi": 2.226610516505907,
+   "p": 0.8801198801198801,
+   "se": 1.3430534967766776,
+   "mde": 3.760549790974697,
+   "a_rev": 21.23473896509784,
+   "b_rev": 21.25262528491859,
+   "p_holm": 1.0
+  },
+  {
+   "dimension": "polarity",
+   "kind": "contrast",
+   "name": "clam_mean_gated - conf_gated_mean_r3",
+   "tag": "named",
+   "diff": 3.810755469339366,
+   "lo": 0.0894642103266909,
+   "hi": 8.822047467931448,
+   "p": 0.04895104895104895,
+   "se": 2.2483413775588987,
+   "mde": 6.295355857164916,
+   "a_rev": 21.23473896509784,
+   "b_rev": 17.423983495758474,
+   "p_holm": 0.1958041958041958
+  },
+  {
+   "dimension": "politeness",
+   "kind": "contrast",
+   "name": "clam_mean_gated - random_gated",
+   "tag": "named",
+   "diff": 1.776192706081332,
+   "lo": -1.119260156026818,
+   "hi": 4.258663285887746,
+   "p": 0.1968031968031968,
+   "se": 1.3469941861495691,
+   "mde": 3.7715837212187933,
+   "a_rev": 45.51475682416517,
+   "b_rev": 43.738564118083836,
+   "p_holm": 0.5904095904095904
+  },
+  {
+   "dimension": "politeness",
+   "kind": "contrast",
+   "name": "clam_mean_gated - conf_gated_mean_r3",
+   "tag": "named",
+   "diff": 0.6724862592951837,
+   "lo": -2.4787333547502963,
+   "hi": 5.22230889468317,
+   "p": 0.5744255744255744,
+   "se": 1.9344551070410507,
+   "mde": 5.416474299714942,
+   "a_rev": 45.51475682416517,
+   "b_rev": 44.842270564869985,
+   "p_holm": 1.0
+  }
+ ],
+ "h4_revised": false,
+ "benchmark_delivered": true,
+ "units": 1800
+}

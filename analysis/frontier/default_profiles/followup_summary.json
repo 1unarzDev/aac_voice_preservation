@@ -1,0 +1,258 @@
+{
+ "label": "POST-PILOT follow-up F1 (2026-11-03); rule PLAN.md section 11",
+ "units": {
+  "polarity": 76,
+  "politeness": 136,
+  "speech_act": 120
+ },
+ "arbitrated_rows": 27,
+ "boot": 2000,
+ "decisions_primary": [
+  {
+   "dimension": "polarity",
+   "chip_minus_word": 0.03949662648775687,
+   "c90": [
+    0.0029424091287933002,
+    0.078184456422397
+   ],
+   "c95": [
+    -0.005141298294598112,
+    0.08575071445240566
+   ],
+   "D1": "not distinguishable",
+   "g1_minus_chip": 0.016265298730615774,
+   "g1_ci": [
+    0.003083973524337355,
+    0.03315994709609733
+   ],
+   "D2": "guard helps",
+   "D3": "did not transport",
+   "chip_transport": {
+    "transported": 0.9951635769643462,
+    "measured": 0.9340543636654622,
+    "lo": 0.8896202602832011,
+    "hi": 0.9728616078538438,
+    "within5pp": false,
+    "inside_ci": false
+   },
+   "word_transport": {
+    "transported": 0.986844805427073,
+    "measured": 0.8945577371777054,
+    "lo": 0.8418138259857596,
+    "hi": 0.9438715274848541,
+    "within5pp": false,
+    "inside_ci": false
+   }
+  },
+  {
+   "dimension": "politeness",
+   "chip_minus_word": 0.008322320638699754,
+   "c90": [
+    -0.0054591563447994595,
+    0.02343147968656369
+   ],
+   "c95": [
+    -0.00880894535138554,
+    0.026354359661216395
+   ],
+   "D1": "equivalent (+-5pp)",
+   "g1_minus_chip": 0.012392466952814818,
+   "g1_ci": [
+    0.002452706120046738,
+    0.02563132215674167
+   ],
+   "D2": "guard helps",
+   "D3": "did not transport",
+   "chip_transport": {
+    "transported": 0.8820455705384488,
+    "measured": 0.9876075330471852,
+    "lo": 0.9743686778432583,
+    "hi": 0.9975472938799532,
+    "within5pp": false,
+    "inside_ci": false
+   },
+   "word_transport": {
+    "transported": 0.9031289502102403,
+    "measured": 0.9792852124084854,
+    "lo": 0.9609048792679028,
+    "hi": 0.994059965064342,
+    "within5pp": false,
+    "inside_ci": false
+   }
+  },
+  {
+   "dimension": "speech_act",
+   "chip_minus_word": -0.03591135502729159,
+   "c90": [
+    -0.07813915064523122,
+    0.009401122273365354
+   ],
+   "c95": [
+    -0.08694205468800176,
+    0.017225534007718295
+   ],
+   "D1": "not distinguishable",
+   "g1_minus_chip": 0.14766208329605002,
+   "g1_ci": [
+    0.09786028262668217,
+    0.2009411932822683
+   ],
+   "D2": "guard helps",
+   "D3": "did not transport",
+   "chip_transport": {
+    "transported": 0.7868400014642021,
+    "measured": 0.7562014694624234,
+    "lo": 0.6979371365068259,
+    "hi": 0.8173754228805259,
+    "within5pp": true,
+    "inside_ci": true
+   },
+   "word_transport": {
+    "transported": 0.8682329709866403,
+    "measured": 0.792112824489715,
+    "lo": 0.7217396339941159,
+    "hi": 0.8598209809045771,
+    "within5pp": false,
+    "inside_ci": false
+   }
+  }
+ ],
+ "decisions_sensitivity_D1_D2_D3": {
+  "polarity|arb": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ],
+  "polarity|excl": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ],
+  "polarity|allfail": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ],
+  "polarity|allpass": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ],
+  "politeness|arb": [
+   "equivalent (+-5pp)",
+   "guard helps",
+   "did not transport"
+  ],
+  "politeness|excl": [
+   "equivalent (+-5pp)",
+   "guard helps",
+   "did not transport"
+  ],
+  "politeness|allfail": [
+   "equivalent (+-5pp)",
+   "guard helps",
+   "did not transport"
+  ],
+  "politeness|allpass": [
+   "equivalent (+-5pp)",
+   "guard helps",
+   "did not transport"
+  ],
+  "speech_act|arb": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ],
+  "speech_act|excl": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ],
+  "speech_act|allfail": [
+   "word better",
+   "guard helps",
+   "did not transport"
+  ],
+  "speech_act|allpass": [
+   "not distinguishable",
+   "guard helps",
+   "did not transport"
+  ]
+ },
+ "clam": {
+  "named_contrasts": [
+   {
+    "dimension": "polarity",
+    "kind": "contrast",
+    "name": "clam_mean_gated - random_gated",
+    "tag": "named",
+    "diff": -0.017886319820750174,
+    "lo": -3.009637481654139,
+    "hi": 2.226610516505907,
+    "p": 0.8801198801198801,
+    "se": 1.3430534967766776,
+    "mde": 3.760549790974697,
+    "a_rev": 21.23473896509784,
+    "b_rev": 21.25262528491859,
+    "p_holm": 1.0
+   },
+   {
+    "dimension": "polarity",
+    "kind": "contrast",
+    "name": "clam_mean_gated - conf_gated_mean_r3",
+    "tag": "named",
+    "diff": 3.810755469339366,
+    "lo": 0.0894642103266909,
+    "hi": 8.822047467931448,
+    "p": 0.04895104895104895,
+    "se": 2.2483413775588987,
+    "mde": 6.295355857164916,
+    "a_rev": 21.23473896509784,
+    "b_rev": 17.423983495758474,
+    "p_holm": 0.1958041958041958
+   },
+   {
+    "dimension": "politeness",
+    "kind": "contrast",
+    "name": "clam_mean_gated - random_gated",
+    "tag": "named",
+    "diff": 1.776192706081332,
+    "lo": -1.119260156026818,
+    "hi": 4.258663285887746,
+    "p": 0.1968031968031968,
+    "se": 1.3469941861495691,
+    "mde": 3.7715837212187933,
+    "a_rev": 45.51475682416517,
+    "b_rev": 43.738564118083836,
+    "p_holm": 0.5904095904095904
+   },
+   {
+    "dimension": "politeness",
+    "kind": "contrast",
+    "name": "clam_mean_gated - conf_gated_mean_r3",
+    "tag": "named",
+    "diff": 0.6724862592951837,
+    "lo": -2.4787333547502963,
+    "hi": 5.22230889468317,
+    "p": 0.5744255744255744,
+    "se": 1.9344551070410507,
+    "mde": 5.416474299714942,
+    "a_rev": 45.51475682416517,
+    "b_rev": 44.842270564869985,
+    "p_holm": 1.0
+   }
+  ],
+  "h4_revised": false,
+  "benchmark_delivered": true,
+  "null_rates": {
+   "qwen2.5-7b": 0.0,
+   "llama3.1-8b": 0.0038888888888888888,
+   "gemma3-4b": 0.0
+  }
+ },
+ "verdict": {
+  "H4_ask_policy_null": "stands (CLAM-style trigger does not beat gated random)",
+  "r3_transported_chip_word_rows": "superseded for polarity and politeness (D3 did not transport)",
+  "benchmark_unmet_gap": "closed"
+ }
+}
