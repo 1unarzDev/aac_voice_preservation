@@ -1,0 +1,63 @@
+\documentclass[manuscript,review]{acmart}
+% ACM TACCESS submission skeleton. Build (repo root mounted so ../figs resolves):
+%   docker run --rm -v ~/aac-voice-preservation:/w -w /w/paper/journal texlive/texlive:latest-full latexmk -pdf main.tex
+% Assembled from sections/s1..s5 (pass 1 integrator). Every number is a \jm... macro from make_macros.py (results_macros.tex). Do not hand-type numbers.
+\input{results_macros.tex}
+\newcommand{\pending}[1]{\textcolor{red}{[#1 pending]}}
+\newcommand{\slot}[1]{\par\noindent\fbox{\parbox{0.94\linewidth}{\small\textbf{SLOT} #1}}\par}
+
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\acmJournal{TACCESS}
+\acmYear{2026}\acmVolume{}\acmNumber{}\acmArticle{}\acmMonth{12}
+
+% ---------------------------------------------------------------------------------------------
+% COVER LETTER NOTE: differences from prior publication (copy into the submission form).
+% Our SE4All archival paper (concurrent_se4all) and our CALE-AI workshop paper (non-archival; concurrent_caleai) report, on
+% discovery and confirmation families, that a deletion-based guard raises pass rates (the guard numbers on fresh families are
+% restated once, in Sec. guard, and marked as restated) and that a chip cue restores a missing commitment; SE4All also gives a short
+% note that humans write keywords with a low negation rate. They report none of the studies that make up this paper's core.
+% NEW here: (i) the human-written pair replication across 20 writers with controlled cue channels; (ii) the writer-intent study
+% (intended-version match, acceptance as written or with a small edit, whole-message reasons) and the argument that commitment
+% preservation is necessary but not sufficient; (iii) the blind three-rater repair-usability audit under a frozen rule;
+% (iv) the human check of the arbiter, with its exclusions and dependence reported; (v) SLP severity weights and clinically
+% weighted failure rates (n=2, expert review); (vi) the consultants' requirement changes; (vii) the same-items profile and ask-policy
+% comparison. RESTATED from the earlier papers: the guard result and the discovery-set cue result, shortened and cited.
+% No figure or table is reused without redrawing; text overlap is limited to the shared methods description. Both papers will be
+% provided to the editor on request.
+% ---------------------------------------------------------------------------------------------
+
+\begin{document}
+
+\title{Necessary but Not Sufficient: Preserving the Writer's Commitments and Covering Their Intended Message in LLM Keyword Expansion for AAC}
+
+\author{Authors withheld}
+\affiliation{\institution{Institution withheld}\city{City}\country{Country}}
+
+\begin{abstract}
+A person who types a few keywords and lets a language model write the sentence needs the sentence to be the one they meant.
+We asked \jmpOneEightWriters{} classmate writers, none of them AAC users, to rate model drafts of their own keywords against the sentences they had intended (\jmpOneEightAcceptN{} drafts, \jmwmModels{} models).
+A one-token cue raised the share of drafts judged to be the intended version from \jmpOneEightMatchBare{}\% to \jmpOneEightMatchChip{}\%, and on \jmfOneUnits{} further items (three models) it cut polarity reversals from \jmfOneRevPolBare{} to \jmfOneRevPolChip{} per 1,000 messages.
+Preserving the critical commitment is nonetheless necessary and not sufficient: writers accepted \jmpOneEightAcceptYesK{} of \jmpOneEightAcceptN{} drafts as written and \jmpOneEightAcceptYesSmall{}\% as written or with a small edit, and the shortfall came from misresolved events and roles and detail lost in compression, not added content (\jmwmAdded{}\% of primary reasons).
+Automatic judges agreed with the writers only weakly ($\kappa$ \jmpOneEightKappa{}), so each result is reported against a human check, with two clinician raters and an inconclusive repair-usability audit marked as thin; access-method, tap and reading costs were not studied, and two paid design consultants who use AAC shaped the requirements only.
+We therefore propose treating commitment preservation as a filter and measuring how much of the writer's whole intended message a set of approval-gated drafts covers.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012><concept><concept_id>10003120.10011738.10011775</concept_id><concept_desc>Human-centered computing~Accessibility technologies</concept_desc><concept_significance>500</concept_significance></concept></ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Human-centered computing~Accessibility technologies}
+\keywords{augmentative and alternative communication, large language models, meaning preservation, writer intent, evaluation validity}
+
+\maketitle
+
+\input{sections/s1}
+\input{sections/s2}
+\input{sections/s3}
+\input{sections/s4}
+\input{sections/s5}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+\end{document}
