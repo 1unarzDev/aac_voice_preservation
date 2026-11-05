@@ -11,9 +11,9 @@ Section~\ref{sec:default} and Section~\ref{sec:guard} establish that a missing c
 Those results are measured against a critical commitment: the one dimension that a minimal pair contrasts, labelled by automatic judges and a blind arbiter.
 This section asks whether that measurement tracks what the people who write and use the messages mean by a correct draft.
 It reports the studies in turn and then a set of bounded negative results.
-In the writer-intent study (writer-intent study) the \jmpOneEightWriters{} writers of the human-written pairs rated drafts generated from their own pairs.
-A whole-message analysis of those ratings separates the reasons a draft is rejected.
-A human check of the arbitrated labels (arbiter check) measures how well each automatic judge and the arbiter agree with people.
+In the writer-intent study (Section~\ref{sec:waterfall}) the \jmpOneEightWriters{} writers of the human-written pairs rated drafts generated from their own pairs.
+A whole-message analysis of those ratings (Section~\ref{sec:whole-message}) separates the reasons a draft is rejected.
+A human check of the arbitrated labels (Section~\ref{sec:validity}) measures how well each automatic judge and the arbiter agree with people.
 Speech-language pathologists (SLPs; \jmdesignSlp{} raters) supply clinical severity weights and an acceptability review.
 Two paid design consultants who use AAC (\jmdesignConsultants{} consultants) revise the requirement list; we know nothing of their communication or access method beyond that they use AAC, and nothing they said is treated as data.
 The section closes with the frontier results that mark where asking, model uncertainty and partner context stop helping.
@@ -33,7 +33,7 @@ In the bare channel the keywords do not say which sentence the writer meant, so 
 Table~\ref{tab:s4-p18} gives the ratings.
 Writers said the draft expressed the sentence the pair was generated from in \jmpOneEightMatchAll{}\% of rated drafts (\jmpOneEightMatchAllK{} of \jmpOneEightMatchAllN{}; 95\% interval \jmpOneEightMatchAllLo{} to \jmpOneEightMatchAllHi{}), and in \jmpOneEightElse{}\% they said it expressed something else.
 The chip raises the intended-version match from \jmpOneEightMatchBare{}\% to \jmpOneEightMatchChip{}\%, a gain of \jmpOneEightCueGain{} points (writer-cluster interval \jmpOneEightCueGainLo{} to \jmpOneEightCueGainHi{}).
-Writers accepted \jmpOneEightAcceptYesK{} of \jmpOneEightAcceptN{} drafts as written, and the one accepted draft came from the bare channel; \jmpOneEightAcceptYesSmall{}\% were acceptable as written or with a small edit.
+Writers accepted \jmpOneEightAcceptYesK{} of \jmpOneEightAcceptN{} drafts as written, of which \jmpOneEightYesBareK{} came from the bare channel and \jmpOneEightYesChipK{} from the chip channel; \jmpOneEightAcceptYesSmall{}\% were acceptable as written or with a small edit.
 Writers' agreement with the automatic judge on the four-way label (A, B, other, unclear) was \jmpOneEightAgreeFour{}\% ($\kappa$ = \jmpOneEightKappa{}).
 
 \begin{table}[t]
@@ -79,7 +79,7 @@ Judge: critical commitment correct & \jmwmRightN{} & \jmwmRightChipN{} & \jmwmRi
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/fig2_waterfall.pdf}
-\caption{Judge-correct is not writer-intended. Left: of \jmpOneEightAcceptN{} writer-rated outputs, \jmwmRightN{} keep the critical commitment by the judge, \jmwmRightIntendedK{} of the \jmwmRightIntendedN{} with a writer rating are the writer's intended version, and \jmpOneEightAcceptYesK{} is accepted as written. Right: reasons among the judge-correct outputs not accepted as written (writer-coded classification, kappa \jmwmHandKappa{} on a 40-item hand check); no output was coded as adding content.}\label{fig:waterfall}
+\caption{Judge-correct is not writer-intended. Left: of \jmpOneEightAcceptN{} writer-rated outputs, \jmwmRightN{} keep the critical commitment by the judge, \jmwmRightIntendedK{} of the \jmwmRightIntendedN{} with a writer rating are the writer's intended version, and \jmpOneEightAcceptYesK{} is accepted as written. Right: reasons among the judge-correct outputs not accepted as written (diff-classifier reasons, kappa \jmwmHandKappa{} on a 40-item hand check); no output was coded as adding content.}\label{fig:waterfall}
 \Description{Judge-correct is not writer-intended.}
 \end{figure}
 
@@ -268,21 +268,21 @@ It reframes the evaluation question.
 A silent reversal that is spoken is a communication failure; a wrong draft that is inspected costs reading and taps.
 Approval cannot catch what the writer does not notice, so R6 does not replace the commitment filter, and it makes the coverage of the writer's whole intended message per draft read the quantity that matters.
 
-% TODO-AUTHOR: the right-hand column states the dispositions adopted in this manuscript's requirement list (no closed feedback log with counts exists in the repo); confirm each before submission.
+% TODO-AUTHOR: before submission send the consultants the description of their role and of these changes for comment; the right-hand column states the dispositions adopted in this manuscript's requirement list (no closed feedback log with counts exists in the repo); confirm each before submission.
 \begin{table*}[t]
 \centering\small
-\caption{Consultant suggestions (C1, C2) and the change adopted in the requirement list. Summaries paraphrase the stored written answers; none concerns a person's own communication.}\label{tab:s4-changes}
+\caption{Consultant suggestions and the change adopted in the requirement list. Summaries paraphrase the stored written answers; none concerns a person's own communication.}\label{tab:s4-changes}
 \begin{tabular}{@{}p{0.43\linewidth}p{0.07\linewidth}p{0.42\linewidth}@{}}
 \toprule
 Suggestion & From & Change to requirements or practice \\
 \midrule
-A draft is never spoken or sent without the person's action; provide a clear speak action, an editable preview and quick undo; keep the original words available to speak directly. & C1, C2 & New R6 (approval before speech); original words always speakable. \\
-Complete typed sentences are kept exactly by default; rewriting only on explicit request, with the proposed change and the original shown, and undo. & C1, C2 & R2 restated as an exact-copy default with an optional, approval-gated rewrite. \\
-Show a small number of meaningfully different drafts with the difference highlighted, or the one unresolved choice; do not chain questions; keep choices brief and reversible; do not learn a permanent preference from one answer. & C1, C2 & R3 restated: show differing drafts or the specific unresolved choice, not a questionnaire. \\
-Preserve relations as well as button labels: the negation attaches to the intended action; a button such as TELL sets sentence form and must not become a verb or create an event of telling. & C1, C2 & R1 and R4 restated at the level of relations; event and role structure proposed as a commitment dimension (Section~\ref{sec:event-role}). \\
-A never-change-without-asking list: yes or no, scope of not, who acts or receives, ownership, permission, names and places, amounts, event time, certainty, question versus statement versus command, explicit tone. & C1, C2 & Adopted as the protected scope; adds ownership, permission, names and places, and amounts to the dimensions measured in this paper. \\
-The R2 bad example uses keywords and PLAIN and so does not show a typed sentence being changed; the chip and plain-word mockups differ in tense and time and cannot establish which is easier; a ``would be nice'' input was encoded as MAYBE. & C1, C2 & Treated as defects of the review materials, not of the requirements; R5 now requires equivalent content in both input styles. \\
-Which is easier to imagine, a chip or a plain word: one chose the chip as a design preference, the other said it depends on access method; both asked that the actual selection effort be tested. & C1, C2 & No change: we make no claim about which input is easier, and tap cost is a proxy only. \\
+A draft is never spoken or sent without the person's action; provide a clear speak action, an editable preview and quick undo; keep the original words available to speak directly. & Both & New R6 (approval before speech); original words always speakable. \\
+Complete typed sentences are kept exactly by default; rewriting only on explicit request, with the proposed change and the original shown, and undo. & Both & R2 restated as an exact-copy default with an optional, approval-gated rewrite. \\
+Show a small number of meaningfully different drafts with the difference highlighted, or the one unresolved choice; do not chain questions; keep choices brief and reversible; do not learn a permanent preference from one answer. & Both & R3 restated: show differing drafts or the specific unresolved choice, not a questionnaire. \\
+Preserve relations as well as button labels: the negation attaches to the intended action; a button such as TELL sets sentence form and must not become a verb or create an event of telling. & Both & R1 and R4 restated at the level of relations; event and role structure proposed as a commitment dimension (Section~\ref{sec:event-role}). \\
+A never-change-without-asking list: yes or no, scope of not, who acts or receives, ownership, permission, names and places, amounts, event time, certainty, question versus statement versus command, explicit tone. & Both & Adopted as the protected scope; adds ownership, permission, names and places, and amounts to the dimensions measured in this paper. \\
+The R2 bad example uses keywords and PLAIN and so does not show a typed sentence being changed; the chip and plain-word mockups differ in tense and time and cannot establish which is easier; a ``would be nice'' input was encoded as MAYBE. & Both & Treated as defects of the review materials, not of the requirements; R5 now requires equivalent content in both input styles. \\
+Which is easier to imagine, a chip or a plain word: views differed between a design preference and a dependence on access method; the consultants asked that the actual selection effort be tested. & Both & No change: we make no claim about which input is easier, and tap cost is a proxy only. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -290,35 +290,4 @@ Which is easier to imagine, a chip or a plain word: one chose the chip as a desi
 \paragraph{Example outputs as a design illustration.}
 We also showed the consultants \jmconsExN{} stored example outputs drawn by a hash-seeded rule (\jmconsGoodN{} the judge passed, \jmconsBadN{} it failed and \jmconsRepN{} guard repairs shown with the first try) and asked whether each was fine to send. We use their answers only as design feedback and report no tally of verdicts. Two of the judge-passed examples were set aside by both consultants because they invent a telling event that the selected buttons do not contain (``They will tell you about the club offer'' for \texttt{[YES] [TELL] [THEY] club offer}), which is the substitution pattern of Section~\ref{sec:event-role} appearing in a judge-passed output. A guard repair that removed ``please'' but kept the unselected state ``on'' (``Leave the light on'' from \texttt{[ASK] leave light}) was not accepted either, which shows that a deletion-only repair removes an unlicensed addition and leaves an uncued one. These cases informed the requirement changes above; \jmconsExN{} outputs do not support an estimate.
 
-\subsection{Frontier limits: asking, model uncertainty and partner context}\label{sec:frontier}
-
-The preceding results suggest several tempting ways to avoid supplying a cue on every message: ask the writer only when it matters, let the model's own uncertainty decide, or let the conversation partner's last remark supply context.
-We tested each in a controlled, machine-labelled study.
-All labels in this subsection are machine labels (two judges with a blind arbiter), the studies are pilot-scale and post-pilot rounds are marked as such in the evidence files, and no human has yet checked them.
-% SLOT: human checks of the frontier labels enter here when scored.
-
-\paragraph{Ask policies.}
-The ask-policy comparison of Section~\ref{sec:asks} (Figure~\ref{fig:frontier}) is the first of these tests: no ranking rule, including a clarification-style trigger, beats asking at random among messages that lack the cue at matched taps, and supplying the cue on every message (\jmfOneRevPolChip{} polarity reversals per 1,000 with a chip, \jmfOneRevPolWord{} with a plain word) undercuts them.
-A learned gate that uses model internals averts a modest share of SLP-weighted speech-act reversals under simulated resolution rates, but a supervised entropy-feature learner matches it; we treat that study as an evaluation framework and not as a result.
-
-\paragraph{The model's own uncertainty does not flag the reversals.}
-We asked whether default decoding hides a calibrated distribution over the dropped negation, using \jmknsModels{} local models, an untruncated sampler and \jmknsUnitsCap{} messages in which the negation was removed from every keyword string (a stress test) and a set of human keyword messages. % CITE-NEEDED: semantic entropy; contextual calibration
-For Qwen2.5-7B, the model for which both datasets agree, sampled negation appears in \jmknsCapSampled{}\% of samples against a source rate of \jmknsCapTarget{}\% on the stress set, and in \jmknsHumSampled{}\% against \jmknsHumTarget{}\% on human keywords: the model is overconfident, not hiding a calibrated tail.
-The sampled share ranks which inputs lost their negation at AUROC \jmknsAucKOneSixQwen{} and \jmknsAucKOneSixLlama{} for the two models, against \jmknsAucLex{} for a model-free classifier on the keywords alone.
-A continuous score from the negation-token probability mass reaches \jmknsAucNegmass{} (\jmknsAucNegmassLo{} to \jmknsAucNegmassHi{}); its difference from the keyword classifier is $\jmknsNegmassVsLex$ [$\jmknsNegmassVsLexLo$, $\jmknsNegmassVsLexHi$], so a per-input signal exists but is no better than a model-free one.
-A verbalised-probability score from one API model reaches \jmknsAucTerraVerbal{}, a difference of $\jmknsTerraVsLex$ [$\jmknsTerraVsLexLo$, $\jmknsTerraVsLexHi$] from the keyword classifier; its interval touches zero, so we treat it as a lead for a confirmatory run and not as a result.
-The conclusion for design is that the model cannot be asked whether it dropped a cue more cheaply than the writer can be asked for the cue.
-
-\paragraph{Partner context improves defaults and adds an echo.}
-Giving the model the conversation partner's last remark is a published way to improve expansion accuracy~\cite{cai2022abbrev}, and we tested whether it also moves the polarity default.
-With \jmpcFamilies{} polarity families, \jmpcModels{} models and model-written partner remarks, a negative remark raises the share of negated bare output by $\jmpcAll$ points [$\jmpcAllLo$, $\jmpcAllHi$], mostly by echoing the remark or agreeing with it.
-Excluding verbatim echoes and agreement replies, the excess is $\jmpcProp$ points [$\jmpcPropLo$, $\jmpcPropHi$]; it depends on who wrote the remarks, from $\jmpcAuthQwen$ with one remark author to $\jmpcAuthMistral$ with the other on the \jmpcAuthFamilies{} families written by both.
-A supplied polarity cue largely removes it: the excess is $\jmpcCue$ points [$\jmpcCueLo$, $\jmpcCueHi$] when echoes and agreements are counted as harm, and $\jmpcCueLow$ [$\jmpcCueLowLo$, $\jmpcCueLowHi$] when they are not.
-A question remark does not raise the affirmative default; it lowers the affirmative share by $\jmpcQAff$ points through abstention.
-The study is a controlled demonstration with templated remarks.
-It says nothing about the rate in real AAC conversation or about whether echoing a remark the writer agrees with is harmful, and no zero-tap mitigation we tried beat random asking at matched taps.
-
-\paragraph{What the limits establish.}
-Taken together, these results fix the role of the cue.
-Asking, model uncertainty and partner context each reduce reversals only partly or at a tap cost that a cue-on-every-message policy undercuts on the measured dimensions, and the cue still has to be elicited from the writer.
-The remaining problem is not the trigger but covering the writer's whole intended message from a compressed input, which Sections~\ref{sec:waterfall} and~\ref{sec:req-revisions} show is a question about approval-gated drafts and not about a better filter.
+\paragraph{Frontier limits.} Machine-labelled pilots on asking, model uncertainty and partner context are in Appendix~\ref{sec:frontier}; none changes the conclusion that the cue has to be elicited from the writer and that the open problem is coverage of the whole intended message.

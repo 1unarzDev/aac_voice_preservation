@@ -1,0 +1,12 @@
+An AAC user typed keywords and a sentence was generated for them.
+
+Keywords: {input}
+Current sentence: {sentence}
+
+Aspect to change: {dim} ({defn})
+Options: {options}
+{target_line}
+Rewrite the current sentence so that only this aspect takes the new value. Keep the same event, people, objects, wording and every
+other aspect (polarity, speech act, who does it, certainty, politeness, time) unchanged as far as the language allows. Do not add
+new facts. {chip_line}
+Output JSON only: {"current_value": "<option the current sentence has>", "new_value": "<option the new sentence has>", "sentence": "<new sentence>"}

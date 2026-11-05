@@ -1,0 +1,488 @@
+{
+ "check_id": "part26",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 10,
+ "for": "a02273bb",
+ "title": "Find what you meant among drafts",
+ "intro": [
+  "For each of 10 messages, you see the keywords you typed for one of your own sentence pairs, the sentence you meant, and the drafts a writing tool offers for those keywords.",
+  "Say whether any draft is what you meant (which one), whether you would send it, and how hard it was to find. The drafts are shown in the order a user would see them."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "The keywords you typed (and a cue button, if you pressed one), the sentence you meant, and the drafts a writing tool offers for those keywords."
+  },
+  {
+   "term": "What counts as 'what you meant'",
+   "text": "A draft says what you meant if it carries your message, even in different words or with less detail. A draft that says the opposite, asks instead of tells, changes who does it or when, or is a different message does not."
+  },
+  {
+   "term": "Would you send it",
+   "text": "As it is: you would send it unchanged. Small edit: you would fix a word or two. No: it would need more than that, or none was right."
+  },
+  {
+   "term": "How hard",
+   "text": "How hard it was to find the draft you meant (or to see that none was right)."
+  }
+ ],
+ "questions": {
+  "hard": {
+   "title": "How hard was it to find what you meant?",
+   "text": "1 = very easy, 5 = very hard. If none was right, say how hard it was to be sure of that.",
+   "options": [
+    {
+     "v": "1",
+     "label": "1 very easy"
+    },
+    {
+     "v": "2",
+     "label": "2"
+    },
+    {
+     "v": "3",
+     "label": "3"
+    },
+    {
+     "v": "4",
+     "label": "4"
+    },
+    {
+     "v": "5",
+     "label": "5 very hard"
+    }
+   ]
+  },
+  "pick1": {
+   "title": "Is this what you meant?",
+   "text": "Yes if it says the message you meant (different words are fine). No if it says something else.",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, this is what I meant"
+    },
+    {
+     "v": "none",
+     "label": "No, it is not"
+    }
+   ]
+  },
+  "pick3": {
+   "title": "Is any of these what you meant?",
+   "text": "Pick the one that says the message you meant (different words are fine), or none.",
+   "options": [
+    {
+     "v": "1",
+     "label": "Draft 1"
+    },
+    {
+     "v": "2",
+     "label": "Draft 2"
+    },
+    {
+     "v": "3",
+     "label": "Draft 3"
+    },
+    {
+     "v": "none",
+     "label": "None of them"
+    }
+   ]
+  },
+  "send": {
+   "title": "Would you send it?",
+   "text": "Think of the draft you picked. If you picked none, choose the last option.",
+   "options": [
+    {
+     "v": "as_is",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No (or I picked none)"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-sv1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Is the bus late?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The bus is late."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please wait for the late bus."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick3": "2",
+    "send": "small_edit",
+    "hard": "2"
+   },
+   "fb": "Draft 2 carries the message (the bus is late); it lacks 'again', a small edit. Draft 1 asks a question and Draft 3 asks for something else."
+  },
+  {
+   "item_id": "prac-sv2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coffee"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't want coffee."
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want coffee."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick1": "none",
+    "send": "no",
+    "hard": "1"
+   },
+   "fb": "The draft says the opposite of what you meant, so the answer is no, and it is easy to see."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "sv-4c5fe117",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "swimming pool session"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the swimming pool offer a private orientation session?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "What time is the swimming pool session?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "What time was the swimming pool session?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "Where is the swimming pool session?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-8932259c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The curtain is blocking the way."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Please block the curtain from blowing in the wind."
+    },
+    {
+     "label": "Draft 3",
+     "text": "The blackout curtain blocks the sunlight."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-86b74aa3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Does the café serve food?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The café serves food."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Do you serve food at the café?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-fbfdd23c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "The terrace fence is on the balcony."
+    },
+    {
+     "label": "Draft 2",
+     "text": "The balcony has a fence around the terrace."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please repair the fence between the terrace and the balcony."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-78a4400a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Draft 1",
+     "text": "This is not a restaurant."
+    },
+    {
+     "label": "Draft 2",
+     "text": "The restaurant does not have a label."
+    },
+    {
+     "label": "Draft 3",
+     "text": "This label is not for the restaurant."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-e64ec9e6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please check the payment receipt."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Can you check the receipt?"
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-d12d911a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Yes, the tutor remembers."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-04e87846",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Email the notes."
+    },
+    {
+     "label": "Draft 2",
+     "text": "I'll email the notes."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Emailed the notes."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-e5ccc666",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please explain the form."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Please definitely explain the form."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please explain the form later."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-558e1311",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Does the subscription price include postage?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The subscription price includes postage."
+    },
+    {
+     "label": "Draft 3",
+     "text": "What is the total price for a subscription with postage?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  }
+ ]
+}

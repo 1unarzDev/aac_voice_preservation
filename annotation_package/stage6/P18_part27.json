@@ -1,0 +1,1752 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 60,
+ "for": "9f227228",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-588ddd41",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "swimming pool session"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the swimming pool offer a private orientation session?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The swimming pool offers a private orientation session."
+    },
+    {
+     "label": "Draft",
+     "text": "What time is the swimming pool session?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e07c6760",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "swimming pool session"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the swimming pool offer a private orientation session?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The swimming pool offers a private orientation session."
+    },
+    {
+     "label": "Draft",
+     "text": "Where is the swimming pool session?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b5d14a89",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "swimming pool session"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the swimming pool offer a private orientation session?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The swimming pool offers a private orientation session."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I join the swimming pool session?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-01d4065e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "swimming pool session"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the swimming pool offer a private orientation session?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The swimming pool offers a private orientation session."
+    },
+    {
+     "label": "Draft",
+     "text": "What time was the swimming pool session?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f7d52453",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "swimming pool session"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the swimming pool offer a private orientation session?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The swimming pool offers a private orientation session."
+    },
+    {
+     "label": "Draft",
+     "text": "What time is my swimming pool session?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-41e2d8d6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Your other version",
+     "text": "The curtain blocks the bright light."
+    },
+    {
+     "label": "Draft",
+     "text": "The curtain is blocking the way."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-52ff9683",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Your other version",
+     "text": "The curtain blocks the bright light."
+    },
+    {
+     "label": "Draft",
+     "text": "Please block the curtain from blowing in the wind."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-065388e3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Your other version",
+     "text": "The curtain blocks the bright light."
+    },
+    {
+     "label": "Draft",
+     "text": "The blackout curtain blocks the sunlight."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-74db85f2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Your other version",
+     "text": "The curtain blocks the bright light."
+    },
+    {
+     "label": "Draft",
+     "text": "Please move the curtain; it is blocking the way."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-46f1fccc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Your other version",
+     "text": "The curtain blocks the bright light."
+    },
+    {
+     "label": "Draft",
+     "text": "I am blocking the curtain."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-41b07402",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "curtain block"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The curtain does not block the bright light."
+    },
+    {
+     "label": "Your other version",
+     "text": "The curtain blocks the bright light."
+    },
+    {
+     "label": "Draft",
+     "text": "The curtain covers the block."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3b678734",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Your other version",
+     "text": "The café does not serve oat milk."
+    },
+    {
+     "label": "Draft",
+     "text": "Does the café serve food?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f2a55ae1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Your other version",
+     "text": "The café does not serve oat milk."
+    },
+    {
+     "label": "Draft",
+     "text": "The café serves coffee and pastries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a607ebed",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Your other version",
+     "text": "The café does not serve oat milk."
+    },
+    {
+     "label": "Draft",
+     "text": "Please serve the drinks at the café."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-eb53f7e4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Your other version",
+     "text": "The café does not serve oat milk."
+    },
+    {
+     "label": "Draft",
+     "text": "The café serves food."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ca8cd94e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Your other version",
+     "text": "The café does not serve oat milk."
+    },
+    {
+     "label": "Draft",
+     "text": "Do you serve food at the café?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-da51ef2d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafe serve"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The café serves oat milk."
+    },
+    {
+     "label": "Your other version",
+     "text": "The café does not serve oat milk."
+    },
+    {
+     "label": "Draft",
+     "text": "Does the café serve?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-04a683f7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The terrace fence screens the neighboring balcony."
+    },
+    {
+     "label": "Draft",
+     "text": "The terrace fence is on the balcony."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-592603ce",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The terrace fence screens the neighboring balcony."
+    },
+    {
+     "label": "Draft",
+     "text": "The balcony has a fence around the terrace."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5e2eef5a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The terrace fence screens the neighboring balcony."
+    },
+    {
+     "label": "Draft",
+     "text": "Please repair the fence between the terrace and the balcony."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-214db140",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The terrace fence screens the neighboring balcony."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the terrace fence on the balcony?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3315ab91",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The terrace fence screens the neighboring balcony."
+    },
+    {
+     "label": "Draft",
+     "text": "I have the terrace fence on the balcony."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-130dbe9b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "terrace fence balcony"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the terrace fence screen the neighboring balcony?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The terrace fence screens the neighboring balcony."
+    },
+    {
+     "label": "Draft",
+     "text": "The balcony has a terrace fence."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2f11aae0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "This is not a restaurant."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-979a17c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "The restaurant does not have a label."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8a72bb02",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "This label is not for the restaurant."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-39b9a834",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "Is this not a restaurant?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f8ab58c2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "I am not a restaurant."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f7cd0ad9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "The label does not say \"restaurant."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-66b127a9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "restaurant label"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The restaurant does not label its ingredients."
+    },
+    {
+     "label": "Your other version",
+     "text": "The restaurant labels its ingredients."
+    },
+    {
+     "label": "Draft",
+     "text": "This is not the restaurant label."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bcd0cfc9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please check the payment receipt."
+    },
+    {
+     "label": "Your other version",
+     "text": "Check the payment receipt."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you check the receipt?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-571ddb9d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please check the payment receipt."
+    },
+    {
+     "label": "Your other version",
+     "text": "Check the payment receipt."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to check the receipt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0fd48b81",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please check the payment receipt."
+    },
+    {
+     "label": "Your other version",
+     "text": "Check the payment receipt."
+    },
+    {
+     "label": "Draft",
+     "text": "Please check your receipt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-317bee4f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please check the payment receipt."
+    },
+    {
+     "label": "Your other version",
+     "text": "Check the payment receipt."
+    },
+    {
+     "label": "Draft",
+     "text": "You can check the receipt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f6d1037f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please check the payment receipt."
+    },
+    {
+     "label": "Your other version",
+     "text": "Check the payment receipt."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I check the receipt?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e98e450d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Your other version",
+     "text": "The tutor does not remember my deadline."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the tutor remembers."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8f30feb8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Your other version",
+     "text": "The tutor does not remember my deadline."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I remember the tutor."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fc6531c9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Your other version",
+     "text": "The tutor does not remember my deadline."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the tutor remembers me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6b4c5d84",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Your other version",
+     "text": "The tutor does not remember my deadline."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the tutor remembered."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-65c4c2a8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Your other version",
+     "text": "The tutor does not remember my deadline."
+    },
+    {
+     "label": "Draft",
+     "text": "Does the tutor remember?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6396fbc9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "tutor remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The tutor remembers my deadline."
+    },
+    {
+     "label": "Your other version",
+     "text": "The tutor does not remember my deadline."
+    },
+    {
+     "label": "Draft",
+     "text": "I remember the tutor."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-25a646d2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "Email the notes."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b03c7923",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "The notes are in the email."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1665c352",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "The email contains notes."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-75e44af0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "I'll email the notes."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a52f21bf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "Emailed the notes."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-21845bba",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "Send the notes by email."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cce76a2d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "email notes"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Email the project notes."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please email the project notes."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to email my notes."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2837cdf3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Your other version",
+     "text": "Explain the access form to me."
+    },
+    {
+     "label": "Draft",
+     "text": "Please explain the form."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-add25d97",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Your other version",
+     "text": "Explain the access form to me."
+    },
+    {
+     "label": "Draft",
+     "text": "Please explain how to fill out the form."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-14a84d0c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Your other version",
+     "text": "Explain the access form to me."
+    },
+    {
+     "label": "Draft",
+     "text": "Please explain what this form is for."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f61883a7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Your other version",
+     "text": "Explain the access form to me."
+    },
+    {
+     "label": "Draft",
+     "text": "Please definitely explain the form."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ce337b50",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Your other version",
+     "text": "Explain the access form to me."
+    },
+    {
+     "label": "Draft",
+     "text": "Please explain the form later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6ba6c8de",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "explain form"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please explain the access form to me."
+    },
+    {
+     "label": "Your other version",
+     "text": "Explain the access form to me."
+    },
+    {
+     "label": "Draft",
+     "text": "Please explain the form to me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ff23af6e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the subscription price include overseas postage?"
+    },
+    {
+     "label": "Draft",
+     "text": "Does the subscription price include postage?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5118a00b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the subscription price include overseas postage?"
+    },
+    {
+     "label": "Draft",
+     "text": "The subscription price has increased because of postage costs."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-70680a43",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the subscription price include overseas postage?"
+    },
+    {
+     "label": "Draft",
+     "text": "What is the postage charge for the subscription?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9286b000",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the subscription price include overseas postage?"
+    },
+    {
+     "label": "Draft",
+     "text": "The subscription price includes postage."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2a5de94c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the subscription price include overseas postage?"
+    },
+    {
+     "label": "Draft",
+     "text": "Do you include postage in the subscription price?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3c2fdfb6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "subscription price postage"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The subscription price includes overseas postage."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the subscription price include overseas postage?"
+    },
+    {
+     "label": "Draft",
+     "text": "What is the total price for a subscription with postage?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

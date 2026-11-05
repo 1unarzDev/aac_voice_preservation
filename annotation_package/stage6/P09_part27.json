@@ -1,0 +1,1901 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 65,
+ "for": "c5a4a156",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-882f7079",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, schedule the training."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-af241308",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I have training scheduled."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5016d139",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, please schedule a training session."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-00fae21a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please schedule the training."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1175a0eb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I'll schedule the training."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1fa51c17",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, add the training to the schedule."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-723fe9e8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the training is on the schedule."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1cd4b9b7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "schedule training"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We schedule the training at the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't schedule the training at the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I will schedule training."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fe66ce2a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "I will check my account later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3b8c1aae",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "The account will be checked later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3f472aae",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you check the account later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d6ce9463",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Will I check my account later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e1e9826e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "You will check my account later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2990bd5b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "My account will be checked later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b5688bb0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "check account"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will check the account at work tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I checked the account at work yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you check the account later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-37bf05c8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pay bill"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will pay the phone bill at home tonight."
+    },
+    {
+     "label": "Your other version",
+     "text": "I paid the phone bill at home last night."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to pay the bill."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b74fb0fd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pay bill"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will pay the phone bill at home tonight."
+    },
+    {
+     "label": "Your other version",
+     "text": "I paid the phone bill at home last night."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you pay the bill?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-91bac03e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pay bill"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will pay the phone bill at home tonight."
+    },
+    {
+     "label": "Your other version",
+     "text": "I paid the phone bill at home last night."
+    },
+    {
+     "label": "Draft",
+     "text": "The bill is paid."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cc29ce6d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pay bill"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will pay the phone bill at home tonight."
+    },
+    {
+     "label": "Your other version",
+     "text": "I paid the phone bill at home last night."
+    },
+    {
+     "label": "Draft",
+     "text": "Please pay the bill."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-190b4a11",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pay bill"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will pay the phone bill at home tonight."
+    },
+    {
+     "label": "Your other version",
+     "text": "I paid the phone bill at home last night."
+    },
+    {
+     "label": "Draft",
+     "text": "You need to pay the bill."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-066aff02",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pay bill"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will pay the phone bill at home tonight."
+    },
+    {
+     "label": "Your other version",
+     "text": "I paid the phone bill at home last night."
+    },
+    {
+     "label": "Draft",
+     "text": "The bill needs to be paid."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8df2bd7d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I sent the report."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-66fb79b5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "The report was sent yesterday."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b79e9cf0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "They sent the report last week."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-87160868",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "They sent the report."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e9d0e8bf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I did not send the report."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fc4f4959",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "The report was sent."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1317bc47",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I sent the report to my teacher this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will send the report to my teacher tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you send the report?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-01432541",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I took medicine with breakfast this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a4e5882f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I took medicine with breakfast this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Do you take medicine?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fffd2146",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I took medicine with breakfast this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to take medicine later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cbe1aaca",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I took medicine with breakfast this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-65e4b0c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I took medicine with breakfast this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Take medicine later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ca856a35",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I took medicine with breakfast this morning."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Get medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-47268253",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I have money for rent."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dcdd8c13",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the rent money is ready."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e2c4b2d1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I paid the rent with cash."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bf91d069",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, you have money for rent."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-92d5ec5c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I will have money for rent."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-20de89ff",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the rent costs money."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7ddb83e6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money rent"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I have enough money for rent this month."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't have enough money for rent this month."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I need money to pay the rent."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ea1bc566",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet sam"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We met Sam at the park last Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We will meet Sam at the park next Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to meet Sam."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c47d4dda",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet sam"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We met Sam at the park last Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We will meet Sam at the park next Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you meet Sam?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-99046124",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet sam"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We met Sam at the park last Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We will meet Sam at the park next Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "We will meet Sam later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-52f060f9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet sam"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We met Sam at the park last Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We will meet Sam at the park next Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "I wanted to meet Sam."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6a9eab90",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet sam"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We met Sam at the park last Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We will meet Sam at the park next Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I meet Sam?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1ac69cd9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet sam"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We met Sam at the park last Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We will meet Sam at the park next Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Sam wants to meet me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-444d50f2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, you can share my phone."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2adb7382",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I will share the phone with you."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bd21e4d5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, please share your phone with me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c380bfee",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I can share my phone."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4b4308f2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Please share my phone."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a2bd445f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I can share my phone with you."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-661244de",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I will share my phone with you."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-aab7cd8c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "share phone"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I share my phone with my sister."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't share my phone with my sister."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, we can share the phone."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-195241e8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "trust brother"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't trust my brother with the key."
+    },
+    {
+     "label": "Your other version",
+     "text": "I trust my brother with the key."
+    },
+    {
+     "label": "Draft",
+     "text": "I trust my brother."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1ba1e0a6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "trust brother"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't trust my brother with the key."
+    },
+    {
+     "label": "Your other version",
+     "text": "I trust my brother with the key."
+    },
+    {
+     "label": "Draft",
+     "text": "Do you trust your brother?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b612405e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "trust brother"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't trust my brother with the key."
+    },
+    {
+     "label": "Your other version",
+     "text": "I trust my brother with the key."
+    },
+    {
+     "label": "Draft",
+     "text": "My brother trusts me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dddcdfa8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "trust brother"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't trust my brother with the key."
+    },
+    {
+     "label": "Your other version",
+     "text": "I trust my brother with the key."
+    },
+    {
+     "label": "Draft",
+     "text": "Do I trust my brother?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d7921c24",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "watch films"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't watch films at home on weekends."
+    },
+    {
+     "label": "Your other version",
+     "text": "I watch films at home on weekends."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to watch films."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1aecd0c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "watch films"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't watch films at home on weekends."
+    },
+    {
+     "label": "Your other version",
+     "text": "I watch films at home on weekends."
+    },
+    {
+     "label": "Draft",
+     "text": "Do you want to watch films?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-370cb823",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "watch films"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't watch films at home on weekends."
+    },
+    {
+     "label": "Your other version",
+     "text": "I watch films at home on weekends."
+    },
+    {
+     "label": "Draft",
+     "text": "We watched films yesterday."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d117cdac",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "watch films"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't watch films at home on weekends."
+    },
+    {
+     "label": "Your other version",
+     "text": "I watch films at home on weekends."
+    },
+    {
+     "label": "Draft",
+     "text": "You want to watch films."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c6237797",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "watch films"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't watch films at home on weekends."
+    },
+    {
+     "label": "Your other version",
+     "text": "I watch films at home on weekends."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I watch films?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ab85c0e4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "watch films"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't watch films at home on weekends."
+    },
+    {
+     "label": "Your other version",
+     "text": "I watch films at home on weekends."
+    },
+    {
+     "label": "Draft",
+     "text": "I want films to be watched."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

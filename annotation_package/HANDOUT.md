@@ -38,6 +38,12 @@ files from `annotation/` (answer keys, model labels).
     - Part 25: 20 people, 7-28 min each (Read a remark and a sentence).
 <!-- stage5:end -->
 
+<!-- stage6:start -->
+- **Stage 6, optional** (opens **Fri Nov 6**): due **Sun Nov 8, 23:59**. Files appear in `stage6/`; re-download the zip. About 10.2 person-hours, 29-31 min each. Sheets: `assignments/<ID>_stage6.md`.
+  - Part 26 (`rate_items.html` + `stage6/<ID>_part26.json`, 10 of your own messages, drafts for each, 3 quick questions). Return `labels_part26_<ID>.csv`.
+  - Part 27 (`rate_items.html` + `stage6/<ID>_part27.json`, single drafts for the same messages, 2 quick questions). Return `labels_part27_<ID>.csv`. Do Part 26 first.
+<!-- stage6:end -->
+
 **Return method:** annotators email the CSVs named on their sheet, unchanged, to the coordinator: one email per stage,
 subject `AAC annotation <ID> stage <N>`, with the time spent and any notes. The coordinator saves each file into the
 `return_folder` given in `annotation/assignments/stage1.csv` and commits it.

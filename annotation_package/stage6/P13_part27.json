@@ -1,0 +1,1632 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 56,
+ "for": "1d894def",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-6fdca8fd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "room free"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the room is free after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The room is free after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Is this room free?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7a965b4d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "room free"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the room is free after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The room is free after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "The room is free of clutter."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b0f00bac",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "room free"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the room is free after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The room is free after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "We have a free room available."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-12065e3a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "room free"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the room is free after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The room is free after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "This room is free."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b8d0be21",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "room free"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the room is free after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The room is free after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Are you free in this room?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-381808d8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "room free"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the room is free after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The room is free after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Is there a free room?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2d306327",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YOU] = the listener does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You call the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you call the clinic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8dd0d8cf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YOU] = the listener does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You call the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "You call the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b718598f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YOU] = the listener does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You call the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "Will you call the clinic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0c026b30",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YOU] = the listener does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You call the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you call the clinic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-df0262b8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YOU] = the listener does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You call the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you call the clinic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bbfe26ad",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YOU] = the listener does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You call the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "Can the clinic call you?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-06b994e5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus delayed"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is delayed near the station."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus may be delayed near the station."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is delayed."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0797c22c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus delayed"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is delayed near the station."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus may be delayed near the station."
+    },
+    {
+     "label": "Draft",
+     "text": "The delayed bus made me late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-be082a6c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus delayed"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is delayed near the station."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus may be delayed near the station."
+    },
+    {
+     "label": "Draft",
+     "text": "Why is the bus delayed?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b0ff57ae",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus delayed"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is delayed near the station."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus may be delayed near the station."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus delayed?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0bc49a69",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus delayed"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is delayed near the station."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus may be delayed near the station."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus was delayed."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-35b697b5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus delayed"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is delayed near the station."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus may be delayed near the station."
+    },
+    {
+     "label": "Draft",
+     "text": "A delay is holding up the bus."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6ba63fd9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry folder"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "The clerk carries the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please carry the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5663fd0c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry folder"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "The clerk carries the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to carry the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a703c2a6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry folder"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "The clerk carries the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you help me carry the folder?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0cc5eca9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry folder"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "The clerk carries the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "You carry the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-33ab1062",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry folder"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "The clerk carries the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "I will carry the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0d1e45e9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry folder"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "The clerk carries the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please take the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1ac0d2b8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse result"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse has my test result."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse has my test result."
+    },
+    {
+     "label": "Draft",
+     "text": "I’m sure the nurse has the results."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d5ca0b74",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse result"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse has my test result."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse has my test result."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse is sure about the result."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ff0fc4fc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse result"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse has my test result."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse has my test result."
+    },
+    {
+     "label": "Draft",
+     "text": "The results from the nurse are certain."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6dbf2f77",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse result"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse has my test result."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse has my test result."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse is certain about the result."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-22a183a9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse result"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse has my test result."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse has my test result."
+    },
+    {
+     "label": "Draft",
+     "text": "I’m sure the nurse will tell us the results soon."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d68e0e9b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pack lunch"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook packs the lunch in the blue container."
+    },
+    {
+     "label": "Your other version",
+     "text": "I pack the lunch in the blue container."
+    },
+    {
+     "label": "Draft",
+     "text": "Please pack lunch."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-70b8846c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pack lunch"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook packs the lunch in the blue container."
+    },
+    {
+     "label": "Your other version",
+     "text": "I pack the lunch in the blue container."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to pack my lunch."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9f5bbb2d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pack lunch"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook packs the lunch in the blue container."
+    },
+    {
+     "label": "Your other version",
+     "text": "I pack the lunch in the blue container."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you pack lunch?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-281e3099",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pack lunch"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook packs the lunch in the blue container."
+    },
+    {
+     "label": "Your other version",
+     "text": "I pack the lunch in the blue container."
+    },
+    {
+     "label": "Draft",
+     "text": "I pack lunch."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fac7e0e9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pack lunch"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook packs the lunch in the blue container."
+    },
+    {
+     "label": "Your other version",
+     "text": "I pack the lunch in the blue container."
+    },
+    {
+     "label": "Draft",
+     "text": "I will pack lunch."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-067e7e14",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pack lunch"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook packs the lunch in the blue container."
+    },
+    {
+     "label": "Your other version",
+     "text": "I pack the lunch in the blue container."
+    },
+    {
+     "label": "Draft",
+     "text": "Please make a packed lunch."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-14ddb7ef",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar music"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar is in the music room."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the guitar is in the music room."
+    },
+    {
+     "label": "Draft",
+     "text": "That is definitely guitar music."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6bf67d1a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar music"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar is in the music room."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the guitar is in the music room."
+    },
+    {
+     "label": "Draft",
+     "text": "I am sure the music is played on a guitar."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-de4d935d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar music"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar is in the music room."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the guitar is in the music room."
+    },
+    {
+     "label": "Draft",
+     "text": "I definitely want to listen to guitar music."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-342927c5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook puts the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "Put the soup."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b379a505",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook puts the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "Please put some soup in my bowl."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8a9b03dc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook puts the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you put the soup away?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3a52f05a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook puts the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I put the soup."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-788bd18f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook puts the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "Put the soup later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a7313093",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cook puts the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "Serve the soup."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-334f67cf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save photo"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I save the photo on the computer."
+    },
+    {
+     "label": "Your other version",
+     "text": "The technician saves the photo on the computer."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to save the photo."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d09b2b3b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save photo"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I save the photo on the computer."
+    },
+    {
+     "label": "Your other version",
+     "text": "The technician saves the photo on the computer."
+    },
+    {
+     "label": "Draft",
+     "text": "I saved the photo."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ef3f808e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save photo"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I save the photo on the computer."
+    },
+    {
+     "label": "Your other version",
+     "text": "The technician saves the photo on the computer."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I save the photo?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f52e455c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save photo"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I save the photo on the computer."
+    },
+    {
+     "label": "Your other version",
+     "text": "The technician saves the photo on the computer."
+    },
+    {
+     "label": "Draft",
+     "text": "I am saving the photo."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-77baa2b2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save photo"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I save the photo on the computer."
+    },
+    {
+     "label": "Your other version",
+     "text": "The technician saves the photo on the computer."
+    },
+    {
+     "label": "Draft",
+     "text": "I archive the photo."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-01c244e7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe my cousin is home."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-02a1c2d4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe my cousin will come home later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-de7e4737",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe my cousin is at their home."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cb36919a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe my cousin will be home."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b2d2e5c0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe I am home."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2676c347",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe I am at my cousin's home."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2e199c80",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin home"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I suppose my cousin is home after the trip."
+    },
+    {
+     "label": "Your other version",
+     "text": "My cousin is home after the trip."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe I should go to my cousin's home."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

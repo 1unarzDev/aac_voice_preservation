@@ -11,6 +11,7 @@ usage:
   python src/make_assignments.py --stage 4 --fill-checks [--absent P05]
                                                                        # after Part 15 returns + collect_written_pairs.py --batch hw2
 
+  python src/make_assignments.py --stage 6                            # Stage 6 (Parts 26, 27: intent-coverage draft sets, own pairs): sheets, stage6.csv, hand-out block
   python src/make_assignments.py --stage 5                            # Stage 5 (Parts 20, 21 for everyone + each person's share of 22-25): sheets, stage5.csv, hand-out block
 
 Stage 5 (added after Stage 4 had been returned; Parts 20 and 21 for all annotators, 18 min each, plus Parts 22-25 shares; about 60 min each)
@@ -102,6 +103,10 @@ S4_PLAN = ASSIGN_DIR / "stage4_plan.json"
 # Stage 5 (Parts 20 and 21, built after Stage 4 had been returned). Dates are assumptions the coordinator can change here.
 STAGE5_DIR = PKG / "stage5"
 DATES.update({"stage5_open": "Wed Nov 4", "stage5": "Wed Nov 4", "stage5_due": "Thu Nov 5, 23:59", "stage5_end": "Thu Nov 5"})
+# Stage 6 (intent-coverage, Parts 26 and 27; analysis/coverage/PLAN.md section 4). Placeholder dates: the coordinator sets them before sending.
+DATES.update({"stage6_open": "Fri Nov 6", "stage6": "Fri Nov 6", "stage6_due": "Sun Nov 8, 23:59", "stage6_end": "Sun Nov 8"})
+STAGE6_DIR = PKG / "stage6"
+S6_PLAN = ASSIGN_DIR / "stage6_coverage.json"   # written by src/make_coverage_stage6.py: per-person items and minutes (private key: annotation/coverage_key.csv)
 S5_FRONTIER = ASSIGN_DIR / "stage5_frontier.json"   # written by src/make_frontier_parts.py: per-person items and minutes for Parts 22-25
 S4_WRITTEN = WRITTEN / "hw2"
 S4_BATCH = "hw2"
@@ -685,6 +690,8 @@ def handout(plan, tab, later: bool = LATER) -> str:
         txt = insert_stage4_section(txt, stage4_handout_section(s4, rows_stage4(s4, plan["annotators"])))
     if (ASSIGN_DIR / "stage5.csv").exists():
         txt = insert_stage5_section(txt, stage5_handout_section(rows_stage5(plan["annotators"])))
+    if (ASSIGN_DIR / "stage6.csv").exists() and s6_plan():
+        txt = insert_stage6_section(txt, stage6_handout_section(rows_stage6(plan["annotators"])))
     return txt
 
 
@@ -1554,9 +1561,121 @@ def run_stage5(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sh
     return {"plan": plan, "rows": rows, "missing": missing, "frontier": fplan}
 
 
+# ---------------------------------------------------------------- Stage 6 (intent-coverage, Parts 26 and 27)
+TASKS6 = {
+    "part26": ("Part 26", "Find what you meant among drafts: {n} of your own messages, a short set of drafts for each, 3 quick questions, 2 practice items first"),
+    "part27": ("Part 27", "Check each draft: {n} single drafts made for the same messages, 2 quick questions each, 2 practice items first"),
+}
+S6_OVERHEAD_MIN = 2   # opening the file and downloading the CSV, per part
+
+
+def s6_plan(path=None) -> dict | None:
+    p = Path(path or S6_PLAN)
+    return json.loads(p.read_text()) if p.exists() else None
+
+
+def rows_stage6(ids, plan6=None) -> list[dict]:
+    plan6 = plan6 if plan6 is not None else s6_plan()
+    out = []
+    for a in ids:
+        mine = (plan6 or {}).get("per_person", {}).get(a)
+        if not mine:
+            continue
+        for o, task in enumerate(TASKS6, 1):
+            n = mine["n_set"] if task == "part26" else mine["n_draft"]
+            label, desc = TASKS6[task]
+            out.append({"annotator": a, "stage": "6", "order": o, "part": label, "task": task, "description": desc.format(n=n),
+                        "file_or_link": f"rate_items.html + stage6/{a}_{task}.json",
+                        "expected_minutes": mine["minutes"][task] + S6_OVERHEAD_MIN,
+                        "return_file": f"labels_{task}_{a}.csv", "return_folder": f"annotation/returns_{task}/", "due": DATES["stage6_due"]})
+    return out
+
+
+S6_EXTRA_RULES = [
+    "- **Part 26:** the drafts are what a writing tool offers for your keywords. A draft is what you meant if it carries your message, even in "
+    "different words or with less detail; a draft that says the opposite, asks instead of tells, or changes who does it or when is not. "
+    "Choose the last option when none is right. Do not go back to change earlier answers after you have seen Part 27.",
+    "- **Part 27:** do Part 26 completely first. Then rate each draft on its own; the same sentence can come up more than once for different "
+    "messages. If you answer No, write in the note box what is wrong (a few words).",
+    "- Answer from your own message only. Do not search for the sentences or ask anyone or any tool.",
+]
+
+
+def stage6_item_line(r, a) -> str:
+    head = f"- [ ] **{r['order']}. {r['part']}: {r['description']}** (about {r['expected_minutes']} min)"
+    body = (f"Open `rate_items.html`, click the file button, choose `stage6/{a}_{r['task']}.json`, enter `{a}`. Do the 2 practice "
+            f"items (you see feedback), then every item. README: {r['part']}. Click **Download CSV** at the end. "
+            f"The file name will be `labels_{r['task']}_{a}.csv`.")
+    return f"{head}  \n  {body} Return: `{r['return_file']}`."
+
+
+def stage6_sheet(rows: list[dict], a: str) -> str:
+    rs = sorted((r for r in rows if r["annotator"] == a), key=lambda r: int(r["order"]))
+    tot = sum(r["expected_minutes"] for r in rs)
+    L = [f"# Stage 6 task sheet for {a} (OPTIONAL; {DATES['stage6']}; due {DATES['stage6_due']})", "",
+         "Stage 6 is a short top-up and **optional**: if you cannot do it, tell the coordinator now. These tasks use **your own** sentence pairs "
+         "and ask whether drafts from a writing tool say what you meant. Download the current `annotation_package.zip`: your files are in its "
+         f"`stage6/` folder and the tool, `rate_items.html`, is in the package folder. About **{tot} min** in total "
+         f"({', '.join(f'{r['part']} {r['expected_minutes']} min' for r in rs)}), plus breaks. Each tool saves your progress in your browser "
+         "(same browser and computer), so you can stop between items.", "",
+         RULES.format(ID=a, END=DATES["stage6_end"]), "", "**Extra rules for Stage 6**"] + S6_EXTRA_RULES
+    L += ["", "## Steps (in this order)", "", "Order: **Part 26 first**, then Part 27. Do not skip ahead to Part 27.", ""]
+    L += [stage6_item_line(r, a) for r in rs] + [""]
+    L += ["**Return files (names must be exact):** " + "; ".join(f"`{r['return_file']}` ({r['part']})" for r in rs) + ".", ""]
+    L += [f"Return: email the CSV files for {', '.join(r['part'] for r in rs)} to the coordinator by {DATES['stage6_due']} "
+          f"(subject `AAC annotation {a} stage 6`), with the time you spent and any notes.", "",
+          "Thank you! Your work is anonymous: only your ID is recorded. You can stop at any time."]
+    return "\n".join(L) + "\n"
+
+
+def stage6_handout_section(rows: list[dict]) -> str:
+    ids = sorted({r["annotator"] for r in rows})
+    per = {a: sum(r["expected_minutes"] for r in rows if r["annotator"] == a) for a in ids}
+    return ("<!-- stage6:start -->\n"
+            f"- **Stage 6, optional** (opens **{DATES['stage6_open']}**): due **{DATES['stage6_due']}**. Files appear in `stage6/`; re-download the zip. "
+            f"About {sum(per.values()) / 60:.1f} person-hours, {min(per.values())}-{max(per.values())} min each. Sheets: `assignments/<ID>_stage6.md`.\n"
+            "  - Part 26 (`rate_items.html` + `stage6/<ID>_part26.json`, 10 of your own messages, drafts for each, 3 quick questions). Return `labels_part26_<ID>.csv`.\n"
+            "  - Part 27 (`rate_items.html` + `stage6/<ID>_part27.json`, single drafts for the same messages, 2 quick questions). Return `labels_part27_<ID>.csv`. "
+            "Do Part 26 first.\n"
+            "<!-- stage6:end -->\n")
+
+
+def insert_stage6_section(txt: str, section: str) -> str:
+    if "<!-- stage6:start -->" in txt:
+        a, rest = txt.split("<!-- stage6:start -->", 1)
+        txt = a.rstrip("\n") + "\n" + rest.split("<!-- stage6:end -->\n", 1)[1]
+    anchor = "\n**Return method:**"
+    assert anchor in txt, "HANDOUT.md layout changed"
+    txt = txt.replace(anchor, "\n" + section + anchor, 1)
+    return txt.replace("stage <1|2|3|4|5>`", "stage <1|2|3|4|5|6>`")
+
+
+def run_stage6(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, stage6_dir=STAGE6_DIR, pkg=PKG,
+               handout_path=None, quiet=False, s6_path=None) -> dict:
+    plan = json.loads(Path(plan_path).read_text())
+    ids = plan["annotators"]
+    p6 = s6_plan(s6_path)
+    if p6 is None:
+        raise SystemExit("no stage6_coverage.json: run src/make_coverage_stage6.py first")
+    rows = rows_stage6(ids, p6)
+    missing = [str(stage6_dir / f"{a}_{t}.json") for a in ids for t in TASKS6 if not (stage6_dir / f"{a}_{t}.json").exists()]
+    if missing and not quiet:
+        print(f"WARNING: {len(missing)} part files missing, e.g. {missing[:2]}")
+    write_csv(out_assign / "stage6.csv", rows, S4_COLS)
+    out_sheets.mkdir(parents=True, exist_ok=True)
+    for a in ids:
+        (out_sheets / f"{a}_stage6.md").write_text(stage6_sheet(rows, a))
+    hp = Path(handout_path or pkg / "HANDOUT.md")
+    hp.write_text(insert_stage6_section(hp.read_text(), stage6_handout_section(rows)))
+    if not quiet:
+        per = [sum(r["expected_minutes"] for r in rows if r["annotator"] == a) for a in ids]
+        print(f"Stage 6: {len(ids)} sheets, {sum(per) / 60:.1f} person-hours, minutes per person {min(per)}-{max(per)}")
+    return {"plan": plan, "rows": rows, "missing": missing, "s6": p6}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--stage", choices=["1", "2", "3", "4", "5"], required=True)
+    ap.add_argument("--stage", choices=["1", "2", "3", "4", "5", "6"], required=True)
     ap.add_argument("--annotators", default="P01..P20", help="e.g. P01..P20 or P01,P02,...")
     ap.add_argument("--absent", default="", help="stage 2/3: people who will not do that stage")
     ap.add_argument("--still-checking", default="", help="stage 2: non-returning writers who still check")
@@ -1583,6 +1702,8 @@ def main(argv=None) -> int:
                         else Path(a.candidates), absent=split(a.absent))
     elif a.stage == "5":
         run_stage5()
+    elif a.stage == "6":
+        run_stage6()
     elif a.stage == "4":
         run_stage4(writers=split(a.writers), raters=split(a.raters), checkers=split(a.checkers), rebuild=a.rebuild)
     return 0

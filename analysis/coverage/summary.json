@@ -1,0 +1,639 @@
+{
+ "n_items": 200,
+ "gate": {
+  "n_train": 99,
+  "n_holdout": 96,
+  "frozen_cutoff": 2.0,
+  "holdout_match_rate": 0.2916666666666667,
+  "auroc": 0.8290441176470589,
+  "auroc_cluster_ci": [
+   0.7717709642508029,
+   0.8857249694749694
+  ],
+  "kappa": 0.5555555555555556,
+  "kappa_cluster_ci": [
+   0.3672017435844614,
+   0.6878429124709526
+  ],
+  "word_count_auroc": 0.7090336134453782,
+  "word_orientation": -1,
+  "auroc_gain_over_words": 0.12001050420168069,
+  "gain_cluster_ci": [
+   -0.015148689516129073,
+   0.257686174769758
+  ],
+  "sanity": {
+   "self_covers": 1.0,
+   "unrelated_covers": 0.0,
+   "pass": true
+  },
+  "train_auroc": 0.8672161172161172,
+  "gate_a": true,
+  "gate_b": true,
+  "gate_c": false,
+  "gate_d": true,
+  "pass": false,
+  "auroc_vs_accept_ok": 0.7543478260869565
+ },
+ "selector_recall_by_dim_at2": {
+  "certainty": 0.0,
+  "speech_act": 0.9761904761904762,
+  "politeness": 0.038461538461538464,
+  "time_quantity": 0.1,
+  "agent": 0.9428571428571428,
+  "polarity": 0.09375
+ },
+ "selector_recall": [
+  {
+   "k": 1,
+   "selector": 0.24,
+   "static": 0.16,
+   "random_draw": 0.17,
+   "random_expected": 0.16666666666666666
+  },
+  {
+   "k": 2,
+   "selector": 0.41,
+   "static": 0.37,
+   "random_draw": 0.35,
+   "random_expected": 0.3333333333333333
+  }
+ ],
+ "fill": {
+  "edit_slots": 1959,
+  "filled_after_regen": 0.8361408882082695,
+  "regenerated_rate": 0.03215926493108729,
+  "needed_regen_rate": 0.18785094435936703,
+  "chip_unfiltered_cue_violation_edits": 0.19164882226980728
+ },
+ "chip_cue_violation_shown_nonG1": {
+  "D3s": 0.1711229946524064,
+  "D5s": 0.18775510204081633,
+  "D3p": 0.5375,
+  "D5p": 0.1525,
+  "C3": 0.0,
+  "C5": 0.0,
+  "E3": 0.0,
+  "E5": 0.0,
+  "R3": 0.0,
+  "C3f": 0.0
+ },
+ "chip_cue_violation_raw_by_kind": {
+  "smp": 0.18775510204081633,
+  "div": 0.1525,
+  "event": 0.12,
+  "edit": 0.29081632653061223
+ },
+ "ceiling_any_arm": {
+  "bare": 0.595,
+  "chip": 0.84,
+  "word": 0.565
+ },
+ "mean_shown": {
+  "C3/bare": 2.74,
+  "C3/chip": 2.535,
+  "C3f/bare": 2.805,
+  "C3f/chip": 2.485,
+  "C3o/bare": 2.5,
+  "C5/bare": 4.57,
+  "C5/chip": 4.03,
+  "D3p/bare": 3.0,
+  "D3p/chip": 3.0,
+  "D3s/bare": 2.06,
+  "D3s/chip": 1.935,
+  "D5p/bare": 5.0,
+  "D5p/chip": 5.0,
+  "D5s/bare": 2.395,
+  "D5s/chip": 2.225,
+  "E3/bare": 2.885,
+  "E3/chip": 2.72,
+  "E5/bare": 4.685,
+  "E5/chip": 4.26,
+  "G1/bare": 1.0,
+  "G1/chip": 1.0,
+  "R3/bare": 2.735,
+  "R3/chip": 2.55,
+  "W1/word": 1.0
+ },
+ "coverage_by_arm": {
+  "G1/bare": {
+   "coverage": 0.145,
+   "ci": [
+    0.08,
+    0.215
+   ],
+   "coverage_loose": 0.23,
+   "k": 1,
+   "n": 200
+  },
+  "C3/bare": {
+   "coverage": 0.315,
+   "ci": [
+    0.215,
+    0.42
+   ],
+   "coverage_loose": 0.51,
+   "k": 3,
+   "n": 200
+  },
+  "C3f/bare": {
+   "coverage": 0.265,
+   "ci": [
+    0.175,
+    0.36
+   ],
+   "coverage_loose": 0.46,
+   "k": 3,
+   "n": 200
+  },
+  "C3o/bare": {
+   "coverage": 0.42,
+   "ci": [
+    0.31,
+    0.53
+   ],
+   "coverage_loose": 0.645,
+   "k": 3,
+   "n": 200
+  },
+  "D3p/bare": {
+   "coverage": 0.245,
+   "ci": [
+    0.16,
+    0.34
+   ],
+   "coverage_loose": 0.38,
+   "k": 3,
+   "n": 200
+  },
+  "D3s/bare": {
+   "coverage": 0.2,
+   "ci": [
+    0.125,
+    0.28
+   ],
+   "coverage_loose": 0.315,
+   "k": 3,
+   "n": 200
+  },
+  "E3/bare": {
+   "coverage": 0.25,
+   "ci": [
+    0.155,
+    0.345
+   ],
+   "coverage_loose": 0.44,
+   "k": 3,
+   "n": 200
+  },
+  "R3/bare": {
+   "coverage": 0.255,
+   "ci": [
+    0.175,
+    0.345
+   ],
+   "coverage_loose": 0.395,
+   "k": 3,
+   "n": 200
+  },
+  "C5/bare": {
+   "coverage": 0.42,
+   "ci": [
+    0.315,
+    0.525
+   ],
+   "coverage_loose": 0.625,
+   "k": 5,
+   "n": 200
+  },
+  "D5p/bare": {
+   "coverage": 0.39,
+   "ci": [
+    0.29,
+    0.4901249999999993
+   ],
+   "coverage_loose": 0.635,
+   "k": 5,
+   "n": 200
+  },
+  "D5s/bare": {
+   "coverage": 0.205,
+   "ci": [
+    0.13,
+    0.29
+   ],
+   "coverage_loose": 0.33,
+   "k": 5,
+   "n": 200
+  },
+  "E5/bare": {
+   "coverage": 0.34,
+   "ci": [
+    0.24,
+    0.445
+   ],
+   "coverage_loose": 0.54,
+   "k": 5,
+   "n": 200
+  },
+  "G1/chip": {
+   "coverage": 0.58,
+   "ci": [
+    0.475,
+    0.68
+   ],
+   "coverage_loose": 0.78,
+   "k": 1,
+   "n": 200
+  },
+  "C3/chip": {
+   "coverage": 0.675,
+   "ci": [
+    0.565,
+    0.78
+   ],
+   "coverage_loose": 0.93,
+   "k": 3,
+   "n": 200
+  },
+  "C3f/chip": {
+   "coverage": 0.65,
+   "ci": [
+    0.54,
+    0.765
+   ],
+   "coverage_loose": 0.935,
+   "k": 3,
+   "n": 200
+  },
+  "D3p/chip": {
+   "coverage": 0.695,
+   "ci": [
+    0.59,
+    0.795
+   ],
+   "coverage_loose": 0.905,
+   "k": 3,
+   "n": 200
+  },
+  "D3s/chip": {
+   "coverage": 0.685,
+   "ci": [
+    0.575,
+    0.79
+   ],
+   "coverage_loose": 0.88,
+   "k": 3,
+   "n": 200
+  },
+  "E3/chip": {
+   "coverage": 0.69,
+   "ci": [
+    0.585,
+    0.79
+   ],
+   "coverage_loose": 0.94,
+   "k": 3,
+   "n": 200
+  },
+  "R3/chip": {
+   "coverage": 0.635,
+   "ci": [
+    0.53,
+    0.74
+   ],
+   "coverage_loose": 0.925,
+   "k": 3,
+   "n": 200
+  },
+  "C5/chip": {
+   "coverage": 0.69,
+   "ci": [
+    0.575,
+    0.795
+   ],
+   "coverage_loose": 0.965,
+   "k": 5,
+   "n": 200
+  },
+  "D5p/chip": {
+   "coverage": 0.8,
+   "ci": [
+    0.715,
+    0.88
+   ],
+   "coverage_loose": 0.965,
+   "k": 5,
+   "n": 200
+  },
+  "D5s/chip": {
+   "coverage": 0.69,
+   "ci": [
+    0.58,
+    0.79
+   ],
+   "coverage_loose": 0.895,
+   "k": 5,
+   "n": 200
+  },
+  "E5/chip": {
+   "coverage": 0.735,
+   "ci": [
+    0.63,
+    0.83
+   ],
+   "coverage_loose": 0.945,
+   "k": 5,
+   "n": 200
+  },
+  "W1/word": {
+   "coverage": 0.565,
+   "ci": [
+    0.45,
+    0.675
+   ],
+   "coverage_loose": 0.735,
+   "k": 1,
+   "n": 200
+  }
+ },
+ "contrasts": {
+  "S1 E3 - D3p (bare)": {
+   "diff_pp": 0.5,
+   "ci": [
+    -7.5,
+    9.0
+   ],
+   "p": 1.0,
+   "n": 200
+  },
+  "S1 C3 - D3p (bare)": {
+   "diff_pp": 7.000000000000001,
+   "ci": [
+    0.0,
+    14.499999999999998
+   ],
+   "p": 0.02618,
+   "n": 200
+  },
+  "S1 C3f - D3p (bare)": {
+   "diff_pp": 2.0,
+   "ci": [
+    -6.0,
+    10.0
+   ],
+   "p": 0.6386,
+   "n": 200
+  },
+  "S1 R3 - D3p (bare)": {
+   "diff_pp": 1.0,
+   "ci": [
+    -5.5,
+    7.5
+   ],
+   "p": 0.8265,
+   "n": 200
+  },
+  "S1 C3o - D3p (bare)": {
+   "diff_pp": 17.5,
+   "ci": [
+    8.0,
+    27.0
+   ],
+   "p": 0.00012,
+   "n": 200
+  },
+  "E3 bare - G1 bare": {
+   "diff_pp": 10.5,
+   "ci": [
+    5.0,
+    17.0
+   ],
+   "p": 0.00022,
+   "n": 200
+  },
+  "C3 bare - G1 bare": {
+   "diff_pp": 17.0,
+   "ci": [
+    10.0,
+    25.0
+   ],
+   "p": 0.0,
+   "n": 200
+  },
+  "D3p bare - G1 bare": {
+   "diff_pp": 10.0,
+   "ci": [
+    4.5,
+    16.5
+   ],
+   "p": 0.00048,
+   "n": 200
+  },
+  "D3s bare - G1 bare": {
+   "diff_pp": 5.5,
+   "ci": [
+    1.5,
+    11.0
+   ],
+   "p": 0.03172,
+   "n": 200
+  },
+  "G1 chip - G1 bare (cue tap)": {
+   "diff_pp": 43.5,
+   "ci": [
+    34.5,
+    53.0
+   ],
+   "p": 0.0,
+   "n": 200
+  },
+  "W1 word - G1 chip": {
+   "diff_pp": -1.5,
+   "ci": [
+    -8.0,
+    5.0
+   ],
+   "p": 0.67088,
+   "n": 200
+  },
+  "S2 E3 bare - G1 chip": {
+   "diff_pp": -33.0,
+   "ci": [
+    -43.5,
+    -22.5
+   ],
+   "p": 2e-05,
+   "n": 200
+  },
+  "S2 C3 bare - G1 chip": {
+   "diff_pp": -26.5,
+   "ci": [
+    -38.0,
+    -14.499999999999998
+   ],
+   "p": 0.0001,
+   "n": 200
+  },
+  "S2 D3p bare - G1 chip": {
+   "diff_pp": -33.5,
+   "ci": [
+    -44.5,
+    -23.0
+   ],
+   "p": 0.0,
+   "n": 200
+  },
+  "S2 C3f bare - G1 chip": {
+   "diff_pp": -31.5,
+   "ci": [
+    -42.5,
+    -20.5
+   ],
+   "p": 2e-05,
+   "n": 200
+  },
+  "S2 R3 bare - G1 chip": {
+   "diff_pp": -32.5,
+   "ci": [
+    -42.5,
+    -22.5
+   ],
+   "p": 0.0,
+   "n": 200
+  },
+  "S3 E3 chip - G1 chip": {
+   "diff_pp": 11.0,
+   "ci": [
+    4.5,
+    18.5
+   ],
+   "p": 0.00092,
+   "n": 200
+  },
+  "S3 C3 chip - G1 chip": {
+   "diff_pp": 9.5,
+   "ci": [
+    3.5000000000000004,
+    16.5
+   ],
+   "p": 0.00204,
+   "n": 200
+  },
+  "S3 D3p chip - G1 chip": {
+   "diff_pp": 11.5,
+   "ci": [
+    5.0,
+    19.0
+   ],
+   "p": 0.0009,
+   "n": 200
+  },
+  "S3 E5 chip - G1 chip": {
+   "diff_pp": 15.5,
+   "ci": [
+    8.0,
+    24.0
+   ],
+   "p": 4e-05,
+   "n": 200
+  },
+  "S3 C5 chip - G1 chip": {
+   "diff_pp": 11.0,
+   "ci": [
+    4.5,
+    18.5
+   ],
+   "p": 0.00106,
+   "n": 200
+  },
+  "S3 D5p chip - G1 chip": {
+   "diff_pp": 22.0,
+   "ci": [
+    13.5,
+    31.0
+   ],
+   "p": 2e-05,
+   "n": 200
+  },
+  "E3 chip - D3p chip": {
+   "diff_pp": -0.5,
+   "ci": [
+    -6.0,
+    5.0
+   ],
+   "p": 1.0,
+   "n": 200
+  },
+  "C3 chip - D3p chip": {
+   "diff_pp": -2.0,
+   "ci": [
+    -7.5,
+    3.0
+   ],
+   "p": 0.39696,
+   "n": 200
+  },
+  "E5 bare - D5p bare": {
+   "diff_pp": -5.0,
+   "ci": [
+    -13.0,
+    3.0
+   ],
+   "p": 0.14686,
+   "n": 200
+  },
+  "C5 bare - D5p bare": {
+   "diff_pp": 3.0,
+   "ci": [
+    -5.5,
+    12.0
+   ],
+   "p": 0.44974,
+   "n": 200
+  },
+  "E5 chip - D5p chip": {
+   "diff_pp": -6.5,
+   "ci": [
+    -12.5,
+    -1.0
+   ],
+   "p": 0.01216,
+   "n": 200
+  },
+  "wrong-first E3 - G1 (chip, same first draft)": {
+   "diff_pp": 11.0,
+   "ci": [
+    4.5,
+    18.5
+   ],
+   "p": 0.00092,
+   "n": 200
+  }
+ },
+ "median_drafts_read_E3_chip_covered": 1.0,
+ "median_drafts_read_E3_bare_covered": 1.0,
+ "models": {
+  "gen": "gpt-5.6-terra",
+  "judge": "gpt-6-luna",
+  "probe_gen_gpt-6.1-terra": "Error code: 503 - No accounts with a plan supporting model 'gpt-6.1-terra'",
+  "probe_judge_gpt-6.1-sol": "Error code: 503 - No accounts with a plan supporting model 'gpt-6.1-sol'"
+ },
+ "status": {
+  "round": 1,
+  "machine_proxy_gate_passed": false,
+  "claim_scope": "descriptive only; no machine-only arm claim (PLAN sec 3); human Stage 6 not run",
+  "generator_used": "gpt-5.6-terra",
+  "judge_used": "gpt-6-luna",
+  "planned": "gpt-6.1-terra / gpt-6.1-sol (503 no plan; deviation to log in DEVIATIONS.md)",
+  "local_replication": {
+   "generation_done": true,
+   "qwen2.5-14b": "runs/coverage_local-qwen14 3645/3645",
+   "llama3.1-8b": "runs/coverage_local-llama 3645/3645",
+   "proxy_judging": "blocked: codex-lb 429 rate limit (retry after 300s repeated) at 2026-11-05 05:27; run src/coverage_local_eval.py when judge quota returns",
+   "results": null
+  },
+  "independent_family_judges_qwen_mistral": "not run",
+  "known_bug": "contrasts.csv last row 'wrong-first E3 - G1' duplicates S3 coverage numbers; wrong_first is identical across arms by construction (slot 1 = G1): bare .365, chip .02"
+ }
+}

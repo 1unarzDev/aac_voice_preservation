@@ -1,0 +1,1727 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 59,
+ "for": "1f2e1a20",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-6366aed2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "The manager scheduled it."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4b72172f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "The manager's schedule was changed."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c18c017e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "The manager had a busy schedule."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-06a14212",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "I scheduled the manager."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0c3d505e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please, the manager scheduled it."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b727744a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "The manager had a schedule."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dc2c3a11",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "manager schedule"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The manager reviewed the schedule in the office on Monday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The manager will review the schedule in the office on Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "Did the manager schedule the meeting?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4de3b172",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receipt folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receipt is in the blue folder."
+    },
+    {
+     "label": "Your other version",
+     "text": "I suppose the receipt is in the blue folder."
+    },
+    {
+     "label": "Draft",
+     "text": "The receipt is in the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-966e20cf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receipt folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receipt is in the blue folder."
+    },
+    {
+     "label": "Your other version",
+     "text": "I suppose the receipt is in the blue folder."
+    },
+    {
+     "label": "Draft",
+     "text": "The folder contains the receipt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bade8547",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receipt folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receipt is in the blue folder."
+    },
+    {
+     "label": "Your other version",
+     "text": "I suppose the receipt is in the blue folder."
+    },
+    {
+     "label": "Draft",
+     "text": "The receipt was in the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2c1b05c8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receipt folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receipt is in the blue folder."
+    },
+    {
+     "label": "Your other version",
+     "text": "I suppose the receipt is in the blue folder."
+    },
+    {
+     "label": "Draft",
+     "text": "I put the receipt in the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4beb8612",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receipt folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receipt is in the blue folder."
+    },
+    {
+     "label": "Your other version",
+     "text": "I suppose the receipt is in the blue folder."
+    },
+    {
+     "label": "Draft",
+     "text": "I am sure the receipt belongs in this folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fca4e2f6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receipt folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receipt is in the blue folder."
+    },
+    {
+     "label": "Your other version",
+     "text": "I suppose the receipt is in the blue folder."
+    },
+    {
+     "label": "Draft",
+     "text": "The receipt folder is definitely the one we need."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c02f4449",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "therapist chart"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The therapist will check the chart at the clinic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The therapist checked the chart at the clinic yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you chart this, therapist?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-291df7c3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "therapist chart"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The therapist will check the chart at the clinic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The therapist checked the chart at the clinic yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "The therapist reviewed my chart."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-429b27a6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "therapist chart"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The therapist will check the chart at the clinic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The therapist checked the chart at the clinic yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to talk to my therapist about the chart."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ce3738b1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "therapist chart"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The therapist will check the chart at the clinic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The therapist checked the chart at the clinic yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you chart this, therapist?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-df4457c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "therapist chart"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The therapist will check the chart at the clinic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The therapist checked the chart at the clinic yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I chart this, therapist?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-565de3d6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe the payment will arrive."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f41ea838",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "The payment may have arrived already."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bf5ba81b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe a payment is arriving now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2d894adc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe the payment arrived."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d64f9992",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe I will receive the payment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a4b89a79",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe payment is arriving."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-65f0971e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe a payment has arrived."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-25b758fe",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "payment arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The payment might arrive before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "The payment arrives before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe the payment will arrive later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5114f71e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "I will tell the nurse later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-480b67c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse will give a report later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5563c778",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to report something to the nurse later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-60557fd0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse will tell me later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f9eeb960",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Will I tell the nurse later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e687952b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse will report later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e79973d4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse will send the report by email tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse sent the report by email yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you report this to the nurse later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9d45337b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse available"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse is available after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse is available after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Is a nurse available?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8dd02714",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse available"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse is available after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse is available after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse is available now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fe009fb0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse available"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse is available after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse is available after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you tell me whether a nurse is available later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-777064f4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse available"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse is available after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse is available after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Please have a nurse available."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-06d4b2e5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse available"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse is available after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse is available after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Will a nurse be available?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dd8afb64",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse available"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse is available after lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "I think the nurse is available after lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the nurse available?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-92785b42",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lease office"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I signed the lease at the office last week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will sign the lease at the office next week."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to lease an office."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a6a7ed1e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lease office"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I signed the lease at the office last week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will sign the lease at the office next week."
+    },
+    {
+     "label": "Draft",
+     "text": "The office lease expires next month."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-507c70e2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lease office"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I signed the lease at the office last week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will sign the lease at the office next week."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you send me a copy of the office lease?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5969d1c1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lease office"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I signed the lease at the office last week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will sign the lease at the office next week."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I lease an office?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-78c24cac",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lease office"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I signed the lease at the office last week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will sign the lease at the office next week."
+    },
+    {
+     "label": "Draft",
+     "text": "You want to lease an office."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8effe35e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lease office"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I signed the lease at the office last week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will sign the lease at the office next week."
+    },
+    {
+     "label": "Draft",
+     "text": "The office is for lease."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-61129adb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "parcel desk"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The parcel reaches the front desk this afternoon."
+    },
+    {
+     "label": "Your other version",
+     "text": "The parcel may reach the front desk this afternoon."
+    },
+    {
+     "label": "Draft",
+     "text": "I’m sure the parcel is at the desk."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5b947df9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "parcel desk"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The parcel reaches the front desk this afternoon."
+    },
+    {
+     "label": "Your other version",
+     "text": "The parcel may reach the front desk this afternoon."
+    },
+    {
+     "label": "Draft",
+     "text": "I’m sure the parcel desk is open."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-53dd18c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "parcel desk"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The parcel reaches the front desk this afternoon."
+    },
+    {
+     "label": "Your other version",
+     "text": "The parcel may reach the front desk this afternoon."
+    },
+    {
+     "label": "Draft",
+     "text": "I’m sure the parcel desk can help you."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-33ac2624",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "advocate ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The advocate explained the ramp at the meeting yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The advocate will explain the ramp at the meeting tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to advocate for a ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a04a9158",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "advocate ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The advocate explained the ramp at the meeting yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The advocate will explain the ramp at the meeting tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you advocate for a ramp?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-19200139",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "advocate ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The advocate explained the ramp at the meeting yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The advocate will explain the ramp at the meeting tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "The advocate spoke about the ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5f89ca49",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "advocate ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The advocate explained the ramp at the meeting yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The advocate will explain the ramp at the meeting tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Let's advocate for a ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c1df6bae",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "advocate ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The advocate explained the ramp at the meeting yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The advocate will explain the ramp at the meeting tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "You want to advocate for a ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c93f36a1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "advocate ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The advocate explained the ramp at the meeting yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The advocate will explain the ramp at the meeting tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I want an advocate for the ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-faa7392a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "class room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the class meets in the upstairs room."
+    },
+    {
+     "label": "Your other version",
+     "text": "The class meets in the upstairs room."
+    },
+    {
+     "label": "Draft",
+     "text": "Classroom."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-db148b8b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "class room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the class meets in the upstairs room."
+    },
+    {
+     "label": "Your other version",
+     "text": "The class meets in the upstairs room."
+    },
+    {
+     "label": "Draft",
+     "text": "The class is in the room."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6fb686d6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "class room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the class meets in the upstairs room."
+    },
+    {
+     "label": "Your other version",
+     "text": "The class meets in the upstairs room."
+    },
+    {
+     "label": "Draft",
+     "text": "Please leave the classroom."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ba38a07c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "class room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the class meets in the upstairs room."
+    },
+    {
+     "label": "Your other version",
+     "text": "The class meets in the upstairs room."
+    },
+    {
+     "label": "Draft",
+     "text": "I am in the classroom."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0dd43262",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "class room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Perhaps the class meets in the upstairs room."
+    },
+    {
+     "label": "Your other version",
+     "text": "The class meets in the upstairs room."
+    },
+    {
+     "label": "Draft",
+     "text": "Classroom later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

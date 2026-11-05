@@ -1,0 +1,1893 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 65,
+ "for": "37be0190",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-03298be4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to plan a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-83d0be6d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can we plan a picnic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3ce13131",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "They are planning a picnic for Saturday."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fc635002",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Let's plan a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ce1bd94d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "We want to plan a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-60b942f0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We don't plan a picnic in the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "I want a plan for a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4e21fc7d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We don't plan to meet at the park Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We plan to meet at the park Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Let's meet at the park."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7d7ecb58",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We don't plan to meet at the park Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We plan to meet at the park Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "The park is where we first met."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-176cf0bb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We don't plan to meet at the park Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We plan to meet at the park Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you meet me at the park after school?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b7b2c6e7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We don't plan to meet at the park Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We plan to meet at the park Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Will we meet at the park?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ce5ffb56",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We don't plan to meet at the park Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We plan to meet at the park Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "I'll meet at the park."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4f71665d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "We don't plan to meet at the park Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "We plan to meet at the park Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Meet me at the park."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d8c861a9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c60494cb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, you should take the medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-92906131",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I will take my medicine now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-80a3ebb0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I'll take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8343ab3b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, you take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b6a0c384",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, medicine is taken."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-57319559",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, please take your medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0b47f701",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I take my medicine with breakfast."
+    },
+    {
+     "label": "Your other version",
+     "text": "I don't take my medicine with breakfast."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, I will take the medicine now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-525b3dbe",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ask captions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Your other version",
+     "text": "You ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you turn on the captions?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fd816252",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ask captions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Your other version",
+     "text": "You ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you add captions to this video?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-60a6b0db",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ask captions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Your other version",
+     "text": "You ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you tell me what the captions say?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4cafadad",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ask captions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Your other version",
+     "text": "You ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Draft",
+     "text": "Are the captions on?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-76ed1b54",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ask captions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Your other version",
+     "text": "You ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Draft",
+     "text": "Could I turn on the captions?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-17bd1a30",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ask captions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Your other version",
+     "text": "You ask the nurse for captions at the clinic."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you add captions?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6facc632",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister plans the picnic at the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "I plan the picnic at the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to plan a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-966eac9d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister plans the picnic at the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "I plan the picnic at the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "We need to plan the picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-896c0f53",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister plans the picnic at the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "I plan the picnic at the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you help plan a picnic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-337d7408",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister plans the picnic at the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "I plan the picnic at the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I plan a picnic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-82b0e4ae",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister plans the picnic at the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "I plan the picnic at the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "Let's plan a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c346fae5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "plan picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister plans the picnic at the park Sunday."
+    },
+    {
+     "label": "Your other version",
+     "text": "I plan the picnic at the park Sunday."
+    },
+    {
+     "label": "Draft",
+     "text": "I want a plan for a picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1048e2d3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "file report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I file the report before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "My coworker files the report before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "I file the report."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-32a0e048",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "file report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I file the report before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "My coworker files the report before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to file a report."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c6800f04",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "file report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I file the report before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "My coworker files the report before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "I filed the report already."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c65d5bbc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "file report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I file the report before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "My coworker files the report before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "I filed the report."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4570f28e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "file report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I file the report before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "My coworker files the report before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "Do I file the report?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-14608f8c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "file report"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I file the report before lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "My coworker files the report before lunch."
+    },
+    {
+     "label": "Draft",
+     "text": "I am filing the report now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-47c2f853",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You take medicine with breakfast each day."
+    },
+    {
+     "label": "Your other version",
+     "text": "I take medicine with breakfast each day."
+    },
+    {
+     "label": "Draft",
+     "text": "Take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6ee8ea15",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You take medicine with breakfast each day."
+    },
+    {
+     "label": "Your other version",
+     "text": "I take medicine with breakfast each day."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to take my medicine now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a25da95d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You take medicine with breakfast each day."
+    },
+    {
+     "label": "Your other version",
+     "text": "I take medicine with breakfast each day."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you take your medicine?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-595c5d63",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You take medicine with breakfast each day."
+    },
+    {
+     "label": "Your other version",
+     "text": "I take medicine with breakfast each day."
+    },
+    {
+     "label": "Draft",
+     "text": "I take medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b0a5923d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You take medicine with breakfast each day."
+    },
+    {
+     "label": "Your other version",
+     "text": "I take medicine with breakfast each day."
+    },
+    {
+     "label": "Draft",
+     "text": "Take medicine later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6edf0348",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "take medicine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You take medicine with breakfast each day."
+    },
+    {
+     "label": "Your other version",
+     "text": "I take medicine with breakfast each day."
+    },
+    {
+     "label": "Draft",
+     "text": "Carry medicine."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7507eb6c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "I don’t have money for groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5c064324",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "I do not want to spend money on groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f1f73001",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "The grocery money is not enough."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-de98cd77",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "You don’t have money for groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-69329a11",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "I won’t have money for groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a1269bb0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "Groceries do not cost money."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a8c9774d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "I am not spending money on groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e769f823",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "money groceries"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't have enough money for groceries this week."
+    },
+    {
+     "label": "Your other version",
+     "text": "I have enough money for groceries this week."
+    },
+    {
+     "label": "Draft",
+     "text": "The groceries are not worth the money."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8654663b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I call the clinic after work."
+    },
+    {
+     "label": "Your other version",
+     "text": "My sister calls the clinic after work."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to call the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-63eba376",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I call the clinic after work."
+    },
+    {
+     "label": "Your other version",
+     "text": "My sister calls the clinic after work."
+    },
+    {
+     "label": "Draft",
+     "text": "I called the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f17e2111",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I call the clinic after work."
+    },
+    {
+     "label": "Your other version",
+     "text": "My sister calls the clinic after work."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to call the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6ce8fb85",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I call the clinic after work."
+    },
+    {
+     "label": "Your other version",
+     "text": "My sister calls the clinic after work."
+    },
+    {
+     "label": "Draft",
+     "text": "I needed to call the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d87d8b15",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I call the clinic after work."
+    },
+    {
+     "label": "Your other version",
+     "text": "My sister calls the clinic after work."
+    },
+    {
+     "label": "Draft",
+     "text": "Do I need to call the clinic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4c968c6c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I call the clinic after work."
+    },
+    {
+     "label": "Your other version",
+     "text": "My sister calls the clinic after work."
+    },
+    {
+     "label": "Draft",
+     "text": "I am calling the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b44cf7c9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "There are no passengers on the bus."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a255cb0d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "The passengers are not on the bus."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-725271f1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus does not carry passengers."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-44658043",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "I am not a passenger on the bus."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0e674ab8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "Are there no passengers on the bus?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dd8edbe8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is not carrying passengers."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f9d8dec8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus passengers"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus doesn't take passengers downtown."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus takes passengers downtown."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is not for passengers."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

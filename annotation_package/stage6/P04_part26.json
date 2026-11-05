@@ -1,0 +1,480 @@
+{
+ "check_id": "part26",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 10,
+ "for": "3aca360c",
+ "title": "Find what you meant among drafts",
+ "intro": [
+  "For each of 10 messages, you see the keywords you typed for one of your own sentence pairs, the sentence you meant, and the drafts a writing tool offers for those keywords.",
+  "Say whether any draft is what you meant (which one), whether you would send it, and how hard it was to find. The drafts are shown in the order a user would see them."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "The keywords you typed (and a cue button, if you pressed one), the sentence you meant, and the drafts a writing tool offers for those keywords."
+  },
+  {
+   "term": "What counts as 'what you meant'",
+   "text": "A draft says what you meant if it carries your message, even in different words or with less detail. A draft that says the opposite, asks instead of tells, changes who does it or when, or is a different message does not."
+  },
+  {
+   "term": "Would you send it",
+   "text": "As it is: you would send it unchanged. Small edit: you would fix a word or two. No: it would need more than that, or none was right."
+  },
+  {
+   "term": "How hard",
+   "text": "How hard it was to find the draft you meant (or to see that none was right)."
+  }
+ ],
+ "questions": {
+  "hard": {
+   "title": "How hard was it to find what you meant?",
+   "text": "1 = very easy, 5 = very hard. If none was right, say how hard it was to be sure of that.",
+   "options": [
+    {
+     "v": "1",
+     "label": "1 very easy"
+    },
+    {
+     "v": "2",
+     "label": "2"
+    },
+    {
+     "v": "3",
+     "label": "3"
+    },
+    {
+     "v": "4",
+     "label": "4"
+    },
+    {
+     "v": "5",
+     "label": "5 very hard"
+    }
+   ]
+  },
+  "pick1": {
+   "title": "Is this what you meant?",
+   "text": "Yes if it says the message you meant (different words are fine). No if it says something else.",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, this is what I meant"
+    },
+    {
+     "v": "none",
+     "label": "No, it is not"
+    }
+   ]
+  },
+  "pick3": {
+   "title": "Is any of these what you meant?",
+   "text": "Pick the one that says the message you meant (different words are fine), or none.",
+   "options": [
+    {
+     "v": "1",
+     "label": "Draft 1"
+    },
+    {
+     "v": "2",
+     "label": "Draft 2"
+    },
+    {
+     "v": "3",
+     "label": "Draft 3"
+    },
+    {
+     "v": "none",
+     "label": "None of them"
+    }
+   ]
+  },
+  "send": {
+   "title": "Would you send it?",
+   "text": "Think of the draft you picked. If you picked none, choose the last option.",
+   "options": [
+    {
+     "v": "as_is",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No (or I picked none)"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-sv1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Is the bus late?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The bus is late."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please wait for the late bus."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick3": "2",
+    "send": "small_edit",
+    "hard": "2"
+   },
+   "fb": "Draft 2 carries the message (the bus is late); it lacks 'again', a small edit. Draft 1 asks a question and Draft 3 asks for something else."
+  },
+  {
+   "item_id": "prac-sv2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coffee"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't want coffee."
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want coffee."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick1": "none",
+    "send": "no",
+    "hard": "1"
+   },
+   "fb": "The draft says the opposite of what you meant, so the answer is no, and it is easy to see."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "sv-bf642de5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please call my brother to make an appointment."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-9dde780c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "show nurse card"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Show the nurse my communication card."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Show the nurse card."
+    },
+    {
+     "label": "Draft 2",
+     "text": "I show the nurse card."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Show the card to the nurse."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-170c77ee",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want to book a room with the receptionist."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Please book a room with the receptionist."
+    },
+    {
+     "label": "Draft 3",
+     "text": "The receptionist wants to book a room."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-a20ae5ca",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "Is the report ready for class?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "Are you ready to report for class?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "Was the report ready for class?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-27aa4cdd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Bring a map to the picnic."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-fff27bec",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The music in the cafeteria is loud."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Please turn down the loud music in the cafeteria."
+    },
+    {
+     "label": "Draft 3",
+     "text": "The music in the cafeteria was loud."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-325a7efd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The movie is beginning."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-4f0dbc9c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please move the speaker chair."
+    },
+    {
+     "label": "Draft 2",
+     "text": "I need to move the speaker chair."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Could you move the chair for the speaker?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-2cfb6817",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "The inhaler is in the drawer."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Is the inhaler in the drawer?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "The inhaler is next to the drawer."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-dc4f5d17",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please record the football match."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Could you please record a football match for me?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please record the football match when it starts."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  }
+ ]
+}

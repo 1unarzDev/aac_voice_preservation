@@ -27,3 +27,27 @@
 - Cuts: Table 2 (evaluation card) replaced by a text block; Table 3 example panel to 2 rows (others are in Fig 1); strip-only, menu-applicability, writer-level-interval and pilot sentences; power and sample-size paragraphs; limitations trimmed.
 - Not done: no human check of guard-treated machine labels exists (stated, not fixed); the 140pt overfull hbox is the two-minipage Table 2 (no clipping seen on page 5).
 - Build: docker pdflatex, 10 pages, body ends page 8 (Conclusion before references); pages viewed at 70 dpi.
+
+## Round 1 re-run (writer, verification only)
+- Found all PART17/PART18 slots, Sec. 6.5, Sec. 6.6, R6 and the confident "does it work" line already in place from earlier rounds; no text changes. Rebuild up to date: 10 pages, body ends p8, no unresolved refs.
+
+## Round 2 (writer, reviewer feedback applied)
+- Macros (make_macros.py, "burn round 2" block, all read from stored files): p17_all/p17_prim/p17_prim_ctl/p17_sec (160 rated = 120 primary + 40 secondary); p17_fcl and p17_std (family-resampled and model-standardized usable gap, 4,000 resamples, seed fixed); lk_* and pf_chg_* (leaked-chip lexical count on analysis/guard_wc/paired_G1.parquet; 0/26 changed with exact 95% upper bound); gd_jrep/gw_jrep/gd_jgain (joint repair from guard_baseline/arm_metrics.csv); t4_wc_base_lo/hi; fr_{pol,pt}_{bare,chip,word}_lo/hi; cc_eq_n/cc_eq_max (chip-vs-word equivalence labels from analysis/chip_controls).
+- Errors fixed: audit size stated once as 160 rated (120 primary + 40 secondary) in abstract, Sec 1, 6.2, H2; 78 speech-act families described as a pre-specified subset of the 238, chosen from development weakness; Table 2 header carries the 48 early cached requests; joint and strict repair/gain both reported (dev 58/74 joint, 63/80 strict; conf 184/397 joint, 251/478 strict); "measured by regeneration" replaced by "derived from restoration rates regenerated on the same items", with intervals; chip-vs-word reworded to the declared equivalence labels (3 of 6 dimensions on hw1, word beats chip on speech act; not distinguishable on regeneration items); Panickssery cited only for self-preference; Fig 1 row 1 ([I] is a copied chip token) explained with its lexical rate (1/26 changed, 3/1,645 guard passes, 2/1,394 first-pass passes) and the 0/26 bound with the by-construction caveat; cue interval for both codings; cue's 73.8% vs 80% line in abstract and contribution (3); base-rate definition sentence (p conditional; 8.6 unconditional; 2.6 vs 2.7 weighting); the 99.9 figures labelled by input set; 1/200 labelled "as written with no edit" and distinguished from 49/126 intended-version test; sign-test p-values marked uncorrected/exploratory.
+- Audit: model-standardized gap -14.6 [-28.3, -1.6] excludes zero (exploratory); family-resampled raw gap -13.3 [-28.6, +1.0] includes it; both reported in Sec 6.2 and the frozen-rule verdict kept.
+- Limitation "deployment clause unresolved / stricter endpoints show a cost" now stated in full only in Sec 6.2; abstract, Sec 1, Table 2, H2, Sec 8 and conclusion cut to a clause or a pointer.
+- REFS: Lacosse (arXiv:2610.19177) and Frisch (arXiv:2606.24854) re-checked against REFS_VERIFIED.md (verified; wording already matches); no bib changes needed.
+- Cuts for the 8-page body: usable-or-minor sentence, power-of-writer-check para, politeness/speech-act default sentence, Qwen-14B/Mistral gain sentence, retry-reproduction and nondeterminism sentences, menu example, several limitations and design sentences.
+- Not done: no human check of guard-treated labels beyond the audit; the fragment rate is only the leaked-chip lexical rule, other malformed text needs raters.
+- Build: docker pdflatex, 10 pages, Conclusion ends on p8, references p8-10; pages viewed at 70 dpi (p1-8).
+
+## Round 3 (writer, reviewer feedback applied)
+- Macros: p17_pd_use / p17_pt_use (+_lo/_hi), per-pool usable gap (discovery, transfer), read from analysis/repair_audit_v2 difference_by_pool.
+- Abstract cut to about 180 words (guard gain, repair rate, 0 of 26, audit sentence, affirmative default as a range from lg_b, 1 of 200, post hoc checks); states "descriptive stored-text contrasts, no effect on people"; same sentence in Table 2 caption.
+- One audit sentence used in abstract, Intro, Sec 6.2, conclusion: frozen rule no detectable cost, deployment clause unresolved, stricter endpoints show a cost; family-standardized -14.6 kept in main text as its own sentence; conclusion states the 20-pair exploratory contrast and that repairs are not more usable than their originals.
+- Audit sampling disclosed (hash-ordered, model-balanced, non-probability; controls not item-matched; per-pool gaps).
+- Sec 7: MRT table (estimand, arms, outcomes, assumptions, sample size, analysis) now precedes the predictions; sample size relabeled as one two-arm between-user cluster calculation, no multiplicity adjustment, "two-contrast" dropped, messages per user (feasibility) stated.
+- Denominators: 1 of all 200 outputs vs 130 judge-correct stated; four affirmative rates labelled by input set; Fig 1 caption rates moved to Sec 6.1.
+- Cuts to pointers: menu/cue (6.3), SLP weighting, ask/CLAM/uncertainty; limitations merged; "post hoc tests" -> "post hoc checks".
+- Not done: no 4-row default table (page budget; rates labelled in text); MRT power not recomputed with a proper MRT formula.
+- Build: docker pdflatex, 10 pages, body ends p8 (Conclusion), refs p9-10; pages viewed at 70 dpi.

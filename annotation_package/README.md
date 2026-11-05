@@ -40,6 +40,8 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   Both are for everyone in Stage 5. **Parts 22-25, `rate_items.html` with `stage5/<ID>_part22.json` ... `_part25.json`**
   (short questions about sentences, messages and remarks): each person gets two or three of these four, as listed on
   the sheet, so that Stage 5 is about 60 minutes in all (it can be done in two sittings). See their sections below.
+- **Parts 26 and 27 (Stage 6), `rate_items.html` with `stage6/<ID>_part26.json` and `_part27.json`** (did a draft say what
+  you meant? your own messages): about 30 minutes in all, everyone. See their section below.
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -347,12 +349,36 @@ What each part asks (the definitions are also on the screen):
 Each item is answered by two or three people, working alone. Nobody gets an item built on a pair they wrote or checked, or
 on a message whose keywords they typed in Part 9.
 
+## Parts 26 and 27 (Stage 6, about 30 min in all): did a draft say what you meant? `rate_items.html`
+These two short tasks use **your own** sentence pairs: the keywords you typed, the sentence you meant, and drafts that a writing
+tool offers for those keywords. Each uses the same tool and keys as Parts 22-25 (`rate_items.html`, your files
+`stage6/<ID>_part26.json` and `stage6/<ID>_part27.json`). Do **Part 26 first**, completely, then Part 27.
+
+1. Open `rate_items.html`, click the file button and choose your file (e.g. `stage6/P02_part26.json`). Enter **the same
+   annotator ID** and press `Enter`. The tool refuses a file that is not yours. Two practice items with feedback come first.
+2. Keys are as in Parts 22-25: `1`-`9` choose an option, `↑`/`↓` move between questions, `Tab` goes to the optional note box,
+   `Enter` next item, `Backspace` previous item. Progress is saved in the browser. Click **Download CSV** at the end of each part.
+- **Part 26, find what you meant (about 12 min, 10 items).** You see the keywords you typed (and a cue button, if you pressed
+  one), the sentence you meant, and one short set of drafts (one to three), in the order a user would see them. Questions: is
+  any draft what you meant, and which one, or none (a draft is what you meant if it carries your message, even in different
+  words or with less detail; not if it says the opposite, asks instead of tells, or changes who does it or when); would you
+  send the one you picked (as it is / with a small edit / no; choose the last option if you picked none); and how hard was it to
+  find what you meant (1 very easy to 5 very hard). The tool also records how long you look at each screen.
+- **Part 27, check each draft (about 19 min, 55-65 single drafts).** One draft at a time, in a mixed order, for the same
+  messages, with the keywords, the sentence you meant and your other version. Questions: does the draft say what you meant,
+  your other version, or something else; and would you accept it as your message (as it is / with a small edit / no). If you
+  answer No, write in the note box what is wrong (a few words).
+
+The same draft can appear in Part 26 and again in Part 27, and the same sentence can appear for different messages; judge each
+one on its own. Answer from your own message only: no searching, no AI tools, no asking anyone. Return `labels_part26_<ID>.csv` and
+`labels_part27_<ID>.csv`.
+
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,
 `wc_source_check_<ID>.csv`, `wb_corpus_check_<ID>.csv` for Parts 4–6, `write_pairs_<dimension>_<ID>.csv`,
 `check_pairs_<file>_<ID>.csv` and `keyword_elicitation_<file>_<ID>.csv` for Parts 7–9, `labels_gold_new_<ID>.csv` for Part 10 and
 `repair_audit_transfer_<ID>.csv` for Part 11, `repair_audit_v2_<ID>.csv` for Part 17, `intent_check_<ID>.csv` for
-Part 18, `labels_part19_<ID>.csv` for Part 19, `labels_part20_<ID>.csv` for Part 20, `labels_part21_<ID>.csv` for Part 21 and `labels_part22_<ID>.csv` ... `labels_part25_<ID>.csv` for Parts 22-25), to the study coordinator. Please also send:
+Part 18, `labels_part19_<ID>.csv` for Part 19, `labels_part20_<ID>.csv` for Part 20, `labels_part21_<ID>.csv` for Part 21 and `labels_part22_<ID>.csv` ... `labels_part25_<ID>.csv` for Parts 22-25, `labels_part26_<ID>.csv` and `labels_part27_<ID>.csv` for Parts 26 and 27), to the study coordinator. Please also send:
 - the time you spent;
 - a short note on anything confusing in the codebook;
 - optionally, whether you have AAC, speech-language or linguistics background. This is used only to describe the annotator pool.

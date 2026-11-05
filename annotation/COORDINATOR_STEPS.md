@@ -282,3 +282,66 @@ Analysis rules (each also stated in the request named; those requests and the pl
   and the filtered propositional C2) are reported as unvalidated. Failing
   or odd categories are reported, not re-run. Machine results stay PROVISIONAL (R9) until this is scored.
 - **No re-labelling.** Human labels never replace production labels in any headline estimate; they are reported next to the machine results as validity checks.
+
+## 6. Stage 6: intent-coverage draft sets (Parts 26 and 27; added 2026-11-05 before any return)
+Human measure of `analysis/coverage/PLAN.md` section 4: does a draft set contain a sentence the writer says is what they meant, at what reading
+cost? The same 20 writers, each on their own 10 items (the writer's own kept pair; 200 items, `analysis/coverage/items_draw.json`, 20 reserve
+items never used). Nothing is generated or judged by the package builder: it reads the frozen `analysis/coverage/{drafts_main,selector_main}.jsonl`.
+Same tool as Parts 22-25 (`annotation_package/rate_items.html`, blind per-person files `stage6/<ID>_part26.json` and `_part27.json`, 2 practice items each).
+```bash
+python src/make_coverage_stage6.py          # frozen (seeded; --force redraws): 40 part files, annotation/coverage_key.csv (PRIVATE), coverage_key.sha256, assignments/stage6_coverage.json
+python src/score_coverage.py --self-check   # key invariants, blind package, planted-writer recovery; must print SELF-CHECK PASSED before the zip is built
+python src/make_assignments.py --stage 6    # sheets <ID>_stage6.md, assignments/stage6.csv, HANDOUT.md block (dates are placeholders in DATES: set them first)
+uv run --with pytest python -m pytest -q tests/
+```
+**Before sending (not yet done): hash-deposit `annotation/coverage_key.sha256` (and `analysis/coverage/items_draw.sha256`, `prompt_shas.json`) as for D-073/D-092;
+rebuild the zip (not done by these scripts); never put `coverage_key.csv` or `stage6_coverage.json` in the package.**
+Returns: `labels_part26_<ID>.csv` -> `annotation/returns_part26/`, `labels_part27_<ID>.csv` -> `annotation/returns_part27/` (columns `item_id, annotator,
+check_id, practice, order, <one column per question>, note, time_ms, ...`). Score with `python src/score_coverage.py` -> `analysis/coverage_human/`
+(`qc.json, by_arm.csv, contrasts.csv, direct_vs_pool.csv, concordance.json, summary.json, free_text_to_code.csv`).
+
+#### Design as built (differences from PLAN section 4; log each in `analysis/coverage/DEVIATIONS.md` when that file is created)
+- **Part 26 (set view).** Per item one (condition, arm) set, condition bare or chip, arm G1 (1 draft), D3p, C3 or E3 (3 drafts), no arm label, drafts in deployed order
+  (G1 first). 8 cells x 25 sets; per writer 5 bare + 5 chip (condition balanced within each of the writer's dimensions), every arm once per condition plus one extra arm rotated
+  over writers. Questions: pick a draft or none (`pick1/2/3`), send (`as_is/small_edit/no`), hard (1-5); the tool stores time per item.
+- **Part 27 (draft check).** For the same item, all distinct drafts of the four arms in the item's own condition (normalised-text de-duplication, tool-shuffled, arm-blind),
+  plus the unfiltered D3p drafts (tag `D3pU`, chip only). Questions: `ver` (meant / my other version / something else), `acc` (as it is / small edit / no); the note box carries
+  "what is wrong" for No. About 56-65 drafts per person. Part 27 comes after Part 26 so the set answers are not primed.
+- **Fits about 30 minutes** (29-31 per person incl. 2 min per part for opening and downloading; seconds per item are assumptions in `stage6_coverage.json`, to be replaced by the
+  timed two-person pretest of PLAN section 9 step 2 before sending). Cut to fit: one condition per item (not both), W1 plain-word arm, the k = 5 audit arms (D5p, C5, E5) and the
+  side-by-side burden check (PLAN 4 step 3) are NOT in the human package; their human endpoints do not exist.
+- **Equal size (critique1 B6).** k = 3 sets are topped up to exactly 3 drafts from the arm's own next candidates (C3: next-ranked dimensions; E3: remaining dimension/event
+  candidates in alternation; D3p: next diverse drafts). Sets still short are shown short and counted (`short_sets` in the scorer; the plan-time set size is in the key as `plan_n`).
+- **Same cue filter for every arm (critique1 B5).** In chip, D3p drafts that the machine judge reads as contradicting the cue are replaced from the arm's own next diverse drafts, exactly as
+  C3/E3 are filtered; the original unfiltered D3p drafts are in the pool as `D3pU`, so both variants are computable from the same human ratings. The filter uses the same judge as the
+  proxy; the human pool ratings are the check on it.
+- **Contrast arms are the pre-declared ones** (G1, D3p, C3, E3); the round-1 machine suggestion to drop E3 (critique1 B3) was NOT applied. S1 is reported for both C3 and E3 (the plan
+  picks one from the machine proxy at the dry-run stage; that choice is not made here).
+
+#### Part 26 and 27 analysis rules (frozen 2026-11-05 before any return; implemented in `src/score_coverage.py`)
+- **Unit and inference.** Writer (20 clusters), items within writer. 95% CI = writer-cluster bootstrap (B = 10,000, seed 20261117: resample writers, then items within writer);
+  p = writer sign-flip randomisation (20,000 flips) next to each CI; Holm over the five primary contrasts below. Everything else is exploratory and labelled so. Per-dimension and
+  per-writer tables are direction only. Language: "coverage of the writer's own intended message", "approval-gated draft sets", "writer-intent agreement by adult annotators". Never AAC-user
+  benefit, IRB approval, machine-panel agreement as human validation, or "pre-registered" (use pre-specified, git-timestamped, hash-deposited, and only once the deposit exists).
+- **QC, no imputation.** Practice rows dropped; rows for unknown ids or another person's id dropped; a repeated item keeps the last export; incomplete rows and invalid options dropped
+  (all counts in `qc.json`). Nothing is imputed and nothing is re-requested after labels are seen. A set answer "none" with a send answer other than No is flagged `inconsistent` and
+  counted as none/no.
+- **Pool endpoints per (item, arm), derived from Part 27 ratings (the arm's shown drafts).** H-cov (primary) = at least one draft rated `meant` AND accepted `yes` or `small_edit`.
+  H-match = at least one `meant` (Part 18's exact definition; compare with Part 18's 25.1% overall, 39.2% chip, 11.2% bare only with the generator difference stated). H-strict = `meant` and `yes`.
+  An endpoint is 1 if any rated draft covers, 0 only if every draft of the set was rated and none covers, otherwise undefined (excluded, counted).
+  H-first = position of the first covering draft, else the set size (censored). H-wrong-first = draft 1 (G1) rated `other`; it is identical across arms by construction and is a
+  check, not a result; the real safety numbers are the D3pU vs D3p difference and the rate of drafts rated `other` per arm.
+- **H-direct (check).** From Part 26: picked = a draft chosen; direct H-cov = picked and send in {as it is, small edit}. Compared with the pool-derived value for the same item and arm
+  (`direct_vs_pool.csv`: rates and agreement); a direct rate above the pool-derived one by more than 5 pp for any arm is reported as a limitation of the pool rating.
+- **Primary contrasts on H-cov (paired within item for the same condition).** S1_C3 and S1_E3: bare, C3 - D3p and E3 - D3p; success = difference >= +10 pp and CI lower bound > 0.
+  S2_C3 and S2_E3: best set vs one cue tap, bare C3 (or E3) vs G1 in chip; these are different items for the same writers, so the CI is an unpaired writer-cluster difference; success =
+  CI lower bound > -5 pp AND cost per covered message at r = 0.5 not above chip G1's (otherwise "equal coverage at higher cost"). S3_E3: chip, E3 - G1; success = >= +10 pp and CI lower bound > 0.
+  Status per contrast: pass / fail (CI upper bound below the threshold) / unresolved. Exploratory: S3x C3 and D3p minus G1 in chip, the cue tap (G1 chip - G1 bare), the filter effect (D3pU - D3p).
+- **S4 (burden).** Median drafts read to the first usable draft among covered items at k = 3 (<= 2.0), and mean Part 26 burden of C3/E3 minus G1 (<= 0.5, CI upper < 1.0; unpaired, items differ).
+- **Cost.** PLAN section 5, tap-equivalents with the sweep r in {0.25, 0.5, 1, 2}: cue tap, r x drafts read, choose tap when k > 1, accept tap, fallback = min(words of the sentence, e x word
+  edit distance to the closest shown draft) when no draft is usable. Assumptions, flagged as such; reported WITH and WITHOUT the fallback term (the fallback favours bigger sets).
+- **Outcome rules.** As PLAN section 7 (C-A / C-B / C-C; unresolved stays unresolved). The proxy gate failed (`analysis/coverage/proxy_validity.json`), so only these human results decide S1-S4.
+- **Proxy vs writers.** Draft-level kappa and AUROC of the proxy `intended` flag against H-match and H-cov (all drafts, and by origin G1, D3p, D3pU, C3, E3), arm-level Spearman (8 arm-condition
+  cells), reported next to the machine tables; set-level agreement is the arm-item comparison of `proxy_cov` and `h_cov`. A conservative proxy variant is not defined here.
+- **Free text.** Notes on No ratings are in `free_text_to_code.csv`; coded by hand into critical / relation / detail dropped / added / fluency (the rule of `whole_message`); the coder is named in the report.
+- **Not decided here (open).** The ICC re-estimate and power table (PLAN 1.4), the S1 arm choice on the reserve dry run, and the timed pretest. If a deviation changes an arm, a draft or a criterion after a return, it is logged with date and reason; this section is never edited.

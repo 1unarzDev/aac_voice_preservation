@@ -1,0 +1,502 @@
+{
+ "check_id": "part26",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 10,
+ "for": "b318b24f",
+ "title": "Find what you meant among drafts",
+ "intro": [
+  "For each of 10 messages, you see the keywords you typed for one of your own sentence pairs, the sentence you meant, and the drafts a writing tool offers for those keywords.",
+  "Say whether any draft is what you meant (which one), whether you would send it, and how hard it was to find. The drafts are shown in the order a user would see them."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "The keywords you typed (and a cue button, if you pressed one), the sentence you meant, and the drafts a writing tool offers for those keywords."
+  },
+  {
+   "term": "What counts as 'what you meant'",
+   "text": "A draft says what you meant if it carries your message, even in different words or with less detail. A draft that says the opposite, asks instead of tells, changes who does it or when, or is a different message does not."
+  },
+  {
+   "term": "Would you send it",
+   "text": "As it is: you would send it unchanged. Small edit: you would fix a word or two. No: it would need more than that, or none was right."
+  },
+  {
+   "term": "How hard",
+   "text": "How hard it was to find the draft you meant (or to see that none was right)."
+  }
+ ],
+ "questions": {
+  "hard": {
+   "title": "How hard was it to find what you meant?",
+   "text": "1 = very easy, 5 = very hard. If none was right, say how hard it was to be sure of that.",
+   "options": [
+    {
+     "v": "1",
+     "label": "1 very easy"
+    },
+    {
+     "v": "2",
+     "label": "2"
+    },
+    {
+     "v": "3",
+     "label": "3"
+    },
+    {
+     "v": "4",
+     "label": "4"
+    },
+    {
+     "v": "5",
+     "label": "5 very hard"
+    }
+   ]
+  },
+  "pick1": {
+   "title": "Is this what you meant?",
+   "text": "Yes if it says the message you meant (different words are fine). No if it says something else.",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, this is what I meant"
+    },
+    {
+     "v": "none",
+     "label": "No, it is not"
+    }
+   ]
+  },
+  "pick2": {
+   "title": "Is any of these what you meant?",
+   "text": "Pick the one that says the message you meant (different words are fine), or none.",
+   "options": [
+    {
+     "v": "1",
+     "label": "Draft 1"
+    },
+    {
+     "v": "2",
+     "label": "Draft 2"
+    },
+    {
+     "v": "none",
+     "label": "None of them"
+    }
+   ]
+  },
+  "pick3": {
+   "title": "Is any of these what you meant?",
+   "text": "Pick the one that says the message you meant (different words are fine), or none.",
+   "options": [
+    {
+     "v": "1",
+     "label": "Draft 1"
+    },
+    {
+     "v": "2",
+     "label": "Draft 2"
+    },
+    {
+     "v": "3",
+     "label": "Draft 3"
+    },
+    {
+     "v": "none",
+     "label": "None of them"
+    }
+   ]
+  },
+  "send": {
+   "title": "Would you send it?",
+   "text": "Think of the draft you picked. If you picked none, choose the last option.",
+   "options": [
+    {
+     "v": "as_is",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No (or I picked none)"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-sv1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Is the bus late?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The bus is late."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please wait for the late bus."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick3": "2",
+    "send": "small_edit",
+    "hard": "2"
+   },
+   "fb": "Draft 2 carries the message (the bus is late); it lacks 'again', a small edit. Draft 1 asks a question and Draft 3 asks for something else."
+  },
+  {
+   "item_id": "prac-sv2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coffee"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't want coffee."
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want coffee."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick1": "none",
+    "send": "no",
+    "hard": "1"
+   },
+   "fb": "The draft says the opposite of what you meant, so the answer is no, and it is easy to see."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "sv-962f13b2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "book table"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You booked the picnic table."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The book is on the table."
+    },
+    {
+     "label": "Draft 2",
+     "text": "The book was on the table."
+    },
+    {
+     "label": "Draft 3",
+     "text": "The book is definitely on the table."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-8570bf42",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cousin remember"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My cousin remembers the dinner date."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Yes, my cousin remembers."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Yes, I remember my cousin."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Yes, my cousin will remember."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-192a7311",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "soup contain"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The soup does not contain ground peanuts."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The soup does not contain it."
+    },
+    {
+     "label": "Draft 2",
+     "text": "The soup did not contain it."
+    },
+    {
+     "label": "Draft 3",
+     "text": "The soup is not contained in it."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-886980d3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "send outline"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did you send the project outline?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please send the outline."
+    },
+    {
+     "label": "Draft 2",
+     "text": "I will send an outline later."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Can you send an outline to the group?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-0590eba5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "roommate lock"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My roommate does not lock the bathroom door."
+    },
+    {
+     "label": "Draft 1",
+     "text": "My roommate locked the door."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-857c7aea",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "group meet"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The group meets outside the cinema."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The group is meeting."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Can the group meet tomorrow?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "I want to meet with the group."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-96f51400",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lamp shine"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The lamp shines through the curtain."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The lamp is shining."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Is the lamp shining?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "The shine is from the lamp."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-083a38bd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cut sandwich"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "You cut the sandwich into quarters."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Cut the sandwich."
+    },
+    {
+     "label": "Draft 2",
+     "text": "I cut the sandwich."
+    }
+   ],
+   "qs": [
+    "pick2",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-6fd6d485",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "stop bus"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did you stop the bus near the library?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want to get off the bus."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Please let me get off the bus."
+    },
+    {
+     "label": "Draft 3",
+     "text": "I want you to get off the bus."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-5c0cc5e9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "lower music"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did you lower the music in the hallway?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "Could you turn the music down?"
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  }
+ ]
+}

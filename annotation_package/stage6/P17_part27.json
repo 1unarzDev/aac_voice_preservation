@@ -1,0 +1,1748 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 60,
+ "for": "1f2ceedb",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-34a1e9a1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "neighbor seedlings"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Our neighbor tends the seedlings during our absence."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does our neighbor tend the seedlings during our absence?"
+    },
+    {
+     "label": "Draft",
+     "text": "My neighbor has seedlings."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fafa1025",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "neighbor seedlings"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Our neighbor tends the seedlings during our absence."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does our neighbor tend the seedlings during our absence?"
+    },
+    {
+     "label": "Draft",
+     "text": "My neighbor is growing seedlings."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ab0ac788",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "neighbor seedlings"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Our neighbor tends the seedlings during our absence."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does our neighbor tend the seedlings during our absence?"
+    },
+    {
+     "label": "Draft",
+     "text": "The seedlings belong to my neighbor."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3cf10739",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "neighbor seedlings"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Our neighbor tends the seedlings during our absence."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does our neighbor tend the seedlings during our absence?"
+    },
+    {
+     "label": "Draft",
+     "text": "Does my neighbor have seedlings?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e2947ea2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "neighbor seedlings"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Our neighbor tends the seedlings during our absence."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does our neighbor tend the seedlings during our absence?"
+    },
+    {
+     "label": "Draft",
+     "text": "I have seedlings."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b1b5c99b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "neighbor seedlings"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Our neighbor tends the seedlings during our absence."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does our neighbor tend the seedlings during our absence?"
+    },
+    {
+     "label": "Draft",
+     "text": "My neighbor grows seedlings."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bed13e55",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "doctor examine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The doctor might examine my wrist."
+    },
+    {
+     "label": "Your other version",
+     "text": "The doctor will examine my wrist."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe the doctor can examine me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9434ea63",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "doctor examine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The doctor might examine my wrist."
+    },
+    {
+     "label": "Your other version",
+     "text": "The doctor will examine my wrist."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe the doctor will examine you."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-91dea707",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "doctor examine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The doctor might examine my wrist."
+    },
+    {
+     "label": "Your other version",
+     "text": "The doctor will examine my wrist."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe a doctor examined me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-063db113",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "doctor examine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The doctor might examine my wrist."
+    },
+    {
+     "label": "Your other version",
+     "text": "The doctor will examine my wrist."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe the doctor is examining me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-73d0a417",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "doctor examine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The doctor might examine my wrist."
+    },
+    {
+     "label": "Your other version",
+     "text": "The doctor will examine my wrist."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe I can examine the doctor."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-94dad47e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "doctor examine"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[MAYBE] = uncertain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The doctor might examine my wrist."
+    },
+    {
+     "label": "Your other version",
+     "text": "The doctor will examine my wrist."
+    },
+    {
+     "label": "Draft",
+     "text": "Maybe I need to see a doctor for an examination."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2cdde967",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "Do you have an embroidery hoop for linen?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f3bbe448",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "What size embroidery hoop should I use for linen?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-85fd70f1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "Where can I buy an embroidery hoop and linen?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-27656b6d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "Do I have an embroidery hoop for linen?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-68e613e6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you please tell me if you have an embroidery hoop for linen?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0f120fa1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the linen in an embroidery hoop?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cb8f85db",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "embroidery hoop linen"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the embroidery hoop hold the linen taut?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The embroidery hoop holds the linen taut."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you show me how to put linen in an embroidery hoop?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b7a2445c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar fit"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar fits in the case."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guitar does not fit in the case."
+    },
+    {
+     "label": "Draft",
+     "text": "Does the guitar fit?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b8da4226",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar fit"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar fits in the case."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guitar does not fit in the case."
+    },
+    {
+     "label": "Draft",
+     "text": "The guitar fit in the case."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a9a084b0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar fit"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar fits in the case."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guitar does not fit in the case."
+    },
+    {
+     "label": "Draft",
+     "text": "I need a guitar that will fit me."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1d0c9a24",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar fit"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar fits in the case."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guitar does not fit in the case."
+    },
+    {
+     "label": "Draft",
+     "text": "The guitar fits."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1eda91ed",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar fit"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar fits in the case."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guitar does not fit in the case."
+    },
+    {
+     "label": "Draft",
+     "text": "Do I fit the guitar?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5e37c9b2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "guitar fit"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The guitar fits in the case."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guitar does not fit in the case."
+    },
+    {
+     "label": "Draft",
+     "text": "Does the guitar fit you?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-892c664e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse change"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse might change my dosage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse will change my dosage."
+    },
+    {
+     "label": "Draft",
+     "text": "Could the nurse change?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-090a0eb8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse change"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse might change my dosage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse will change my dosage."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I change nurses?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3409448d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse change"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse might change my dosage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse will change my dosage."
+    },
+    {
+     "label": "Draft",
+     "text": "The nurse needs to change the bandage."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ff49dc41",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse change"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse might change my dosage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse will change my dosage."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you have the nurse change?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-af81356c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse change"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse might change my dosage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse will change my dosage."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you change, nurse?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c2e661a7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "nurse change"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The nurse might change my dosage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The nurse will change my dosage."
+    },
+    {
+     "label": "Draft",
+     "text": "Could the nurse be changed?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-24fae129",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coach bring"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The coach does not bring the spare racket."
+    },
+    {
+     "label": "Your other version",
+     "text": "The coach brings the spare racket."
+    },
+    {
+     "label": "Draft",
+     "text": "Can the coach bring it?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-737bf57e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coach bring"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The coach does not bring the spare racket."
+    },
+    {
+     "label": "Your other version",
+     "text": "The coach brings the spare racket."
+    },
+    {
+     "label": "Draft",
+     "text": "The coach will bring the equipment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a16a9d75",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coach bring"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The coach does not bring the spare racket."
+    },
+    {
+     "label": "Your other version",
+     "text": "The coach brings the spare racket."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring the coach over here."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f84752df",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coach bring"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The coach does not bring the spare racket."
+    },
+    {
+     "label": "Your other version",
+     "text": "The coach brings the spare racket."
+    },
+    {
+     "label": "Draft",
+     "text": "Coach, bring it."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-87f46e56",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coach bring"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The coach does not bring the spare racket."
+    },
+    {
+     "label": "Your other version",
+     "text": "The coach brings the spare racket."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you bring it, Coach?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8f808c67",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coach bring"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The coach does not bring the spare racket."
+    },
+    {
+     "label": "Your other version",
+     "text": "The coach brings the spare racket."
+    },
+    {
+     "label": "Draft",
+     "text": "Can it bring the coach?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e9a8b65f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist read"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receptionist reads my access note."
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist does not read my access note."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the receptionist read it."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bc8175a2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist read"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receptionist reads my access note."
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist does not read my access note."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the receptionist is reading."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-84a6acc8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist read"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receptionist reads my access note."
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist does not read my access note."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the receptionist read the message aloud."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-87f2de59",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist read"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receptionist reads my access note."
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist does not read my access note."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the receptionist will read it."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5788d65e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist read"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receptionist reads my access note."
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist does not read my access note."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, you, the receptionist, read it."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0fa2585d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist read"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[YES] = affirmative (not negated)"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The receptionist reads my access note."
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist does not read my access note."
+    },
+    {
+     "label": "Draft",
+     "text": "Yes, the receptionist read."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b5987a0d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "refund arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The refund will arrive by Friday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The refund might arrive by Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "The refund will arrive."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-812085fc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "refund arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The refund will arrive by Friday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The refund might arrive by Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "The refund arrived."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5ecb0aa3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "refund arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The refund will arrive by Friday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The refund might arrive by Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "I will get the refund."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7a9fa604",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "refund arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The refund will arrive by Friday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The refund might arrive by Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "I am sure the refund has arrived."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-353d556a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "refund arrive"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[SURE] = certain"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The refund will arrive by Friday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The refund might arrive by Friday."
+    },
+    {
+     "label": "Draft",
+     "text": "Are you sure the refund will arrive?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a90f366d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "visitor badge access"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the visitor badge grant access to the courtyard?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The visitor badge grants access to the courtyard."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I get visitor badge access?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-962c7b46",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "visitor badge access"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the visitor badge grant access to the courtyard?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The visitor badge grants access to the courtyard."
+    },
+    {
+     "label": "Draft",
+     "text": "Do visitors need a badge to access this area?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-120c51e9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "visitor badge access"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the visitor badge grant access to the courtyard?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The visitor badge grants access to the courtyard."
+    },
+    {
+     "label": "Draft",
+     "text": "Where can I get a visitor badge for access?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5a27366f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "visitor badge access"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the visitor badge grant access to the courtyard?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The visitor badge grants access to the courtyard."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I not get visitor badge access?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d724411e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "visitor badge access"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the visitor badge grant access to the courtyard?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The visitor badge grants access to the courtyard."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I get visitor badge access right now?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-99f94d2a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "visitor badge access"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Does the visitor badge grant access to the courtyard?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The visitor badge grants access to the courtyard."
+    },
+    {
+     "label": "Draft",
+     "text": "Does the visitor have badge access?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d487ab71",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The pharmacy does not deliver my prescription."
+    },
+    {
+     "label": "Your other version",
+     "text": "The pharmacy delivers my prescription."
+    },
+    {
+     "label": "Draft",
+     "text": "Can the pharmacy deliver?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e666fcb1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The pharmacy does not deliver my prescription."
+    },
+    {
+     "label": "Your other version",
+     "text": "The pharmacy delivers my prescription."
+    },
+    {
+     "label": "Draft",
+     "text": "The pharmacy will deliver my prescription today."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-05d719d6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The pharmacy does not deliver my prescription."
+    },
+    {
+     "label": "Your other version",
+     "text": "The pharmacy delivers my prescription."
+    },
+    {
+     "label": "Draft",
+     "text": "Please ask the pharmacy to deliver my medication."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e36e92a8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The pharmacy does not deliver my prescription."
+    },
+    {
+     "label": "Your other version",
+     "text": "The pharmacy delivers my prescription."
+    },
+    {
+     "label": "Draft",
+     "text": "Please have the pharmacy deliver."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-768e4249",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The pharmacy does not deliver my prescription."
+    },
+    {
+     "label": "Your other version",
+     "text": "The pharmacy delivers my prescription."
+    },
+    {
+     "label": "Draft",
+     "text": "Did the pharmacy deliver?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bf6fa582",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "pharmacy deliver"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The pharmacy does not deliver my prescription."
+    },
+    {
+     "label": "Your other version",
+     "text": "The pharmacy delivers my prescription."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I deliver to the pharmacy?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}
