@@ -480,7 +480,8 @@ for _x in EV["guard"]["gallery"]:
         put("bx3_in", _x["input"].replace("Keywords: ", "")); put("bx3_before", _x["before"]); put("bx3_after", _x["after"])
 # ---- design constants for the pre-specified human-effect study (TYPED assumptions, labelled as such in the paper)
 _z = 1.96 + 0.8416                                     # two-sided 5% size, 80% power
-_pc = _kc["k"] / _kc["n"]                              # control usable rate taken from the pilot
+_ctl_au = json.loads((ROOT / "analysis/repair_audit_v2/summary.json").read_text())["per_arm"]["control"]["usable"]
+_pc = _ctl_au["k"] / _ctl_au["n"]                      # control usable rate observed in the 120-text audit
 put("dz_ctl_assumed", f"{100 * _pc:.0f}")
 put("dz_mde", f"{100 * _z * _m.sqrt(2 * _pc * (1 - _pc) / 60):.0f}")   # detectable gap with 60 vs 60 texts (3 raters, consensus)
 _writers = {m for l in (ROOT / "data/items/hw.jsonl").read_text().splitlines()
@@ -639,6 +640,131 @@ MB.update({"mb_gem_a": _g["a_aff"], "mb_gem_c": _g["c_aff"], "mb_gem_n": _g["n_a
 _MBINT = ("mb_nmod", "mb_nfam", "mb_gem_n")
 for _k, _v in MB.items():
     put(_k, _v if _k in _MBINT else f"{100 * _v:.1f}")
+
+# ---------------- burn round 1: human returns (Parts 17-19), SLP panel, consultants, frontier limits.
+# Every value is read from a stored analysis file (or from the SLP scorer's report); nothing is typed.
+import re as _re2
+import subprocess as _sp
+import tempfile as _tf
+
+
+def _pp(k, est, lo, hi, d=1):
+    """difference in proportion (fraction) -> points with CI."""
+    put(k, f"{100 * est:.{d}f}"); put(k + "_lo", f"{100 * lo:.{d}f}"); put(k + "_hi", f"{100 * hi:.{d}f}")
+
+
+_a2 = json.loads((ROOT / "analysis/repair_audit_v2/summary.json").read_text())
+for _arm, _t in (("repaired", "rep"), ("control", "ctl"), ("original_failed", "of"), ("strip_only", "so")):
+    _u = _a2["per_arm"][_arm]["usable"]
+    put(f"p17_{_t}", f"{100 * _u['p']:.1f}"); kn(f"p17_{_t}_c", _u["k"], _u["n"])
+_g2 = _a2["difference_repaired_minus_control"]["usable"]
+_pp("p17_gap", _g2["diff"], *_g2["ci"])
+put("p17_zero_in_ci", int(_g2["ci"][0] <= 0 <= _g2["ci"][1]))
+_pr = _a2["secondary"]["original_failed"]["paired"]
+_pp("p17_pres", _pr["preserving"]["diff"], *_pr["preserving"]["ci"]); put("p17_pres_p", f"{_pr['preserving']['sign_test_p']:.2f}")
+put("p17_pres_only", _pr["preserving"]["only_repaired"]); put("p17_pres_pairs", _pr["preserving"]["n_pairs"])
+_pp("p17_stance", _pr["added_stance"]["diff"], *_pr["added_stance"]["ci"]); put("p17_stance_p", f"{_pr['added_stance']['sign_test_p']:.3f}")
+put("p17_stance_only", _pr["added_stance"]["only_comparator"]); put("p17_stance_pairs", _pr["added_stance"]["n_pairs"])
+_so = _a2["secondary"]["strip_only"]["unpaired"]["usable"]
+_pp("p17_so_gap", _so["diff"], *_so["ci"])
+put("p17_raters_n", len(_a2["annotators"]))
+# round 2: stricter pre-existing audit endpoints, paired usable endpoints, per-model descriptives
+for _e, _t in (("preserving", "prs"), ("usable_and_preserving", "up")):
+    _d = _a2["difference_repaired_minus_control"][_e]; _pp(f"p17_{_t}", _d["diff"], *_d["ci"])
+    _ur, _uc = _a2["per_arm"]["repaired"][_e], _a2["per_arm"]["control"][_e]
+    put(f"p17_{_t}_rep", f"{100 * _ur['p']:.1f}"); put(f"p17_{_t}_ctl", f"{100 * _uc['p']:.1f}")
+_dp_ = _a2["difference_by_pool"]["discovery"]["usable_and_preserving"] if "discovery" in _a2["difference_by_pool"] else None
+if _dp_: _pp("p17_up_disc", _dp_["diff"], *_dp_["ci"])
+_pu = _pr_ = _a2["secondary"]["original_failed"]["paired"]
+_pp("p17_of_use", _pu["usable"]["diff"], *_pu["usable"]["ci"]); put("p17_of_use_p", f"{_pu['usable']['sign_test_p']:.2f}")
+_pp("p17_of_up", _pu["usable_and_preserving"]["diff"], *_pu["usable_and_preserving"]["ci"]); put("p17_of_up_p", f"{_pu['usable_and_preserving']['sign_test_p']:.2f}")
+put("p17_pres_same", _pu["preserving"]["n_pairs"] - _pu["preserving"]["only_repaired"] - _pu["preserving"]["only_comparator"])
+for _mk, _t in (("repaired/gemma3-4b", "gem"), ("repaired/gpt-6.1-terra", "api")):
+    _bm = _a2["by_model_descriptive"][_mk]["usable"]; put(f"p17_{_t}_k", _bm["k"]); put(f"p17_{_t}_n", _bm["n"])
+# Part 18 writer intent
+_ic = json.loads((ROOT / "analysis/intent_check/summary.json").read_text())
+_pp("p18_cue", _ic["match_rate_chip1_minus_bare"]["diff"], *_ic["match_rate_chip1_minus_bare"]["writer_cluster_ci"])
+for _ch, _t in (("chip1", "cue"), ("bare", "bare"), ("all", "all")):
+    _m = _ic["match_rate"][_ch]; put(f"p18_m_{_t}", f"{100 * _m['p']:.1f}"); kn(f"p18_m_{_t}_c", _m["k"], _m["n"])
+_ay = _ic["acceptability"]["all"]["yes"]; kn("p18_asis", _ay["k"], _ay["n"])
+put("p18_n_writers", len(_ic["writers"])); put("p18_n_items", _ic["n_rated"])
+put("p18_wj_kappa", f"{_ic['agreement']['all']['q1_four_labels']['kappa']:.2f}".lstrip("0"))
+_wm = json.loads((ROOT / "analysis/whole_message/summary.json").read_text())
+_kq = _wm["key_question"]["judge critical RIGHT"]
+kn("p18_right_r1", _kq["R1"][0], _kq["R1"][1]); kn("p18_right_na", _kq["R3"], _kq["n"])
+put("p18_right_unsure", _kq["n"] - _kq["R1"][1])
+_fl = _wm["key_question"]["right_not_accepted_flags"]
+put("p18_right_dropped", f"{100 * _fl['dropped_unrecoverable']:.0f}"); put("p18_right_subst", f"{100 * _fl['substitution']:.0f}")
+_ra_ = _wm["part18"]["reason_all"]; put("p18_added_only", _ra_["added"])
+put("p17_texts_rep", _a2["per_arm"]["repaired"]["usable"]["n"])
+put("p18_right_added", f"{100 * _fl['added']:.0f}")
+_m66 = _re2.search(r"Among judge-RIGHT not-accepted items:.*?judge `added_content` = yes (\d+)% \(of judged\)", (ROOT / "analysis/whole_message/report.md").read_text())
+put("p18_right_jadded", _m66.group(1))
+# round 3: usable-or-minor endpoint (secondary, reported for completeness)
+_um = _a2["per_arm"]
+put("p17_um_rep", f"{100 * _um['repaired']['usable_or_minor']['p']:.1f}"); put("p17_um_ctl", f"{100 * _um['control']['usable_or_minor']['p']:.1f}")
+_pp("p17_um_gap", _a2["difference_repaired_minus_control"]["usable_or_minor"]["diff"], *_a2["difference_repaired_minus_control"]["usable_or_minor"]["ci"])
+put("p18_flag_dropped_all", f"{100 * _wm['part18']['flags_all']['dropped_unrecoverable']:.0f}")
+_hc = _wm["hand_check"]; put("wm_kappa", f"{_hc['kappa']:.2f}".lstrip("0")); put("wm_hand_n", _hc["n"])
+_kqr = _wm["key_question"]
+kn("p18_h1_ok", _kqr["judge critical RIGHT"]["R1"][1] - _kqr["judge critical RIGHT"]["R1"][0], _kqr["judge critical RIGHT"]["R1"][1])
+kn("p18_h1_bad", _kqr["judge critical WRONG"]["R1"][1] - _kqr["judge critical WRONG"]["R1"][0], _kqr["judge critical WRONG"]["R1"][1])
+# Part 19 arbiter check
+_ab = json.loads((ROOT / "analysis/arbiter_check/summary.json").read_text())
+for _r, _t in (("human_vs_arbiter", "arb"), ("human_vs_J1", "j1"), ("human_vs_J2", "j2")):
+    _c = _ab[_r]["per_coding"]; put(f"p19_{_t}", f"{100 * _c['p']:.0f}"); kn(f"p19_{_t}_c", _c["k"], _c["n"])
+put("p19_kappa", f"{_ab['human_vs_arbiter']['kappa']:.2f}".lstrip("0"))
+put("p19_n_ann", len(_ab["annotators"]))
+_cy = _ab["can_you"]["per_coding_share"]["request/command"]; put("p19_canyou", f"{100 * _cy['p']:.0f}"); kn("p19_canyou_c", _cy["k"], _cy["n"])
+# SLP panel: run the stored scorer on the stored returns (no model calls) and read its report
+with _tf.TemporaryDirectory(dir=ROOT / "tmp") as _td:
+    _out = Path(_td) / "slp.md"
+    _sp.run([__import__("sys").executable, str(ROOT / "src/score_slp_panel.py"), "--returns", str(ROOT / "expert_package/returns_slp"),
+             "--out", str(_out)], check=True, capture_output=True)
+    _slp = _out.read_text()
+_wt = {}
+for _ln in _slp.splitlines():
+    _c = [x.strip() for x in _ln.strip("|").split("|")]
+    if len(_c) >= 8 and _c[1] in ("baseline_P0", "guard_G1", "baseline_bare", "chip", "word") and _c[0].startswith(("W-C", "hw1")):
+        _wt[_c[1]] = _c
+    if len(_c) >= 7 and _c[0] in ("guard_repair", "guard_original", "chip", "word") and "/" in _c[2]:
+        _wt["acc_" + _c[0]] = _c
+put("slp_n", len(list((ROOT / "expert_package/returns_slp").glob("slp_rating_*.csv"))))
+put("slp_neg_sev", _re2.search(r"\| negation dropped/added \| ([\d.]+)", _slp).group(1).rstrip("0").rstrip("."))
+put("slp_neg_block", _re2.search(r"\| negation dropped/added \|[^\n]*\| (\d+) \| (\d+) \|", _slp).group(2))
+for _key, _t in (("baseline_P0", "wc_base"), ("guard_G1", "wc_guard"), ("baseline_bare", "hw_base"), ("chip", "hw_chip"), ("word", "hw_word")):
+    put(f"slp_{_t}", _wt[_key][4]); put(f"slp_{_t}_unw", _wt[_key][3])
+for _arm, _t in (("guard_repair", "rep"), ("guard_original", "orig"), ("chip", "chip"), ("word", "word")):
+    _row = _wt["acc_" + _arm]; _yes = int(_row[3].split("/")[0]); kn(f"slp_acc_{_t}", _yes, int(_row[1]))
+# AAC-user design consultants: count the "Important" ratings of R1-R5 in the stored answer sheets
+_imp = [len(_re2.findall(r"How important is R\d\?\nA: Important", (p / "design_review_answers.txt").read_text()))
+        for p in sorted((ROOT / "annotation/returns_consultant").glob("C0*"))]
+put("cons_n", len(_imp)); put("cons_imp", sum(_imp)); put("cons_imp_den", 5 * len(_imp))
+# Frontier limits (analysis/frontier/default_profiles follow-up F1 and knows_not_says)
+_fr = ROOT / "analysis/frontier"
+_f1 = {(r["dimension"], r["arm"]): float(r["rev_per_1000"]) for r in _csv.DictReader((_fr / "default_profiles/followup/f1_price.csv").open()) if r["mode"] == "arb"}
+for _dim, _t in (("polarity", "pol"), ("politeness", "pt")):
+    put(f"fr_{_t}_bare", f"{_f1[(_dim, 'bare')]:.1f}"); put(f"fr_{_t}_chip", f"{_f1[(_dim, 'chip')]:.1f}"); put(f"fr_{_t}_word", f"{_f1[(_dim, 'word')]:.1f}")
+_fres = {(r["dimension"], r["arm"]): r for r in _csv.DictReader((_fr / "default_profiles/followup/f1_restoration.csv").open()) if r["model"] == "pooled(mode=arb)"}
+put("fr_sa_chip", f"{100 * float(_fres[('speech_act', 'chip')]['r']):.1f}")
+put("fr_sa_chipg1", f"{100 * float(_fres[('speech_act', 'chipG1')]['r']):.1f}")
+put("fr_units", sum(json.loads((_fr / "default_profiles/followup/f1_summary.json").read_text())["units"].values()))
+_dp = json.loads((_fr / "default_profiles/summary.json").read_text())
+_ac = _dp["always_commit_model_visible_per_1000"]["polarity"]
+put("fr_ac", f"{_ac['est']:.1f}"); put("fr_ac_lo", f"{_ac['lo']:.1f}"); put("fr_ac_hi", f"{_ac['hi']:.1f}")
+put("fr_mde", f"{_dp['mde_per_1000_prior_vs_gated_random']['polarity']:.1f}")
+put("fr_holm_sig", _dp["primary_significant_after_holm"]); put("fr_holm_n", len(_dp["primary_contrasts"]))
+_clam = next(r for r in _csv.DictReader((_fr / "default_profiles/followup/clam_contrasts.csv").open())
+             if r["dimension"] == "polarity" and r["name"] == "clam_mean_gated - random_gated")
+put("fr_clam", f"{float(_clam['a_rev']):.1f}"); put("fr_rand", f"{float(_clam['b_rev']):.1f}"); put("fr_clam_ph", f"{float(_clam['p_holm']):.2f}")
+_kn = json.loads((_fr / "knows_not_says/summary.json").read_text())
+_r1 = {r["model"]: r for r in _kn["r1"] if r["dataset"] == "human"}
+put("fr_samp_qwen", f"{100 * _r1['qwen2.5-7b']['sampled_share']:.1f}"); put("fr_samp_llama", f"{100 * _r1['llama3.1-8b']['sampled_share']:.1f}")
+put("fr_post", f"{100 * _r1['qwen2.5-7b']['posterior']:.1f}")
+_rp = {r["quantity"]: r for r in _kn["r2_pooled"] if r["dataset"] == "human"}
+put("fr_auc_samp", f"{_rp['auroc:sampled_share(K=16)']['point']:.2f}".lstrip("0"))
+put("fr_auc_lex", f"{_rp['auroc:lexical_cv_logistic']['point']:.2f}".lstrip("0"))
+
 
 
 def esc(v: str) -> str:

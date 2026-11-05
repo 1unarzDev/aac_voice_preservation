@@ -75,7 +75,7 @@ def put(key: str, value, src: str, fmt: str = "pct"):
     else:
         s = str(value)
     macros[key] = s
-    sources[key] = src
+    sources[key] = str(src).replace(str(ROOT) + "/", "")
 
 
 def boot(df: pd.DataFrame, col: str, cluster: str = "family_id"):
@@ -1108,6 +1108,8 @@ _hs = json.load(open(ROOT / _H))
 put("hw_ncand", _hs["n_candidates"], _H, "int")
 put("hw_nkept", _hs["n_kept"], _H, "int")
 put("hw_nfam", _hs["n_analysed_families"], _H, "int")
+put("hw_nexcl", len(_hs["primary_excluded_families"]) + (_hs["n_kept"] - _hs["n_analysed_families"] - len(_hs["primary_excluded_families"])), _H, "int")
+assert _hs["n_kept"] - _hs["n_analysed_families"] == 1
 _wr = {r_["writer_id"] for r_ in map(json.loads, open(ROOT / "data/items/hw.jsonl"))}
 put("hw_nwriters", len(_wr), "data/items/hw.jsonl (distinct writer_id among kept families)", "int")
 put("hw_wr_min", min(_hs["writers_by_dim"].values()), _H, "int")
@@ -1265,6 +1267,8 @@ put("wd_nscen", _D["n_clusters"], _DS, "int")
 put("wd_nreq", _D["n_requests"], _DS, "int")
 # --- extension cost (extend_cost.py dry run)
 _EC = json.load(open(OUT / "extend_cost.json"))
+put("ec_rows_per_pair_model", _EC["rescored_rows"] // (4 * _hs["n_candidates"]), "paper/se4all/extend_cost.json / analysis/hw1/summary.json", "int")
+assert _EC["rescored_rows"] == 4 * _hs["n_candidates"] * (_EC["rescored_rows"] // (4 * _hs["n_candidates"]))
 for _k in ("new_entry_lines", "rescored_rows", "rescore_seconds", "model_calls", "loc_attribute", "loc_validator", "loc_labels", "n_chips"):
     put("ec_" + _k, _EC[_k], "paper/se4all/extend_cost.json (dry run, src/attribute.py + src/validate_cue_inputs.py)", "int" if _k != "rescore_seconds" else "f1")
 assert _EC["validator_ok"] == "compatible" and _EC["validator_conflict"] == "conflicting"
@@ -1406,6 +1410,11 @@ _miss = [m_ for m_ in _or["judge_missed_mutants"] if m_["op"] != "booster_insert
 assert sorted(m_["op"] for m_ in _miss) == ["speech_act_to_question", "time_shift", "time_shift"]
 put("orr_nboost", _or["booster_only"]["n_mut"], _OR, "int")
 put("orr_nmiss", len(_miss), _OR, "int")
+import csv as _csv
+_rr = [r_ for r_ in _csv.DictReader(open(ROOT / "analysis/oracle_real/real_rows.csv")) if r_["kind"] == "mutant" and r_["op"] != "booster_insert"]
+put("orr_nops", len({r_["op"] for r_ in _rr}), "analysis/oracle_real/real_rows.csv", "int")
+put("orr_nsrc", len({r_["orig_text"] for r_ in _rr}), "analysis/oracle_real/real_rows.csv", "int")
+assert len(_rr) == _or["n_mutants"] - _or["booster_only"]["n_mut"]
 
 # ---- cycle 5: oracle precision/recall on natural (unseeded) outputs vs human-consensus verdicts
 _NP = "analysis/oracle_natural/summary.json"
@@ -1499,6 +1508,123 @@ MB.update({"mb_gem_a": _g["a_aff"], "mb_gem_c": _g["c_aff"], "mb_gem_n": _g["n_a
 _MBINT = ("mb_nmod", "mb_nfam", "mb_gem_n")
 for _k, _v in MB.items():
     put(_k, _v, "analysis/model_breadth/summary.json + gemini_summary.json", "int" if _k in _MBINT else "f1x")
+
+
+# ---- Stage 4/5 human and expert results folded in (D-078..D-092) ----
+import csv as _csv, subprocess as _sp, re as _re
+_AC = ROOT / "analysis/arbiter_check/summary.json"
+_ar = json.load(open(_AC))
+_h = _ar["human_vs_arbiter"]["per_coding"]
+put("p19_arb", _h["p"], str(_AC), "pct")
+put("p19_arb_k", _h["k"], str(_AC), "int"); put("p19_arb_n", _h["n"], str(_AC), "int")
+put("p19_kappa", _ar["human_vs_arbiter"]["kappa"], str(_AC), "f2")
+put("p19_j1", _ar["human_vs_J1"]["per_coding"]["p"], str(_AC), "pct")
+put("p19_j2", _ar["human_vs_J2"]["per_coding"]["p"], str(_AC), "pct")
+put("p19_j2k", _ar["human_vs_J2"]["kappa"], str(_AC), "f2")
+put("p19_nann", len(_ar["annotators"]), str(_AC), "int")
+_cy = _ar["can_you"]["per_coding_share"]["request/command"]
+put("p19_cy", _cy["p"], str(_AC), "pct"); put("p19_cy_k", _cy["k"], str(_AC), "int"); put("p19_cy_n", _cy["n"], str(_AC), "int")
+put("p19_cy_items", _ar["can_you"]["items"], str(_AC), "int")
+
+_IC = ROOT / "analysis/intent_check/summary.json"
+_ic = json.load(open(_IC))
+put("p18_gain", _ic["match_rate_chip1_minus_bare"]["diff"], str(_IC), "f1x")
+put("p18_gain_lo", _ic["match_rate_chip1_minus_bare"]["writer_cluster_ci"][0], str(_IC), "f1x")
+put("p18_gain_hi", _ic["match_rate_chip1_minus_bare"]["writer_cluster_ci"][1], str(_IC), "f1x")
+put("p18_acc_k", _ic["acceptability"]["all"]["yes"]["k"], str(_IC), "int"); put("p18_acc_n", _ic["acceptability"]["all"]["yes"]["n"], str(_IC), "int")
+put("p18_kappa", _ic["agreement"]["all"]["q1_four_labels"]["kappa"], str(_IC), "f2")
+put("p18_nwriters", len(_ic["writers"]), str(_IC), "int")
+
+_WM = ROOT / "analysis/whole_message/summary.json"
+_wm = json.load(open(_WM))
+_kq = _wm["key_question"]
+put("wm_right_n", _kq["judge critical RIGHT"]["n"], str(_WM), "int")
+put("wm_right_rej_k", _kq["judge critical RIGHT"]["R1"][0], str(_WM), "int")
+put("wm_right_rej_den", _kq["judge critical RIGHT"]["R1"][1], str(_WM), "int")
+put("wm_right_rej", _kq["judge critical RIGHT"]["R1"][0] / _kq["judge critical RIGHT"]["R1"][1], str(_WM), "pct")
+_fl = _kq["right_not_accepted_flags"]
+put("wm_dropped", _fl["dropped_unrecoverable"], str(_WM), "pct")
+put("wm_subst", _fl["substitution"], str(_WM), "pct")
+put("wm_added_prim_k", _wm["part18"]["reason_all"]["added"], str(_WM), "int")
+put("wm_notacc_n", sum(_wm["part18"]["reason_all"].values()), str(_WM), "int")
+put("wm_len_auroc", _wm["bridge"]["p18_ok_R1"]["length ratio to keywords (deployable)"]["auroc"], str(_WM), "f2")
+
+_DP = ROOT / "analysis/frontier/default_profiles/followup/f1_price.csv"
+_DR = ROOT / "analysis/frontier/default_profiles/followup/f1_restoration.csv"
+_pr = {(r["dimension"], r["arm"]): float(r["rev_per_1000"]) for r in _csv.DictReader(open(_DP)) if r["mode"] == "arb"}
+for _d_, _dk in (("polarity", "pol"), ("politeness", "pz")):
+    for _a_ in ("bare", "chip", "word"):
+        put(f"sc_{_dk}_{_a_}", _pr[(_d_, _a_)], str(_DP), "f1")
+_rs = {(r["dimension"], r["arm"]): float(r["r"]) for r in _csv.DictReader(open(_DR)) if r["model"] == "pooled(mode=arb)"}
+put("sc_act_chip", _rs[("speech_act", "chip")], str(_DR), "pct")
+put("sc_act_g1", _rs[("speech_act", "chipG1")], str(_DR), "pct")
+put("sc_nunits", 332, str(_DR), "int")
+
+# SLP panel: run the scorer (stdlib, deterministic) and parse its tables
+_slp_out = ROOT / "tmp" / "slp_report_se4all.md"
+_sp.run([sys.executable, str(ROOT / "src/score_slp_panel.py"), "--out", str(_slp_out)], check=True, capture_output=True)
+_sr = _slp_out.read_text()
+_SLP = "expert_package/returns_slp via src/score_slp_panel.py"
+def _row(prefix):
+    for ln in _sr.splitlines():
+        if ln.startswith(prefix):
+            return [c.strip() for c in ln.strip("|").split("|")]
+    raise KeyError(prefix)
+_neg = _row("| negation dropped/added")
+macros["slp_neg"] = str(int(float(_neg[1].split()[0]))); sources["slp_neg"] = _SLP
+_sev = {n: float(_row(f"| {n}")[1].split()[0]) for n in ("politeness added/removed", "negation dropped/added")}
+macros["slp_pol_sev"] = f"{_sev['politeness added/removed']:.1f}"; sources["slp_pol_sev"] = _SLP
+_w = lambda pop, arm: float(_row(f"| {pop} | {arm} |")[4])
+_uw = lambda pop, arm: float(_row(f"| {pop} | {arm} |")[3])
+_WC = "W-C speech-act (1,872 targets)"; _HW = "hw1 human-written pairs, six dimensions"
+for _k_, _pop, _arm in (("slp_w_base_g", _WC, "baseline_P0"), ("slp_w_g1", _WC, "guard_G1"), ("slp_w_base_hw", _HW, "baseline_bare"),
+                        ("slp_w_chip", _HW, "chip"), ("slp_w_word", _HW, "word")):
+    macros[_k_] = f"{_w(_pop, _arm):.1f}"; sources[_k_] = _SLP
+    macros[_k_.replace("slp_w", "slp_u")] = f"{_uw(_pop, _arm):.1f}"; sources[_k_.replace("slp_w", "slp_u")] = _SLP
+_acc = {a: _row(f"| {a} |") for a in ("guard_repair", "guard_original", "chip", "word")}
+macros["slp_acc_rep"] = _acc["guard_repair"][5]; macros["slp_acc_orig"] = _acc["guard_original"][5]
+macros["slp_acc_rep_k"] = _acc["guard_repair"][3].split("/")[0].strip(); macros["slp_acc_rep_n"] = _acc["guard_repair"][1]
+macros["slp_acc_orig_n"] = _acc["guard_original"][1]
+for _k_ in ("slp_acc_rep", "slp_acc_orig", "slp_acc_rep_k", "slp_acc_rep_n", "slp_acc_orig_n"):
+    sources[_k_] = _SLP
+
+# consultants: importance and send-judgments from the returns; requirement-change counts from consultant_log.csv
+_CR = ROOT / "annotation/returns_consultant"
+_cp = {c: json.load(open(_CR / c / "design_review_progress.json")) for c in ("C01", "C02")}
+put("co_n", len(_cp), str(_CR), "int")
+put("co_imp", sum(v[f"imp_R{i}"] == "important" for v in _cp.values() for i in range(1, 6)), str(_CR), "int")
+put("co_imp_den", len(_cp) * 5, str(_CR), "int")
+_key = {r["id"]: r for r in _csv.DictReader(open(ROOT / "expert_package/consultant_key.csv"))}
+_both_no = [e for e in _key if e.startswith("E") and all(v[f"send_{e}"] == "notok" for v in _cp.values())]
+_good = [e for e in _key if _key[e]["kind"] == "good"]
+_rep = [e for e in _key if _key[e]["kind"] == "repaired"]
+put("co_nex", len([e for e in _key if e.startswith("E")]), "expert_package/consultant_key.csv", "int")
+put("co_good_n", len(_good), "expert_package/consultant_key.csv", "int")
+put("co_good_bothno", len([e for e in _good if e in _both_no]), "expert_package/consultant_key.csv", "int")
+put("co_rep_n", len(_rep), "expert_package/consultant_key.csv", "int")
+put("co_rep_bothok", len([e for e in _rep if all(v[f"send_{e}"] == "ok" for v in _cp.values())]), "expert_package/consultant_key.csv", "int")
+_bad = [e for e in _key if _key[e]["kind"] == "bad"]
+put("co_bad_n", len(_bad), "expert_package/consultant_key.csv", "int")
+put("co_bad_bothno", len([e for e in _bad if e in _both_no]), "expert_package/consultant_key.csv", "int")
+_cl = list(_csv.DictReader(open(OUT / "consultant_log.csv")))
+put("co_nsugg", len(_cl), "paper/se4all/consultant_log.csv", "int")
+put("co_nreq", sum(int(r["counts_toward_N"]) for r in _cl), "paper/se4all/consultant_log.csv", "int")
+put("co_ndes", sum(1 for r in _cl if r["change_made"] in ("yes", "partly") and r["counts_toward_N"] == "0"), "paper/se4all/consultant_log.csv", "int")
+put("co_nno", sum(1 for r in _cl if r["change_made"] == "no"), "paper/se4all/consultant_log.csv", "int")
+
+_sl = _wm["slp"]["judge PASS (meaning_fail=0)"]
+put("slp_jp_n", _sl["n"], str(_WM), "int"); put("slp_jp_unacc", _sl["unacc"], str(_WM), "int")
+
+# event-leak regression test T1 (consultant_checks.py)
+_sp.run([sys.executable, str(OUT / "consultant_checks.py")], check=True, capture_output=True)
+_cc2 = json.load(open(OUT / "consultant_checks.json"))
+_CCP = "paper/se4all/consultant_checks.json (runs/hw1/outputs.jsonl)"
+put("t1_k", _cc2["n_leak"], _CCP, "int"); put("t1_n", _cc2["n_tell_inputs"], _CCP, "int")
+put("t1", _cc2["n_leak"] / _cc2["n_tell_inputs"], _CCP, "pct")
+put("t1_ctrl", _cc2["n_ctrl_leak"] / _cc2["n_ctrl"], _CCP, "pct")
+put("t1_qwen", _cc2["by_model"]["qwen2.5-7b"]["leak"] / _cc2["by_model"]["qwen2.5-7b"]["n"], _CCP, "pct")
+put("t1_terra", _cc2["by_model"]["gpt-6.1-terra"]["leak"] / _cc2["by_model"]["gpt-6.1-terra"]["n"], _CCP, "pct")
+put("t1_fam_k", _cc2["n_fam_leak"], _CCP, "int"); put("t1_fam_n", _cc2["n_fam"], _CCP, "int")
 
 
 def sha(p: Path) -> str:

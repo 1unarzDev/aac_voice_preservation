@@ -272,22 +272,12 @@ def guard_examples():
     L += [head(rf"\textbf{{Development set, repaired}} ({SHORT[x['model']]}, {CH[x['channel']]}; "
                rf"1st by hash order; {frac(x['pool_k'], x['pool_n'])} scored failures repaired)"),
           strings(x["input"][10:], x["before"], x["after"])]
-    x = G[("fixed", 2)]
-    L += [head(rf"\textbf{{Development set, scored repair that is a fragment}} ({SHORT[x['model']]}, "
-               rf"{CH[x['channel']]}; 2nd by hash order; {frac(g['ask_you_prefix']['k'], g['ask_you_prefix']['n'])} scored repairs "
-               r"begin ``Ask you'', a post hoc lexical count, not a fluency rate)"),
-          strings(x["input"][10:], x["before"], x["after"])]
     x = G[("unfixed", 1)]
     L += [head(rf"\textbf{{Development set, failure that remains}} ({SHORT[x['model']]}, {CH[x['channel']]}; "
                rf"1st by hash order; {frac(x['pool_k'], x['pool_n'])} failures remain, {g['residual_flagged']['k']}/{g['residual_flagged']['n']} "
                r"still flagged; the source asks whether the listener is charging it)"),
           strings(x["input"][10:], x["before"], x["after"])]
-    T = {e["category"]: e for e in json.loads((ROOT / "analysis/guard_wc/examples.json").read_text())}
-    x = T["correct-text-changed"]
-    L += [head(rf"\textbf{{Confirmation set, correct text changed, still a scored pass}} ({SHORT[x['model']]}, "
-               rf"{CH[x['channel']]}; 1st by SHA-256 order; {frac(x['event_k'], x['eligible_n'])} strict-correct targets changed, "
-               r"none to a scored failure)"),
-          strings(x["input_text"][10:], x["before"], x["after"])]
+    # the fragment and correct-text-changed rows are Figure 1 rows 3 and 1 and are not repeated here
     (HERE / "guard_examples.tex").write_text("\n".join(L) + "\n")
 
 

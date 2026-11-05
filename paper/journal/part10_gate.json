@@ -1,0 +1,1773 @@
+{
+ "gate": "part10_new",
+ "run": "new",
+ "annotators": [
+  "P07",
+  "P09",
+  "P11"
+ ],
+ "items": 162,
+ "test_items": 121,
+ "coders_per_item": {
+  "3": 162
+ },
+ "dims": {
+  "critical": {
+   "test/R0": {
+    "n": 121,
+    "kappa": 0.934,
+    "acc": 0.9421487603305785,
+    "ci": [
+     0.883,
+     0.973
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 121,
+    "kappa": 0.934,
+    "acc": 0.9421487603305785,
+    "ci": [
+     0.883,
+     0.973
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 121,
+    "kappa": 0.934,
+    "acc": 0.9421487603305785,
+    "ci": [
+     0.883,
+     0.973
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 162,
+    "kappa": 0.936,
+    "acc": 0.9444444444444444,
+    "ci": [
+     0.894,
+     0.972
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 162,
+    "kappa": 0.936,
+    "acc": 0.9444444444444444,
+    "ci": [
+     0.894,
+     0.972
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 162,
+    "kappa": 0.936,
+    "acc": 0.9444444444444444,
+    "ci": [
+     0.894,
+     0.972
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 121,
+    "kappa": 0.934,
+    "ci": [
+     0.884,
+     0.981
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 62,
+     "kappa": 0.906,
+     "acc": 0.9193548387096774,
+     "ci": [
+      0.82795,
+      0.98
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 25,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 51,
+     "kappa": 0.977,
+     "acc": 0.9803921568627451,
+     "ci": [
+      0.927,
+      1.0
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 24,
+     "kappa": 0.85,
+     "acc": 0.875,
+     "ci": [
+      0.67795,
+      1.0
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 7,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "bare": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_TELL": {
+     "n": 11,
+     "kappa": 0.862,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.577,
+      1.0
+     ]
+    },
+    "chip1": {
+     "n": 51,
+     "kappa": 0.949,
+     "acc": 0.9607843137254902,
+     "ci": [
+      0.871475,
+      1.0
+     ]
+    },
+    "chipall": {
+     "n": 26,
+     "kappa": 0.949,
+     "acc": 0.9615384615384616,
+     "ci": [
+      0.838425,
+      1.0
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": 0.873,
+     "acc": 0.9,
+     "ci": [
+      0.62,
+      1.0
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "neither_TELL": {
+     "n": 3,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "noncrit": {
+     "n": 11,
+     "kappa": 0.88,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.602375,
+      1.0
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "pol_TELL": {
+     "n": 11,
+     "kappa": 0.676,
+     "acc": 0.7272727272727273,
+     "ci": [
+      0.365,
+      1.0
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 486,
+    "human_human_kappa": 0.957,
+    "hh_ci": [
+     0.928975,
+     0.981
+    ],
+    "judge_human_kappa": 0.924,
+    "jh_ci": [
+     0.884,
+     0.96
+    ],
+    "difference_jh_minus_hh": -0.033,
+    "diff_ci": [
+     -0.07299999999999995,
+     0.0020000000000000018
+    ]
+   }
+  },
+  "polarity": {
+   "test/R0": {
+    "n": 121,
+    "kappa": 0.969,
+    "acc": 0.9917355371900827,
+    "ci": [
+     0.889975,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 121,
+    "kappa": 0.969,
+    "acc": 0.9917355371900827,
+    "ci": [
+     0.889975,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 121,
+    "kappa": 0.969,
+    "acc": 0.9917355371900827,
+    "ci": [
+     0.889975,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 162,
+    "kappa": 0.978,
+    "acc": 0.9938271604938271,
+    "ci": [
+     0.926,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 162,
+    "kappa": 0.978,
+    "acc": 0.9938271604938271,
+    "ci": [
+     0.926,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 162,
+    "kappa": 0.978,
+    "acc": 0.9938271604938271,
+    "ci": [
+     0.926,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 121,
+    "kappa": 0.969,
+    "ci": [
+     0.895,
+     1.0
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 62,
+     "kappa": 0.938,
+     "acc": 0.9838709677419355,
+     "ci": [
+      0.783,
+      1.0
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 25,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 51,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 24,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 7,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "bare": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_TELL": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "chip1": {
+     "n": 51,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "chipall": {
+     "n": 26,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": 0.63,
+     "acc": 0.9,
+     "ci": [
+      0.0,
+      1.0
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "neither_TELL": {
+     "n": 3,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "noncrit": {
+     "n": 11,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "pol_TELL": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 486,
+    "human_human_kappa": 0.986,
+    "hh_ci": [
+     0.948,
+     1.0
+    ],
+    "judge_human_kappa": 0.971,
+    "jh_ci": [
+     0.914,
+     1.0
+    ],
+    "difference_jh_minus_hh": -0.015,
+    "diff_ci": [
+     -0.06699999999999995,
+     0.02100000000000002
+    ]
+   }
+  },
+  "speech_act": {
+   "test/R0": {
+    "n": 121,
+    "kappa": 0.865,
+    "acc": 0.9256198347107438,
+    "ci": [
+     0.776,
+     0.942
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 121,
+    "kappa": 0.865,
+    "acc": 0.9256198347107438,
+    "ci": [
+     0.776,
+     0.942
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 121,
+    "kappa": 0.865,
+    "acc": 0.9256198347107438,
+    "ci": [
+     0.776,
+     0.942
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 162,
+    "kappa": 0.862,
+    "acc": 0.9259259259259259,
+    "ci": [
+     0.778,
+     0.929
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 162,
+    "kappa": 0.862,
+    "acc": 0.9259259259259259,
+    "ci": [
+     0.778,
+     0.929
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 162,
+    "kappa": 0.862,
+    "acc": 0.9259259259259259,
+    "ci": [
+     0.778,
+     0.929
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 121,
+    "kappa": 0.865,
+    "ci": [
+     0.774,
+     0.949
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 62,
+     "kappa": 0.822,
+     "acc": 0.9032258064516129,
+     "ci": [
+      0.67295,
+      0.943
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 25,
+     "kappa": 0.847,
+     "acc": 0.92,
+     "ci": [
+      0.6409,
+      1.0
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 51,
+     "kappa": 0.871,
+     "acc": 0.9215686274509803,
+     "ci": [
+      0.728,
+      0.969
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 24,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 7,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "bare": {
+     "n": 11,
+     "kappa": 0.81,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.298,
+      1.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "both_TELL": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "chip1": {
+     "n": 51,
+     "kappa": 0.879,
+     "acc": 0.9215686274509803,
+     "ci": [
+      0.745425,
+      0.971
+     ]
+    },
+    "chipall": {
+     "n": 26,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": 0.677,
+     "acc": 0.8,
+     "ci": [
+      0.25712500000000005,
+      1.0
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "neither_TELL": {
+     "n": 3,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "noncrit": {
+     "n": 11,
+     "kappa": 0.0,
+     "acc": 0.7272727272727273,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": 0.0,
+     "acc": 0.8571428571428571,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "pol_TELL": {
+     "n": 11,
+     "kappa": 0.0,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 484,
+    "human_human_kappa": 0.887,
+    "hh_ci": [
+     0.825,
+     0.938
+    ],
+    "judge_human_kappa": 0.87,
+    "jh_ci": [
+     0.802975,
+     0.924
+    ],
+    "difference_jh_minus_hh": -0.017,
+    "diff_ci": [
+     -0.07000000000000006,
+     0.026000000000000023
+    ]
+   }
+  },
+  "agent": {
+   "test/R0": {
+    "n": 121,
+    "kappa": 0.869,
+    "acc": 0.9173553719008265,
+    "ci": [
+     0.791,
+     0.937
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 121,
+    "kappa": 0.869,
+    "acc": 0.9173553719008265,
+    "ci": [
+     0.791,
+     0.937
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 121,
+    "kappa": 0.869,
+    "acc": 0.9173553719008265,
+    "ci": [
+     0.791,
+     0.937
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 162,
+    "kappa": 0.892,
+    "acc": 0.9320987654320988,
+    "ci": [
+     0.83,
+     0.9460249999999998
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 162,
+    "kappa": 0.892,
+    "acc": 0.9320987654320988,
+    "ci": [
+     0.83,
+     0.9460249999999998
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 162,
+    "kappa": 0.892,
+    "acc": 0.9320987654320988,
+    "ci": [
+     0.83,
+     0.9460249999999998
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 121,
+    "kappa": 0.869,
+    "ci": [
+     0.784,
+     0.946
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 62,
+     "kappa": 0.891,
+     "acc": 0.9354838709677419,
+     "ci": [
+      0.778,
+      0.974
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 25,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 51,
+     "kappa": 0.911,
+     "acc": 0.9411764705882353,
+     "ci": [
+      0.79995,
+      1.0
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 24,
+     "kappa": 0.738,
+     "acc": 0.8333333333333334,
+     "ci": [
+      0.483375,
+      0.935
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 7,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "bare": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "both_TELL": {
+     "n": 11,
+     "kappa": 0.792,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.0,
+      1.0
+     ]
+    },
+    "chip1": {
+     "n": 51,
+     "kappa": 0.816,
+     "acc": 0.8823529411764706,
+     "ci": [
+      0.6843750000000001,
+      0.93
+     ]
+    },
+    "chipall": {
+     "n": 26,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "neither_TELL": {
+     "n": 3,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "noncrit": {
+     "n": 11,
+     "kappa": 0.841,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.444,
+      1.0
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "pol_TELL": {
+     "n": 11,
+     "kappa": 0.566,
+     "acc": 0.7272727272727273,
+     "ci": [
+      0.0684000000000002,
+      1.0
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 486,
+    "human_human_kappa": 0.941,
+    "hh_ci": [
+     0.903,
+     0.974
+    ],
+    "judge_human_kappa": 0.875,
+    "jh_ci": [
+     0.8159749999999999,
+     0.926
+    ],
+    "difference_jh_minus_hh": -0.066,
+    "diff_ci": [
+     -0.1279999999999999,
+     -0.01200000000000001
+    ]
+   }
+  },
+  "certainty": {
+   "test/R0": {
+    "n": 121,
+    "kappa": 0.912,
+    "acc": 0.9586776859504132,
+    "ci": [
+     0.82895,
+     0.982
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 121,
+    "kappa": 0.912,
+    "acc": 0.9586776859504132,
+    "ci": [
+     0.82895,
+     0.982
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 121,
+    "kappa": 0.912,
+    "acc": 0.9586776859504132,
+    "ci": [
+     0.82895,
+     0.982
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 162,
+    "kappa": 0.894,
+    "acc": 0.9506172839506173,
+    "ci": [
+     0.811,
+     0.961
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 162,
+    "kappa": 0.894,
+    "acc": 0.9506172839506173,
+    "ci": [
+     0.811,
+     0.961
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 162,
+    "kappa": 0.894,
+    "acc": 0.9506172839506173,
+    "ci": [
+     0.811,
+     0.961
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 121,
+    "kappa": 0.912,
+    "ci": [
+     0.832,
+     0.982
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 62,
+     "kappa": 0.832,
+     "acc": 0.9193548387096774,
+     "ci": [
+      0.6819500000000001,
+      0.96505
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 25,
+     "kappa": 0.915,
+     "acc": 0.96,
+     "ci": [
+      0.69,
+      1.0
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 51,
+     "kappa": 0.959,
+     "acc": 0.9803921568627451,
+     "ci": [
+      0.844425,
+      1.0
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 24,
+     "kappa": 0.864,
+     "acc": 0.9583333333333334,
+     "ci": [
+      0.467,
+      1.0
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 7,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "bare": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "both_TELL": {
+     "n": 11,
+     "kappa": 0.0,
+     "acc": 0.9090909090909091,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "chip1": {
+     "n": 51,
+     "kappa": 0.883,
+     "acc": 0.9411764705882353,
+     "ci": [
+      0.723475,
+      1.0
+     ]
+    },
+    "chipall": {
+     "n": 26,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": 0.8,
+     "acc": 0.9,
+     "ci": [
+      0.3527500000000001,
+      1.0
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "neither_TELL": {
+     "n": 3,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "noncrit": {
+     "n": 11,
+     "kappa": 0.0,
+     "acc": 0.7272727272727273,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "pol_TELL": {
+     "n": 11,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 486,
+    "human_human_kappa": 0.9,
+    "hh_ci": [
+     0.835,
+     0.955
+    ],
+    "judge_human_kappa": 0.899,
+    "jh_ci": [
+     0.835,
+     0.951
+    ],
+    "difference_jh_minus_hh": -0.001,
+    "diff_ci": [
+     -0.04500000000000004,
+     0.03500000000000003
+    ]
+   }
+  },
+  "politeness": {
+   "test/R0": {
+    "n": 121,
+    "kappa": 0.906,
+    "acc": 0.9917355371900827,
+    "ci": [
+     0.6547000000000001,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 121,
+    "kappa": 0.906,
+    "acc": 0.9917355371900827,
+    "ci": [
+     0.6547000000000001,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 121,
+    "kappa": 0.906,
+    "acc": 0.9917355371900827,
+    "ci": [
+     0.6547000000000001,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 162,
+    "kappa": 0.938,
+    "acc": 0.9938271604938271,
+    "ci": [
+     0.762,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 162,
+    "kappa": 0.938,
+    "acc": 0.9938271604938271,
+    "ci": [
+     0.762,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 162,
+    "kappa": 0.938,
+    "acc": 0.9938271604938271,
+    "ci": [
+     0.762,
+     1.0
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 121,
+    "kappa": 0.906,
+    "ci": [
+     0.658,
+     1.0
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 62,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 25,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 51,
+     "kappa": 0.0,
+     "acc": 0.9803921568627451,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 24,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 7,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "bare": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "both_TELL": {
+     "n": 11,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "chip1": {
+     "n": 51,
+     "kappa": 0.793,
+     "acc": 0.9803921568627451,
+     "ci": [
+      0.0,
+      1.0
+     ]
+    },
+    "chipall": {
+     "n": 26,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "neither_TELL": {
+     "n": 3,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "noncrit": {
+     "n": 11,
+     "kappa": 1.0,
+     "acc": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "pol_TELL": {
+     "n": 11,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 486,
+    "human_human_kappa": 0.958,
+    "hh_ci": [
+     0.828,
+     1.0
+    ],
+    "judge_human_kappa": 0.96,
+    "jh_ci": [
+     0.852,
+     1.0
+    ],
+    "difference_jh_minus_hh": 0.002,
+    "diff_ci": [
+     0.0,
+     0.02400000000000002
+    ]
+   }
+  },
+  "added_content": {
+   "test/R0": {
+    "n": 93,
+    "kappa": 0.172,
+    "acc": 0.6774193548387096,
+    "ci": [
+     0.041975000000000005,
+     0.317
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R1": {
+    "n": 93,
+    "kappa": 0.172,
+    "acc": 0.6774193548387096,
+    "ci": [
+     0.041975000000000005,
+     0.317
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "test/R2": {
+    "n": 93,
+    "kappa": 0.172,
+    "acc": 0.6774193548387096,
+    "ci": [
+     0.041975000000000005,
+     0.317
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R0": {
+    "n": 128,
+    "kappa": 0.224,
+    "acc": 0.6953125,
+    "ci": [
+     0.103,
+     0.35502499999999987
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R1": {
+    "n": 128,
+    "kappa": 0.224,
+    "acc": 0.6953125,
+    "ci": [
+     0.103,
+     0.35502499999999987
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "all/R2": {
+    "n": 128,
+    "kappa": 0.224,
+    "acc": 0.6953125,
+    "ci": [
+     0.103,
+     0.35502499999999987
+    ],
+    "excluded_no_consensus": 0,
+    "ref_no_consensus": 0
+   },
+   "stored_test_final": {
+    "n": 93,
+    "kappa": 0.172,
+    "ci": [
+     0.049,
+     0.33
+    ]
+   },
+   "by_model_R1": {
+    "gemma3-4b": {
+     "n": 44,
+     "kappa": 0.185,
+     "acc": 0.7272727272727273,
+     "ci": [
+      0.0,
+      0.42957499999999993
+     ]
+    },
+    "gpt-6.1-terra": {
+     "n": 23,
+     "kappa": 0.358,
+     "acc": 0.782608695652174,
+     "ci": [
+      0.0,
+      0.7455749999999999
+     ]
+    },
+    "llama3.1-8b": {
+     "n": 42,
+     "kappa": 0.319,
+     "acc": 0.7380952380952381,
+     "ci": [
+      0.063,
+      0.588
+     ]
+    },
+    "qwen2.5-7b": {
+     "n": 19,
+     "kappa": 0.063,
+     "acc": 0.42105263157894735,
+     "ci": [
+      0.0,
+      0.2357249999999998
+     ]
+    }
+   },
+   "by_channel_R1": {
+    "actor_STATEMENT": {
+     "n": 2,
+     "kappa": null,
+     "acc": 1.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "actor_TELL": {
+     "n": 5,
+     "kappa": 0.0,
+     "acc": 0.6,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "bare": {
+     "n": 9,
+     "kappa": 0.0,
+     "acc": 0.7777777777777778,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "both_STATEMENT": {
+     "n": 8,
+     "kappa": 0.0,
+     "acc": 0.75,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "both_TELL": {
+     "n": 8,
+     "kappa": 0.0,
+     "acc": 0.5,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "chip1": {
+     "n": 38,
+     "kappa": 0.111,
+     "acc": 0.7105263157894737,
+     "ci": [
+      0.0,
+      0.3629249999999996
+     ]
+    },
+    "chipall": {
+     "n": 19,
+     "kappa": 0.336,
+     "acc": 0.7368421052631579,
+     "ci": [
+      0.0,
+      0.727
+     ]
+    },
+    "full": {
+     "n": 10,
+     "kappa": 0.6,
+     "acc": 0.8,
+     "ci": [
+      0.138,
+      1.0
+     ]
+    },
+    "neither_STATEMENT": {
+     "n": 4,
+     "kappa": 0.0,
+     "acc": 0.5,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "neither_TELL": {
+     "n": 1,
+     "kappa": 0.0,
+     "acc": 0.0,
+     "ci": [
+      null,
+      null
+     ]
+    },
+    "noncrit": {
+     "n": 8,
+     "kappa": 0.385,
+     "acc": 0.75,
+     "ci": [
+      0.0,
+      1.0
+     ]
+    },
+    "pol_STATEMENT": {
+     "n": 7,
+     "kappa": 0.0,
+     "acc": 0.8571428571428571,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "pol_TELL": {
+     "n": 9,
+     "kappa": 0.0,
+     "acc": 0.4444444444444444,
+     "ci": [
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "human_human_vs_judge_human": {
+    "pairs_observations": 384,
+    "human_human_kappa": 0.458,
+    "hh_ci": [
+     0.234975,
+     0.6460249999999998
+    ],
+    "judge_human_kappa": 0.311,
+    "jh_ci": [
+     0.206,
+     0.4240249999999999
+    ],
+    "difference_jh_minus_hh": -0.147,
+    "diff_ci": [
+     -0.30299999999999994,
+     0.026000000000000023
+    ]
+   }
+  }
+ }
+}
