@@ -7,6 +7,7 @@
 \newcommand{\slot}[1]{\par\noindent\fbox{\parbox{0.94\linewidth}{\small\textbf{SLOT} #1}}\par}
 
 \settopmatter{printacmref=false}
+\setlength{\headheight}{21pt}
 \setcopyright{none}
 \renewcommand\footnotetextcopyrightpermission[1]{}
 \acmJournal{TACCESS}
@@ -16,32 +17,33 @@
 % COVER LETTER NOTE: differences from prior publication (copy into the submission form).
 % Our SE4All archival paper (concurrent_se4all) and our CALE-AI workshop paper (non-archival; concurrent_caleai) report, on
 % discovery and confirmation families, that a deletion-based guard raises pass rates (the guard numbers on fresh families are
-% restated once, in Sec. guard, and marked as restated) and that a chip cue restores a missing commitment; SE4All also gives a short
+% recapped once, in the subordinate Sec. guard, and marked as a recap; no guard figure is in the abstract or the main argument) and that a chip cue restores a missing commitment; SE4All also gives a short
 % note that humans write keywords with a low negation rate. They report none of the studies that make up this paper's core.
 % NEW here: (i) the human-written pair replication across 20 writers with controlled cue channels; (ii) the writer-intent study
 % (intended-version match, acceptance as written or with a small edit, whole-message reasons) and the argument that commitment
 % preservation is necessary but not sufficient; (iii) the blind three-rater repair-usability audit under a frozen rule;
 % (iv) the human check of the arbiter, with its exclusions and dependence reported; (v) SLP severity weights and clinically
 % weighted failure rates (n=2, expert review); (vi) the consultants' requirement changes; (vii) the same-items profile and ask-policy
-% comparison. RESTATED from the earlier papers: the guard result and the discovery-set cue result, shortened and cited.
+% comparison. RECAPPED from the earlier papers: the guard result and the discovery-set cue result, shortened and cited.
 % No figure or table is reused without redrawing; text overlap is limited to the shared methods description. Both papers will be
 % provided to the editor on request.
 % ---------------------------------------------------------------------------------------------
 
 \begin{document}
 
-\title{Necessary but Not Sufficient: Preserving the Writer's Commitments and Covering Their Intended Message in LLM Keyword Expansion for AAC}
+\title{Necessary but Not Sufficient: Writer Intent in LLM Keyword Expansion for AAC, Evaluated with Non-AAC Writers}
 
 \author{Authors withheld}
 \affiliation{\institution{Institution withheld}\city{City}\country{Country}}
 
 \begin{abstract}
-A person who types a few keywords and lets a language model write the sentence needs the sentence to be the one they meant.
-We asked \jmpOneEightWriters{} classmate writers, none of them AAC users, to rate model drafts of their own keywords against the sentences they had intended (\jmpOneEightAcceptN{} drafts, \jmwmModels{} models).
-A one-token cue raised the share of drafts judged to be the intended version from \jmpOneEightMatchBare{}\% to \jmpOneEightMatchChip{}\%, and on \jmfOneUnits{} further items (three models) it cut polarity reversals from \jmfOneRevPolBare{} to \jmfOneRevPolChip{} per 1,000 messages.
-Preserving the critical commitment is nonetheless necessary and not sufficient: writers accepted \jmpOneEightAcceptYesK{} of \jmpOneEightAcceptN{} drafts as written and \jmpOneEightAcceptYesSmall{}\% as written or with a small edit, and the shortfall came from misresolved events and roles and detail lost in compression, not added content (\jmwmAdded{}\% of primary reasons).
-Automatic judges agreed with the writers only weakly ($\kappa$ \jmpOneEightKappa{}), so each result is reported against a human check, with two clinician raters and an inconclusive repair-usability audit marked as thin; access-method, tap and reading costs were not studied, and two paid design consultants who use AAC shaped the requirements only.
-We therefore propose treating commitment preservation as a filter and measuring how much of the writer's whole intended message a set of approval-gated drafts covers.
+Language models can turn a few keywords into a sentence for a person who communicates with AAC, but only if the sentence is the one the person meant. We report a writer-intent evaluation with non-AAC adults: \jmpOneEightWriters{} classmate writers rated \jmpOneEightAcceptN{} drafts from \jmwmModels{} models against the sentences they had intended from their own keywords.
+A one-token cue raised the share of drafts judged to be the intended version from \jmpOneEightMatchBare{}\% to \jmpOneEightMatchChip{}\%.
+On a separate set of \jmfOneUnits{} items (three models), the same cue cut polarity reversals from \jmfOneRevPolBare{} to \jmfOneRevPolChip{} per 1,000 messages.
+Preserving the critical commitment is a necessary filter and not sufficient: writers accepted \jmpOneEightAcceptYesK{} of the \jmpOneEightAcceptN{} drafts as written and \jmpOneEightAcceptYesSmall{}\% as written or with a small edit, and the gap came from misresolved events and roles and detail lost in compression; added content was not detected (\jmwmAdded{}\% of primary reasons, by a post-hoc classifier checked against one hand coder).
+Automatic judges agreed with the writers only weakly ($\kappa$ \jmpOneEightKappa{}), so each result is reported against a human check: the writers, two clinician raters and a blind three-rater audit of repairs.
+The paper offers a validated evaluation protocol for writer intent in AAC keyword expansion, plus requirement changes from two paid design consultants who use AAC; the writers and raters are not AAC users and the rates do not transfer to AAC keyword input.
+We propose measuring how much of the writer's whole intended message a set of approval-gated drafts covers, with the commitment filter as the first gate.
 \end{abstract}
 
 \begin{CCSXML}
@@ -57,6 +59,7 @@ We therefore propose treating commitment preservation as a filter and measuring 
 \input{sections/s3}
 \input{sections/s4}
 \input{sections/s5}
+\input{sections/app}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}

@@ -1,0 +1,1839 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 63,
+ "for": "75dfc949",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-944209b1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "repeat instructions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please repeat the instructions during the visit."
+    },
+    {
+     "label": "Your other version",
+     "text": "Repeat the instructions during the visit."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you repeat the instructions?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5486242a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "repeat instructions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please repeat the instructions during the visit."
+    },
+    {
+     "label": "Your other version",
+     "text": "Repeat the instructions during the visit."
+    },
+    {
+     "label": "Draft",
+     "text": "Please repeat the instructions."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b9a1fbc3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "repeat instructions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please repeat the instructions during the visit."
+    },
+    {
+     "label": "Your other version",
+     "text": "Repeat the instructions during the visit."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to repeat the instructions."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-176df18e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "repeat instructions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please repeat the instructions during the visit."
+    },
+    {
+     "label": "Your other version",
+     "text": "Repeat the instructions during the visit."
+    },
+    {
+     "label": "Draft",
+     "text": "Repeat the instructions."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6b85a1ae",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "repeat instructions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please repeat the instructions during the visit."
+    },
+    {
+     "label": "Your other version",
+     "text": "Repeat the instructions during the visit."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you repeat the instructions right now?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-eb15243f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "repeat instructions"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please repeat the instructions during the visit."
+    },
+    {
+     "label": "Your other version",
+     "text": "Repeat the instructions during the visit."
+    },
+    {
+     "label": "Draft",
+     "text": "Could the instructions be repeated?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-19925deb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you turn on captions later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b6aa4005",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "I would like to request captions later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e18330c5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you add captions to the video later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-091e7965",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Could I turn on captions later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3d298951",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Turn on captions later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ee2ec202",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Could captions be shown later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-67b14e58",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "request captions"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will request captions at the meeting tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I requested captions at the meeting yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I ask for captions later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1e533ece",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "teacher appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The teacher will move my appointment at the clinic to Thursday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The teacher moved my appointment at the clinic to Tuesday."
+    },
+    {
+     "label": "Draft",
+     "text": "I have an appointment with the teacher later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-39d8b427",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "teacher appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The teacher will move my appointment at the clinic to Thursday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The teacher moved my appointment at the clinic to Tuesday."
+    },
+    {
+     "label": "Draft",
+     "text": "The teacher has an appointment later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-728c3924",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "teacher appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The teacher will move my appointment at the clinic to Thursday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The teacher moved my appointment at the clinic to Tuesday."
+    },
+    {
+     "label": "Draft",
+     "text": "The teacher's appointment is later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b6d0c298",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "teacher appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The teacher will move my appointment at the clinic to Thursday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The teacher moved my appointment at the clinic to Tuesday."
+    },
+    {
+     "label": "Draft",
+     "text": "Do I have an appointment with the teacher later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dcf29792",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "teacher appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The teacher will move my appointment at the clinic to Thursday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The teacher moved my appointment at the clinic to Tuesday."
+    },
+    {
+     "label": "Draft",
+     "text": "The teacher has an appointment with me later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-85857feb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "teacher appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[LATER] = future time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The teacher will move my appointment at the clinic to Thursday."
+    },
+    {
+     "label": "Your other version",
+     "text": "The teacher moved my appointment at the clinic to Tuesday."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I make an appointment with the teacher for later?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-06ed7e89",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "Save the game."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c1ffa14a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to save the game now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-64cae116",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you save the game for me?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7822ba1b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I save the game?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0ef7b7f4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "I save the game."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-33819ba7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "Preserve the game."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1ff40fde",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to save the game."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cacbf274",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "save game"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Save my game before dinner."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please save my game before dinner."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you save my game?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-703a50d5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please put the receipt in my wallet."
+    },
+    {
+     "label": "Your other version",
+     "text": "Put the receipt in my wallet."
+    },
+    {
+     "label": "Draft",
+     "text": "Put the receipt away."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1145899a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please put the receipt in my wallet."
+    },
+    {
+     "label": "Your other version",
+     "text": "Put the receipt in my wallet."
+    },
+    {
+     "label": "Draft",
+     "text": "Put the receipt in the envelope."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bd775e6b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please put the receipt in my wallet."
+    },
+    {
+     "label": "Your other version",
+     "text": "Put the receipt in my wallet."
+    },
+    {
+     "label": "Draft",
+     "text": "Put the receipt on the counter."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2bec7b18",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please put the receipt in my wallet."
+    },
+    {
+     "label": "Your other version",
+     "text": "Put the receipt in my wallet."
+    },
+    {
+     "label": "Draft",
+     "text": "I put the receipt away."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-72a19589",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please put the receipt in my wallet."
+    },
+    {
+     "label": "Your other version",
+     "text": "Put the receipt in my wallet."
+    },
+    {
+     "label": "Draft",
+     "text": "Do not put the receipt away."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-318cca30",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put receipt"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please put the receipt in my wallet."
+    },
+    {
+     "label": "Your other version",
+     "text": "Put the receipt in my wallet."
+    },
+    {
+     "label": "Draft",
+     "text": "File the receipt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2c731c19",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move car"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you move the car near the gate?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Would you move the car near the gate?"
+    },
+    {
+     "label": "Draft",
+     "text": "Move the car."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ad9b7386",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move car"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you move the car near the gate?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Would you move the car near the gate?"
+    },
+    {
+     "label": "Draft",
+     "text": "I need to move my car."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b5f24126",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move car"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you move the car near the gate?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Would you move the car near the gate?"
+    },
+    {
+     "label": "Draft",
+     "text": "The car is moving."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d6cc4764",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move car"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you move the car near the gate?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Would you move the car near the gate?"
+    },
+    {
+     "label": "Draft",
+     "text": "I move the car."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-28a3f284",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move car"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you move the car near the gate?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Would you move the car near the gate?"
+    },
+    {
+     "label": "Draft",
+     "text": "Move the car later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e520175b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move car"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you move the car near the gate?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Would you move the car near the gate?"
+    },
+    {
+     "label": "Draft",
+     "text": "Car, move."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-02428bab",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "My ankle hurt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e83b7ff5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "My ankle was injured."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5f15c84c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "My ankle was hurting earlier."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dab64cf6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "Your ankle hurt."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9681ba5a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "Did my ankle hurt?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9d7600ba",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "I injured my ankle."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3c985f4f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "ankle hurt"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PAST] = past time"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My ankle hurt after the walk yesterday."
+    },
+    {
+     "label": "Your other version",
+     "text": "My ankle hurts after the walk now."
+    },
+    {
+     "label": "Draft",
+     "text": "I had pain in my ankle."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1b07d425",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you meet me at the park later?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you meet me at the park later?"
+    },
+    {
+     "label": "Draft",
+     "text": "Let's meet at the park."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-523078d6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you meet me at the park later?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you meet me at the park later?"
+    },
+    {
+     "label": "Draft",
+     "text": "The park is where we first met."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b2e003ad",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you meet me at the park later?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you meet me at the park later?"
+    },
+    {
+     "label": "Draft",
+     "text": "Can you meet me at the park after school?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-048528fd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you meet me at the park later?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you meet me at the park later?"
+    },
+    {
+     "label": "Draft",
+     "text": "Meet me at the park."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f4dcf8b9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you meet me at the park later?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you meet me at the park later?"
+    },
+    {
+     "label": "Draft",
+     "text": "Let's meet at the park now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1e2652da",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "meet park"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you meet me at the park later?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you meet me at the park later?"
+    },
+    {
+     "label": "Draft",
+     "text": "Meet at the park."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-77276f35",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "turn notifications"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will turn off notifications during class tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I turned off notifications during class yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Turn off notifications."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-49e3c767",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "turn notifications"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will turn off notifications during class tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I turned off notifications during class yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Turn on notifications."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fda35864",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "turn notifications"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will turn off notifications during class tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I turned off notifications during class yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to change the notification settings."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-651a3200",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "turn notifications"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will turn off notifications during class tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I turned off notifications during class yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Should I turn off notifications?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9ff36a6f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "turn notifications"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I will turn off notifications during class tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "I turned off notifications during class yesterday."
+    },
+    {
+     "label": "Draft",
+     "text": "Disable notifications."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f4fb2d2d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "play guitar"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I played guitar at home last night."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will play guitar at home tonight."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to play guitar."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-374543f2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "play guitar"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I played guitar at home last night."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will play guitar at home tonight."
+    },
+    {
+     "label": "Draft",
+     "text": "Do you play guitar?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f64ec1f8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "play guitar"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I played guitar at home last night."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will play guitar at home tonight."
+    },
+    {
+     "label": "Draft",
+     "text": "They played guitar yesterday."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-81ea203d",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "play guitar"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I played guitar at home last night."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will play guitar at home tonight."
+    },
+    {
+     "label": "Draft",
+     "text": "You want to play guitar."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8b5c151e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "play guitar"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I played guitar at home last night."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will play guitar at home tonight."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I play guitar?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e76aca97",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "play guitar"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I played guitar at home last night."
+    },
+    {
+     "label": "Your other version",
+     "text": "I will play guitar at home tonight."
+    },
+    {
+     "label": "Draft",
+     "text": "I play guitar."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

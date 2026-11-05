@@ -1,0 +1,488 @@
+{
+ "check_id": "part26",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 10,
+ "for": "ac42f606",
+ "title": "Find what you meant among drafts",
+ "intro": [
+  "For each of 10 messages, you see the keywords you typed for one of your own sentence pairs, the sentence you meant, and the drafts a writing tool offers for those keywords.",
+  "Say whether any draft is what you meant (which one), whether you would send it, and how hard it was to find. The drafts are shown in the order a user would see them."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "The keywords you typed (and a cue button, if you pressed one), the sentence you meant, and the drafts a writing tool offers for those keywords."
+  },
+  {
+   "term": "What counts as 'what you meant'",
+   "text": "A draft says what you meant if it carries your message, even in different words or with less detail. A draft that says the opposite, asks instead of tells, changes who does it or when, or is a different message does not."
+  },
+  {
+   "term": "Would you send it",
+   "text": "As it is: you would send it unchanged. Small edit: you would fix a word or two. No: it would need more than that, or none was right."
+  },
+  {
+   "term": "How hard",
+   "text": "How hard it was to find the draft you meant (or to see that none was right)."
+  }
+ ],
+ "questions": {
+  "hard": {
+   "title": "How hard was it to find what you meant?",
+   "text": "1 = very easy, 5 = very hard. If none was right, say how hard it was to be sure of that.",
+   "options": [
+    {
+     "v": "1",
+     "label": "1 very easy"
+    },
+    {
+     "v": "2",
+     "label": "2"
+    },
+    {
+     "v": "3",
+     "label": "3"
+    },
+    {
+     "v": "4",
+     "label": "4"
+    },
+    {
+     "v": "5",
+     "label": "5 very hard"
+    }
+   ]
+  },
+  "pick1": {
+   "title": "Is this what you meant?",
+   "text": "Yes if it says the message you meant (different words are fine). No if it says something else.",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, this is what I meant"
+    },
+    {
+     "v": "none",
+     "label": "No, it is not"
+    }
+   ]
+  },
+  "pick3": {
+   "title": "Is any of these what you meant?",
+   "text": "Pick the one that says the message you meant (different words are fine), or none.",
+   "options": [
+    {
+     "v": "1",
+     "label": "Draft 1"
+    },
+    {
+     "v": "2",
+     "label": "Draft 2"
+    },
+    {
+     "v": "3",
+     "label": "Draft 3"
+    },
+    {
+     "v": "none",
+     "label": "None of them"
+    }
+   ]
+  },
+  "send": {
+   "title": "Would you send it?",
+   "text": "Think of the draft you picked. If you picked none, choose the last option.",
+   "options": [
+    {
+     "v": "as_is",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No (or I picked none)"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-sv1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Is the bus late?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The bus is late."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Please wait for the late bus."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick3": "2",
+    "send": "small_edit",
+    "hard": "2"
+   },
+   "fb": "Draft 2 carries the message (the bus is late); it lacks 'again', a small edit. Draft 1 asks a question and Draft 3 asks for something else."
+  },
+  {
+   "item_id": "prac-sv2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "coffee"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[NOT] = negation"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I don't want coffee."
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want coffee."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ],
+   "expected": {
+    "pick1": "none",
+    "send": "no",
+    "hard": "1"
+   },
+   "fb": "The draft says the opposite of what you meant, so the answer is no, and it is easy to see."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "sv-c6f9bdec",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bank close"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bank closes early on Fridays."
+    },
+    {
+     "label": "Draft 1",
+     "text": "What time does the bank close?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "The bank closes at that time."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Who closes the bank?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-889c9d66",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "count coins"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cashier counted the coins at the desk."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please count the coins."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-08051b83",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep bedroom door"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I kept the bedroom door closed overnight."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please keep the bedroom door open."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Keep the bedroom door closed."
+    },
+    {
+     "label": "Draft 3",
+     "text": "Can you keep the bedroom door unlocked?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-c8b35fb8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "board game cupboard"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The board game is inside the blue cupboard."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The board game is in the cupboard."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Is the board game in the cupboard?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "I put the board game in the cupboard."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-5cedbe46",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "brother call"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did your brother call after the appointment?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "Can you call my brother?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "Can I call my brother?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "Does my brother call?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-3c2ab37a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "print report"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I printed the report in the office."
+    },
+    {
+     "label": "Draft 1",
+     "text": "Please print the report."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Can I print the report?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "I will print the report."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-0eb630a0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "train stop theater"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening train stops near the theater."
+    },
+    {
+     "label": "Draft 1",
+     "text": "The train stops at the theater."
+    }
+   ],
+   "qs": [
+    "pick1",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-45896dea",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "picnic river"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is our picnic beside the river tomorrow?"
+    },
+    {
+     "label": "Draft 1",
+     "text": "Would you like to have a picnic by the river?"
+    },
+    {
+     "label": "Draft 2",
+     "text": "Would I like to have a picnic by the river?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "Would you have liked to have a picnic by the river?"
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-f4e39710",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move lamp sofa"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I moved the lamp away from the sofa."
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want to move the lamp by the sofa."
+    },
+    {
+     "label": "Draft 2",
+     "text": "Can I move the lamp by the sofa?"
+    },
+    {
+     "label": "Draft 3",
+     "text": "I want to move the lamp onto the sofa."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  },
+  {
+   "item_id": "sv-b9db8823",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "invite cousin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I invited my cousin to the wedding."
+    },
+    {
+     "label": "Draft 1",
+     "text": "I want to invite my cousin."
+    },
+    {
+     "label": "Draft 2",
+     "text": "I invited my cousin."
+    },
+    {
+     "label": "Draft 3",
+     "text": "I am inviting my cousin."
+    }
+   ],
+   "qs": [
+    "pick3",
+    "send",
+    "hard"
+   ]
+  }
+ ]
+}

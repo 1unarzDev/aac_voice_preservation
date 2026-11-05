@@ -675,6 +675,8 @@ for _e, _t in (("preserving", "prs"), ("usable_and_preserving", "up")):
     put(f"p17_{_t}_rep", f"{100 * _ur['p']:.1f}"); put(f"p17_{_t}_ctl", f"{100 * _uc['p']:.1f}")
 _dp_ = _a2["difference_by_pool"]["discovery"]["usable_and_preserving"] if "discovery" in _a2["difference_by_pool"] else None
 if _dp_: _pp("p17_up_disc", _dp_["diff"], *_dp_["ci"])
+for _pl, _pt in (("discovery", "pd"), ("transfer", "pt")):   # burn r3: per-pool usable gap (pools differ)
+    _dq = _a2["difference_by_pool"][_pl]["usable"]; _pp(f"p17_{_pt}_use", _dq["diff"], *_dq["ci"])
 _pu = _pr_ = _a2["secondary"]["original_failed"]["paired"]
 _pp("p17_of_use", _pu["usable"]["diff"], *_pu["usable"]["ci"]); put("p17_of_use_p", f"{_pu['usable']['sign_test_p']:.2f}")
 _pp("p17_of_up", _pu["usable_and_preserving"]["diff"], *_pu["usable_and_preserving"]["ci"]); put("p17_of_up_p", f"{_pu['usable_and_preserving']['sign_test_p']:.2f}")
@@ -765,6 +767,63 @@ _rp = {r["quantity"]: r for r in _kn["r2_pooled"] if r["dataset"] == "human"}
 put("fr_auc_samp", f"{_rp['auroc:sampled_share(K=16)']['point']:.2f}".lstrip("0"))
 put("fr_auc_lex", f"{_rp['auroc:lexical_cv_logistic']['point']:.2f}".lstrip("0"))
 
+
+# ---------------- burn round 2 (CALE-AI writer): audit size, model-standardized contrast, fragment/leak rate, joint repair, CIs, chip-vs-word labels
+import math as _mth
+import numpy as _np
+import pandas as _pd
+
+put("p17_all", _a2["n_items_key"]); put("p17_prim", _a2["per_arm"]["repaired"]["usable"]["n"] + _a2["per_arm"]["control"]["usable"]["n"])
+put("p17_prim_ctl", _a2["per_arm"]["control"]["usable"]["n"])
+put("p17_sec", _a2["n_items_key"] - (_a2["per_arm"]["repaired"]["usable"]["n"] + _a2["per_arm"]["control"]["usable"]["n"]))
+# model-standardized and family-clustered contrasts (analysis/repair_audit_v2/items.csv; family bootstrap, fixed seed)
+_it = _pd.read_csv(ROOT / "analysis/repair_audit_v2/items.csv")
+_it = _it[_it.arm.isin(["repaired", "control"]) & _it.cons_usable.astype(str).isin(["True", "False"])].copy()
+_u = (_it.cons_usable.astype(str) == "True").values.astype(float)
+_arm = (_it.arm == "repaired").values; _mod = _it.assigned_model.values; _fam = _it.families.values
+_models = list(_np.unique(_mod)); _w = {m_: (_mod == m_).mean() for m_ in _models}
+_fams = list(_np.unique(_fam)); put("p17_nfam", len(_fams))
+_S = _np.zeros((len(_fams), len(_models), 2)); _N = _np.zeros_like(_S)
+_fi = {f_: i_ for i_, f_ in enumerate(_fams)}
+for _j in range(len(_it)):
+    _S[_fi[_fam[_j]], _models.index(_mod[_j]), 0 if _arm[_j] else 1] += _u[_j]; _N[_fi[_fam[_j]], _models.index(_mod[_j]), 0 if _arm[_j] else 1] += 1
+def _est_std(wt):
+    s_ = (wt[:, None, None] * _S).sum(0); n_ = (wt[:, None, None] * _N).sum(0)
+    if (n_ == 0).any(): return _np.nan
+    r_ = s_ / n_; return sum(_w[m_] * (r_[k_, 0] - r_[k_, 1]) for k_, m_ in enumerate(_models))
+def _est_raw(wt):
+    s_ = (wt[:, None, None] * _S).sum((0, 1)); n_ = (wt[:, None, None] * _N).sum((0, 1)); r_ = s_ / n_; return r_[0] - r_[1]
+_rng = _np.random.default_rng(20261105)
+_bs, _br = [], []
+for _ in range(4000):
+    _wt = _np.bincount(_rng.integers(0, len(_fams), len(_fams)), minlength=len(_fams)).astype(float)
+    _bs.append(_est_std(_wt)); _br.append(_est_raw(_wt))
+_one = _np.ones(len(_fams)); _bs = _np.array(_bs)
+_pp("p17_std", _est_std(_one), *_np.nanpercentile(_bs, [2.5, 97.5])); _pp("p17_fcl", _est_raw(_one), *_np.percentile(_br, [2.5, 97.5]))
+# leaked-chip rate on the confirmation guard run (declared lexical rule: a bracketed cue token echoed in the sentence)
+_pg = _pd.read_parquet(ROOT / "analysis/guard_wc/paired_G1.parquet")
+_el = _pg[_pg.strict_P0 == 1]; _chg = _el[_el.text_P0 != _el.text_arm]
+_lk = lambda t_: t_.str.contains(r"\[", regex=True)
+kn("lk_chg", int(_lk(_chg.text_arm).sum()), len(_chg))
+_pa_ = _pg[_pg.strict_arm == 1]; _p0_ = _pg[_pg.strict_P0 == 1]
+kn("lk_arm", int(_lk(_pa_.text_arm).sum()), len(_pa_)); kn("lk_p0", int(_lk(_p0_.text_P0).sum()), len(_p0_))
+put("pf_chg_n", len(_chg)); put("pf_chg_k", int((_chg.strict_arm != 1).sum()))
+put("pf_chg_ub", f"{100 * (1 - 0.025 ** (1 / len(_chg))):.0f}")  # exact two-sided 95% upper bound for 0 of n
+# joint-pass repair rates (guard_baseline/arm_metrics.csv)
+_am = {(r["set"], r["arm"], r["metric"]): r for r in _csv.DictReader((ROOT / "analysis/guard_baseline/arm_metrics.csv").open())}
+for _st, _t in (("disc", "gd"), ("wc", "gw")):
+    _r = _am[(_st, "G1", "joint_repair")]; kn(f"{_t}_jrep", int(float(_r["k"])), int(float(_r["n"]))); put(f"{_t}_jrep", f"{100 * float(_r['estimate']):.1f}")
+    put(f"{_t}_jgain", f"{100 * float(_am[(_st, 'G1', 'joint_gain')]['estimate']):.2f}")
+# cue replication interval for the base coding, derived-reversal intervals
+put("t4_wc_base_lo", _f(_b["ci_low"])); put("t4_wc_base_hi", _f(_b["ci_high"]))
+_f1p = {(r["dimension"], r["arm"]): r for r in _csv.DictReader((_fr / "default_profiles/followup/f1_price.csv").open()) if r["mode"] == "arb"}
+for _dim, _t in (("polarity", "pol"), ("politeness", "pt")):
+    for _arm_ in ("bare", "chip", "word"):
+        put(f"fr_{_t}_{_arm_}_lo", f"{float(_f1p[(_dim, _arm_)]['lo']):.1f}"); put(f"fr_{_t}_{_arm_}_hi", f"{float(_f1p[(_dim, _arm_)]['hi']):.1f}")
+# chip vs word: which dimensions were declared equivalent (CI within +-5 pp) in analysis/chip_controls
+_eq = [k for k, v in _cd.items() if v["vs_nl"].startswith("NL equals")]
+put("cc_eq_n", len(_eq)); put("cc_eq_max", f"{100 * max(abs(_cd[k]['chip1_minus_nlcue']) for k in _eq):.1f}")
+put("cc_pol_chipgap", f"{100 * _cd['polarity']['chip1_minus_nlcue']:.1f}")
 
 
 def esc(v: str) -> str:

@@ -1410,6 +1410,8 @@ _miss = [m_ for m_ in _or["judge_missed_mutants"] if m_["op"] != "booster_insert
 assert sorted(m_["op"] for m_ in _miss) == ["speech_act_to_question", "time_shift", "time_shift"]
 put("orr_nboost", _or["booster_only"]["n_mut"], _OR, "int")
 put("orr_nmiss", len(_miss), _OR, "int")
+put("orr_j_mut_ne_k", _oh["judge_mut"]["k"], _OR, "int")
+put("orr_j_mut_ne_den", _oh["judge_mut"]["n"] - 1, _OR + " (one equivalent mutant removed from the denominator)", "int")
 import csv as _csv
 _rr = [r_ for r_ in _csv.DictReader(open(ROOT / "analysis/oracle_real/real_rows.csv")) if r_["kind"] == "mutant" and r_["op"] != "booster_insert"]
 put("orr_nops", len({r_["op"] for r_ in _rr}), "analysis/oracle_real/real_rows.csv", "int")
@@ -1517,6 +1519,9 @@ _ar = json.load(open(_AC))
 _h = _ar["human_vs_arbiter"]["per_coding"]
 put("p19_arb", _h["p"], str(_AC), "pct")
 put("p19_arb_k", _h["k"], str(_AC), "int"); put("p19_arb_n", _h["n"], str(_AC), "int")
+put("p19_arb_lo", _h["ci"][0], str(_AC), "pct"); put("p19_arb_hi", _h["ci"][1], str(_AC), "pct")
+put("p19_cy_nlab", _ar["can_you"]["codings_with_label"], str(_AC), "int")
+assert _ar["codings_with_label"] == _h["n"] + _ar["can_you"]["codings_with_label"]
 put("p19_kappa", _ar["human_vs_arbiter"]["kappa"], str(_AC), "f2")
 put("p19_j1", _ar["human_vs_J1"]["per_coding"]["p"], str(_AC), "pct")
 put("p19_j2", _ar["human_vs_J2"]["per_coding"]["p"], str(_AC), "pct")
@@ -1525,6 +1530,21 @@ put("p19_nann", len(_ar["annotators"]), str(_AC), "int")
 _cy = _ar["can_you"]["per_coding_share"]["request/command"]
 put("p19_cy", _cy["p"], str(_AC), "pct"); put("p19_cy_k", _cy["k"], str(_AC), "int"); put("p19_cy_n", _cy["n"], str(_AC), "int")
 put("p19_cy_items", _ar["can_you"]["items"], str(_AC), "int")
+# BURN r5: arbiter check at item level (coders agree), chance baseline, by arbiter side; equivalent mutant; per-contrast families
+_pi = _ar["human_vs_arbiter"]["per_item_when_coders_agree"]
+put("p19_item_k", _pi["k"], str(_AC), "int"); put("p19_item_n", _pi["n"], str(_AC), "int")
+put("p19_item", _pi["p"], str(_AC), "pct")
+_wl, _wh = wilson(_pi["k"], _pi["n"])
+put("p19_item_lo", _wl, str(_AC) + " (Wilson, items)", "pct"); put("p19_item_hi", _wh, str(_AC) + " (Wilson, items)", "pct")
+_hs_ = _ar["human_match_by_arbiter_side"]
+put("p19_sideJ1", _hs_["J1"]["arbiter_label"]["p"], str(_AC), "pct")
+put("p19_sideJ2", _hs_["J2"]["arbiter_label"]["p"], str(_AC), "pct")
+put("p19_nlab", _ar["codings_with_label"], str(_AC), "int"); put("p19_nexp", _ar["codings_expected"], str(_AC), "int")
+put("p19_nitems", _ar["arbiter_items"], str(_AC), "int")
+_fbd = json.load(open(ROOT / "analysis/hw1/summary.json"))["families_by_dim"]
+put("hwf_act", _fbd["speech_act"], "analysis/hw1/summary.json", "int")
+put("hwf_pz", _fbd["politeness"], "analysis/hw1/summary.json", "int")
+put("hwf_pol", _fbd["polarity"], "analysis/hw1/summary.json", "int")
 
 _IC = ROOT / "analysis/intent_check/summary.json"
 _ic = json.load(open(_IC))

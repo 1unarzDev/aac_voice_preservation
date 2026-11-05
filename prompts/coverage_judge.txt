@@ -1,0 +1,18 @@
+You compare a DRAFT sentence with two sentences, VERSION A and VERSION B, that differ on one aspect on purpose.
+
+VERSION A: {A}
+VERSION B: {B}
+DRAFT: {draft}
+
+Aspect: {dim}
+{question}
+Options: {options}
+
+Return:
+- "value": the option the DRAFT expresses for this aspect (use only the options above; unclear/mixed if it does not commit).
+- "event_A": does the DRAFT have the same event and role structure as VERSION A: same predicate (what is done or said) and the
+  same participants in the same roles (who does what to whom/what)? Ignore the aspect above (A and B differ on it on purpose),
+  ignore added or dropped detail such as places, times of day, adjectives or objects that are not the point, and ignore tense
+  unless the aspect is time. Answer "yes", "partly" (same participants but a different predicate, or the reverse), or "no".
+- "event_B": the same question for VERSION B.
+{extra_block}Output JSON only.

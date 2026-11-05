@@ -5,31 +5,31 @@
 
 \subsection{What the evidence establishes}\label{sec:disc-summary}
 
-Three results carry the paper, and one measurement result qualifies how far they reach.
+Three results establish the commitment filter, and one result, the writer-intent study, is the paper's main finding and shows how far the filter reaches.
 First, the affirmative default is a property of the model family, not of one prompt: with bare keywords every one of the \jmbreadthModels{} models (\jmbreadthFamilies{} families) chooses the affirmative reading in at least \jmbreadthMinAff{}\% of inputs, and without the prompt legend the pooled share is still \jmlegendNoLegendAff{}\% [\jmlegendNoLegendAffLo{}, \jmlegendNoLegendAffHi{}].
 We do not present the direction of this bias as new; it builds on the positivity bias that Chen et al.\ report for keyword-to-sentence generation about negative commonsense facts~\cite{chen2023say}, adds the base rate in human-written keyword messages, and prices the default per dimension.
 At the human base rate of negation in keyword messages (\jmtTwoNegBase{}\%), always committing to the default leaves \jmfOneRevPolBare{} silent polarity reversals per 1,000 messages.
 Second, a one-token cue removes most of that cost: with the cue on every message, polarity reversals fall to \jmfOneRevPolChip{} (chip) or \jmfOneRevPolWord{} (plain word) per 1,000, politeness reversals from \jmfOneRevPoliteBare{} to \jmfOneRevPoliteChip{} and \jmfOneRevPoliteWord{}, and chip plus guard raises speech-act restoration from \jmfOneActRestoreChip{}\% to \jmfOneActRestoreChipG{}\%.
 An irrelevant control cue does not do this (Section~\ref{sec:default}).
-Third, the guard that repairs a failed draft by deletion raises speech-act restoration on the same items from \jmfOneActRestoreChip{}\% to \jmfOneActRestoreChipG{}\% (its transfer to fresh families is restated from our earlier paper in Section~\ref{sec:guard}), and the blind repair audit was inconclusive on usability: the difference was \jmpOneSevenDiffUsable{} points with interval \jmpOneSevenDiffUsableLo{} to \jmpOneSevenDiffUsableHi{}, which neither shows nor excludes a cost (Section~\ref{sec:guard}).
-Against each repair's own failed original, the audit found large gains in preserved meaning (\jmpOneSevenOrigPres{} points) and fewer invented stances (\jmpOneSevenOrigStance{} points).
+Third, the recapped guard (Section~\ref{sec:guard}), which repairs a failed draft by deletion, lowers the clinically weighted failure rate from \jmslpWGuardBase{}\% to \jmslpWGuardG{}\%; in the blind repair audit repairs were usable in \jmpOneSevenRepUsable{}\% of cases against \jmpOneSevenCtlUsable{}\% for controls (difference \jmpOneSevenDiffUsable{} points, interval \jmpOneSevenDiffUsableLo{} to \jmpOneSevenDiffUsableHi{}), so a usability cost could not be excluded.
+Against each repair's own failed original, repairs preserved more meaning (\jmpOneSevenOrigPres{} points, interval \jmpOneSevenOrigPresLo{} to \jmpOneSevenOrigPresHi{}, $p=\jmpOneSevenOrigPresP{}$).
 
 The qualifying result is that these gains concern a floor, not the target.
 Writers accepted \jmpOneEightAcceptYesK{} of \jmpOneEightAcceptN{} drafts as written, and among drafts whose critical commitment the judge had marked correct, \jmwmRightROne{}\% were still not the version the writer intended (\jmwmRightROneK{} of \jmwmRightROneN{}).
 The reasons were compression loss and misresolved events or roles, not added content: in \jmwmDroppedUnrecShare{}\% of the rejected cases the writer's sentence contained words absent from the keywords, so no model could have recovered them, and \jmwmRightSubst{}\% of the judge-correct rejections were event or role substitutions (who does what to whom).
 Added content accounted for \jmwmAdded{}\% of primary reasons.
 A cue nevertheless lifts the match to the writer's intended version from \jmpOneEightMatchBare{}\% to \jmpOneEightMatchChip{}\% (\jmpOneEightCueGain{} points, interval \jmpOneEightCueGainLo{} to \jmpOneEightCueGainHi{}, clustered over \jmpOneEightWriters{} writers), so the cue is the most effective single input measured here while remaining far from sufficient.
-We therefore read critical-commitment preservation as a hard filter that a draft must pass before it is offered, and the coverage of the writer's whole intended message, per tap and per draft read, as the objective that remains open (Section~\ref{sec:future}).
+We therefore read critical-commitment preservation as a necessary filter that a draft must pass before it is offered, and the coverage of the writer's whole intended message, per tap and per draft read, as the objective that remains open (Section~\ref{sec:future}).
 
 \subsection{Design implications for AAC}\label{sec:implications}
 
 The implications below follow from the measured results and from the requirement changes that two paid design consultants who use AAC proposed after reviewing the requirements and stored example outputs (Section~\ref{sec:req-revisions}).
 We report the consultants' input as changes to the requirement list; their experiences are not data and the list remains our proposal.
 Table~\ref{tab:implications} states each implication with its evidence and its status.
-An implication marked \emph{measured} rests on a result in this paper; one marked \emph{consultant} was proposed by the consultants and is adopted as a requirement; one marked \emph{untested} is a design hypothesis that the studies in Section~\ref{sec:future} are built to test.
+An implication marked \emph{measured} rests on a result in this paper with human-validated labels, and one marked \emph{provisional} on machine or detector-proxy labels; one marked \emph{consultant} was proposed by the consultants and is adopted as a requirement; one marked \emph{untested} is a design hypothesis that the studies in Section~\ref{sec:future} are built to test.
 
 \begin{table}[t]
-\caption{Design implications, the evidence behind each, and its status. Statuses: measured (result in this paper), consultant (requirement proposed by the two design consultants), untested (hypothesis for future work).}
+\caption{Design implications, the evidence behind each, and its status. Statuses: measured (result in this paper with human-validated labels); provisional (machine or detector-proxy labels), consultant (requirement proposed by the two design consultants), untested (hypothesis for future work).}
 \label{tab:implications}
 \small
 \begin{tabular}{@{}p{0.04\linewidth}p{0.36\linewidth}p{0.42\linewidth}p{0.12\linewidth}@{}}
@@ -37,13 +37,13 @@ An implication marked \emph{measured} rests on a result in this paper; one marke
  & Implication & Evidence & Status \\
 \midrule
 I1 & Offer commitment cues (negation, politeness, sentence type) as first-class controls, available as a chip or as an equivalent plain word. & Polarity reversals per 1,000: \jmfOneRevPolBare{} bare, \jmfOneRevPolChip{} chip, \jmfOneRevPolWord{} word; politeness \jmfOneRevPoliteBare{}, \jmfOneRevPoliteChip{}, \jmfOneRevPoliteWord{}. Chip and word are not distinguishable on polarity and are equivalent within the pre-specified margin on politeness. & measured \\
-I2 & Do not fix one route as the default. Both routes set the same visible meaning and allow correction in place. & One consultant found the chip easier to imagine; the other answered that it depends on the access method and vocabulary layout. Neither claim is a measure of selection effort. & consultant; untested \\
+I2 & Do not fix one route as the default. Both routes set the same visible meaning and allow correction in place. & Consultant views differed between a preference for the chip and a dependence on the access method and vocabulary layout. Neither view is a measure of selection effort. & consultant; untested \\
 I3 & A generated sentence is a draft. It is spoken only after the person approves it, can be inspected privately, edited or cancelled, and the original selection can always be spoken directly. & Proposed independently by both consultants as a sixth requirement (R6). Writers accepted \jmpOneEightAcceptYesK{} of \jmpOneEightAcceptN{} drafts as written, so unapproved speech would voice a draft the writer would change in nearly every case. & consultant; measured \\
 I4 & Keep exact-copy as the default for fully typed sentences; rewriting needs an explicit request, a visible proposed change and approval. & Both consultants. Our studies cover keyword input only, so this is a scope boundary, not a result. & consultant \\
 I5 & Where a draft must choose between readings, show a small number of meaningfully different drafts with the difference highlighted, and reserve a focused question for cases that block any useful draft. & Cue-supplied match to the intended version is \jmpOneEightMatchChip{}\%; the remainder is event, role and detail the cue does not carry. Asking at a fixed budget does not beat random choice of where to ask (I7). Both consultants asked for differing drafts or a targeted choice. & consultant; untested \\
 I6 & Add event and role structure (who does what to whom) to the commitment model, alongside the seven dimensions. & \jmwmRightSubst{}\% of judge-correct rejections were event or role substitutions; both consultants independently asked that relations be preserved. & measured; consultant \\
-I7 & Do not allocate effort to ask-when-uncertain policies. Supply the cue instead. & Ask policies do not beat gated-random asking at a 10\% budget: prior-ranked \jmdpAskPriorPol{} [\jmdpAskPriorPolLo{}, \jmdpAskPriorPolHi{}], gated-random \jmdpAskRandPol{} [\jmdpAskRandPolLo{}, \jmdpAskRandPolHi{}], a CLAM-style gate \jmclamPol{} [\jmclamPolLo{}, \jmclamPolHi{}] polarity reversals per 1,000, against \jmdpAlwaysCommitPol{} for always-commit. Minimum detectable difference \jmdpMdePol{} per 1,000. & measured (null of limited power) \\
-I8 & Spend cue taps by clinical severity as well as frequency. & Two SLPs rated negation errors \jmslpNegSeverity{} of 5 and would block them (\jmslpNegBlock{}\% of ratings). Severity weights: polarity \jmwPol{}, speech act \jmwAct{}, politeness \jmwPolite{}. Speech act is \jmwShareAct{}\% of weighted failure under always-commit because it is frequent (detector-proxy labels, provisional). & measured (n=\jmdesignSlp{} experts) \\
+I7 & Under the tap arithmetic, prefer supplying the cue to ask-when-uncertain policies; selection effort is unmeasured. & Ask policies do not beat gated-random asking at a 10\% budget: prior-ranked \jmdpAskPriorPol{} [\jmdpAskPriorPolLo{}, \jmdpAskPriorPolHi{}], gated-random \jmdpAskRandPol{} [\jmdpAskRandPolLo{}, \jmdpAskRandPolHi{}], a CLAM-style gate \jmclamPol{} [\jmclamPolLo{}, \jmclamPolHi{}] polarity reversals per 1,000, against \jmdpAlwaysCommitPol{} for always-commit. Minimum detectable difference \jmdpMdePol{} per 1,000. & measured (null of limited power) \\
+I8 & Spend cue taps by clinical severity as well as frequency. & Two SLPs rated negation errors \jmslpNegSeverity{} of 5 and would block them (\jmslpNegBlock{}\% of ratings). Severity weights: polarity \jmwPol{}, speech act \jmwAct{}, politeness \jmwPolite{}. Speech act is \jmwShareAct{}\% of weighted failure under always-commit because it is frequent (detector-proxy labels). & severity weights measured (n=\jmdesignSlp{} experts); speech-act share provisional \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -62,9 +62,12 @@ The SLPs reflect the same caution from the clinical side: they judged \jmslpAccR
 The second is the choice between asking and cueing (I5, I7).
 Ask policies are attractive because a question costs one turn.
 Our comparison shows no resolvable advantage of any tested policy over gated-random asking at the same budget, and in our machine-only checks the model's own uncertainty did not reliably mark the inputs at risk.
-Giving the writer the cue as a standing control is the efficient option on the dimensions we measured.
+By the tap arithmetic, giving the writer the cue as a standing control is the cheaper option on the dimensions we measured; selection effort, scanning order and reading cost were not measured, so this is not an efficiency claim for any access method.
 Reading cost is the unmeasured side of this trade: a set of differing drafts replaces taps with reading, and whether writers who use scanning, switches or gaze can catch a wrong draft in a set is untested.
 The approval gate presupposes that they can.
+
+\paragraph{User diversity and authorship.}
+The implications do not describe one kind of AAC user. Access method (direct selection, scanning, switch, gaze), language profile (aphasia or motor-only impairment) and literacy change how a draft can be read, how a cue can be supplied and what an error costs, and we studied none of them. Unusual, blunt or very short messages are legitimate messages and not a deficit to be smoothed; the exact-copy default and the first action ``speak the original selection'' protect the person's authorship, not only safety.
 
 \paragraph{Implications for evaluation practice.}
 The measuring instrument is itself a result.
@@ -85,15 +88,23 @@ They are not AAC users, and the writer-intent results (acceptance, intended-vers
 We make no claim of benefit to AAC users and no claim about how AAC users would write keywords, which cues they would use or how they would review drafts.
 The \jmdesignSlp{} speech-language pathologists are an expert review of a fixed set of outputs, not a population estimate, and their agreement statistics describe this pair.
 The \jmdesignConsultants{} consultants are not a sample of AAC users; their feedback shaped the requirements, concerned a text-based design only, and does not establish what AAC users in general want.
+They also identified defects in the review materials (Section~\ref{sec:req-revisions}); we treated these as defects of the materials and changed the requirements accordingly, so their ratings are not used as evidence for any effect.
+
+\paragraph{Ecological validity.}
+In this study the keywords are chosen by writers from a sentence they have already composed, with unconstrained input and no time pressure. AAC keyword input is generated without a finished sentence in hand, under motor, vocabulary-layout and time constraints, and by people with different language profiles (for example aphasia, cerebral palsy or ALS). The intended-version match (bare to cue) and the acceptance rate cannot be assumed to transfer to that input, and we do not claim that they do. The approval gate also presupposes that the person can notice a wrong draft, which is untested for scanning, switch and gaze users.
 
 \paragraph{Scale and status of the replication.}
 The human-written pair replication has \jmhwChipGainWriters{} to \jmhwAffShareWriters{} writers per contrast and is exploratory; we claim direction and consistency across writers and models (the chip gain over a non-critical cue is \jmhwChipGain{} points [\jmhwChipGainLo{}, \jmhwChipGainHi{}] over \jmhwChipGainFamilies{} families), not interval width.
 The study is pre-specified and git-timestamped; it is not pre-registered.
 
+\paragraph{The reason classifier.}
+The finding that no output added content (\jmwmAdded{}\% of primary reasons) depends on a post-hoc reason classifier whose rules were written after the items were seen and that was checked against one LLM hand coder on \jmwmHandN{} items (\ensuremath{\kappa}=\jmwmHandKappa{}). We read it as ``added content was not detected'' and not as proof of absence. % TODO-AUTHOR: a second human coder on a held-out check would remove this limit.
+The necessity argument also leans on judge labels (judge agreement with writers is low, \ensuremath{\kappa}=\jmpOneEightKappa{}); it is supported at the other end, where all \jmwmWrongNotIntK{} of \jmwmWrongNotIntN{} judge-failed drafts rated by writers were not the intended version.
+
 \paragraph{The usability audit.}
-The interval includes zero but is wide: the lower bound is \jmpOneSevenDiffUsableLo{} points, and the repaired texts are less often usable and preserving together than controls (\jmpOneSevenDiffUsPres{} points).
-Control items are easier, so the gap is confounded with item difficulty and we do not read it as a cost of repair.
-We therefore describe the audit as inconclusive, with the interval shown, and not as ``no cost'' or ``as good as controls''.
+The interval includes zero and its lower bound is \jmpOneSevenDiffUsableLo{} points, so the finding is the absence of a detectable cost under the frozen rule, not equivalence with controls; the audit was not powered to exclude a difference of that size.
+Repaired texts are less often usable and preserving together than controls (\jmpOneSevenDiffUsPres{} points), and control items are easier, so the gap is confounded with item difficulty.
+We therefore report that a usability cost could not be excluded, with the interval shown, and neither ``no cost'' nor ``as good as controls''.
 Repairs of the smallest local model are usable in \jmpOneSevenGemmaUsable{}\% of cases (\jmpOneSevenGemmaUsableK{} of \jmpOneSevenGemmaUsableN{}), which bounds where the guard can be recommended.
 Each item was rated by \jmdesignRatersPerItem{} independent raters, all classmates.
 
@@ -111,8 +122,7 @@ The reversals-per-1,000 arithmetic assumes the asked person supplies the cue; th
 \paragraph{Scope of the system studied.}
 All inputs are English text keyword strings; we did not study speech output, access methods, vocabulary layout, prediction interfaces, multi-turn context or sustained use.
 Model outputs come from specific model versions and a hosted API that does not honour a random seed, so exact outputs are not reproducible even though the stored outputs, judgments and analyses are.
-% SLOT: add one sentence each for the pending human checks (treated outputs, source labels) and the intent-coverage pilot once their results exist.
-Until those human checks return, the treated-output and source-label results above rest on machine labels.
+The speech-act and politeness base rates and the source labels of the elicitation sample rest on detector-proxy and machine labels (marked provisional where used); the frontier pilots in Appendix~\ref{sec:frontier} are machine-labelled and unchecked by people. All other results reported here have a human check.
 
 \subsection{Ethics and positionality}\label{sec:ethics-positionality}
 
@@ -120,7 +130,7 @@ Annotators were adult non-author university classmates who gave consent and rece
 They labelled and audited model outputs; some also chose keywords and wrote sentence pairs that we release under CC~BY~4.0 with their consent.
 We collected no personal data, no demographic, health or disability information, and no recordings; participants are identified only by an ID, could stop at any time and were paid for the time spent.
 Two speech-language pathologists were paid expert annotators of study materials, working anonymously under a written professional-services agreement; the data concern the outputs, not the raters.
-Two paid design consultants who use AAC were engaged who reviewed requirements and examples under a written consulting agreement. This was design consultation, not research participation, and we (the authors) decided that it was; we did not collect, analyse or report their experiences, and we report only which requirements changed and why.
+The consultants did not review the analysis or the claims of this paper. Two paid design consultants who use AAC were engaged who reviewed requirements and examples under a written consulting agreement. This was design consultation, not research participation, and we (the authors) decided that it was; we did not collect, analyse or report their experiences, and we report only which requirements changed and why.
 As independent researchers we did not seek an institutional review determination, and we make no claim of approval or exemption.
 A study that recruits AAC users to use or evaluate a system requires institutional review before recruitment, and none is reported here.
 
@@ -140,6 +150,7 @@ Our consultants and SLPs shaped requirements and severity weights but did not re
 \subsection{Future work}\label{sec:future}
 
 \paragraph{A study with AAC users.}
+Co-investigation with AAC users, from the choice of tasks to the interpretation of results, is the precondition we set for any deployment claim.
 The central open question is whether the results transfer to the people for whom the tools are intended.
 A study with AAC users, under institutional review and with an access-method-aware protocol, would test what this paper cannot: which cues users choose to supply and in which route; how often they can detect a wrong draft in a single draft and in a set; the reading and selection effort for scanning, switch, eye-gaze and direct-touch users; whether exact-copy and approval gates are used as the consultants expect; and whether users want the system to learn preferences from a single approval, which the consultants cautioned against.
 The consultants also noted that the chip and plain-word routes need a working prototype with real navigation and scanning order to compare, because our evidence on the two routes concerns meaning restored, not effort.

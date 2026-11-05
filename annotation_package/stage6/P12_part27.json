@@ -1,0 +1,1868 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 64,
+ "for": "14de3722",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-9d2a7473",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "left light"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Sorry, I left the light on upstairs."
+    },
+    {
+     "label": "Your other version",
+     "text": "I left the light on upstairs."
+    },
+    {
+     "label": "Draft",
+     "text": "Please turn on the left light."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-677cb987",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "left light"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Sorry, I left the light on upstairs."
+    },
+    {
+     "label": "Your other version",
+     "text": "I left the light on upstairs."
+    },
+    {
+     "label": "Draft",
+     "text": "Please move the light to the left."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a72afd67",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "left light"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Sorry, I left the light on upstairs."
+    },
+    {
+     "label": "Your other version",
+     "text": "I left the light on upstairs."
+    },
+    {
+     "label": "Draft",
+     "text": "Please turn off the left light."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-93ba3673",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "left light"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Sorry, I left the light on upstairs."
+    },
+    {
+     "label": "Your other version",
+     "text": "I left the light on upstairs."
+    },
+    {
+     "label": "Draft",
+     "text": "Please do not turn on the left light."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b6bdc1dd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "left light"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Sorry, I left the light on upstairs."
+    },
+    {
+     "label": "Your other version",
+     "text": "I left the light on upstairs."
+    },
+    {
+     "label": "Draft",
+     "text": "Please turn on the left light now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-849ffcc9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "left light"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Sorry, I left the light on upstairs."
+    },
+    {
+     "label": "Your other version",
+     "text": "I left the light on upstairs."
+    },
+    {
+     "label": "Draft",
+     "text": "Please leave the light on the left side."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5af615a9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I put soup."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-85550d91",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I put the soup on the table."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b1ba1ae2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I put soup in the bowl."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-40c83fc0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I am putting soup."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-55a05d0b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "Did I put soup?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-dc1ea952",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I pour soup."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f42ae9e3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I put the soup in the refrigerator."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fb6247cc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "put soup"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I put the soup on the table."
+    },
+    {
+     "label": "Your other version",
+     "text": "You put the soup on the table."
+    },
+    {
+     "label": "Draft",
+     "text": "I put soup in my bowl."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-17223667",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I am carrying a bag."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-de346327",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I will carry the bag."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6679f3fc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I can carry the bag."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4608d1ce",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I carried a bag."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6092c4bf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I am not carrying a bag."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0fe398c4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I am holding a bag."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2dd7b97c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "carry bag"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[I] = I do it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I carry the bag to the museum."
+    },
+    {
+     "label": "Your other version",
+     "text": "The guide carries the bag to the museum."
+    },
+    {
+     "label": "Draft",
+     "text": "I carried a bag yesterday."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9fb0404a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-38d08e5c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you please bring a folder?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-20462145",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring your folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-12ad3a11",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring the folder now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6c3d6bdb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please let me bring the folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-50eada40",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring a folder."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e513af5a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you please bring a folder for me?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-eaff27dd",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring folder"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please bring the folder to the office."
+    },
+    {
+     "label": "Your other version",
+     "text": "Bring the folder to the office."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring the folder to the meeting."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-246b46b9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring groceries"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister brings the groceries to the kitchen."
+    },
+    {
+     "label": "Your other version",
+     "text": "I bring the groceries to the kitchen."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring the groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8db995eb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring groceries"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister brings the groceries to the kitchen."
+    },
+    {
+     "label": "Your other version",
+     "text": "I bring the groceries to the kitchen."
+    },
+    {
+     "label": "Draft",
+     "text": "Did you bring the groceries?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7b20568c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring groceries"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister brings the groceries to the kitchen."
+    },
+    {
+     "label": "Your other version",
+     "text": "I bring the groceries to the kitchen."
+    },
+    {
+     "label": "Draft",
+     "text": "I will bring groceries later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0e9510ec",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring groceries"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister brings the groceries to the kitchen."
+    },
+    {
+     "label": "Your other version",
+     "text": "I bring the groceries to the kitchen."
+    },
+    {
+     "label": "Draft",
+     "text": "Please bring the groceries now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7552e35e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring groceries"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister brings the groceries to the kitchen."
+    },
+    {
+     "label": "Your other version",
+     "text": "I bring the groceries to the kitchen."
+    },
+    {
+     "label": "Draft",
+     "text": "I will bring the groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-32ccf78c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring groceries"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My sister brings the groceries to the kitchen."
+    },
+    {
+     "label": "Your other version",
+     "text": "I bring the groceries to the kitchen."
+    },
+    {
+     "label": "Draft",
+     "text": "Please fetch the groceries."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3bc97303",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "open window"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you open the window in the lounge?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you open the window in the lounge?"
+    },
+    {
+     "label": "Draft",
+     "text": "Open the window."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-68655791",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "open window"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you open the window in the lounge?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you open the window in the lounge?"
+    },
+    {
+     "label": "Draft",
+     "text": "Could you open the window?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-417c9682",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "open window"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you open the window in the lounge?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you open the window in the lounge?"
+    },
+    {
+     "label": "Draft",
+     "text": "The open window is letting in cold air."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ad89d332",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "open window"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you open the window in the lounge?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you open the window in the lounge?"
+    },
+    {
+     "label": "Draft",
+     "text": "I will open the window."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e8ebba30",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "open window"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you open the window in the lounge?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you open the window in the lounge?"
+    },
+    {
+     "label": "Draft",
+     "text": "Open the window now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e5555954",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "open window"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Can you open the window in the lounge?"
+    },
+    {
+     "label": "Your other version",
+     "text": "Could you open the window in the lounge?"
+    },
+    {
+     "label": "Draft",
+     "text": "Get the window open."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-be043cc4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "fix car"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I fix the car in the garage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The mechanic fixes the car in the garage."
+    },
+    {
+     "label": "Draft",
+     "text": "Fix the car."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3cf15bb3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "fix car"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I fix the car in the garage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The mechanic fixes the car in the garage."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you fix the car?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3a0d9caa",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "fix car"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I fix the car in the garage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The mechanic fixes the car in the garage."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to fix the car."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1f79c855",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "fix car"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I fix the car in the garage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The mechanic fixes the car in the garage."
+    },
+    {
+     "label": "Draft",
+     "text": "I fix the car."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-baac07c6",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "fix car"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I fix the car in the garage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The mechanic fixes the car in the garage."
+    },
+    {
+     "label": "Draft",
+     "text": "Fix the car later."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2068b8c8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "fix car"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "I fix the car in the garage."
+    },
+    {
+     "label": "Your other version",
+     "text": "The mechanic fixes the car in the garage."
+    },
+    {
+     "label": "Draft",
+     "text": "Have the car fixed."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e60a4001",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[THEY] = someone else does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My friend calls the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "They called the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4ffb73ad",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[THEY] = someone else does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My friend calls the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "They are calling the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ff0d05b8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[THEY] = someone else does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My friend calls the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "They called a clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4ab74bd3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[THEY] = someone else does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My friend calls the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "They did not call the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-57cb93d4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[THEY] = someone else does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My friend calls the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "The clinic called them."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4de3b074",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call clinic"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[THEY] = someone else does it"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "My friend calls the clinic from the garden."
+    },
+    {
+     "label": "Your other version",
+     "text": "I call the clinic from the garden."
+    },
+    {
+     "label": "Draft",
+     "text": "They should call the clinic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6a07f0c5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "found book"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Thanks, I found the book in my bag."
+    },
+    {
+     "label": "Your other version",
+     "text": "I found the book in my bag."
+    },
+    {
+     "label": "Draft",
+     "text": "I found the book."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-8c527d31",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "found book"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Thanks, I found the book in my bag."
+    },
+    {
+     "label": "Your other version",
+     "text": "I found the book in my bag."
+    },
+    {
+     "label": "Draft",
+     "text": "Have you found the book?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-62ec0bd4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "found book"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Thanks, I found the book in my bag."
+    },
+    {
+     "label": "Your other version",
+     "text": "I found the book in my bag."
+    },
+    {
+     "label": "Draft",
+     "text": "The book was found."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-86c1f7f8",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "found book"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Thanks, I found the book in my bag."
+    },
+    {
+     "label": "Your other version",
+     "text": "I found the book in my bag."
+    },
+    {
+     "label": "Draft",
+     "text": "They found the book."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5e5b2ecf",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "found book"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Thanks, I found the book in my bag."
+    },
+    {
+     "label": "Your other version",
+     "text": "I found the book in my bag."
+    },
+    {
+     "label": "Draft",
+     "text": "Did I find the book?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-43dcf682",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Your other version",
+     "text": "Keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Draft",
+     "text": "Please keep the ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-11961dfc",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Your other version",
+     "text": "Keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Draft",
+     "text": "Keep the ramp clear."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1c6af040",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Your other version",
+     "text": "Keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Draft",
+     "text": "Keep the ramp where it is."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-43d175b1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Your other version",
+     "text": "Keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Draft",
+     "text": "I keep the ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7df32e86",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Your other version",
+     "text": "Keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Draft",
+     "text": "I will keep the ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e392e3d9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "keep ramp"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Your other version",
+     "text": "Keep the ramp clear at the entrance."
+    },
+    {
+     "label": "Draft",
+     "text": "Please keep to the ramp."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

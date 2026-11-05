@@ -1,0 +1,1835 @@
+{
+ "check_id": "part27",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 63,
+ "for": "3bca379f",
+ "title": "Check each draft",
+ "intro": [
+  "You will see single drafts made for your own messages, one at a time, in a mixed order. For each one, say what it says and whether you would accept it.",
+  "Some drafts are close to what you meant and some are not. If you answer No, write in the note box what is wrong."
+ ],
+ "help": [
+  {
+   "term": "What you see",
+   "text": "One draft at a time, with the keywords it was made from, the sentence you meant and your other version."
+  },
+  {
+   "term": "What does it say",
+   "text": "What I meant: it carries the message you meant. My other version: it carries the message of your other sentence. Something else: neither."
+  },
+  {
+   "term": "Would you accept it",
+   "text": "Yes as it is, yes with a small edit (a word or two), or no. If no, write in the note box what is wrong."
+  }
+ ],
+ "questions": {
+  "acc": {
+   "title": "Would you accept it as your message?",
+   "text": "If you answer No, write in the note box what is wrong (a few words).",
+   "options": [
+    {
+     "v": "yes",
+     "label": "Yes, as it is"
+    },
+    {
+     "v": "small_edit",
+     "label": "Yes, with a small edit"
+    },
+    {
+     "v": "no",
+     "label": "No"
+    }
+   ]
+  },
+  "ver": {
+   "title": "What does this draft say?",
+   "text": "Compare it with what you meant and with your other version.",
+   "options": [
+    {
+     "v": "meant",
+     "label": "What I meant"
+    },
+    {
+     "v": "other",
+     "label": "My other version"
+    },
+    {
+     "v": "else",
+     "label": "Something else"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-pd1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "The bus is late."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "meant",
+    "acc": "small_edit"
+   },
+   "fb": "It says the bus is late, which is what you meant; 'again' is missing, a small edit."
+  },
+  {
+   "item_id": "prac-pd2",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bus late"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The bus is late again."
+    },
+    {
+     "label": "Your other version",
+     "text": "The bus is not late."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the bus late?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ],
+   "expected": {
+    "ver": "else",
+    "acc": "no"
+   },
+   "fb": "It asks a question: it is neither of your two sentences, and it would need more than a small edit."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "pd-08ab5342",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please call my brother to make an appointment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3361e47b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please call my brother about the appointment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4cfcfcef",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please call your brother about the appointment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3d7c221b",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please call my brother to make an appointment now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ca5fd0ea",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please definitely call my brother to make an appointment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bb145277",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please make an appointment to call my brother."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1c36c5ca",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "call brother appointment"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please call my brother after the appointment today."
+    },
+    {
+     "label": "Your other version",
+     "text": "Call my brother after the appointment today."
+    },
+    {
+     "label": "Draft",
+     "text": "Please call the brother who has an appointment."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-fabbab82",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "show nurse card"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Show the nurse my communication card."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please show the nurse my communication card."
+    },
+    {
+     "label": "Draft",
+     "text": "Show the nurse card."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c91b94a1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "show nurse card"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Show the nurse my communication card."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please show the nurse my communication card."
+    },
+    {
+     "label": "Draft",
+     "text": "Show me the nurse card."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-1b87f56f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "show nurse card"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Show the nurse my communication card."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please show the nurse my communication card."
+    },
+    {
+     "label": "Draft",
+     "text": "Show the card to the nurse."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-98e15b7a",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "show nurse card"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Show the nurse my communication card."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please show the nurse my communication card."
+    },
+    {
+     "label": "Draft",
+     "text": "I show the nurse card."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-cf1a8064",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "show nurse card"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLAIN] = no added politeness"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Show the nurse my communication card."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please show the nurse my communication card."
+    },
+    {
+     "label": "Draft",
+     "text": "Can I show the nurse card?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b5046a26",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist booked the accessible room."
+    },
+    {
+     "label": "Draft",
+     "text": "I want to book a room with the receptionist."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5a2b892e",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist booked the accessible room."
+    },
+    {
+     "label": "Draft",
+     "text": "The receptionist booked the room for us."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-91a5a7ea",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist booked the accessible room."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you ask the receptionist whether a room is available?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-39f14c9f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist booked the accessible room."
+    },
+    {
+     "label": "Draft",
+     "text": "Please book a room with the receptionist."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9ce503a5",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist booked the accessible room."
+    },
+    {
+     "label": "Draft",
+     "text": "I want you to book a room with the receptionist."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2fb979e7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "receptionist book room"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Did the receptionist book the accessible room?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The receptionist booked the accessible room."
+    },
+    {
+     "label": "Draft",
+     "text": "The receptionist wants to book a room."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a161a132",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The report is ready for class tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the report ready for class?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9b7ada50",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The report is ready for class tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the class report ready?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e5876332",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The report is ready for class tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "When will the report be ready for class?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-be149509",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The report is ready for class tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Are you ready to report for class?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ae77a9f7",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The report is ready for class tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Was the report ready for class?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-710b371c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "report ready class"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[?] = a question"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is the report ready for class tomorrow?"
+    },
+    {
+     "label": "Your other version",
+     "text": "The report is ready for class tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the class ready for the report?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-e18b0720",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Bring a map to the picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6b3ffd39",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you bring the picnic map?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-44ae7a00",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I will bring a map for the picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0673e7b3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you bring a map to the picnic?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-12df2354",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "I'll bring a map to the picnic."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-db42c0b9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "bring map picnic"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Your other version",
+     "text": "Please bring the map to our picnic tomorrow."
+    },
+    {
+     "label": "Draft",
+     "text": "Bring the picnic map."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-a8ed9a49",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "Is the cafeteria music loud during lunch?"
+    },
+    {
+     "label": "Draft",
+     "text": "The music in the cafeteria is loud."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-121cf881",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "Is the cafeteria music loud during lunch?"
+    },
+    {
+     "label": "Draft",
+     "text": "The cafeteria has loud music playing."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bc72f037",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "Is the cafeteria music loud during lunch?"
+    },
+    {
+     "label": "Draft",
+     "text": "Could you turn down the loud music in the cafeteria?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-537f00de",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "Is the cafeteria music loud during lunch?"
+    },
+    {
+     "label": "Draft",
+     "text": "Please turn down the loud music in the cafeteria."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-62ce84f3",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "Is the cafeteria music loud during lunch?"
+    },
+    {
+     "label": "Draft",
+     "text": "The music in the cafeteria was loud."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d22fc196",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "cafeteria music loud"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The cafeteria music is loud during lunch."
+    },
+    {
+     "label": "Your other version",
+     "text": "Is the cafeteria music loud during lunch?"
+    },
+    {
+     "label": "Draft",
+     "text": "The cafeteria has loud music."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-6175ddad",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "The movie is beginning."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2aceb7e4",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "The movie begins now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2a77e056",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "The movie has begun."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-aa1f20c0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "I am beginning the movie."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-4848b981",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "The movie will begin."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-76d25473",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "The movie is starting."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-ec57ac46",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "movie begin"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[TELL] = a plain statement"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "The evening movie begins at seven."
+    },
+    {
+     "label": "Your other version",
+     "text": "Does the evening movie begin at seven?"
+    },
+    {
+     "label": "Draft",
+     "text": "When does the movie begin?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-9158c00f",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Your other version",
+     "text": "Move the speaker away from my chair."
+    },
+    {
+     "label": "Draft",
+     "text": "Please move the speaker chair."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-2e868c26",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Your other version",
+     "text": "Move the speaker away from my chair."
+    },
+    {
+     "label": "Draft",
+     "text": "I need to move the speaker chair."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-290b5231",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Your other version",
+     "text": "Move the speaker away from my chair."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you move the chair for the speaker?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bc72b808",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Your other version",
+     "text": "Move the speaker away from my chair."
+    },
+    {
+     "label": "Draft",
+     "text": "The speaker chair is moving."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-3b7d2623",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Your other version",
+     "text": "Move the speaker away from my chair."
+    },
+    {
+     "label": "Draft",
+     "text": "I will move the speaker chair."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0c720586",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "move speaker chair"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please move the speaker away from my chair."
+    },
+    {
+     "label": "Your other version",
+     "text": "Move the speaker away from my chair."
+    },
+    {
+     "label": "Draft",
+     "text": "Please let the speaker move the chair."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-795231e9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Your other version",
+     "text": "My inhaler is inside the kitchen drawer."
+    },
+    {
+     "label": "Draft",
+     "text": "The inhaler is in the drawer."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-0f6df758",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Your other version",
+     "text": "My inhaler is inside the kitchen drawer."
+    },
+    {
+     "label": "Draft",
+     "text": "Please put the inhaler in the drawer."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-32f8ceac",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Your other version",
+     "text": "My inhaler is inside the kitchen drawer."
+    },
+    {
+     "label": "Draft",
+     "text": "Can you get the inhaler from the drawer?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-36de1284",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Your other version",
+     "text": "My inhaler is inside the kitchen drawer."
+    },
+    {
+     "label": "Draft",
+     "text": "Is the inhaler in the drawer?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-5b092e56",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Your other version",
+     "text": "My inhaler is inside the kitchen drawer."
+    },
+    {
+     "label": "Draft",
+     "text": "I put the inhaler in the drawer."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-7ad50187",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "inhaler drawer"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Is my inhaler inside the kitchen drawer?"
+    },
+    {
+     "label": "Your other version",
+     "text": "My inhaler is inside the kitchen drawer."
+    },
+    {
+     "label": "Draft",
+     "text": "The inhaler is next to the drawer."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c5f16c1c",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please record the football match."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-c8b9b8e9",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you please record a football match for me?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-26c1f693",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please record the football match when it starts."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-07914b40",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please record the football match now."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-f8baa6e0",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please definitely record the football match."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-bf57a725",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please document the football match."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-d260b1b1",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Could you record a football match for me, please?"
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  },
+  {
+   "item_id": "pd-b88a78fb",
+   "blocks": [
+    {
+     "label": "Keywords you typed",
+     "text": "record football match"
+    },
+    {
+     "label": "Cue button you pressed",
+     "text": "[PLEASE] = polite"
+    },
+    {
+     "label": "What you meant (your sentence)",
+     "text": "Please record the football match on Saturday."
+    },
+    {
+     "label": "Your other version",
+     "text": "Record the football match on Saturday."
+    },
+    {
+     "label": "Draft",
+     "text": "Please make a record of the football match."
+    }
+   ],
+   "qs": [
+    "ver",
+    "acc"
+   ]
+  }
+ ]
+}

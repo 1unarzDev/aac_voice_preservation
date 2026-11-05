@@ -1,0 +1,11 @@
+An AAC (augmentative and alternative communication) user typed keywords for a sentence they want to say.
+A sentence generator will turn the keywords into one default sentence. Some aspects of meaning the keywords do not fix.
+
+Keywords: {input}
+
+Aspects (dimension: options):
+{dims}
+
+Rank the aspects from MOST to LEAST likely to be wrong or undetermined in a default reading of these keywords,
+that is, where a different value from the default would be a natural thing for the user to have meant.
+Output JSON only: {"ranking": ["<dimension>", ...]} listing every aspect above exactly once.
