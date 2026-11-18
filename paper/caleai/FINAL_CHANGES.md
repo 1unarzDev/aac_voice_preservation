@@ -65,3 +65,12 @@ Deviation: none from the frozen analysis rules; the machine-round coverage proxy
 - Positionality: "n=2 each" -> "two people per role"; consultants/SLPs described as paid reviewers; H3's "said what I meant" outcome stated as our proposal to be checked with AAC users; authors' own AAC use/clinical training not reported (stated); no acknowledgement without permission.
 - Space: trimmed other limitation/ethics wording (dropped "untreated and treated outputs" detail from Labels sentence). Stage 7 slots intact. Build clean, body ends p. 8, refs pp. 9-10; pages viewed (1, 8, 9).
 - Not fixed: member-check not reported (not returned; paper does not claim one); intro line 135 "often compose" is cited, unchanged; consultant consent/compensation wording kept brief; QUOTE-PENDING comment kept; Table 2 "per distinct request" tweak skipped.
+
+## Page-limit trim (body back on page 8, about 19 free lines)
+Cut or compressed (no numbers or macros removed except noted):
+- MRT table (Sec. 7): shortened estimand, arms, outcomes and sample-size rows; same macros.
+- Frontier limits: dropped model names, the chip/word elaboration, and the cue-value restatement; kept the 3 claims, q, and CIs.
+- Consultants paragraph: shortened; Table 4 untouched; "paid design consultants who use AAC" kept.
+- Limitations: removed caveats already in the body (strip-only, menu not run on confirmation set, duplicate "no AAC user was evaluated", "no acknowledgement without permission"); positionality and ethics kept.
+- Sec. 6.x: removed duplicate "listeners are not AAC partners" sentence, "necessary, not sufficient" line, "The cue has to come from the user", chip-vs-word polarity/time sentence, honour-rate pair (hx_chip_rate, hx_non_rate), rl_gpt agreement clause, "analysis files give same figure" parenthetical.
+- Macros no longer printed in main.tex: cc_nl (polarity/time sentence had no macro), hx_chip_rate, hx_non_rate, rl_gpt, rl_gpt_n (none used by abstract or conclusion).
