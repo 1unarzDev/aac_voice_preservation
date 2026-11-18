@@ -109,7 +109,11 @@ def bare_gens(sel):
 async def guard(sel, models=None):
     import httpx, interventions as I, runio
     bg, fams = bare_gens(sel)
-    items = {f: x for f, x in fams.items()}
+    items = {}
+    for cf in ("annotation/written/hw_candidates.jsonl", "annotation/written/hw2/hw_candidates.jsonl"):
+        for x in jl(ROOT / cf):
+            items[x["family_id"]] = x   # representative family of a shared request may be a dropped candidate (context only)
+    items.update(fams)
     # check offline which items need a call (G1 flags only supplied commitments and added politeness)
     caller = I.Caller(conc_local=2, conc_api=4, retries=3)
     out = []

@@ -1,0 +1,76 @@
+{
+ "SF01": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "Violation: drop `not` (violation = critical_match)",
+  "killed_by": [
+   "oracle_identity",
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 120 cell mismatches, e.g. (('pol-07', 'A'), 'violation', 'True', 'False')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 120 cell mismatches, e.g. (('pol-07', 'A'), 'violation', 'False', 'True')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "14/21 runs differ from frozen endpoints: expB1/violation_by_dim/gemma3-4b|politeness/rate: 0.616 != 0.384 | expC1/violation_by_dim/gemma3-4b|agent/rate: 0.969 != 0.031 | oracle_inject/violation_by_dim/identity|agent/rate: 1.0 != 0.0"
+   }
+  }
+ },
+ "SF27": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "chip1 channel emits all_chips (wrong chip set)",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "3 request files differ: pilot: key sets differ (1152) | test: key sets differ (2832) | hw: key sets differ (4028)"
+   }
+  }
+ },
+ "SF33": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "request_key no longer depends on sample_idx",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "5 request files differ: expB1: key sets differ (3136) | wb1: key sets differ (3624) | pilot: key sets differ (7800)"
+   }
+  }
+ },
+ "SF34": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "identical renders no longer merge their targets",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_hw_elic.test_score_elicitation: AssertionError: assert {'human_T1', ...', 'pos_cap4'} <= {'human_T1', ...', 'pos_cap4'}\n  \n  Extra items in the left set:\n  'human_T3'"
+   },
+   "pytest:test_hw_elic": {
+    "kind": "assert",
+    "detail": "tests.test_hw_elic.test_score_elicitation: AssertionError: assert {'human_T1', ...', 'pos_cap4'} <= {'human_T1', ...', 'pos_cap4'}\n  \n  Extra items in the left set:\n  'human_T3'"
+   },
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "5 request files differ: expB1: request 6b5a420d differs | wb1: request f9b45f8a differs | pilot: request 53fd799b differs"
+   }
+  }
+ }
+}

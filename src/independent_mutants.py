@@ -118,15 +118,30 @@ class Gem:
         self.spec = models.REGISTRY["gemini-3.1-flash-lite"]
         self.n = 0
         self.log = []
+        self.cache = {}
+        f = RUNO / "gemini_calls.jsonl"
+        if f.exists():  # reuse earlier temperature-0 responses (same op+sentence) so calls are not re-spent
+            for l in f.read_text().splitlines():
+                x = json.loads(l)
+                if not x.get("err") and x.get("out") is not None:
+                    self.cache[(x["op"], x["src"])] = x
+                self.log.append(x)
+                if not x.get("cached"):
+                    self.n += 1
 
     async def ask(self, client, op, s):
+        if (op, s) in self.cache:
+            return self.cache[(op, s)]["out"]
         if self.n >= CALL_CAP:
             return None
         self.n += 1
         req = {"prompt": PROMPTS[op].format(s=s), "temperature": 0.0, "max_tokens": 96}
         r = await GB.call(client, req, self.spec)
         txt = (r.get("raw_text") or "").strip().split("\n")[0].strip().strip('"')
-        self.log.append({"op": op, "src": s, "out": txt, "finish": r.get("finish_reason"), "err": r.get("error")})
+        ent = {"op": op, "src": s, "out": txt, "finish": r.get("finish_reason"), "err": r.get("error")}
+        self.log.append(ent)
+        if not ent["err"]:
+            self.cache[(op, s)] = ent
         return txt
 
     def valid(self, op, s, o):
@@ -155,7 +170,11 @@ async def build_async():
             pred = (lambda r: r["variant_value"] == "affirmative") if dim == "polarity" else (
                 (lambda r: r["variant_value"] == "question" and r["text"].strip().endswith("?")) if op == "q_embed" else (lambda r: True))
             got = 0
-            for r in take(dim, op, pred):
+            cand = take(dim, op, pred)
+            if op in TEMPLATE_OPS:  # polarity pool is small after exclusions: top up with non-negated texts from other dimensions
+                extra = [r for d2 in DIMS if d2 != dim for r in take(d2, op) if not B.NEG.search(r["text"]) and r["text"].strip()[-1] != "?"]
+                cand = cand + extra
+            for r in cand:
                 if got >= n:
                     break
                 if r["text_id"] in used:

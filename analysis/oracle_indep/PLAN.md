@@ -44,3 +44,11 @@ until the template applies. Gemini ops take the next shuffled items, one call pe
   lex_visible flag (mutant newly matches the baseline NEG/PAST/LATER regexes; reported as a stratum, "nobody" is NEG-visible by construction).
 - analysis/oracle_indep/draw.json: seed, pool sizes, counts by operator, call counts.
 - Not done here: judge scoring, baseline scoring, human confirmation (Part 29). Mutants are candidates until two annotators confirm.
+
+## Amendment 1 (made after the first build, which showed template ops under-filled: neg_refuse_to 6/13, neg_hardly 0/12; no outcome/judge info involved)
+- Template negation ops walk the polarity pool first, then (seeded order) non-negated, non-question texts from the other five dimension pools; the
+  template regex is the only applicability criterion. Their dimension_hint is the source dimension.
+- First-build Gemini responses (temperature 0, same op+sentence) are reused from runs/oracle_indep/gemini_calls.jsonl rather than re-called;
+  the 150-call cap counts only distinct calls actually made (first build used 106).
+- Known limitation, kept on purpose: role_passive/q_embed/paraphrase outputs from a small model can fail to change (or fail to keep) meaning;
+  that is exactly what the 2-annotator Part 29 confirmation filters, and only confirmed items count.
