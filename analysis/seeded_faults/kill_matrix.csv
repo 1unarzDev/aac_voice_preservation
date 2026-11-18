@@ -1,0 +1,7 @@
+mutant,class,file,description,killed_by_existing,pytest_all,pytest:test_analyze,pytest:test_assignments,pytest:test_frontier_multilingual_register,pytest:test_hw_elic,pytest:test_layer0,pytest:test_parts56_scorers,pytest:test_resolution,pytest:test_stage23,pytest:test_stage4,pytest:test_stage5_frontier,pytest:test_stage6_coverage,pytest:test_validate_cue_inputs,oracle_identity,oracle_injection,oracle_challenge,validator_r5_replay,validator_t9_replay,rescore_frozen_endpoints,request_rebuild
+SF01,K1,src/attribute.py,Violation: drop `not` (violation = critical_match),1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0
+SF27,K4,src/build_requests.py,chip1 channel emits all_chips (wrong chip set),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF33,K4,src/build_requests.py,request_key no longer depends on sample_idx,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF34,K4,src/build_requests.py,identical renders no longer merge their targets,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+TOTAL_KILLED,,,,2,1,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,1,3
+SCORE,,,,0.5,0.25,0.0,0.0,0.0,0.25,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.25,0.25,0.0,0.0,0.0,0.25,0.75
