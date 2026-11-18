@@ -1592,6 +1592,7 @@ def _row(prefix):
     raise KeyError(prefix)
 _neg = _row("| negation dropped/added")
 macros["slp_neg"] = str(int(float(_neg[1].split()[0]))); sources["slp_neg"] = _SLP
+macros["slp_neg_block"] = _neg[5]; sources["slp_neg_block"] = _SLP  # percent of the two raters who would block a negation change
 _sev = {n: float(_row(f"| {n}")[1].split()[0]) for n in ("politeness added/removed", "negation dropped/added")}
 macros["slp_pol_sev"] = f"{_sev['politeness added/removed']:.1f}"; sources["slp_pol_sev"] = _SLP
 _w = lambda pop, arm: float(_row(f"| {pop} | {arm} |")[4])
@@ -1604,6 +1605,10 @@ for _k_, _pop, _arm in (("slp_w_base_g", _WC, "baseline_P0"), ("slp_w_g1", _WC, 
 _acc = {a: _row(f"| {a} |") for a in ("guard_repair", "guard_original", "chip", "word")}
 macros["slp_acc_rep"] = _acc["guard_repair"][5]; macros["slp_acc_orig"] = _acc["guard_original"][5]
 macros["slp_acc_rep_k"] = _acc["guard_repair"][3].split("/")[0].strip(); macros["slp_acc_rep_n"] = _acc["guard_repair"][1]
+macros["slp_acc_rep"] = f"{100*int(macros['slp_acc_rep_k'])/int(macros['slp_acc_rep_n']):.1f}"  # exact k/n, not half-even rounded
+_t1 = _sr.split("## Task 1")[1].split("\n## ")[0]
+macros["slp_ntypes"] = str(sum(1 for l in _t1.splitlines() if l.startswith("| ") and not l.startswith("| type") and not l.startswith("|---")))
+sources["slp_ntypes"] = _SLP
 macros["slp_acc_orig_n"] = _acc["guard_original"][1]
 for _k_ in ("slp_acc_rep", "slp_acc_orig", "slp_acc_rep_k", "slp_acc_rep_n", "slp_acc_orig_n"):
     sources[_k_] = _SLP
@@ -1693,6 +1698,8 @@ _BA = "analysis/coverage_human/by_arm.csv"
 _cba = {(r["cond"], r["arm"]): r for r in _csv2.DictReader(open(ROOT / _BA))}
 put("cv_g1bare", 100 * float(_cba[("bare", "G1")]["h_cov"]), _BA, "int"); put("cv_g1chip", 100 * float(_cba[("chip", "G1")]["h_cov"]), _BA, "int")
 put("cv_c3bare", 100 * float(_cba[("bare", "C3")]["h_cov"]), _BA, "int")
+_s3 = _cct["S3_E3-G1_chip"]  # extra drafts on top of the cue tap (frozen contrast S3)
+put("cv_s3", float(_s3["diff_pp"]), _CT, "int"); put("cv_s3_lo", float(_s3["lo_pp"]), _CT, "int"); put("cv_s3_hi", float(_s3["hi_pp"]), _CT, "int")
 
 # ---------------- seeded-fault sweep (rounds 1 and 2) and the Claude re-label (each macro reads a stored analysis file)
 _SF1 = "analysis/seeded_faults/summary.json"; _SF2 = "analysis/seeded_faults/round2_summary.json"

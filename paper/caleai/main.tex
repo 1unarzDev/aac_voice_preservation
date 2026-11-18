@@ -78,10 +78,9 @@ The frozen rule returns \emph{no detectable usability cost} (the interval includ
 The audit can detect a gap of about \RES{dz_mde} points near the observed control rate, so no detectable cost is not evidence of no cost, and only this usable endpoint was the frozen decision rule.
 The texts are a hash-ordered list, not a probability sample, and controls are not item-matched to the repairs, so the gap mixes repair and item difficulty.
 Two stricter secondary endpoints, defined before the returns and uncorrected for multiplicity, do show a cost against never-failed controls: meaning preserved \RES{p17_prs_rep}\% against \RES{p17_prs_ctl}\% (\RES{p17_prs} points [\RES{p17_prs_lo}, \RES{p17_prs_hi}]) and usable \emph{and} preserving \RES{p17_up_rep}\% against \RES{p17_up_ctl}\% (\RES{p17_up} points [\RES{p17_up_lo}, \RES{p17_up_hi}]).
-Resampling the \RES{p17_nfam} families gives \RES{p17_fcl} points [\RES{p17_fcl_lo}, +\RES{p17_fcl_hi}]; standardizing to a common model mix gives \RES{p17_std} [\RES{p17_std_lo}, \RES{p17_std_hi}], exploratory, so the frozen verdict is unchanged but its margin is thin.
-The within-pair contrasts that follow are exploratory: secondary comparisons fixed before the returns, outside the frozen rule, uncorrected, on \RES{p17_pres_pairs} pairs of a repair with its own failed original (the stance contrast has \RES{p17_stance_pairs} pairs because \RES{p17_stance_unk} original had no decided stance rating).
+The within-pair contrasts that follow are exploratory: secondary comparisons fixed before the returns, outside the frozen rule, uncorrected, on \RES{p17_pres_pairs} pairs of a repair with its own failed original.
 Against its own failed original, a repair keeps the meaning in \RES{p17_pres_only} of \RES{p17_pres_pairs} pairs and the original in none (+\RES{p17_pres} points [\RES{p17_pres_lo}, \RES{p17_pres_hi}], exact sign test $p=\RES{p17_pres_p}$; the other \RES{p17_pres_same} pairs are unchanged on meaning), and it removes invented stance (a meaning, certainty, politeness or speaker the input did not give) in \RES{p17_stance_only} of \RES{p17_stance_pairs} pairs and adds it in none (\RES{p17_stance} points [\RES{p17_stance_lo}, \RES{p17_stance_hi}], $p=\RES{p17_stance_p}$).
-Repairs are not more usable than their originals (paired usable \RES{p17_of_use} points [\RES{p17_of_use_lo}, +\RES{p17_of_use_hi}]).} % PART17 (filled)
+} % PART17 (filled)
 \newcommand{\slotIntent}{This first, post hoc test is a consistency check, close to definitional, and differs from acceptance as written with no edit: writers named the version they meant in \kof{p18_h1_ok} outputs whose critical value the judge scored correct, against \kof{p18_h1_bad} of those it scored wrong (Section~\ref{sec:human}).
 } % PART18 (filled)
 \newcommand{\slotBaseline}{The no-feedback baseline (G1r) keeps the monitor, trigger and retry cap but regenerates from the original prompt with no feedback turn, at temperature 0.7 because a temperature-0 retry repeats the first pass; the guard at the same temperature (G1t) isolates the feedback message.} % BASELINE
@@ -100,11 +99,13 @@ On bare polarity inputs (\RES{lg_n_models} models, both sources), affirmative ou
 \maketitle
 
 \begin{abstract}
-People who use AAC (augmentative and alternative communication) pick a few words, and a language model writes the sentence the app speaks, sometimes dropping a ``not''.
-Our method is a \emph{ledger} that sets each gain beside what it leaves broken, what it breaks and what it costs; we apply it to two fixes, judged by stored-text checks and by adult annotators (no AAC users took part).
+People who use AAC (augmentative and alternative communication) pick a few words, and a language model writes the sentence the app speaks as the person's own, sometimes dropping a ``not'': a silent reversal puts words in their mouth.
+Two speech-language pathologists each rated a dropped or added negation \RES{slp_neg_sev} of 5 and would block it.
+Our method is a \emph{ledger} that sets each gain beside what it leaves broken, what it breaks and what it costs in text and in design terms; we apply it to two fixes, judged by stored-text checks and by adult annotators (no AAC users took part).
 \slotListenerAbs{}
 The cleanest finding is cue restoration: a one-tap cue (a chip or a plain word) raises speech-act fidelity by +\RES{hx_p1} points [\RES{hx_p1_lo}, \RES{hx_p1_hi}] over keywords with a neutral chip, on pairs written by ten people and positive for every writer, and a second-family extractor reproduces it (+\RES{rl_p1} [\RES{rl_p1_lo}, \RES{rl_p1_hi}]).
-The judge agrees with two people on \kof{tc_crit} treated outputs; at the measured cue-supply rate ($q=\RES{vq_q}$) a supplied cue removes nearly all silent reversals in same-item regeneration, and writers rating their own intent covered +\RES{cv_tap} points more items after a tap (exploratory), with draft sets adding +\RES{cv_s3} on top; on the confirmation set the cue reached \RES{wc_act_ratio}\% of the typed-input rate, short of its pre-set 80\% line.
+At the measured cue-supply rate ($q=\RES{vq_q}$) a supplied cue removes nearly all silent reversals in same-item regeneration, and writers covered +\RES{cv_tap} points more of their intent after one tap (exploratory), the cheapest route to coverage among those compared, with extra drafts adding +\RES{cv_s3} at more reading cost; on the confirmation set the cue reached \RES{wc_act_ratio}\% of the typed-input rate, short of its pre-set 80\% line.
+Judge-correct is necessary, not sufficient: writers accepted \kof{p18_asis} drafts as written, so the person, not the model, owns the message.
 A commitment \emph{guard} is the worked case of hidden costs: it raises the joint pass rate by +\RES{gt_jgain_g1} points [\RES{gt_jgain_g1_lo}, \RES{gt_jgain_g1_hi}] on its weakest development dimension and repairs \RES{gt_rep_g1}\% of strict-check failures, yet in a \RES{p17_prim}-text human audit its repairs preserve meaning less often than never-failed controls (\RES{p17_prs} points [\RES{p17_prs_lo}, \RES{p17_prs_hi}]), although the frozen usability rule finds no detectable gap.
 The ledger turns these gains and costs into predictions that AAC users can test.
 \end{abstract}
@@ -130,9 +131,11 @@ Second: menu rewrite; this is the politeness row, where sets offering the polite
 %% =====================================================================
 \section{Introduction}
 %% =====================================================================
+A sentence an AAC app speaks is heard as the person's own, so authorship rides on every word the system adds or drops.
 People who use AAC often compose by selecting a few words or symbols, because every selection costs time and effort~\cite{valencia2023less,cai2024speakfaster}.
 LLM keyword expansion turns \kw{want go party} into a full sentence~\cite{shen2022kwickchat,cai2024speakfaster}, which a system may speak on the user's behalf, sometimes after review~\cite{hancock2020aimc,valencia2020agency}.
-But the model decides more than words: whether something happened or did not, whether the sentence asks or tells, whether it says \say{please}.
+A silent reversal then puts words in the person's mouth; two speech-language pathologists rated a dropped negation \RES{slp_neg_sev} of 5 for seriousness (Section~\ref{sec:human}).
+The model decides more than words: whether something happened or did not, whether the sentence asks or tells, whether it says \say{please}.
 Given \kw{not like medication}, a sentence that drops the negation, turns it into a question or adds politeness is fluent and wrong.
 Three kinds of fix are being explored: check the output against the user's words and regenerate on a conflict~\cite{madaan2023selfrefine,gou2024critic}, offer suggestions that span the readings the words leave open, or give the user a control over stance or context~\cite{valencia2024compa,mao2025designprobes,xiang2025socializechat}, which our one-tap cue instantiates.
 Such work commonly reports accuracy or similarity gains~\cite{cai2022abbrev,shen2022kwickchat,cai2024speakfaster}, which are real, but a gain-only report hides what a fix leaves unfixed, what it changes that was already right, and whether the repaired text is usable.
@@ -341,7 +344,6 @@ Of the results here, the guard's three frozen confirmation criteria are confirma
 \label{sec:repaircost}
 A pass checks a few labels, not a sentence.
 For \kw{\chip{ASK} \chip{YOU} \chip{PLAIN} wear headphones}, the guard turns \say{You wear headphones.} into \say{Ask you to wear headphones.}, which passes every scored predicate (Figure~\ref{fig:examples}).
-\RES{g_ask_k} of the \RES{g_ask_n} scored development repairs begin ``Ask you'' (post hoc count).
 We therefore had people judge repaired text.
 \textbf{The audit.}
 A \RES{p17_all}-text audit of new texts (\RES{p17_prim} primary: \RES{p17_texts_rep} repaired, \RES{p17_prim_ctl} never-failed controls; \RES{p17_sec} secondary: 20 original-failed and 20 strip-only texts, to separate repair from item difficulty) gave each text \RES{p17_raters} independent non-author raters, under a rule frozen before any return: a pooled interval entirely below $-$\RES{p17_margin} points kills the guard for deployment (kept as a detector); one including $-$\RES{p17_margin} but excluding 0 is a cost of uncertain size; one including 0 is no detectable cost.
@@ -356,25 +358,19 @@ The cue keeps the critical value in \RES{c_chip1}\% of development targets (\RES
 \label{sec:realistic}
 We ran the pipeline on \RES{hw_kept} minimal pairs written by \RES{hw_writers} non-author annotators and on keywords that \RES{el_annot} annotators typed for \RES{el_msgs} AACText messages.
 On the human-written pairs the cue gain replicates on all \RES{hw_chip_dims} dimensions (\RES{hw_chip_min} to \RES{hw_chip_max} points), politeness addition adds +\RES{t6_p2} points and the bare affirmative default is \RES{hw_p3}\% \ci{hw_p3} of committed answers on the first seven writers' pairs (the analysis files give the same figure as points above 50).
-Two controls on these pairs show that the missing cue, not the chip, is the lever.
-An irrelevant chip from another dimension adds little: the cue chip beats it by \RES{cc_irrel_min} to \RES{cc_irrel_max} points by dimension.
 On these pairs the same cue as a plain word (\kw{not}, \kw{please}) was declared equivalent to the chip (interval within $\pm$5 points) on \RES{cc_eq_n} of \RES{cc_nl_dims} dimensions (largest difference \RES{cc_eq_max}); the chip leads by under 1 point on polarity and time/quantity, and the word beats the chip on speech act by \RES{cc_nl_act} points.
 \paragraph{Held-out writers.}
-Four further writers wrote \RES{hx2_pairs} speech-act pairs; blind checkers passed every one (\kof{hx2_chk} checks, so no pair was rejected, which is not a measured error rate).
+Four further writers wrote \RES{hx2_pairs} speech-act pairs; blind checkers passed every one (\kof{hx2_chk} checks).
 The speech-act cue gain (cue chip minus a neutral chip, writer-clustered) is +\RES{hx_p1} points \ci{hx_p1} across \RES{hx_n_writers} writers and \RES{hx_rows} paired rows, with the wild-bootstrap interval [\RES{hx_wild_lo}, \RES{hx_wild_hi}] and the exact one-sided sign-flip $p=\RES{hx_sf_p}$, the floor for ten writers (the two-sided floor is twice that).
-Every writer's mean is positive (+\RES{hx_wm_min} to +\RES{hx_wm_max}), leave-one-out stays at +\RES{hx_loo_min} to +\RES{hx_loo_max}, and the new writers do at least as well as the first six (+\RES{hx2} \ci{hx2} on \RES{hx2_rows} rows against +\RES{hx1} \ci{hx1}).
+Every writer's mean is positive (+\RES{hx_wm_min} to +\RES{hx_wm_max}), and the new writers do at least as well as the first six (+\RES{hx2} \ci{hx2} on \RES{hx2_rows} rows against +\RES{hx1} \ci{hx1}).
 It does not help equally: Llama gains only +\RES{hx_llama} [\RES{hx_llama_lo}, \RES{hx_llama_hi}] against +\RES{hx_oth_min} to +\RES{hx_oth_max} for the other three models, \RES{hx_fam_nogain} of \RES{hx_fam_n} families show no gain, and \RES{hx_miss}\% of cue outputs still miss the writer's act (\RES{hx_chip_rate}\% honour it against \RES{hx_non_rate}\% without the cue).
 Politeness and the default still rest on six and seven writers, so for them we claim direction and consistency (every writer's mean has the same sign), not interval width; the replication is exploratory and the writers are volunteers.
-In the keyword study about one keyword set in five lost the negation (\RES{el_pol_h}\% \ci{el_pol_h}; \RES{t2_d_h}\% [\RES{t2_d_h_lo}, \RES{t2_d_h_hi}] after resampling messages and reweighting to the sampling frame), on cue-enriched messages that carry a negation.
 
 \paragraph{Defaults: a good guess with an asymmetric cost.}
 When keywords carry no negation word, the models write an affirmative sentence for \RES{t2_aff_h}\% of such human keyword sets.
 That is the Bayes-preferred guess: among human keyword sets with no negation word, the source was negated only \RES{src_t2}\% [\RES{src_t2_lo}, \RES{src_t2_hi}] of the time (this is $p$, the posterior probability of a negated source given no negation word in the keywords), so guessing affirmative is right \RES{t2_acc_h}\% of the time.
-Two people labelled \RES{src_neg_n} source messages: the detector's negated label matched on \kof{src_neg}, and none of \RES{src_nn_n} messages in the non-negated strata was negated (Wilson upper bound \RES{src_nn_ub}\%); the estimate is partly by construction because unlabelled messages take their stratum rate.
 The harm is the asymmetric cost: about \RES{src_t2_rev} of every 1,000 messages are silently reversed when the user types keywords unaided (\RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t2_rev_h_hi}] in the keyword-study posterior; Section~\ref{sec:frontier} gives two other estimates), against \RES{t2_spur_h} spurious negations, and the guess breaks even only if a reversal costs under \RES{t2_ratio_h} times a spurious negation (the odds $(1-p)/p$).
-Across estimators $p$ ranges from \RES{t2_post_h_bayes}\% (corpus-prevalence Bayes) to \RES{t2_post_c}\% (crude compressor; \RES{fr_post}\% on the frontier units), and the break-even ratio from \RES{t2_ratio_h} for human keywords to \RES{t2_ratio_c} for the compressor, so the asymmetry is the argument, not the exact $p$.
 An accuracy metric rewards this behavior, so a ledger puts a default's cost beside its hit rate.
-The default holds on the \RES{mb_nmod} models from \RES{mb_nfam} families (at least \RES{mb_bare_min}\% affirmative) and on a lite Gemini model (\RES{mb_gem_a}\% and \RES{mb_gem_c}\% on the legend arms).
 
 \subsection{Cue restoration judged by people}
 \label{sec:cuehuman}
@@ -384,21 +380,22 @@ The default holds on the \RES{mb_nmod} models from \RES{mb_nfam} families (at le
 Listeners are not AAC communication partners and comprehension is not a real-world consequence.
 \paragraph{Writers' own intent.}
 Twenty writers judged \RES{cv_items} items, randomized within writer, for whether a draft was what they meant and would send as is or with a small edit.
-One greedy draft covers \RES{cv_cg1}\% [\RES{cv_cg1_lo}, \RES{cv_cg1_hi}] of items after a tap against \RES{cv_bg1}\% [\RES{cv_bg1_lo}, \RES{cv_bg1_hi}] bare (+\RES{cv_tap} points [\RES{cv_tap_lo}, \RES{cv_tap_hi}], exploratory); three bare drafts reach only \RES{cv_bd3}--\RES{cv_be3}\% (\RES{cv_s2} points against one tapped draft, unresolved by the frozen rule, costlier per covered message).
-Draft sets add on top of a cue, not instead of it: after a tap a contrast-selected set adds +\RES{cv_s3} points [\RES{cv_s3_lo}, \RES{cv_s3_hi}] over one draft, and plain prompted diversity does as well (+\RES{cv_d3g}).
+One greedy draft covers \RES{cv_cg1}\% [\RES{cv_cg1_lo}, \RES{cv_cg1_hi}] of items after a tap against \RES{cv_bg1}\% [\RES{cv_bg1_lo}, \RES{cv_bg1_hi}] bare (+\RES{cv_tap} points [\RES{cv_tap_lo}, \RES{cv_tap_hi}], exploratory); three bare drafts reach only \RES{cv_bd3}--\RES{cv_be3}\%.
+Draft sets add on top of a cue, not instead of it: after a tap a contrast-selected set adds +\RES{cv_s3} points [\RES{cv_s3_lo}, \RES{cv_s3_hi}] over one draft.
 \paragraph{Second-family re-label.}
 Claude (Sonnet), given the production codebook prompt and only each output's text, relabelled the judge units; on the speech-act gain it gives +\RES{rl_p1} points [\RES{rl_p1_lo}, \RES{rl_p1_hi}] against +\RES{hx_p1} with the GPT judge (\RES{rl_p1_changed} of \RES{rl_p1_replaced} labels changed, all ten writers positive).
 Its critical labels match human consensus on \RES{rl_hum}\% of \RES{rl_hum_n} outputs ($\kappa=\RES{rl_hum_kappa}$) and the judge's on \RES{rl_gpt}\% of \RES{rl_gpt_n}.
-Claude also arbitrated labels and assisted analysis and writing, so this is a second-family extractor, not an independent human check.
+Claude also arbitrated labels and assisted analysis and writing, so this is no independent human check.
 
 \subsection{Two ledger columns from people: writer intent and clinical weight}
 \label{sec:human}
 \paragraph{Writer intent (first test of H1).}
 Each of \RES{p18_n_writers} writers judged \RES{p18_per_writer} outputs generated from their own pairs (\RES{p18_n_items} in all), choosing the version they meant.
 A cue raises the share matching the intended version from \RES{p18_m_bare}\% to \RES{p18_m_cue}\%, +\RES{p18_cue} points [\RES{p18_cue_lo}, \RES{p18_cue_hi}] (writer-clustered; keywords-only is a reference level, not a failure rate).
-Yet writers accepted \RES{p18_asis_k} of all \RES{p18_asis_n} outputs as written with no edit (a different test from naming the version they meant), and the judge's critical-dimension label agrees with the writer's four-way label at only $\kappa=\RES{p18_wj_kappa}$.
+Yet writers accepted \RES{p18_asis_k} of all \RES{p18_asis_n} outputs as written with no edit, and the judge's label agrees with the writer's at only $\kappa=\RES{p18_wj_kappa}$.
 Keeping the critical commitment is necessary, not sufficient.
-Among the \RES{p18_right_na_n} of those \RES{p18_asis_n} outputs whose critical value the judge scored correct (\RES{p18_right_r1_n} with a decided answer; \RES{p18_right_unsure} unsure), writers rejected \kof{p18_right_r1} as not the version meant.
+Among the \RES{p18_right_na_n} of those \RES{p18_asis_n} outputs whose critical value the judge scored correct (\RES{p18_right_r1_n} with a decided answer; \RES{p18_right_unsure} unsure), writers rejected \kof{p18_right_r1} as not the version meant; of the rejected, \RES{p18_right_dropped}\% lost detail only the writer's sentence carried (compression) and \RES{p18_right_subst}\% changed who does what (event or role) (overlapping flags from a diff classifier).
+The person, not the model, owns the message.
 \paragraph{Clinical weight.}
 Two speech-language pathologists (expert review of study materials, not a population estimate) rated how serious each of seven kinds of silent meaning change is; both rated a dropped or added negation \RES{slp_neg_sev} of 5 and would block it.
 Weighting each judge-flagged failure by the severity of its type, the guard lowers the clinically weighted failure rate from \RES{slp_wc_base}\% to \RES{slp_wc_guard}\% (confirmation) and a supplied cue lowers it on human-written pairs from \RES{slp_hw_base}\% to \RES{slp_hw_chip}\% (chip) and \RES{slp_hw_word}\% (word); on selected judge-failed items they judged repairs acceptable to speak in \kof{slp_acc_rep} rater-judgments against \kof{slp_acc_orig} for the originals (descriptive, not comparable arms).
@@ -406,9 +403,7 @@ Weighting each judge-flagged failure by the severity of its type, the guard lowe
 \subsection{Frontier limits: the cue's measured price, and what asking and uncertainty do not do}
 \label{sec:frontier}
 These results are provisional: stored outputs, machine labels resolved by a blind arbiter, the three local primary models (Gemma-3-4B, Llama-3.1-8B, Qwen2.5-7B), \RES{fr_units} exposure units.
-Three estimators of one quantity, not independent replications, put silent negation reversals per 1,000 messages at \RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t2_rev_h_hi}] (posterior, messages resampled and reweighted), \RES{fr_ac} [\RES{fr_ac_lo}, \RES{fr_ac_hi}] (model-visible, exposure units resampled) and \RES{fr_pol_bare} (bare-arm regeneration on the cue arms' items, used below).
 Supplying the cue on every message (derived: bare rate times the share not restored, regenerated on the same items) cuts polarity reversals per 1,000 from \RES{fr_pol_bare} [\RES{fr_pol_bare_lo}, \RES{fr_pol_bare_hi}] to \RES{fr_pol_chip} [\RES{fr_pol_chip_lo}, \RES{fr_pol_chip_hi}] (chip) and \RES{fr_pol_word} [\RES{fr_pol_word_lo}, \RES{fr_pol_word_hi}] (word), and politeness reversals from \RES{fr_pt_bare} to \RES{fr_pt_chip} and \RES{fr_pt_word}; the chip and the word are not distinguishable on polarity or speech act on these items; speech-act restoration is \RES{fr_sa_chip}\% with a chip and \RES{fr_sa_chipg1}\% with chip plus guard.
-Ask policies, including a CLAM-style trigger (\RES{fr_clam} reversals per 1,000 against \RES{fr_rand} for gated random), show no detectable benefit over gated-random asking after Holm correction (power limited, not equivalence).
 The cue has to come from the user.
 \paragraph{Human labels on the frontier inputs.}
 Two people per item (\RES{dp_n_ann} annotators, \RES{dp_items} items) confirmed the speech-act and politeness source labels: \RES{dp_sa_det}\% [\RES{dp_sa_det_lo}, \RES{dp_sa_det_hi}] of decided speech-act exposure units are human question or request, and \kof{dp_pt_det} politeness units are human-polite.
@@ -428,8 +423,7 @@ When keywords lost the speech-act cue, the cue-restored draft was chosen in \RES
 Estimand & Average causal excursion effect~\cite{boruvka2018excursion} on a proximal outcome of delivering the regenerated sentence versus the original, at decision points where the monitor flags a conflict, for adult AAC users who compose with LLM keyword expansion\\
 Arms, unit & Randomized per flagged message within user~\cite{klasnja2015mrt}, fixed probabilities: silent regeneration, flag-and-confirm, original; cues are a between-user factor\\
 Outcomes & Proximal: sent without edit, one-tap \say{said what I meant} on a random subset of sends. Longitudinal: weekly rates, abandonment, reliance\\
-Assumptions & Positivity by design; consistency; carryover is the main threat, so we target the excursion effect\\
-Sample size & Illustrative, typed assumptions to replace with pilot estimates: standardized effect \RES{mrt_d}, within-user correlation \RES{mrt_rho}, \RES{mrt_T} flagged points per user, 80\% power, 5\% level, about \RES{mrt_users} users; at the monitor's \RES{g_flagged}\% flag rate on constructed inputs that needs roughly \RES{mrt_msgs} messages per user\\
+Sample size & Illustrative typed assumptions: standardized effect \RES{mrt_d}, within-user correlation \RES{mrt_rho}, \RES{mrt_T} flagged points per user, 80\% power, 5\% level, about \RES{mrt_users} users (roughly \RES{mrt_msgs} messages per user at the \RES{g_flagged}\% flag rate)\\
 \bottomrule
 \end{tabular}
 \caption{The human-effect study that tests H3.}
@@ -444,23 +438,48 @@ Each prediction names what would demote it; H1 and H2 were checked post hoc, and
 \textbf{H3 (collateral).} Offline changed-correct and coverage loss predict a later drop in users' \say{said what I meant} rate; if not, evaluation of this kind should be demoted.
 H3 needs AAC users (Table~\ref{tab:mrt}).
 
-\paragraph{Design implications from two AAC-user consultants.}
-Two paid AAC-user design consultants rated our five requirements (keep a button's meaning; do not change typed text; do not quietly guess; a new button must not break what was right; an honest test screen) important, and each asked for \textbf{R6, a draft is never spoken without the person's approval}, which makes flag-and-confirm the default.
+\paragraph{What consultants told us, and what the evidence implies.}
+Two paid design consultants reviewed the requirements and ten example outputs under a written agreement (a design review, not a study; paraphrase only; no data about them). They did not review this paper or its outcome measure, did not always agree (on button versus plain word, and on rewrite and confirmation), and neither speaks for AAC users generally.
+Table~\ref{tab:consult} pairs their points, paraphrased, with the change each produced.
+% QUOTE-PENDING: C01/C02 permission for any short quotes; the consulting agreement allows anonymous acknowledgement only with permission.
+Both asked for \textbf{R6, a draft is never spoken without the person's approval}, which makes flag-and-confirm the default.
+Writers rejected judge-correct drafts for lost detail and changed roles, so the cue is offered as the person's choice, a draft waits for approval (R6), and typed sentences stay exact.
+Taps and reading drafts cost effort and attention (more under scanning or eye gaze); neither was measured.
+As design reasoning, one cue tap is the cheapest route to stored-text coverage (+\RES{cv_tap} points), and extra drafts add +\RES{cv_s3} on top at more reading cost: the smallest added step among the options we compared, as design reasoning; burden and benefit for people are untested and left to the human-effect study.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{3.7cm}@{}}
+\toprule
+Consultants' point (paraphrased) & What it changed\\
+\midrule
+The person decides when a draft is spoken; it stays a draft they can hear, edit or cancel & R6 added; flag-and-confirm is the default\\[2pt]
+\textsc{not} must attach to the action meant, not appear anywhere in the sentence & R1 scope: negation is tied to the intended action\\[2pt]
+Complete typed sentences stay exactly as typed unless the person asks for a change$^{*}$ & R2: exact-copy default; typed-sentence example added\\[2pt]
+When a choice is open (who acts, ask or tell), show it and let the person pick, keep the short words or cancel$^{*}$ & R3: differing drafts shown with the difference highlighted\\[2pt]
+Example outputs unfit to send (dropped \textsc{not}, invented event) & Items fixed; regression tests added\\
+\bottomrule
+\end{tabular}
+\caption{What two design consultants told us and what we changed. Not a study. $^{*}$Put differently by the two (one: optional Rewrite with Undo, no per-change confirmation).}
+\label{tab:consult}
+\end{table}
 
 %% =====================================================================
 \section{Limitations}
 \label{sec:limits}
 %% =====================================================================
 \emph{Human outcomes and raters.} Human outcomes are annotator judgments of study materials: listeners and raters are non-author adults, not AAC users or AAC communication partners, and comprehension is not a real-world consequence; use, agency, effort and trust are untested (Section~\ref{sec:protocol}).
-\emph{Labels and scope.} Endpoints use an LLM extractor validated against people on untreated and, for the critical field, treated outputs (added content is weakly measured), with post-outcome arbitration in the confirmation; strip-only covers one failure type; the menu was not run on the confirmation set; items are constructed, open models are at most 14B, and AACText is crowd-written fiction.
-\emph{Community involvement.} Two AAC-user design consultants and two speech-language pathologists reviewed requirements and materials (n=2 each; not a population estimate); we claim no benefit to AAC users.
-\emph{Ethics.} Twenty adult non-author volunteers recruited from the authors' university classmates, who consented and were paid, judged study materials (model outputs) as annotators; no data about the volunteers themselves were collected, no one used or was evaluated on a system, and no AAC users took part. Some also chose keywords for public AACText messages or wrote new sentence pairs, released under CC~BY~4.0 with recorded consent. As independent researchers we did not seek an institutional review determination.
+\emph{Labels and scope.} Endpoints use an LLM extractor validated against people (added content is weakly measured), with post-outcome arbitration in the confirmation; strip-only covers one failure type; the menu was not run on the confirmation set; items are constructed, open models are at most 14B, and AACText is crowd-written fiction.
+\emph{Positionality.} The authors are independent researchers in language-model evaluation, without a clinical or AAC-community partner institution.
+Two paid design consultants and two speech-language pathologists (SLPs, paid expert raters) reviewed requirements and materials (two people per role; not a population estimate); H3's ``said what I meant'' outcome is our proposal, to be checked with AAC users before use; no acknowledgement without permission. We do not report the authors' own AAC use or clinical training. No AAC user took part as a participant and none was evaluated, so we claim nothing about benefit, preference or burden for people who use AAC; effort findings are design reasoning, to be tested with them.
+\emph{Ethics.} Twenty adult non-author volunteers recruited by the authors, who consented and were paid, judged study materials (model outputs); no data about them were collected, no one used or was evaluated on a system, and no AAC users took part. Some also chose keywords or wrote sentence pairs, released under CC~BY~4.0 with recorded consent. As independent researchers we did not seek an institutional review determination.
 
 \section{Conclusion}
 The ledger is the method: it prices each fix beside its gain.
-Its cleanest finding is cue restoration: the speech-act gain (+\RES{hx_p1} points) replicates on ten writers' pairs and under a second-family extractor, a supplied cue removes nearly all silent reversals in same-item regeneration at the measured supply rate ($q=\RES{vq_q}$), and writers covered +\RES{cv_tap} points more of their intent after a tap; \slotListenerConc{} on the confirmation set the cue reached \RES{wc_act_ratio}\% of the typed-input rate against its 80\% line, and the affirmative default, right on average, is priced rather than assumed.
-The guard is the worked case of hidden costs: on the \RES{gt_fam} speech-act families, its weakest dimension, it raises the joint pass rate by +\RES{gt_jgain_g1} points (+\RES{gt_jgain_terra} to +\RES{gt_jgain_gemma} by model, an upper-leaning slice) and repairs \RES{gt_rep_g1}\% of strict-check failures, yet the human audit finds significantly lower meaning preservation than never-failed controls (Section~\ref{sec:repaircost}); deletion alone earns +\RES{gt_jgain_g1s} of the gain.
-The ledger turns these into predictions AAC users can test.
+Its cleanest finding is cue restoration: the speech-act gain (+\RES{hx_p1} points) replicates on ten writers' pairs and under a second-family extractor, a supplied cue removes nearly all silent reversals in same-item regeneration at the measured supply rate ($q=\RES{vq_q}$), and writers covered +\RES{cv_tap} points more of their intent after a tap; \slotListenerConc{} on the confirmation set the cue reached \RES{wc_act_ratio}\% of the typed-input rate against its 80\% line.
+The guard is the worked case of hidden costs: on the \RES{gt_fam} speech-act families, its weakest dimension, it raises the joint pass rate by +\RES{gt_jgain_g1} points and repairs \RES{gt_rep_g1}\% of strict-check failures, yet the human audit finds significantly lower meaning preservation than never-failed controls (Section~\ref{sec:repaircost}).
+The message is the person's own, so the cue stays theirs to give and each draft waits for their approval; the ledger turns these into predictions AAC users can test.
 An anonymized artifact rebuilds every number.
 
 %% GenAI disclosure: the lab supplies the format (placeholder).

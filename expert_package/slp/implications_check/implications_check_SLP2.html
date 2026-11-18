@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design implications check</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #111111; --muted: #3a3a3a; --line: #767676; --panel: #f3f3f3;
+    --accent: #0b4fa8; --accent-fg: #ffffff; --sel: #dbe8ff; --ok: #0a5c2b; --focus: #c25400; --chip: #fff3d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --fg: #f2f2f2; --muted: #d0d0d0; --line: #9a9a9a; --panel: #1f1f1f;
+      --accent: #8fb8ff; --accent-fg: #111111; --sel: #23365a; --ok: #7fd89c; --focus: #ffb366; --chip: #3a3016;
+    }
+  }
+  * { box-sizing: border-box; transition: none !important; animation: none !important; }
+  html { font-size: 18px; }
+  html[data-size="large"] { font-size: 23px; }
+  html[data-size="xlarge"] { font-size: 28px; }
+  body { margin: 0; background: var(--bg); color: var(--fg); line-height: 1.5;
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  a { color: var(--accent); }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--bg); padding: 8px; border: 2px solid var(--fg); }
+  .skip:focus { left: 8px; z-index: 10; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 2px solid var(--line); }
+  .bar { max-width: 1000px; margin: 0 auto; padding: 8px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+  main { max-width: 1000px; margin: 0 auto; padding: 8px 16px 80px; }
+  h1 { font-size: 1.15rem; margin: 0; }
+  h2 { font-size: 1.3rem; margin: 28px 0 8px; border-bottom: 2px solid var(--line); padding-bottom: 4px; }
+  h3 { font-size: 1.1rem; margin: 0 0 6px; }
+  label { font-weight: 600; }
+  input[type=text], select { font: inherit; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  input[type=text] { width: 9em; }
+  textarea { font: inherit; width: 100%; min-height: 3.2em; padding: 6px 8px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); }
+  button { font: inherit; padding: 6px 12px; border: 2px solid var(--fg); background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 2px; }
+  .box { border: 2px solid var(--line); background: var(--panel); padding: 10px 14px; margin: 10px 0; }
+  .card { border: 3px solid var(--line); padding: 12px 14px 14px; margin: 16px 0; background: var(--bg); }
+  .card.done { border-color: var(--ok); }
+  .card:target { border-color: var(--accent); }
+  fieldset { border: 2px solid var(--line); margin: 10px 0 0; padding: 6px 12px 10px; }
+  legend { font-weight: 700; padding: 0 6px; }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+  .opts.col { flex-direction: column; }
+  .opt { display: inline-flex; align-items: flex-start; gap: 8px; border: 2px solid var(--line); padding: 4px 10px; cursor: pointer; }
+  .opt input { width: 1.15em; height: 1.15em; margin-top: .25em; flex: none; }
+  .opt.checked { background: var(--sel); border-color: var(--accent); font-weight: 700; }
+  .ex { border-left: 6px solid var(--line); padding: 4px 12px; margin: 8px 0; }
+  .lbl { font-size: .85rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+  .sel, .sent { font-size: 1.15rem; overflow-wrap: anywhere; }
+  .sent { font-weight: 700; background: var(--panel); border: 2px solid var(--fg); padding: 8px 12px; margin: 2px 0 8px; }
+  .chip { display: inline-block; background: var(--chip); border: 2px solid var(--fg); border-radius: 6px; padding: 0 6px; margin: 0 2px; font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+  .gloss { font-size: .9rem; color: var(--muted); margin: 2px 0 6px; }
+  .note { font-size: .95rem; margin: 4px 0 0; }
+  .status { min-height: 1.4em; font-weight: 600; }
+  .meter { height: 12px; border: 2px solid var(--fg); width: 180px; background: var(--bg); }
+  .meter > div { height: 100%; background: var(--accent); width: 0; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 2px solid var(--line); padding: 4px 8px; text-align: left; vertical-align: top; }
+  .small { font-size: .9rem; color: var(--muted); }
+  .hidden { display: none; }
+  @media (max-width: 640px) { html { font-size: 17px; } }
+  @media print { header { position: static; } button { display: none; } }
+</style></head><body>
+<header><div class="bar"><h1>Design implications check</h1><span><strong>ID: SLP2</strong></span><input id="rid" type="hidden" value="SLP2">
+<button id="export" class="primary" type="button">Download CSV</button><button id="importbtn" type="button">Resume from a CSV</button>
+<input id="importfile" type="file" accept=".csv,text/csv" class="hidden" aria-label="Choose a CSV file to resume from">
+<label for="size" class="small">Text size</label><select id="size"><option value="normal">Normal</option><option value="large">Large</option><option value="xlarge">Extra large</option></select>
+<div class="small" id="prog" aria-live="polite"></div></div></header>
+<main id="main"><p class="status" id="status" role="status" aria-live="polite"></p>
+<h2>Before you start</h2>
+<div class="box"><p><strong>About 10 minutes.</strong> You rated seven kinds of meaning change earlier. Here are eight short statements that our papers draw from the materials. For each, please tell us whether it is clinically sound. You are reviewing statements about a design, not any person, and we collect nothing about you beyond your reviewer ID. Please do not type your name, workplace, clients or any personal details in the boxes.</p>
+<p>Choose <em>yes</em>, <em>yes with a caveat</em> or <em>no</em>. For the last two, a short note is welcome. A negative answer is as useful to us as a positive one. At the end there is one open box for anything clinically important that we have left out. Your answers save in this browser. Press <strong>Download CSV</strong> when you finish and return the file as described in the covering note. Please work alone.</p></div>
+<div class="card" id="c-S1"><h3>1. Selection burden under access methods</h3><p class="sent">For a person who accesses a device by switch scanning or eye gaze, every extra selection costs time and effort. A cue that fixes one meaning (for example a NOT or question button) should therefore be one selection, and worth adding only where it prevents a change of meaning that would otherwise have to be noticed and corrected.</p><p class="note"><em>Background:</em> Our studies count the cue as one tap. They did not measure selection time under scanning or eye gaze.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S1" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S1" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S1" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S1_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S1_c" data-id="S1" aria-label="S1 caveat or reason"></textarea></div><div class="card" id="c-S2"><h3>2. Reading drafts costs attention</h3><p class="sent">Reading and checking a generated draft costs the person attention and time, and more so for several drafts. A single draft by default, with further drafts only on request, is preferable to showing several drafts every time.</p><p class="note"><em>Background:</em> In one writer study, three drafts without a cue covered fewer intended messages than one draft after a one-tap cue.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S2" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S2" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S2" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S2_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S2_c" data-id="S2" aria-label="S2 caveat or reason"></textarea></div><div class="card" id="c-S3"><h3>3. Approval before speaking</h3><p class="sent">A generated sentence stays a draft until the person approves it. It is never spoken automatically, and the person can hear or inspect it privately, change it, or cancel.</p><p class="note"><em>Background:</em> Written design feedback on our requirements asked for this rule.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S3" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S3" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S3" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S3_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S3_c" data-id="S3" aria-label="S3 caveat or reason"></textarea></div><div class="card" id="c-S4"><h3>4. The cue is a choice</h3><p class="sent">The meaning cue is the person&#x27;s choice, not a requirement. The person may use a button, type the same meaning as an ordinary word, or leave it out and accept that the system must then guess or ask.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S4" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S4" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S4" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S4_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S4_c" data-id="S4" aria-label="S4 caveat or reason"></textarea></div><div class="card" id="c-S5"><h3>5. Preserving typed wording</h3><p class="sent">When the person types a whole sentence, the default is to speak it exactly as typed. Rewriting happens only on explicit request, with the proposed change visible and approved before speech.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S5" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S5" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S5" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S5_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S5_c" data-id="S5" aria-label="S5 caveat or reason"></textarea></div><div class="card" id="c-S6"><h3>6. Event and role errors matter</h3><p class="sent">Changes to who acts, when something happens, or what happens (an added event or detail) matter clinically, not only changes to negation or tone. Such errors can send the listener a different message while the sentence still reads fluently.</p><p class="note"><em>Background:</em> In your earlier severity ratings, actor switched, time changed and added content each had mean severity 4.0, 4.0 and 4.0 of 5.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S6" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S6" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S6" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S6_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S6_c" data-id="S6" aria-label="S6 caveat or reason"></textarea></div><div class="card" id="c-S7"><h3>7. Negation reversal is the most severe</h3><p class="sent">Dropping or adding a negation, so that the message says the opposite of what was meant, is the most severe of the silent changes and should be blocked rather than only flagged.</p><p class="note"><em>Background:</em> In your earlier ratings negation had mean severity 5.0 of 5, the highest of the seven types, and was marked block by both reviewers.</p>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S7" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S7" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S7" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S7_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S7_c" data-id="S7" aria-label="S7 caveat or reason"></textarea></div><div class="card" id="c-S8"><h3>8. Severity-weighted failure figures</h3><p class="sent">When failures are weighted by clinical severity instead of simply counted, the ordering of the conditions is the one the unweighted counts suggest, and a cue or guard still lowers the failure rate. Weighting each failure by the severity you rated, the share of outputs with a failure was:</p><table><caption class="small">Share of outputs with a meaning failure, in two separate sets of items. Compare rows only within a set.</caption><tr><th scope="col">Items</th><th scope="col">Condition</th><th scope="col">Counted</th><th scope="col">Weighted by your severity</th></tr><tr><td>Speech-act targets</td><td>Baseline</td><td>30.3%</td><td>22.0%</td></tr><tr><td>Speech-act targets</td><td>With the guard</td><td>18.6%</td><td>14.7%</td></tr><tr><td>Human-written pairs</td><td>Keywords with a neutral chip</td><td>71.5%</td><td>55.5%</td></tr><tr><td>Human-written pairs</td><td>With a one-tap cue (chip)</td><td>19.8%</td><td>14.9%</td></tr><tr><td>Human-written pairs</td><td>With the cue as a plain word</td><td>23.4%</td><td>17.8%</td></tr></table>
+<fieldset><legend>Is this clinically sound?</legend><div class="opts col"><label class="opt"><input type="radio" name="S8" value="yes"> <span>Yes, clinically sound</span></label><label class="opt"><input type="radio" name="S8" value="caveat"> <span>Yes, with a caveat (please write it below)</span></label><label class="opt"><input type="radio" name="S8" value="no"> <span>No (please say why below)</span></label></div></fieldset>
+<label for="S8_c" class="small">Caveat or reason (needed for "with a caveat" or "no"):</label><textarea id="S8_c" data-id="S8" aria-label="S8 caveat or reason"></textarea></div>
+<h2>Anything clinically important missing?</h2>
+<label for="free" class="small">Anything clinically important missing from these statements? (optional; no personal or client details)</label><textarea id="free" rows="5"></textarea>
+<p>Press <strong>Download CSV</strong> at the top and return the file. Thank you.</p></main>
+<script>
+const IDS = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"]; const FIXED = "SLP2";
+const $ = id => document.getElementById(id);
+let S = {rid: FIXED || "", a: {}, free: ""};
+const key = () => "implcheck_" + (S.rid || "none");
+function store(){ try{ localStorage.setItem(key(), JSON.stringify(S)); }catch(e){} }
+function load(){ try{ const j = localStorage.getItem(key()); if (j) S = Object.assign(S, JSON.parse(j), {rid: FIXED || S.rid}); }catch(e){} }
+function paint(){
+  IDS.forEach(id => { const a = S.a[id] || {};
+    document.querySelectorAll('input[name="'+id+'"]').forEach(r => { r.checked = a.v === r.value; r.closest(".opt").classList.toggle("checked", r.checked); });
+    $(id+"_c").value = a.c || ""; $("c-"+id).classList.toggle("done", !!a.v); });
+  $("free").value = S.free || ""; $("rid").value = S.rid;
+  const n = IDS.filter(i => (S.a[i]||{}).v).length; $("prog").textContent = n + " of " + IDS.length + " answered";
+}
+function need(){ return IDS.filter(i => { const a = S.a[i]||{}; return (a.v==="caveat"||a.v==="no") && !(a.c||"").trim(); }); }
+document.addEventListener("change", e => { if (e.target.name && IDS.includes(e.target.name)) { (S.a[e.target.name] = S.a[e.target.name]||{}).v = e.target.value; store(); paint(); } });
+document.addEventListener("input", e => { const id = e.target.dataset && e.target.dataset.id; if (id) { (S.a[id] = S.a[id]||{}).c = e.target.value; store(); } if (e.target.id==="free"){ S.free = e.target.value; store(); } });
+$("rid").addEventListener("input", e => { if (FIXED) return; S.rid = e.target.value.trim(); load(); paint(); });
+$("size").addEventListener("change", e => { document.documentElement.dataset.size = e.target.value; });
+const q = v => '"' + String(v||"").replace(/"/g, '""') + '"';
+function csv(){ const L = ["reviewer_id,item,sound,comment"];
+  IDS.forEach(i => { const a = S.a[i]||{}; L.push([q(S.rid), i, q(a.v||""), q((a.c||"").replace(/\s+/g," ").trim())].join(",")); });
+  L.push([q(S.rid), "FREE", '""', q((S.free||"").replace(/\s+/g," ").trim())].join(",")); return L.join("\n") + "\n"; }
+$("export").addEventListener("click", () => {
+  if (!S.rid) { $("status").textContent = "Please enter your ID first."; return; }
+  const m = need(); $("status").textContent = m.length ? "Reminder: " + m.join(", ") + " marked caveat or no without a note. The file is saved anyway." : "File saved. Thank you.";
+  const b = new Blob([csv()], {type:"text/csv"}), a = document.createElement("a");
+  a.href = URL.createObjectURL(b); a.download = "implications_check_" + S.rid + ".csv"; document.body.appendChild(a); a.click(); a.remove(); });
+$("importbtn").addEventListener("click", () => $("importfile").click());
+$("importfile").addEventListener("change", e => { const f = e.target.files[0]; if (!f) return; f.text().then(t => {
+  const rows = []; let cur = [], cell = "", inq = false;
+  for (let i=0;i<t.length;i++){ const c=t[i]; if(inq){ if(c==='"'&&t[i+1]==='"'){cell+='"';i++;} else if(c==='"') inq=false; else cell+=c; }
+    else if(c==='"') inq=true; else if(c===','){cur.push(cell);cell="";} else if(c==='\n'){cur.push(cell);rows.push(cur);cur=[];cell="";} else if(c!=='\r') cell+=c; }
+  rows.slice(1).forEach(r => { if (IDS.includes(r[1])) S.a[r[1]] = {v:r[2], c:r[3]}; else if (r[1]==="FREE") S.free = r[3]; });
+  if (!FIXED && rows[1]) S.rid = rows[1][0]; store(); paint(); }); });
+load(); paint();
+</script></body></html>
