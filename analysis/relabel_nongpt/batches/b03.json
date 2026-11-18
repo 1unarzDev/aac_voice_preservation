@@ -1,0 +1,589 @@
+{
+ "general_dimensions": {
+  "polarity": {
+   "question": "Is the main statement or request negated (not/never/no/don't)? 'mixed/unclear' if both or you cannot tell.",
+   "options": [
+    "affirmative",
+    "negated",
+    "mixed/unclear"
+   ]
+  },
+  "speech_act": {
+   "question": "What the sentence does: tells (statement), asks for information (question), asks someone to do something (request/command), declines (refusal), proposes or offers (offer/suggestion).",
+   "options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "offer/suggestion",
+    "other"
+   ]
+  },
+  "agent": {
+   "question": "Who does the main action: the speaker (I), the listener (you), both (we/let's), someone else (third party), or no doer is stated (unspecified).",
+   "options": [
+    "speaker",
+    "addressee",
+    "we/joint",
+    "third party",
+    "unspecified"
+   ]
+  },
+  "certainty": {
+   "question": "How sure the sentence sounds: plain, hedged (maybe/I think/probably), strongly certain (definitely/really/for sure). Questions and requests: n/a.",
+   "options": [
+    "plain assertion",
+    "hedged/uncertain",
+    "strongly certain/emphatic",
+    "n/a (question/request)"
+   ]
+  },
+  "politeness": {
+   "question": "Explicit politeness words only: 'please'; a softened request (could you / would you mind / if possible); thanks or apology. Else none.",
+   "options": [
+    "none",
+    "please",
+    "softened request (could you/would you mind)",
+    "thanks/apology"
+   ]
+  }
+ },
+ "items": [
+  {
+   "unit_id": "ud27bc9dbf8",
+   "text": "Does the evening train stop at the theater?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u012c4a4bc4",
+   "text": "We will move the picnic to the hall.",
+   "critical_question": "How sure does the sentence sound about its claim? plain assertion = stated as fact; hedged/uncertain = maybe, might, probably, I think; strongly certain/emphatic = definitely, really, for sure. Questions, requests or no claim = unclear/mixed.",
+   "critical_options": [
+    "plain assertion",
+    "hedged/uncertain",
+    "strongly certain/emphatic",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u18feccf73f",
+   "text": "I want to tell you that I cut a sandwich.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u2a222d0f35",
+   "text": "The underpass is between the platforms.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u72e1e6abd3",
+   "text": "I tell you the clinic is open.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "uccc4a8c6e9",
+   "text": "Is the chess club meeting?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u65b08cbc27",
+   "text": "Will you repeat that?",
+   "critical_question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+   "critical_options": [
+    "polite",
+    "plain",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "uf76407fb73",
+   "text": "Tell me how to charge my phone.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u72fc50a869",
+   "text": "I want to go to class upstairs.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u64f53461f7",
+   "text": "I need to print the housing office forms.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u0fdc615f72",
+   "text": "Is the music lower?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u73f8d8afad",
+   "text": "Please leave the green folder.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ufc426aa7be",
+   "text": "The receptionist has an accessible room with a book.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u7dc86fceea",
+   "text": "Is my brother calling?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u345c5a74e6",
+   "text": "I got a refund after the item arrived in the past.",
+   "critical_question": "When does the main event happen? past = already happened; now = happening at the moment or right now; later = in the future. Use tense and time words. No time or several = unclear/mixed.",
+   "critical_options": [
+    "past",
+    "now",
+    "later",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u724b394f37",
+   "text": "Do the lentil patties have dill in them?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ue17eb9c2bd",
+   "text": "The bus stop is at the library.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u5ff061747b",
+   "text": "I will give you a walking tour.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u6ce91acfbe",
+   "text": "I built a model glider with a balsa fuselage.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "uc10a568797",
+   "text": "Is there a class meeting?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u3c388dbb82",
+   "text": "I will tell you about the kite spool pouch.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u249fce8c21",
+   "text": "I tell laboratory goggles.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ua1ffbfb209",
+   "text": "Does the deposit cover any damage to the poles?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u58473ead61",
+   "text": "I will tell you about cabinet journals.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ue86d691160",
+   "text": "I need a repair estimate for the disposal fee.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u74e136dce1",
+   "text": "Wear headphones for your music.",
+   "critical_question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+   "critical_options": [
+    "polite",
+    "plain",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u59ae1070ee",
+   "text": "Tell the neighbor to plant the seedlings.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u320c0d4fab",
+   "text": "I want to call my brother about an appointment.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ub0af270ab6",
+   "text": "They take the route.",
+   "critical_question": "Who does the main (content) action of the sentence? speaker = I/me, incl. the speaker's own body part; addressee = you (incl. commands and 'can you ...?'); we/joint = we, let's, you and I; third party = other people or inanimate things; in 'I think X' code X's doer; unclear/mixed = no doer or several.",
+   "critical_options": [
+    "speaker",
+    "addressee",
+    "we/joint",
+    "third party",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ue2352a0071",
+   "text": "Tell my neighbor to feed the cat.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u3d49f694a5",
+   "text": "What temperature should the ointment be?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u3c19734f40",
+   "text": "Will the band play?",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u936fb0d0aa",
+   "text": "You can tell me about the ferry for bicycles.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u809ba2a20d",
+   "text": "Turn the radio on.",
+   "critical_question": "Does the sentence contain an explicit polite marker? polite = please, could you, would you (mind), thank you/thanks, sorry. plain = none of these ('can you ...?' alone is plain).",
+   "critical_options": [
+    "polite",
+    "plain",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "ua4b8a09390",
+   "text": "Tell the panel to vibrate.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u09674c7210",
+   "text": "The [TELL] garment has a velvet lining against [PLAIN].",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u422ed3a8a6",
+   "text": "The bank is closing early.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u40d1005dcc",
+   "text": "You make the lamp.",
+   "critical_question": "Is the main thing the sentence says negated (not/never/no/don't) or affirmative? Uncertainty wording like 'not sure' is unclear/mixed.",
+   "critical_options": [
+    "negated",
+    "affirmative",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "uab43ea0941",
+   "text": "Can you bring the parcel.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  },
+  {
+   "unit_id": "u591993ab0b",
+   "text": "The escalator is pulsing and making a hum, and I'm going to land on it.",
+   "critical_question": "What does the sentence do? statement = tells; question = asks for information or permission ('Can I ...?' is a question); request/command = asks the listener to do something ('Can you ...?' is a request); refusal = declines; acceptance = agrees/accepts ('Yes, I'll ...'); offer/suggestion = proposes (let's, how about). Several = unclear/mixed.",
+   "critical_options": [
+    "statement",
+    "question",
+    "request/command",
+    "refusal",
+    "acceptance",
+    "offer/suggestion",
+    "unclear/mixed"
+   ]
+  }
+ ]
+}
