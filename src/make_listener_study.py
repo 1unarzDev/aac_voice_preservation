@@ -384,12 +384,172 @@ def package(out_pkg=PKG7, out_ann=ANN, force=False, write=True):
     return {"plan": plan, "key28": key28, "key29": key29, "files": files, "units28": u28, "units29": u29}
 
 
+# ----------------------------------------------------------------------------- Part 30 listener study v2 (rules: analysis/listener2/PLAN.md)
+OUT2 = ROOT / "analysis/listener2"
+SEED2 = 20261118
+S8_SALT = "s8-20261118"
+AUDIO2 = ROOT / "annotation_package/stage8/audio"
+TTS_VENV = ROOT / "tmp/tts"
+VOICE = "en_US-lessac-medium"
+
+
+def used_families():
+    used = {d["family_id"] for d in json.loads((ROOT / "analysis/listener/draw.json").read_text())["items"]} \
+        if isinstance(json.loads((ROOT / "analysis/listener/draw.json").read_text()), dict) else \
+        {d["family_id"] for d in json.loads((ROOT / "analysis/listener/draw.json").read_text())}
+    used |= {k["family_id"] for k in jl(ROOT / "analysis/oracle_indep/key.private.jsonl")}
+    return used
+
+
+def draw2():
+    fams = load_families()
+    used = used_families()
+    rng = random.Random(SEED2)
+    sel, short, elig = [], {}, {}
+    for d in DIMS:
+        pool = sorted(f for f, x in fams.items() if x["dimension"] == d and x["human_check"]["n_pass"] >= 3 and f not in used)
+        elig[d] = len(pool)
+        rng.shuffle(pool)
+        picks = pool[:30]
+        if len(picks) < 30:
+            short[d] = len(picks)
+        for fid in picks:
+            dv = default_variant(fams[fid])
+            sel.append({"family_id": fid, "dimension": d, "nondefault": True, "intended": "B" if dv == "A" else "A", "default_variant": dv})
+        # reserve attention pool: default-intended, fresh families not drawn
+    for d in DIMS:
+        cell = [s for s in sel if s["dimension"] == d]
+        rng.shuffle(cell)
+        off = rng.randrange(4)
+        for i, s in enumerate(cell):
+            s["model"] = MODELS[(i + off) % 4]
+    sel.sort(key=lambda s: s["family_id"])
+    for i, s in enumerate(sel):
+        s["item"] = f"N{i + 1:03d}"
+    chosen = {s["family_id"] for s in sel}
+    att_pool = sorted(f for f, x in fams.items() if x["dimension"] in DIMS and x["human_check"]["n_pass"] >= 3 and f not in used and f not in chosen)
+    rng.shuffle(att_pool)
+    att = [{"family_id": f, "variant": default_variant(fams[f]), "att": f"A{i + 1:02d}"} for i, f in enumerate(att_pool[:30])]
+    OUT2.mkdir(exist_ok=True)
+    (OUT2 / "draw.json").write_text(json.dumps({"seed": SEED2, "eligible_fresh_per_dim": elig, "shortfall": short, "items": sel, "attention_pool": att}, indent=1))
+    print("eligible", elig, "shortfall", short, "N", len(sel), Counter(s["model"] for s in sel), "attention", len(att))
+    return sel, att
+
+
+def build2():
+    fams = load_families()
+    dr = json.loads((OUT2 / "draw.json").read_text())
+    sel, att = dr["items"], dr["attention_pool"]
+    outs = {}
+    for r in ("hw1", "hw2"):
+        for o in jl(ROOT / f"runs/{r}/outputs.jsonl"):
+            if o["channel"] in ("bare", "chip1") and o.get("suggestion_idx", 0) == 0:
+                outs[(o["family_id"], o["variant"], o["model"], o["channel"])] = o
+    rows, key, dropped = [], [], []
+    for s in sel:
+        fam = fams[s["family_id"]]
+        iv = s["intended"]; ov = "B" if iv == "A" else "A"; d = s["dimension"]
+        vi, vo = fam["variants"][iv]["critical_value"], fam["variants"][ov]["critical_value"]
+        vals = [fam["variants"][v]["critical_value"] for v in "AB"]
+        third = [x for x in RANK[d] if x not in vals]
+        act = ACTION[d]
+        o_third = act[third[0]] if third and third[0] in act else ACTION["polarity"]["_third"]
+        r2 = random.Random(f"{SEED2}-{s['item']}")
+        opts = [{"role": "correct", "text": act[vi]}, {"role": "opposite", "text": act[vo]},
+                {"role": "clarify", "text": CLARIFY}, {"role": "other", "text": o_third}]
+        r2.shuffle(opts)
+        topic = fam.get("topic")
+        ctx = f"Topic: {topic}" if topic else None
+        rd = [("A", "B"), ("B", "A")][r2.randrange(2)]   # order of the two readings randomised per item
+        t = {c: (outs.get((s["family_id"], iv, s["model"], c)) or {}) for c in ("bare", "chip1")}
+        if not all(t[c].get("text") and t[c].get("parse_ok", True) for c in t):
+            dropped.append({"item": s["item"], "family_id": s["family_id"], "model": s["model"], "have": {c: bool(t[c].get("text")) for c in t}})
+            continue
+        ident = norm(t["bare"]["text"]) == norm(t["chip1"]["text"])
+        for c in ("bare", "chip1"):
+            txt = t[c]["text"]
+            unit = f"{s['item']}-same" if ident else f"{s['item']}-{c}"
+            rows.append({"stimulus_id": f"{s['item']}-{c}", "item": s["item"], "kind": "study", "condition": c, "judge_unit": unit,
+                         "identical_text": ident, "output_text": txt, "context": ctx, "intended_reading": iv,
+                         "reading_1": f'They are saying: "{fam["variants"][rd[0]]["source"]}"',
+                         "reading_2": f'They are saying: "{fam["variants"][rd[1]]["source"]}"',
+                         "reading_order": "".join(rd), "q2_options": opts,
+                         "q2_correct": next(i for i, x in enumerate(opts) if x["role"] == "correct"),
+                         "q2_opposite": next(i for i, x in enumerate(opts) if x["role"] == "opposite"),
+                         "audio": audio_name(txt)})
+        key.append({"item": s["item"], "family_id": s["family_id"], "variant_intended": iv, "dimension": d, "intended_value": vi,
+                    "opposite_value": vo, "model": s["model"], "hw_file": fam["_file"], "slp_weight": SLP_W[d],
+                    "writer_id": fam.get("writer_id"), "identical_text": ident, "bare_keywords": fam["bare"]})
+    # attention items: writer's own sentence of the default-intended variant, 30 families
+    for a in att:
+        fam = fams[a["family_id"]]
+        iv = a["variant"]; ov = "B" if iv == "A" else "A"; d = fam["dimension"]
+        vi, vo = fam["variants"][iv]["critical_value"], fam["variants"][ov]["critical_value"]
+        act = ACTION[d]
+        vals = [vi, vo]; third = [x for x in RANK[d] if x not in vals]
+        o_third = act[third[0]] if third and third[0] in act else ACTION["polarity"]["_third"]
+        r2 = random.Random(f"{SEED2}-{a['att']}")
+        opts = [{"role": "correct", "text": act[vi]}, {"role": "opposite", "text": act[vo]},
+                {"role": "clarify", "text": CLARIFY}, {"role": "other", "text": o_third}]
+        r2.shuffle(opts)
+        rd = [("A", "B"), ("B", "A")][r2.randrange(2)]
+        txt = fam["variants"][iv]["source"]
+        topic = fam.get("topic")
+        rows.append({"stimulus_id": a["att"], "item": a["att"], "kind": "attention", "condition": "reference", "judge_unit": a["att"],
+                     "identical_text": False, "output_text": txt, "context": f"Topic: {topic}" if topic else None, "intended_reading": iv,
+                     "reading_1": f'They are saying: "{fam["variants"][rd[0]]["source"]}"', "reading_2": f'They are saying: "{fam["variants"][rd[1]]["source"]}"',
+                     "reading_order": "".join(rd), "q2_options": opts, "q2_correct": 0 if False else next(i for i, x in enumerate(opts) if x["role"] == "correct"),
+                     "q2_opposite": next(i for i, x in enumerate(opts) if x["role"] == "opposite"), "audio": audio_name(txt)})
+        key.append({"item": a["att"], "family_id": a["family_id"], "kind": "attention", "dimension": d, "writer_id": fam.get("writer_id"), "hw_file": fam["_file"]})
+    # practice (2 audio, 2 text share these sentences) and headphone check
+    extra = [("prac-1", "The shop is closed today."), ("prac-2", "I did not cook the rice."), ("hp-check", "The number is four, seven, two.")]
+    for k, txt in extra:
+        rows.append({"stimulus_id": k, "item": k, "kind": "practice" if k.startswith("prac") else "headphone_check", "condition": None, "judge_unit": k,
+                     "output_text": txt, "audio": audio_name(txt)})
+    with open(OUT2 / "stimuli.jsonl", "w") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    (ROOT / "orchestration/listener2_key_private.json").write_text(json.dumps(key, indent=1))
+    kinds = Counter((r["kind"], r["condition"]) for r in rows)
+    print("rows", dict(kinds), "dropped", dropped, "identical items", sum(1 for k in key if k.get("identical_text")))
+    return rows
+
+
+def audio_name(text):
+    return hashlib.sha1(f"{S8_SALT}|{text}".encode()).hexdigest()[:12] + ".mp3"
+
+
+def tts():
+    """Render unique sentences with Piper (run under the tmp/tts venv), loudness-normalise to -23 LUFS, encode mp3, write manifest."""
+    import subprocess, wave, io
+    rows = jl(OUT2 / "stimuli.jsonl")
+    texts = sorted({(r["audio"], r["output_text"]) for r in rows})
+    AUDIO2.mkdir(parents=True, exist_ok=True)
+    py = TTS_VENV / "v/bin/python"
+    worker = ROOT / "tmp/tts/render.py"
+    jobs = [{"name": n, "text": t} for n, t in texts]
+    (ROOT / "tmp/tts/jobs.json").write_text(json.dumps(jobs))
+    subprocess.run([str(py), str(worker), str(ROOT / "tmp/tts/jobs.json"), str(TTS_VENV / f"{VOICE}.onnx"), str(AUDIO2)], check=True)
+    man = {"tts": "piper-tts", "voice": VOICE, "voice_onnx_sha256": hashlib.sha256((TTS_VENV / f"{VOICE}.onnx").read_bytes()).hexdigest(),
+           "sample_rate_render": 22050, "loudness_lufs": -23, "format": "mp3 mono 64k", "files": {}}
+    for n, t in texts:
+        man["files"][n] = {"sha256": hashlib.sha256((AUDIO2 / n).read_bytes()).hexdigest()}
+    (AUDIO2.parent / "audio_manifest.json").write_text(json.dumps(man, indent=1))
+    print("rendered", len(texts), "files", AUDIO2)
+
+
+def _main2(cmd):
+    {"draw2": draw2, "build2": build2, "tts": tts}[cmd]()
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["draw", "needcalls", "guard", "build", "package"])
+    ap.add_argument("cmd", choices=["draw", "needcalls", "guard", "build", "package", "draw2", "build2", "tts"])
     ap.add_argument("--models")
     ap.add_argument("--force", action="store_true", help="package: overwrite the frozen Stage 7 packet")
     a = ap.parse_args()
+    if a.cmd in ("draw2", "build2", "tts"):
+        _main2(a.cmd); sys.exit(0)
     if a.cmd == "package":
         if (ANN / "assignments" / "stage7_plan.json").exists() and not a.force:
             print("stage7_plan.json exists (frozen); use --force to redraw"); sys.exit(0)
