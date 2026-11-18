@@ -1,0 +1,91 @@
+{
+ "N_pairs": 1016,
+ "N_writers": 10,
+ "machine_P1_pp": 37.5,
+ "alloc": {
+  "gemma3-4b|00": 5,
+  "gemma3-4b|01": 5,
+  "gemma3-4b|10": 11,
+  "gemma3-4b|11": 9,
+  "gpt-6.1-terra|00": 4,
+  "gpt-6.1-terra|10": 12,
+  "gpt-6.1-terra|11": 11,
+  "llama3.1-8b|00": 7,
+  "llama3.1-8b|01": 6,
+  "llama3.1-8b|10": 9,
+  "llama3.1-8b|11": 9,
+  "qwen2.5-7b|00": 5,
+  "qwen2.5-7b|01": 5,
+  "qwen2.5-7b|10": 11,
+  "qwen2.5-7b|11": 11
+ },
+ "strata_N": {
+  "gemma3-4b|00": 22,
+  "gemma3-4b|01": 19,
+  "gemma3-4b|10": 121,
+  "gemma3-4b|11": 92,
+  "gpt-6.1-terra|00": 11,
+  "gpt-6.1-terra|10": 131,
+  "gpt-6.1-terra|11": 112,
+  "llama3.1-8b|00": 60,
+  "llama3.1-8b|01": 35,
+  "llama3.1-8b|10": 78,
+  "llama3.1-8b|11": 81,
+  "qwen2.5-7b|00": 14,
+  "qwen2.5-7b|01": 13,
+  "qwen2.5-7b|10": 118,
+  "qwen2.5-7b|11": 109
+ },
+ "scenarios": {
+  "noise5": {
+   "mean_ppi_pp": 33.845711477116495,
+   "mean_se_pp": 3.2103497590446546,
+   "ci_halfwidth_pp": 7.2623157025103575,
+   "p_lower_gt0": 1.0,
+   "p_rect_detected": 0.1655,
+   "p_equiv10": 0.6325,
+   "mean_rect_pp": -3.654288522883503,
+   "mean_rect_se_pp": 2.8777458823125692
+  },
+  "noise10": {
+   "mean_ppi_pp": 30.129725613133584,
+   "mean_se_pp": 4.305037033149113,
+   "ci_halfwidth_pp": 9.738670360649799,
+   "p_lower_gt0": 1.0,
+   "p_rect_detected": 0.323,
+   "p_equiv10": 0.148,
+   "mean_rect_pp": -7.370274386866413,
+   "mean_rect_se_pp": 4.127025587770532
+  },
+  "noise15": {
+   "mean_ppi_pp": 26.4339339294236,
+   "mean_se_pp": 5.188116075387928,
+   "ci_halfwidth_pp": 11.736333941367311,
+   "p_lower_gt0": 0.9875,
+   "p_rect_detected": 0.4665,
+   "p_equiv10": 0.03,
+   "mean_rect_pp": -11.066066070576404,
+   "mean_rect_se_pp": 5.101217900443053
+  },
+  "chip1_overcredited10": {
+   "mean_ppi_pp": 25.616694425980846,
+   "mean_se_pp": 3.977979928476733,
+   "ci_halfwidth_pp": 8.998815788671132,
+   "p_lower_gt0": 0.9995,
+   "p_rect_detected": 0.8375,
+   "p_equiv10": 0.0205,
+   "mean_rect_pp": -11.883305574019156,
+   "mean_rect_se_pp": 3.7609341139184265
+  },
+  "chip1_overcredited20": {
+   "mean_ppi_pp": 15.9122682747043,
+   "mean_se_pp": 4.920765308631411,
+   "ci_halfwidth_pp": 11.131544489369467,
+   "p_lower_gt0": 0.8005,
+   "p_rect_detected": 0.9955,
+   "p_equiv10": 0.0,
+   "mean_rect_pp": -21.587731725295704,
+   "mean_rect_se_pp": 4.795023956299733
+  }
+ }
+}

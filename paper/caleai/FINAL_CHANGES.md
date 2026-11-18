@@ -100,3 +100,15 @@ Cut or compressed (no numbers or macros removed except noted):
 - Table 2 overfull (144 pt) viewed on p5: nothing clipped (multicolumn rows only); 4 pt overfull left. Ethics paragraph already states no institutional review determination was sought.
 - Not done: macro-backed derivation of "about 18 points" audit MDE (text uses dz_mde macro); structural readability items (abstract/thesis paragraph, Sec. 6.2, 6.7 density) left to the readability pass.
 - Build: 10 pp, References heading on p8 (pdftotext), body within 8 pp, no PENDING, no undefined refs.
+
+## A1 one-headline rewrite + A4 fold (Nov 18)
+- Title, abstract (about 125 words) and Introduction now lead with ONE headline: the cue restores intended meaning for adult listeners (+20 pp success; opposite-action 22.5% -> 1.3%); machine gain (+37.5, 73.8% vs 80%) as supporting; ledger/guard as a gain-and-cost sentence. Abstract no longer ends on a limitation; "none an AAC user" is in the listener clause. Conclusion reordered the same way.
+- Thesis/Contributions paragraphs replaced by "Headline" and "The ledger" paragraphs plus new Table 1 (evidence status + estimand: claim, estimand/unit, evidence type human-judged / machine / projection, estimate; 8 rows, all macros). Chain row labelled projection (central +14.7).
+- A4 fold: listener body adds crossed-model robustness (GLMM +19.5 [14.7, 24.5]; two-way cluster linear +20.0 [11.8, 28.1]) and "0 of 846 judgments by a listener who wrote or checked the pair"; "mixed-model check not run" removed from limits. New macros hd_* in make_macros.py (read analysis/hardening/summary.json). Frozen estimate stays the headline. Reversal row stays "not confirmed".
+- Space cuts to keep body on p8: duplicate intro sentences, audit-rule clause, per-model gain list, "offline failure indicators and cost" paragraph, wc_early sentence, unfixed-failure sentence, two secondary-table rows, one consultant row, frontier politeness clause and dp_* human-label sentence, p19 arbiter-agreement sentence (macros still generated), consultants-paragraph trims. All honesty items kept (80% shortfall, audit underpowered, not AAC partners, Claude not independent, no IRB determination, anonymity).
+- Build: docker pdflatex, 10 pp, body ends p8, References starts p9 (pdftotext). Pages 1, 2, 8 viewed. Not committed.
+
+## Fixer (checker round 3, Nov 18)
+- Abstract, "Headline" paragraph, conclusion: "restores intended meaning" -> "improves the reading listeners choose"; states absolute 28% with "most cue outputs still miss it", "no AAC users or partners tested", frozen primary (received reversals, -42 per 1,000 [-99, +7]) not confirmed, guard usability gap with interval and "deployment clause unresolved". Intro now says cue is lead contribution, guard the worked ledger case. All numbers via macros.
+- Not done: worked example/mini-glossary on p1, Table 1 split, Table 3 overfull (nothing clipped), pooled ~34-pt note, ledger rows for gt_jgain_g1/gt_rep_g1 provenance, GenAI comment wording (no space; body held on p8).
+- Build: docker latexmk, 10 pp, Conclusion on p8, References heading p9 (pdftotext), no undefined refs. Not committed.

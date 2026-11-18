@@ -68,6 +68,9 @@ def put(key: str, value, src: str, fmt: str = "pct"):
         s = f"{value:.1f}"
     elif fmt == "f1x":
         s = f"{100 * value:.1f}"
+    elif fmt == "pcth":  # percent, round half up
+        from decimal import Decimal, ROUND_HALF_UP
+        s = str((Decimal(repr(round(100 * value, 6)))).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
     elif fmt == "f3":
         s = f"{value:.3f}"
     elif fmt == "p3":
@@ -1784,6 +1787,20 @@ if _LS.exists():
     put("ls_un_bare", _cd[("unclear", "bare", "all")]["estimate"] / 100, _LS)
     _r = [c for c in _l["contrasts"] if c["contrast"] == "chip1 - bare" and c["metric"] == "reversal"][0]
     put("ls_rd", _r['estimate'], _LS, 'int'); put("ls_rd_lo", _r['lo'], _LS, 'int'); put("ls_rd_hi", _r['hi'], _LS, 'int')
+
+    put("ls_cq_bare", _cd[("conseq", "bare", "all")]["estimate"] / 100, _LS, "pcth")
+    put("ls_cq_chip", _cd[("conseq", "chip1", "all")]["estimate"] / 100, _LS, "pcth")
+# ---- A2: NLI and Claude oracles on the confirmed independent mutants (analysis/oracle_indep2)
+_O2 = ROOT / "analysis/oracle_indep2/summary.json"
+if _O2.exists():
+    _o2 = json.load(open(_O2))["oracles"]
+    for _kk, _nm in (("oi2_j", "gpt_judge"), ("oi2_n", "nli_primary"), ("oi2_c", "claude_change")):
+        for _s, _f in (("a", "mut_all"), ("b", "mut_lexblind"), ("f", "false_alarm")):
+            _r = _o2[_nm][_f]
+            put(f"{_kk}{_s}_k", _r["k"], _O2, "int"); put(f"{_kk}{_s}_n", _r["n"], _O2, "int"); put(f"{_kk}{_s}", _r["rate"], _O2)
+    put("oi2_ns_b_k", _o2["nli_secondary"]["mut_lexblind"]["k"], _O2, "int")
+    put("oi2_extra", _o2["claude_change"]["mcnemar_all"]["oracle_only"], _O2, "int")
+    put("oi2_n_mc_p", _o2["nli_primary"]["mcnemar_all"]["p"], _O2, "p3")
 
 
 def sha(p: Path) -> str:

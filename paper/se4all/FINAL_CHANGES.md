@@ -60,3 +60,16 @@
 - Fig. 1 caption: 99.3% chip figure now stated as conditional (of the 414 outputs wrong bare, right with chip), not an overall chip rate.
 - Abstract: removed cryptic "(a coverage score)". Not changed: Wilson 96.8% vs rounded 97 (consistent); email trailing underscore and IEEE AI disclosure left for author.
 - Build: page count and References position rechecked.
+
+## 2026-11-18 A1 one-headline rewrite + A2/A4 fold (SE4All)
+- Abstract rewritten: headline = testing the oracle like software (independent mutants 70.7% / 58.5% lexicon-blind, Claude 90.7% and NLI 73.3% as alternative oracles, seeded faults) then the cue as the application (99.8% affirmative default, +37.5 pp exploratory, listener opposite action 22.5% -> 1.3%). Intro opens with the problem, then states the one headline; contributions list replaced by one paragraph.
+- New Table I (evidence status: claim -> Human / Machine / Author-built / Not measured -> estimate), 10 rows. Listener sentence moved from the intro to a new "Listener check" subsection, with one sentence on the A4 sensitivities (crossed models, leakage audit: effects unchanged; reversal difference still not confirmed, item-clustered test does not reject).
+- Table (Oracle evidence): near-circular baseline rows merged into one; three rows added for the 75 confirmed independent mutants (judge, NLI primary rule, Claude label-change: all / lexicon-blind / false alarms). \oracleindep gained one sentence (NLI rule declared before scoring; Claude is a second family, not independent; NLI misses role/implied-time; sensitivity only). No new paragraph.
+- New macros in make_macros.py: oi2_* (analysis/oracle_indep2), ls_cq_bare/chip (new half-up rounding fmt "pcth" so 1.25 prints 1.3 as frozen), oi2_extra. results_macros.tex regenerated.
+- Cuts to hold 8 pp (nothing dropped from results): contribution list, interval-convention sentence, family-count sentence, composition/consultant-table rows (2), 4 oracle-table agreement rows, 4 secondary-table rows, p19_cy sentence, Costs closing sentence, conclusion and related-work wording. Not changed: honesty elements, Ethics.
+- Build: docker pdflatex, 8 pages incl. refs, no overfull/undefined; pages 1, 2, 8 viewed. Backup tmp/se4all_main_before_A1.tex. Not committed.
+
+## 2026-11-18 FIXER (checks round: nits)
+- Abstract: NLI/Claude catch rates now stated "of all 75 mutants" (macro oi_all_n), resolving the strata-mixing nit vs Table I; listener sentence now says "no AAC users were tested".
+- Listener check: reversal difference "stays not confirmed, at best borderline". No number changed; no mismatches were found by the checkers.
+- Build (docker pdflatex): 8 pages incl. references (References on p. 8), no overfull/undefined refs. Not changed: scit font warning, email underscore, AI disclosure, artifact URL (author items).
