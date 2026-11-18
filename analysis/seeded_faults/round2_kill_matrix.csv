@@ -1,0 +1,61 @@
+mutant,class,file,description,killed_by_existing,pytest_all,pytest:test_analyze,pytest:test_assignments,pytest:test_frontier_multilingual_register,pytest:test_hw_elic,pytest:test_layer0,pytest:test_parts56_scorers,pytest:test_replay_regression,pytest:test_resolution,pytest:test_stage23,pytest:test_stage4,pytest:test_stage5_frontier,pytest:test_stage6_coverage,pytest:test_stage7,pytest:test_survivor_classes,pytest:test_validate_cue_inputs,oracle_identity,oracle_injection,oracle_challenge,validator_r5_replay,validator_t9_replay,rescore_frozen_endpoints,request_rebuild
+SF01,K1,src/attribute.py,Violation: drop `not` (violation = critical_match),1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,1,0
+SF02,K1,src/attribute.py,Assumption: negate committed,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF03,K1,src/attribute.py,committed: drop `not` (committed = is_unclear),1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF04,K1,src/attribute.py,chose: variant-A value reported as B,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF05,K1,src/attribute.py,constraint_preserving: `and` -> `or`,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0
+SF06,K1,src/attribute.py,non-completion on a cue channel counted as constraint-preserving,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+SF07,K1,src/attribute.py,general-dim comparison also scores the family's own critical dimension,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0
+SF08,K1,src/attribute.py,hedge_added inverted,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF09,K1,src/attribute.py,emphatic_added reference test inverted (!= -> ==),1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF10,K1,src/attribute.py,arbiter labels never used when J1 != J2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF11,K2,src/attribute.py,contra: counts dimensions NOT given by the channel,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0
+SF12,K2,src/attribute.py,stance addition: counts dimensions given by the channel,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF13,K2,src/attribute.py,`full` is no longer a cue channel,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0
+SF14,K2,src/attribute.py,`noncrit` is no longer an ambiguous channel,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF15,K2,src/attribute.py,channel_dims: chip1 gives the all_chips dimensions,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0
+SF16,K2,src/attribute.py,channel_dims: full channel gives no general dimension,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0
+SF17,K2,src/attribute.py,custom channel: cue test reversed subset,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF18,K2,src/labels.py,chip table: [NOT] -> affirmative,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0
+SF19,K2,src/labels.py,chip table: [YOU] -> speaker,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,1,1,1,0
+SF20,K2,src/labels.py,general_spec: requests no longer make certainty n/a,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF21,K3,src/judge.py,_final: agreement is flagged as disagreement,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF22,K3,src/judge.py,_final: tiebreak returns J1 instead of layer0 value,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF23,K3,src/judge.py,_final: unresolved disagreement keeps J1 label,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF24,K3,src/judge.py,general-dim tiebreak uses the polarity layer0 label for every dimension,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF25,K3,src/judge.py,critical label: J2 ignored (J1 compared with itself),1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF26,K3,src/judge.py,added_content read from the extraction pass instead of pass B,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF27,K4,src/build_requests.py,chip1 channel emits all_chips (wrong chip set),1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF28,K4,src/build_requests.py,chipall channel emits only the critical chips,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF29,K4,src/build_requests.py,chipall channel puts keywords before the chips,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF30,K4,src/build_requests.py,full channel types the bare keywords instead of the source sentence,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF31,K4,src/build_requests.py,noncrit channel drops the noncritical word,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF32,K4,src/build_requests.py,noncritical word inserted at the wrong position (> -> <),1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF33,K4,src/build_requests.py,request_key no longer depends on sample_idx,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF34,K4,src/build_requests.py,identical renders no longer merge their targets,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SF35,K5,src/labels.py,critical_match: plain no longer honoured by emphatic,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0
+SF36,K5,src/labels.py,critical_match: acceptance relaxed to also accept refusal,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0
+SF37,K5,src/labels.py,critical_match: plain~emphatic relaxation applied to every certainty value,1,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,1,1,0,0,1,0
+SF38,K5,src/labels.py,critical_match: acceptance~statement relaxation removed,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0
+SF39,K5,src/labels.py,critical_match: final equality inverted,1,1,1,0,0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,1,0,0,1,0
+SF40,K5,src/oracle_wa.py,oracle verdict(): violation = critical_match,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+SF41,K5,src/oracle_wa.py,oracle verdict(): contradiction test inverted,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+SF42,K6,src/validate_cue_inputs.py,requirement_set: plain no longer honoured by emphatic,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0
+SF43,K6,src/validate_cue_inputs.py,requirement_set: polite values no longer a class,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0
+SF44,K6,src/validate_cue_inputs.py,decode: several cues for one dimension are unioned instead of intersected,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+SF45,K6,src/validate_cue_inputs.py,validate: disjoint accepted/required sets no longer conflict,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0
+SF46,K6,src/validate_cue_inputs.py,validate: compatible test reversed (req <= accepted),1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0
+SF47,K6,src/validate_cue_inputs.py,validate: conflicting verdict only for non-consensus claims,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0
+SF48,K6,src/validate_cue_inputs.py,decode: 'would you' no longer a politeness marker,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0
+SF49,K6,src/validate_cue_inputs.py,decode: 'feel sorry' no longer treated as ambiguous,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0
+SF50,K7,src/layer0.py,layer0: requests no longer certainty n/a,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF51,K7,src/layer0.py,layer0: booster outranks hedge,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+SF52,K7,src/layer0.py,layer0: polarity negated if ANY main clause is negated,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+SF53,K8,src/runio.py,occurrence validity: `and` -> `or`,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+SF54,K8,src/explode.py,text normalisation no longer lower-cases,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0
+SF55,K8,src/analyze.py,"bootstrap point estimate divides by families, not valid rows",1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF56,K8,src/analyze.py,paired difference direction reversed,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SF57,K8,src/attribute.py,ambiguous-channel dedupe ignores channel,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SF58,K8,src/attribute.py,endpoints: quarantined refusal/acceptance families are KEPT in primary estimates,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+TOTAL_KILLED,,,,58,39,3,0,0,1,1,0,14,0,0,5,0,0,2,9,10,7,12,4,9,4,27,8
+SCORE,,,,1.0,0.6724,0.0517,0.0,0.0,0.0172,0.0172,0.0,0.2414,0.0,0.0,0.0862,0.0,0.0,0.0345,0.1552,0.1724,0.1207,0.2069,0.069,0.1552,0.069,0.4655,0.1379
