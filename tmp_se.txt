@@ -1,0 +1,520 @@
+          Testing the Test Oracle: A Harness for
+       Meaning Preservation in LLM-Expanded AAC
+                                 Liam Bray                                             Nicholas Cheng
+                          Independent Researcher                                   Independent Researcher
+                          liambray_@outlook.com                                  nicholasicheng6@gmail.com
+
+
+
+   Abstract—When a language model expands a few AAC key-              unvalidated checker silently decides every result, so we treat
+words into a sentence, it can lose a “not”, and the person’s words    testing the oracle as a first-class contribution beside testing the
+are then spoken as theirs. Deciding whether an output kept the        models. We contribute: (1) a harness with six requirements
+meaning needs a test oracle, an automated checker that is itself
+software and can be wrong, so we built a test harness with six        R1–R6 that have stated sources and, where the oracle can see
+requirements and tested its oracle the way one tests software.        them, executable tests (§II); (2) tests of the oracle, including a
+The oracle caught 193/196 rule-seeded mutants of stored outputs       human check of its arbiter, a fault-by-test matrix, two defects
+(193/195 excluding one mutant judged equivalent after the miss)       we made ourselves, a production rule that passes its keyed
+with 0/100 false alarms; on two held-out sets (39 violation           gate with zero margin after a stricter rule was rejected, and
+positives) its violation verdicts have 87.8% precision and 92.3%
+recall against human coders; its critical label equals the human      the boundary of what the oracle checks (§IV); (3) evidence on
+consensus on 115/115 treated outputs; and non-author annotators       human-written pairs and on a machine-written confirmation set
+side with its tie-breaking arbiter in 77.4% of 124 codings (arbiter   that the tests find real, model-specific behavior (§III); (4) a
+rulings only). A fault-by-test matrix and two defects in our own      requirements review by two AAC-user design consultants,
+harness, each now a regression test, show that no single test         with each change traced (§V); and (5) the harness and stored
+catches every fault: the production oracle passes its keyed gate
+with zero margin (22/24 mutants detected, two misses tolerated),      outputs as an artifact. The harness is for developers, not for
+and the stricter rule that scored 24/24 was rejected because          assessing AAC users or their messages.
+it failed an unchanged source. With the tested oracle, four
+models answered bare polarity keywords affirmatively in 99.8%                        II. R EQUIREMENTS AND H ARNESS
+of committed outputs on human-written pairs, and supplying                 Families and channels: A family is a minimal pair
+the missing cue raised the intended speech act by 37.5 pp over
+a length-matched word [33.8, 41.2], writer-level t, 10 writers, all
+                                                                      of source messages that share content words and differ on
+positive, exploratory (31.41 pp on a machine-written confirmation     one critical dimension: polarity, agent (who acts), certainty,
+set); the patterns replicate on 6 models from 5 families. Passing     speech act (question, request or statement), politeness, or
+the oracle is necessary but not sufficient: writers rejected 77/126   time/quantity. Each variant is rendered through five channels,
+(61.1%) of the oracle-passed outputs they rated, mostly for           which say how much of the message the user supplied: bare
+compression loss and changed event or role structure, and two
+AAC-user design consultants added a relations clause to R4 and
+                                                                      keywords; +word, which adds one noncritical content word;
+a new approval requirement, R6. The harness, tests and stored         +chip, which adds the critical value as a chip such as [NOT];
+outputs are released.                                                 +all, with every chip the variant needs; and full, the source
+   Index Terms—accessibility, AAC, LLM testing, test oracle,          sentence itself. Every variant needs at least one chip, so the
+requirements, regression testing
+
+                       I. I NTRODUCTION                               bare Keywords: supervisor read ⇒ “The supervisor read.”
+                                                                      (affirmative)
+   Some people who use augmentative and alternative commu-            +chip Keywords: [NOT] supervisor read ⇒ “The supervisor did
+nication (AAC) compose a message from a few keywords, be-             not read.” (negated)
+                                                                      full   The user typed: The supervisor does not read my
+cause each selection costs time and effort [1], [2]. A language       schedule. ⇒ “The supervisor does not read my schedule.” (negated)
+model then expands the keywords into a sentence [3], [2].             hidden source: “The supervisor does not read my schedule.”
+Typing supervisor read might mean “The supervisor                     Assumption vs. Violation. The user typed no word for “not”, so the
+read” or “The supervisor did not read” (Fig. 1). Whether the          affirmative output is an Assumption, charged to the input design and not to
+model erred depends on what the user supplied, and a text-            the model. If the user supplies [NOT] and the output drops it, that is a
+                                                                      Violation, charged to the model.
+similarity score cannot know that. Symbol- and grid-based
+                                                                      Fig. 1. A stored output on a human-written pair (Gemma-3-4B), with the
+AAC is out of scope.                                                  exact input strings. It is the first family in SHA-256 order with a wrong bare
+   This paper asks which output changes count as failures,            and a right chip output, so it is illustrative, not typical. On the 104 human-
+given exactly what the user supplied, and how to test the             written polarity families (not the confirmation set of Table III), bare binary
+                                                                      output matches the source about half the time by design (49.8% wrong), a
+checker that decides. The software-engineering problem is the         ceiling and not a finding, and distinct from the confirmation-set bare match
+oracle. Deciding whether an output kept the meaning needs a           rate in Table III; with the chip it is right in 99.3% [98.6, 99.8]% (human-
+checker, here an LLM that extracts a few explicit labels. An          written pairs, 414 outputs).
+unmarked reading gets a counter-chip (e.g., [PLAIN]). A             are analysed, because 1 speech-act family falls in the re-
+chip is a probe of whether supplied information is used,            fusal/acceptance quarantine of Defect A. The confirmation set
+not a proposed interface: its real cost depends on the access       has 238 fresh machine-written families on three dimensions,
+method (a dwell, a menu traversal, a grid button), and it adds      whose three contrasts were pre-specified in a git-timestamped
+a vocabulary to learn and an error-recovery path. The tested        plan frozen before generation. The development set has 60
+lever is the missing cue; the chip is one encoding of it, and       authored families used to develop prompts and codebooks.
+two controls (Sec. III) score an irrelevant chip and a plain        Corpus transfer uses crowd-written fictional messages from
+word.                                                               AACText [5], and the composition study (R4) adds a second
+      Requirements: For output y from input x, let Ld (y) be        chip to 80 scenarios. Four models run with one fixed one-
+the extracted value on dimension d and C(x) the commitments         sentence prompt (greedy): Qwen2.5-7B-Instruct, Llama-3.1-
+that x carries. Table I states each requirement with its source     8B-Instruct and Gemma-3-4B-it, three open models run locally
+and its test. A Violation means a supplied value was not            with 4-bit quantization, and one API model, gpt-6.1-terra.
+kept (R1, R2); an Assumption means the output committed             Two larger open models, Qwen2.5-14B and Mistral-Nemo-
+to a value the input left open (R3). A reference-fidelity score     12B, were added later under the same prompts (6 models
+would charge the model for what the interface omitted, and          from 5 families on all arms), and a lite Gemini model ran the
+a similarity score would pass an added “please” on a typed          legend arms only (Section III, Model breadth). Unless labelled,
+sentence. R1–R5 are our proposal, derived from the structure        intervals are pointwise 95% percentile-bootstrap intervals
+of the task and from defects we met; two AAC-user design            from writer-cluster (human-written pairs) or seed/construction-
+consultants then reviewed them and added R6 and refinements         cluster (confirmation set) resamples, 10,000 over a fixed model
+(§V). The declared policy behind R2, keep typed wording             roster; the exceptions are the writer-level t intervals of Table II,
+unless the person asks for a rewrite and sees it first, protects    Wilson intervals for proportions in Table V, and cluster-
+authorship. Some users prefer that a system rewrite their text,     bootstrap κ intervals.
+so R2 is a policy to test, not a recommendation.
+                                                                          III. R ESULTS : D OES THE H ARNESS F IND R EAL
+      Harness: Fig. 2 shows the pipeline. A family specifica-
+                                                                                             B EHAVIOR ?
+tion is rendered into channels, and the R5 validator checks
+that each displayed chip matches the claim. A generator             A. Primary replication on human-written pairs
+produces outputs. An extractor (gpt-6.1-sol; not a generator,          Table II gives the three contrasts. Act-chip gain is the
+but from the same family as the generator gpt-6.1-terra, so self-   speech-act chip minus a length-matched word. Net politeness
+preference [4] is possible, and the human checks of Section IV      addition is politeness added to plain typed sentences minus
+are the mitigation) answers the family’s critical question and      politeness removed from polite ones. Affirmative default is
+five general questions from the output alone; added-content         the share of committed (valid affirmative or negated) bare
+extraction also sees the visible input. Two extractor prompts       polarity outputs that are affirmative. They were pre-specified
+(J1, J2) differ in wording and option order, and critical           for the confirmation set; on the human-written pairs they are
+disagreements go to a cross-family arbiter (a blind Claude          an exploratory replication, not preregistered, and each rests
+Sonnet 5.5 session shown only the output text and the question,     on 6–7 writers. Each contrast uses the families of its own
+which ruled after outcomes were known; the same arbiter ruled       dimension (speech act 67, politeness 89, polarity 104 of the
+on the human-written-pair, model-breadth and confirmation-set       546 analysed families; the other three dimensions enter only
+units) or stay unknown. Verdicts are then computed in code          the per-dimension gain below). Every writer’s mean is positive
+from labels, item specification and channel, so a rule change       in all three contrasts; pooling a second round of speech-act
+re-scores every stored output without model calls. The oracle       pairs gives 10 writers for the act chip (127 families), writer
+decides only whether a fixed set of explicit, text-level values     means 29.2 to 45.5 pp, leave-one-writer-out 36.7 to 38.3 pp,
+is kept. It does not judge fluency, referents or whether anyone     and sign-flip p = .0010, the floor for ten writers; politeness
+would accept the sentence.                                          and polarity keep six and seven writers (floors 1/64, 1/128).
+      Cost of extending the harness: Adding a [THANKS]              The writer-level t intervals of Table II, wider than percentile-
+chip for politeness took 1 entry in the chip table                  bootstrap ones, are the ones to read; we claim direction,
+(src/labels.py); the verdict code (267 lines) and the R5            not width. Effects vary by model for the act chip (pooled:
+validator (333 lines) read that table and did not change, and re-   Llama 16.9 pp, whose writer means are not all positive, against
+scoring 22,960 stored rows took 3.0 s with 0 model calls (one       40.2 pp or more for the other three, gpt-6.1-terra 51.6) and for
+dry run on one chip; a new dimension also needs a codebook          politeness (Gemma +22.5, Llama +1.1). A different quantity,
+option and extractor calls, not measured).                          chip minus length-matched word in match rate per dimension,
+      Evidence sets: All items are authored or crowd-written,       is positive on all six dimensions, between 35.3 and 82.7 pp
+not messages from AAC users. The human-written pairs                (percentile-bootstrap lower bounds all above 31.2 pp); for
+(primary) are 547 pairs kept of 574 candidates, written by 20       speech act it is the Act-chip gain, but for politeness it measures
+non-author writers over six dimensions and kept after three         match, not the markers added minus removed of Net politeness
+blind independent checks; a second round of speech-act pairs        addition. No robustness check (near-duplicates collapsed, one
+adds writers to that contrast only (pooled below); 546 families     writer excluded, arbiter calls reversed, all candidates) flips a
+                                                             TABLE I
+T RACEABILITY OF REQUIREMENTS R1–R6: WHERE EACH COMES FROM , WHICH TEST CHECKS IT, AND WHAT THAT TEST HAS FOUND . A LL AUTOMATED
+ CHECKS RUN ON STORED OUTPUTS AND RE - SCORE WITHOUT MODEL CALLS . R1–R4 TEST THE SYSTEM UNDER TEST; R5 TESTS THE INPUT BUILDER ;
+                                R6 IS A PROPERTY OF THE HOST SYSTEM THAT THE ORACLE CANNOT SEE .
+
+Requirement                         Source                        Executable test                    What the test has found
+R1 supplied chip: if C(x)           Interface contract: a chip    Chip check on +chip/+all           Speech-act chips kept in 73.24% of 624 confirmation-set
+fixes d to c, Ld (y) must be        the person supplied is        outputs; Violation if the value    targets (typed sentence 99.20%); for the [?] chip alone, 58
+admissible for c; a [NOT]           information the person        differs (scope is not labelled     of 208 targets (27.88%) not kept
+stays attached to the intended      paid for; scope clause        by the extractor, so not yet
+action                              from both consultants         tested)
+R2 full input: each scored          Declared policy (above),      Full-input check on full           Politeness added to plain typed sentences: 7.9%
+explicit value of a typed           restated by both              outputs                            (human-written pairs), 8.12% (confirmation set)
+sentence is kept, including         consultants; exact copy
+the absence of a politeness         satisfies it
+marker; a rewrite needs a
+request and a preview
+R3 ambiguity: if C(x) leaves        Bare keywords                 Default report on bare/+word       Affirmative reading on 99.8% (human-written pairs) and
+d open, Ld (y) is not               under-specify; a              outputs; 50% matched is a          99.37% (confirmation set) of committed bare polarity
+pass/fail; log an Assumption        systematic default            design ceiling                     outputs
+and report its direction            decides which reading is
+                                    free
+R4 composition and relations:       Chips are supplied            Composition check                  Composition (§III-D): Qwen loses the agent under [TELL]
+adding a compatible chip for        together in practice;         (pass→fail transitions,            (13.12 pp), Llama loses polarity under [STATEMENT]
+e must not break a kept value       relations from both           repeat-draw floor reported);       (8.59 pp); T1: 34.9% of [TELL] outputs, 1.3% for bare
+on d ̸= e, nor who does             consultants                   event-leak test T1: a [TELL]       input
+what; [TELL] marks a                                              input must not yield a
+statement and is not the verb                                     reporting verb the keywords
+                                                                  lack
+R5 input builder: a test input      Defect B below: failures      Validator on the rendered          7/139 restorations contradicted their source; the validator
+that claims to supply c must        cannot be attributed to a     input                              rejects 7/7
+display a chip for c                model if the input lied       (validate_cue_inputs),
+                                                                  run before generation
+R6 approval: a generated            Both AAC-user                 Interface inspection of the        Not exercised here: no system under test speaks messages
+draft is never spoken or sent       consultants (new, §V)         host system; no automated
+without the person’s                                              test, because the oracle sees
+approval; the typed words                                         text, not delivery
+stay available
+
+
+                                Channel renderer                                                                                        Verdict code
+       Family spec                                          R5 input                   Generator          Extractor J1, J2
+                              bare / +word / +chip                                                                                         R1–R4:
+      (minimal pair)                                        validator                (four models)           + arbiter
+                                    +all / full                                                                                    Violation / Assumption
+                                                       Is the input honest?
+                                                                                                                   Tests of the oracle (§IV)
+                                                                                                             identity: an unchanged source passes
+                                                                        Is the checker right?
+                                                                                                            mutants: a one-value change is detected
+                                                                                                        human gate: extractor labels vs. human coders (κ)
+
+
+Fig. 2. How a test runs. A message pair is shown to the model with more or less of the information (bare to full). The validator first checks that what we
+show matches the source (R5), the extractor reads each output into labels, and code, not the LLM, decides Violation or Assumption (R1–R4). The dashed box
+tests the checker: an unchanged sentence must pass, a one-value change must be caught, and the labels must match human coders. Because verdicts come
+from stored labels, changing a rule re-scores every output without calling a model.
+
+
+
+decision (largest shift 1.7 pp). Act-chip gain and Affirmative                               Model breadth: Qwen2.5-14B and Mistral-Nemo-12B
+default are close to manipulation checks that the harness                              (same prompts, greedy, 4-bit) reproduce each pattern, so the
+separates supplied from missing information, as intended.                              default and the cue effect appear on 6 models from 5 families;
+      Controls: the cue, not the chip: Two controls on the                             a lite Gemini model (legend arms only) agrees.
+human-written pairs (analysis/chip_controls/) show                                           Same-items cue restoration and clinical weight: On 332
+that restoring the missing cue is what fixes the default. An                           elicited messages whose cue the typist dropped (three models,
+irrelevant chip adds little; the cue chip beats it by 30.0 to                          machine-judged), supplying the cue cuts expected silent polar-
+80.9 pp by dimension, which rules out “any added chip helps”.                          ity reversals per 1,000 messages from 23.8 to 1.6 (chip) and
+The same cue as a plain word (not, please) is within 2.1 pp                            2.6 (word), and politeness reversals from 51.8 to 0.7 and 1.2.
+of the chip on 5 of 6 dimensions and beats it on speech act                            Two speech-language pathologists (n = 2, expert review, not
+by 8.2 pp: the chip is our probe, not a requirement.                                   a population estimate) rated a dropped or added negation the
+                                 TABLE II                                                                TABLE III
+    T HE THREE CONTRASTS ON HUMAN - WRITTEN PAIRS (546 FAMILIES ,             C ONFIRMATION SET: SHARE OF OUTPUTS MATCHING THE INTENDED
+EXCEPT THE ACT- CHIP ROW, WHICH POOLS BOTH ROUNDS : 127 FAMILIES ;             VALUE , BY CHANNEL (%). I TALIC CELLS ( BARE , + WORD ) ARE THE
+     WRITERS IN PARENTHESES ) AND ON THE CONFIRMATION SET (238                MODEL’ S DEFAULT UNDER AMBIGUOUS INPUT, BOUNDED BY 50% BY
+FAMILIES ): ONE FIXED PROMPT, FOUR MODELS , H OLM - ADJUSTED p OVER          DESIGN FOR THE TWO BINARY DIMENSIONS ; THEY ARE NOT ACCURACY.
+THE THREE FOR THE CONFIRMATION SET. H UMAN - WRITTEN PAIRS : 95% t            S PEECH ACT IS THREE - VALUED . O NE FIXED PROMPT, FOUR MODELS
+  INTERVALS OVER WRITERS ( DF = WRITERS −1; PERCENTILE INTERVAL                  POOLED ; PER - MODEL VALUES ARE IN THE RELEASED ARTIFACT.
+ FOR THE DEFAULT, WHOSE t INTERVAL PASSES 100%); THE SIGN - FLIP p
+   VALUES ARE IN THE TEXT. C ONFIRMATION SET ( MACHINE - WRITTEN ):
+                                                                            Dimension    bare   +word   +chip   +all   full   n per cell
+    95% PERCENTILE - BOOTSTRAP INTERVALS ( CLUSTER RESAMPLING );
+p = .0003 IS THE SMALLEST H OLM VALUE THAT 10,000 RESAMPLES CAN             polarity     49.8    49.8    99.2 96.2 99.8             640
+   GIVE . P OLITENESS IS NET ( PLAIN SOURCES THAT GAINED A MARKER           speech act   39.3    41.8    73.2 74.8 99.2             624
+                 MINUS POLITE SOURCES THAT LOST ONE ).                      politeness   50.0    50.0    89.5 87.2 95.0             640
+
+                    Human-written (writers)       Confirmation        p
+Act-chip gain, pp +37.5 [33.8, 41.2] (10) +31.41 [25.00, 37.94] .0003       keyword strings with no negation word, only 2.7% came from
+(rounds 1+2)                                                                a negated message), but its errors are silent: about 24 negated
+Net politeness, pp +7.6 [3.7, 11.5] (6)        +6.25 [2.50, 10.00] .0009
+Affirmative default, 99.8 [99.3, 100.0]% (7) 99.37 [98.42, 100.00]% .0003   messages per 1,000 are reversed without any signal, against
+%                                                                           0.8 spurious negations, so R3 logs the Assumption and tests its
+Act-chip gain,                                +31.65 [25.22, 38.19]         direction; the detector’s negation label equals the human label
+arbitrated labels                                                           on 200/200 sampled messages, leaving the 2.7% unchanged. A
+masked, pp                                                                  pre-declared three-arm test shows that it is not a prompt-legend
+                                                                            artifact (affirmative share 99.5% with the legend, 98.4% with
+                                                                            none, 99.9% when the prompt said markers may be missing; 4
+most serious silent change (5 of 5 each); weighted by severity,             models, both sets). The default itself is not new: Chen et al. [6]
+failures fall from 57.4% to 14.9% with the chip and 17.8%                   reported keyword-to-sentence models writing wrongly positive
+with words, and they accepted 32% of repairs as written,                    sentences about negative commonsense facts; we price it for
+against 0% of the failed originals.                                         AAC input against a human base rate and separate it from
+                                                                            cue violations and compression loss. A later human coverage
+B. Confirmation set
+                                                                            study found the cue tap, not a set of drafts, the main lever on
+   All three contrasts have the same sign on the confirmation               covering the writer’s intended message (one draft 13% bare,
+set, and every interval excludes zero (Table II). Act-chip gain             43% after the cue; three bare drafts 22%).
+(31.41 pp) is a little below the human-written 37.5 pp, and the                The [?] chip is the weakest supplied chip (alone it failed
+Affirmative default is of similar size. Net politeness addition             58 of 208, 42 of them coded as requests for “Can you. . . ?”,
+is small, with a lower bound of 2.50 pp. Two qualifications:                a codebook decision). 20 annotators who had not been taught
+48 cached requests predate the final item freeze, and Act-                  the rule coded such outputs as a request in 98.2% of 57
+chip gain relies on post-hoc arbitration of 259 extractor-                  codings, so the stored coding is what people do; the alternative
+disagreement rows; with those labels masked as unknown it is                coding moves the confirmation-set Act-chip gain from 31.4
+31.65 pp (last row of Table II), and the other two contrasts con-           to 18.6 pp and changes no Holm decision, so the size of the
+tain no arbitrated rows. “Pre-specified and git-timestamped”                gain is codebook-dependent and its sign is not. Full-input
+means the plan was committed to a private repository before                 violations are model-specific: Gemma-3-4B and gpt-6.1-terra
+generation, which is not independently verifiable; the pub-                 added markers, while Llama and Qwen removed markers more
+lic hash release protocol-hash-2026-11-01 post-dates                        often than they added them on the confirmation set. This is a
+the confirmation-set freeze and does not certify it.                        regression to test for per model, not a property of LLMs.
+C. Assumptions, full-input violations and model heterogeneity               D. Composition (R4)
+   Table III separates the two kinds of evidence. In the italic                The composition study adds a second chip to a single-
+cells the input is ambiguous, so the match is the model’s                   chip input and counts pass→fail transitions of the first chip’s
+default, bounded by a 50% design ceiling; it is not accu-                   value against the disagreement between two greedy repeats
+racy. In the other cells the chip or sentence is visible, so                (the floor): 80 scenarios, two encodings of the speech-act
+the match measures preservation. Under bare input, 317/319                  chip ([TELL] and its alias [STATEMENT]), four models,
+committed directional polarity outputs on the confirmation                  two draws (11,520 requests). Failures depend on both model
+set were affirmative; these are Assumptions, not failures; the              and encoding: Qwen loses the agent in 84/640 transitions
+interface decides who pays an extra selection to say “not”.                 under [TELL] (13.12 pp [10.31, 16.09]) and in 0 under
+To test whether the default is a compression artifact we                    [STATEMENT]; Llama loses polarity in 55/640 transitions
+asked 20 annotators to type keywords for 600 crowd-written                  under [STATEMENT] (8.59 pp [6.25, 11.09]) and in 0 under
+AACText messages; on the 122 messages with a negation                       [TELL]. Two greedy repeats of the identical single-chip
+cue they dropped it in 20.8% of sets, against 100.0% for a                  input disagreed on 0/160 of Qwen and 0/160 of Llama inputs
+crude compressor. The default is also the better guess (among               (analysis/r2d/), so the raw rate is the floor-adjusted rate;
+on two-chip inputs the stricter floor leaves 9.38 and 7.03 pp.                                          TABLE IV
+An R4 test must therefore fix the encoding: a failure under one          FAULT- BY- TEST MATRIX ( A N A L Y S I S / O R A C L E /, THE R5 REPLAY, THE
+                                                                         HUMAN - AGREEMENT SETS ). Missed: THE TEST RAN ON THE AFFECTED
+encoding of the same meaning is an encoding defect before                                     RULE AND DID NOT FAIL .
+it is a model property. The study is exploratory and machine-
+scored.                                                                 Defect class             Caught by                   Missed by
+                                                                        Over-strict acceptance identity (14/2,292)           keyed controls (no
+                  IV. T ESTING THE O RACLE                              rule (a verbatim source                              failure: 0/24 false
+   Every result above is only as good as the checker, so we             fails)                                               alarms)
+                                                                        Over-relaxed rule (a    keyed acceptance             identity (0/120 false
+test it as software, in the spirit of the test-oracle literature [7],   substitution passes)    mutants (4/6 vs. 24/24       alarms); scoped mutants
+[8] and of mutation analysis [9]: an authorized change must                                     under the strict rule)
+pass and an unauthorized one must fail. Identity test: an               Builder chip            R5 validator (7/7)           –
+                                                                        contradicts the source
+unchanged source injected as its own full-channel output must           Error shared by         keyed challenge; both        both extractor prompts
+pass. Scoped mutants: a hand-written one-value change to a              machine coders (“I      human coders
+development-set source must be detected. Keyed challenge:               can’t wait” read as
+                                                                        negated)
+hand-written controls and one-feature mutants, with keys
+hashed before the first extractor call, must be classified as
+keyed. Human gate: extractor labels against human coders. A
+mutant is an output copy with one value changed, a control one               Which test caught which defect: Table IV lists, for each
+with a surface edit only; keyed means the expected outcome              defect class we met, which test caught it and which missed it.
+was fixed (hashed) before the first extractor call; J1 and J2           No single test catches every class, and the cheapest (identity)
+are the two extractor prompts and the arbiter rules on their            passed the harmful relaxation. It is an inventory of this
+critical disagreements; development items built the codebook            project, not a seeded-fault sweep: it shows that the tests are
+and prompts (in-sample), held-out sets did not.                         complementary, not that they find faults we did not anticipate.
+      Two defects, two regression tests: Two defects arose                   Mutation and identity evidence: Table V lists the evi-
+while building the harness; neither was seeded, and each now            dence, first on authored inputs. The keyed challenge set has
+has a regression test (summarized in the fault-by-test matrix           four groups of six controls and six one-feature mutants. Its
+below). In Defect A, the identity test failed 14 of 2,292 repro-        pre-specified gate tolerates at most two missed mutants and
+ductions, all one sentence, “Yes, you can borrow my car this            one false alarm among 24 each. Under the production rule,
+weekend.”, coded statement against the target acceptance: the           which carries the acceptance relaxation of Defect A, the oracle
+model had done its job and the checker demanded a distinction           detected 22/24 mutants (Wilson interval [74.2, 97.7]%) and
+the text need not force. The obvious repair, accepting statement        raised 0/24 false alarms, so it passes the gate only because the
+for an acceptance target, passed identity but failed the next           relaxation’s two misses use the whole miss tolerance (zero
+test: the relaxed oracle detected only 4/6 acceptance mutants           margin); the strict rule without the relaxation detected 24/24.
+and missed both statement substitutions (“You borrowed my                    Mutation testing on real outputs, with baselines: Au-
+car this weekend.”), whereas without the relaxation it detected         thored sentences are easy, so we also seeded one-value mutants
+24/24 mutants across groups. This is one sentence in one                into real stored outputs of the human-written pairs (seed
+family, a demonstration of the trade-off and not an estimate            fixed in advance; 10 operators re-implemented because the
+of how often relaxation hides faults: removing a false alarm            authored mutants were hand-written) and drew 100 surface-
+removed fault sensitivity, so both refusal/acceptance families          edited controls (case, punctuation, contraction; 4 boosters,
+are quarantined from every primary result (leaving 58 of                which the contract tolerates, are excluded from the mutants)
+60 development families) until a predicate passes both tests;           from outputs the oracle scored as preserving. The 196 mutants
+keyed acceptance mutants now guard the rule. In Defect B,               come from 194 distinct stored sentences, so the intervals treat
+an audit of 139 restored-chip inputs built from AACText                 them as more independent than they are. Table V gives the
+messages found 7 whose displayed chip contradicted the stored           result: the judge caught 193/196 mutants with 0/100 false
+source, e.g., [MAYBE] for a plain assertion, after a silent             alarms, matching the authored-sentence result (120/120). Its
+fallback in our builder; in the 5 [MAYBE] messages, all                 3 misses are two mixed-signal time shifts and one equivalent
+20 outputs followed the visible chip and failed the source,             mutant, so it caught 193/195 non-equivalent mutants; the
+which a source-fidelity score counts as model failures. The             mutants are rule-seeded by operators that mirror the extractor’s
+R5 validator decodes only the rendered input and now rejects            cues, a sensitivity measure and not an error rate. A surface
+all 7 before generation. Replayed on every chip input of the            lexicon scores 190/196 with 4/100 false alarms (near-circular:
+confirmation set, the composition study and the human-written           it matches the cues the operators edit), and string overlap
+pairs (13,496 inputs), it found 0 conflicts; 10,528 were verified       138/196 with 16/100; the judge’s edge shows mainly on
+compatible and 2,968 (time chips and one long chip alias) are           controls.
+outside its decoder. It covers chip inputs only, matches the                 The oracle on faults nobody seeded: Human-labelled
+audit on 139/139, and never certifies the 8 coarser [SURE]              natural outputs test the oracle on faults nobody seeded: judge
+restorations.                                                           verdict against human-consensus verdict, with violation and
+                              TABLE V                                              Treated outputs: 20 annotators coded 120 outputs from 6
+O RACLE EVIDENCE (W ILSON 95% INTERVALS ). U PPER BLOCK : SEEDED             classes that carry the headline contrasts (guard repairs, retries,
+ TESTS ON AUTHORED SENTENCES OR RULE - SEEDED EDITS OF STORED
+OUTPUTS , NOT AN ERROR RATE ON UNEDITED OUTPUTS . L OWER BLOCK :             chip and plain-word outputs, three further models), two coders
+ ORACLE AGAINST HUMAN CODERS ON NATURAL OUTPUTS ( PLURALITY                  each: the judge’s critical label equals the human consensus on
+OF CODERS ; ITEMS WITHOUT A DETERMINATE HUMAN CRITICAL VALUE                 115/115 outputs (Wilson lower bound 96.8%), in every class;
+   EXCLUDED ). H ELD - OUT: NOT USED TO BUILD THE CODEBOOK OR
+                              PROMPTS .                                      added content stays the weakest field (98/109, κ = 0.59).
+                                                                                   Human gate: The first human gate, with two annotators,
+Check                                                              Result    was run on the development items (the extraction inventory
+Oracle tests (seeded)                                                        used to develop the codebook), with plurality references and
+Identity: unchanged source,                                         0/120    tied items excluded rather than adjudicated. Its pre-specified
+false alarms
+Scoped single-value mutants de-                                  120/120
+                                                                             criterion (κ ≥ 0.6) passes on all 7 fields. It validates extraction
+tected                                                                       of explicit markers on those items, not repaired text or corpus-
+Keyed challenge mutants de-                                         22/24    transfer readings. Two later checks use outputs the harness had
+tected, production rule (gate,
+zero margin)
+                                                                             not been developed on: outputs for human-elicited keywords
+Keyed challenge controls, false                                      0/24    and outputs for human-written pairs (Table V). With ties and
+alarms                                                                       unsure counted as disagreement, critical κ is .930 (develop-
+   acceptance group only, pro-                                        4/6
+duction rule
+                                                                             ment items), .925 [.874, .971] (elicited keywords) and .931
+   all groups, strict rule (no re-                                  24/24    [.868, .981] (human-written pairs), so the gate still passes;
+laxation)                                                                    the weakest field is added content on human-written pairs
+Real outputs (196 mutants, 100                                               (.692, lower bound .541). These are the oracle’s evidence
+controls): mutants caught; false                                             on headline-type data, though their coders were taught the
+alarms
+   judge (J1+J2, arbiter)                                 193/196; 0/100
+                                                                             codebook. A third check targets the arbiter, whose rulings
+   surface lexicon (near-circular)                        190/196; 4/100     settle every critical disagreement between J1 and J2. Of 260
+   string overlap                                        138/196; 16/100     codings by 20 non-author annotators of 100 arbiter-decided
+Oracle vs. humans (natural outputs)                                          units, 181 carried a label (124 on the arbiter units, the
+Held-out sets, judge vs. human-                                              rest on 30 “Can you” outputs), and people sided with the
+consensus verdict (positives:
+39 violation, 53 preservation-                                               arbiter in 96/124 (77.4%, per-coding Wilson interval [69.3,
+failure verdicts): precision;                                                83.9]%, κ = 0.74); on the 50 items where all coders agree,
+recall                                                                       in 39 (78.0% [64.8, 87.2]%, Wilson over items). Units are
+   violation verdicts            87.8% [74.5, 94.7]%; 92.3% [79.7, 97.3]%
+   preservation-failure verdicts 84.5% [73.1, 91.6]%; 92.5% [82.1, 97.0]%    J1/J2 disagreements, so chance is 50% and the shares for
+                                                                             J1 (60.5%) and J2 (39.5%) are complementary; people agree
+Human gate, test split of the                                   0.91–0.97
+development items (187 items,                                                with the arbiter whichever prompt it sided with (81.3% when
+two coders): κ, 7 fields                                                     it followed J1, 74.5% when it followed J2). It covers only
+Outputs for human-elicited key-                          0.97 [0.94, 0.99]   J1/J2 disputes, ruled by a Claude session after outcomes were
+words (4 coders, 151 of 161
+items): critical κ [CI]                                                      known, from a family no generator or extractor belongs to;
+   raw agreement, critical label                                   97.4%     it limits, and does not remove, the self-preference concern.
+   verdict agreement                                              151/151    Machine agreement is not validation: on “I can’t wait to go
+Outputs for human-written pairs                          0.94 [0.89, 0.97]
+(3 coders, 150 of 152 items):                                                to the party.”, both extractor prompts, the rule-based extractor
+critical κ [CI]                                                              and two further machine coders answered negated, and both
+   raw agreement, critical label                                   94.0%     human annotators answered affirmative, as keyed.
+   verdict κ                                                    0.81–0.85
+                                                                                   Necessary, not sufficient: The oracle checks a fixed set
+                                                                             of explicit values, so passing it is necessary for a faithful
+                                                                             sentence, not sufficient. In the writer-intent check, 20 writers
+preservation failure as the positive classes. The development                judged 200 outputs for their own pairs: the cue raised the share
+items (99 verdicts) built the codebook and extractor prompts,                called the intended version by 28.0 pp [14.8, 42.0], yet writers
+so they are reported separately; two held-out sets, a second                 accepted 1 of 200 as written, and writer–judge κ is 0.24. Of the
+gold set of fresh outputs and the human-written pairs (217                   130 outputs whose critical value the oracle scored correct, 126
+verdicts), were not used to build either. On the held-out sets,              had an intended-version rating, and writers said 77 of those
+violation verdicts have precision 87.8% [74.5, 94.7]% and                    (61.1%) were not the version they meant. The reasons are
+recall 92.3% [79.7, 97.3]% (39 positives), and preservation                  not added content (the primary reason in 0 of 199 rejections)
+failures 84.5% [73.1, 91.6]% and 92.5% [82.1, 97.0]% (Ta-                    but compression loss and misresolved events: 97.7% of the
+ble V). The development items give 95.7% and 91.7%, which                    rejected, oracle-correct outputs lack words from the writer’s
+are in-sample and not evidence. On the elicited keywords the                 own sentence that no keyword or chip supplies, and 48.8%
+assumption verdict has precision 100.0% and recall 100.0% on                 show a different event or role. Of 80 SLP rater-judgments on
+151 items. Each set has only 16–24 violation positives, hence                oracle-passed outputs, 44 said the sentence only partly or did
+the wide intervals.                                                          not say what the selected words mean, and both consultants
+asked that relations (who does what) be preserved, which R4            Preservation and LLMs in AAC: Qu et al. evaluate
+now says. Event and role structure is a missing requirement,      speech-act retention in style transfer [15], and rewriting can
+not a fault of the oracle, which answers whether a supplied       keep semantic similarity while erasing pragmatic markers [16].
+value was kept; a separate test must ask whether the sentence     AAC systems studied with users expose user-side controls over
+says the same thing. The cheapest such check, T1, requires        context or stance [1], [17]; a Lacosse et al. preprint keeps a
+that a [TELL] input whose keywords hold no form of tell           short list of bracketed function words, including “not” [18];
+not yield tell/tells/told/telling. On the human-                  Choudhury et al. test whether affect cues reach the output [19];
+written pairs 1,373 of 3,936 such outputs (34.9%; 437 of 492      R-SPEAK was co-designed with people with aphasia and
+families) do, against 1.3% of same-source bare outputs (Qwen      compared LLMs on interpreting aphasic speech [20]. We add
+outputs 68.7%, gpt-6.1-terra outputs 0.0%). T1 is lexical and     a conditional specification of which commitments are testable
+not human-validated; the critical check passes these outputs      under each input, and tests of the oracle that checks them.
+because the speech act is a statement.
+                                                                                  VII. T HREATS TO VALIDITY
+        V. R EQUIREMENTS R EVIEW BY AAC-U SER                       • Construct. Labels are coarse, explicit categories; refer-
+                    C ONSULTANTS                                      ents, negation scope, certainty degree and event structure
+   Two paid AAC-user design consultants reviewed R1–R5                are only partly covered (§IV), and passing the checker is
+in plain language with real stored examples and a descrip-            weaker than keeping the typed wording.
+                                                                    • Oracle. All rates depend on an LLM extractor and arbiter,
+tion of the chip and plain-word designs. We asked for
+design feedback on the requirements and on 10 example                 and the extractor shares a family with one generator. The
+outputs, not about their own communication, and report re-            defect trace has n = 2 defects, both found by our own
+quirement changes, not their answers, as data. Every sug-             process: it shows that the process works, not that it finds
+gestion is a log row with the change made or not and                  defects we did not anticipate. The surface baseline is near-
+why (paper/se4all/consultant_log.csv, 11 rows):                       circular.
+                                                                    • External. 6 models from 5 families (open models at
+5 changed the requirement list, 2 were design or wording
+changes, and 4 were not followed. The requirement changes             most 14B, 4-bit), one prompt, English, constructed and
+(Table I) are R6, which makes every draft wait for the person’s       crowd-written rather than AAC-user messages; effects are
+approval; a NOT-scope clause in R1; the exact-copy default            model-specific, and zero observed events do not establish
+and request-and-preview condition in R2; a brief, reversible          zero risk.
+                                                                    • Use. No outside developer has used the harness yet.
+choice for the logged Assumption in R3; and relations in R4.
+R6 is the one the oracle cannot test. The relations change            The SLP panel and the consultants are two people each;
+led to a test: an example the oracle had passed, a [TELL]             both shaped the requirements and neither establishes
+turned into a verb, was flagged as unsendable, so we wrote            what AAC users in general want. Selection counts omit
+T1 and measured it on all stored outputs (§IV). Flaws they            reading, navigation and fatigue (see also [21]).
+found in our materials became builder test cases, including                             VIII. C ONCLUSION
+the two Defect B inputs, whose [MAYBE] chip misstated the            An oracle for meaning preservation is software and needs
+message. The consultants are not a sample of AAC users, and       tests of its own. Ours caught a repair that hid real substitu-
+the requirements stay our proposals.                              tions and a builder that supplied the wrong chip, its critical
+                    VI. R ELATED W ORK                            labels agree with human coders on three sets of outputs,
+                                                                  including all 115/115 treated outputs checked, and people
+      Test oracles, metamorphic testing and requirements for      side with its arbiter on 77.4% of disputed labels. With it,
+ML: Whether an output is correct is the oracle problem [8];       human-written pairs show that bare keywords leave a default
+partial or pseudo oracles are standard [7], and metamorphic       reading, that supplying the missing cue, as a chip or a
+testing checks relations between runs [10]. Mutation analysis     plain word, removes most expected reversals, and that some
+measures a test suite by whether it detects seeded faults [9];    models change typed text. The tests also mark their own edge:
+we apply it to the oracle, not the system. Requirements engi-     passing the oracle is necessary but not sufficient, because
+neering for ML calls for explicit, testable requirements [11];    event and role structure is a requirement it does not check,
+R1–R6 are one such set, with sources and tests stated.            and review by two AAC-user consultants added relations to
+      Testing LLM systems: CheckList organizes behavioral         R4, a new approval requirement (R6) and a first regression
+tests into minimum-functionality, invariance and directional      test for the missing structure. Families, requirements, harness,
+tests [12], and Cho et al. catalogue metamorphic relations for    oracle tests, stored outputs and analysis code are available at
+LLM-based NLP [13]; we claim no new testing technique.            https://github.com/1unarzDev/aac_voice_preservation.
+LLM judges show position, verbosity and self-preference
+biases [4], and Pauli et al. show that preservation metrics                      E THICS AND P OSITIONALITY
+look valid when test data confound style change with content        No data about AAC users were collected; AACText is
+errors [14]; our identity and mutant tests apply that idea to a   public under CC BY 4.0. All annotators were adult non-
+checker.                                                          authors, classmates of the authors from a university (we
+list no affiliation because the work was not run through an                      [10] T. Y. Chen, F.-C. Kuo, H. Liu, P.-L. Poon, D. Towey, T. H. Tse, and Z. Q.
+institution), identified only by an ID; each consented and was                        Zhou, “Metamorphic testing: A review of challenges and opportunities,”
+                                                                                      ACM Computing Surveys, vol. 51, no. 1, pp. 4:1–4:27, 2018.
+reimbursed for their time (payment and food). They labelled                      [11] A. Vogelsang and M. Borg, “Requirements engineering for machine
+model outputs and audited items under a fixed codebook,                               learning: Perspectives from data scientists,” in 2019 IEEE 27th Interna-
+blinded to model, condition and source. Some also chose                               tional Requirements Engineering Conference Workshops (REW), 2019,
+                                                                                      pp. 245–251.
+keywords for public AACText messages, and some wrote new                         [12] M. T. Ribeiro, T. Wu, C. Guestrin, and S. Singh, “Beyond accuracy:
+sentence pairs, which they released under CC BY 4.0 with                              Behavioral testing of NLP models with CheckList,” in Proceedings of the
+recorded consent. No personal or health data were collected.                          58th Annual Meeting of the Association for Computational Linguistics.
+                                                                                      Association for Computational Linguistics, 2020, pp. 4902–4912.
+As independent researchers, we did not seek an institutional                     [13] S. Cho, S. Ruberto, and V. Terragni, “Metamorphic testing of large
+review determination. Two speech-language pathologists were                           language models for natural language processing,” in Proceedings
+paid, anonymous expert annotators of study materials under a                          of the 41st IEEE International Conference on Software Maintenance
+                                                                                      and Evolution (ICSME), 2025, pp. 174–186. [Online]. Available:
+written professional-services agreement; the data are about the                       https://valerio-terragni.github.io/assets/pdf/cho-icsme-2025.pdf
+outputs, not about them. Two AAC-user consultants were paid                      [14] A. B. Pauli, I. Augenstein, and I. Assent, “Mind the style gap: Meta-
+design consultants who reviewed requirements and examples                             evaluation of style and attribute transfer metrics,” in Findings of the
+                                                                                      Association for Computational Linguistics: EMNLP 2025. Association
+under a written consulting agreement; we did not collect, anal-                       for Computational Linguistics, 2025, pp. 21 550–21 564.
+yse or report their experiences, and neither package collected                   [15] R. Qu, L. Ungar, and J. Sedoc, “Conditioning on dialog acts improves
+demographic or health information. The requirements were                              empathy style transfer,” in Findings of the Association for Computational
+                                                                                      Linguistics: EMNLP 2023. Association for Computational Linguistics,
+reviewed by the consultants and the outputs rated by the SLPs                         2023, pp. 13 254–13 271.
+as described above; they are still our proposals, and we make                    [16] S. K. Navneet, J. Chandra, and Y. Zhang, “When AI writes, whose
+no claim about benefit to AAC users. We drew on writing by                            voice remains? quantifying cultural marker erasure across world English
+                                                                                      varieties in large language models,” in Extended Abstracts of the 2026
+and with autistic and AAC-using adults [22], [23], [21] and on                        CHI Conference on Human Factors in Computing Systems. ACM,
+participatory-research and double-empathy work [24], [25] to                          2026, pp. 1–7.
+avoid encoding a group style or deficit. We assume no “autistic                  [17] S. Valencia, J. Huynh, E. Y. Jiang, Y. Wu, T. Wan, Z. Zheng, H. Admoni,
+                                                                                      J. P. Bigham, and A. Pavel, “COMPA: Using conversation context to
+style”, and our claims are limited to commitments explicit in                         achieve common ground in AAC,” in Proceedings of the 2024 CHI
+the text.                                                                             Conference on Human Factors in Computing Systems. ACM, 2024.
+                                                                                 [18] E. Lacosse, P. Tano, and D. C. McNamee, “Multi-system cognitive
+                             R EFERENCES                                              steering for generative communication,” 2026, arXiv preprint.
+[1] S. Valencia, R. Cave, K. Kallarackal, K. Seaver, M. Terry, and S. K.         [19] S. H. Choudhury, A. Kumar, and L. J. Martin, “Evaluating human-LLM
+    Kane, ““The less I type, the better”: How AI language models can                  representation alignment: A case study on affective sentence generation
+    enhance or impede communication for AAC users,” in Proceedings of                 for augmentative and alternative communication,” in Proceedings of the
+    the 2023 CHI Conference on Human Factors in Computing Systems.                    14th International Joint Conference on Natural Language Processing
+    ACM, 2023.                                                                        and the 4th Conference of the Asia-Pacific Chapter of the Association for
+[2] S. Cai, S. Venugopalan, K. Seaver, X. Xiao, K. Tomanek, S. Jalasutram,            Computational Linguistics. The Asian Federation of Natural Language
+    M. R. Morris, S. Kane, A. Narayanan, R. L. MacDonald, E. Kornman,                 Processing and The Association for Computational Linguistics, 2025,
+    D. Vance, B. Casey, S. M. Gleason, P. Q. Nelson, and M. P. Brenner,               pp. 1618–1637.
+    “Using large language models to accelerate communication for eye gaze        [20] A.-K. Al-Tamimi, J. Andrews, J. Benfield, C. Sweby, C. Gilmartin,
+    typing users with ALS,” Nature Communications, vol. 15, no. 1, p. 9449,           R. Lindley, D. Trusson, M. Dziunka, D. Webster, and K. Radford, “R-
+    2024.                                                                             SPEAK, an AI-based smartphone app to enhance communication in
+[3] J. Shen, B. Yang, J. Dudley, and P. O. Kristensson, “KWickChat: A                 people with expressive aphasia: Qualitative acceptability and usability
+    multi-turn dialogue system for AAC using context-aware sentence gen-              study,” Journal of Medical Internet Research, vol. 28, p. e93518, 2026.
+    eration by bag-of-keywords,” in Proceedings of the 27th International        [21] B. Frisch, W. Wade, D. Gaines, M. Kinsella, B. Peters, T. Broderick,
+    Conference on Intelligent User Interfaces. ACM, 2022, pp. 853–867.                and K. Vertanen, “It’s complicated: On the design and evaluation of
+[4] L. Zheng, W.-L. Chiang, Y. Sheng, S. Zhuang, Z. Wu, Y. Zhuang,                    AI-powered AAC interfaces,” 2026, position paper, Speech AI for All
+    Z. Lin, Z. Li, D. Li, E. P. Xing, H. Zhang, J. E. Gonzalez, and I. Stoica,        workshop at CHI 2026.
+    “Judging LLM-as-a-judge with MT-Bench and Chatbot Arena,” in                 [22] A. H. Zisk and E. Dalton, “Augmentative and alternative communication
+    Advances in Neural Information Processing Systems, vol. 36, 2023.                 for speaking autistic adults: Overview and recommendations,” Autism in
+    [Online]. Available: https://arxiv.org/abs/2306.05685                             Adulthood, vol. 1, no. 2, pp. 93–100, 2019.
+[5] K. Vertanen and P. O. Kristensson, “The imagination of crowds:               [23] A. L. Donaldson, endever* corbin, and J. McCoy, ““everyone deserves
+    Conversational AAC language modeling using crowdsourcing and large                AAC”: Preliminary study of the experiences of speaking autistic adults
+    data sources,” in Proceedings of the 2011 Conference on Empirical                 who use augmentative and alternative communication,” Perspectives of
+    Methods in Natural Language Processing, 2011, pp. 700–711. [Online].              the ASHA Special Interest Groups, vol. 6, no. 2, pp. 315–326, 2021.
+    Available: https://aactext.org/imagine/                                      [24] C. Nicolaidis, D. Raymaker, S. K. Kapp, A. Baggs, E. Ashkenazy,
+[6] J. Chen, W. Shi, Z. Fu, S. Cheng, L. Li, and Y. Xiao, “Say                        K. McDonald, M. Weiner, J. Maslak, M. Hunter, and A. Joyce, “The
+    what you mean! large language models speak too positively about                   AASPIRE practice-based guidelines for the inclusion of autistic adults
+    negative commonsense knowledge,” in Proceedings of the 61st                       in research as co-researchers and study participants,” Autism, vol. 23,
+    Annual Meeting of the Association for Computational Linguistics                   no. 8, pp. 2007–2019, 2019.
+    (Volume 1: Long Papers), 2023, pp. 9890–9908. [Online]. Available:           [25] D. E. M. Milton, “On the ontological status of autism: The ‘double
+    https://aclanthology.org/2023.acl-long.550/                                       empathy problem’,” Disability & Society, vol. 27, no. 6, pp. 883–887,
+[7] E. J. Weyuker, “On testing non-testable programs,” The Computer                   2012.
+    Journal, vol. 25, no. 4, pp. 465–470, 1982.
+[8] E. T. Barr, M. Harman, P. McMinn, M. Shahbaz, and S. Yoo, “The
+    oracle problem in software testing: A survey,” IEEE Transactions on
+    Software Engineering, vol. 41, no. 5, pp. 507–525, 2015.
+[9] Y. Jia and M. Harman, “An analysis and survey of the development of
+    mutation testing,” IEEE Transactions on Software Engineering, vol. 37,
+    no. 5, pp. 649–678, 2011.
+

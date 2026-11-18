@@ -1,0 +1,638 @@
+     Gains Hide Failures: A Ledger Evaluation of a Commitment Guard for AAC
+                                Sentence Expansion
+
+                                                        Anonymous submission
+
+
+
+
+                             Abstract                                   User input     Model         Guard        What the scorer and
+                                                                                       wrote         output       the person see
+  People who use AAC (augmentative and alternative commu-
+  nication) pick a few words, and a language model writes the           [?] [I]        “Is it okay if “Is [I] bring Scored a pass (it
+  sentence the app speaks, sometimes dropping a “not”. We               bring          I bring a      a friend?” keeps the question
+  evaluate a commitment guard, which makes the model rewrite            friend         friend?”                     label). Not a
+  when its sentence contradicts the user’s input, in a ledger that                                                  sentence: the model
+  sets each gain beside what it leaves broken, what it breaks                                                       copied the chip
+  and what it costs. All results are descriptive stored-text con-                                                   token.
+  trasts, with no effect on people. On 78 speech-act families (the      knock          “Please        “Don’t        A menu meant to
+  guard’s weakest development dimension, so an upper-leaning            come           knock          knock         widen choices turned
+  slice, not an average over dimensions), rerun unchanged on                           before you     before you a polite request into a
+  fresh items, the guard raises the joint pass rate by +9.83 points                    come in.”      come in.”     prohibition.
+  [8.39, 11.32] (from +0.85 to +19.02 by model, largest for the         [ASK]          “You wear      “Ask you to Scored a pass. Not
+  weaker local models) and repairs 52.51% of strict-check fail-         [YOU]          head-          wear head- what was meant.
+  ures. Of 26 already-correct texts the guard changed, 0 became         [PLAIN]        phones.”       phones.”
+  failures, but that count is measured by the same strict predicate     wear
+  the monitor uses, so it is partly by construction; the human          headphones
+  audit is the non-circular safety evidence. In that 120-text audit
+  of repairs against never-failed controls, the frozen rule returns     Figure 1: Bracketed tokens in an input are cue chips, single
+  no detectable usability cost (−13.3 points [−27.6, +1.5]; it de-      taps that fix one commitment: [NOT] negation, [?] a ques-
+  tects gaps of about 18 points) and leaves the deployment clause
+  unresolved, while two stricter endpoints are significantly neg-
+                                                                        tion, [ASK] and [YOU] an ask addressed to the listener,
+  ative: meaning preserved −13.6 points [−26.2, −1.0] and               [I] the speaker as agent, [PLAIN] no added politeness.
+  usable and preserving −20.0 [−34.8, −3.9]. Against each re-           Illustrative failures found by the audit, real stored outputs,
+  pair’s own failed original, an exploratory paired contrast on         not typical: each is the first case in a fixed hash order within
+  20 pairs favours the repair on meaning kept (+30.0 points [9.1,       its category, except the third, the second repair in that or-
+  46.8]) but not on usable and preserving (+10.0 [−9.4, 29.1]).         der; rates are in Section 6.2. First: the guard changed 26 of
+  On speech-act pairs written by ten people, the supplied cue           1,394 already-correct texts, none into a strict-check failure.
+  gains +37.5 points [33.8, 41.2] over keywords with a neutral          Second: menu rewrite; this is the politeness row, where sets
+  chip, positive for every writer; on the confirmation set its pre-     offering the polite option fell from 26/40 to 12/40, while on
+  set clause of 80% of the typed-input rate failed (73.8%), so          polarity and certainty items sets offering both readings rose
+  only the gain clause replicates. Models commit to the affir-
+  mative reading in at least 98.4% of committed answers even
+                                                                        from 15/80 to 78/80.
+  when told not to assume, so their rare errors are silent rever-
+  sals; a supplied cue, as a chip or a plain word, removes nearly
+  all of them in same-item regeneration. Together these price a         lencia et al. 2023; Cai et al. 2024). LLM keyword expansion
+  supplied cue and the affirmative default, with whole-message          turns want go party into a full sentence (Shen et al.
+  fidelity beside the commitments.                                      2022; Cai et al. 2024), which a system may speak on the
+                                                                        user’s behalf, sometimes after review (Hancock, Naaman,
+                      1    Introduction                                 and Levy 2020; Valencia et al. 2020). But the model decides
+                                                                        more than words: whether something happened or did not,
+People who use AAC often compose by selecting a few words               whether the sentence asks or tells, whether it says “please”.
+or symbols, because every selection costs time and effort (Va-          Given not like medication, a sentence that drops the
+This is an anonymized submission for review purposes only. Dis-         negation, turns it into a question or adds politeness is fluent
+tribution, citation, or public sharing of this manuscript is strictly   and wrong. Three kinds of fix are being explored: check
+prohibited. Copyright and publication details will appear in the        the output against the user’s words and regenerate on a con-
+final version if accepted.                                              flict (Madaan et al. 2023; Gou et al. 2024), offer suggestions
+that span the readings the words leave open, or give the user        et al. 2026); our ledger is a technical layer shaped so that a
+a control over stance or context (Valencia et al. 2024; Mao          functional study can test it.
+et al. 2025; Xiang et al. 2025), which our one-tap cue instan-
+                                                                     Editing, preservation and evaluation. Generate–
+tiates. Such work commonly reports accuracy or similarity
+                                                                     critique–revise loops (Madaan et al. 2023; Gou et al. 2024)
+gains (Cai et al. 2022; Shen et al. 2022; Cai et al. 2024),
+                                                                     and conditioning a rewrite on the source dialog act (Qu,
+which are real, but a gain-only report hides what a fix leaves
+                                                                     Ungar, and Sedoc 2023) are established, as is reporting a
+unfixed, what it changes that was already right, and whether
+                                                                     targeted change together with collateral change (Ziegenbein,
+the repaired text is usable.
+                                                                     Stahl, and Wachsmuth 2026; Elgaar and Amiri 2025).
+Thesis and ledger. Where only gains are reported, failures           Preservation metrics are valid only when test data do not
+stay hidden, so we report a ledger. Beside each benefit it           confound the intended change with content errors (Pauli,
+records offline failure indicators (events in stored text that a     Augenstein, and Assent 2025); models have default po-
+gain-only report omits: failures that remain, correct outputs        liteness strategies (Zhao and Hawkins 2025), and write
+the fix changed, readings a menu no longer offers, silent            sentences wrongly positive about negative commonsense
+reversals under a default that is right on average), the cost, and   facts (Chen et al. 2023), so an affirmative default is not
+where the intervention applies. None of these indicators is a        our finding; we price it. Faithfulness and hallucination
+measured harm to a person. What does it show? The guard              evaluation in generation asks whether output is supported
+repairs supplied-value failures on fresh items and against           by its source (Maynez et al. 2020; Ji et al. 2023); our
+their own failed originals its repairs keep the meaning and          offline failure indicators apply that question to values a
+remove invented stance; a supplied cue removes nearly all            user supplied, and add collateral change and a severity
+silent reversals; and the whole message, which the ledger also       weighting from speech-language pathologists (Section 6.5).
+measures, is the open column. A gain-only report would stop          The ledger differs from a standard error analysis plus
+at +9.83 points and 52.51% repaired; the ledger adds what            collateral-change report by attributing each miss to loss,
+remains, the share plain deletion earns (+3.47), the spread by       violation or assumption and by setting the benefit, the free
+model and the usability audit. Our running case is keyword-          baseline and the human usability check in one display. We
+to-sentence expansion with four LLMs on minimal-pair item            add accounting conditioned on what the input supplied,
+families, defined in Section 3.                                      against a free baseline, plus a human usability check on
+                                                                     repaired text. LLM judges (Zheng et al. 2023) favor their
+Contributions. (1) A ledger and its design rules: attribu-           own generations (Panickssery, Bowman, and Feng 2024)
+tion decides what an intervention may be credited with; a            and can agree with each other more than with people on
+free baseline and pass lines fixed in advance decide whether         pragmatic labels (Wang, Sun, and Guo 2026), which bounds
+it merits a human study (§5), with a pre-specified human-            what our machine labels can show.
+effect design (§7). (2) One lead case, a commitment guard,
+evaluated end to end: on a confirmation set with a frozen rule                               3   Setting
+it raises the joint pass rate by +9.83 points, repairs 52.51%        Items and populations. An item is a minimal-pair family
+of strict-check failures (46.3% of joint-pass failures), and its     (“I don’t like the new medication” / “I like the new medi-
+feedback beats plain retrying by +6.94 points [5.34, 8.60] at        cation”); each source sentence is shown to the model under
+matched decoding (+6.20 against resampling at temperature            five input conditions (Table 1). The development set has 58
+0.7); the ledger adds residual failures, the share a free base-      constructed families on six dimensions (after quarantining
+line earns, and a 160-text human audit of its repairs (§6).          two families whose scoring rule has a known blind spot);
+(3) The supplied cue and the affirmative default, priced: a          the guard was built and tested there, so its numbers are de-
+cue gain that replicates on ten held-out writers’ pairs (but         velopment results, and the menu and cue rows use it. The
+reaches 73.8% of the typed-input rate against its 80% line           confirmation set has 240 fresh constructed families (polarity,
+on the confirmation set), human checks of the judge and de-          speech act, politeness), 238 analyzed after a pre-generation
+tector, and writer-intent and clinical-weight columns, with          exclusion, with three contrasts pre-specified in version con-
+further rows reported briefly (§6.5, §6.6). We ran no study          trol; a hash of the protocol was deposited publicly after the
+with AAC users; every result is a change in stored text.             confirmation freeze, so it does not certify the freeze. 48
+                                                                     cached requests predate the final item freeze. Its 78 anal-
+                    2    Related Work                                ysed speech-act families, a pre-specified subset of the 238
+                                                                     chosen because speech act was the guard’s weakest develop-
+LLMs in AAC. LLM expansion and suggestion systems
+                                                                     ment dimension, are where the guard was rerun unchanged.
+for AAC include KWickChat (Shen et al. 2022) and Speak-
+                                                                     The human-written pairs are 547 kept minimal pairs writ-
+Faster (Cai et al. 2024), and AAC users have described how
+                                                                     ten by 20 non-author annotators, plus 60 speech-act pairs
+such systems help and hinder them (Valencia et al. 2023).
+                                                                     from 4 further writers who had not written that dimension,
+Several add user-side control over stance or context (Valen-
+                                                                     kept after blind checks. The keyword study has 20 annotators
+cia et al. 2024; Mao et al. 2025; Xiang et al. 2025; Lacosse,
+                                                                     type keywords for 600 AACText messages (crowd-written
+Tano, and McNamee 2026); others measure whether affect or
+                                                                     fiction).
+intent survives generation (Choudhury, Kumar, and Martin
+2025). Frisch et al. argue that AI-powered AAC needs techni-         Scoring and attribution. Four primary models write each
+cal, user-mediated and functional evaluation together (Frisch        sentence: Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and
+  Glossary
+  Family           Two source sentences differing on one critical       Cue, chip         A commitment the user adds, as one tap such
+                   dimension, with the same bare keywords                                 as [NOT], [?], [PLAIN], or as a plain word
+  Critical         Polarity, agent, certainty, speech act (ask, tell,   Input             Keywords only; keywords plus a
+  dimension        request), politeness, time/quantity                  conditions        length-matched neutral word; plus the critical
+                                                                                          cue; plus all cues; the typed sentence (“typed
+                                                                                          input”, the full channel)
+  Pass (joint      Keeps the critical value and every other scored      First pass        The model’s single greedy sentence, before any
+  pass)            supplied predicate; the headline metric                                intervention
+  Strict-check     Keeps the critical value, contradicts no supplied    Strip-only        Free baseline: delete an unrequested “please”,
+  pass             dimension, adds no politeness; a failure is a                          “pls” or “plz” (no model call)
+                   strict-check failure, and repair rate is the share
+                   of these that the intervention fixes
+  Violation        The input carried a value and the output changed     Offline failure   Event in stored text that a gain-only report
+                   it                                                   indicator         omits
+
+   Table 1: Glossary. All scores are partial predicates computed from machine-extracted labels, not judgments of usability.
+
+
+Gemma-3-4B-it (4-bit, llama.cpp) and one commercial API                   content is the weak field (98/109, κ = .59), so we do not
+model; Section 6.4 adds Qwen2.5-14B and Mistral-Nemo-                     claim it is validated. Repaired text is checked by the usabil-
+12B (six models from five families) and a lite Gemini model               ity audit (Section 6.2). Item construction and the scorer are
+on the legend arms only (seven in all); the models are fixed,             described in a companion paper (Anonymous 2027).
+not sampled. An LLM extractor (two prompt variants) la-
+bels each output’s dimensions without seeing the source,                                       4    Interventions
+model or condition; a second-family arbiter resolves dis-
+agreements on critical labels; deterministic code turns la-               The commitment guard (lead; system side). After the
+bels into verdicts, identically for treated and untreated out-            first pass, a deterministic lexical monitor (regexes and lexi-
+puts. A target is one (item, model, input condition) outcome.             cons for negation, person, modality, question form, numbers,
+Because the input condition fixes which values the model                  tense and “please”) compares the output with the values in
+was given, a miss is attributed to one of three causes: loss              the visible input: the cues, or for typed input the monitor’s
+(the input never carried the value), violation (it carried the            own labels of the typed sentence. It also flags a politeness
+value and the output changed it) or assumption (the input                 marker that was not supplied. On a flag, the same conversa-
+was ambiguous and the output committed anyway). Take                      tion receives one feedback turn (“Your sentence must keep:
+the source “I don’t like the new medication”. The keywords                negated; no added politeness. Write the sentence again with
+like medication never carried the negation, so an af-                     the same meaning otherwise.”) and is regenerated, up to two
+firmative output is a loss at input, and the remedy is a cue;             retries. The guard returns the first unflagged attempt, else the
+[NOT] like medication carried it, so an affirmative                       attempt with fewest flags, ties going to the original. The free
+output is a violation, and only then can a checker enforce the            baselines are strip-only and plain retrying. The no-feedback
+value; when the words leave both readings open and a menu                 baseline (G1r) keeps the monitor, trigger and retry cap but
+of suggestions offers only one, the miss is an assumption, and            regenerates from the original prompt with no feedback turn,
+the remedy is a menu or a question. The guard is therefore                at temperature 0.7 because a temperature-0 retry repeats the
+credited with violations alone, and a gain is never credited to           first pass; the guard at the same temperature (G1t) isolates
+an intervention for a failure of a kind it cannot touch. In the           the feedback message.
+confirmation set, 259 disagreement rows (177 units) were re-              The menu (secondary; keywords only). The complete
+solved by a single arbiter after outcomes were known, blind to            menu keeps the top of three baseline suggestions and rewrites
+reference, model and condition. Against two human annota-                 the third (then second) into a missing polarity (then certainty)
+tors on 163 sampled untreated outputs, extractor labels agree             reading, with one model call and one monitored retry.
+at held-out κ = 0.91–0.97 on all 7 label fields (pre-specified
+gate 0.6). In a check of arbitrated labels by 20 annotators               The cue (secondary; user side). The user adds one com-
+(units where the two judges disagreed), people sided with                 mitment cue, such as [NOT], [MAYBE], [?] or [PLAIN].
+the arbiter in 77% of codings (κ = .74) against 60% and                   The chip probes whether supplied information is used; the
+40% for the two judges, and 98% coded “Can you. . . ?” as                 lever is the missing cue, which a plain word can also supply
+a request. On 120 real treated outputs (guard repairs, no-                (Sec. 6.4).
+feedback retries, cue arms, two further local models, a lite
+Gemini model), two people per item agreed with the judge’s                                 5    Evaluation Design
+critical label on 115/115 items with a consensus (100.0%,
+interval 97–100%; 18–20 items per class, lowest class bound               Evaluation card: intervention, comparison, pass line.
+82%): no detectable judge failure in any treated class. Added             Pass lines were fixed in advance (development: in code be-
+                                                                          fore the run; confirmation: in a hashed file before any retry);
+verdicts are in Table 2 and Section 6.2. Guard (targets a vio-     retry: at least 30% of strict failures repaired, at most 10%
+lation of a supplied value; compared with the stored first pass    of strict-correct texts changed, and a joint-pass gain whose
+and with strip-only at zero calls): repair ≥30% of failures and    lower 95% bound exceeds zero. The pass rate rose from
+change ≤10% of correct outputs; confirmation pass-rate gain        78.79% to 88.62%, 9.83 points [8.39, 11.32]; the guard re-
+with lower bound > 0; deployment clause, usable ≥ control          paired 251/478 strict-check failures (52.51% [48.36, 56.70]),
+−10 points. Menu (ambiguous input; stored baseline menu):          changed 26/1,394 already-correct texts and turned 0 of the
+gain ≥30 points. Cue (value lost at input; length-matched          strict-check passes into failures. Only the 26 changed texts
+neutral word): gain ≥10 points and ≥80% of typed-input             could have failed, so the informative figure is 0 of 26 (exact
+rate.                                                              upper 97.5% bound 13%); the zero is measured by the same
+                                                                   strict predicate the monitor uses, and the guard returns its
+Estimand, arms and what the ledger predicts. The hu-               first unflagged attempt, so it is partly by construction and not
+man target (Section 7) is the excursion effect, on a proximal      independent safety evidence; the human audit below is. A
+“said what I meant” outcome and on weekly longitudinal             post hoc lexical rule finds a bracketed chip token in 1/26 of
+rates, of delivering a regenerated sentence instead of the         the changed texts, 3/1,645 of all guard strict-check passes and
+original at a flagged decision point.                              2/1,394 of first-pass passes (Figure 1, first example); other
+Paired comparisons of stored configurations. For                   malformed text needs a person. The gain is uneven across
+system-side interventions, the untreated outcome is the stored     the four fixed models: +0.85 (API model), +3.21 (Qwen),
+first-pass output for the same request, and the treated out-       +16.24 (Llama) and +19.02 points (Gemma), 468 targets
+come is what the intervention returns from it. This removes        each, so the pooled figure comes mostly from the two weaker
+between-request variation but does not identify an effect          models. The repair rate fell from 78.8% (strict-check; 78.4%
+on people: every “gain”, “increment” or “effect” below is          joint) in development to 52.51% (46.3% joint) on fresh items,
+a descriptive contrast on fixed items, with no estimand for        so the development figure overstates it; joint-pass and strict-
+people (that estimand is the one above). Intervals are 95%         check rates are not interchangeable. Of the results here, the
+percentile intervals from family or cluster resamples (fixed       guard’s three frozen confirmation criteria are confirmatory;
+seeds), pointwise and uncorrected.                                 the resample baseline, the audit’s secondary endpoints, H1
+                                                                   and H2, the decomposition and the frontier rows are post hoc
+Offline failure indicators and cost. Changed-correct               or exploratory.
+counts already-correct outputs whose text the intervention
+changed; correct→failure is the share that became scored           6.2   What the pass does not show: repair usability
+failures; residual failures remain after the intervention. We
+                                                                   A pass checks a few labels, not a sentence. For [ASK]
+also show what a label cannot see (scored passes that are
+                                                                   [YOU] [PLAIN] wear headphones, the guard turns
+fragments; a human usability rating of repaired text). Cost is
+                                                                   “You wear headphones.” into “Ask you to wear headphones.”,
+extra model calls and latency.
+                                                                   which passes every scored predicate (Figure 1). 4 of the 63
+                                                                   scored development repairs begin “Ask you” (post hoc count).
+                        6    Results                               We therefore had people judge repaired text. The audit. A
+6.1   The guard: about half of failures repaired,                  160-text audit of new texts (120 primary: 60 repaired, 60
+      and feedback beats plain retrying                            never-failed controls; 40 secondary: 20 original-failed and
+On the development cue conditions, strict-check pass rose          20 strip-only texts, to separate repair from item difficulty)
+from 94.25% to 98.78% of 1,392 targets (Table 2). Of the 80        gave each text 3 independent non-author raters, under a rule
+initial failures the guard repaired 63 (78.8% [68.4, 88.9]), far   frozen before any return: a pooled interval entirely below
+above its 30% pass line. Deleting an unrequested “please”          −10 points kills the guard for deployment (kept as a detec-
+at zero calls already reaches 1,346 strict-check passes, so        tor); one including −10 but excluding 0 is a cost of uncertain
+regeneration’s increment is 2.08 points [1.15, 3.16]: 31 tar-      size; one including 0 is no detectable cost. Repaired texts
+gets pass only with the guard and 2 only with deletion. 17         were usable in 43/60 texts (71.7%) against 51/60 (85.0%)
+of 80 failures remained, 12 of them involving speech act,          for controls, a gap of −13.3 points [−27.6, +1.5]. The frozen
+and 14/17 were still flagged after both retries: detected, not     rule returns no detectable usability cost (the interval includes
+repaired. Regenerating without feedback repairs little: 15/80      zero), the deployment clause is unresolved (the point estimate
+development failures (18.8%) against 63/80 with the guard,         lies below the −10 line), and the two stricter endpoints are
+and 87/478 confirmation failures (18.2%) against 251/478.          significantly negative. The audit can detect a gap of about 18
+The guard’s increment over resampling (unmatched decod-            points near the observed control rate, so no detectable cost
+ing) is +3.23 [1.87, 4.81] points in development and +6.20         is not evidence of no cost, and only this usable endpoint was
+[4.75, 7.64] in confirmation; the matched-decoding contrast        the frozen decision rule. The texts are a hash-ordered list, not
+(G1t − G1r) is the clean feedback contrast: +2.95 and +6.94        a probability sample, and controls are not item-matched to
+[5.34, 8.60].                                                      the repairs, so the gap mixes repair and item difficulty. Two
+                                                                   stricter secondary endpoints, defined before the returns and
+Confirmation. Speech act was the guard’s weakest dimen-            uncorrected for multiplicity, do show a cost against never-
+sion, so we reran the guard unchanged on the confirmation          failed controls: meaning preserved 79.7% against 93.2%
+set’s speech-act families (78 families, four models, three cue     (−13.6 points [−26.2, −1.0]) and usable and preserving
+conditions, 1,872 targets). Criteria were frozen before any        61.7% against 81.7% (−20.0 points [−34.8, −3.9]). Re-
+                   Development             Confirmation (frozen;       Visible input          First pass          Guard output
+                                           48 early cached
+                                                                       Development set, repaired (Gemma, one cue; 1st by hash
+                                           requests)
+                                                                       order; 63/80 scored failures repaired)
+                   58 families, 6          78 speech-act families
+                                                                       [PLAIN] let          “Please let me finish “Let me finish the
+                   dimensions, 1,392       (of 238), 1,872 targets
+                                                                       finish               my sentence.”         sentence.”
+                   cue targets
+                                                                       sentence
+Benefit (% of targets)                                                 Development set, failure that remains (Llama, all cues; 1st
+Strict-check pass: 94.25 / 96.70 / 98.78   74.47 / 81.73 / 87.87       by hash order; 17/80 failures remain, 14/17 still flagged; the
+first pass /                                                           source asks whether the listener is charging it)
+strip-only / guard                                                     [?] [YOU]            “Can you charge my “Can you charge my
+Pass (joint): same 94.68 / 96.77 / 98.85   78.79 / 82.26 / 88.62       charge               wheelchair?”          wheelchair?”
+order                                                                  wheelchair
+Guard − first       +4.17 pass; +4.53      +9.83 [8.39, 11.32] pass;
+pass, points        strict-check           +13.41 [11.38, 15.44]
+                                           strict-check
+Failures repaired, 63/80 (78.8%) /         251/478 (52.51%) /
+strict-check / joint 58/74 (78.4%)         184/397 (46.3%)
+pass
+Free baseline: strip-only, zero calls (+2.44 strict-check development, +3.47 [2.78, 4.22] pass confirmation)
+Guard −              +2.08 [1.15, 3.16]     +6.36 [5.29, 7.48] pass
+strip-only, points strict-check
+Free baseline 2: resample without feedback (G1r), T=0.7, same retry cap; G1t is the guard rerun at T=0.7
+Pass: resample       95.6 / 98.6            82.4 / 89.4
+G1r / guard G1t
+(T=0.7)
+Repair rate:         15/80 (18.8%)          87/478 (18.2%)
+resample G1r
+Guard (T=0) −        +3.23 [1.87, 4.81]     +6.20 [4.75, 7.64]
+G1r, points (pass)
+G1t − G1r,           +2.95 [1.65, 4.38]     +6.94 [5.34, 8.60]
+matched
+decoding (pass)
+What remains (offline failure indicators)
+Residual             17/1,392 (1.2%)        227/1,872 (12.13%)
+strict-check
+failures
+Already-correct 14/1,312 cue;               26/1,394 (1.87%)
+text changed         49/2,154 all inputs
+Strict-check pass 0/1,312                   0/1,394; 0/26 changed
+→ failure                                   (upper bound 13%)
+Cost and verdict
+Audit vs controls —                         −13.3 [−27.6, +1.5] /
+(points; usable /                           −13.6 [−26.2, −1.0] /
+preserving / both)                          −20.0 [−34.8, −3.9]
+Extra calls per      0.104 (1,856 inputs) 0.41 (1,848 inputs)
+input
+Pass line            development criteria passed on the three
+                     met (not a             scored criteria, the only
+                     confirmatory test)     confirmatory verdict
+                                            (usability: §6.2)
+
+Table 2: The guard as one display. All contrasts are descriptive stored-text contrasts, with no effect on people. Left: benefit,
+the free baseline and what remains, on two separate populations that are never pooled; scored partial predicates, not usability.
+Targets are scored (item, model, input condition) outcomes; inputs are the distinct requests the guard processed. Development:
+1,392 cue targets, plus 464 requests with no supplied cue (no strict target), give 1,856 inputs. Confirmation: 1,872 targets share
+1,848 distinct requests. Pass means joint pass; strict-check rows are labelled. Differences use unrounded rates, so a difference
+of printed levels can differ by 0.1. Right: stored examples, verbatim, by the rule in each row; not typical. Brackets: 95%
+whole-family bootstrap intervals for paired differences. Repair rates condition on initial strict-check failures; already-correct
+and pass-to-failure rows on initial strict-check passes.
+                  comparator (baseline menu; length-matched word)                   intervention      pre-set pass line
+
+                                     Benefit                                    What it leaves or breaks                  Cost and test
+
+                                                                                politeness
+            Menu                                                                                                          +2.05 calls / set
+                                                                                26/40→12/40, −35 pp
+                                     sets with both readings
+            adds missing readings                                                                                         +3.25 s / set¹
+            to 3 suggestions      15/80→78/80
+            (system side)                                                       speech act                                412/428 self-verified
+                                                                                14/31→6/31, −25.8 pp
+                                                                                                                          Pre-set test
+
+                                                                                rewrites changing type                    gain ≥30 pp:
+                                                                                138 of 428                                PASS
+
+
+
+
+                                                                                kept, lost with cue
+            Cue (chip)               value kept: development                                                              +1 selection²
+                                                                                7 of 194
+                                     194→440 of 464
+            user adds one                                                                                                 +0 calls
+            cue such as [NOT]
+            (user side)                                                         missed, still missed                      all chips: 3.1 selections
+                                                                                17 of 270
+                                     value kept: confirmation                                                             Pre-set test
+                                     261→457 of 624
+                                                                                cue given, contradicted                   gain ≥10 pp, ≥80% of typed
+                                                                                0 of 464                                  development: PASS
+                                                                                                                          confirmation: FAIL
+
+                                    0       25       50      75        100      0       25        50      75     100
+                                            % of targets or sets                       % (levels, not changes)
+            ¹ local server, partial CPU offload ² nominal; dwell, scanning, learning not counted
+            Tick on confirmation row: 80% of the typed-sentence rate
+
+
+Figure 2: Two add-ons help in one place and cost something elsewhere (machine-extracted labels; four models). Open circle:
+comparator; filled: intervention; bars: 95% cluster-bootstrap intervals; black tick: the pass line set in advance; pp: percentage
+points. Plotted values are percent levels; changes in points are printed. The cue passes both clauses on the development set but
+fails its ≥80%-of-typed clause on the confirmation set (only its gain clause replicates). The guard is in Table 2.
+
+
+sampling the 95 families gives −13.3 points [−28.6, +1.0];                                ity inputs (4 models, both sources), affirmative output among
+standardizing to a common model mix gives −14.6 [−28.3,                                   committed answers was 99.5% with the cue legend, 98.4%
+−1.6], exploratory, so the frozen verdict is unchanged but                                with the legend removed and 99.9% when the prompt said
+its margin is thin. The within-pair contrasts that follow are                             markers may be missing and not to assume one.
+exploratory: secondary comparisons fixed before the returns,
+outside the frozen rule, uncorrected, on 20 pairs of a repair                             6.4      Realistic-input checks
+with its own failed original (the stance contrast has 19 pairs
+                                                                                          We ran the pipeline on 547 minimal pairs written by 20 non-
+because 1 original had no decided stance rating). Against
+                                                                                          author annotators and on keywords that 20 annotators typed
+its own failed original, a repair keeps the meaning in 6 of
+                                                                                          for 600 AACText messages. On the human-written pairs the
+20 pairs and the original in none (+30.0 points [9.1, 46.8],
+                                                                                          cue gain replicates on all 6 dimensions (35.3 to 82.7 points),
+exact sign test p = 0.03; the other 14 pairs are unchanged on
+                                                                                          politeness addition adds +7.6 points and the bare affirmative
+meaning), and it removes invented stance (a meaning, cer-
+                                                                                          default is 99.8% [99.3, 100.0]. Two controls on these pairs
+tainty, politeness or speaker the input did not give) in 10 of
+                                                                                          show that the missing cue, not the chip, is the lever. An
+19 pairs and adds it in none (−52.6 points [−69.1, −26.4],
+                                                                                          irrelevant chip from another dimension adds little: the cue
+p = 0.002). Repairs are not more usable than their originals
+                                                                                          chip beats it by 30.0 to 80.9 points by dimension. On these
+(paired usable −5.0 points [−20.2, +10.8]).
+                                                                                          pairs the same cue as a plain word (not, please) was
+6.3   Two more ledger rows: the menu and the cue                                          declared equivalent to the chip (interval within ±5 points)
+                                                                                          on 3 of 6 dimensions (largest difference 2.1); the chip leads
+The complete menu raises coverage of both polarity or cer-                                by under 1 point on polarity and time/quantity, and the word
+tainty readings (+78.75 points, passes its line) but removes                              beats the chip on speech act by 8.2 points.
+the polite option on other dimensions (Figure 1, second ex-
+ample). The cue keeps the critical value in 94.8% of devel-                               Held-out writers. Four further writers wrote 60 speech-
+opment targets (97.3% of typed input), and its gain over the                              act pairs; blind checkers passed every one (180/180 checks,
+length-matched word replicates on 78 fresh speech-act fam-                                so no pair was rejected, which is not a measured error rate).
+ilies (31.4 points [25.0, 37.9]), but there it reaches 73.8%                              The speech-act cue gain (cue chip minus a neutral chip,
+of the typed-input rate, below its 80% line (Figure 2). The                               writer-clustered) is +37.5 points [33.8, 41.2] across 10 writ-
+bare-keyword default is not a prompt artifact. On bare polar-                             ers and 1,016 paired rows, with the wild-bootstrap interval
+[33.9, 41.1] and the exact one-sided sign-flip p = .00098,          the version they meant), and the judge’s critical-dimension
+the floor for ten writers (the two-sided floor is twice that).      label agrees with the writer’s four-way label at only κ = .24.
+Every writer’s mean is positive (+29.2 to +45.5), leave-one-        Keeping the critical commitment is necessary, not sufficient.
+out stays at +36.7 to +38.3, and the new writers do at least as     Among the 130 of those 200 outputs whose critical value
+well as the first six (+40.0 [35.8, 44.2] on 480 rows against       the judge scored correct (126 with a decided answer; 4 un-
++35.3 [28.9, 41.7]). Recoding “Can you. . . ?” as a question        sure), writers rejected 77/126 as not the version meant. A
+gives +37.5 [30.6, 44.4] and “I want X, please” as a state-         post hoc decomposition (exploratory, κ = .71 with 40 hand-
+ment +37.4. It does not help equally: Llama gains only +16.9        coded items) finds mainly compression loss and event/role
+[10.5, 23.4] against +40.2 to +51.6 for the other three models,     misresolution: 98% of the writers’ sentences contain words
+6 of 127 families show no gain, and 17% of cue outputs still        no keyword supplied, and 49% of the outputs change who
+miss the writer’s act (82.9% honour it against 45.4% with-          does what.
+out the cue). Politeness and the default still rest on six and
+                                                                    Clinical weight. Two speech-language pathologists (ex-
+seven writers, so for them we claim direction and consistency
+                                                                    pert review of study materials, not a population estimate)
+(every writer’s mean has the same sign), not interval width;
+                                                                    rated how serious each of seven kinds of silent meaning
+the replication is exploratory and the writers are volunteers.
+                                                                    change is; both rated a dropped or added negation 5 of 5
+In the keyword study about one keyword set in five lost the
+                                                                    and would block it. Weighting each judge-flagged failure
+negation (20.8% [16.9, 25.2]; 21.4% [15.4, 27.8] after re-
+                                                                    by the severity of its type, the guard lowers the clinically
+sampling messages and reweighting to the sampling frame),
+                                                                    weighted failure rate from 22.0% to 14.7% (confirmation)
+on cue-enriched messages that carry a negation.
+                                                                    and a supplied cue lowers it on human-written pairs from
+Defaults: a good guess with an asymmetric cost. When                57.4% to 14.9% (chip) and 17.8% (word); on selected judge-
+keywords carry no negation word, the models write an affir-         failed items they judged repairs acceptable to speak in 13/40
+mative sentence for 99.9% of such human keyword sets. That          rater-judgments against 0/20 for the originals (descriptive,
+is the Bayes-preferred guess: among human keyword sets              not comparable arms).
+with no negation word, the source was negated only 2.7%
+[1.8, 3.7] of the time (this is p, the posterior probability of a   6.6   Frontier limits: the cue’s measured price, and
+negated source given no negation word in the keywords), so                what asking and uncertainty do not do
+guessing affirmative is right 97.3% of the time. Two people         These results are provisional: stored outputs, machine labels
+labelled 200 source messages: the detector’s negated label          resolved by a blind arbiter, the three local primary models
+matched on 200/200, and none of 145 messages in the non-            (Gemma-3-4B, Llama-3.1-8B, Qwen2.5-7B), 332 exposure
+negated strata was negated (Wilson upper bound 2.6%); the           units. Three estimators of one quantity, not independent repli-
+estimate is partly by construction because unlabelled mes-          cations, put silent negation reversals per 1,000 messages at
+sages take their stratum rate. The harm is the asymmetric           24 [15, 33] (posterior, messages resampled and reweighted),
+cost: about 23.9 of every 1,000 messages are silently re-           23.9 [16.0, 32.5] (model-visible, exposure units resampled)
+versed when the user types keywords unaided (24 [15, 33] in         and 23.8 (bare-arm regeneration on the cue arms’ items, used
+the keyword-study posterior; Section 6.6 gives two other es-        below). Supplying the cue on every message (derived: bare
+timates), against 0.8 spurious negations, and the guess breaks      rate times the share not restored, regenerated on the same
+even only if a reversal costs under 36 times a spurious nega-       items) cuts polarity reversals per 1,000 from 23.8 [23.0, 24.3]
+tion (the odds (1 − p)/p). Across estimators p ranges from          to 1.6 [0.7, 2.7] (chip) and 2.6 [1.4, 3.9] (word), and polite-
+2.0% (corpus-prevalence Bayes) to 11.4% (crude compres-             ness reversals from 51.8 to 0.7 and 1.2; the chip and the word
+sor; 2.6% on the frontier units), and the break-even ratio from     are not distinguishable on polarity or speech act on these
+36 for human keywords to 8 for the compressor, so the asym-         items; speech-act restoration is 75.6% with a chip and 90.4%
+metry is the argument, not the exact p. An accuracy metric          with chip plus guard. Ask policies, including a CLAM-style
+rewards this behavior, so a ledger puts a default’s cost beside     trigger (21.2 reversals per 1,000 against 21.3 for gated ran-
+its hit rate. The default holds on the 6 models from 5 fami-        dom), show no detectable benefit over gated-random asking
+lies (at least 99.0% affirmative) and on a lite Gemini model        after Holm correction (power limited, not equivalence). The
+(97.8% and 98.9% on the legend arms). We price the default          cue has to come from the user.
+against a human base rate on AAC-style messages and show
+                                                                    Human labels on the frontier inputs. Two people per item
+it survives “do not assume” prompting.
+                                                                    (11 annotators, 223 items) confirmed the speech-act and po-
+                                                                    liteness source labels: 91.6% [84.8, 95.5] of decided speech-
+6.5   Two ledger columns from people: writer                        act exposure units are human question or request, and 42/43
+      intent and clinical weight                                    politeness units are human-polite. Always-commit reversals
+Writer intent (first test of H1). Each of 20 writers judged         per 1,000 with human labels: speech act 159.7 [131.2, 189.0]
+10 outputs generated from their own pairs (200 in all), choos-      (detector 161.9), politeness 48.6 (49.4). The coders did not
+ing the version they meant. A cue raises the share matching         agree on whether the keywords already show the cue (κ of
+the intended version from 11.2% to 39.2%, +28.0 points              −0.03 and −0.07), so that gate stays machine-defined. When
+[14.8, 42.0] (writer-clustered; keywords-only is a reference        keywords lost the speech-act cue, the cue-restored draft was
+level, not a failure rate). Yet writers accepted 1 of all 200       chosen in 73.6% [59.7, 86.1] of 72 judgments on 36 items,
+outputs as written with no edit (a different test from naming       below the 90% restoration rate that the cue-value calculation
+  H3 study: micro-randomized trial (MRT), pre-specified          scored wrong (Section 6.5). H2 (repair usability). A scored
+  design; no value is a result                                   repair is usable at no less than 10 points below a never-failed
+  Estimand    Average causal excursion effect (Boruvka           control; the 160-text audit tested this under the frozen rule
+              et al. 2018) on a proximal outcome of              of Section 6.2, so H2 is unresolved. H3 (collateral). Offline
+              delivering the regenerated sentence versus the     changed-correct and coverage loss predict a later drop in
+              original, at decision points where the monitor     users’ “said what I meant” rate; if not, evaluation of this kind
+              flags a conflict, for adult AAC users who          should be demoted. H3 needs AAC users (Table 3).
+              compose with LLM keyword expansion
+  Arms, unit  Randomized per flagged message within              Design implications from two AAC-user consultants.
+              user (Klasnja et al. 2015), fixed probabilities:   Two paid AAC-user design consultants rated our five re-
+              silent regeneration, flag-and-confirm,             quirements (keep a button’s meaning; do not change typed
+              original; cues are a between-user factor           text; do not quietly guess; a new button must not break what
+  Outcomes    Proximal: sent without edit, one-tap “said         was right; an honest test screen) important, and each asked
+              what I meant” on a random subset of sends.         for a sixth: R6, a draft is never spoken without the per-
+              Longitudinal: weekly rates, abandonment,
+              reliance
+                                                                 son’s approval, with the original words kept beside it. R6
+  Assumptions Positivity by design; consistency; carryover is    makes flag-and-confirm the default.
+              the main threat, so we target the excursion
+              effect                                                                  8    Limitations
+  Sample size Illustrative, typed assumptions to replace with
+              pilot estimates: standardized effect 0.2,          Human outcomes and raters. Results are changes in stored
+              within-user correlation 0.3, 40 flagged points     text; communication success, agency, effort and trust are
+              per user, 80% power, 5% level, about 125           untested (Section 7), and the audit’s raters are non-author
+              users; at the monitor’s 8.5% flag rate on          peers, not AAC users. Labels and scope. Endpoints use an
+              constructed inputs that needs roughly 473          LLM extractor validated against people on untreated and, for
+              messages per user                                  the critical field, treated outputs (added content is weakly
+                                                                 measured), with post-outcome arbitration in the confirma-
+       Table 3: The human-effect study that tests H3.            tion; strip-only covers one failure type; the menu was not run
+                                                                 on the confirmation set; items are constructed, open models
+                                                                 are at most 14B, and AACText is crowd-written fiction. Com-
+assumed (measured q = 0.74); at the measured rate its gains      munity involvement. Two paid AAC-user design consultants
+shrink by about a fifth with the ordering unchanged.             and two speech-language pathologists reviewed requirements
+                                                                 and materials (n=2 each; not a population estimate); the re-
+Draft sets against one cue tap. Twenty writers judged 200
+                                                                 quirements remain our proposals, with no claim of benefit to
+items for whether a draft was what they meant and would send
+                                                                 AAC users. Ethics. No data were collected from AAC users.
+as is or with a small edit. The cue tap is the main lever: one
+                                                                 All annotators were adult non-authors recruited from the au-
+greedy draft covers 43% [31, 55] of items after a tap against
+                                                                 thors’ peers, identified only by an ID; each consented and
+13% [5, 23] bare (+30 points [15, 44], exploratory), and
+                                                                 was reimbursed for their time. They labelled model outputs
+three bare drafts reach only 20–22% (−21 points against one
+                                                                 and audited items under a fixed codebook, blinded to model,
+tapped draft, unresolved by the frozen rule and costlier per
+                                                                 condition and source; some also chose keywords for public
+covered message). Draft sets add on top of a cue, not instead
+                                                                 AACText messages or wrote new sentence pairs, released un-
+of it: after a tap a contrast-selected set adds +13 points [5,
+                                                                 der CC BY 4.0 with recorded consent. No personal or health
+22] over one draft, and plain prompted diversity does as well
+                                                                 data were collected, and we did not seek an institutional
+(+22); coverage is judged by adult annotators on their own
+                                                                 review determination.
+messages, not AAC users.
+
+       7     From Ledger to a Pre-Specified                                           9    Conclusion
+                 Human-Effect Study                              A supplied cue removes nearly all silent reversals on the
+Each prediction names what would demote it; H1 and H2            same items, and its speech-act gain replicates on ten writers’
+were checked post hoc, and the H3 design is pre-specified in     pairs (+37.5 points), so the affirmative default, right on av-
+version control.                                                 erage, is priced rather than assumed. On the 78 speech-act
+                                                                 families, the guard’s weakest dimension, it raises the joint
+Predictions. H1 (writer intent). Among outputs the               pass rate by +9.83 points (+0.85 to +19.02 by model, an
+scorer counts as preserving a writer’s critical value, writ-     upper-leaning slice), repairs 52.51% of strict-check failures
+ers report that the output “said what I meant” more often        and beats matched-temperature resampling (+6.94 points);
+than among outputs it counts as failing; a gap whose inter-      the human audit finds no detectable usability cost but sig-
+val includes zero demotes the scored endpoint. This first,       nificantly lower meaning preservation than never-failed con-
+post hoc test is a consistency check, close to definitional,     trols (Section 6.2). The ledger records what remains (deletion
+and differs from acceptance as written with no edit: writers     alone earns +3.47 of the +9.83 points) and turns it into predic-
+named the version they meant in 49/126 outputs whose crit-       tions AAC users can test. An anonymized artifact, [PEND-
+ical value the judge scored correct, against 0/69 of those it    ING: anonymized artifact URL], rebuilds every number.
+                        References                                 Klasnja, P.; Hekler, E. B.; Shiffman, S.; Boruvka, A.; Almi-
+Anonymous. 2027. Testing What an AAC Expander Is Al-               rall, D.; Tewari, A.; and Murphy, S. A. 2015. Microran-
+lowed to Say: Input-Conditioned Commitment Contracts for           domized Trials: An Experimental Design for Developing
+LLM Sentence Expansion. Anonymized for review.                     Just-in-Time Adaptive Interventions. Health Psychology,
+                                                                   34(Suppl.): 1220–1228.
+Boruvka, A.; Almirall, D.; Witkiewitz, K.; and Murphy, S. A.
+                                                                   Lacosse, E.; Tano, P.; and McNamee, D. C. 2026. Multi-
+2018. Assessing Time-Varying Causal Effect Moderation in
+                                                                   System Cognitive Steering for Generative Communication.
+Mobile Health. Journal of the American Statistical Associa-
+                                                                   ArXiv preprint, version 1, October 2026, arXiv:2610.19177.
+tion, 113(523): 1112–1121.
+                                                                   Madaan, A.; Tandon, N.; Gupta, P.; Hallinan, S.; Gao, L.;
+Cai, S.; Venugopalan, S.; Seaver, K.; Xiao, X.; Tomanek, K.;       Wiegreffe, S.; Alon, U.; Dziri, N.; Prabhumoye, S.; Yang,
+Jalasutram, S.; Morris, M. R.; Kane, S.; Narayanan, A.; Mac-       Y.; Gupta, S.; Majumder, B. P.; Hermann, K.; Welleck, S.;
+Donald, R. L.; Kornman, E.; Vance, D.; Casey, B.; Gleason,         Yazdanbakhsh, A.; and Clark, P. 2023. Self-Refine: Itera-
+S. M.; Nelson, P. Q.; and Brenner, M. P. 2024. Using large         tive Refinement with Self-Feedback. In Advances in Neural
+language models to accelerate communication for eye gaze           Information Processing Systems, volume 36.
+typing users with ALS. Nature Communications, 15: 9449.
+                                                                   Mao, L.; Lee, J. H.; Faroqi-Shah, Y.; and Valencia, S. 2025.
+Cai, S.; Venugopalan, S.; Tomanek, K.; Narayanan, A.; Mor-         Design Probes for AI-Driven AAC: Addressing Complex
+ris, M. R.; and Brenner, M. P. 2022. Context-Aware Ab-             Communication Needs in Aphasia. In Proceedings of the
+breviation Expansion Using Large Language Models. In               2025 ACM Designing Interactive Systems Conference, 404–
+Proceedings of NAACL, 1261–1275.                                   422. ACM.
+Chen, J.; Shi, W.; Fu, Z.; Cheng, S.; Li, L.; and Xiao, Y.         Maynez, J.; Narayan, S.; Bohnet, B.; and McDonald, R. 2020.
+2023. Say What You Mean! Large Language Models Speak               On Faithfulness and Factuality in Abstractive Summariza-
+Too Positively about Negative Commonsense Knowledge. In            tion. In Proceedings of the 58th Annual Meeting of the
+Proceedings of the 61st Annual Meeting of the Association for      Association for Computational Linguistics, 1906–1919.
+Computational Linguistics (Volume 1: Long Papers), 9890–
+                                                                   Panickssery, A.; Bowman, S. R.; and Feng, S. 2024. LLM
+9908. Toronto, Canada: Association for Computational Lin-
+                                                                   Evaluators Recognize and Favor Their Own Generations. In
+guistics.
+                                                                   Advances in Neural Information Processing Systems, vol-
+Choudhury, S. H.; Kumar, A.; and Martin, L. J. 2025. Evalu-        ume 37.
+ating Human-LLM Representation Alignment: A Case Study             Pauli, A. B.; Augenstein, I.; and Assent, I. 2025. Mind the
+on Affective Sentence Generation for Augmentative and Al-          Style Gap: Meta-Evaluation of Style and Attribute Transfer
+ternative Communication. In Proceedings of the 14th Inter-         Metrics. In Findings of the Association for Computational
+national Joint Conference on Natural Language Processing           Linguistics: EMNLP 2025, 21550–21564. Association for
+and the 4th Conference of the Asia-Pacific Chapter of the          Computational Linguistics.
+Association for Computational Linguistics, 1618–1637. The
+Asian Federation of Natural Language Processing and The            Qu, R.; Ungar, L.; and Sedoc, J. 2023. Conditioning on Dia-
+Association for Computational Linguistics.                         log Acts improves Empathy Style Transfer. In Findings of the
+                                                                   Association for Computational Linguistics: EMNLP 2023,
+Elgaar, M.; and Amiri, H. 2025. Linguistically-Controlled          13254–13271. Association for Computational Linguistics.
+Paraphrase Generation. In Findings of the Association for
+Computational Linguistics: EMNLP 2025, 20842–20864.                Shen, J.; Yang, B.; Dudley, J.; and Kristensson, P. O. 2022.
+Association for Computational Linguistics.                         KWickChat: A Multi-Turn Dialogue System for AAC Using
+                                                                   Context-Aware Sentence Generation by Bag-of-Keywords.
+Frisch, B.; Wade, W.; Gaines, D.; Kinsella, M.; Peters, B.;        In Proceedings of the 27th International Conference on In-
+Broderick, T.; and Vertanen, K. 2026. It’s Complicated: On         telligent User Interfaces, 853–867. ACM.
+the Design and Evaluation of AI-Powered AAC Interfaces.
+Position paper, Speech AI for All workshop at CHI 2026,            Valencia, S.; Cave, R.; Kallarackal, K.; Seaver, K.; Terry, M.;
+arXiv:2606.24854.                                                  and Kane, S. K. 2023. “The less I type, the better”: How AI
+                                                                   Language Models can Enhance or Impede Communication
+Gou, Z.; Shao, Z.; Gong, Y.; Shen, Y.; Yang, Y.; Duan, N.; and     for AAC Users. In Proceedings of the 2023 CHI Conference
+Chen, W. 2024. CRITIC: Large Language Models Can Self-             on Human Factors in Computing Systems. ACM.
+Correct with Tool-Interactive Critiquing. In International
+                                                                   Valencia, S.; Huynh, J.; Jiang, E. Y.; Wu, Y.; Wan, T.; Zheng,
+Conference on Learning Representations.
+                                                                   Z.; Admoni, H.; Bigham, J. P.; and Pavel, A. 2024. COMPA:
+Hancock, J. T.; Naaman, M.; and Levy, K. 2020. AI-Mediated         Using Conversation Context to Achieve Common Ground in
+Communication: Definition, Research Agenda, and Ethical            AAC. In Proceedings of the 2024 CHI Conference on Human
+Considerations. Journal of Computer-Mediated Communi-              Factors in Computing Systems. ACM.
+cation, 25(1): 89–100.                                             Valencia, S.; Pavel, A.; Santa Maria, J.; Yu, S.; Bigham, J. P.;
+Ji, Z.; Lee, N.; Frieske, R.; Yu, T.; Su, D.; Xu, Y.; Ishii, E.;   and Admoni, H. 2020. Conversational Agency in Augmen-
+Bang, Y. J.; Madotto, A.; and Fung, P. 2023. Survey of Hallu-      tative and Alternative Communication. In Proceedings of
+cination in Natural Language Generation. ACM Computing             the 2020 CHI Conference on Human Factors in Computing
+Surveys, 55(12): 1–38.                                             Systems. ACM.
+Wang, R.; Sun, K.; and Guo, Y. 2026. Polite but Misaligned:
+Evaluating LLM Politeness Judgments Against Human Prag-
+matic Norms. In Findings of the Association for Computa-
+tional Linguistics: EMNLP 2026, 26402–26421. Association
+for Computational Linguistics.
+Xiang, W.; Xu, Y.; Fang, Y.; Teng, Z.; Jiang, Z.; Hu, B.;
+and Yang, J. 2025. SocializeChat: A GPT-Based AAC Tool
+Grounded in Personal Memories to Support Social Commu-
+nication. ArXiv preprint; accepted to IEEE International
+Conference on Systems, Man, and Cybernetics (SMC) 2025,
+arXiv:2510.19017.
+Zhao, H.; and Hawkins, R. D. 2025. Comparing human and
+LLM politeness strategies in free production. In Proceed-
+ings of the 2025 Conference on Empirical Methods in Natural
+Language Processing, 16188–16216. Association for Com-
+putational Linguistics.
+Zheng, L.; Chiang, W.-L.; Sheng, Y.; Zhuang, S.; Wu, Z.;
+Zhuang, Y.; Lin, Z.; Li, Z.; Li, D.; Xing, E. P.; Zhang, H.;
+Gonzalez, J. E.; and Stoica, I. 2023. Judging LLM-as-a-
+Judge with MT-Bench and Chatbot Arena. In Advances in
+Neural Information Processing Systems, volume 36.
+Ziegenbein, T.; Stahl, M.; and Wachsmuth, H. 2026. Teach-
+ing LLMs Human-Like Editing of Inappropriate Argumen-
+tation via Reinforcement Learning. In Proceedings of the
+64th Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), 38616–38637. Asso-
+ciation for Computational Linguistics.
+

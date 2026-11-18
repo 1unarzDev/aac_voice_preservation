@@ -1647,6 +1647,50 @@ put("t1_terra", _cc2["by_model"]["gpt-6.1-terra"]["leak"] / _cc2["by_model"]["gp
 put("t1_fam_k", _cc2["n_fam_leak"], _CCP, "int"); put("t1_fam_n", _cc2["n_fam"], _CCP, "int")
 
 
+# ---------------- final fold-in: hw1+hw2 speech-act gain, Parts 20-21, Stage 6 (each macro reads a stored analysis file)
+import csv as _csv2
+_A2 = "analysis/"
+_h12 = json.load(open(ROOT / "analysis/hw12/summary.json")); _h12s = json.load(open(ROOT / "analysis/hw12/speech_act_sensitivity.json"))
+_p1 = _h12["contrasts"]["P1"]; _S = "analysis/hw12/summary.json"
+put("hx_p1", _p1["estimate"], _S, "pct"); put("hx_p1_lo", _p1["t_ci_low"], _S, "pct"); put("hx_p1_hi", _p1["t_ci_high"], _S, "pct")
+put("hx_wr", _p1["writers"], _S, "int"); put("hx_rows", _p1["rows"], _S, "int")
+put("hx_fams", _h12s["hw12_n_families"], "analysis/hw12/speech_act_sensitivity.json", "int")
+_wm_ = list(_p1["writer_means"].values()); assert min(_wm_) > 0
+put("hx_wm_min", min(_wm_), _S, "pct"); put("hx_wm_max", max(_wm_), _S, "pct")
+put("hx_sf_p", _p1["sign_flip_randomization"]["p_one_sided"], _S, "p4")
+put("hx_loo_min", min(v["estimate"] for v in _p1["leave_one_writer_out"].values()), _S, "pct")
+put("hx_loo_max", max(v["estimate"] for v in _p1["leave_one_writer_out"].values()), _S, "pct")
+put("hx1_wr", _h12s["hw1"]["writers"], "analysis/hw12/speech_act_sensitivity.json", "int")
+put("hx2_wr", _h12s["hw2"]["writers"], "analysis/hw12/speech_act_sensitivity.json", "int")
+_pm12 = {r["model"]: r for r in _csv2.DictReader(open(ROOT / "analysis/hw12/per_model.csv")) if r["contrast"] == "P1"}
+for _m_, _t_ in (("llama3.1-8b", "llama"), ("gpt-6.1-terra", "terra")):
+    put(f"hx_{_t_}", float(_pm12[_m_]["estimate"]), "analysis/hw12/per_model.csv", "pct")
+put("hx_oth_min", min(float(_pm12[m_]["estimate"]) for m_ in _pm12 if m_ != "llama3.1-8b"), "analysis/hw12/per_model.csv", "pct")
+# Part 20
+_TC = "analysis/treated_check/summary.json"; _tc = json.load(open(ROOT / _TC)); _tcs = _tc["per_field"]["strict"]; _cr = _tcs["critical"]["pooled"]
+put("tc_c_k", _cr["k"], _TC, "int"); put("tc_c_den", _cr["n"], _TC, "int")
+put("tc_lo", _cr["acc_ci"][0], _TC, "int" if False else "pct")
+put("tc_items", _tc["n_items_key"], _TC, "int"); put("tc_ann", len(_tc["annotators"]), _TC, "int")
+_cls = ("G1", "G1r", "chip1", "nlcue", "newmodel", "gemini"); assert all(_tcs["critical"][c_]["acc"] == 1.0 for c_ in _cls)
+put("tc_ncls", len(_cls), _TC, "int")
+_ac = _tcs["added_content"]["pooled"]; put("tc_add_k", _ac["k"], _TC, "int"); put("tc_add_den", _ac["n"], _TC, "int"); put("tc_add_kappa", _ac["kappa"], _TC, "f2")
+# Part 21
+_SC = "analysis/source_check/summary.json"; _sc = json.load(open(ROOT / _SC)); _sn = _sc["labels"]["negated"]["strict"]["unweighted"]
+put("src_k", _sn["agree"], _SC, "int"); put("src_den", _sn["n"], _SC, "int"); put("src_kappa", _sn["kappa"], _SC, "f1")
+_t2h = _sc["t2"]["human_corrected"]["human"]
+put("src_t2", _t2h["posterior_empirical"], _SC, "pct"); put("src_t2_rev", _t2h["silent_reversal_per_1000"], _SC, "int")
+# Stage 6: cue tap (writer-cluster, exploratory) and the set-vs-cue comparison
+_CT = "analysis/coverage_human/contrasts.csv"
+_cct = {r["name"]: r for r in _csv2.DictReader(open(ROOT / _CT))}
+_r = _cct["cue_tap_G1chip-G1bare"] if "cue_tap_G1chip-G1bare" in _cct else None
+if _r is not None:
+    put("cv_tap", float(_r["diff_pp"]), _CT, "int"); put("cv_tap_lo", float(_r["lo_pp"]), _CT, "int"); put("cv_tap_hi", float(_r["hi_pp"]), _CT, "int")
+_BA = "analysis/coverage_human/by_arm.csv"
+_cba = {(r["cond"], r["arm"]): r for r in _csv2.DictReader(open(ROOT / _BA))}
+put("cv_g1bare", 100 * float(_cba[("bare", "G1")]["h_cov"]), _BA, "int"); put("cv_g1chip", 100 * float(_cba[("chip", "G1")]["h_cov"]), _BA, "int")
+put("cv_c3bare", 100 * float(_cba[("bare", "C3")]["h_cov"]), _BA, "int")
+
+
 def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()[:12]
 
