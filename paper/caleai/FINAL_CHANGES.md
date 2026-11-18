@@ -74,3 +74,17 @@ Cut or compressed (no numbers or macros removed except noted):
 - Limitations: removed caveats already in the body (strip-only, menu not run on confirmation set, duplicate "no AAC user was evaluated", "no acknowledgement without permission"); positionality and ethics kept.
 - Sec. 6.x: removed duplicate "listeners are not AAC partners" sentence, "necessary, not sufficient" line, "The cue has to come from the user", chip-vs-word polarity/time sentence, honour-rate pair (hx_chip_rate, hx_non_rate), rl_gpt agreement clause, "analysis files give same figure" parenthetical.
 - Macros no longer printed in main.tex: cc_nl (polarity/time sentence had no macro), hx_chip_rate, hx_non_rate, rl_gpt, rl_gpt_n (none used by abstract or conclusion).
+
+## Stage 7 listener fold (Part 28, scored as frozen)
+- make_macros.py: ls_* macros now read analysis/listener/summary.json (success, reversal, unclear, conseq, contrasts, Holm, plain-word 90% interval).
+- Filled \slotListenerAbs, \slotListenerBody, \slotListenerConc; all PENDING markers removed (none in PDF text).
+- Abstract: one sentence, reversals per 1,000 bare vs cue (50 vs 8) marked descriptive (interval includes zero) plus intended-reading 8% vs 28% (+20 [9, 31]). No reversal headline claimed (frozen rule: not confirmed).
+- Body (Sec. 6.x Listeners): success + Holm + reference 100%; consequence 22.5% vs 1.3% (non-default 33% vs 0%); reversal descriptive; mostly unclear (87%/71%); guard changed 16/120, success 0.0; plain word not shown equivalent (-0.5, 90% [-7.2, 6.3]); limits stated once (two listeners per unit, 50% non-default design mix, unclear partly lost information, low absolute success, mixed model not run, not AAC partners).
+- Conclusion: one clause (8% to 28%). Cue's failed 80% clause, Part 17 endpoints, anonymity, consultants-who-use-AAC wording unchanged.
+- Space: shortened own listener text to fit; build 10 pp, body ends p. 8, References starts p. 9 (pdftotext). Pages 1 and 8 viewed.
+
+## Final fixer (verifier round)
+- Abstract: cue headline now labelled a machine-label gain checked against people, with the 80% shortfall (wc_act_ratio) stated immediately after; q and "removes nearly all silent reversals" dropped from abstract, contributions and conclusion; guard sentence gives usable gap and meaning-preservation point estimates first, notes underpowered and secondary/uncorrected.
+- Fig. 1 caption: 0-of-26 marked "by construction, scored by the same predicate". Table glossary: G1r defined as resample-without-feedback. H3 text: states it is the workshop-theme contribution and that a null demotes the offline proxies. Conclusion guard sentence shortened. QUOTE-PENDING comment removed.
+- Build: docker pdflatex, 10 pp, References starts p9 (pdftotext), body ends p8; pages 1 and 8 rendered. No undefined refs.
+- Not fixed: full ~150-word abstract rewrite, confirmatory/exploratory marker in Table 2, Table 2 overfull and font enlargement, independent-mutant numbers in CALE-AI (SE4All-only), ls_cq_chip rounding nudge, GenAI placeholder, 0-of-26 still in body, no claims-ledger row added.
