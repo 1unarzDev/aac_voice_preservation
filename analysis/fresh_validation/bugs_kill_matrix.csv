@@ -1,0 +1,43 @@
+mutant,class,file,description,killed_by_existing,pytest_all,pytest:test_analyze,pytest:test_assignments,pytest:test_frontier_multilingual_register,pytest:test_hw_elic,pytest:test_layer0,pytest:test_parts56_scorers,pytest:test_replay_regression,pytest:test_resolution,pytest:test_stage23,pytest:test_stage4,pytest:test_stage5_frontier,pytest:test_stage6_coverage,pytest:test_stage7,pytest:test_survivor_classes,pytest:test_validate_cue_inputs,oracle_identity,oracle_injection,oracle_challenge,validator_r5_replay,validator_t9_replay,rescore_frozen_endpoints,request_rebuild
+FB01,F1,src/score_listener_study.py,comparison edge > -> >=,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB02,F1,src/score_repair_audit.py,comparison edge < -> <=,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB03,F1,src/score_oracle_indep.py,slice end -1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB04,F1,src/make_frontier_parts.py,range(n) -> range(n - 1),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB05,F1,src/score_listener_study.py,comparison edge < -> <=,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB06,F2,src/score_listener_study.py,constant 0.55 -> 1.1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB07,F2,src/score_oracle_indep.py,constant 150 -> 151,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB08,F2,src/make_assignments.py,constant 35 -> 36,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB09,F2,src/guard_baseline.py,constant 3 -> 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB10,F2,src/analyze.py,default/flag index=False flipped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB11,F3,src/score_listener_study.py,first two positional arguments swapped,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB12,F3,src/score_repair_audit.py,operands of a difference swapped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB13,F3,src/make_listener_study.py,first two positional arguments swapped,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB14,F3,src/make_frontier_parts.py,first two positional arguments swapped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB15,F3,src/analyze.py,first two positional arguments swapped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB16,F4,src/score_listener_study.py,true division -> floor division,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB17,F4,src/score_repair_audit.py,true division -> floor division,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB18,F4,src/score_oracle_indep.py,int() -> round(),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB19,F4,src/guard_baseline.py,sum() -> max(),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB20,F4,src/analyze.py,float() -> int(),1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB21,F5,src/analyze.py,sort_values: last key column dropped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB22,F5,src/analyze.py,groupby: last key column dropped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB23,F5,src/analyze.py,drop_duplicates: last key column dropped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB24,F5,src/analyze.py,sort_values: last key column dropped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB25,F5,src/analyze.py,drop_duplicates: last key column dropped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB26,F6,src/make_assignments.py,elicitation tie-break order reversed (hord rank sign),1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+FB27,F6,src/make_assignments.py,tie-break routing no longer excludes the pair writer,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB28,F6,src/make_listener_study.py,Part 29 sentence-order coin reversed,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB29,F6,src/make_listener_study.py,Part 28 self-annotation exclusion skipped (nobody blocked),1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB30,F6,src/make_frontier_parts.py,allocator may give the same item to the same person twice (no duplicate-annotator check),1,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0
+FB31,F7,src/score_listener_study.py,listener exclusions computed but not applied on the main path,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB32,F7,src/score_repair_audit.py,practice rows flagged practice=1 no longer skipped,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB33,F7,src/score_oracle_indep.py,empty-input default: judge reported scored when no items,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB34,F7,src/make_frontier_parts.py,balance(): new-part opening not prevented when allow_new is False,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB35,F7,src/guard_baseline.py,quarantine filter not applied on the disc path,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB36,F8,src/score_listener_study.py,label/form map 'A' -> 'B',1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+FB37,F8,src/make_assignments.py,label/form map 'A' -> 'B',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB38,F8,src/make_listener_study.py,label/form map 'B' -> 'A',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB39,F8,src/guard_baseline.py,sign flip of a difference (- -> +),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FB40,F8,src/analyze.py,label/form map 'B' -> 'A',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+TOTAL_KILLED,,,,16,16,1,0,0,0,0,0,0,0,3,1,1,0,12,0,0,0,0,0,0,0,0,0
+SCORE,,,,0.4,0.4,0.025,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.075,0.025,0.025,0.0,0.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

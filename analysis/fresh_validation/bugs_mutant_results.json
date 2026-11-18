@@ -1,0 +1,506 @@
+{
+ "FB01": {
+  "cls": "F1",
+  "file": "src/score_listener_study.py",
+  "desc": "comparison edge > -> >=",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7fa7e743f7e0>(B=100)\n +    where <function self_check at 0x7fa7e743f7e0> = SL.self_check"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7fa7e743f7e0>(B=100)\n +    where <function self_check at 0x7fa7e743f7e0> = SL.self_check"
+   }
+  }
+ },
+ "FB02": {
+  "cls": "F1",
+  "file": "src/score_repair_audit.py",
+  "desc": "comparison edge < -> <=",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB03": {
+  "cls": "F1",
+  "file": "src/score_oracle_indep.py",
+  "desc": "slice end -1",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB04": {
+  "cls": "F1",
+  "file": "src/make_frontier_parts.py",
+  "desc": "range(n) -> range(n - 1)",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB05": {
+  "cls": "F1",
+  "file": "src/score_listener_study.py",
+  "desc": "comparison edge < -> <=",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB06": {
+  "cls": "F2",
+  "file": "src/score_listener_study.py",
+  "desc": "constant 0.55 -> 1.1",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7f1e7988b7e0>(B=100)\n +    where <function self_check at 0x7f1e7988b7e0> = SL.self_check"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7f1e7988b7e0>(B=100)\n +    where <function self_check at 0x7f1e7988b7e0> = SL.self_check"
+   }
+  }
+ },
+ "FB07": {
+  "cls": "F2",
+  "file": "src/score_oracle_indep.py",
+  "desc": "constant 150 -> 151",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7feda9980d60>()\n +    where <function self_check at 0x7feda9980d60> = SO.self_check"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7feda9980d60>()\n +    where <function self_check at 0x7feda9980d60> = SO.self_check"
+   }
+  }
+ },
+ "FB08": {
+  "cls": "F2",
+  "file": "src/make_assignments.py",
+  "desc": "constant 35 -> 36",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage23.test_frozen_plan_unchanged: AssertionError: assert {'salt': 'ass...3', ...}, ...} == {'salt': 'ass...3', ...}, ...}\n  \n  Omitting 16 identical items, use -vv to show\n  Differing "
+   },
+   "pytest:test_stage23": {
+    "kind": "assert",
+    "detail": "tests.test_stage23.test_frozen_plan_unchanged: AssertionError: assert {'salt': 'ass...3', ...}, ...} == {'salt': 'ass...3', ...}, ...}\n  \n  Omitting 16 identical items, use -vv to show\n  Differing "
+   }
+  }
+ },
+ "FB09": {
+  "cls": "F2",
+  "file": "src/guard_baseline.py",
+  "desc": "constant 3 -> 4",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB10": {
+  "cls": "F2",
+  "file": "src/analyze.py",
+  "desc": "default/flag index=False flipped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB11": {
+  "cls": "F3",
+  "file": "src/score_listener_study.py",
+  "desc": "first two positional arguments swapped",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: AttributeError: 'int' object has no attribute 'reset_index'"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: AttributeError: 'int' object has no attribute 'reset_index'"
+   }
+  }
+ },
+ "FB12": {
+  "cls": "F3",
+  "file": "src/score_repair_audit.py",
+  "desc": "operands of a difference swapped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB13": {
+  "cls": "F3",
+  "file": "src/make_listener_study.py",
+  "desc": "first two positional arguments swapped",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_blindness: AssertionError: assert '02eca11f' == '156b241f'\n  \n  - 156b241f\n  + 02eca11f"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_blindness: AssertionError: assert '02eca11f' == '156b241f'\n  \n  - 156b241f\n  + 02eca11f"
+   }
+  }
+ },
+ "FB14": {
+  "cls": "F3",
+  "file": "src/make_frontier_parts.py",
+  "desc": "first two positional arguments swapped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB15": {
+  "cls": "F3",
+  "file": "src/analyze.py",
+  "desc": "first two positional arguments swapped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB16": {
+  "cls": "F4",
+  "file": "src/score_listener_study.py",
+  "desc": "true division -> floor division",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: TypeError: unsupported operand type(s) for //: 'PosixPath' and 'str'"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: TypeError: unsupported operand type(s) for //: 'PosixPath' and 'str'"
+   }
+  }
+ },
+ "FB17": {
+  "cls": "F4",
+  "file": "src/score_repair_audit.py",
+  "desc": "true division -> floor division",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB18": {
+  "cls": "F4",
+  "file": "src/score_oracle_indep.py",
+  "desc": "int() -> round()",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB19": {
+  "cls": "F4",
+  "file": "src/guard_baseline.py",
+  "desc": "sum() -> max()",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB20": {
+  "cls": "F4",
+  "file": "src/analyze.py",
+  "desc": "float() -> int()",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.BootstrapTests.test_pairing_preserves_perfect_delta: AssertionError: np.int64(0) != 0.2 within 7 places (np.float64(0.2) difference)"
+   },
+   "pytest:test_analyze": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.BootstrapTests.test_pairing_preserves_perfect_delta: AssertionError: np.int64(0) != 0.2 within 7 places (np.float64(0.2) difference)"
+   }
+  }
+ },
+ "FB21": {
+  "cls": "F5",
+  "file": "src/analyze.py",
+  "desc": "sort_values: last key column dropped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB22": {
+  "cls": "F5",
+  "file": "src/analyze.py",
+  "desc": "groupby: last key column dropped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB23": {
+  "cls": "F5",
+  "file": "src/analyze.py",
+  "desc": "drop_duplicates: last key column dropped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB24": {
+  "cls": "F5",
+  "file": "src/analyze.py",
+  "desc": "sort_values: last key column dropped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB25": {
+  "cls": "F5",
+  "file": "src/analyze.py",
+  "desc": "drop_duplicates: last key column dropped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB26": {
+  "cls": "F6",
+  "file": "src/make_assignments.py",
+  "desc": "elicitation tie-break order reversed (hord rank sign)",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage23.test_frozen_plan_unchanged: AssertionError: assert {'salt': 'ass...3', ...}, ...} == {'salt': 'ass...3', ...}, ...}\n  \n  Omitting 16 identical items, use -vv to show\n  Differing ; tests.test_stage4.test_plan_frozen_fields_match_rebuild: AssertionError: hw1 plan field elicitation drifted\nassert {'P01': ['eli...s14_r1'], ...} == {'P01': ['eli...s12_r2'], ...}\n  \n  Omitting 4 identical i"
+   },
+   "pytest:test_stage23": {
+    "kind": "assert",
+    "detail": "tests.test_stage23.test_frozen_plan_unchanged: AssertionError: assert {'salt': 'ass...3', ...}, ...} == {'salt': 'ass...3', ...}, ...}\n  \n  Omitting 16 identical items, use -vv to show\n  Differing "
+   },
+   "pytest:test_stage4": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_plan_frozen_fields_match_rebuild: AssertionError: hw1 plan field elicitation drifted\nassert {'P01': ['eli...s14_r1'], ...} == {'P01': ['eli...s12_r2'], ...}\n  \n  Omitting 4 identical i"
+   }
+  }
+ },
+ "FB27": {
+  "cls": "F6",
+  "file": "src/make_assignments.py",
+  "desc": "tie-break routing no longer excludes the pair writer",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage23.test_stage23_end_to_end: AssertionError: assert ('P17' != 'P17')"
+   },
+   "pytest:test_stage23": {
+    "kind": "assert",
+    "detail": "tests.test_stage23.test_stage23_end_to_end: AssertionError: assert ('P17' != 'P17')"
+   }
+  }
+ },
+ "FB28": {
+  "cls": "F6",
+  "file": "src/make_listener_study.py",
+  "desc": "Part 29 sentence-order coin reversed",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_repo_files_match_builder: AssertionError: P01_part29.json\nassert '{\\n \"check_i...n  }\\n ]\\n}\\n' == '{\\n \"check_i...n  }\\n ]\\n}\\n'\n  \n  Skipping 2068 identical leading character"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_repo_files_match_builder: AssertionError: P01_part29.json\nassert '{\\n \"check_i...n  }\\n ]\\n}\\n' == '{\\n \"check_i...n  }\\n ]\\n}\\n'\n  \n  Skipping 2068 identical leading character"
+   }
+  }
+ },
+ "FB29": {
+  "cls": "F6",
+  "file": "src/make_listener_study.py",
+  "desc": "Part 28 self-annotation exclusion skipped (nobody blocked)",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "crash",
+    "detail": "tests.test_stage7.test_counts_and_balance: failed on setup with \"AssertionError: a family without a writer/checker record would silently exclude no one\""
+   },
+   "pytest:test_stage7": {
+    "kind": "crash",
+    "detail": "tests.test_stage7.test_counts_and_balance: failed on setup with \"AssertionError: a family without a writer/checker record would silently exclude no one\""
+   }
+  }
+ },
+ "FB30": {
+  "cls": "F6",
+  "file": "src/make_frontier_parts.py",
+  "desc": "allocator may give the same item to the same person twice (no duplicate-annotator check)",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage5_frontier.test_fresh_build_equals_committed: AssertionError: assert {'salt': 's5f...': 23.3}, ...} == {'salt': 's5f...': 23.3}, ...}\n  \n  Omitting 8 identical items, use -vv to show\n  Differing i; tests.test_stage7.test_counts_and_balance: assert ({42, 43} <= {42, 43} and {9, 10, 11, 12, 13, 14, ...} == {15}\n  \n  Extra items in the left set:\n  9\n  10\n  11\n  12\n  13\n  14\n  Use -v to get m"
+   },
+   "pytest:test_stage5_frontier": {
+    "kind": "assert",
+    "detail": "tests.test_stage5_frontier.test_fresh_build_equals_committed: AssertionError: assert {'salt': 's5f...': 23.3}, ...} == {'salt': 's5f...': 23.3}, ...}\n  \n  Omitting 8 identical items, use -vv to show\n  Differing i"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_counts_and_balance: assert ({42, 43} <= {42, 43} and {9, 10, 11, 12, 13, 14, ...} == {15}\n  \n  Extra items in the left set:\n  9\n  10\n  11\n  12\n  13\n  14\n  Use -v to get m"
+   }
+  }
+ },
+ "FB31": {
+  "cls": "F7",
+  "file": "src/score_listener_study.py",
+  "desc": "listener exclusions computed but not applied on the main path",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7f7b645f77e0>(B=100)\n +    where <function self_check at 0x7f7b645f77e0> = SL.self_check"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7f7b645f77e0>(B=100)\n +    where <function self_check at 0x7f7b645f77e0> = SL.self_check"
+   }
+  }
+ },
+ "FB32": {
+  "cls": "F7",
+  "file": "src/score_repair_audit.py",
+  "desc": "practice rows flagged practice=1 no longer skipped",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB33": {
+  "cls": "F7",
+  "file": "src/score_oracle_indep.py",
+  "desc": "empty-input default: judge reported scored when no items",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB34": {
+  "cls": "F7",
+  "file": "src/make_frontier_parts.py",
+  "desc": "balance(): new-part opening not prevented when allow_new is False",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_repo_files_match_builder: AssertionError: P01_part29.json\nassert '{\\n \"check_i...n  }\\n ]\\n}\\n' == '{\\n \"check_i...n  }\\n ]\\n}\\n'\n  \n  Skipping 2295 identical leading character"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_repo_files_match_builder: AssertionError: P01_part29.json\nassert '{\\n \"check_i...n  }\\n ]\\n}\\n' == '{\\n \"check_i...n  }\\n ]\\n}\\n'\n  \n  Skipping 2295 identical leading character"
+   }
+  }
+ },
+ "FB35": {
+  "cls": "F7",
+  "file": "src/guard_baseline.py",
+  "desc": "quarantine filter not applied on the disc path",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB36": {
+  "cls": "F8",
+  "file": "src/score_listener_study.py",
+  "desc": "label/form map 'A' -> 'B'",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7f93ecc277e0>(B=100)\n +    where <function self_check at 0x7f93ecc277e0> = SL.self_check"
+   },
+   "pytest:test_stage7": {
+    "kind": "assert",
+    "detail": "tests.test_stage7.test_scorer_self_checks: assert 1 == 0\n +  where 1 = <function self_check at 0x7f93ecc277e0>(B=100)\n +    where <function self_check at 0x7f93ecc277e0> = SL.self_check"
+   }
+  }
+ },
+ "FB37": {
+  "cls": "F8",
+  "file": "src/make_assignments.py",
+  "desc": "label/form map 'A' -> 'B'",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB38": {
+  "cls": "F8",
+  "file": "src/make_listener_study.py",
+  "desc": "label/form map 'B' -> 'A'",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB39": {
+  "cls": "F8",
+  "file": "src/guard_baseline.py",
+  "desc": "sign flip of a difference (- -> +)",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "FB40": {
+  "cls": "F8",
+  "file": "src/analyze.py",
+  "desc": "label/form map 'B' -> 'A'",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ }
+}
