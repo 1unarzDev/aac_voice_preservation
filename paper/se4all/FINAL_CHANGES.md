@@ -50,3 +50,13 @@
 - \listenerslot: CI labelled unadjusted 95% bootstrap; adds bare "unclear" 86.7% (new macro ls_un_bare) and reversal difference -42 per 1,000 [-99, 7] includes zero (new macros ls_rd*, make_macros.py; regenerated from repo root).
 - Cuts for 8 pp: abstract "two defects/keyed gate zero margin" sentence, "released" sentence, equivalent-mutant parenthetical. Build: 8 pages incl. refs, no undefined; pages 1 and 8 viewed.
 - Unfixed (needs new analyses/venue choice): second non-GPT/non-Claude extractor, pre-specified pooling for 37.5 pp (abstract still gives it), third defect trace, R6 test, member check, density of Tables II-V, p=.0003 hand-typed.
+
+## 2026-11-18 readability pass
+- Abstract cut from ~330 to ~165 words: problem, method, circular-vs-lexicon-blind mutant caveat (70.7%), cue effect (99.8% affirmative default; +37.5 pp, exploratory), listener result with reversal difference not confirmed, necessary-not-sufficient (61.1% rejected) and consultants-who-use-AAC (not a sample). Four result numbers.
+- Secondary statistics (leave-one-out, sign-flip p, per-model splits, robustness shift, chip-control gaps) moved from prose into new Table "Secondary results" (tab:secondary); primary paragraph and controls paragraph shortened and open with their point; Costs paragraph reordered to lead with the finding. Fixed a broken paragraph break.
+- Honesty elements retained (Stage 7 listener sentence, mutant circularity, human-vs-machine labels, ethics/positionality). Original saved at tmp/se4all_main_before_readability.tex. Not committed.
+
+## 2026-11-18 FIXER (post-check)
+- Fig. 1 caption: 99.3% chip figure now stated as conditional (of the 414 outputs wrong bare, right with chip), not an overall chip rate.
+- Abstract: removed cryptic "(a coverage score)". Not changed: Wilson 96.8% vs rounded 97 (consistent); email trailing underscore and IEEE AI disclosure left for author.
+- Build: page count and References position rechecked.

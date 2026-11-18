@@ -61,12 +61,11 @@ nicholasicheng6@gmail.com}}
 \maketitle
 
 \begin{abstract}
-A message composed with AAC is spoken as the person's own, so when a language model expands a few keywords and silently loses a \say{not}, it puts words in their mouth; two speech-language pathologists rated that change the most serious of \RES{slp_ntypes} types (\RES{slp_neg} of 5 each, and both would block it).
-Deciding whether an output kept the meaning needs a test oracle, an automated checker that is itself software and can be wrong, so we built a test harness with six requirements and tested its oracle with software-testing methods.
-The oracle caught \kof{orr_j_mut} rule-seeded mutants of stored outputs, a circular sensitivity measure, with \kof{orr_j_fa} false alarms (\pct{oi_all} on mutants built without its lexicon); on two held-out sets (\RES{nat_ho_viol_npos} violation positives) its violation verdicts have \pct{nat_ho_viol_p} \cip{nat_ho_viol_p} precision and \pct{nat_ho_viol_r} \cip{nat_ho_viol_r} recall against human coders; its critical label equals the human consensus on \kof{tc_c} treated outputs; and non-author annotators side with its tie-breaking arbiter in \pct{p19_arb} of \RES{p19_arb_n} codings (chance is 50\%; arbiter rulings only).
-A seeded-fault sweep of \RES{sf_n} mutants of the harness exposed two untested components (judge post-processing and the input builder); regression tests added after the sweep raised the share of mutants killed from \RES{sf_r1_k}/\RES{sf_den} to \RES{sf_r2_k}/\RES{sf_den}, a coverage score on a fixed list and not an independent estimate.
-With the tested oracle, four models answered bare polarity keywords affirmatively in \pct{hwaff} of committed outputs on human-written pairs, and supplying the missing cue raised the intended speech act by \RES{hx_p1}\,pp over a length-matched word [\RES{hx_p1_lo}, \RES{hx_p1_hi}], writer-level $t$, \RES{hx_wr} writers, all positive, exploratory (first round alone, \RES{hx_r1_wr} writers: \RES{hx_r1}\,pp; pooling the second round was decided after seeing it); on a machine-written confirmation set it is \RES{wcp1}\,pp, \RES{wcp1_um}\,pp with post-hoc arbitrated labels masked; the patterns replicate on \RES{mb_nmod} models from \RES{mb_nfam} families.
-Passing the oracle is necessary but not sufficient, and the extractor shares a model family with one generator: writers rejected \kof{wm_right_rej} (\pct{wm_right_rej}) of the oracle-passed outputs they rated, mostly for compression loss and changed event or role structure, the person, not the model, owns the message, and two paid design consultants who use AAC asked for an approval requirement (R6) and a NOT-scope clause, among other changes.
+People who use augmentative and alternative communication (AAC) may type a few keywords that a language model expands into a sentence spoken as their own, so a silently dropped \say{not} puts words in their mouth.
+Judging such output needs a test oracle, an automated checker that can itself be wrong, so we built a harness with six requirements and tested its oracle.
+Rule-seeded mutants are a circular check; on mutants built without the oracle's lexicon the judge caught \pct{oi_all}, and a seeded-fault sweep exposed two untested components that regression tests now cover.
+With the tested oracle, four models read bare polarity keywords as affirmative in \pct{hwaff} of committed outputs, and supplying the missing cue raised the intended speech act by \RES{hx_p1}\,percentage points (exploratory); in a listener study the cue helped, but fewer reversals were not confirmed.
+Passing the oracle is necessary but not sufficient: writers rejected \pct{wm_right_rej} of oracle-passed outputs, and two paid design consultants who use AAC (not a sample) asked for a person-approval requirement.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -97,7 +96,7 @@ Symbol- and grid-based AAC is out of scope.
   The user typed no word for \say{not}, so the affirmative output is an \emph{Assumption}, charged to the input design and not to the model.
   If the user supplies \chip{NOT} and the output drops it, that is a \emph{Violation}, charged to the model.
   \end{minipage}
-  \caption{A stored output on a human-written pair (Gemma-3-4B), with the exact input strings. It is the first family in SHA-256 order with a wrong bare and a right chip output, so it is illustrative, not typical. On the \RES{hwe_pol_nq} human-written polarity families, bare binary output matches the source about half the time by design (\RES{hwe_pol_wrong}\% wrong), a ceiling and not a finding; with the chip it is right in \RES{hwe_pol_fix}\% \cip{hwe_pol_fix} (human-written pairs, \RES{hwe_pol_fix_n} outputs).}
+  \caption{A stored output on a human-written pair (Gemma-3-4B), with the exact input strings. It is the first family in SHA-256 order with a wrong bare and a right chip output, so it is illustrative, not typical. On the \RES{hwe_pol_nq} human-written polarity families, bare binary output matches the source about half the time by design (\RES{hwe_pol_wrong}\% wrong), a ceiling and not a finding; of the \RES{hwe_pol_fix_n} outputs that were wrong bare, \RES{hwe_pol_fix}\% \cip{hwe_pol_fix} are right with the chip (human-written pairs).}
   \label{fig:gallery}
 \end{figure}
 
@@ -235,12 +234,13 @@ Table~\ref{tab:primary} gives the three contrasts.
 \emph{Affirmative default} is the share of committed (valid affirmative or negated) bare polarity outputs that are affirmative.
 They were pre-specified for the confirmation set; on the human-written pairs they are an exploratory replication, not preregistered, and each rests on \RES{hw_wr_min}--\RES{hw_wr_max} writers.
 Each contrast uses the families of its own dimension (speech act \RES{hwf_act}, politeness \RES{hwf_pz}, polarity \RES{hwf_pol} of the \RES{hw_nfam} analysed families).
-Every writer's mean is positive in all three contrasts; pooling a second round of speech-act pairs gives \RES{hx_wr} writers for the act chip (\RES{hx_fams} families), leave-one-writer-out \RES{hx_loo_min} to \RES{hx_loo_max}\,pp, and one-sided sign-flip $p=\RES{hx_sf_p}$ (two-sided $\RES{hx_sf_p2}$), the floor for ten writers; politeness and polarity keep six and seven writers (one-sided floors $1/64$, $1/128$). Pooling the second round for this one contrast was a post-hoc decision; round 1 alone (\RES{hx_r1_wr} writers) gives \RES{hx_r1}\,pp \ci{hx_r1}. We claim direction, not width.
-Effects vary by model for the act chip (pooled: Llama \RES{hx_llama}\,pp, whose writer means are not all positive, against \RES{hx_oth_min}\,pp or more for the other three, gpt-6.1-terra \RES{hx_terra}) and for politeness (Gemma \RES{t6p2_gemma}, Llama \RES{t6p2_llama}).
-No robustness check (near-duplicates collapsed, one writer excluded, arbiter calls reversed, all candidates) flips a decision (largest shift \RES{hw_shift_max}\,pp).
+Every writer's mean is positive in all three contrasts, and pooling a second round of speech-act pairs gives \RES{hx_wr} writers for the act chip (\RES{hx_fams} families); that pooling was decided after seeing round 1, which alone (\RES{hx_r1_wr} writers) gives \RES{hx_r1}\,pp \ci{hx_r1}.
+We claim direction, not width.
+Effects vary by model, and no robustness check flips a decision; Table~\ref{tab:secondary} gives the secondary statistics.
 \paragraph*{Controls: the cue, not the chip}
-Two controls on the human-written pairs (\texttt{analysis/chip\_controls/}) show that restoring the missing cue is what fixes the default.
-An irrelevant chip adds little (the cue chip beats it by \RES{cc_irrel_min} to \RES{cc_irrel_max}\,pp), and the same cue as a plain word is within \RES{cc_nl_near_max}\,pp of the chip on \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions and beats it on speech act by \RES{cc_nl_act}\,pp: the chip is our probe, not a requirement.
+Restoring the missing cue, not the chip itself, fixes the default.
+Two controls on the human-written pairs (\texttt{analysis/chip\_controls/}) support this: an irrelevant chip adds little, and the same cue as a plain word comes close to the chip on most dimensions (Table~\ref{tab:secondary}).
+The chip is our probe, not a requirement.
 \paragraph*{Same-items cue restoration and clinical weight}
 On \RES{sc_nunits} elicited messages whose cue the typist dropped (three models, machine-judged), supplying the cue cuts expected silent polarity reversals per 1,000 messages from \RES{sc_pol_bare} to \RES{sc_pol_chip} (chip) and \RES{sc_pol_word} (word), and politeness reversals from \RES{sc_pz_bare} to \RES{sc_pz_chip} and \RES{sc_pz_word}.
 Two speech-language pathologists ($n=2$, expert review, not a population estimate) rated a dropped or added negation the most serious silent change (\RES{slp_neg} of 5 each); they accepted \RES{slp_acc_rep}\% of repairs as written, against \RES{slp_acc_orig}\% of the failed originals.
@@ -264,6 +264,31 @@ Two speech-language pathologists ($n=2$, expert review, not a population estimat
   \end{tabularx}
 \end{table}
 
+\begin{table}[t]
+  \caption{Secondary results (human-written pairs, exploratory). Per-model values are pooled-round act-chip gain and net politeness, in percentage points.}
+  \label{tab:secondary}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabularx}{\columnwidth}{@{}Xr@{}}
+    \toprule
+    Check & Result\\
+    \midrule
+    Act-chip gain, leave-one-writer-out & \RES{hx_loo_min} to \RES{hx_loo_max}\\
+    Sign-flip $p$ (act chip, \RES{hx_wr} writers), one- / two-sided & \RES{hx_sf_p} / \RES{hx_sf_p2}\\
+    \quad one-sided floors, politeness / polarity (6 / 7 writers) & $1/64$ / $1/128$\\
+    Act-chip gain by model: Llama (not all writers positive) & \RES{hx_llama}\\
+    \quad other three models, minimum & \RES{hx_oth_min}\\
+    \quad gpt-6.1-terra & \RES{hx_terra}\\
+    Net politeness by model: Gemma / Llama & \RES{t6p2_gemma} / \RES{t6p2_llama}\\
+    Largest shift under any robustness check\textsuperscript{a} & \RES{hw_shift_max}\\
+    Cue chip minus irrelevant chip & \RES{cc_irrel_min} to \RES{cc_irrel_max}\\
+    Plain word within \RES{cc_nl_near_max}\,pp of chip & \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions\\
+    \quad plain word vs.\ chip, speech act & word ahead by \RES{cc_nl_act}\\
+    \bottomrule
+  \end{tabularx}\\[2pt]
+  {\scriptsize \textsuperscript{a}Near-duplicates collapsed, one writer excluded, arbiter calls reversed, or all candidates.}
+\end{table}
+
 \subsection{Confirmation set}
 All three contrasts have the same sign on the confirmation set, and every interval excludes zero (Table~\ref{tab:primary}).
 Act-chip gain (\RES{wcp1}\,pp) is a little below the human-written \RES{hx_p1}\,pp, and the Affirmative default is of similar size.
@@ -279,9 +304,10 @@ Under bare input, \kn{wcaff} committed directional polarity outputs on the confi
 When \RES{el_nann} annotators typed keywords for \RES{el_nmsg} AACText messages, they dropped the negation cue in \pct{el_neg_h} of \RES{el_neg_c_n} negated messages (a crude compressor: \pct{el_neg_c}).
 The default is also the better guess (among keyword strings with no negation word, only \pct{t2_post} came from a negated message), but its errors are silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations, so R3 logs the Assumption and tests its direction (the detector's negation label equals the human label on \kof{src} sampled messages).
 
-The default is not new~\cite{chen2023say}; we price it for AAC input against a human base rate. \paragraph*{Costs to the person}
-Every selection costs effort, more under switch scanning or eye gaze, and every extra draft costs reading and attention; we measured neither and give design reasoning only.
-A later human coverage study (writers judging their own intended message) found one cue tap the cheapest route to coverage: one draft covered \RES{cv_g1bare}\% bare and \RES{cv_g1chip}\% after the cue (+\RES{cv_tap}\,pp \ci{cv_tap}, exploratory), three bare drafts \RES{cv_c3bare}\%, and drafts beyond the cue add a further +\RES{cv_s3}\,pp \ci{cv_s3} at more reading.
+The default is not new~\cite{chen2023say}; we price it for AAC input against a human base rate.
+\paragraph*{Costs to the person}
+One cue tap is the cheapest route to coverage, though every selection costs effort (more under switch scanning or eye gaze) and every extra draft costs reading; we measured neither cost and give design reasoning only.
+In a later human coverage study (writers judging their own intended message), one draft covered \RES{cv_g1bare}\% bare and \RES{cv_g1chip}\% after the cue (+\RES{cv_tap}\,pp \ci{cv_tap}, exploratory), three bare drafts \RES{cv_c3bare}\%, and drafts beyond the cue add a further +\RES{cv_s3}\,pp \ci{cv_s3} at more reading.
 The design that follows asks for the least burden for the most protection: a tap the person chooses, then drafts only where it pays.
 
 \begin{table}[t]
