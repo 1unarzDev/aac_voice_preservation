@@ -1,0 +1,471 @@
+{
+ "n_mut": 75,
+ "n_ctl": 46,
+ "n_mut_lexblind": 53,
+ "oracles": {
+  "gpt_judge": {
+   "mut_all": {
+    "k": 53,
+    "n": 75,
+    "rate": 0.7067,
+    "lo": 0.5956,
+    "hi": 0.7976
+   },
+   "mut_lexblind": {
+    "k": 31,
+    "n": 53,
+    "rate": 0.5849,
+    "lo": 0.4509,
+    "hi": 0.7074
+   },
+   "false_alarm": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   }
+  },
+  "nli_primary": {
+   "mut_all": {
+    "k": 55,
+    "n": 75,
+    "rate": 0.7333,
+    "lo": 0.6237,
+    "hi": 0.8202
+   },
+   "mut_lexblind": {
+    "k": 41,
+    "n": 53,
+    "rate": 0.7736,
+    "lo": 0.6447,
+    "hi": 0.8655
+   },
+   "false_alarm": {
+    "k": 0,
+    "n": 46,
+    "rate": 0.0,
+    "lo": -0.0,
+    "hi": 0.0771
+   },
+   "mcnemar_all": {
+    "judge_only": 13,
+    "oracle_only": 15,
+    "p": 0.8506
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 5,
+    "oracle_only": 15,
+    "p": 0.0414
+   }
+  },
+  "nli_secondary": {
+   "mut_all": {
+    "k": 68,
+    "n": 75,
+    "rate": 0.9067,
+    "lo": 0.8197,
+    "hi": 0.9541
+   },
+   "mut_lexblind": {
+    "k": 48,
+    "n": 53,
+    "rate": 0.9057,
+    "lo": 0.7975,
+    "hi": 0.959
+   },
+   "false_alarm": {
+    "k": 0,
+    "n": 46,
+    "rate": 0.0,
+    "lo": -0.0,
+    "hi": 0.0771
+   },
+   "mcnemar_all": {
+    "judge_only": 6,
+    "oracle_only": 21,
+    "p": 0.0059
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 4,
+    "oracle_only": 21,
+    "p": 0.0009
+   }
+  },
+  "claude_change": {
+   "mut_all": {
+    "k": 68,
+    "n": 75,
+    "rate": 0.9067,
+    "lo": 0.8197,
+    "hi": 0.9541
+   },
+   "mut_lexblind": {
+    "k": 46,
+    "n": 53,
+    "rate": 0.8679,
+    "lo": 0.7516,
+    "hi": 0.9345
+   },
+   "false_alarm": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   }
+  },
+  "claude_ref": {
+   "mut_all": {
+    "k": 68,
+    "n": 75,
+    "rate": 0.9067,
+    "lo": 0.8197,
+    "hi": 0.9541
+   },
+   "mut_lexblind": {
+    "k": 46,
+    "n": 53,
+    "rate": 0.8679,
+    "lo": 0.7516,
+    "hi": 0.9345
+   },
+   "false_alarm": {
+    "k": 7,
+    "n": 46,
+    "rate": 0.1522,
+    "lo": 0.0757,
+    "hi": 0.2822
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   }
+  },
+  "either_nli_primary": {
+   "mut_all": {
+    "k": 68,
+    "n": 75,
+    "rate": 0.9067,
+    "lo": 0.8197,
+    "hi": 0.9541
+   },
+   "mut_lexblind": {
+    "k": 46,
+    "n": 53,
+    "rate": 0.8679,
+    "lo": 0.7516,
+    "hi": 0.9345
+   },
+   "false_alarm": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   }
+  },
+  "both_nli_primary": {
+   "mut_all": {
+    "k": 40,
+    "n": 75,
+    "rate": 0.5333,
+    "lo": 0.4216,
+    "hi": 0.6418
+   },
+   "mut_lexblind": {
+    "k": 26,
+    "n": 53,
+    "rate": 0.4906,
+    "lo": 0.3612,
+    "hi": 0.6212
+   },
+   "false_alarm": {
+    "k": 0,
+    "n": 46,
+    "rate": 0.0,
+    "lo": -0.0,
+    "hi": 0.0771
+   },
+   "mcnemar_all": {
+    "judge_only": 13,
+    "oracle_only": 0,
+    "p": 0.0002
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 5,
+    "oracle_only": 0,
+    "p": 0.0625
+   }
+  },
+  "either_nli_secondary": {
+   "mut_all": {
+    "k": 74,
+    "n": 75,
+    "rate": 0.9867,
+    "lo": 0.9283,
+    "hi": 0.9976
+   },
+   "mut_lexblind": {
+    "k": 52,
+    "n": 53,
+    "rate": 0.9811,
+    "lo": 0.9006,
+    "hi": 0.9967
+   },
+   "false_alarm": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 21,
+    "p": 0.0
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 21,
+    "p": 0.0
+   }
+  },
+  "both_nli_secondary": {
+   "mut_all": {
+    "k": 47,
+    "n": 75,
+    "rate": 0.6267,
+    "lo": 0.5135,
+    "hi": 0.7274
+   },
+   "mut_lexblind": {
+    "k": 27,
+    "n": 53,
+    "rate": 0.5094,
+    "lo": 0.3788,
+    "hi": 0.6388
+   },
+   "false_alarm": {
+    "k": 0,
+    "n": 46,
+    "rate": 0.0,
+    "lo": -0.0,
+    "hi": 0.0771
+   },
+   "mcnemar_all": {
+    "judge_only": 6,
+    "oracle_only": 0,
+    "p": 0.0312
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 4,
+    "oracle_only": 0,
+    "p": 0.125
+   }
+  },
+  "either_claude_change": {
+   "mut_all": {
+    "k": 68,
+    "n": 75,
+    "rate": 0.9067,
+    "lo": 0.8197,
+    "hi": 0.9541
+   },
+   "mut_lexblind": {
+    "k": 46,
+    "n": 53,
+    "rate": 0.8679,
+    "lo": 0.7516,
+    "hi": 0.9345
+   },
+   "false_alarm": {
+    "k": 5,
+    "n": 46,
+    "rate": 0.1087,
+    "lo": 0.0473,
+    "hi": 0.2304
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   }
+  },
+  "both_claude_change": {
+   "mut_all": {
+    "k": 53,
+    "n": 75,
+    "rate": 0.7067,
+    "lo": 0.5956,
+    "hi": 0.7976
+   },
+   "mut_lexblind": {
+    "k": 31,
+    "n": 53,
+    "rate": 0.5849,
+    "lo": 0.4509,
+    "hi": 0.7074
+   },
+   "false_alarm": {
+    "k": 3,
+    "n": 46,
+    "rate": 0.0652,
+    "lo": 0.0224,
+    "hi": 0.175
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 0,
+    "p": 1.0
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 0,
+    "p": 1.0
+   }
+  },
+  "either_claude_ref": {
+   "mut_all": {
+    "k": 68,
+    "n": 75,
+    "rate": 0.9067,
+    "lo": 0.8197,
+    "hi": 0.9541
+   },
+   "mut_lexblind": {
+    "k": 46,
+    "n": 53,
+    "rate": 0.8679,
+    "lo": 0.7516,
+    "hi": 0.9345
+   },
+   "false_alarm": {
+    "k": 8,
+    "n": 46,
+    "rate": 0.1739,
+    "lo": 0.0909,
+    "hi": 0.3072
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 15,
+    "p": 0.0001
+   }
+  },
+  "both_claude_ref": {
+   "mut_all": {
+    "k": 53,
+    "n": 75,
+    "rate": 0.7067,
+    "lo": 0.5956,
+    "hi": 0.7976
+   },
+   "mut_lexblind": {
+    "k": 31,
+    "n": 53,
+    "rate": 0.5849,
+    "lo": 0.4509,
+    "hi": 0.7074
+   },
+   "false_alarm": {
+    "k": 3,
+    "n": 46,
+    "rate": 0.0652,
+    "lo": 0.0224,
+    "hi": 0.175
+   },
+   "mcnemar_all": {
+    "judge_only": 0,
+    "oracle_only": 0,
+    "p": 1.0
+   },
+   "mcnemar_lexblind": {
+    "judge_only": 0,
+    "oracle_only": 0,
+    "p": 1.0
+   }
+  }
+ },
+ "claude_fallback_units": 0,
+ "claude_by_op": {
+  "neg_fail_to": {
+   "n": 13,
+   "claude_change": 13,
+   "gpt": 6,
+   "nli": 13
+  },
+  "neg_hardly": {
+   "n": 12,
+   "claude_change": 12,
+   "gpt": 12,
+   "nli": 12
+  },
+  "neg_nobody": {
+   "n": 10,
+   "claude_change": 10,
+   "gpt": 10,
+   "nli": 10
+  },
+  "neg_refuse_to": {
+   "n": 13,
+   "claude_change": 12,
+   "gpt": 5,
+   "nli": 13
+  },
+  "q_embed": {
+   "n": 1,
+   "claude_change": 1,
+   "gpt": 1,
+   "nli": 0
+  },
+  "role_embed": {
+   "n": 12,
+   "claude_change": 7,
+   "gpt": 6,
+   "nli": 3
+  },
+  "time_implied": {
+   "n": 14,
+   "claude_change": 13,
+   "gpt": 13,
+   "nli": 4
+  }
+ }
+}

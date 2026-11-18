@@ -1,0 +1,92 @@
+[
+ {
+  "type": "F6",
+  "module": "MA",
+  "file": "src/make_assignments.py",
+  "line": 254,
+  "original": "-hord(cap, \"elic\").index(a)))",
+  "mutated": "hord(cap, \"elic\").index(a)))",
+  "desc": "elicitation tie-break order reversed (hord rank sign)"
+ },
+ {
+  "type": "F6",
+  "module": "MA",
+  "file": "src/make_assignments.py",
+  "line": 1060,
+  "original": "excl = {r[\"writer_id\"]} | set((r.get(\"checkers\") or \"\").split())",
+  "mutated": "excl = set((r.get(\"checkers\") or \"\").split())",
+  "desc": "tie-break routing no longer excludes the pair writer"
+ },
+ {
+  "type": "F6",
+  "module": "ML",
+  "file": "src/make_listener_study.py",
+  "line": 316,
+  "original": ".random() < 0.5      # True: the mutant/changed text is Sentence 1",
+  "mutated": ".random() >= 0.5      # True: the mutant/changed text is Sentence 1",
+  "desc": "Part 29 sentence-order coin reversed"
+ },
+ {
+  "type": "F6",
+  "module": "ML",
+  "file": "src/make_listener_study.py",
+  "line": 306,
+  "original": "\"blocked\": set(hw[k[\"family_id\"]]), \"group\": first[\"item\"]})",
+  "mutated": "\"blocked\": set(), \"group\": first[\"item\"]})",
+  "desc": "Part 28 self-annotation exclusion skipped (nobody blocked)"
+ },
+ {
+  "type": "F6",
+  "module": "MF",
+  "file": "src/make_frontier_parts.py",
+  "line": 312,
+  "original": "return (p not in u[\"blocked\"] and p not in self.who[(part, u[\"item_id\"])]",
+  "mutated": "return (p not in u[\"blocked\"]",
+  "desc": "allocator may give the same item to the same person twice (no duplicate-annotator check)"
+ },
+ {
+  "type": "F7",
+  "module": "LS",
+  "file": "src/score_listener_study.py",
+  "line": 236,
+  "original": "keep = dec[~dec.annotator.isin(ex[\"excluded\"])]",
+  "mutated": "keep = dec",
+  "desc": "listener exclusions computed but not applied on the main path"
+ },
+ {
+  "type": "F7",
+  "module": "RA",
+  "file": "src/score_repair_audit.py",
+  "line": 73,
+  "original": "if r.get(\"practice\") == \"1\" or r[\"item_id\"].startswith(\"prac-\"):",
+  "mutated": "if r[\"item_id\"].startswith(\"prac-\"):",
+  "desc": "practice rows flagged practice=1 no longer skipped"
+ },
+ {
+  "type": "F7",
+  "module": "OI",
+  "file": "src/score_oracle_indep.py",
+  "line": 154,
+  "original": "have_judge = (c[\"judge_pass\"] != \"missing\").all() if len(c) else False",
+  "mutated": "have_judge = (c[\"judge_pass\"] != \"missing\").all() if len(c) else True",
+  "desc": "empty-input default: judge reported scored when no items"
+ },
+ {
+  "type": "F7",
+  "module": "MF",
+  "file": "src/make_frontier_parts.py",
+  "line": 347,
+  "original": "if not allow_new and new:",
+  "mutated": "if False:",
+  "desc": "balance(): new-part opening not prevented when allow_new is False"
+ },
+ {
+  "type": "F7",
+  "module": "GD",
+  "file": "src/guard_baseline.py",
+  "line": 369,
+  "original": "if s == \"disc\":\n            raw = raw[~raw.quarantine_refusal_acceptance]",
+  "mutated": "if False:\n            raw = raw[~raw.quarantine_refusal_acceptance]",
+  "desc": "quarantine filter not applied on the disc path"
+ }
+]

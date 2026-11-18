@@ -28,7 +28,8 @@
 \newcommand{\resdef}[2]{\expandafter\def\csname RES@#1\endcsname{#2}}
 \newcommand{\RES}[1]{\ifcsname RES@#1\endcsname\csname RES@#1\endcsname\else\RESmissing{#1}\fi}
 %% ORACLE_INDEP / LISTENER sentences (macros from analysis/oracle_indep and analysis/listener via make_macros.py)
-\newcommand{\oracleindep}{Non-circularly, \RES{oi_all_n} mutants built without the checker lexicon and confirmed by two annotators were caught by the judge in \kn{oi_all} (\pct{oi_all}; the \RES{orr_j_mut_den}-mutant rule-seeded figure above overstates sensitivity) and in \RES{oi_nc_k}/\RES{oi_nc_n} (\pct{oi_nc}, Wilson \cip{oi_nc}) where the lexicon does not see the change (surface baselines: \pct{oi_surf}, \pct{oi_ovl}), with \kn{oi_fa} false alarms on confirmed controls (all politeness cases); it is weak on ``fail to'', ``refuse to'' and embedded roles, and passive and embedded-question mutants were not confirmed and are not estimated.}
+\newcommand{\oracleindep}{Non-circularly, \RES{oi_all_n} mutants built without the checker lexicon and confirmed by two annotators were caught by the judge in \kn{oi_all} (\pct{oi_all}; the \RES{orr_j_mut_den}-mutant rule-seeded figure above overstates sensitivity) and in \RES{oi_nc_k}/\RES{oi_nc_n} (\pct{oi_nc}, Wilson \cip{oi_nc}) where the lexicon does not see the change (surface baselines: \pct{oi_surf}, \pct{oi_ovl}), with \kn{oi_fa} false alarms on confirmed controls (all politeness cases); it is weak on ``fail to'', ``refuse to'' and embedded roles, and passive and embedded-question mutants were not confirmed and are not estimated.
+An NLI model (contradiction rule declared before scoring) and a Claude relabel that compares original with mutant, a second family but not independent of the authors' tooling, catch more on the lexicon-blind mutants (Table~\ref{tab:oracle}); NLI misses role and implied-time mutants, and Claude flags every mutant the judge does plus \RES{oi2_extra} more, so this is a sensitivity analysis.}
 \newcommand{\listenerslot}{In a listener study with \RES{ls_n} adult annotators (not AAC partners; materials judged, not real consequences), the intended reading was chosen for \pct{ls_bare} of bare outputs and \pct{ls_chip} with a cue chip (+\RES{ls_diff}\,points, unadjusted 95\% bootstrap CI \RES{ls_lo} to \RES{ls_hi}); most other bare answers were \say{unclear} (\pct{ls_un_bare}) rather than reversed, and the reversal difference per 1,000 (\RES{ls_rd}, \RES{ls_rd_lo} to \RES{ls_rd_hi}) includes zero.}
 \newcommand{\RESmissing}[1]{\textcolor{red}{\textbf{\texttt{[\detokenize{#1}]}}}}
 \newcommand{\IfRES}[3]{\ifcsname RES@#1\endcsname#2\else#3\fi}
@@ -61,10 +62,12 @@ nicholasicheng6@gmail.com}}
 \maketitle
 
 \begin{abstract}
-People who use augmentative and alternative communication (AAC) may type a few keywords that a language model expands into a sentence spoken as their own, so a silently dropped \say{not} puts words in their mouth.
-Judging such output needs a test oracle, an automated checker that can itself be wrong, so we built a harness with six requirements and tested its oracle.
-Rule-seeded mutants are a circular check; on mutants built without the oracle's lexicon the judge caught \pct{oi_all}, and a seeded-fault sweep exposed two untested components that regression tests now cover.
-With the tested oracle, four models read bare polarity keywords as affirmative in \pct{hwaff} of committed outputs, and supplying the missing cue raised the intended speech act by \RES{hx_p1}\,percentage points (exploratory); in a listener study the cue helped, but fewer reversals were not confirmed.
+A language model that expands a person's AAC keywords into a sentence spoken as their own can silently drop a \say{not}, and judging it needs a test oracle, an automated checker that can itself be wrong.
+We test that oracle the way one tests software.
+Rule-seeded mutants are a circular check; on mutants built without the oracle's lexicon the judge caught \pct{oi_all} (\pct{oi_nc} where the lexicon is blind), a Claude relabel and an NLI model, both shown the original sentence, caught \pct{oi2_ca} and \pct{oi2_na} of all \RES{oi_all_n} mutants, with different misses, and seeded faults exposed two untested components that regression tests now cover.
+We then apply the tested oracle.
+Four models read bare polarity keywords as affirmative in \pct{hwaff} of committed outputs, and supplying the missing cue raised the intended speech act by \RES{hx_p1}\,percentage points (exploratory); in a listener study of adult annotators (no AAC users were tested) it cut the share of bare outputs read as the opposite action from \pct{ls_cq_bare} to \pct{ls_cq_chip}.
+Table~\ref{tab:status} states the evidence type of every claim.
 Passing the oracle is necessary but not sufficient: writers rejected \pct{wm_right_rej} of oracle-passed outputs, and two paid design consultants who use AAC (not a sample) asked for a person-approval requirement.
 \end{abstract}
 
@@ -78,10 +81,7 @@ accessibility, AAC, LLM testing, test oracle, requirements, regression testing
 Some people who use augmentative and alternative communication (AAC) compose a message from a few keywords, because each selection costs time and effort~\cite{valencia2023less,cai2024speakfaster}.
 A language model then expands the keywords into a sentence~\cite{shen2022kwickchat,cai2024speakfaster}, which is spoken as the person's own words.
 Typing \kw{supervisor read} might mean \say{The supervisor read} or \say{The supervisor did not read} (Fig.~\ref{fig:gallery}).
-Whether the model erred depends on what the user supplied, and a text-similarity score cannot know that.
-A reversed \say{not} is a decision the person did not make: the pathologists would block it.
-\listenerslot{}
-Symbol- and grid-based AAC is out of scope.
+Whether the model erred depends on what the user supplied, which a text-similarity score cannot know, so a test oracle must decide.
 
 \begin{figure}[b]
   \centering
@@ -100,17 +100,33 @@ Symbol- and grid-based AAC is out of scope.
   \label{fig:gallery}
 \end{figure}
 
-This paper asks which output changes count as failures, given exactly what the user supplied, and how to test the checker that decides.
-The software-engineering problem is the oracle.
-Deciding whether an output kept the meaning needs a checker, here an LLM that extracts a few explicit labels.
-An unvalidated checker silently decides every result, so we treat testing the oracle as a first-class contribution beside testing the models.
-We contribute:
-(1)~a harness with six requirements R1--R6 that have stated sources and, where the oracle can see them, executable tests (\S\ref{sec:harness});
-(2)~tests of the oracle, including a human check of its arbiter, a seeded-fault kill matrix with regression tests added for the components it exposed, a re-label by a second model family, two defects we made ourselves, a production rule that passes its keyed gate with zero margin after a stricter rule was rejected, and the boundary of what the oracle checks (\S\ref{sec:oracle});
-(3)~evidence on human-written pairs and on a machine-written confirmation set that the tests find real, model-specific behavior (\S\ref{sec:results});
-(4)~a requirements review by two paid design consultants who use AAC (not a sample), with each change traced (\S\ref{sec:consult}); and
-(5)~the harness and stored outputs as an artifact.
-The harness is for developers, not for assessing people who use AAC or their messages.
+Our headline is a method result: an oracle for meaning preservation can be tested like software, and the tests change what it is trusted for.
+Mutants written without its lexicon show what its rule-seeded score hid, and a seeded-fault sweep finds untested components (\S\ref{sec:oracle}).
+The application is a cue: bare keywords default to the affirmative, supplying the missing cue restores the intended speech act, and in a listener study it cuts opposite-action readings (\S\ref{sec:results}).
+The harness has six requirements R1--R6 with stated sources and executable tests (\S\ref{sec:harness}), was reviewed by two paid design consultants who use AAC (not a sample; \S\ref{sec:consult}), and is released as an artifact; it is for developers, not for assessing people who use AAC or their messages.
+
+\begin{table}[t]
+  \caption{Evidence status of each claim. \emph{Human}: people judged text materials (adult non-AAC annotators or writers of their own pairs). \emph{Machine}: an LLM or NLI judge scored stored outputs. \emph{Exploratory}: not a pre-specified confirmatory test.}
+  \label{tab:status}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}Xp{2.3cm}r@{}}
+    \toprule
+    Claim & Evidence & Estimate\\
+    \midrule
+    Judge catches mutants built without its lexicon & Machine (mutants human-confirmed) & \pct{oi_nc}\\
+    \quad NLI / Claude catch the same mutants & Machine & \pct{oi2_nb} / \pct{oi2_cb}\\
+    Seeded faults killed, before / after new tests & Author-built list & \RES{sf_r1_k}/\RES{sf_den} / \RES{sf_r2_k}/\RES{sf_den}\\
+    Judge label equals human label, treated outputs & Human & \kof{tc_c}\\
+    Bare polarity read as affirmative & Machine, expl. & \pct{hwaff}\\
+    Cue raises intended speech act & Machine, expl. & +\RES{hx_p1}\,pp\\
+    Listener picks intended reading, bare $\to$ chip & Human & \pct{ls_bare} $\to$ \pct{ls_chip}\\
+    Listener reads opposite action, bare $\to$ chip & Human & \pct{ls_cq_bare} $\to$ \pct{ls_cq_chip}\\
+    Writers reject oracle-passed outputs & Human, post hoc & \pct{wm_right_rej}\\
+    Benefit to people who use AAC & Not measured & ---\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
 %% =====================================================================
 \section{Requirements and Harness}
@@ -221,7 +237,7 @@ The \emph{confirmation set} has \RES{wc_n_fam} fresh machine-written families on
 The \emph{development set} has \RES{n_fam_test} authored families used to develop prompts and codebooks.
 \emph{Corpus transfer} uses crowd-written fictional messages from AACText~\cite{vertanen2011imagination}.
 Four models run with one fixed one-sentence prompt (greedy): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct and Gemma-3-4B-it, three open models run locally with 4-bit quantization, and one API model, gpt-6.1-terra. Two larger open models were added later under the same prompts (\RES{mb_nmod} models from \RES{mb_nfam} families on all arms).
-Unless labelled, intervals are pointwise 95\% percentile-bootstrap intervals from writer-cluster (human-written pairs) or seed/construction-cluster (confirmation set) resamples, 10,000 over a fixed model roster; the exceptions are the writer-level $t$ intervals of Table~\ref{tab:primary}, Wilson intervals for proportions in Table~\ref{tab:oracle}, and cluster-bootstrap $\kappa$ intervals.
+Unless labelled, intervals are 95\% percentile-bootstrap intervals clustered by writer (human-written pairs) or seed/construction (confirmation set), 10,000 resamples; Table~\ref{tab:primary} uses writer-level $t$ intervals and proportions use Wilson intervals.
 
 %% =====================================================================
 \section{Results: Does the Harness Find Real Behavior?}
@@ -233,14 +249,11 @@ Table~\ref{tab:primary} gives the three contrasts.
 \emph{Net politeness addition} is politeness added to plain typed sentences minus politeness removed from polite ones.
 \emph{Affirmative default} is the share of committed (valid affirmative or negated) bare polarity outputs that are affirmative.
 They were pre-specified for the confirmation set; on the human-written pairs they are an exploratory replication, not preregistered, and each rests on \RES{hw_wr_min}--\RES{hw_wr_max} writers.
-Each contrast uses the families of its own dimension (speech act \RES{hwf_act}, politeness \RES{hwf_pz}, polarity \RES{hwf_pol} of the \RES{hw_nfam} analysed families).
 Every writer's mean is positive in all three contrasts, and pooling a second round of speech-act pairs gives \RES{hx_wr} writers for the act chip (\RES{hx_fams} families); that pooling was decided after seeing round 1, which alone (\RES{hx_r1_wr} writers) gives \RES{hx_r1}\,pp \ci{hx_r1}.
 We claim direction, not width.
 Effects vary by model, and no robustness check flips a decision; Table~\ref{tab:secondary} gives the secondary statistics.
 \paragraph*{Controls: the cue, not the chip}
-Restoring the missing cue, not the chip itself, fixes the default.
-Two controls on the human-written pairs (\texttt{analysis/chip\_controls/}) support this: an irrelevant chip adds little, and the same cue as a plain word comes close to the chip on most dimensions (Table~\ref{tab:secondary}).
-The chip is our probe, not a requirement.
+The missing cue, not the chip itself, fixes the default: an irrelevant chip adds little, and the same cue as a plain word comes close to the chip on most dimensions (Table~\ref{tab:secondary}); the chip is our probe, not a requirement.
 \paragraph*{Same-items cue restoration and clinical weight}
 On \RES{sc_nunits} elicited messages whose cue the typist dropped (three models, machine-judged), supplying the cue cuts expected silent polarity reversals per 1,000 messages from \RES{sc_pol_bare} to \RES{sc_pol_chip} (chip) and \RES{sc_pol_word} (word), and politeness reversals from \RES{sc_pz_bare} to \RES{sc_pz_chip} and \RES{sc_pz_word}.
 Two speech-language pathologists ($n=2$, expert review, not a population estimate) rated a dropped or added negation the most serious silent change (\RES{slp_neg} of 5 each); they accepted \RES{slp_acc_rep}\% of repairs as written, against \RES{slp_acc_orig}\% of the failed originals.
@@ -275,40 +288,37 @@ Two speech-language pathologists ($n=2$, expert review, not a population estimat
     \midrule
     Act-chip gain, leave-one-writer-out & \RES{hx_loo_min} to \RES{hx_loo_max}\\
     Sign-flip $p$ (act chip, \RES{hx_wr} writers), one- / two-sided & \RES{hx_sf_p} / \RES{hx_sf_p2}\\
-    \quad one-sided floors, politeness / polarity (6 / 7 writers) & $1/64$ / $1/128$\\
     Act-chip gain by model: Llama (not all writers positive) & \RES{hx_llama}\\
     \quad other three models, minimum & \RES{hx_oth_min}\\
-    \quad gpt-6.1-terra & \RES{hx_terra}\\
     Net politeness by model: Gemma / Llama & \RES{t6p2_gemma} / \RES{t6p2_llama}\\
-    Largest shift under any robustness check\textsuperscript{a} & \RES{hw_shift_max}\\
     Cue chip minus irrelevant chip & \RES{cc_irrel_min} to \RES{cc_irrel_max}\\
     Plain word within \RES{cc_nl_near_max}\,pp of chip & \RES{cc_nl_near} of \RES{cc_nl_dims} dimensions\\
-    \quad plain word vs.\ chip, speech act & word ahead by \RES{cc_nl_act}\\
     \bottomrule
   \end{tabularx}\\[2pt]
-  {\scriptsize \textsuperscript{a}Near-duplicates collapsed, one writer excluded, arbiter calls reversed, or all candidates.}
-\end{table}
+  \end{table}
 
 \subsection{Confirmation set}
 All three contrasts have the same sign on the confirmation set, and every interval excludes zero (Table~\ref{tab:primary}).
 Act-chip gain (\RES{wcp1}\,pp) is a little below the human-written \RES{hx_p1}\,pp, and the Affirmative default is of similar size.
 Net politeness addition is small, with a lower bound of \RES{wcp2_lo}\,pp.
 Two qualifications: \RES{wc_prefreeze} cached requests predate the final item freeze, and Act-chip gain relies on post-hoc arbitration of \RES{wc_arb_rows} extractor-disagreement rows; with those labels masked as unknown it is \RES{wcp1_um}\,pp (last row of Table~\ref{tab:primary}), and the other two contrasts contain no arbitrated rows.
-\say{Pre-specified and git-timestamped} means a private-repository commit before generation, not independently verifiable; the public hash release \texttt{\RES{hash_release}} post-dates the freeze and does not certify it.
+\say{Pre-specified and git-timestamped} means a private-repository commit before generation; the public hash release \texttt{\RES{hash_release}} post-dates the freeze and does not certify it.
+
+\subsection{Listener check}
+\listenerslot{}
+Crossed listener-by-item models and a leakage audit (no listener judged a pair they wrote or checked) leave the success and opposite-action effects unchanged; the reversal difference stays not confirmed, at best borderline (the item-clustered test does not reject, the listener-clustered one does).
 
 \subsection{Assumptions, full-input violations and model heterogeneity}
 Table~\ref{tab:ladder} separates the two kinds of evidence.
 In the italic cells the input is ambiguous, so the match is the model's default, bounded by a 50\% design ceiling; it is not accuracy.
 In the other cells the chip or sentence is visible, so the match measures preservation.
-Under bare input, \kn{wcaff} committed directional polarity outputs on the confirmation set were affirmative; these are Assumptions, not failures.
+Under bare input, \kn{wcaff} committed directional polarity outputs on the confirmation set were affirmative (a known default~\cite{chen2023say}); these are Assumptions, not failures.
 When \RES{el_nann} annotators typed keywords for \RES{el_nmsg} AACText messages, they dropped the negation cue in \pct{el_neg_h} of \RES{el_neg_c_n} negated messages (a crude compressor: \pct{el_neg_c}).
 The default is also the better guess (among keyword strings with no negation word, only \pct{t2_post} came from a negated message), but its errors are silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations, so R3 logs the Assumption and tests its direction (the detector's negation label equals the human label on \kof{src} sampled messages).
 
-The default is not new~\cite{chen2023say}; we price it for AAC input against a human base rate.
 \paragraph*{Costs to the person}
 One cue tap is the cheapest route to coverage, though every selection costs effort (more under switch scanning or eye gaze) and every extra draft costs reading; we measured neither cost and give design reasoning only.
 In a later human coverage study (writers judging their own intended message), one draft covered \RES{cv_g1bare}\% bare and \RES{cv_g1chip}\% after the cue (+\RES{cv_tap}\,pp \ci{cv_tap}, exploratory), three bare drafts \RES{cv_c3bare}\%, and drafts beyond the cue add a further +\RES{cv_s3}\,pp \ci{cv_s3} at more reading.
-The design that follows asks for the least burden for the most protection: a tap the person chooses, then drafts only where it pays.
 
 \begin{table}[t]
   \caption{Confirmation set: share of outputs matching the intended value, by channel (\%). Italic cells (bare, +word) are the model's default under ambiguous input, bounded by 50\% by design for the two binary dimensions; they are not accuracy. Speech act is three-valued. One fixed prompt, four models pooled; per-model values are in the released artifact.}
@@ -325,7 +335,7 @@ The design that follows asks for the least burden for the most protection: a tap
 \end{table}
 
 The \chip{?} chip is the weakest supplied chip (alone it failed \RES{wc_qfail_k} of \RES{wc_qfail_n}, \RES{wc_q2req_k} of them coded as requests for \say{Can you\ldots?}, a codebook decision).
-Annotators not taught the rule coded such outputs as a request in \pct{p19_cy} of \RES{p19_cy_n} codings; the alternative coding moves the confirmation-set Act-chip gain from \RES{cb_wc_base} to \RES{cb_wc_q}\,pp and changes no Holm decision, so the size of the gain is codebook-dependent and its sign is not.
+The alternative coding moves the confirmation-set Act-chip gain from \RES{cb_wc_base} to \RES{cb_wc_q}\,pp and changes no Holm decision, so the size of the gain is codebook-dependent and its sign is not.
 Full-input violations are model-specific (Gemma-3-4B and gpt-6.1-terra added markers; Llama and Qwen more often removed them), a regression to test for per model, not a property of LLMs.
 
 \subsection{Composition (R4)}
@@ -348,10 +358,9 @@ A \emph{mutant} is an output copy with one value changed, a \emph{control} one w
 Two unseeded defects arose while building the harness; each now has a regression test.
 In Defect A, the identity test failed \RES{id_fail_raw} of \RES{id_n} reproductions, all one sentence, \say{Yes, you can borrow my car this weekend.}, coded \emph{\RES{id_fail_got}} against the target \emph{\RES{id_fail_want}}: the model had done its job and the checker demanded a distinction the text need not force.
 The obvious repair, accepting \emph{statement} for an acceptance target, passed identity but failed the next test: the relaxed oracle detected only \kof{or_acc_mut_det} acceptance mutants and missed both statement substitutions (\say{You borrowed my car this weekend.}), whereas without the relaxation it detected \kof{or_new_mut_det_raw} mutants across groups.
-This is one sentence in one family, a demonstration and not a rate: removing a false alarm removed fault sensitivity, so both refusal/acceptance families are quarantined from every primary result (leaving \RES{n_fam_primary} of \RES{n_fam_test} development families) until a predicate passes both tests; keyed acceptance mutants now guard the rule.
+One sentence in one family is a demonstration, not a rate: removing a false alarm removed fault sensitivity, so both refusal/acceptance families are quarantined from every primary result (\RES{n_fam_primary} of \RES{n_fam_test} development families remain) and keyed acceptance mutants guard the rule.
 In Defect B, an audit of \RES{wb_msgs_restored} restored-chip inputs built from AACText messages found \RES{wb_conflicts} whose displayed chip contradicted the stored source, e.g., \chip{MAYBE} for a plain assertion, after a silent fallback in our builder; in the \RES{wb_maybe_msgs} \chip{MAYBE} messages all \RES{wb_maybe_n} outputs followed the chip and failed the source, which a fidelity score counts as model failures.
-The R5 validator decodes only the rendered input and now rejects all \RES{r5_conf} before generation.
-Replayed on all \RES{t9_inputs} chip inputs of the three studies, it found \RES{t9_conflicts} conflicts; \RES{t9_unknown} are outside its decoder.
+The R5 validator decodes only the rendered input and now rejects all \RES{r5_conf} before generation; replayed on all \RES{t9_inputs} chip inputs of the three studies it found \RES{t9_conflicts} conflicts (\RES{t9_unknown} outside its decoder).
 
 \paragraph*{Seeded faults, two untested components, new regression tests}
 The two defects were found by accident, so we also seeded faults deliberately: \RES{sf_n} one-line mutants of the harness source in \RES{sf_ncls} classes (Table~\ref{tab:matrix}), each run against the whole existing test pool; a mutant is \emph{killed} if any test fails on it, by assertion or output mismatch and not by crash (\RES{sf_crash_only} kills by crash or timeout only).
@@ -399,8 +408,11 @@ Under the production rule, which carries the acceptance relaxation of Defect A, 
     \midrule
     Real outputs (\RES{orr_j_mut_den} mutants, \RES{orr_nctl} controls): mutants caught; false alarms & \\
     \quad judge (J1+J2, arbiter) & \kof{orr_j_mut}; \kof{orr_j_fa}\\
-    \quad surface lexicon (near-circular) & \kof{orr_s_mut}; \kof{orr_s_fa}\\
-    \quad string overlap & \kof{orr_o_mut}; \kof{orr_o_fa}\\
+    \quad surface lexicon, string overlap (near-circular) & \kof{orr_s_mut}, \kof{orr_o_mut}\\
+    Independent mutants, human-confirmed (\RES{oi2_ja_n}, \RES{oi2_jb_n} lexicon-blind; \RES{oi2_jf_n} controls): all; lexicon-blind; false alarms & \\
+    \quad judge (frozen) & \pct{oi2_ja}; \pct{oi2_jb}; \RES{oi2_jf_k}\\
+    \quad NLI (deberta-large-mnli, contradiction) & \pct{oi2_na}; \pct{oi2_nb}; \RES{oi2_nf_k}\\
+    \quad Claude (label change) & \pct{oi2_ca}; \pct{oi2_cb}; \RES{oi2_cf_k}\\
     \midrule
     \multicolumn{2}{@{}l}{\emph{Oracle vs.\ humans (natural outputs)}}\\
     Held-out sets, judge vs.\ human-consensus verdict (positives: \RES{nat_ho_viol_npos} violation, \RES{nat_ho_pres_npos} preservation-failure verdicts): precision; recall &\\
@@ -409,11 +421,7 @@ Under the production rule, which carries the acceptance relaxation of Defect A, 
     \midrule
     Human gate, test split of the development items (\RES{human_n_items} items, two coders): $\kappa$, \RES{human_gate_n} fields & \RES{human_gkappa_min}--\RES{human_gkappa_max}\\
     Outputs for human-elicited keywords (\RES{jve_coders} coders, \RES{jve_n} of \RES{jve_items} items): critical $\kappa$ [CI] & \RES{jve_kappa} [\RES{jve_kappa_lo}, \RES{jve_kappa_hi}]\\
-    \quad raw agreement, critical label & \RES{jve_acc}\%\\
-    \quad verdict agreement & \RES{jve_va_k}/\RES{jve_va_n}\\
     Outputs for human-written pairs (\RES{jvh_coders} coders, \RES{jvh_n} of \RES{jvh_items} items): critical $\kappa$ [CI] & \RES{jvh_kappa} [\RES{jvh_kappa_lo}, \RES{jvh_kappa_hi}]\\
-    \quad raw agreement, critical label & \RES{jvh_acc}\%\\
-    \quad verdict $\kappa$ & \RES{jvh_vk_min}--\RES{jvh_vk_max}\\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -422,7 +430,7 @@ Under the production rule, which carries the acceptance relaxation of Defect A, 
 Authored sentences are easy, so we also seeded one-value mutants into real stored outputs of the human-written pairs (seed fixed in advance; \RES{orr_nops} operators re-implemented because the authored mutants were hand-written) and drew \RES{orr_nctl} surface-edited controls (case, punctuation, contraction; \RES{orr_nboost} boosters, which the contract tolerates, are excluded from the mutants) from outputs the oracle scored as preserving.
 Table~\ref{tab:oracle} gives the result: the judge caught \kof{orr_j_mut} mutants with \kof{orr_j_fa} false alarms, matching the authored-sentence result (\kof{orr_wa}).
 The operators mirror the extractor's cues, so this is a sensitivity measure, not an error rate.
-A surface lexicon scores \kof{orr_s_mut} (near-circular) and string overlap \kof{orr_o_mut}.
+A surface lexicon scores \kof{orr_s_mut} (near-circular) and string overlap \kof{orr_o_mut}; Table~\ref{tab:oracle} also gives the independent-mutant comparison.
 
 \paragraph*{The oracle on faults nobody seeded}
 Human-labelled natural outputs test the oracle on faults nobody seeded: judge verdict against human-consensus verdict, with violation and preservation failure as the positive classes.
@@ -442,7 +450,7 @@ The extractor shares a family with one generator, so we had a Claude session re-
 Against the human consensus on the \RES{rl_n} human-coded units of two sets, its critical label agrees on \pct{rl_c_acc} ($\kappa=\RES{rl_c_kappa}$), and the GPT extractor on \pct{rl_g_acc} ($\kappa=\RES{rl_g_kappa}$).
 Replacing the \RES{rl_rows} labels behind the human-written act-chip contrast changes \RES{rl_chg} of them and moves the gain from \RES{rl_p1_gpt}\,pp to \RES{rl_p1}\,pp \ci{rl_p1} (\RES{rl_wr} writers, every writer positive), so the headline does not depend on which family judged.
 The same model family also served as the arbiter and assisted the project, so this check is a second opinion from a different family than the generators, not an independent one.
-Machine agreement is not validation: on \say{I can't wait to go to the party.}, both extractor prompts and three further machine coders answered \emph{negated}; both human annotators answered \emph{affirmative}, as keyed.
+Machine agreement is not validation: on \say{I can't wait to go to the party.}, five machine coders answered \emph{negated} and both humans \emph{affirmative}, as keyed.
 
 \paragraph*{Necessary, not sufficient}
 The oracle checks a fixed set of explicit values, so passing it is necessary for a faithful sentence, not sufficient.
@@ -484,17 +492,11 @@ Table~\ref{tab:consult} gives the main design points, paraphrased, and what each
     & R3 brief reversible choice; draft-set study (Stage 6)\\
     Keep every compatible meaning already selected; a chip such as \chip{TELL} is not the verb
     & R4 relations clause; test T1 (\S\ref{sec:oracle})\\
-    Some examples and mockups did not show what they claimed to (a wrong chip, different event times)
-    & Defect~B validator and regression tests (R5)\\
     A chip is easier to imagine, but a preference is not evidence of fewer selections; words stay equivalent, and cost needs a prototype
     & Chip kept as a probe, plain-word control; no cost claim\\
-    The person may keep a blunt, short or unusual sentence; warnings must not demand politeness
-    & Cue is a choice, not a correction; no politeness default\\
     \bottomrule
   \end{tabularx}
 \end{table}
-
-The relations change led to a test: an example the oracle had passed, a \chip{TELL} turned into a verb, was judged not sendable, so we wrote T1 and measured it on all stored outputs.
 
 %% =====================================================================
 \section{Related Work}
@@ -505,8 +507,8 @@ Mutation analysis measures a test suite by whether it detects seeded faults~\cit
 Requirements engineering for ML calls for explicit, testable requirements~\cite{vogelsang2019re4ml}; R1--R6 are one such set, with sources and tests stated.
 
 \paragraph*{Testing LLM systems}
-CheckList organizes behavioral tests~\cite{ribeiro2020checklist} and Cho et al.\ catalogue metamorphic relations for LLM-based NLP~\cite{cho2025metamorphic}; we claim no new testing technique.
-LLM judges show position, verbosity and self-preference biases~\cite{zheng2023judging}, and Pauli et al.\ show that preservation metrics look valid when test data confound style change with content errors~\cite{pauli2025stylegap}; our identity and mutant tests apply that idea to a checker.
+CheckList organizes behavioral tests~\cite{ribeiro2020checklist} and Cho et al.\ catalogue metamorphic relations~\cite{cho2025metamorphic}; we claim no new technique.
+LLM judges show position, verbosity and self-preference biases~\cite{zheng2023judging}, and preservation metrics look valid when test data confound style change with content errors~\cite{pauli2025stylegap}; our identity and mutant tests apply that idea to a checker.
 
 \paragraph*{Preservation and LLMs in AAC}
 Qu et al.\ evaluate speech-act retention in style transfer~\cite{qu2023conditioning}, and rewriting can keep semantic similarity while erasing pragmatic markers~\cite{navneet2026voice}.
@@ -528,9 +530,10 @@ We add a conditional specification of which commitments are testable under each 
 \section{Conclusion}
 %% =====================================================================
 An oracle for meaning preservation is software and needs tests of its own.
-Ours caught a repair that hid real substitutions and a builder that supplied the wrong chip, and a seeded-fault sweep (\RES{sf_r1_k} of \RES{sf_den} mutants killed) found two components with no tests, which now have them (\RES{sf_r2_k} of \RES{sf_den}, on a list that informed the tests); its critical labels agree with human coders on three sets of outputs, including all \kof{tc_c} treated outputs checked, and people side with its arbiter on \pct{p19_arb} of disputed labels.
-With it, human-written pairs show that bare keywords leave a default reading, that supplying the missing cue, as a chip or a plain word, removes most expected reversals, and that some models change typed text.
-The tests also mark their own edge: passing the oracle is necessary but not sufficient, because event and role structure is a requirement it does not check, and review by two design consultants and two SLP raters added R6 and relations in R4, which led to a proposed regression test (T1) for the missing structure, lexical and awaiting human validation.
+Ours caught a repair that hid real substitutions and a builder that supplied the wrong chip; mutants written without its lexicon, a second model family and an NLI model located where it is weak; and a seeded-fault sweep found two components with no tests, which now have them.
+Its critical labels agree with human coders on three sets of outputs, including all \kof{tc_c} treated outputs checked.
+With it, human-written pairs show that bare keywords leave a default reading, that supplying the missing cue removes most opposite-action readings for listeners, and that some models change typed text.
+Passing the oracle is necessary but not sufficient: event and role structure is a requirement it does not check, so review by two design consultants and two SLP raters added R6 and relations in R4, and a lexical regression test (T1) awaits human validation.
 Families, requirements, harness, oracle tests, stored outputs and analysis code are available at \url{https://github.com/1unarzDev/aac_voice_preservation}.
 
 \section*{Ethics and Positionality}

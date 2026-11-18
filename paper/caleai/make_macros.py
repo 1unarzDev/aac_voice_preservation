@@ -940,6 +940,14 @@ put("ls_d_holm_lo", _f(_lk[("chip1 - bare", "success")]["lo_holm"])); put("ls_d_
 put("ls_nd_lo90", _f(_lk[("nlcue - chip1", "success")]["lo90"], 1)); put("ls_nd_hi90", _f(_lk[("nlcue - chip1", "success")]["hi90"], 1))
 put("ls_nl_items", _lk[("nlcue - chip1", "success")]["n_items"])
 put("ls_g_d", _f(_lk[("G1 - bare", "success")]["estimate"], 1))
+# A4 hardening sensitivities (analysis/hardening/summary.json; frozen estimates stay the headline)
+_hd = json.loads((_A / "hardening/summary.json").read_text())
+_hm = {(m["metric"], m["contrast"]): m for m in _hd["listener_models"]}
+_hs = _hm[("success", "chip1 - bare")]
+put("hd_glmm", _f(_hs["glmm_diff"], 1)); put("hd_glmm_lo", _f(_hs["glmm_lo"], 1)); put("hd_glmm_hi", _f(_hs["glmm_hi"], 1))
+put("hd_lpm", _f(_hs["lpm2way_diff"], 1)); put("hd_lpm_lo", _f(_hs["lpm2way_lo"], 1)); put("hd_lpm_hi", _f(_hs["lpm2way_hi"], 1))
+put("hd_leak_n", _hd["leakage"]["n_key_rows"]); put("hd_leak_own", _hd["leakage"]["listener_is_writer_of_judged_pair"] + _hd["leakage"]["listener_is_checker_of_judged_pair"])
+put("hd_chain", _f(_hd["headline"]["chain_central_pp"], 1))
 
 
 def esc(v: str) -> str:

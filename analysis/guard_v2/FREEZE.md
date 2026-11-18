@@ -1,0 +1,4 @@
+# FREEZE (written 2026-11-18T22:50:20Z, before any G2 generation)
+baa49c13c8a5dc2754cb06c51a0929c79e645209639a27f40fcf6b44eb56cd8e  PLAN.md
+d8e3a23a0f499964f0416a25a17ad0d09a6a92a846c9796cddcb4c462178b56c  frame.csv
+6cd3b4795bc0e3553da7e6d3ffe3b05c2ce9c460043c4feb6b8d79d006f718b9  draw.json
