@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check our summary of your review</title>
+<style>
+  :root { --bg:#fff; --fg:#111; --muted:#333; --line:#6b6b6b; --panel:#f3f3f3; --accent:#0b4fa8; --accent-fg:#fff; --sel:#dbe8ff; --focus:#c25400; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#111; --fg:#f2f2f2; --muted:#d0d0d0; --line:#9a9a9a; --panel:#1f1f1f; --accent:#8fb8ff; --accent-fg:#111; --sel:#23365a; --focus:#ffb366; } }
+  :root[data-theme="dark"] { --bg:#111; --fg:#f2f2f2; --muted:#d0d0d0; --line:#9a9a9a; --panel:#1f1f1f; --accent:#8fb8ff; --accent-fg:#111; --sel:#23365a; --focus:#ffb366; }
+  :root[data-contrast="high"] { --bg:#000; --fg:#fff; --muted:#fff; --line:#fff; --panel:#000; --accent:#ffff00; --accent-fg:#000; --sel:#003a8c; --focus:#00ffff; }
+  * { box-sizing:border-box; transition:none !important; animation:none !important; }
+  html { font-size:20px; } html[data-size="large"] { font-size:25px; } html[data-size="xlarge"] { font-size:31px; } html[data-size="huge"] { font-size:38px; }
+  body { margin:0; background:var(--bg); color:var(--fg); line-height:1.6; font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+  .skip { position:absolute; left:-999px; top:0; background:var(--bg); padding:8px; border:2px solid var(--fg); } .skip:focus { left:8px; z-index:10; }
+  header, main { max-width:900px; margin:0 auto; padding:10px 16px; }
+  header { border-bottom:2px solid var(--line); }
+  h1 { font-size:1.4rem; margin:.2em 0; } h2 { font-size:1.3rem; margin:1.6em 0 .4em; border-bottom:2px solid var(--line); } h3 { font-size:1.15rem; margin:0 0 .4em; }
+  label { font-weight:600; } select, button { font:inherit; padding:6px 12px; border:2px solid var(--fg); background:var(--bg); color:var(--fg); cursor:pointer; }
+  button.primary { background:var(--accent); color:var(--accent-fg); border-color:var(--accent); }
+  textarea { font:inherit; width:100%; padding:8px; border:2px solid var(--line); background:var(--bg); color:var(--fg); }
+  :focus-visible { outline:4px solid var(--focus); outline-offset:2px; }
+  .card { border:3px solid var(--line); padding:12px 16px 16px; margin:16px 0; }
+  .box { border:2px solid var(--line); background:var(--panel); padding:10px 16px; margin:12px 0; }
+  .lbl { font-weight:700; margin:.6em 0 .1em; } .small { font-size:.85rem; color:var(--muted); }
+  blockquote { margin:8px 0; padding:4px 14px; border-left:6px solid var(--line); font-weight:700; }
+  fieldset { border:2px solid var(--line); margin:12px 0; padding:6px 12px 10px; } legend { font-weight:700; padding:0 6px; }
+  .opts { display:flex; flex-wrap:wrap; gap:8px 12px; } .opt { display:inline-flex; gap:8px; align-items:flex-start; border:2px solid var(--line); padding:4px 12px; cursor:pointer; font-weight:400; }
+  .opt input { width:1.2em; height:1.2em; margin-top:.3em; }
+  .q { margin:12px 0; } nav ul { columns:2; padding-left:1.2em; } .tools { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:8px 0; }
+  .status { min-height:1.5em; font-weight:600; }
+  @media print { .tools, nav, .skip { display:none; } .card { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the form</a>
+<header>
+  <h1>Check our summary of your review</h1>
+  <div class="tools" role="group" aria-label="Page settings">
+    <label for="size">Text size</label>
+    <select id="size"><option value="normal">Normal</option><option value="large">Large</option><option value="xlarge">Extra large</option><option value="huge">Huge</option></select>
+    <label for="contrast">Colours</label>
+    <select id="contrast"><option value="auto">Automatic</option><option value="light">Light</option><option value="dark">Dark</option><option value="high">High contrast</option></select>
+  </div>
+</header>
+<main id="main">
+  <div class="box"><p><strong>You are in charge.</strong> This takes about 20 minutes. There is no time limit. Take a break whenever you want. You can skip any question.</p><p>Your answers are saved in this browser as you go. The buttons at the bottom save a file. Nothing is sent anywhere by this page.</p></div>
+  <nav aria-label="Sections"><ul><li><a href="#h-changed">What changed</a></li><li><a href="#h-rows">Your points</a></li><li><a href="#h-quotes">Quotes</a></li><li><a href="#h-ack">Thank-you</a></li><li><a href="#h-wrong">Wording</a></li><li><a href="#h-save">Save and return</a></li></ul></nav>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <form id="form" onsubmit="return false">
+<section aria-labelledby="h-changed"><h2 id="h-changed">Thank you, and what changed</h2><p>Thank you for your review. Your answers helped us. Here is what we did with them.</p><p>We added a new rule (R6): a draft is never spoken or sent until the person approves it. We changed R1, R2, R3 and R4. We added a test for the TELL button. Some of your points we could not follow yet. We say which ones below, and why.</p>
+<h3>How to answer</h3><p>This takes about 20 minutes. There is no time limit.</p><p>We want to be sure we described your points fairly. If we got something wrong, tell us. We will change it.</p><p>You can answer in any way that works for you. You can type, use your AAC device, or ask a support person to write what you say, word for word. You can skip any question.</p><p>Please send your answers back by Nov 19, 18:00. If you cannot, nothing bad happens. We will not quote you, and we will not thank you, unless you said yes.</p><p>Please do not write your name or personal stories. We are asking only about the tool and our summary.</p><p>Your answers go only to the authors. They are not published. Only your yes answers can be used.</p></section>
+<section aria-labelledby="h-rows"><h2 id="h-rows">Your points: what you told us, and what we changed</h2><p>Below are 8 points. Each one is our own short summary of what you wrote. For each one, tell us if it is a fair description of your point.</p>
+<article class="card" id="row1" aria-labelledby="h-row1"><h3 id="h-row1">Point 1. Who decides when a draft is spoken</h3>
+<p class="lbl">What you told us</p><p>A made-up sentence should stay a draft until the person approves it. The person can hear or look at it privately, change it, or cancel. The person&#x27;s own words stay available, and can be spoken directly.</p>
+<p class="lbl">What we changed</p><p>We added a new rule, R6. A draft is never spoken or sent without the person&#x27;s approval, and the typed words stay available.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row1" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row1" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row1" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row1_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row1_text" name="row1_text" rows="3"></textarea></div></article><article class="card" id="row2" aria-labelledby="h-row2"><h3 id="h-row2">Point 2. R1, keep the button&#x27;s meaning</h3>
+<p class="lbl">What you told us</p><p>A chosen button must keep its meaning and its reach. NOT must stay with the action it was meant for. If two choices clash, the system should ask instead of picking one.</p>
+<p class="lbl">What we changed</p><p>R1 now says NOT stays with the intended action, and that a clash between two choices is shown next to those choices.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row2" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row2" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row2" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row2_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row2_text" name="row2_text" rows="3"></textarea></div></article><article class="card" id="row3" aria-labelledby="h-row3"><h3 id="h-row3">Point 3. R2, typed sentences</h3>
+<p class="lbl">What you told us</p><p>A complete typed sentence should be spoken as typed, unless the person asks for a rewrite. A rewrite needs a visible proposed change and approval before speech. The bad example under R2 did not show this.</p>
+<p class="lbl">What we changed</p><p>R2 now says exact copy is the default, and a rewrite needs a request and a preview. We did not make a new R2 example for the packet. We wrote down that the old example missed the point.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row3" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row3" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row3" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row3_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row3_text" name="row3_text" rows="3"></textarea></div></article><article class="card" id="row4" aria-labelledby="h-row4"><h3 id="h-row4">Point 4. R3, unclear words</h3>
+<p class="lbl">What you told us</p><p>Show the one choice that is unclear, such as who acts or whether it is a question. The person can pick, keep the short words, or cancel. The extra steps should be short and easy to undo. One answer should not quietly become a lasting habit.</p>
+<p class="lbl">What we changed</p><p>R3 now pairs the logged guess with a short choice that can be undone. We have not written a rule about lasting habits.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row4" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row4" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row4" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row4_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row4_text" name="row4_text" rows="3"></textarea></div></article><article class="card" id="row5" aria-labelledby="h-row5"><h3 id="h-row5">Point 5. R4, adding a button</h3>
+<p class="lbl">What you told us</p><p>Keep every meaning that was already chosen and still fits. If a new button changes an earlier one on purpose, show the change for approval. TELL means a statement. It must not become the word &quot;tell&quot;.</p>
+<p class="lbl">What we changed</p><p>R4 now covers who does what, not only button labels. We added a test: a TELL button must not produce a &quot;tell&quot; verb that the words did not have.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row5" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row5" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row5" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row5_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row5_text" name="row5_text" rows="3"></textarea></div></article><article class="card" id="row6" aria-labelledby="h-row6"><h3 id="h-row6">Point 6. What never to change without asking</h3>
+<p class="lbl">What you told us</p><p>Do not change yes or no, who acts, ownership, permission, consent, urgency, numbers, names, event time, or a chosen tone without asking. Do not invent reasons, feelings or promises. A blunt message must not become a polite suggestion.</p>
+<p class="lbl">What we changed</p><p>Partly. We test the things our coding scheme scores. We do not yet test names, amounts, ownership, consent or urgency, and we say so.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row6" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row6" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row6" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row6_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row6_text" name="row6_text" rows="3"></textarea></div></article><article class="card" id="row7" aria-labelledby="h-row7"><h3 id="h-row7">Point 7. Button or plain word</h3>
+<p class="lbl">What you told us</p><p>A button is easier to imagine, but this is a design preference, not proof that buttons need fewer steps. Plain words should stay an equal option. Test real steps on a working prototype. The two mockups also differed in event time.</p>
+<p class="lbl">What we changed</p><p>We have not picked a default and we do not say either is easier. Comparing real steps needs a study with users, which we have not done. We did not redo the mockups in the packet. Our tests use the same message for both ways.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row7" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row7" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row7" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row7_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row7_text" name="row7_text" rows="3"></textarea></div></article><article class="card" id="row8" aria-labelledby="h-row8"><h3 id="h-row8">Point 8. The test examples</h3>
+<p class="lbl">What you told us</p><p>Check what a test input really says before judging the output. A bad meaning button is a different problem from a system that ignores a good button.</p>
+<p class="lbl">What we changed</p><p>This was already in R5. The two inputs that were wrong became test cases in our checker.</p>
+<fieldset><legend>Is this a fair description of your point?</legend><div class="opts">
+<label class="opt"><input type="radio" name="row8" value="yes"> Yes, it is fair</label>
+<label class="opt"><input type="radio" name="row8" value="change"> Change it (use the box)</label>
+<label class="opt"><input type="radio" name="row8" value="remove"> Remove it</label></div></fieldset>
+<div class="q"><label for="row8_text">If you want it changed, say how <span class="small">(you can leave this blank)</span></label><textarea id="row8_text" name="row8_text" rows="3"></textarea></div></article></section>
+<section aria-labelledby="h-quotes"><h2 id="h-quotes">Words we might quote</h2><p>We might quote a few of your own words in a paper. We would not use your name. These are exact words from your answers. For each one, tell us if we may use it. If you do not answer, we will not use it.</p><p class="small">Only two people did this review. Someone who knows the project may guess who said a quote. If that worries you, answer no.</p>
+<article class="card" id="quote1" aria-labelledby="h-quote1"><h3 id="h-quote1">Quote 1</h3>
+<blockquote>&ldquo;the person decides when a draft is spoken&rdquo;</blockquote>
+<fieldset><legend>OK to quote anonymously?</legend><div class="opts">
+<label class="opt"><input type="radio" name="quote1" value="yes"> Yes</label>
+<label class="opt"><input type="radio" name="quote1" value="no"> No</label>
+<label class="opt"><input type="radio" name="quote1" value="change"> Change the wording (use the box)</label></div></fieldset>
+<div class="q"><label for="quote1_text">New wording <span class="small">(you can leave this blank)</span></label><textarea id="quote1_text" name="quote1_text" rows="2"></textarea></div></article><article class="card" id="quote2" aria-labelledby="h-quote2"><h3 id="h-quote2">Quote 2</h3>
+<blockquote>&ldquo;A generated sentence must remain a draft until approved&rdquo;</blockquote>
+<fieldset><legend>OK to quote anonymously?</legend><div class="opts">
+<label class="opt"><input type="radio" name="quote2" value="yes"> Yes</label>
+<label class="opt"><input type="radio" name="quote2" value="no"> No</label>
+<label class="opt"><input type="radio" name="quote2" value="change"> Change the wording (use the box)</label></div></fieldset>
+<div class="q"><label for="quote2_text">New wording <span class="small">(you can leave this blank)</span></label><textarea id="quote2_text" name="quote2_text" rows="2"></textarea></div></article><article class="card" id="quote3" aria-labelledby="h-quote3"><h3 id="h-quote3">Quote 3</h3>
+<blockquote>&ldquo;A direct boundary must not become a polite suggestion by default&rdquo;</blockquote>
+<fieldset><legend>OK to quote anonymously?</legend><div class="opts">
+<label class="opt"><input type="radio" name="quote3" value="yes"> Yes</label>
+<label class="opt"><input type="radio" name="quote3" value="no"> No</label>
+<label class="opt"><input type="radio" name="quote3" value="change"> Change the wording (use the box)</label></div></fieldset>
+<div class="q"><label for="quote3_text">New wording <span class="small">(you can leave this blank)</span></label><textarea id="quote3_text" name="quote3_text" rows="2"></textarea></div></article></section>
+<section aria-labelledby="h-ack"><h2 id="h-ack">Thank-you in the papers</h2><fieldset><legend>Do you want us to thank you in the papers?</legend><div class="opts"><label class="opt"><input type="radio" name="ack" value="anon"> Yes. You may thank us as &quot;two paid AAC-user consultants&quot;.</label><label class="opt"><input type="radio" name="ack" value="none"> No. Do not thank us in the papers.</label><label class="opt"><input type="radio" name="ack" value="later"> I have not decided yet. (Until you decide, we do not thank you.)</label></div></fieldset><p class="small">If you want to be named, tell us in writing. That is a separate step, as in your agreement.</p></section>
+<section aria-labelledby="h-wrong"><h2 id="h-wrong">Wording</h2><div class="q"><label for="disrespect">Does any wording in this summary feel disrespectful or wrong? Please tell us where, and how to fix it. <span class="small">(you can leave this blank)</span></label><textarea id="disrespect" name="disrespect" rows="5"></textarea></div></section>
+<section aria-labelledby="h-save"><h2 id="h-save">Save and return</h2>
+<p>When you are done, save a file and send it back to the authors by Nov 19, 18:00. Saving does not send anything. You can save the text file, the spreadsheet file (CSV), or both. You can also save your progress and load it later.</p>
+<div class="tools"><button type="button" class="primary" id="savecsv">Save answers (CSV)</button> <button type="button" id="savetxt">Save answers (text)</button> <button type="button" id="savejson">Save progress</button> <button type="button" id="loadjson">Load progress</button><input type="file" id="jsonfile" accept=".json" hidden></div>
+<p class="small">You can also print this page and write on it, or use the MEMBER_CHECK.md copy. Anonymous page. It collects no personal information, makes no recordings and does not use the network.</p></section>
+  </form>
+</main>
+<script>
+"use strict";
+const CFG = {"key": "consultant_membercheck_C01", "id": "C01", "items": [["row1", "row", "Row 1 (Who decides when a draft is spoken). Is this a fair description of your point?"], ["row2", "row", "Row 2 (R1, keep the button's meaning). Is this a fair description of your point?"], ["row3", "row", "Row 3 (R2, typed sentences). Is this a fair description of your point?"], ["row4", "row", "Row 4 (R3, unclear words). Is this a fair description of your point?"], ["row5", "row", "Row 5 (R4, adding a button). Is this a fair description of your point?"], ["row6", "row", "Row 6 (What never to change without asking). Is this a fair description of your point?"], ["row7", "row", "Row 7 (Button or plain word). Is this a fair description of your point?"], ["row8", "row", "Row 8 (The test examples). Is this a fair description of your point?"], ["quote1", "quote", "Quote 1: \"the person decides when a draft is spoken\". OK to quote anonymously?"], ["quote2", "quote", "Quote 2: \"A generated sentence must remain a draft until approved\". OK to quote anonymously?"], ["quote3", "quote", "Quote 3: \"A direct boundary must not become a polite suggestion by default\". OK to quote anonymously?"], ["ack", "ack", "Acknowledgement"], ["disrespect", "text", "Does any wording in this summary feel disrespectful or wrong?"]], "ackopts": {"anon": "Yes. You may thank us as \"two paid AAC-user consultants\".", "none": "No. Do not thank us in the papers.", "later": "I have not decided yet. (Until you decide, we do not thank you.)"}, "due": "Nov 19, 18:00"};
+const $ = id => document.getElementById(id), KEY = CFG.key, form = $("form");
+const VL = {yes:"Yes", change:"Change it", remove:"Remove it", no:"No", anon:CFG.ackopts.anon, none:CFG.ackopts.none, later:CFG.ackopts.later};
+function say(m) { $("status").textContent = m; }
+function collect() { const o = {}; form.querySelectorAll("textarea").forEach(t => { if (t.value.trim()) o[t.name] = t.value; });
+  form.querySelectorAll("input[type=radio]:checked").forEach(r => { o[r.name] = r.value; }); return o; }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(collect())); } catch (e) {} }
+function fill(o) { Object.keys(o).forEach(k => { const t = form.querySelector('textarea[name="' + k + '"]'); if (t) t.value = o[k];
+  const r = form.querySelector('input[type=radio][name="' + k + '"][value="' + o[k] + '"]'); if (r) r.checked = true; }); }
+function download(name, text, type) { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name; document.body.append(a); a.click(); a.remove(); }
+function rowsOut() { const o = collect(); return CFG.items.map(([n, kind, label]) => {
+  const ans = o[n] ? (VL[o[n]] || o[n]) : "(no answer)"; const cm = (kind === "row" || kind === "quote") ? (o[n + "_text"] || "") : "";
+  return {id: n, question: label, answer: kind === "text" ? (o[n] || "(no answer)") : ans, comment: cm}; }); }
+function csvq(s) { return '"' + String(s).replace(/"/g, '""') + '"'; }
+form.addEventListener("input", save); form.addEventListener("change", save);
+$("savecsv").addEventListener("click", () => { const r = rowsOut(); const lines = [["consultant","id","question","answer","comment"].join(",")];
+  r.forEach(x => lines.push([CFG.id, x.id, x.question, x.answer, x.comment].map(csvq).join(",")));
+  download("member_check_" + CFG.id + ".csv", lines.join("\r\n") + "\r\n", "text/csv"); say("Saved a CSV file."); });
+$("savetxt").addEventListener("click", () => { const lines = ["Member check answers (" + CFG.id + ")", ""];
+  rowsOut().forEach(x => { lines.push("Q: " + x.question, "A: " + x.answer); if (x.comment) lines.push("Comment: " + x.comment); lines.push(""); });
+  download("member_check_" + CFG.id + ".txt", lines.join("\n"), "text/plain"); say("Saved a text file."); });
+$("savejson").addEventListener("click", () => { download("member_check_progress_" + CFG.id + ".json", JSON.stringify(collect()), "application/json"); say("Saved a progress file."); });
+$("loadjson").addEventListener("click", () => $("jsonfile").click());
+$("jsonfile").addEventListener("change", e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { fill(JSON.parse(r.result)); save(); say("Progress loaded."); } catch (x) { say("That file could not be read."); } }; r.readAsText(f); e.target.value = ""; });
+$("size").addEventListener("change", () => { document.documentElement.dataset.size = $("size").value; try { localStorage.setItem(KEY + "_size", $("size").value); } catch (e) {} });
+$("contrast").addEventListener("change", () => { const v = $("contrast").value, h = document.documentElement; if (v === "high") { h.dataset.contrast = "high"; delete h.dataset.theme; } else { delete h.dataset.contrast; if (v === "auto") delete h.dataset.theme; else h.dataset.theme = v; } try { localStorage.setItem(KEY + "_contrast", v); } catch (e) {} });
+try { const s = localStorage.getItem(KEY + "_size"); if (s) { $("size").value = s; document.documentElement.dataset.size = s; }
+  const c = localStorage.getItem(KEY + "_contrast"); if (c) { $("contrast").value = c; $("contrast").dispatchEvent(new Event("change")); }
+  const o = localStorage.getItem(KEY); if (o) fill(JSON.parse(o)); } catch (e) {}
+</script>
+</body>
+</html>
