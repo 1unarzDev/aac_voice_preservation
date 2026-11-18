@@ -88,3 +88,15 @@ Cut or compressed (no numbers or macros removed except noted):
 - Fig. 1 caption: 0-of-26 marked "by construction, scored by the same predicate". Table glossary: G1r defined as resample-without-feedback. H3 text: states it is the workshop-theme contribution and that a null demotes the offline proxies. Conclusion guard sentence shortened. QUOTE-PENDING comment removed.
 - Build: docker pdflatex, 10 pp, References starts p9 (pdftotext), body ends p8; pages 1 and 8 rendered. No undefined refs.
 - Not fixed: full ~150-word abstract rewrite, confirmatory/exploratory marker in Table 2, Table 2 overfull and font enlargement, independent-mutant numbers in CALE-AI (SE4All-only), ls_cq_chip rounding nudge, GenAI placeholder, 0-of-26 still in body, no claims-ledger row added.
+
+## Readability pass (Nov 18)
+- Abstract rewritten: 149 words, 4 headline numbers (+37.5 cue, 73.8% vs 80% target, 28% vs 8% listeners); problem, method, findings, limitation clause. Kept: failed 80% clause, "machine-scored", reversal cut not confirmed, guard audit underpowered with stricter endpoints, no AAC users. Fixed double-negative ("-13.3 points less often") by removing the number from the abstract.
+- Sec. 6.4/6.5 prose: moved wild interval, sign-flip p, writer-mean range, new-vs-first writers, Llama split, contrast-selected set, bare-3-draft range, kappa to new Table "Secondary results" (tab:secondary); primary CIs kept in text. Added plain topic openers to two paragraphs.
+- Build clean, no undefined refs; 10 pp, body ends p8 (References heading on p8). Pages 1, 2, 8 viewed.
+- Not done: per-paragraph opener rewrite of Sec. 3-5, sentence-length pass of Setting/Interventions.
+
+## Fixer (numbers/limits check, Nov 18)
+- No numeric errors found by checker (about 45 figures verified). Listener limits: "adult classmates" -> "adult peers of the authors" (matches Ethics). Table 4 sample-size row: flag rate now "computed at the unrounded 8.46%-rate" wording so 473 messages reproduces.
+- Table 2 overfull (144 pt) viewed on p5: nothing clipped (multicolumn rows only); 4 pt overfull left. Ethics paragraph already states no institutional review determination was sought.
+- Not done: macro-backed derivation of "about 18 points" audit MDE (text uses dz_mde macro); structural readability items (abstract/thesis paragraph, Sec. 6.2, 6.7 density) left to the readability pass.
+- Build: 10 pp, References heading on p8 (pdftotext), body within 8 pp, no PENDING, no undefined refs.
