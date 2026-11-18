@@ -357,35 +357,34 @@ The cue keeps the critical value in \RES{c_chip1}\% of development targets (\RES
 \subsection{Realistic-input checks}
 \label{sec:realistic}
 We ran the pipeline on \RES{hw_kept} minimal pairs written by \RES{hw_writers} non-author annotators and on keywords that \RES{el_annot} annotators typed for \RES{el_msgs} AACText messages.
-On the human-written pairs the cue gain replicates on all \RES{hw_chip_dims} dimensions (\RES{hw_chip_min} to \RES{hw_chip_max} points), politeness addition adds +\RES{t6_p2} points and the bare affirmative default is \RES{hw_p3}\% \ci{hw_p3} of committed answers on the first seven writers' pairs (the analysis files give the same figure as points above 50).
-On these pairs the same cue as a plain word (\kw{not}, \kw{please}) was declared equivalent to the chip (interval within $\pm$5 points) on \RES{cc_eq_n} of \RES{cc_nl_dims} dimensions (largest difference \RES{cc_eq_max}); the chip leads by under 1 point on polarity and time/quantity, and the word beats the chip on speech act by \RES{cc_nl_act} points.
+On the human-written pairs the cue gain replicates on all \RES{hw_chip_dims} dimensions (\RES{hw_chip_min} to \RES{hw_chip_max} points), politeness addition adds +\RES{t6_p2} points and the bare affirmative default is \RES{hw_p3}\% \ci{hw_p3} of committed answers on the first seven writers' pairs.
+On these pairs the same cue as a plain word (\kw{not}, \kw{please}) was declared equivalent to the chip (interval within $\pm$5 points) on \RES{cc_eq_n} of \RES{cc_nl_dims} dimensions (largest difference \RES{cc_eq_max}); the word beats the chip on speech act by \RES{cc_nl_act} points.
 \paragraph{Held-out writers.}
 Four further writers wrote \RES{hx2_pairs} speech-act pairs; blind checkers passed every one (\kof{hx2_chk} checks).
 The speech-act cue gain (cue chip minus a neutral chip, writer-clustered) is +\RES{hx_p1} points \ci{hx_p1} across \RES{hx_n_writers} writers and \RES{hx_rows} paired rows, with the wild-bootstrap interval [\RES{hx_wild_lo}, \RES{hx_wild_hi}] and the exact one-sided sign-flip $p=\RES{hx_sf_p}$, the floor for ten writers (the two-sided floor is twice that).
 Every writer's mean is positive (+\RES{hx_wm_min} to +\RES{hx_wm_max}), and the new writers do at least as well as the first six (+\RES{hx2} \ci{hx2} on \RES{hx2_rows} rows against +\RES{hx1} \ci{hx1}).
-It does not help equally: Llama gains only +\RES{hx_llama} [\RES{hx_llama_lo}, \RES{hx_llama_hi}] against +\RES{hx_oth_min} to +\RES{hx_oth_max} for the other three models, \RES{hx_fam_nogain} of \RES{hx_fam_n} families show no gain, and \RES{hx_miss}\% of cue outputs still miss the writer's act (\RES{hx_chip_rate}\% honour it against \RES{hx_non_rate}\% without the cue).
-Politeness and the default still rest on six and seven writers, so for them we claim direction and consistency (every writer's mean has the same sign), not interval width; the replication is exploratory and the writers are volunteers.
+It does not help equally: Llama gains only +\RES{hx_llama} [\RES{hx_llama_lo}, \RES{hx_llama_hi}] against +\RES{hx_oth_min} to +\RES{hx_oth_max} for the other three models, \RES{hx_fam_nogain} of \RES{hx_fam_n} families show no gain, and \RES{hx_miss}\% of cue outputs still miss the writer's act.
+Politeness and the default still rest on six and seven writers, so for them we claim direction and consistency (every writer's mean has the same sign), not interval width.
 
 \paragraph{Defaults: a good guess with an asymmetric cost.}
 When keywords carry no negation word, the models write an affirmative sentence for \RES{t2_aff_h}\% of such human keyword sets.
 That is the Bayes-preferred guess: among human keyword sets with no negation word, the source was negated only \RES{src_t2}\% [\RES{src_t2_lo}, \RES{src_t2_hi}] of the time (this is $p$, the posterior probability of a negated source given no negation word in the keywords), so guessing affirmative is right \RES{t2_acc_h}\% of the time.
 The harm is the asymmetric cost: about \RES{src_t2_rev} of every 1,000 messages are silently reversed when the user types keywords unaided (\RES{t2_rev_h} [\RES{t2_rev_h_lo}, \RES{t2_rev_h_hi}] in the keyword-study posterior; Section~\ref{sec:frontier} gives two other estimates), against \RES{t2_spur_h} spurious negations, and the guess breaks even only if a reversal costs under \RES{t2_ratio_h} times a spurious negation (the odds $(1-p)/p$).
-An accuracy metric rewards this behavior, so a ledger puts a default's cost beside its hit rate.
+An accuracy metric rewards this, so a ledger puts a default's cost beside its hit rate.
 
 \subsection{Cue restoration judged by people}
 \label{sec:cuehuman}
 \paragraph{Listeners.}
 \RES{ls_listeners} adult non-author annotators saw a context line and one sentence, never the keywords, the intended message or the condition, and chose which of two minimal-pair readings the person was saying (or neither) and how they would respond; \RES{ls_items} messages from the human-written pairs, with the writer's own sentence as ceiling and the rules frozen before collection.
 \slotListenerBody{}
-Listeners are not AAC communication partners and comprehension is not a real-world consequence.
 \paragraph{Writers' own intent.}
 Twenty writers judged \RES{cv_items} items, randomized within writer, for whether a draft was what they meant and would send as is or with a small edit.
 One greedy draft covers \RES{cv_cg1}\% [\RES{cv_cg1_lo}, \RES{cv_cg1_hi}] of items after a tap against \RES{cv_bg1}\% [\RES{cv_bg1_lo}, \RES{cv_bg1_hi}] bare (+\RES{cv_tap} points [\RES{cv_tap_lo}, \RES{cv_tap_hi}], exploratory); three bare drafts reach only \RES{cv_bd3}--\RES{cv_be3}\%.
-Draft sets add on top of a cue, not instead of it: after a tap a contrast-selected set adds +\RES{cv_s3} points [\RES{cv_s3_lo}, \RES{cv_s3_hi}] over one draft.
+After a tap a contrast-selected set adds +\RES{cv_s3} points [\RES{cv_s3_lo}, \RES{cv_s3_hi}] over one draft.
 \paragraph{Second-family re-label.}
 Claude (Sonnet), given the production codebook prompt and only each output's text, relabelled the judge units; on the speech-act gain it gives +\RES{rl_p1} points [\RES{rl_p1_lo}, \RES{rl_p1_hi}] against +\RES{hx_p1} with the GPT judge (\RES{rl_p1_changed} of \RES{rl_p1_replaced} labels changed, all ten writers positive).
-Its critical labels match human consensus on \RES{rl_hum}\% of \RES{rl_hum_n} outputs ($\kappa=\RES{rl_hum_kappa}$) and the judge's on \RES{rl_gpt}\% of \RES{rl_gpt_n}.
-Claude also arbitrated labels and assisted analysis and writing, so this is no independent human check.
+Its critical labels match human consensus on \RES{rl_hum}\% of \RES{rl_hum_n} outputs ($\kappa=\RES{rl_hum_kappa}$).
+Claude also arbitrated labels and assisted analysis and writing: no independent human check.
 
 \subsection{Two ledger columns from people: writer intent and clinical weight}
 \label{sec:human}
@@ -393,7 +392,6 @@ Claude also arbitrated labels and assisted analysis and writing, so this is no i
 Each of \RES{p18_n_writers} writers judged \RES{p18_per_writer} outputs generated from their own pairs (\RES{p18_n_items} in all), choosing the version they meant.
 A cue raises the share matching the intended version from \RES{p18_m_bare}\% to \RES{p18_m_cue}\%, +\RES{p18_cue} points [\RES{p18_cue_lo}, \RES{p18_cue_hi}] (writer-clustered; keywords-only is a reference level, not a failure rate).
 Yet writers accepted \RES{p18_asis_k} of all \RES{p18_asis_n} outputs as written with no edit, and the judge's label agrees with the writer's at only $\kappa=\RES{p18_wj_kappa}$.
-Keeping the critical commitment is necessary, not sufficient.
 Among the \RES{p18_right_na_n} of those \RES{p18_asis_n} outputs whose critical value the judge scored correct (\RES{p18_right_r1_n} with a decided answer; \RES{p18_right_unsure} unsure), writers rejected \kof{p18_right_r1} as not the version meant; of the rejected, \RES{p18_right_dropped}\% lost detail only the writer's sentence carried (compression) and \RES{p18_right_subst}\% changed who does what (event or role) (overlapping flags from a diff classifier).
 The person, not the model, owns the message.
 \paragraph{Clinical weight.}
@@ -402,12 +400,11 @@ Weighting each judge-flagged failure by the severity of its type, the guard lowe
 
 \subsection{Frontier limits: the cue's measured price, and what asking and uncertainty do not do}
 \label{sec:frontier}
-These results are provisional: stored outputs, machine labels resolved by a blind arbiter, the three local primary models (Gemma-3-4B, Llama-3.1-8B, Qwen2.5-7B), \RES{fr_units} exposure units.
-Supplying the cue on every message (derived: bare rate times the share not restored, regenerated on the same items) cuts polarity reversals per 1,000 from \RES{fr_pol_bare} [\RES{fr_pol_bare_lo}, \RES{fr_pol_bare_hi}] to \RES{fr_pol_chip} [\RES{fr_pol_chip_lo}, \RES{fr_pol_chip_hi}] (chip) and \RES{fr_pol_word} [\RES{fr_pol_word_lo}, \RES{fr_pol_word_hi}] (word), and politeness reversals from \RES{fr_pt_bare} to \RES{fr_pt_chip} and \RES{fr_pt_word}; the chip and the word are not distinguishable on polarity or speech act on these items; speech-act restoration is \RES{fr_sa_chip}\% with a chip and \RES{fr_sa_chipg1}\% with chip plus guard.
-The cue has to come from the user.
+These results are provisional: stored outputs, machine labels resolved by a blind arbiter, three local models, \RES{fr_units} exposure units.
+Supplying the cue on every message (derived: bare rate times the share not restored, regenerated on the same items) cuts polarity reversals per 1,000 from \RES{fr_pol_bare} [\RES{fr_pol_bare_lo}, \RES{fr_pol_bare_hi}] to \RES{fr_pol_chip} [\RES{fr_pol_chip_lo}, \RES{fr_pol_chip_hi}] (chip) and \RES{fr_pol_word} [\RES{fr_pol_word_lo}, \RES{fr_pol_word_hi}] (word), and politeness reversals from \RES{fr_pt_bare} to \RES{fr_pt_chip} and \RES{fr_pt_word}; chip and word are not distinguishable on these items; speech-act restoration is \RES{fr_sa_chip}\% with a chip and \RES{fr_sa_chipg1}\% with chip plus guard.
 \paragraph{Human labels on the frontier inputs.}
-Two people per item (\RES{dp_n_ann} annotators, \RES{dp_items} items) confirmed the speech-act and politeness source labels: \RES{dp_sa_det}\% [\RES{dp_sa_det_lo}, \RES{dp_sa_det_hi}] of decided speech-act exposure units are human question or request, and \kof{dp_pt_det} politeness units are human-polite.
-When keywords lost the speech-act cue, the cue-restored draft was chosen in \RES{vq}\% [\RES{vq_lo}, \RES{vq_hi}] of \RES{vq_n} judgments on \RES{vq_items} items, below the 90\% restoration rate that the cue-value calculation assumed (measured $q=\RES{vq_q}$); at the measured rate its gains shrink by about a fifth with the ordering unchanged.
+Two people per item (\RES{dp_n_ann} annotators, \RES{dp_items} items) confirmed source labels: \RES{dp_sa_det}\% [\RES{dp_sa_det_lo}, \RES{dp_sa_det_hi}] of decided speech-act exposure units are human question or request, and \kof{dp_pt_det} politeness units are human-polite.
+When keywords lost the speech-act cue, the cue-restored draft was chosen in \RES{vq}\% [\RES{vq_lo}, \RES{vq_hi}] of \RES{vq_n} judgments on \RES{vq_items} items, below the assumed 90\% restoration (measured $q=\RES{vq_q}$); gains shrink by about a fifth, ordering unchanged.
 
 %% =====================================================================
 \section{From Ledger to a Pre-Specified Human-Effect Study}
@@ -420,32 +417,31 @@ When keywords lost the speech-act cue, the cue-restored draft was chosen in \RES
 \toprule
 \multicolumn{2}{@{}p{7.5cm}}{\textbf{H3 study: micro-randomized trial (MRT), pre-specified design; no value is a result}}\\
 \midrule
-Estimand & Average causal excursion effect~\cite{boruvka2018excursion} on a proximal outcome of delivering the regenerated sentence versus the original, at decision points where the monitor flags a conflict, for adult AAC users who compose with LLM keyword expansion\\
-Arms, unit & Randomized per flagged message within user~\cite{klasnja2015mrt}, fixed probabilities: silent regeneration, flag-and-confirm, original; cues are a between-user factor\\
-Outcomes & Proximal: sent without edit, one-tap \say{said what I meant} on a random subset of sends. Longitudinal: weekly rates, abandonment, reliance\\
-Sample size & Illustrative typed assumptions: standardized effect \RES{mrt_d}, within-user correlation \RES{mrt_rho}, \RES{mrt_T} flagged points per user, 80\% power, 5\% level, about \RES{mrt_users} users (roughly \RES{mrt_msgs} messages per user at the \RES{g_flagged}\% flag rate)\\
+Estimand & Average causal excursion effect~\cite{boruvka2018excursion} of delivering the regenerated sentence versus the original, at flagged decision points, for adult AAC users of LLM keyword expansion\\
+Arms, unit & Per flagged message within user~\cite{klasnja2015mrt}: silent regeneration, flag-and-confirm, original; cue is between-user\\
+Outcomes & Proximal: sent without edit; one-tap \say{said what I meant} on a random subset. Longitudinal: weekly rates, abandonment\\
+Sample size & Illustrative: effect \RES{mrt_d}, within-user correlation \RES{mrt_rho}, \RES{mrt_T} flagged points per user, 80\% power, 5\% level: about \RES{mrt_users} users (about \RES{mrt_msgs} messages each at the \RES{g_flagged}\% flag rate)\\
 \bottomrule
 \end{tabular}
 \caption{The human-effect study that tests H3.}
 \label{tab:mrt}
 \end{table}
-Each prediction names what would demote it; H1 and H2 were checked post hoc, and the H3 design is pre-specified in version control.
+Each prediction names what would demote it; H1 and H2 were checked post hoc, the H3 design is pre-specified in version control.
 
 \paragraph{Predictions.}
 \textbf{H1 (writer intent).} Among outputs the scorer counts as preserving a writer's critical value, writers report that the output \say{said what I meant} more often than among outputs it counts as failing; a gap whose interval includes zero demotes the scored endpoint.
 \slotIntent{} % PART18
 \textbf{H2 (repair usability).} A scored repair is usable at no less than \RES{p17_margin} points below a never-failed control; the \RES{p17_all}-text audit tested this under the frozen rule of Section~\ref{sec:repaircost}, so H2 is unresolved.
-\textbf{H3 (collateral).} Offline changed-correct and coverage loss predict a later drop in users' \say{said what I meant} rate; if not, evaluation of this kind should be demoted.
+\textbf{H3 (collateral).} Offline changed-correct and coverage loss predict a later drop in users' \say{said what I meant} rate; if not, such evaluation is demoted.
 H3 needs AAC users (Table~\ref{tab:mrt}).
 
 \paragraph{What consultants told us, and what the evidence implies.}
-Two paid design consultants reviewed the requirements and ten example outputs under a written agreement (a design review, not a study; paraphrase only; no data about them). They did not review this paper or its outcome measure, did not always agree (on button versus plain word, and on rewrite and confirmation), and neither speaks for AAC users generally.
-Table~\ref{tab:consult} pairs their points, paraphrased, with the change each produced.
+Two paid design consultants who use AAC reviewed the requirements and ten example outputs under a written agreement (a design review, not a study; paraphrase only; no data about them). They did not review this paper or its outcome measure, did not always agree, and neither speaks for AAC users generally; Table~\ref{tab:consult} pairs their points with the change each produced.
 % QUOTE-PENDING: C01/C02 permission for any short quotes; the consulting agreement allows anonymous acknowledgement only with permission.
 Both asked for \textbf{R6, a draft is never spoken without the person's approval}, which makes flag-and-confirm the default.
-Writers rejected judge-correct drafts for lost detail and changed roles, so the cue is offered as the person's choice, a draft waits for approval (R6), and typed sentences stay exact.
-Taps and reading drafts cost effort and attention (more under scanning or eye gaze); neither was measured.
-As design reasoning, one cue tap is the cheapest route to stored-text coverage (+\RES{cv_tap} points), and extra drafts add +\RES{cv_s3} on top at more reading cost: the smallest added step among the options we compared, as design reasoning; burden and benefit for people are untested and left to the human-effect study.
+Writers rejected judge-correct drafts for lost detail and changed roles, so the cue is the person's choice and typed sentences stay exact.
+Taps and reading drafts cost effort (more under scanning or eye gaze); neither was measured.
+As design reasoning, one cue tap is the cheapest route to stored-text coverage (+\RES{cv_tap} points) and extra drafts add +\RES{cv_s3} at more reading cost; burden and benefit for people are untested and left to the human-effect study.
 
 \begin{table}[t]
 \centering\footnotesize
@@ -461,7 +457,7 @@ When a choice is open (who acts, ask or tell), show it and let the person pick, 
 Example outputs unfit to send (dropped \textsc{not}, invented event) & Items fixed; regression tests added\\
 \bottomrule
 \end{tabular}
-\caption{What two design consultants told us and what we changed. Not a study. $^{*}$Put differently by the two (one: optional Rewrite with Undo, no per-change confirmation).}
+\caption{What two design consultants who use AAC told us and what we changed. Not a study. $^{*}$Put differently by the two (one: optional Rewrite with Undo, no per-change confirmation).}
 \label{tab:consult}
 \end{table}
 
@@ -469,11 +465,11 @@ Example outputs unfit to send (dropped \textsc{not}, invented event) & Items fix
 \section{Limitations}
 \label{sec:limits}
 %% =====================================================================
-\emph{Human outcomes and raters.} Human outcomes are annotator judgments of study materials: listeners and raters are non-author adults, not AAC users or AAC communication partners, and comprehension is not a real-world consequence; use, agency, effort and trust are untested (Section~\ref{sec:protocol}).
-\emph{Labels and scope.} Endpoints use an LLM extractor validated against people (added content is weakly measured), with post-outcome arbitration in the confirmation; strip-only covers one failure type; the menu was not run on the confirmation set; items are constructed, open models are at most 14B, and AACText is crowd-written fiction.
-\emph{Positionality.} The authors are independent researchers in language-model evaluation, without a clinical or AAC-community partner institution.
-Two paid design consultants and two speech-language pathologists (SLPs, paid expert raters) reviewed requirements and materials (two people per role; not a population estimate); H3's ``said what I meant'' outcome is our proposal, to be checked with AAC users before use; no acknowledgement without permission. We do not report the authors' own AAC use or clinical training. No AAC user took part as a participant and none was evaluated, so we claim nothing about benefit, preference or burden for people who use AAC; effort findings are design reasoning, to be tested with them.
-\emph{Ethics.} Twenty adult non-author volunteers recruited by the authors, who consented and were paid, judged study materials (model outputs); no data about them were collected, no one used or was evaluated on a system, and no AAC users took part. Some also chose keywords or wrote sentence pairs, released under CC~BY~4.0 with recorded consent. As independent researchers we did not seek an institutional review determination.
+\emph{Human outcomes and raters.} Listeners and raters are non-author adults, not AAC users or communication partners, and comprehension is not a real-world consequence; use, agency, effort and trust are untested (Section~\ref{sec:protocol}).
+\emph{Labels and scope.} Endpoints use an LLM extractor validated against people (added content is weakly measured), with post-outcome arbitration in the confirmation; items are constructed, open models are at most 14B, and AACText is crowd-written fiction.
+\emph{Positionality.} The authors are independent language-model evaluation researchers without a clinical or AAC-community partner institution.
+Two paid design consultants who use AAC and two speech-language pathologists (paid expert raters) reviewed requirements and materials (not a population estimate); H3's ``said what I meant'' outcome is our proposal, to be checked with AAC users before use. We do not report the authors' own AAC use or clinical training. No AAC user took part as a participant, so we claim nothing about benefit, preference or burden for people who use AAC.
+\emph{Ethics.} Twenty adult non-author volunteers recruited by the authors, who consented and were paid, judged study materials (model outputs); no data about them were collected and no one used or was evaluated on a system. Some also chose keywords or wrote sentence pairs, released under CC~BY~4.0 with recorded consent. As independent researchers we did not seek an institutional review determination.
 
 \section{Conclusion}
 The ledger is the method: it prices each fix beside its gain.
