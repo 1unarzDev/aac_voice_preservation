@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "23895761",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m31104102",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They hardly kept the bedroom door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They kept the bedroom door."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m3eb2d81f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They refuse to sent the report."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They sent the report."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4328cf9b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will cook pasta."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I cooked pasta in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4a39bb1f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The clerk explains that you pay the bill at the bank."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You pay the bill at the bank."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4b91e4e1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The class might meet in room four."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It is possible that the class will meet in room four."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m62e556c6",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I request a ramp at the main entrance."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I fail to request a ramp at the main entrance."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m804ff60e",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I checked my blood pressure yesterday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yesterday, I measured my blood pressure."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m87d8c510",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They hardly play guitar."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They play guitar."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8f5ab589",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am asking whether the class meets in the upstairs room."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Does the class meet in the upstairs room?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8fe31337",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The chef makes soup for lunch today."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Soup is made by the chef for lunch today."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m9a94cde6",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "What movie is starting?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Which film is beginning?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m9aa0fa7c",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I collected tablets in the past."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "He claimed that he had collected tablets in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mc28e9033",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly move the chair."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You move the chair."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mceda2b87",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will email the schedule to my teacher."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I'll email the schedule to my teacher."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "md6494c44",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The neighbors mentioned that they are planning a picnic."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are planning a picnic."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

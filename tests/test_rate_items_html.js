@@ -21,13 +21,14 @@ function key(w, k, target) { (target || w.document.body).dispatchEvent(new w.Key
 function fnv(s) { let h = 2166136261 >>> 0; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h.toString(16).padStart(8, '0'); }
 const CID = DOC.check_id, QS = DOC.questions, QIDS = Object.keys(QS);
 const optV = o => typeof o === 'string' ? o : o.v;
+const OPTS = (it, q) => (it.qopts && it.qopts[q]) || QS[q].options;   // per-item options (Stage 7) override the file-level ones
 
 ok(DOC.tool === 'rate_items_v1' && DOC.items.length === DOC.n_items && DOC.n_items >= 1, CID + ': ' + DOC.items.length + ' items in the file');
 ok(DOC.practice.length === 2, 'two practice items');
-ok(DOC.items.every(x => Object.keys(x).sort().join() === 'blocks,item_id,qs'), 'items carry only id, text blocks and question ids (blind)');
+ok(DOC.items.every(x => ['blocks,item_id,qs', 'blocks,item_id,qopts,qs'].includes(Object.keys(x).sort().join())), 'items carry only id, text blocks, question ids and per-item options (blind)');
 ok(DOC['for'] === fnv(ID + '|' + CID), 'file is made for ' + ID);
 ok(DOC.items.concat(DOC.practice).every(x => x.qs.every(q => QS[q])), 'every question id is defined');
-ok(DOC.practice.every(p => p.qs.every(q => QS[q].options.map(optV).includes(p.expected[q]))), 'practice answers are valid options');
+ok(DOC.practice.every(p => p.qs.every(q => OPTS(p, q).map(optV).includes(p.expected[q]))), 'practice answers are valid options');
 const BLIND = /stratum|detector|\barm\b|arm_|machine|model|checker|judge|weight|gpt|qwen|llama|mistral|gemini|intended|propositional|echo_|exposure|frontier|hypothes|policy/i;
 ok(!BLIND.test(JSON.stringify(DOC)), 'no design, arm or model wording anywhere in the file');
 
@@ -49,12 +50,12 @@ $('annot').value = ID; key(w, 'Enter', $('annot'));
 ok(new RegExp(DOC.n_items + ' items').test($('introview').textContent), 'intro for the right person');
 key(w, 'Enter'); ok(/Practice/.test($('phasetag').textContent), 'practice starts');
 // practice 1: answer as expected -> all Matches
-const optIndex = (q, v) => QS[q].options.map(optV).indexOf(v) + 1;
+const optIndex = (it, q, v) => OPTS(it, q).map(optV).indexOf(v) + 1;
 function answerWith(item, f) { for (const q of item.qs) key(w, String(f(q))); }
-answerWith(DOC.practice[0], q => optIndex(q, DOC.practice[0].expected[q]));
+answerWith(DOC.practice[0], q => optIndex(DOC.practice[0], q, DOC.practice[0].expected[q]));
 key(w, 'Enter'); ok(/Matches/.test($('feedback').textContent) && !/Different/.test($('feedback').textContent), 'practice 1 feedback matches'); key(w, 'Enter');
 // practice 2: deliberately not the expected option
-answerWith(DOC.practice[1], q => { const i = optIndex(q, DOC.practice[1].expected[q]); return i === 1 ? 2 : 1; });
+answerWith(DOC.practice[1], q => { const i = optIndex(DOC.practice[1], q, DOC.practice[1].expected[q]); return i === 1 ? 2 : 1; });
 key(w, 'Enter'); ok(/Different/.test($('feedback').textContent), 'practice 2 feedback flags a difference'); key(w, 'Enter');
 ok(w.eval('S.phase') === 'M' && new RegExp('Item 1 of ' + DOC.n_items).test($('progtext').textContent), 'main phase');
 const order = w.eval('S.order');
@@ -66,7 +67,7 @@ key(w, 'Enter'); ok(/every question/.test($('status').textContent) && w.eval('S.
 const seen = new Set();
 for (let i = 0; i < DOC.n_items; i++) {
   const it = DOC.items.find(x => x.item_id === order[i]); seen.add(it.qs.join('+'));
-  it.qs.forEach((q, k) => key(w, String(1 + ((i + k) % QS[q].options.length))));
+  it.qs.forEach((q, k) => key(w, String(1 + ((i + k) % OPTS(it, q).length))));
   if (i === 2 || DOC.n_items < 3 && i === 0) { key(w, 'Tab'); const n = $('note'); n.value = 'odd; with "quotes", and comma'; n.dispatchEvent(new w.Event('input')); key(w, 'Enter', n); }
   else key(w, 'Enter');
 }
@@ -84,7 +85,7 @@ let bad = 0;
 for (const r of rows.slice(1)) {
   const cells = r.split(','); const id = cells[0]; const it = DOC.items.concat(DOC.practice).find(x => x.item_id === id);
   if (!it) { bad++; continue; }
-  QIDS.forEach(q => { const v = cells[col(q)]; if (it.qs.includes(q) ? !QS[q].options.map(optV).includes(v) : v !== '') bad++; });
+  QIDS.forEach(q => { const v = cells[col(q)]; if (it.qs.includes(q) ? !OPTS(it, q).map(optV).includes(v) : v !== '') bad++; });
 }
 ok(bad === 0, 'answers are valid options; questions an item did not ask are empty');
 if (OUT) fs.writeFileSync(OUT, csv);

@@ -1,0 +1,2438 @@
+{
+ "check_id": "part28",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 43,
+ "for": "371c462a",
+ "title": "Listen to a sentence and say what it means",
+ "intro": [
+  "You will see a short topic line and one sentence that a person said to you. Say what you think the person is saying, how you would respond, and how sure you are.",
+  "Sentences come from different sources: some were written by a person, some were produced by a program. Do not try to guess the source. Answer only from what the sentence says to you."
+ ],
+ "help": [
+  {
+   "term": "What is the person saying?",
+   "text": "Two readings are shown. Choose the one the sentence says to you. If it says neither, or you cannot tell, choose 'Something else, or I cannot tell'."
+  },
+  {
+   "term": "How would you respond?",
+   "text": "Choose the response that fits what you understood. 'Ask them to say it again or confirm' is right when you are not sure what they mean."
+  },
+  {
+   "term": "How sure are you?",
+   "text": "1 means you are guessing, 3 means you are sure."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "What is the person saying?",
+   "text": "Choose the message the sentence says. If it fits neither, or you cannot tell, choose the last option.",
+   "options": [
+    {
+     "v": "reading 1",
+     "label": "Reading 1"
+    },
+    {
+     "v": "reading 2",
+     "label": "Reading 2"
+    },
+    {
+     "v": "unclear",
+     "label": "Something else, or I cannot tell"
+    }
+   ]
+  },
+  "q2": {
+   "title": "How would you respond?",
+   "text": "Choose what you would do after hearing the sentence.",
+   "options": [
+    {
+     "v": "action 1",
+     "label": "Response 1"
+    },
+    {
+     "v": "action 2",
+     "label": "Response 2"
+    },
+    {
+     "v": "action 3",
+     "label": "Response 3"
+    },
+    {
+     "v": "action 4",
+     "label": "Response 4"
+    }
+   ]
+  },
+  "q3": {
+   "title": "How sure are you?",
+   "text": "How sure are you of what the person is saying?",
+   "options": [
+    {
+     "v": "1",
+     "label": "1: not sure"
+    },
+    {
+     "v": "2",
+     "label": "2: fairly sure"
+    },
+    {
+     "v": "3",
+     "label": "3: sure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "Topic: shopping"
+    },
+    {
+     "label": "The sentence",
+     "text": "The shop is closed today."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The shop is closed today.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"Is the shop closed today?\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 2",
+      "label": "Take note of it: they are telling you something"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Do what they ask: they want you to act"
+     }
+    ]
+   },
+   "expected": {
+    "q1": "reading 1",
+    "q2": "action 2"
+   },
+   "fb": "The sentence tells you something (it is not a question), so Reading 1 and taking note of it."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "Topic: dinner"
+    },
+    {
+     "label": "The sentence",
+     "text": "I did not cook the rice."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I did not cook the rice.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I cooked the rice.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a no: it did not happen"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Plan for it as something still to come"
+     }
+    ]
+   },
+   "expected": {
+    "q1": "reading 1",
+    "q2": "action 2"
+   },
+   "fb": "The sentence says the rice was not cooked: Reading 1, and you would treat it as not done. Question 3 (how sure you are) has no right answer; you will see it in the real items."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "u065d792b",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "The curtain covers the hallway light."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The curtain covers the hallway light.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The curtain does not cover the hallway light.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 2",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u0784d25a",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "I went to the bank yesterday to pay my past bill."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I will pay the bill at the bank counter tomorrow.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I paid the bill at the bank counter yesterday.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as happening right now"
+     },
+     {
+      "v": "action 3",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u1491605c",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "They sent the form."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The advocate sent the accommodation form.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I sent the accommodation form.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect that you are the one who should do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u15bdc54c",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "relationships"
+    },
+    {
+     "label": "The sentence",
+     "text": "My sister does not visit the garden on Sunday."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"My sister does not visit the garden on Sunday.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"My sister visits the garden on Sunday.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 4",
+      "label": "No reply or action is needed"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u23345d6f",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "health"
+    },
+    {
+     "label": "The sentence",
+     "text": "YES, please record the session."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The therapist records my symptoms accurately.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The therapist does not record my symptoms accurately.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u255f9852",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "The drummer lowered the music during rehearsal."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"You lowered the music during rehearsal.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The drummer lowered the music during rehearsal.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect the speaker to do it themselves"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u26c18bbc",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "work/school"
+    },
+    {
+     "label": "The sentence",
+     "text": "I need to file a report."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I file the report before lunch.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"My coworker files the report before lunch.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u2b6d2295",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "plans"
+    },
+    {
+     "label": "The sentence",
+     "text": "The clinic is open now."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The clinic opens at nine on Monday.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"Does the clinic open at nine on Monday?\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 2",
+      "label": "Take note of it: they are telling you something"
+     },
+     {
+      "v": "action 3",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u304e70f0",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "I plan to travel with headphones."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The headphones do not fit inside my travel bag.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The headphones fit inside my travel bag.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 4",
+      "label": "No reply or action is needed"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u322b27ae",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "work/school"
+    },
+    {
+     "label": "The sentence",
+     "text": "You move the chair."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I move the chair beside the window.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"You move the chair beside the window.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect the speaker to do it themselves"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u3e93b346",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "hobbies"
+    },
+    {
+     "label": "The sentence",
+     "text": "I check the gate now."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The guard checks the gate now.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The guard checked the gate this morning.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as happening right now"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u4aae144f",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "work/school"
+    },
+    {
+     "label": "The sentence",
+     "text": "I will post the teacher's notes."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The teacher does not post the new timetable.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The teacher posts the new timetable.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 2",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as a yes: go ahead"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u4dfef8f9",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "health"
+    },
+    {
+     "label": "The sentence",
+     "text": "The wrist brace rubs against the buckle."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"Does the wrist brace rub against the buckle?\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The wrist brace rubs against the buckle.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 3",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 4",
+      "label": "Take note of it: they are telling you something"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u4fcdf539",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "boundaries"
+    },
+    {
+     "label": "The sentence",
+     "text": "respect the visitor"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The visitor respects my closed door.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The visitor does not respect my closed door.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as a yes: go ahead"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u5962c40a",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "The extractor fan is whistling."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The extractor fan produces a high whistle.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"Does the extractor fan produce a high whistle?\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 2",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Take note of it: they are telling you something"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u59d33ad3",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "health"
+    },
+    {
+     "label": "The sentence",
+     "text": "You water the plants."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"You water the plants beside the porch.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The gardener waters the plants beside the porch.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect that you are the one who should do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u61ec5ad2",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "I explain the schedule in the office."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I explain the schedule in the office.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The therapist explains the schedule in the office.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect someone else, neither of you, to do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u632648f8",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "transport"
+    },
+    {
+     "label": "The sentence",
+     "text": "Does the train stop at the theater?"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"Does the evening train stop near the theater?\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The evening train stops near the theater.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 2",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 3",
+      "label": "Take note of it: they are telling you something"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u6549cae7",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "money"
+    },
+    {
+     "label": "The sentence",
+     "text": "I need to pay the postage for the fundraiser deposit."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"Does the fundraiser deposit cover postage for the badges?\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The fundraiser deposit covers postage for the badges.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 2",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 3",
+      "label": "Take note of it: they are telling you something"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u6dfb77b5",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "health"
+    },
+    {
+     "label": "The sentence",
+     "text": "I will take medicine."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I will take my medicine at home tomorrow.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I took my medicine at home yesterday.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u6ec456b9",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "transport"
+    },
+    {
+     "label": "The sentence",
+     "text": "I checked the wheelchair ramp."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The driver checked the wheelchair ramp.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I checked the wheelchair ramp.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect that you are the one who should do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u71ce09cf",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "I asked for an interpreter at the clinic yesterday."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I will ask for an interpreter at the clinic tomorrow.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I asked for an interpreter at the clinic yesterday.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u72816eba",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "The concert music is loud near our seats."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"Is the concert music loud near our seats?\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The concert music is loud near our seats.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 2",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 3",
+      "label": "Take note of it: they are telling you something"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u77b09b05",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "The team meets in room four today."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"Does the team meet in room four today?\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The team meets in room four today.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Take note of it: they are telling you something"
+     },
+     {
+      "v": "action 2",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 3",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u77bbdbdb",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "boundaries"
+    },
+    {
+     "label": "The sentence",
+     "text": "Turn notifications were set in the past."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I will turn off notifications during class tomorrow.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I turned off notifications during class yesterday.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 2",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as happening right now"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u78af4942",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "boundaries"
+    },
+    {
+     "label": "The sentence",
+     "text": "The driver will park the taxi by the hotel later."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The driver parked the taxi by the hotel.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The driver will park the taxi by the hotel later.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u83efc213",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "You lower the music in the car."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I lower the music in the car.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"You lower the music in the car.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect that you are the one who should do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u8759a52e",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "hobbies"
+    },
+    {
+     "label": "The sentence",
+     "text": "My brother kept the bedroom door closed overnight."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"My brother kept the bedroom door closed overnight.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I kept the bedroom door closed overnight.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect the speaker to do it themselves"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u8a4bef8b",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "transport"
+    },
+    {
+     "label": "The sentence",
+     "text": "I will board the airport shuttle tomorrow."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I boarded the airport shuttle yesterday.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I will board the airport shuttle tomorrow.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 2",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u9346b0b2",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "boundaries"
+    },
+    {
+     "label": "The sentence",
+     "text": "My friend brought photos to the café last night."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"My friend brings photos to the café tonight.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"My friend brought photos to the café last night.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "u9c6494e6",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "The caption display identifies speakers beside each quotation."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The caption display identifies speakers beside each quotation.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"Does the caption display identify speakers beside each quotation?\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Answer them: they are asking something"
+     },
+     {
+      "v": "action 2",
+      "label": "Do what they ask: they want you to act"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Take note of it: they are telling you something"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ua650ddbf",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "boundaries"
+    },
+    {
+     "label": "The sentence",
+     "text": "Please close the gate."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I closed the garden gate.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"My neighbor closed the garden gate.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect someone else, neither of you, to do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ua6bdb685",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "transport"
+    },
+    {
+     "label": "The sentence",
+     "text": "The driver knows the hospital entrance."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The driver does not know the hospital entrance.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The driver knows the hospital entrance.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 3",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ub2f59244",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "sensory"
+    },
+    {
+     "label": "The sentence",
+     "text": "The lamp shines through the curtain."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The lamp does not shine through the curtain.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The lamp shines through the curtain.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ub8fb50ba",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "relationships"
+    },
+    {
+     "label": "The sentence",
+     "text": "The nurse will call the clinic tomorrow."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The nurse called the clinic yesterday.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The nurse will call the clinic tomorrow.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as happening right now"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 3",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "uc6840c2f",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "health"
+    },
+    {
+     "label": "The sentence",
+     "text": "I will take medicine."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I take medicine with breakfast.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I don't take medicine with breakfast.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 3",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ud6984934",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "Please turn up the music."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I will turn the music down in a minute.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I turned the music down a minute ago.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ud7a6bbcb",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "food"
+    },
+    {
+     "label": "The sentence",
+     "text": "The soup contains."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The soup contains ground peanuts.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The soup does not contain ground peanuts.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 2",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "udee6fd6d",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "self-advocacy"
+    },
+    {
+     "label": "The sentence",
+     "text": "I don't need captions for the meeting tomorrow."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I need captions for the meeting tomorrow.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I don't need captions for the meeting tomorrow.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 3",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 4",
+      "label": "No reply or action is needed"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ue204fbe3",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "hobbies"
+    },
+    {
+     "label": "The sentence",
+     "text": "I want to play guitar later."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I will play guitar at home tonight.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I played guitar at home last night.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Plan for it as something still to come"
+     },
+     {
+      "v": "action 2",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 3",
+      "label": "Treat it as already done"
+     },
+     {
+      "v": "action 4",
+      "label": "Treat it as happening right now"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ue4e93a61",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "food"
+    },
+    {
+     "label": "The sentence",
+     "text": "They cook rice."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"Dad cooks rice for dinner at home.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"I cook rice for dinner at home.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Ask them to say it again or confirm what they mean"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Expect that you are the one who should do it"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ueb189712",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "transport"
+    },
+    {
+     "label": "The sentence",
+     "text": "Where is the bus stop?"
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"The bus doesn't stop at the library each day.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"The bus stops at the library each day.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Treat it as a no: do not go ahead, hold off"
+     },
+     {
+      "v": "action 2",
+      "label": "Treat it as a yes: go ahead"
+     },
+     {
+      "v": "action 3",
+      "label": "No reply or action is needed"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  },
+  {
+   "item_id": "ufdf2485f",
+   "blocks": [
+    {
+     "label": "Topic",
+     "text": "money"
+    },
+    {
+     "label": "The sentence",
+     "text": "I will pay rent."
+    }
+   ],
+   "qs": [
+    "q1",
+    "q2",
+    "q3"
+   ],
+   "qopts": {
+    "q1": [
+     {
+      "v": "reading 1",
+      "label": "They are saying: \"I paid the rent through the bank.\""
+     },
+     {
+      "v": "reading 2",
+      "label": "They are saying: \"You paid the rent through the bank.\""
+     },
+     {
+      "v": "unclear",
+      "label": "Something else, or I cannot tell"
+     }
+    ],
+    "q2": [
+     {
+      "v": "action 1",
+      "label": "Expect the speaker to do it themselves"
+     },
+     {
+      "v": "action 2",
+      "label": "Expect someone else, neither of you, to do it"
+     },
+     {
+      "v": "action 3",
+      "label": "Expect that you are the one who should do it"
+     },
+     {
+      "v": "action 4",
+      "label": "Ask them to say it again or confirm what they mean"
+     }
+    ]
+   }
+  }
+ ]
+}

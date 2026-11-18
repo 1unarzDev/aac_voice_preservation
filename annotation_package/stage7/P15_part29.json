@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "b7430757",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0c875f09",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Yes, I fail to remember my cousin."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yes, I remember my cousin."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m21d12ff4",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I'm sure we will go for a dog walk."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am sure we will go for a dog walk."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m25472455",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Could you please turn down the music in the car?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please lower the music in the car."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m54d9411a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am not inquiring of the nurse regarding the ramp."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I do not ask the nurse about the ramp."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m60c60b98",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "My roommate locks the bathroom door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No one in my room locks the bathroom door."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m64a2b19b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They told me to put the keys."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I was told by them to put the keys."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m7ea0ec54",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We need a museum permit."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No one needs a museum permit."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m82d2dd7d",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Would you mind lowering the brightness of the lamp?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Can you dim the lamp?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m84a17c14",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Following dinner, I secured the front door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I locked the front door after dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "maae3de90",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They fail to tell that the picnic is included."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They tell that the picnic is included."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbee0d5aa",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Is the pharmacy open?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the pharmacy is open."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mdb55b95d",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I invite Sam to the picnic this weekend."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I refuse to invite Sam to the picnic this weekend."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me866d194",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly sent the assignment."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You sent the assignment."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me8788435",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Please wait by the bus stop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Kindly remain at the bus stop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mffa75425",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Is the cafeteria music loud?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the cafeteria music is loud."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

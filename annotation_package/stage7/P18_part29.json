@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "9d226f02",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m033c647f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You pick the music for the trip."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You hardly pick the music for the trip."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m2340d674",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They wish to dim the lights in the hallway following their evening meal."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They want to lower the hallway lights after dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m353aa9d0",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They tell the cousin photos."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They fail to tell the cousin photos."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m5ad73610",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They do not wear headphones while traveling."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They don't use headphones when they travel."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m5e7fd890",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We'll visit our cousins later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We will visit our cousins later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6480f62f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are at the bus stop near the library."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are located at the bus stop in the vicinity of the library."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6a1de40a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Kindly give my aunt a call."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please call my aunt."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m96b47ab9",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I ride the bus to the museum."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The bus carries me to the museum."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m9d8dd98a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I use this path."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I take this route."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma1051a11",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are loading the bags."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are hardly loading the bags."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb545c5df",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They called their sister."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will call their sister later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbb83a267",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are at the bus stop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They're at the bus stop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me1b29080",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The screen will be quiet."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Now the screen is quiet."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me4e311f9",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Are they entering the room?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether they are entering the room."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mee98ad87",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We fail to plan to meet at the park Sunday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We plan to meet at the park Sunday."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

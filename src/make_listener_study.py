@@ -3,9 +3,18 @@
   python src/make_listener_study.py draw     # seeded draw of 120 intended messages + model assignment -> tmp/listener_draw.json
   python src/make_listener_study.py guard    # G1 (unchanged src/interventions.guard_one) on the 120 bare inputs
   python src/make_listener_study.py build    # analysis/listener/stimuli.jsonl + orchestration/listener_key_private.json
+  python src/make_listener_study.py package  # Stage 7 packet (Parts 28 and 29): per-person blind files, private keys, balance (frozen; --force redraws)
+
+package writes (rules: annotation/COORDINATOR_STEPS.md section 7, analysis/listener/PLAN.md, analysis/oracle_indep/PLAN.md Amendment 2):
+  annotation_package/stage7/<ID>_part28.json, <ID>_part29.json   blind files for annotation_package/rate_items.html
+  annotation/listener_key.csv, annotation/oracle_indep_key.csv    PRIVATE keys (+ .sha256 to deposit before sending)
+  annotation/assignments/stage7_plan.json                        per-person items and minutes, design record (read by make_assignments.py --stage 7)
+Part 28: one listener sees a judge unit (one sentence, merged across conditions with identical text) at most once, and any one intended message in at most
+one unit (Latin square over conditions); 2 different listeners per unit; nobody judges a pair they wrote or checked (src/make_frontier_parts.py hw_blocks).
+Part 29: 150 mutant/control candidates x 2 annotators, same exclusions on the source family; the two sentences in a seeded order, neutral wording.
 """
 from __future__ import annotations
-import argparse, asyncio, hashlib, json, random, re, sys
+import argparse, asyncio, csv, hashlib, json, random, re, sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -31,6 +40,18 @@ ACTION = {
 }
 CLARIFY = "Ask them to say it again or confirm what they mean"
 SLP_W = {"polarity": 1.0, "speech_act": 0.8, "agent": 0.8, "time_quantity": 0.8}
+
+
+ANN = ROOT / "annotation"
+PKG7 = ROOT / "annotation_package" / "stage7"
+S7_SALT = "s7-20261117"
+SEC7 = {"part28": 26.0, "part29": 16.0}        # seconds per judgment, assumptions to be replaced by the pilot timing
+N_PRACTICE = 2
+IND = ROOT / "analysis/oracle_indep"
+TARGET = {"neg_fail_to": "polarity", "neg_refuse_to": "polarity", "neg_hardly": "polarity", "neg_nobody": "polarity",
+          "role_passive": "agent", "role_embed": "agent", "q_embed": "speech_act", "time_implied": "time_quantity"}
+Q29 = ("Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure "
+       "the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.")
 
 
 def jl(p):
@@ -208,12 +229,175 @@ def build(sel, gres):
     return cnt, gap, uniq
 
 
+# ----------------------------------------------------------------------------- Stage 7 packet
+def opaque(prefix, x):
+    return prefix + hashlib.sha1(f"{S7_SALT}|{x}".encode()).hexdigest()[:8]
+
+
+def id_hash(annotator, check):
+    import make_frontier_parts as FP
+    return FP.id_hash(annotator, check)
+
+
+def _opt(v, label):
+    return {"v": v, "label": label}
+
+
+def part28_spec():
+    qs = {"q1": {"title": "What is the person saying?", "text": "Choose the message the sentence says. If it fits neither, or you cannot tell, choose the last option.",
+                 "options": [_opt("reading 1", "Reading 1"), _opt("reading 2", "Reading 2"), _opt("unclear", "Something else, or I cannot tell")]},
+          "q2": {"title": "How would you respond?", "text": "Choose what you would do after hearing the sentence.",
+                 "options": [_opt(f"action {i}", f"Response {i}") for i in range(1, 5)]},
+          "q3": {"title": "How sure are you?", "text": "How sure are you of what the person is saying?",
+                 "options": [_opt("1", "1: not sure"), _opt("2", "2: fairly sure"), _opt("3", "3: sure")]}}
+    intro = ["You will see a short topic line and one sentence that a person said to you. Say what you think the person is saying, how you would respond, and how sure you are.",
+             "Sentences come from different sources: some were written by a person, some were produced by a program. Do not try to guess the source. Answer only from what the sentence says to you."]
+    help_ = [{"term": "What is the person saying?", "text": "Two readings are shown. Choose the one the sentence says to you. If it says neither, or you cannot tell, choose 'Something else, or I cannot tell'."},
+             {"term": "How would you respond?", "text": "Choose the response that fits what you understood. 'Ask them to say it again or confirm' is right when you are not sure what they mean."},
+             {"term": "How sure are you?", "text": "1 means you are guessing, 3 means you are sure."}]
+    def pr(item_id, ctx, sentence, r1, r2, a, exp1, exp2, fb):
+        blocks = ([{"label": "Topic", "text": ctx}] if ctx else []) + [{"label": "The sentence", "text": sentence}]
+        qo = {"q1": [_opt("reading 1", r1), _opt("reading 2", r2), _opt("unclear", "Something else, or I cannot tell")],
+              "q2": [_opt(f"action {i + 1}", t) for i, t in enumerate(a)]}
+        return {"item_id": item_id, "blocks": blocks, "qs": ["q1", "q2"], "qopts": qo, "expected": {"q1": exp1, "q2": exp2}, "fb": fb}
+    practice = [
+        pr("prac-1", "Topic: shopping", "The shop is closed today.", 'They are saying: "The shop is closed today."', 'They are saying: "Is the shop closed today?"',
+           ["Answer them: they are asking something", "Take note of it: they are telling you something", "Ask them to say it again or confirm what they mean", "Do what they ask: they want you to act"],
+           "reading 1", "action 2", "The sentence tells you something (it is not a question), so Reading 1 and taking note of it."),
+        pr("prac-2", "Topic: dinner", "I did not cook the rice.", 'They are saying: "I did not cook the rice."', 'They are saying: "I cooked the rice."',
+           ["Treat it as already done", "Treat it as a no: it did not happen", "Ask them to say it again or confirm what they mean", "Plan for it as something still to come"],
+           "reading 1", "action 2", "The sentence says the rice was not cooked: Reading 1, and you would treat it as not done. Question 3 (how sure you are) has no right answer; you will see it in the real items.")]
+    return {"title": "Listen to a sentence and say what it means", "intro": intro, "help": help_, "questions": qs, "practice": practice}
+
+
+def part29_spec():
+    qs = {"q1": {"title": "Same meaning?", "text": Q29,
+                 "options": [_opt("same", "same"), _opt("different", "different"), _opt("unsure", "unsure")]}}
+    intro = ["You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+             "Answer from the words only. Use 'unsure' if you really cannot decide."]
+    help_ = [{"term": "Same or different", "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."},
+             {"term": "Style does not count", "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."}]
+    practice = [
+        {"item_id": "prac-1", "blocks": [{"label": "Sentence 1", "text": "I will go to the shop."}, {"label": "Sentence 2", "text": "I will not go to the shop."}],
+         "qs": ["q1"], "expected": {"q1": "different"}, "fb": "The second sentence says the opposite (not going), so they are different."},
+        {"item_id": "prac-2", "blocks": [{"label": "Sentence 1", "text": "It is raining now."}, {"label": "Sentence 2", "text": "It's raining now."}],
+         "qs": ["q1"], "expected": {"q1": "same"}, "fb": "Only the contraction differs, so they mean the same."}]
+    return {"title": "Do two sentences mean the same?", "intro": intro, "help": help_, "questions": qs, "practice": practice}
+
+
+def package(out_pkg=PKG7, out_ann=ANN, force=False, write=True):
+    import make_frontier_parts as FP
+    ids = json.loads((ANN / "assignments" / "plan.json").read_text())["annotators"]
+    FP.K.update({"part28": 2, "part29": 2}); FP.SEC.update(SEC7)
+    hw = FP.hw_blocks()
+    stim = jl(OUT / "stimuli.jsonl")
+    key = {k["item"]: k for k in json.loads((ROOT / "orchestration/listener_key_private.json").read_text())}
+    # ---- Part 28 units: one per judge_unit
+    by_unit = defaultdict(list)
+    for r in stim:
+        by_unit[r["judge_unit"]].append(r)
+    u28 = []
+    for unit in sorted(by_unit):
+        rs = by_unit[unit]
+        first = rs[0]
+        k = key[first["item"]]
+        assert all(r["output_text"] == first["output_text"] for r in rs)
+        u28.append({"item_id": opaque("u", unit), "unit": unit, "item": first["item"], "rows": rs, "key": k,
+                    "blocked": set(hw[k["family_id"]]), "group": first["item"]})
+    assert all(u["blocked"] for u in u28), "a family without a writer/checker record would silently exclude no one"
+    assert len({u["item_id"] for u in u28}) == len(u28)
+    # ---- Part 29 units
+    cand = {c["id"]: c for c in jl(IND / "candidates.jsonl")}
+    ikey = {k["id"]: k for k in jl(IND / "key.private.jsonl")}
+    assert set(cand) == set(ikey) and len(cand) == 150
+    u29 = []
+    for cid in sorted(cand):
+        k = ikey[cid]
+        flip = random.Random(f"{SEED}|p29|{cid}").random() < 0.5      # True: the mutant/changed text is Sentence 1
+        u29.append({"item_id": opaque("m", cid), "cid": cid, "cand": cand[cid], "key": k, "mut_first": flip,
+                    "blocked": set(hw[k["family_id"]]), "group": None})
+    assert all(u["blocked"] for u in u29), "a family without a writer/checker record would silently exclude no one"
+    assert len({u["item_id"] for u in u29}) == len(u29)
+    rnd = random.Random(int(hashlib.sha256(S7_SALT.encode()).hexdigest(), 16) % 2**32)
+    al = {}
+    for p_, us in (("part28", u28), ("part29", u29)):     # each part balanced on its own, so every listener gets about the same share of each part
+        al[p_] = FP.Alloc(ids, rnd, base=0)
+        al[p_].run({p_: us})
+    spec = {"part28": part28_spec(), "part29": part29_spec()}
+    per = {a: {} for a in ids}
+    key28, key29, files = [], [], {}
+    for p, units in (("part28", u28), ("part29", u29)):
+        for a in ids:
+            mine = [u for u in units if a in al[p].who[(p, u["item_id"])]]
+            sec = (len(mine) + N_PRACTICE) * SEC7[p]
+            per[a][p] = {"n_items": len(mine), "seconds": round(sec, 1), "minutes": round(sec / 60)}
+            items = []
+            for u in sorted(mine, key=lambda u: u["item_id"]):
+                if p == "part28":
+                    r = u["rows"][0]
+                    rng = random.Random(f"{SEED}|p28|{a}|{u['unit']}")
+                    rd = ["A", "B"]; rng.shuffle(rd)
+                    q2 = list(r["q2_options"]); rng.shuffle(q2)
+                    blocks = ([{"label": "Topic", "text": r["context"].replace("Topic: ", "", 1)}] if r["context"] else []) + [{"label": "The sentence", "text": r["output_text"]}]
+                    qo = {"q1": [_opt("reading 1", r["reading_" + rd[0]]), _opt("reading 2", r["reading_" + rd[1]]), _opt("unclear", "Something else, or I cannot tell")],
+                          "q2": [_opt(f"action {i + 1}", o["text"]) for i, o in enumerate(q2)]}
+                    items.append({"item_id": u["item_id"], "blocks": blocks, "qs": ["q1", "q2", "q3"], "qopts": qo})
+                    k = u["key"]
+                    key28.append({"item_id": u["item_id"], "annotator": a, "judge_unit": u["unit"], "item": u["item"],
+                                  "conditions": ";".join(x["condition"] for x in u["rows"]), "family_id": k["family_id"],
+                                  "dimension": k["dimension"], "nondefault": k["nondefault"], "model": k["model"], "hw_file": k["hw_file"],
+                                  "intended_reading": r["intended_reading"], "intended_value": k["intended_value"], "opposite_value": k["opposite_value"],
+                                  "slp_weight": k["slp_weight"], "reading1": rd[0], "q2_roles": "|".join(o["role"] for o in q2),
+                                  "context": r["context"] or "", "output_text": r["output_text"]})
+                else:
+                    c = u["cand"]; first, second = (c["mutant"], c["original"]) if u["mut_first"] else (c["original"], c["mutant"])
+                    items.append({"item_id": u["item_id"], "blocks": [{"label": "Sentence 1", "text": first}, {"label": "Sentence 2", "text": second}], "qs": ["q1"]})
+                    k = u["key"]
+                    key29.append({"item_id": u["item_id"], "annotator": a, "cand_id": u["cid"], "kind": k["kind"], "op": k["op"], "expected": k["expected"],
+                                  "source_dimension": k["dimension"], "target_dimension": TARGET.get(k["op"], k["dimension"]), "ref_value": k["ref_value"],
+                                  "target_ref": "affirmative" if k["op"].startswith("neg_") else k["ref_value"],
+                                  "lex_visible": k["lex_visible"], "family_id": k["family_id"], "variant": k["variant"], "mutant_is_sentence": 1 if u["mut_first"] else 2,
+                                  "original": c["original"], "mutant": c["mutant"]})
+            if mine:
+                s = spec[p]
+                files[f"{a}_{p}.json"] = {"check_id": p, "tool": "rate_items_v1", "version": 1, "n_items": len(items), "for": id_hash(a, p),
+                                          "title": s["title"], "intro": s["intro"], "help": s["help"], "questions": s["questions"],
+                                          "practice": s["practice"], "items": items}
+    tot = {a: round(sum(v["seconds"] for v in per[a].values()) / 60 + 2 * len(per[a])) for a in ids}    # + 2 min per part to open and download
+    plan = {"salt": S7_SALT, "seed": SEED, "seconds_per_judgment": SEC7, "practice_items_per_part": N_PRACTICE, "overhead_min_per_part": 2,
+            "n_units": {"part28": len(u28), "part29": len(u29)}, "listeners_per_unit": 2,
+            "per_person": per, "total_minutes": tot,
+            "note": "minutes per part = round((items + 2 practice) x seconds per judgment / 60); total adds 2 min per part for opening the file and downloading the CSV"}
+    if write:
+        out_pkg.mkdir(parents=True, exist_ok=True)
+        for f in out_pkg.glob("P*_part2[89].json"):
+            f.unlink()
+        for n, d in files.items():
+            (out_pkg / n).write_text(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
+        out_ann.mkdir(parents=True, exist_ok=True)
+        for name, rows in (("listener_key.csv", key28), ("oracle_indep_key.csv", key29)):
+            with open(out_ann / name, "w", newline="", encoding="utf-8") as fh:
+                w = csv.DictWriter(fh, list(rows[0])); w.writeheader(); w.writerows(rows)
+            (out_ann / name.replace(".csv", ".sha256")).write_text(hashlib.sha256((out_ann / name).read_bytes()).hexdigest() + f"  {name}\n")
+        (out_ann / "assignments").mkdir(exist_ok=True)
+        (out_ann / "assignments" / "stage7_plan.json").write_text(json.dumps(plan, indent=1) + "\n")
+    return {"plan": plan, "key28": key28, "key29": key29, "files": files, "units28": u28, "units29": u29}
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["draw", "needcalls", "guard", "build"])
+    ap.add_argument("cmd", choices=["draw", "needcalls", "guard", "build", "package"])
     ap.add_argument("--models")
+    ap.add_argument("--force", action="store_true", help="package: overwrite the frozen Stage 7 packet")
     a = ap.parse_args()
-    if a.cmd == "draw":
+    if a.cmd == "package":
+        if (ANN / "assignments" / "stage7_plan.json").exists() and not a.force:
+            print("stage7_plan.json exists (frozen); use --force to redraw"); sys.exit(0)
+        r = package()
+        t = r["plan"]["total_minutes"]
+        print("units", r["plan"]["n_units"], "minutes per person min", min(t.values()), "max", max(t.values()), "mean", round(sum(t.values()) / len(t), 1))
+        print({k: (min(v[k]["n_items"] for v in r["plan"]["per_person"].values()), max(v[k]["n_items"] for v in r["plan"]["per_person"].values())) for k in ("part28", "part29")})
+    elif a.cmd == "draw":
         draw()
     else:
         sel = json.loads((TMP / "listener_draw.json").read_text())

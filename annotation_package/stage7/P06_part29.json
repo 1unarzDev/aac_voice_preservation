@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "313d57b3",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m033c647f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You pick the music for the trip."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You hardly pick the music for the trip."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m21b63012",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will play a band later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will refuse to play a band later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m30c1f0c4",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The driver does not know."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The operator is unaware."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m353aa9d0",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They tell the cousin photos."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They fail to tell the cousin photos."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m5e7fd890",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We'll visit our cousins later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We will visit our cousins later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m5f21492a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will order soup later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I'll order soup later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6480f62f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are at the bus stop near the library."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are located at the bus stop in the vicinity of the library."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma3d63391",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They take the route."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The route is taken by them."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma79016ab",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They folded the ramp in the past."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The witness reported that they had folded the ramp in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mac80cbfb",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will read."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will refuse to read."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbb83a267",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are at the bus stop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They're at the bus stop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbfa9243f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Please ask you to keep the ramp."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Kindly request that you retain the ramp."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mcabf8049",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The bill does not cover the evening call."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The evening call is not included in the bill."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me5f08c40",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The clinic opens at nine on Monday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "On Monday, the clinic begins operations at nine."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "meab5fbf0",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will move the chair."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "He says that he will move the chair."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

@@ -42,6 +42,9 @@ system produced a sentence or what the "right" answer is meant to be. Label the 
   the sheet, so that Stage 5 is about 60 minutes in all (it can be done in two sittings). See their sections below.
 - **Parts 26 and 27 (Stage 6), `rate_items.html` with `stage6/<ID>_part26.json` and `_part27.json`** (did a draft say what
   you meant? your own messages): about 30 minutes in all, everyone. See their section below.
+<!-- stage7-time:start -->
+- **Parts 28 and 29 (Stage 7), `rate_items.html` with `stage7/<ID>_part28.json` and `_part29.json`** (what does a sentence mean to you? do two sentences mean the same?): about 28 minutes in all, everyone. See their section below.
+<!-- stage7-time:end -->
 
 ## Setup (2 minutes)
 1. Open `annotate.html` in a desktop browser (double-click it). It works offline and needs no installation.
@@ -372,6 +375,25 @@ tool offers for those keywords. Each uses the same tool and keys as Parts 22-25 
 The same draft can appear in Part 26 and again in Part 27, and the same sentence can appear for different messages; judge each
 one on its own. Answer from your own message only: no searching, no AI tools, no asking anyone. Return `labels_part26_<ID>.csv` and
 `labels_part27_<ID>.csv`.
+
+<!-- stage7:start -->
+## Parts 28 and 29 (Stage 7, about 28 min in all): what does a sentence mean? do two sentences mean the same? `rate_items.html`
+These two short tasks use sentences only; no personal information about you is recorded. Each uses the same tool and keys as Parts 22-27 (`rate_items.html`, your files
+`stage7/<ID>_part28.json` and `stage7/<ID>_part29.json`). Do **Part 28 first**, then Part 29.
+
+1. Open `rate_items.html`, click the file button and choose your file (e.g. `stage7/P02_part28.json`). Enter **the same annotator ID** and press `Enter`.
+   The tool refuses a file that is not yours. Two practice items with feedback come first.
+2. Keys are as in Parts 22-27: `1`-`9` choose an option, `↑`/`↓` move between questions, `Tab` goes to the optional note box, `Enter` next item,
+   `Backspace` previous item. Progress is saved in the browser. Click **Download CSV** at the end of each part.
+- **Part 28, what is the person saying? (about 42 sentences, about 22 min).** You see a topic line and one sentence that a person said to you. Three questions:
+  (1) which of two readings the sentence says, or "something else, or I cannot tell"; (2) how you would respond (four short choices, one of which is to ask
+  them to say it again); (3) how sure you are (1 to 3). Answer from the sentence alone. Sentences come from different sources; do not try to guess the source.
+- **Part 29, do the two sentences mean the same? (15 pairs, about 5 min).** Two sentences. Does Sentence 2 mean the same as Sentence 1: who does what to
+  whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Wording and style
+  differences do not count. Answer same, different or unsure.
+
+Answer from the words on the page only: no searching, no AI tools, no asking anyone. Return `labels_part28_<ID>.csv` and `labels_part29_<ID>.csv`.
+<!-- stage7:end -->
 
 ## Returning your work
 Send the downloaded CSV files, named like `labels_<run>_<ID>.csv` (and `repair_audit_<ID>.csv`,

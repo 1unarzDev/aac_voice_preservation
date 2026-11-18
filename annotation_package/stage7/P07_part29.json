@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "45be179a",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m1dac8e00",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The television volume was lowered by my brother for dinner."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "My brother lowered the television volume for dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m25b346fc",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The form was explained by the advocate at the reception desk."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The advocate explained the form at reception."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m38a108b4",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They told their sister to garden."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will tell their sister to garden later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4069ee46",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am of the opinion that the guitar is located in the music room."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I believe the guitar is in the music room."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6a1de40a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Kindly give my aunt a call."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please call my aunt."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m964d44b1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are going to save the photo."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The photo is going to be saved by them."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m96ce4896",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly collect the prescription."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You collect the prescription."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m99ae3137",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Yes, I will fail to wait for the taxi."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yes, I will wait for the taxi."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m99fb0db2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will start the game."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will fail to start the game."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb1b38416",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will turn off notifications."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I turned off turn notifications in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb6668647",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "He says that he waters the plants."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I water the plants."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mcd4907e1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will meet."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will fail to meet."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mcf461ba5",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They welcome us to the club."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They fail to welcome us to the club."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mdcbe6f1b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The garden gate was locked by them."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They locked the garden gate."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mee98ad87",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We fail to plan to meet at the park Sunday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We plan to meet at the park Sunday."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

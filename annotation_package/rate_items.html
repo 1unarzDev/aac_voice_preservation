@@ -110,8 +110,8 @@
 /* Items come from a file (JSON) made by src/make_frontier_parts.py (stage5/<ID>_part22..25.json). Blind: the file carries only
    opaque ids, the text to read and the questions; the loader refuses any other field and a file made for someone else. */
 const ALLOWED_TOP = ["check_id", "tool", "version", "n_items", "for", "title", "intro", "help", "questions", "practice", "items"];
-const ALLOWED_ITEM = ["item_id", "blocks", "qs"];
-const ALLOWED_PRACTICE = ["item_id", "blocks", "qs", "expected", "fb"];
+const ALLOWED_ITEM = ["item_id", "blocks", "qs", "qopts"];   // qopts (optional): per-item options for a question, {qid: [{v, label}, ...]}
+const ALLOWED_PRACTICE = ["item_id", "blocks", "qs", "expected", "fb", "qopts"];
 const TOOL = "rate_items_v1";
 let DATA = null, ITEMS = [], PRACTICE = [], QDEF = {}, QORDER = [];
 function RUNID() { return TOOL + ":" + (DATA ? DATA.check_id : ""); }
@@ -131,6 +131,7 @@ function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = se
 function shuffled(ids, seedStr) { const a = ids.slice(), r = rng(seedOf(seedStr)); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function idHash(id, check) { return (seedOf(String(id).trim().toUpperCase() + "|" + check) >>> 0).toString(16).padStart(8, "0"); }
 const optV = (o) => typeof o === "string" ? o : o.v;
+function qOpts(it, qid) { return (it.qopts && it.qopts[qid]) || QDEF[qid].options; }
 const optL = (o) => typeof o === "string" ? o : o.label;
 
 function validateItem(it, allowed, isPractice) {
@@ -141,6 +142,14 @@ function validateItem(it, allowed, isPractice) {
     if (!b || typeof b.label !== "string" || typeof b.text !== "string" || !b.text.trim() || Object.keys(b).some(k => k !== "label" && k !== "text")) return "Item " + it.item_id + " has a bad text block.";
   }
   for (const q of it.qs) if (!QDEF[q]) return "Item " + it.item_id + " asks an unknown question " + q + ".";
+  if (it.qopts !== undefined) {
+    if (!it.qopts || typeof it.qopts !== "object" || Array.isArray(it.qopts)) return "Item " + it.item_id + " has malformed options.";
+    for (const [q, os] of Object.entries(it.qopts)) {
+      if (!it.qs.includes(q) || !Array.isArray(os) || os.length < 2 || os.length > 9) return "Item " + it.item_id + " has malformed options for " + q + ".";
+      for (const o of os) if (!o || typeof o.v !== "string" || !o.v || typeof o.label !== "string" || !o.label.trim() || Object.keys(o).some(k => k !== "v" && k !== "label")) return "Item " + it.item_id + " has a bad option for " + q + ".";
+      if (new Set(os.map(o => o.v)).size !== os.length) return "Item " + it.item_id + " repeats an option value for " + q + ".";
+    }
+  }
   if (isPractice) for (const q of it.qs) if (!it.expected || !it.expected[q] || typeof it.fb !== "string") return "Practice item " + it.item_id + " is incomplete.";
   return null;
 }
@@ -255,7 +264,7 @@ function render() {
     const lg = document.createElement("legend"); lg.textContent = (qi + 1) + ". " + q.title; fs.append(lg);
     const p = document.createElement("p"); p.className = "q"; p.textContent = q.text; fs.append(p);
     const opts = document.createElement("div"); opts.className = "opts"; opts.setAttribute("role", "radiogroup"); opts.setAttribute("aria-label", q.title);
-    q.options.forEach((o, oi) => {
+    qOpts(it, qid).forEach((o, oi) => {
       const lab = document.createElement("label"); lab.className = "opt" + (r.answers[qid] === optV(o) ? " checked" : "");
       const inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.value = optV(o); inp.checked = r.answers[qid] === optV(o);
       inp.disabled = showingFeedback; inp.addEventListener("change", () => answer(qi, optV(o)));
@@ -371,8 +380,8 @@ document.addEventListener("keydown", (e) => {
   }
   if (t && t.tagName === "BUTTON" && (e.key === "Enter" || e.key === " ")) { if (e.key === "Enter") { e.preventDefault(); t.click(); } return; }
   if (PHASES[S.phase].intro) { if (e.key === "Enter") { e.preventDefault(); next(); } return; }
-  const it = cur().it, q = QDEF[it.qs[active]];
-  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1; if (n < q.options.length) { e.preventDefault(); answer(active, optV(q.options[n])); } }
+  const it = cur().it;
+  if (/^[1-9]$/.test(e.key)) { const n = Number(e.key) - 1; const os = qOpts(it, it.qs[active]); if (n < os.length) { e.preventDefault(); answer(active, optV(os[n])); } }
   else if (e.key === "Enter") { e.preventDefault(); next(); }
   else if (e.key === "Backspace") { e.preventDefault(); back(); }
   else if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, it.qs.length - 1); render(); }

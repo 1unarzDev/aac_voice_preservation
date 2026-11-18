@@ -1,24 +1,24 @@
 {
- "n_mutants": 4,
+ "n_mutants": 58,
  "mutation_table_sha256": "05d7f93114222e4f9a67e81c748bd8c84d74ea9b4337202dba743f02942f9c76",
  "clean_baseline_passes_all_columns": true,
  "real_tree_unchanged_by_sweep": true,
  "pooled_existing_tests": {
-  "killed": 2,
-  "n": 4,
-  "score": 0.5,
+  "killed": 39,
+  "n": 58,
+  "score": 0.6724,
   "wilson95": [
-   0.15,
-   0.85
+   0.544,
+   0.779
   ]
  },
  "pooled_with_supplementary_request_rebuild": {
-  "killed": 4,
-  "n": 4,
-  "score": 1.0
+  "killed": 46,
+  "n": 58,
+  "score": 0.7931
  },
  "killed_only_by_crash_or_timeout": 0,
- "killed_by_assertion_or_mismatch": 2,
+ "killed_by_assertion_or_mismatch": 39,
  "pytest_files": [
   "test_analyze",
   "test_assignments",
@@ -35,221 +35,268 @@
  ],
  "per_test": {
   "pytest_all": {
-   "killed": 1,
-   "n": 4,
-   "score": 0.25,
+   "killed": 18,
+   "n": 58,
+   "score": 0.3103,
    "wilson95": [
-    0.046,
-    0.699
+    0.206,
+    0.438
    ],
-   "unique_kills": 1
+   "unique_kills": 5
   },
   "pytest:test_analyze": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 3,
+   "n": 58,
+   "score": 0.0517,
    "wilson95": [
-    0.0,
-    0.49
+    0.018,
+    0.141
    ],
    "unique_kills": 0
   },
   "pytest:test_assignments": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_frontier_multilingual_register": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_hw_elic": {
    "killed": 1,
-   "n": 4,
-   "score": 0.25,
+   "n": 58,
+   "score": 0.0172,
    "wilson95": [
-    0.046,
-    0.699
+    0.003,
+    0.091
    ],
    "unique_kills": 0
   },
   "pytest:test_layer0": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 1,
+   "n": 58,
+   "score": 0.0172,
    "wilson95": [
-    0.0,
-    0.49
+    0.003,
+    0.091
    ],
    "unique_kills": 0
   },
   "pytest:test_parts56_scorers": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_resolution": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_stage23": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_stage4": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 5,
+   "n": 58,
+   "score": 0.0862,
    "wilson95": [
-    0.0,
-    0.49
+    0.037,
+    0.186
    ],
    "unique_kills": 0
   },
   "pytest:test_stage5_frontier": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_stage6_coverage": {
    "killed": 0,
-   "n": 4,
+   "n": 58,
    "score": 0.0,
    "wilson95": [
     0.0,
-    0.49
+    0.062
    ],
    "unique_kills": 0
   },
   "pytest:test_validate_cue_inputs": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 10,
+   "n": 58,
+   "score": 0.1724,
    "wilson95": [
-    0.0,
-    0.49
+    0.096,
+    0.289
    ],
    "unique_kills": 0
   },
   "oracle_identity": {
-   "killed": 1,
-   "n": 4,
-   "score": 0.25,
+   "killed": 7,
+   "n": 58,
+   "score": 0.1207,
    "wilson95": [
-    0.046,
-    0.699
+    0.06,
+    0.229
    ],
    "unique_kills": 0
   },
   "oracle_injection": {
-   "killed": 1,
-   "n": 4,
-   "score": 0.25,
+   "killed": 12,
+   "n": 58,
+   "score": 0.2069,
    "wilson95": [
-    0.046,
-    0.699
+    0.123,
+    0.328
    ],
    "unique_kills": 0
   },
   "oracle_challenge": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 4,
+   "n": 58,
+   "score": 0.069,
    "wilson95": [
-    0.0,
-    0.49
+    0.027,
+    0.164
    ],
    "unique_kills": 0
   },
   "validator_r5_replay": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 9,
+   "n": 58,
+   "score": 0.1552,
    "wilson95": [
-    0.0,
-    0.49
+    0.084,
+    0.269
    ],
    "unique_kills": 0
   },
   "validator_t9_replay": {
-   "killed": 0,
-   "n": 4,
-   "score": 0.0,
+   "killed": 4,
+   "n": 58,
+   "score": 0.069,
    "wilson95": [
-    0.0,
-    0.49
+    0.027,
+    0.164
    ],
    "unique_kills": 0
   },
   "rescore_frozen_endpoints": {
-   "killed": 1,
-   "n": 4,
-   "score": 0.25,
+   "killed": 27,
+   "n": 58,
+   "score": 0.4655,
    "wilson95": [
-    0.046,
-    0.699
+    0.343,
+    0.592
    ],
-   "unique_kills": 0
+   "unique_kills": 12
   },
   "request_rebuild": {
-   "killed": 3,
-   "n": 4,
-   "score": 0.75,
+   "killed": 8,
+   "n": 58,
+   "score": 0.1379,
    "wilson95": [
-    0.301,
-    0.954
+    0.072,
+    0.249
    ],
    "unique_kills": 0
   }
  },
  "by_class": {
   "K1": {
-   "n": 1,
+   "n": 10,
+   "killed": 9,
+   "killed_with_supplementary": 9
+  },
+  "K2": {
+   "n": 10,
+   "killed": 10,
+   "killed_with_supplementary": 10
+  },
+  "K3": {
+   "n": 6,
+   "killed": 0,
+   "killed_with_supplementary": 0
+  },
+  "K4": {
+   "n": 8,
+   "killed": 1,
+   "killed_with_supplementary": 8
+  },
+  "K5": {
+   "n": 7,
+   "killed": 5,
+   "killed_with_supplementary": 5
+  },
+  "K6": {
+   "n": 8,
+   "killed": 8,
+   "killed_with_supplementary": 8
+  },
+  "K7": {
+   "n": 3,
    "killed": 1,
    "killed_with_supplementary": 1
   },
-  "K4": {
-   "n": 3,
-   "killed": 1,
-   "killed_with_supplementary": 3
+  "K8": {
+   "n": 6,
+   "killed": 5,
+   "killed_with_supplementary": 5
   }
  },
  "survivors": [
+  "SF06",
+  "SF21",
+  "SF22",
+  "SF23",
+  "SF24",
+  "SF25",
+  "SF26",
   "SF27",
-  "SF33"
+  "SF28",
+  "SF29",
+  "SF30",
+  "SF31",
+  "SF32",
+  "SF33",
+  "SF40",
+  "SF41",
+  "SF51",
+  "SF52",
+  "SF53"
  ],
  "pooled_columns": [
   "pytest_all",
@@ -263,5 +310,5 @@
  "supplementary_columns": [
   "request_rebuild"
  ],
- "baseline_secs": 84.2
+ "baseline_secs": 84.5
 }

@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "381c47bd",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0633e828",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We plan a picnic in the park on Sunday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We refuse to plan a picnic in the park on Sunday."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m19227558",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "My friend is not sharing the holiday photos."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "My friend does not share the holiday photos."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m21d12ff4",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I'm sure we will go for a dog walk."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am sure we will go for a dog walk."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m25472455",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Could you please turn down the music in the car?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please lower the music in the car."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m311854ef",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Did they call their brother in the past?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether they called their brother in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6b064dd7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The cashier gives me a receipt."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No cashier gives me a receipt."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6d839ae5",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I refuse to carry the inhaler."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I carry the inhaler."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m98144908",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "No one respects the guest."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yes, they respect the guest."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "maae3de90",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They fail to tell that the picnic is included."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They tell that the picnic is included."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb276098a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are going to travel to the park by taxi later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will take a taxi to the park later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb2f4bd53",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I tasted the soup."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am tasting the soup now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "md6494c44",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The neighbors mentioned that they are planning a picnic."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are planning a picnic."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mdb55b95d",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I invite Sam to the picnic this weekend."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I refuse to invite Sam to the picnic this weekend."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mfcf22efa",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You cooked the vegetable soup for dinner."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The vegetable soup was cooked by you for dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mffffe181",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Did the rent payment leave my account [PAST]?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the rent payment left my account."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

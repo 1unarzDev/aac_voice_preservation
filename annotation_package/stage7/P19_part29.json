@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "c11550bb",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0633e828",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We plan a picnic in the park on Sunday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We refuse to plan a picnic in the park on Sunday."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m19227558",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "My friend is not sharing the holiday photos."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "My friend does not share the holiday photos."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4a39bb1f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The clerk explains that you pay the bill at the bank."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You pay the bill at the bank."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m74dff944",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Kindly begin the game."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please start the game."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m87d8c510",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They hardly play guitar."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They play guitar."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8f5ab589",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am asking whether the class meets in the upstairs room."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Does the class meet in the upstairs room?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m970f3f6f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I lowered the music."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will lower the music later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb1b38416",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will turn off notifications."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I turned off turn notifications in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mcbb6a48f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am going to phone the clinic."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will call the clinic."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mceda2b87",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will email the schedule to my teacher."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I'll email the schedule to my teacher."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me000c55b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "My train will leave the platform in ten minutes."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "In ten minutes, my train is scheduled to depart from the platform."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me3041b64",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is possible that the entrance ramp is unobstructed."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Perhaps the ramp by the entrance is clear."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me7073cd3",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "She says that she carries the bag."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I carry the bag."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mf1727ba8",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is possible that the refund will arrive."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Maybe the refund will arrive."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mfce6a857",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Is the cafe closed?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the cafe is closed."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

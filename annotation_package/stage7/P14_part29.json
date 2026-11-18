@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "b818ba2e",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0b91263b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They told them that the bus arrived."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They told them that the bus would arrive."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m1dac8e00",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The television volume was lowered by my brother for dinner."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "My brother lowered the television volume for dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m3eb2d81f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They refuse to sent the report."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They sent the report."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m40b74fd0",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will be sure the movie starts later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They'll be sure the movie starts later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m44581e2d",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are sure the receipt folder is here."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They're sure the receipt folder is here."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4900b248",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Nobody says yes."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The counselor says yes."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6d839ae5",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I refuse to carry the inhaler."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I carry the inhaler."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m71c24210",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will carry the folder."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "He says that he will carry the folder."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m7ea0ec54",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We need a museum permit."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No one needs a museum permit."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8b6bcb38",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are moving the chair."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The witness reports that they are moving the chair."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m9a94cde6",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "What movie is starting?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Which film is beginning?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb6668647",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "He says that he waters the plants."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I water the plants."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mc3a91bb7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I'll read the notes now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will read the notes now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me6c97d2f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The supervisor reads my schedule."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No supervisor reads my schedule."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mfcf22efa",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You cooked the vegetable soup for dinner."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The vegetable soup was cooked by you for dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

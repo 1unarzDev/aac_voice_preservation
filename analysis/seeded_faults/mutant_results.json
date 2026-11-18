@@ -24,6 +24,433 @@
    }
   }
  },
+ "SF02": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "Assumption: negate committed",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "19/21 runs differ from frozen endpoints: expC1/cp2_commitment/gemma3-4b|P0|actor/rate: 0.0 != 1.0 | pilot1/cp2_commitment/gemma3-4b|P0|bare/rate: 0.174 != 0.826 | hw2/cp2_commitment/gemma3-4b|P0|bare/rate: 0.017 != 0.983"
+   }
+  }
+ },
+ "SF03": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "committed: drop `not` (committed = is_unclear)",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "19/21 runs differ from frozen endpoints: expC1/cp2_commitment/gemma3-4b|P0|actor/rate: 0.0 != 1.0 | pilot1/cp2_commitment/gemma3-4b|P0|bare/rate: 0.174 != 0.826 | hw2/cp2_commitment/gemma3-4b|P0|bare/rate: 0.017 != 0.983"
+   }
+  }
+ },
+ "SF04": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "chose: variant-A value reported as B",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "19/21 runs differ from frozen endpoints: expC1/cp2_direction_vs_50pct/gemma3-4b|agent/A: 0 != 23 | pilot1/cp2_direction_vs_50pct/gemma3-4b|agent/A: 0 != 15 | hw2/cp2_direction_vs_50pct/gemma3-4b|speech_act/A: 0 != 93"
+   }
+  }
+ },
+ "SF05": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "constraint_preserving: `and` -> `or`",
+  "killed_by": [
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 111 cell mismatches, e.g. (('pol-07', 'A'), 'constraint_preserving', 'True', 'False')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "14/21 runs differ from frozen endpoints: expB1/cp1_constraint_preserving/gemma3-4b|P0|e_chips/rate: 1.0 != 0.643 | expC1/cp1_constraint_preserving/gemma3-4b|P0|actor/rate: 1.0 != 0.688 | oracle_inject/cp1_constraint_preserving/mutant|INJ|full/rate: 0.957 != 0.0"
+   }
+  }
+ },
+ "SF06": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "non-completion on a cue channel counted as constraint-preserving",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF07": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "general-dim comparison also scores the family's own critical dimension",
+  "killed_by": [
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 99 cell mismatches, e.g. (('pol-07', 'A'), 'contra_dims', 'polarity', '')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "20/21 runs differ from frozen endpoints: expB1/sensitivity_including_quarantine/cp1_constraint_preserving/llama3.1-8b|P0|i_y/rate: 0.844 != 0.906 | expC1/cp1_constraint_preserving/qwen2.5-7b|P0|both/rate: 0.484 != 0.508 | pilot1/cp1_constraint_preserving/gemma3-4b|P2|chipall/rate: 0.587 != 0.594"
+   }
+  }
+ },
+ "SF08": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "hedge_added inverted",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "16/21 runs differ from frozen endpoints: oracle_inject/stance_additions/identity|INJ/hedge_added: 0.086 != 0.0 | pilot1/stance_additions/gemma3-4b|P0/hedge_added: 0.048 != 0.0 | hw2/stance_additions/gemma3-4b|P0/hedge_added: 0.003 != 0.0"
+   }
+  }
+ },
+ "SF09": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "emphatic_added reference test inverted (!= -> ==)",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "15/21 runs differ from frozen endpoints: oracle_inject/stance_additions/mutant|INJ/emphatic_added: 0.0 != 0.078 | pilot1/stance_additions/gemma3-4b|P0/emphatic_added: 0.0 != 0.022 | hw2/stance_additions/qwen2.5-7b|P0/emphatic_added: 0.0 != 0.003"
+   }
+  }
+ },
+ "SF10": {
+  "cls": "K1",
+  "file": "src/attribute.py",
+  "desc": "arbiter labels never used when J1 != J2",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "13/21 runs differ from frozen endpoints: expB1/n_critical_unresolved: 2 != 0 | expC1/n_critical_unresolved: 73 != 0 | oracle_inject/speech_act_violation_quarantined_only/identity/n: 3 != 4"
+   }
+  }
+ },
+ "SF11": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "contra: counts dimensions NOT given by the channel",
+  "killed_by": [
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 9 cell mismatches, e.g. (('cer-08', 'A'), 'contra_dims', '', 'agent')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "13/21 runs differ from frozen endpoints: expB1/cp1_constraint_preserving/gemma3-4b|P0|e_chips/rate: 0.714 != 0.643 | expC1/cp1_constraint_preserving/gemma3-4b|P0|actor/rate: 0.5 != 0.688 | pilot1/cp1_constraint_preserving/gemma3-4b|P0|chip1/rate: 0.63 != 0.826"
+   }
+  }
+ },
+ "SF12": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "stance addition: counts dimensions given by the channel",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "21/21 runs differ from frozen endpoints: expB1/stance_additions/gemma3-4b|P0/any_stance_addition: 0.101 != 0.131 | expC1/stance_additions/gemma3-4b|P0/any_stance_addition: 0.445 != 0.369 | oracle_inject/stance_additions/mutant|INJ/any_stance_addition: 0.043 != 0.0"
+   }
+  }
+ },
+ "SF13": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "`full` is no longer a cue channel",
+  "killed_by": [
+   "oracle_identity",
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 240 cell mismatches, e.g. (('pol-07', 'A'), 'violation', '', 'False')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 240 cell mismatches, e.g. (('pol-07', 'A'), 'violation', '', 'True')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "8/21 runs differ from frozen endpoints: oracle_inject/cp1_constraint_preserving: keys differ ['identity|INJ|full', 'mutant|INJ|full'] | pilot1/cp1_constraint_preserving: keys differ ['gemma3-4b|P0|full', 'gemma3-4b|P1|full', 'gemma3-4b|P2|full',  | hw2/cp1_constraint_preserving: keys differ ['gemma3"
+   }
+  }
+ },
+ "SF14": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "`noncrit` is no longer an ambiguous channel",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "7/21 runs differ from frozen endpoints: pilot1/cp2_commitment: keys differ ['gemma3-4b|P0|noncrit', 'gemma3-4b|P1|noncrit', 'gemma3-4b|P2|noncrit', 'g | hw2/cp2_commitment: keys differ ['gemma3-4b|P0|noncrit', 'gpt-6.1-terra|P0|noncrit', 'llama3.1-8b|P0|noncrit', | ext_hw_nemo/cp2_commitment: keys d"
+   }
+  }
+ },
+ "SF15": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "channel_dims: chip1 gives the all_chips dimensions",
+  "killed_by": [
+   "pytest_all",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "pytest:test_stage4": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "7/21 runs differ from frozen endpoints: pilot1/cp1_constraint_preserving/gemma3-4b|P0|chip1/rate: 0.63 != 0.826 | hw2/cp1_constraint_preserving/gemma3-4b|P0|chip1/rate: 0.408 != 0.892 | ext_hw_nemo/cp1_constraint_preserving/mistral-nemo-12b|P0|chip1/rate: 0.729 != 0.973"
+   }
+  }
+ },
+ "SF16": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "channel_dims: full channel gives no general dimension",
+  "killed_by": [
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 9 cell mismatches, e.g. (('cer-08', 'A'), 'contra_dims', '', 'agent')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "8/21 runs differ from frozen endpoints: oracle_inject/stance_additions/mutant|INJ/any_stance_addition: 0.043 != 0.0 | pilot1/cp1_constraint_preserving/gemma3-4b|P0|full/rate: 1.0 != 0.957 | hw2/cp1_constraint_preserving/gemma3-4b|P0|full/rate: 1.0 != 0.983"
+   }
+  }
+ },
+ "SF17": {
+  "cls": "K2",
+  "file": "src/attribute.py",
+  "desc": "custom channel: cue test reversed subset",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "6/21 runs differ from frozen endpoints: expB1/cp1_constraint_preserving: keys differ ['gemma3-4b|P0x|e_alias', 'gemma3-4b|P0x|e_chips', 'gemma3-4b|P0x | expC1/cp1_constraint_preserving: keys differ ['gemma3-4b|P0|actor', 'gemma3-4b|P0|both', 'gemma3-4b|P0|pol', ' | wb1/cp1_constraint_preserving: key"
+   }
+  }
+ },
+ "SF18": {
+  "cls": "K2",
+  "file": "src/labels.py",
+  "desc": "chip table: [NOT] -> affirmative",
+  "killed_by": [
+   "pytest_all",
+   "oracle_identity",
+   "oracle_injection",
+   "validator_r5_replay",
+   "validator_t9_replay",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_supported_chips_compatible: validate_cue_inputs.CueContractError: conflicting: 'Keywords: [NOT] go home' vs polarity='negated': cue accepts ['affirmative'], disjoint from the req"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_supported_chips_compatible: validate_cue_inputs.CueContractError: conflicting: 'Keywords: [NOT] go home' vs polarity='negated': cue accepts ['affirmative'], disjoint from the req"
+   },
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 8 cell mismatches, e.g. (('act-10', 'A'), 'constraint_preserving', 'False', 'True')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 4 cell mismatches, e.g. (('act-10', 'A'), 'contra_dims', '', 'polarity')"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   },
+   "validator_t9_replay": {
+    "kind": "assert",
+    "detail": "t9 summary /raw/W-C r2c1/verdicts: keys differ ['conflicting']"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "9/21 runs differ from frozen endpoints: expB1/sensitivity_including_quarantine/cp1_constraint_preserving/gemma3-4b|P0|e_chips/rate: 0.656 != 0.625 | expC1/cp1_constraint_preserving/gemma3-4b|P0|both/rate: 0.602 != 0.75 | oracle_inject/cp1_constraint_preserving/identity|INJ|full/rate: 0.983 != 1.0"
+   }
+  }
+ },
+ "SF19": {
+  "cls": "K2",
+  "file": "src/labels.py",
+  "desc": "chip table: [YOU] -> speaker",
+  "killed_by": [
+   "pytest_all",
+   "oracle_identity",
+   "oracle_injection",
+   "validator_r5_replay",
+   "validator_t9_replay",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^; tests.test_validate_cue_inputs.UnitCases.test_supported_chips_compatible: validate_cue_inputs.CueContractError: conflicting: 'Keywords: [YOU] go home' vs agent='addressee': cue accepts ['speaker'], disjoint from the required"
+   },
+   "pytest:test_stage4": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_supported_chips_compatible: validate_cue_inputs.CueContractError: conflicting: 'Keywords: [YOU] go home' vs agent='addressee': cue accepts ['speaker'], disjoint from the required"
+   },
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 56 cell mismatches, e.g. (('act-09', 'A'), 'constraint_preserving', 'False', 'True')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 28 cell mismatches, e.g. (('act-09', 'A'), 'contra_dims', 'agent', '')"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   },
+   "validator_t9_replay": {
+    "kind": "assert",
+    "detail": "t9 summary /raw/W-D r2d1/verdicts: keys differ ['conflicting']"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "17/21 runs differ from frozen endpoints: expB1/cp1_constraint_preserving/gemma3-4b|P0|e_chips/rate: 0.286 != 0.643 | expC1/cp1_constraint_preserving/gemma3-4b|P0|both/rate: 0.594 != 0.75 | oracle_inject/cp1_constraint_preserving/identity|INJ|full/rate: 0.776 != 1.0"
+   }
+  }
+ },
+ "SF20": {
+  "cls": "K2",
+  "file": "src/labels.py",
+  "desc": "general_spec: requests no longer make certainty n/a",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "2/21 runs differ from frozen endpoints: main1/stance_additions/qwen2.5-7b|P2/any_stance_addition: 0.297 != 0.296 | span1/stance_additions/gpt-6.1-terra|I2/any_stance_addition: 0.695 != 0.693"
+   }
+  }
+ },
+ "SF21": {
+  "cls": "K3",
+  "file": "src/judge.py",
+  "desc": "_final: agreement is flagged as disagreement",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF22": {
+  "cls": "K3",
+  "file": "src/judge.py",
+  "desc": "_final: tiebreak returns J1 instead of layer0 value",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF23": {
+  "cls": "K3",
+  "file": "src/judge.py",
+  "desc": "_final: unresolved disagreement keeps J1 label",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF24": {
+  "cls": "K3",
+  "file": "src/judge.py",
+  "desc": "general-dim tiebreak uses the polarity layer0 label for every dimension",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF25": {
+  "cls": "K3",
+  "file": "src/judge.py",
+  "desc": "critical label: J2 ignored (J1 compared with itself)",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF26": {
+  "cls": "K3",
+  "file": "src/judge.py",
+  "desc": "added_content read from the extraction pass instead of pass B",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
  "SF27": {
   "cls": "K4",
   "file": "src/build_requests.py",
@@ -34,6 +461,71 @@
    "request_rebuild": {
     "kind": "assert",
     "detail": "3 request files differ: pilot: key sets differ (1152) | test: key sets differ (2832) | hw: key sets differ (4028)"
+   }
+  }
+ },
+ "SF28": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "chipall channel emits only the critical chips",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "3 request files differ: pilot: key sets differ (1152) | test: key sets differ (2832) | hw: key sets differ (4020)"
+   }
+  }
+ },
+ "SF29": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "chipall channel puts keywords before the chips",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "3 request files differ: pilot: key sets differ (2304) | test: key sets differ (5712) | hw: key sets differ (8048)"
+   }
+  }
+ },
+ "SF30": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "full channel types the bare keywords instead of the source sentence",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "3 request files differ: pilot: key sets differ (1728) | test: key sets differ (4320) | hw: key sets differ (6232)"
+   }
+  }
+ },
+ "SF31": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "noncrit channel drops the noncritical word",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "3 request files differ: pilot: key sets differ (648) | test: key sets differ (1488) | hw: key sets differ (2100)"
+   }
+  }
+ },
+ "SF32": {
+  "cls": "K4",
+  "file": "src/build_requests.py",
+  "desc": "noncritical word inserted at the wrong position (> -> <)",
+  "killed_by": [],
+  "also_killed_by_supplementary": true,
+  "detail": {
+   "request_rebuild": {
+    "kind": "assert",
+    "detail": "3 request files differ: pilot: key sets differ (1152) | test: key sets differ (2880) | hw: key sets differ (4116)"
    }
   }
  },
@@ -70,6 +562,506 @@
    "request_rebuild": {
     "kind": "assert",
     "detail": "5 request files differ: expB1: request 6b5a420d differs | wb1: request f9b45f8a differs | pilot: request 53fd799b differs"
+   }
+  }
+ },
+ "SF35": {
+  "cls": "K5",
+  "file": "src/labels.py",
+  "desc": "critical_match: plain no longer honoured by emphatic",
+  "killed_by": [
+   "pytest_all",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "pytest:test_stage4": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "7/21 runs differ from frozen endpoints: pilot1/cp1_constraint_preserving/gemma3-4b|P0|chip1/rate: 0.761 != 0.826 | ext_hw_nemo/cp1_constraint_preserving/mistral-nemo-12b|P0|chip1/rate: 0.929 != 0.973 | ext_hw_qwen14/cp1_constraint_preserving/qwen2.5-14b|P0|chip1/rate: 0.899 != 0.977"
+   }
+  }
+ },
+ "SF36": {
+  "cls": "K5",
+  "file": "src/labels.py",
+  "desc": "critical_match: acceptance relaxed to also accept refusal",
+  "killed_by": [
+   "oracle_injection",
+   "oracle_challenge",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 4 cell mismatches, e.g. (('act-10', 'B'), 'critical_match', 'True', 'False')"
+   },
+   "oracle_challenge": {
+    "kind": "assert",
+    "detail": "challenge: 2 cell mismatches, e.g. (('ch2-a07',), 'match_prod', 'True', 'False')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "1/21 runs differ from frozen endpoints: oracle_inject/speech_act_violation_quarantined_only/mutant/rate: 0.5 != 1.0"
+   }
+  }
+ },
+ "SF37": {
+  "cls": "K5",
+  "file": "src/labels.py",
+  "desc": "critical_match: plain~emphatic relaxation applied to every certainty value",
+  "killed_by": [
+   "pytest_all",
+   "oracle_identity",
+   "oracle_injection",
+   "oracle_challenge",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "pytest:test_stage4": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 30 cell mismatches, e.g. (('cer-07', 'B'), 'critical_match', 'False', 'True')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 29 cell mismatches, e.g. (('cer-07', 'B'), 'critical_match', 'True', 'False')"
+   },
+   "oracle_challenge": {
+    "kind": "assert",
+    "detail": "challenge: 2 cell mismatches, e.g. (('ch-13',), 'match_prod', 'False', 'True')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "11/21 runs differ from frozen endpoints: oracle_inject/cp1_constraint_preserving/identity|INJ|full/rate: 0.914 != 1.0 | pilot1/cp1_constraint_preserving/gemma3-4b|P0|chip1/rate: 0.761 != 0.826 | ext_hw_nemo/cp1_constraint_preserving/mistral-nemo-12b|P0|chip1/rate: 0.894 != 0.973"
+   }
+  }
+ },
+ "SF38": {
+  "cls": "K5",
+  "file": "src/labels.py",
+  "desc": "critical_match: acceptance~statement relaxation removed",
+  "killed_by": [
+   "oracle_challenge",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_challenge": {
+    "kind": "assert",
+    "detail": "challenge: 2 cell mismatches, e.g. (('ch2-a10',), 'match_prod', 'False', 'True')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "5/21 runs differ from frozen endpoints: expB1/speech_act_violation_quarantined_only/gemma3-4b/rate: 0.518 != 0.054 | pilot1/speech_act_violation_quarantined_only/gemma3-4b/rate: 0.458 != 0.146 | main1/speech_act_violation_quarantined_only/gemma3-4b/rate: 0.708 != 0.365"
+   }
+  }
+ },
+ "SF39": {
+  "cls": "K5",
+  "file": "src/labels.py",
+  "desc": "critical_match: final equality inverted",
+  "killed_by": [
+   "pytest_all",
+   "oracle_identity",
+   "oracle_injection",
+   "oracle_challenge",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.ScoringTests.test_not_applicable_certainty_does_not_make_completion_unknown: AssertionError: np.False_ is not true; tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "pytest:test_analyze": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.ScoringTests.test_not_applicable_certainty_does_not_make_completion_unknown: AssertionError: np.False_ is not true"
+   },
+   "pytest:test_stage4": {
+    "kind": "assert",
+    "detail": "tests.test_stage4.test_stage5_scorers_self_check: AssertionError: ('score_treated_check.py', '', 'Traceback (most recent call last):\n    File \"/home/lunarz/aac-voice-preservation/tmp/sf...^^^^^^^^^^^^"
+   },
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 324 cell mismatches, e.g. (('pol-07', 'A'), 'critical_match', 'False', 'True')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 318 cell mismatches, e.g. (('pol-07', 'A'), 'critical_match', 'True', 'False')"
+   },
+   "oracle_challenge": {
+    "kind": "assert",
+    "detail": "challenge: 58 cell mismatches, e.g. (('ch-01',), 'match_prod', 'False', 'True')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "21/21 runs differ from frozen endpoints: expB1/cp1_constraint_preserving/gemma3-4b|P0|e_chips/rate: 0.286 != 0.643 | expC1/cp1_constraint_preserving/gemma3-4b|P0|actor/rate: 0.0 != 0.688 | oracle_inject/cp1_constraint_preserving/identity|INJ|full/rate: 0.086 != 1.0"
+   }
+  }
+ },
+ "SF40": {
+  "cls": "K5",
+  "file": "src/oracle_wa.py",
+  "desc": "oracle verdict(): violation = critical_match",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF41": {
+  "cls": "K5",
+  "file": "src/oracle_wa.py",
+  "desc": "oracle verdict(): contradiction test inverted",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF42": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "requirement_set: plain no longer honoured by emphatic",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay",
+   "validator_t9_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_requirement_set_mirrors_wb_report_honours: AssertionError: False != True : ('certainty', 'plain assertion', 'strongly certain/emphatic')"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_requirement_set_mirrors_wb_report_honours: AssertionError: False != True : ('certainty', 'plain assertion', 'strongly certain/emphatic')"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay.csv differs from frozen"
+   },
+   "validator_t9_replay": {
+    "kind": "assert",
+    "detail": "t9 summary /raw/hw1/verdicts: keys differ ['compatible_but_coarser']"
+   }
+  }
+ },
+ "SF43": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "requirement_set: polite values no longer a class",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay",
+   "validator_t9_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_noop_and_precedence: AssertionError: Tuples differ: ('unchanged_noop', 'compatible_but_coarser') != ('unchanged_noop', 'compatible')\n\nFirst differing element 1:\n'compatibl"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_noop_and_precedence: AssertionError: Tuples differ: ('unchanged_noop', 'compatible_but_coarser') != ('unchanged_noop', 'compatible')\n\nFirst differing element 1:\n'compatibl"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   },
+   "validator_t9_replay": {
+    "kind": "assert",
+    "detail": "t9 summary /raw/W-C r2c1/verdicts: keys differ ['compatible_but_coarser']"
+   }
+  }
+ },
+ "SF44": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "decode: several cues for one dimension are unioned instead of intersected",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_unknowns: AssertionError: 'compatible_but_coarser' != 'conflicting'\n- compatible_but_coarser\n+ conflicting"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_unknowns: AssertionError: 'compatible_but_coarser' != 'conflicting'\n- compatible_but_coarser\n+ conflicting"
+   }
+  }
+ },
+ "SF45": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "validate: disjoint accepted/required sets no longer conflict",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_known_conflict_shapes_rejected: AssertionError: 'compatible_but_coarser' != 'conflicting'\n- compatible_but_coarser\n+ conflicting"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_known_conflict_shapes_rejected: AssertionError: 'compatible_but_coarser' != 'conflicting'\n- compatible_but_coarser\n+ conflicting"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   }
+  }
+ },
+ "SF46": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "validate: compatible test reversed (req <= accepted)",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_sure_is_coarser_than_emphatic_and_never_certified: AssertionError: 'compatible' != 'compatible_but_coarser'\n- compatible\n+ compatible_but_coarser"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_sure_is_coarser_than_emphatic_and_never_certified: AssertionError: 'compatible' != 'compatible_but_coarser'\n- compatible\n+ compatible_but_coarser"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   }
+  }
+ },
+ "SF47": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "validate: conflicting verdict only for non-consensus claims",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_known_conflict_shapes_rejected: AssertionError: 'unknown' != 'conflicting'\n- unknown\n+ conflicting"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_known_conflict_shapes_rejected: AssertionError: 'unknown' != 'conflicting'\n- unknown\n+ conflicting"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   }
+  }
+ },
+ "SF48": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "decode: 'would you' no longer a politeness marker",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.FrozenWBReplay.test_replay_matches_frozen_audit_without_changing_inputs: AssertionError"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.FrozenWBReplay.test_replay_matches_frozen_audit_without_changing_inputs: AssertionError"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   }
+  }
+ },
+ "SF49": {
+  "cls": "K6",
+  "file": "src/validate_cue_inputs.py",
+  "desc": "decode: 'feel sorry' no longer treated as ambiguous",
+  "killed_by": [
+   "pytest_all",
+   "validator_r5_replay"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_noop_and_precedence: AssertionError: Tuples differ: ('conflicting', 'conflicting') != ('unchanged_noop', 'unknown')\n\nFirst differing element 0:\n'conflicting'\n'unchanged_no"
+   },
+   "pytest:test_validate_cue_inputs": {
+    "kind": "assert",
+    "detail": "tests.test_validate_cue_inputs.UnitCases.test_noop_and_precedence: AssertionError: Tuples differ: ('conflicting', 'conflicting') != ('unchanged_noop', 'unknown')\n\nFirst differing element 0:\n'conflicting'\n'unchanged_no"
+   },
+   "validator_r5_replay": {
+    "kind": "assert",
+    "detail": "replay internal assertion failed: "
+   }
+  }
+ },
+ "SF50": {
+  "cls": "K7",
+  "file": "src/layer0.py",
+  "desc": "layer0: requests no longer certainty n/a",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_layer0.test_cases: AssertionError: 'Could you please help me with my coat?': certainty expected 'n/a (question/request)' got 'plain assertion'\nassert not [\"'Could you pl"
+   },
+   "pytest:test_layer0": {
+    "kind": "assert",
+    "detail": "tests.test_layer0.test_cases: AssertionError: 'Could you please help me with my coat?': certainty expected 'n/a (question/request)' got 'plain assertion'\nassert not [\"'Could you pl"
+   }
+  }
+ },
+ "SF51": {
+  "cls": "K7",
+  "file": "src/layer0.py",
+  "desc": "layer0: booster outranks hedge",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF52": {
+  "cls": "K7",
+  "file": "src/layer0.py",
+  "desc": "layer0: polarity negated if ANY main clause is negated",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF53": {
+  "cls": "K8",
+  "file": "src/runio.py",
+  "desc": "occurrence validity: `and` -> `or`",
+  "killed_by": [],
+  "also_killed_by_supplementary": false,
+  "detail": {}
+ },
+ "SF54": {
+  "cls": "K8",
+  "file": "src/explode.py",
+  "desc": "text normalisation no longer lower-cases",
+  "killed_by": [
+   "oracle_identity",
+   "oracle_injection",
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "oracle_identity": {
+    "kind": "assert",
+    "detail": "identity: 1440 cell mismatches, e.g. (('pol-07', 'A'), 'critical', '', 'negated')"
+   },
+   "oracle_injection": {
+    "kind": "assert",
+    "detail": "injection: 1449 cell mismatches, e.g. (('pol-07', 'A'), 'critical', '', 'affirmative')"
+   },
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "1/21 runs differ from frozen endpoints: oracle_inject/n_critical_unresolved: 232 != 0"
+   }
+  }
+ },
+ "SF55": {
+  "cls": "K8",
+  "file": "src/analyze.py",
+  "desc": "bootstrap point estimate divides by families, not valid rows",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.BootstrapTests.test_cluster_dependence_changes_ci: AssertionError: 50.0 != 0.5"
+   },
+   "pytest:test_analyze": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.BootstrapTests.test_cluster_dependence_changes_ci: AssertionError: 50.0 != 0.5"
+   }
+  }
+ },
+ "SF56": {
+  "cls": "K8",
+  "file": "src/analyze.py",
+  "desc": "paired difference direction reversed",
+  "killed_by": [
+   "pytest_all"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "pytest_all": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.BootstrapTests.test_pairing_preserves_perfect_delta: AssertionError: np.float64(-0.20000000000000004) != 0.2 within 7 places (np.float64(0.4) difference)"
+   },
+   "pytest:test_analyze": {
+    "kind": "assert",
+    "detail": "tests.test_analyze.BootstrapTests.test_pairing_preserves_perfect_delta: AssertionError: np.float64(-0.20000000000000004) != 0.2 within 7 places (np.float64(0.4) difference)"
+   }
+  }
+ },
+ "SF57": {
+  "cls": "K8",
+  "file": "src/attribute.py",
+  "desc": "ambiguous-channel dedupe ignores channel",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "3/21 runs differ from frozen endpoints: wb1/cp2_commitment/gemma3-4b|P0|restored/rate: 0.882 != 0.889 | wb1i/cp2_commitment/gpt-6.1-terra|P0|restored/rate: 0.824 != 0.833 | elic1/cp2_commitment/gemma3-4b|P0|human_P04/rate: 0.945 != 0.933"
+   }
+  }
+ },
+ "SF58": {
+  "cls": "K8",
+  "file": "src/attribute.py",
+  "desc": "endpoints: quarantined refusal/acceptance families are KEPT in primary estimates",
+  "killed_by": [
+   "rescore_frozen_endpoints"
+  ],
+  "also_killed_by_supplementary": false,
+  "detail": {
+   "rescore_frozen_endpoints": {
+    "kind": "assert",
+    "detail": "6/21 runs differ from frozen endpoints: expB1/n_rows: 1792 != 1568 | oracle_inject/n_rows: 240 != 232 | pilot1/n_rows: 7680 != 7360"
    }
   }
  }

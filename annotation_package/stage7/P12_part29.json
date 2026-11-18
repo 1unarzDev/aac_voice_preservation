@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "16de3a48",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0c875f09",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Yes, I fail to remember my cousin."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yes, I remember my cousin."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m299141b7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am going to consume the medication at a later time."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will take medicine later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m327253e7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "LATER check account"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Checked account."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m60f40ffc",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Kindly remain at the gate."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please wait at the gate."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m62e556c6",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I request a ramp at the main entrance."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I fail to request a ramp at the main entrance."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m71c24210",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will carry the folder."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "He says that he will carry the folder."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8fe31337",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The chef makes soup for lunch today."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Soup is made by the chef for lunch today."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m96ce4896",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly collect the prescription."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You collect the prescription."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m970f3f6f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I lowered the music."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will lower the music later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbc9dbc51",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "No one among our friends knows the meeting place."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Our friends know the meeting place."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mc3a91bb7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I'll read the notes now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will read the notes now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mcbb6a48f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am going to phone the clinic."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will call the clinic."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "md04f155b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am asking whether the bus reaches the town centre at noon."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Does the bus reach the town centre at noon?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me3041b64",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is possible that the entrance ramp is unobstructed."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Perhaps the ramp by the entrance is clear."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me6c97d2f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The supervisor reads my schedule."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No supervisor reads my schedule."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}
