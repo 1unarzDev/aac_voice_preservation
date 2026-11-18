@@ -1,0 +1,2465 @@
+1    Necessary but Not Sufficient: Preserving the Writer’s Commitments and
+2
+3
+     Covering Their Intended Message in LLM Keyword Expansion for AAC
+4
+5    AUTHORS WITHHELD, Institution withheld, Country
+6
+7
+     A person who types a few keywords and lets a language model write the sentence needs the sentence to be the one they meant. We
+8    asked 20 classmate writers, none of them AAC users, to rate model drafts of their own keywords against the sentences they had
+9    intended (200 drafts, 4 models). A one-token cue raised the share of drafts judged to be the intended version from 11.2% to 39.2%, and
+10   on 332 further items (three models) it cut polarity reversals from 23.8 to 1.6 per 1,000 messages. Preserving the critical commitment is
+11   nonetheless necessary and not sufficient: writers accepted 1 of 200 drafts as written and 40.0% as written or with a small edit, and
+12
+     the shortfall came from misresolved events and roles and detail lost in compression, not added content (0.0% of primary reasons).
+13
+     Automatic judges agreed with the writers only weakly (𝜅 0.24), so each result is reported against a human check, with two clinician
+14
+15
+     raters and an inconclusive repair-usability audit marked as thin; access-method, tap and reading costs were not studied, and two paid
+16   design consultants who use AAC shaped the requirements only. We therefore propose treating commitment preservation as a filter
+17   and measuring how much of the writer’s whole intended message a set of approval-gated drafts covers.
+18
+19
+     CCS Concepts: • Human-centered computing → Accessibility technologies.
+20
+     Additional Key Words and Phrases: augmentative and alternative communication, large language models, meaning preservation,
+21
+     writer intent, evaluation validity
+22
+23
+24   1   Introduction
+25
+     A person who communicates by selecting a few words can now ask a language model to turn them into a sentence.
+26
+27   For a writer who selects words slowly this promises a large gain in speed, and it is the premise of a line of systems
+28   that expand abbreviations, keywords and partial phrases into full utterances [7, 8, 21]. It also changes what a message
+29   is. The words the writer selects are the writer’s message in compressed form, and the model fills in everything they
+30
+     leave open. Whether the filled-in sentence is the sentence the writer meant is a property of the model’s defaults, not
+31
+32   of its fluency. Unusual, blunt, short and incomplete sentences are legitimate messages, so a system that makes them
+33   smoother has changed them; this is why we study drafts that a system only proposes and the writer approves.
+34
+35       Lead result. We asked 20 writers to rate model drafts of their own keywords against the sentences they had intended.
+36   A one-token cue added to the keywords raised the share of drafts judged to be the intended version from 11.2% to 39.2%
+37
+     (+28.0 points [+14.8, +42.0]; 200 drafts, 4 models). Yet writers accepted only 1 of the 200 drafts as written, and 40.0% as
+38
+39
+     written or with a small edit. The shortfall is not added content (0.0% of primary reasons). Among drafts whose critical
+40   commitment an automatic judge marked correct, the main reasons were misresolved events and roles (48.8%) and detail
+41   lost in compression (45.7%). Preserving the critical commitment is therefore a necessary filter and not the objective. The
+42
+     objective is to cover the writer’s whole intended message with drafts that the writer approves before anything is spoken.
+43
+44
+     This single result organises the paper; the remaining studies establish the filter (a missing cue is the main source of
+45   silent reversals, and a cue repairs them), check the instruments that scored it, and bound what asking and guarding add.
+46
+47       Who the data come from. Every human datum in this paper comes from adult non-author university classmates (the
+48   writers and coders) and from two speech-language pathologists. None is an AAC user, and the sentences the writers
+49
+     intended were written for this study. Our central claim is therefore writer-intent agreement among non-AAC adults. Two
+50
+51   Author’s Contact Information: Authors withheld, Institution withheld, City, Country.
+52   Manuscript submitted to ACM                                                                                                           1
+      2                                                                                                          Authors withheld
+
+53    paid design consultants who use AAC reviewed the requirement list; we report only what changed in it, and we treat
+54
+      nothing they said as data. We do not claim benefit to AAC users; Section 6.3 states the limits once.
+55
+56
+          What is new relative to our earlier papers. Two shorter papers from this project, an archival paper and a non-archival
+57
+58
+      workshop paper [3, 4], report the deletion-based guard on constructed families (speech-act joint pass 78.8% to 88.6% on
+59    78 fresh families) and the discovery-set cue result. We restate those results in shortened form and cite them; the guard
+60    numbers appear in this paper only in Section 4.6, where they are marked as restated. New here are the human-written
+61
+      pair replication (20 writers), the writer-intent study and whole-message analysis, the clinician severity weights, the
+62
+63
+      blind repair-usability audit, the human check of the arbiter, the same-items profile and the ask-policy comparison. The
+64    same-items speech-act figures (75.6% to 90.4%, 332 elicitation units) differ from the guard figures above because they
+65    come from a different item set, a different baseline (cue present) and three models.
+66
+67        Why the cue matters. Consider one stored case. A writer’s intended sentence was “The supervisor does not read my
+68
+      schedule.” The keywords were supervisor read. A local model returned “The supervisor read.”, fluent and the opposite
+69
+70    of the message; with the cue [NOT] added it returned “The supervisor did not read.” This is a rule-selected best-case
+71    illustration and not a typical draw: it is the first, in a fixed hash order, of 104 polarity families in which the bare output
+72    committed to the wrong polarity and the cue output to the right one. Because the rule conditions on a wrong bare
+73
+      output, the cue’s 99.3% [98.6, 99.8] success on those 414 rows is a best case. The rate at which bare outputs were wrong
+74
+75    (49.8% of 832 rows from 7 writers) is a design ceiling of a contrast whose two variants share one bare input, not a model
+76    finding; the informative quantity is the gain from the cue.
+77
+78        Supporting results. The default is systematic in the minimal-pair setting: with bare keywords models chose the
+79
+      affirmative reading in at least 99.0% of inputs across 6 models, and without the prompt legend the share stays at 98.4%
+80
+      (four models). The bare input is built to be ambiguous between the two variants, so the affirmative share is partly a
+81
+82    property of that design; it points in the direction Chen et al. report for negative commonsense facts [10], which we do
+83    not claim as new. What we add is its price on the same 332 items (three models): polarity reversals fall from 23.8 to 1.6
+84
+      per 1,000 messages with the cue. Weighted by what two speech-language pathologists judged serious, the cue lowers
+85
+      the failure rate from 57.4% to 14.9%; with two raters this is an expert review, not an estimate for a population. A blind
+86
+87    audit by three classmate raters per item of guard repairs was inconclusive: 71.7% of repairs were usable against 85.0% of
+88    controls, a difference of −13.3 points [−27.6, +1.5], so a usability cost is neither shown nor excluded. Automatic judges
+89
+      agreed with the writers only weakly (𝜅 0.24). The arbiter that resolves judge disagreements matched human coders
+90
+      in 77.4% of the 124 committed codings on disputed units (a check with 38.0% of codings excluded as unsure or blank;
+91
+92    Section 3.6). Last, ask-when-uncertain policies did not beat asking at random at the same number of taps under an
+93    arithmetic model; no person was asked.
+94
+          Table 1 gives the items, writers and models behind each headline so that no figure is read at the wrong denominator.
+95
+96
+          Contributions.
+97
+98         (1) A writer-intent result: a one-token cue raises the intended-version match from 11.2% to 39.2%, yet one draft in
+99
+               200 is accepted as written, and the shortfall is compression loss and misresolved events and roles, not added
+100
+               content.
+101
+102        (2) A commitment-preservation harness with writer-written minimal pairs, controlled cue channels, and a per-
+103            dimension default priced per 1,000 messages, with its denominators stated.
+104   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    3
+105   Table 1. Denominators behind each headline number. Writers are classmates unless stated; “–” means not applicable. The six-model
+106   default is not the denominator of any cue contrast.
+107
+108
+              Headline                                         Items                        Writers/raters      Models
+109
+110
+              Affirmative share on bare input                  hw1 and machine pairs, up    7 writers           6 (legend test: 4)
+                                                               to 104 polarity families
+111
+              Cue gain over a non-critical word (hw1)          67 families                  6 writers           4
+112
+              Reversals per 1,000 (same items)                 332 units                    –                   3
+113
+              Writer-intent match and acceptance               200 drafts                   20 writers          4
+114           SLP severity weights and weighted failure        7 error types; 4,368 (hw1)   2 raters            4
+115                                                            and 1,872 (fresh) targets
+116           Guard on fresh families (restated)               78 families, 1,872 targets   –                   4
+117           Repair-usability audit                           60 items per arm             6 raters, 3 per     guard outputs
+118                                                                                         item
+119           Arbiter check                                    100 disputed units, 124      20 coders           –
+120
+                                                               committed codings
+              Ask policies                                     332 units (arithmetic)       none                3
+121
+122
+123
+124        (3) An assessment of the instruments (judges, arbiter, clinician weights, repair audit) with the exclusions and the
+125            dependence between codings reported.
+126
+           (4) Requirement changes from two design consultants (drafts never spoken without approval, an exact-copy default,
+127
+               differing drafts shown) and bounded negative results on ask policies, model uncertainty and partner context.
+128
+129
+          Roadmap. Section 2 places the work in the literature. Section 3 defines the units, the attribution rule and the
+130
+131   instruments. Section 4 reports the default, the cue, the guard and the repair audit; Section 5 reports the writer-grounded
+132   studies, the expert and consultant input and the negative results on asking. Section 6 draws the design implications,
+133
+      states the limits of the evidence once, and sets out the study that follows.
+134
+135
+136
+      2   Related Work
+137       Language models for AAC text entry and expansion. Prediction for AAC has long traded keystrokes for speed. Recent
+138
+      systems use large language models to expand compressed input. Cai et al. expand first-letter abbreviations in context,
+139
+140
+      reaching exact expansion of most phrases up to a stated abbreviation length and showing that a single prior turn more
+141   than doubles accuracy [8]. SpeakFaster extends this with keyword and mask editing for eye-gaze typists with ALS
+142   and evaluates keystroke savings in simulation, in a pilot with non-AAC participants and with eye-gaze typists [7].
+143
+      KWickChat generates context-aware sentences from bags of keywords for AAC dialogue [21]. The measures in this
+144
+145
+      literature are motor savings, exact match or user-rated quality. Valencia et al. show why that is not enough: AAC users
+146   who tested live model suggestions judged them able to save time and effort, but found it important that phrases reflect
+147   their own communication style and preferences [22]. Work on affective sentence generation tests whether an emotion
+148
+      cue reaches the output [11], and design probes with people with aphasia examine how AI-driven AAC meets complex
+149
+150
+      communication needs [18]. None of these studies, as far as we found, ask whether a specific commitment the writer
+151   did not type (a negation, a sentence type, an actor) is silently overwritten by a model default, or price that failure per
+152   message.
+153
+154       Acceptance, abandonment and review burden. Assistive technology is abandoned at a high rate when it does not
+155
+      match what the person needs or wants to do [19], and clinicians report that the fit between a system and its user’s
+156
+                                                                                                              Manuscript submitted to ACM
+      4                                                                                                         Authors withheld
+
+157   communication goals decides whether AAC succeeds or is dropped [16]. Text prediction adds a review burden: every
+158
+      suggestion must be read and judged, and predictive text shapes what people write [2]. Valencia et al. report that AAC
+159
+160
+      users want suggestions to reflect their own style [22]. These findings make the cost of a draft that is almost, but not
+161   quite, the intended message a first-order concern, and are why we measure acceptance as written and with a small edit
+162   instead of match alone. The tradition of “nothing about us without us” [9] is also why we separate what classmates and
+163
+      clinicians can tell us from what only AAC users can.
+164
+165
+166       Faithfulness and positivity bias. Chen et al. show that language models produce sentences that are too positive about
+167
+      negative commonsense knowledge, including in a constrained keywords-to-sentence task, and attribute the effect to
+168
+      negation reporting bias and statistical shortcuts [10]. Their task scores generated sentences against factual truth and is
+169
+170   not set in AAC. We treat their result as the prior for polarity and contribute three things it does not contain: the human
+171   base rate against which the default is measured, a per-dimension profile that extends beyond negation to politeness,
+172
+      speech act, actor and certainty, and the price per 1,000 messages. The direction of a default also depends on the task:
+173
+      Braun finds that language models lean toward answering “no” on agreement tasks, unlike the acquiescence typical of
+174
+175   people [6]. This is a reason to profile each dimension and not to assume one direction for all of them, which is how we
+176   proceed. For testing behavior beyond accuracy, we use the logic of behavioral testing with minimal pairs [20].
+177
+178
+179       Clarification, cues and when to ask. Interactive systems can resolve ambiguity by asking. Zhang and Choi frame the
+180   decision as a trade-off between the user’s preference for speed and for care, and estimate the entropy over user intents
+181   to decide when clarification is worth its cost [24]. Conf-Gen brings conformal risk control to generative models and
+182
+      includes a guarantee that a chat system has asked enough clarifying questions [17]. These works treat a question as
+183
+184   a cost the user bears, which in AAC is a physical cost per selection. We take the cheapest form of that interaction, a
+185   one-token cue the writer may supply before generation, and compare it against ask policies on the same items.
+186
+187
+188
+          AI-mediated communication and authorship. Hancock, Naaman and Levy define AI-mediated communication as
+189   interpersonal communication in which an intelligent agent operates on behalf of a communicator by modifying,
+190   augmenting or generating messages [13]. AAC expansion is a case where the agent generates the message from a
+191
+      specification, which makes authorship an evaluation question and not only an ethical one. Jakesch et al. show in an
+192
+193
+      online experiment that a writing assistant built to argue one side shifted the opinions that participants expressed and
+194   later reported [14], and Valencia et al. report that AAC users want suggested phrases to be theirs [22]. These findings
+195   motivate an approval gate: a draft is the writer’s message only if the writer says it is.
+196
+197
+198       Validity of the evaluation instrument. Language-model judges are widely used and have known position, verbosity
+199   and self-enhancement biases [25]; prediction-powered inference gives a way to correct their error with a small human-
+200
+      labelled sample [1]. In AAC, Frisch et al. argue that technical, user-mediated and functional evaluation must be
+201
+      combined, and call for measuring alignment with the writer’s intent [12]. We measure it: against the writers’ own
+202
+203   intended sentences, against clinicians’ severity ratings and against a human-validated arbiter, and we treat the resulting
+204   agreement as a finding about the instrument.
+205
+206
+207       Relation to concurrent work. The overlap with our two shorter papers [3, 4] is stated in Section 1; we do not repeat it.
+208   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    5
+209
+210       Study stages mapped onto the keyword-expansion pipeline
+211
+212
+
+            Writer types                                                             Commitment check                    Writer
+213                                     Model                    Draft or                                               approval
+                                                                                       (7 dimensions;
+214          keywords                 (expands)                set of drafts          judge + arbiter)                    gate
+215
+216
+217                                                                                              never spoken without
+                                                                                                    approval (R6)
+218
+219
+220         Optional cue
+                                                                                                                          Speak
+221         (one token)
+222
+223
+224       Evidence                   hw1, 6 models,           Guard and repair        SLP severity weights             Writer-intent
+225       for each stage              cue controls                 audit              (n=2 expert review)                 study
+226
+227
+228   Fig. 1. Keyword-expansion pipeline with the approval gate, and where each study of this paper plugs in. A one-token cue is optional;
+229   nothing is spoken until the writer approves a draft (requirement R6, from the design consultants who use AAC). Schematic; no data.
+230
+231
+232   3     Method
+233
+234
+      The method charges each wrong sentence to the party that could have prevented it. A message is rendered through
+235   input channels that fix what the person supplied, a model writes a sentence, two extractor prompts label what the
+236   sentence commits to, and deterministic code turns the labels into a verdict. The verdict is a function of the stored
+237
+      labels, the item specification and the channel, so a change of rule re-scores every stored output without a model call.
+238
+239
+      This section defines the units and the attribution rule (Sections 3.1 and 3.2), describes the extractor and its arbiter
+240   (Section 3.3), and then validates each link of the chain: the checker against seeded and unseeded faults (Section 3.4), the
+241   extractor against human coders (Section 3.5) and the arbiter against human coders (Section 3.6). The writer-grounded
+242
+      and expert instruments that the later sections use are defined in Section 3.7, and estimation in Section 3.8. The harness
+243
+244
+      follows the one first described in our concurrent archival and workshop papers [3, 4]; the description here is complete
+245   for the results that follow.
+246
+247   3.1    Items, channels, models
+248
+249
+          Families and dimensions. A family is a minimal pair of source sentences that share their content words and differ on
+250   one critical dimension: polarity, agent (who acts), certainty, speech act (statement, question or request), politeness, or
+251   time/quantity. The two members of a pair, variants A and B, are rendered from the same keywords, so the keywords
+252
+      alone cannot tell them apart. The extractor answers the family’s critical question for every output and five general
+253
+254
+      questions (polarity, speech act, agent, certainty, politeness), and it answers an added-content question. These are the
+255   seven fields that the human checks below validate.
+256
+257       Channels. Each variant is shown to the model through five channels that differ in how much of the message the
+258   person supplied. Bare gives the keywords only. Non-critical adds one content word that does not bear on the critical
+259
+      dimension and so matches the length of a cue. Chip adds the critical value as a one-token cue such as [NOT], [?] or
+260
+                                                                                                               Manuscript submitted to ACM
+      6                                                                                                                Authors withheld
+
+261   Table 2. One hw1 polarity family through the five channels, with the verdict each channel can give. Selection rule, declared before
+262   the draw: polarity families ordered by SHA-256 of the family id; the first family in which the bare output commits to the wrong value
+263
+      while the chip output matches; models in alphabetical order, then variant A, then B (here 104 qualifying families; model gemma3-4b,
+      variant B, target negated; stored outputs and stored labels, not edited). Source sentence: “The supervisor does not read my schedule.”
+264
+      Rate the example represents: a committed bare output has the wrong value for the variant in 49.8% [49.5, 50.0] of 832 bare rows (7
+265
+      writers), the design ceiling of a pair that shares one bare input, not a finding about models; given the chip, the output matches the
+266
+      target in 99.3% [98.6, 99.8] of 414 rows.
+267
+268
+                   Channel          Input shown                Stored output           Label       Verdict
+269
+270                Bare         supervisor read           The supervisor read.         affirmative assumption (wrong value)
+271                Non-critical supervisor        read    The supervisor read          affirmative assumption (wrong value)
+272                             schedule                  the schedule.
+273
+                   Chip         [NOT] supervisor read     The supervisor did not       negated     kept
+                                                          read.
+274
+                   All-chips        [NOT] [TELL] [THEY] The supervisor did not         negated     kept
+275
+                                    supervisor read       read.
+276
+                   Full             typed source sentence The supervisor does          negated     kept
+277                                                       not read my schedule.
+278
+279
+280
+281
+      [PLAIN]. All-chips adds every cue the variant needs. Full gives the source sentence itself. The chip is a probe of whether
+282   supplied information is used, not a proposed interface: its real cost depends on the access method, and a plain-word cue
+283   and an irrelevant-chip control are scored as separate channels (Section 4). Table 2 shows one family through all five
+284
+      channels.
+285
+286
+          Evidence sets. The primary set is the human-written pairs (hw1). 20 adult non-author classmates wrote 574 candidate
+287
+288
+      minimal pairs and the keywords for them; three independent blind checkers per pair, who never saw model outputs, and
+289   a tie-break by one of six fixed checkers kept 547, of which 546 are analysed after the exclusions stated in the hw1 report.
+290   Each contrast rests on 6 to 7 writers. Generation ran on all candidates before the checks, so dropped pairs are removed
+291
+      at analysis time. A confirmation set of machine-written families with three pre-specified contrasts, and a development
+292
+293
+      set used to build the prompts and codebook, are reported in the concurrent papers and enter here only where cited.
+294
+295
+          Models and prompt. Six models from 5 families write one sentence per request: Qwen2.5-7B-Instruct, Llama-3.1-
+296   8B-Instruct, Gemma-3-4B-it, Qwen2.5-14B-Instruct and Mistral-Nemo-12B-Instruct (4-bit GGUF, llama.cpp, local) and
+297   one API model, gpt-6.1-terra. All use one fixed one-sentence prompt (P0) with greedy decoding; the prompt includes a
+298
+      short legend of the cues, and the no-legend arms of Section 4 test whether the legend matters. The hw1 run comprises
+299
+300
+      16,388 requests. A lite commercial Gemini model was added later under the same prompts as a seventh, machine-API
+301   replication, and is labelled as such where its rows appear. Reissuing the same request reproduces the text for 76.4 to
+302   90.8% of local requests and 44.4 to 71.4% of API requests, so every comparison is made on stored outputs for the same
+303
+      request and not on fresh draws.
+304
+305
+306   3.2   Attribution by construction
+307
+      Attribution is a property of the design, not a judgment about each output. Let 𝐶 (𝑥) be the set of dimensions whose
+308
+      value input 𝑥 fixes: the chip or the typed sentence fixes the critical dimension in the chip, all-chips and full channels,
+309
+310   and nothing fixes it in the bare and non-critical channels. For an output 𝑦 with extracted value 𝐿𝑑 (𝑦) on dimension 𝑑
+311   and meant value 𝑠𝑑 :
+312   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    7
+313
+            • Violation. 𝑑 ∈ 𝐶 (𝑥) and 𝐿𝑑 (𝑦) is not admissible for 𝑠𝑑 . The model held the value and did not keep it. This is
+314
+315
+              the only miss a checker can enforce.
+316         • Assumption. 𝑑 ∉ 𝐶 (𝑥) and 𝐿𝑑 (𝑦) is a committed value. The model chose a reading the input left open. An
+317           assumption is not a pass or a fail; we report its direction and share.
+318
+            • Loss. 𝑑 ∉ 𝐶 (𝑥) and 𝐿𝑑 (𝑦) ≠ 𝑠𝑑 . The writer’s value never reached the model. Loss and assumption are the same
+319
+320
+              open-channel event seen from the interface (the value was lost) and from the model (it committed anyway); a
+321           loss is never charged as a violation.
+322
+323
+324   Because the two variants of a pair share their open-channel input, a model that commits is wrong on exactly one
+325   of them, so paired match in an open channel has a ceiling that the design fixes; the quantity of interest is the gap
+326
+      between open and cue channels, not the open-channel rate. The cue gain (chip minus non-critical) measures how
+327
+      much of the loss a cue recovers, and the irrelevant-chip control separates cue content from added tokens (Section 4). A
+328
+329   reference-fidelity score would charge the model for what the interface omitted; this rule does not.
+330     Verdicts are computed in code from labels, the item specification and the channel, identically for treated and untreated
+331
+      outputs. Plain assertion is honoured by emphatic certainty; unresolved critical labels are excluded and counted, not
+332
+      filled from either extractor prompt; and the added-content field is carried as a descriptive rate and enters no verdict
+333
+334   rule. Refusal and acceptance speech-act families are quarantined from every primary estimate because their predicate
+335   failed the oracle tests of Section 3.4. The rule decides only whether explicit, text-level values are kept. It does not
+336
+      judge fluency, reference resolution or whether the writer would accept the sentence; the writer-grounded analysis of
+337
+      Section 5.1 extends the attribution to that question.
+338
+339
+340
+        Input honesty (R5). A failure cannot be charged to a model if the displayed input misstated the claim. A validator
+341
+342   therefore decodes the rendered input and rejects any cue that contradicts the source before generation. Replayed on
+343   13,496 chip inputs from the confirmation, composition and hw1 sets, it found 0 conflicts; 10,528 inputs were verified
+344
+      compatible and 2,968 (time chips and one long alias) lie outside its decoder, with 0 generation or judge calls. Two defects
+345
+      found while building the harness, a relaxed acceptance predicate and an input-builder fallback, and the regression test
+346
+347   each produced, are traced in the concurrent archival paper [4].
+348
+349
+350   3.3   Extractor, judge pair and arbiter
+351
+352
+      The extractor is gpt-6.1-sol at low reasoning effort, a model that is not among those under test. It sees the output alone,
+353   not the source, the model or the channel, except for the added-content question, which also sees the visible input. Two
+354   prompt variants, J1 and J2, differ in wording and option order. On hw1 they labelled 12,823 unique output units and
+355
+      agreed on the critical label for 98.7% (𝜅 = .986); the remaining 170 units (1.3%) went to a blind arbiter. The arbiter is a
+356
+357
+      Claude model from a different family than the judge (claude-opus-5-5 for the confirmation set, claude-sonnet-5-5 for the
+358   other runs) and sees only the output text, the critical question and its options. No J1 fallback enters a primary estimate,
+359   and every hw1 critical label is resolved by agreement or by the arbiter. In the confirmation set the arbiter resolved
+360
+      177 units (259 rows) after outcomes were known, blind to reference, model and condition, and the unknown-masked
+361
+362
+      analysis is kept as a sensitivity analysis. One tested model, gpt-6.1-terra, shares a vendor with the judge; its critical-label
+363   𝜅 against humans is reported with the other models in Section 3.5.
+364
+                                                                                                           Manuscript submitted to ACM
+      8                                                                                                                Authors withheld
+
+365   Table 3. Checker evidence. Authored rows use sentences we wrote or edited; the real-output rows seed one-value edits into stored
+366   hw1 outputs (seed 20261102; four booster mutants, which the contract tolerates, are excluded from the mutant counts); the last rows
+367
+      compare the judge’s verdicts with the consensus of human coders on unedited outputs from held-out sets (Parts 10 and 13). Intervals
+      are Wilson 95%. None of the first two groups is an error rate on unedited outputs.
+368
+369
+370                           Check                                                                          Result
+371                           Authored inputs
+372                           Identity: unchanged source passes; false alarms                                 0/120
+373                           Scoped one-value mutants detected                                             120/120
+374                           Keyed challenge, mutants detected, production                                   22/24
+375                           rule
+376                             acceptance group only                                                           4/6
+377
+                                strict rule, no acceptance relaxation                                         24/24
+                              Keyed challenge controls, false alarms                                           0/24
+378
+379                           Seeded edits of real outputs (mutants caught; false alarms on 100 controls)
+380                           Judge (J1, J2, arbiter)                                  193/196 [95.6, 99.5]%; 0/100
+381
+                              Surface lexicon (near-circular)                                       190/196; 4/100
+                              String overlap                                                       138/196; 16/100
+382
+383                           Unedited outputs, held-out human consensus (precision; recall, %)
+384                           Violation verdict (39 positives)                  87.8 [74.5, 94.7]; 92.3 [79.7, 97.3]
+385                           Preservation-failure verdict (53 positives)       84.5 [73.1, 91.6]; 92.5 [82.1, 97.0]
+386
+387
+388   3.4   Testing the checker
+389
+      The checker is the extractor plus the verdict code; we test it as software, in the spirit of the test-oracle and mutation-
+390
+      analysis literature [5, 15, 23]: an authorized change must pass and an unauthorized one must fail. Table 3 lists the
+391
+392   evidence in the order of how far it is from our own hands.
+393
+394       Authored faults. An unchanged source injected as its own output must pass (the identity test), and a hand-written
+395   one-value change must be caught (scoped mutants). A keyed challenge set of controls and one-feature mutants, with
+396   keys hashed before the first extractor call, has four groups: acceptance, embedded actors, question versus request, and
+397
+      mitigated requests. The production rule detects 22 of 24 keyed mutants; the strict rule without the acceptance relaxation
+398
+399   detects 24 of 24, and the relaxation accounts for the difference, using up the pre-specified miss tolerance. This is why
+400   refusal and acceptance families are quarantined: removing a false alarm from the acceptance predicate removed fault
+401   sensitivity.
+402
+403       Faults in real outputs. Hand-written faults are easy. We therefore seeded 200 one-value mutants into stored hw1
+404
+      outputs that the checker had scored as preserving, with operators for each dimension (negation insertion and removal,
+405
+406
+      speech-act flips, agent swaps, hedge insertion and removal, politeness addition and removal, time shifts), and drew
+407   100 meaning-preserving surface edits as controls. The judge caught 193 of 196 mutants with 0 false alarms, and no
+408   unresolved rows. A surface lexicon of negation, hedge, politeness, tense and question cues scored 190 of 196 with 4
+409
+      false alarms, and string overlap 138 of 196 with 16 false alarms. The lexicon matches the cues the operators insert,
+410
+411
+      so its score shows that the operators are lexically shallow and not that a lexicon is an adequate checker; the judge’s
+412   advantage shows mainly on controls.
+413
+414       Faults nobody seeded. Seeded faults are faults we thought of. The test on unedited outputs uses the human-coded
+415   sets of Section 3.5: on the two sets not used to build the codebook, the judge’s violation verdicts have precision 87.8%
+416   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    9
+417   Table 4. Extractor against human coders, test split (Cohen’s 𝜅). Strict rule: ties and unsure answers count as disagreement; intervals
+418   are family-cluster bootstrap 95%. Human–human and judge–human 𝜅 are computed on the same items for the critical field. All
+419   coders were adult non-author classmates. Added content is the weakest field in Parts 10 and 13.
+420
+421           Gate                             Coders Items (test) Stored 𝜅 Strict critical 𝜅 [CI] Hum–hum Judge–hum Speech act Added
+422
+              H7 (development)                      2   163 (121)     0.95   0.93 [0.86, 0.98]     0.97        0.92       0.90   0.89
+423           Round 10 (fresh runs)                 3   162 (121)     0.93   0.93 [0.88, 0.97]     0.96        0.92       0.86   0.17
+424           Round 12 (typed keywords)             4   161 (115)     0.98   0.93 [0.87, 0.97]     0.99        0.97       0.89   0.87
+              Round 13 (human-written pairs)        3   152 (110)     0.94   0.93 [0.87, 0.98]     0.99        0.94       0.96   0.69
+425
+426
+427
+428   and recall 92.3% against the human consensus (39 positives in 217 verdicts), and its preservation-failure verdicts 84.5%
+429
+      and 92.5% (Table 3). Each set has few positives, so the intervals are wide. Machine agreement is not validation: on a
+430
+431
+      keyed challenge sentence, “I can’t wait to go to the party,” the judge and the machine panel read negated, a known blind
+432   spot for idiomatic negation, which is why no claim here rests on machine-panel agreement.
+433
+434
+      3.5   Validating the extractor against human coders
+435
+436   Four human gates compare the extractor’s final label with the plurality label of trained human coders on stored outputs
+437   (Table 4). Coders labelled the same fields from the stored output with the same options as the judge, after being
+438
+      taught the same codebook with practice items. The development gate (H7) used the extraction inventory from which
+439
+440
+      the codebook was built. round 10 coded fresh outputs from the confirmation, composition and guard-transfer runs;
+441   round 12 coded outputs for keywords that other annotators typed for stored messages; round 13 coded outputs for the
+442   human-written pairs. Rounds 10, 12 and 13 are therefore later checks on outputs the harness was not developed on.
+443
+      Each gate samples stored outputs by a seeded draw and keeps a seeded quarter for calibration; 𝜅 is computed on the
+444
+445
+      remaining test split. The stored rule excludes ties and unsure answers from the reference; the strict rule counts them as
+446   disagreement, and the table reports the strict rule with a family-cluster bootstrap interval.
+447      On the critical field the extractor’s strict-rule 𝜅 is at least 0.93 in every gate, with the lowest lower interval bound at
+448
+      0.86, against a pre-specified gate of 0.6. In every gate the judge–human 𝜅 sits just below the human–human 𝜅 on the
+449
+450
+      same items, so the extractor is close to, not above, the agreement that two people reach. By model, the critical-field 𝜅
+451   on the development gate lies between 0.90 and 0.97 (gpt-6.1-terra, 𝑛 = 41). The added-content field is the exception:
+452   its 𝜅 is 0.17 on round 10 and 0.69 on round 13 (J1–J2 agreement on hw1 is 𝜅 = 0.69), so no verdict or estimate here is
+453
+      built on it. These gates cover untreated outputs and the codebook is shared between humans and judge; they validate
+454
+455
+      extraction of explicit markers, not repaired or rewritten text, which the audits of Section 3.7 address.
+456
+457   3.6   Validating the arbiter against human coders (arbiter check)
+458
+459
+      The arbiter decides every unit on which the two extractor prompts disagree, so it carries the hardest labels. The arbiter
+460   check asks people to code exactly those units. Each of 20 annotators coded a seeded set of items, two coders per item.
+461   The key holds 100 arbiter units, stratified by run and by the precedent the arbiter applied (for example, “I want X,
+462
+      please” is a request), on every one of which J1 and J2 disagreed, and 30 “Can you. . . ?” or “Could you. . . ?” outputs for
+463
+464
+      which the codebook example was hidden. Coders did not receive items from their own pairs or keyword sets. Of the 200
+465   codings on arbiter units, 124 carried a label; the remaining 38.0% were unsure or blank and are excluded, not counted
+466   as disagreement, so the agreement below is conditional on a person committing to a label. Intervals are Wilson and
+467
+      descriptive, because codings are not independent.
+468
+                                                                                                                  Manuscript submitted to ACM
+      10                                                                                                              Authors withheld
+
+469   Table 5. Humans against the arbiter and each judge prompt on the 100 arbiter units (124 labelled codings, all units ones on which J1
+470   and J2 disagreed). The arbiter sided with J1 on 62 units, with J2 on 36 and with neither on 2.
+471
+472                                     Reference   Agreement with humans (%) [95% CI]         Cohen’s 𝜅
+473
+                                        Arbiter                            77.4 [69.3, 83.9]        0.74
+474
+                                        J1                                 60.5 [51.7, 68.6]        0.56
+475                                     J2                                 39.5 [31.4, 48.3]        0.34
+476
+477
+478
+           Humans side with the arbiter more often than with either prompt (Table 5). They match the arbiter on 81.3% [71.1,
+479
+      88.5] of codings where it sided with J1 and 74.5% [60.5, 84.7] where it sided with J2, so the arbiter is not simply the more
+480
+481   frequent prompt. Where both coders of an item gave a label, they agree with each other on 94.0% (50 items, 𝜅 = 0.93); 3
+482   arbiter items split their coders. The disagreements with the arbiter concentrate in a few precedent tags with few items
+483
+      each (for example, “I want X, please” and “I tell you to. . . ”); the supplement lists them with their counts, and we do not
+484
+      pool them away. On the codebook rule that “Can you. . . ?” is a request, 98.2% [90.7, 99.7] of 57 labelled codings chose
+485
+486   request or command, from coders who had not been shown the rule; the alternative coding as a question is not what
+487   people do.
+488
+489        What the exclusion and the dependence do to the estimate. Excluding unsure or blank codings matters: if every one of
+490   the 38.0% unlabelled codings on the arbiter units (124 labelled of 200) were counted as a disagreement, agreement with
+491
+      the arbiter would be 48.0%, so the 77.4% is an agreement among codings where a person committed, and these are the
+492
+493   units on which two prompts already disagreed. Codings share items and coders, so we resampled items as clusters:
+494   the interval is 67.7 to 86.2%, close to the descriptive Wilson interval. Dropping any one coder moves agreement only
+495   between 75.9% and 79.1%. Per-coder agreement is far noisier (50.0 to 100.0% over the 15 coders with at least five labelled
+496
+      codings), and the 30 coder pairs share about three items each, so a kappa per coder pair is not estimable; the only
+497
+498   pair-level statistic we report is the human–human agreement on items where both coders labelled. We therefore call
+499   the arbiter checked against human codings of the disputed units, and do not call it validated in general: the evidence is a
+500   moderate-sized check of the hardest units, with a stated attrition.
+501
+           The consequence for the method is fixed in advance of every analysis: arbiter labels are the reference for disputed
+502
+503   units, no J1 fallback enters a primary estimate, and the effect of recoding “Can you. . . ?” is reported next to the primary
+504   estimate (Section 4).
+505
+506
+      3.7    Writer-grounded and expert instruments
+507
+508   Four further instruments supply the human evidence of later sections; their results are not repeated here. Repair-
+509   usability audit (blind three-rater audit). 60 repaired texts and 60 controls, plus a secondary arm of the pre-repair
+510
+      originals, were rated blind to arm by 6 raters, 3 per item. The primary endpoint, the item-level consensus “usable”
+511
+512
+      (strict majority of its raters), and the decision rule for repaired minus control were frozen in the repository before any
+513   rating was returned; the rule and its three outcomes are stated in the protocol and applied unchanged. Writer-intent
+514   check (the writer-intent study). Each of the 20 writers rated 10 outputs for their own pairs, half from the bare
+515
+      channel and half from the chip channel, choosing which variant the sentence says (A, B, something else, unclear) and
+516
+517
+      whether they would accept it as their message. The judge labels the critical dimension only, while the writer judges
+518   the whole message; the instrument is writer-intent agreement and not validation by AAC users. Expert annotators.
+519   Two anonymous speech-language pathologists rated the seriousness of each kind of silent meaning change on an
+520   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    11
+521
+      anchored scale and rated stored outputs blind to arm; the result is an expert review by two raters, not a population
+522
+523
+      estimate. Design consultants. Two paid design consultants who use AAC reviewed the requirements and example
+524   outputs; every suggestion and the resulting change or non-change is logged, and we report requirement changes,
+525   not the consultants’ experiences. Annotators were adult non-author university classmates who consented and were
+526
+      paid (payment and food); the two expert annotators and two consultants were paid under written agreements. No
+527
+528
+      institutional review determination was sought.
+529
+530
+531   3.8    Estimation
+532
+533
+      Contrasts are differences of row-weighted means over targets, where a target is one (item, model, channel, variant)
+534   outcome and the model roster is fixed. Intervals are pointwise 95% percentile intervals from 10,000 cluster resamples
+535   (seed 20261031): writers are the clusters for hw1 and construction clusters for the confirmation set. Proportions of
+536
+      codings use Wilson intervals, and 𝜅 intervals use family-cluster bootstrap. With 6 to 7 writers per contrast, the writer-
+537
+538
+      cluster intervals are optimistic, and we claim direction and consistency across writers, not interval width. No interval
+539   corrects for exploratory selection or for extractor error beyond the validation above. Analyses were pre-specified and
+540   git-timestamped; we do not call them pre-registered, and the public hash deposits post-date the confirmation freeze and
+541
+      do not certify it. Numbers in tables and text are generated from the stored analysis files by a script, and the verdict rule
+542
+543
+      can be re-run on stored labels with no model call.
+544
+545
+546   4     Studies and Results I: Defaults, Cue Restoration and the Guard
+547
+548
+      This section reports the studies that establish what the default costs and what repairs it. Each study states its population,
+549   its estimator and its denominator, and each result is bounded once, where it is reported. We begin with the cost of
+550   the default measured against what people actually type (§4.1), test whether the default belongs to the prompt or to
+551
+      the models (§4.2), show that a cue restores the commitment and that the cue’s content is what does it (§4.3), price the
+552
+553
+      restoration per 1,000 messages on the same items (§4.4), ask whether any rule for when to ask beats chance (§4.5),
+554   and then evaluate the guard against a no-feedback baseline (§4.6), a blind human audit of its repairs (§4.7) and expert
+555   severity weights (§4.8).
+556
+557
+558
+          Conventions common to all studies. Model outputs are labelled by two machine judges (J1, J2); disagreements on
+559
+      the critical commitment go to a blind arbiter that sees only the output text, and no label falls back to J1 when the
+560
+561   arbiter is missing. Intervals are 95% percentile bootstrap intervals clustered by writer (human-written pairs), by family
+562   (machine-written families and the guard) or by message (the elicitation sample). The human-written, legend, control
+563
+      and guard analyses use 10,000 resamples with seed 20261031, the same-items study uses 2,000 resamples with seed
+564
+      20261103, and the elicitation-sample prices and ask-policy contrasts use the resample counts stated in their reports.
+565
+566   Rates “per 1,000 messages” are rates over the sampled units, not deployment rates. Where a decision rule governs a
+567   verdict (the legend test, the same-items comparisons, the guard baseline and the usability audit), it was written down
+568
+      and git-timestamped before the outcomes it governs were generated or returned; we do not call any of the studies
+569
+      pre-registered. Machine labels are used throughout this section; where a human check of the machine labels exists it is
+570
+571   reported in the study that uses the labels, and the checks that have not yet returned are named as such.
+572
+                                                                                                         Manuscript submitted to ACM
+      12                                                                                                                              Authors withheld
+
+573   Table 6. The default priced against human base rates (elicitation sample, 1,800 keyword units from 600 messages; Horvitz–Thompson
+574   weights; message-bootstrap 95% intervals). Prior is the share of keyword strings without the cue whose source message carried it;
+575
+      model asserts cue is the share of such inputs for which the model’s output asserts the cue-bearing value. Reversals are messages
+      whose source has the cue, whose keywords lack it and whose output lacks it; the opposite error is an output that asserts the cue
+576
+      when the source lacks it; break-even is the cost ratio of a reversal to an opposite error at which the default stops paying. Source labels
+577
+      are detector labels.
+578
+579
+               Dimension                            Prior [95% CI]      Model asserts cue   Reversals /1,000 [CI]   Opposite /1,000    Break-even
+580
+581
+               Negation (affirmative default)       2.7% [1.8, 3.7]          0.1%            23.9 [15.5, 32.5]           0.8              36.4
+               Politeness (plain default)           6.5% [4.8, 8.2]          6.7%            49.4 [36.4, 63.2]           75.2             14.4
+582            Sentence type (statement default)   47.9% [42.5, 53.3]        28.2%          161.9 [136.4, 188.1]         62.5              1.1
+583
+584
+585
+      4.1     What the Default Costs, Priced Against Human Base Rates
+586
+587        Setting. A keyword string that omits a cue leaves the model to choose a reading, and the choice is a default. Whether
+588   a default is a good guess depends on how often the omitted cue was present in what the writer meant. We measured that
+589
+      base rate from people. The elicitation sample consists of 600 source messages from an AAC-style corpus (6,142 messages
+590
+591   in total, of which 8.6% are negated by a detector label), each shortened to keywords by three human keyword sets,
+592   giving 1,800 keyword units. Stored outputs of 4 generators were scored for three commitment dimensions (negation,
+593   politeness, sentence type), the dimensions for which a lexical test of “the keywords carry the cue” exists. The source
+594
+      cue labels are detector labels; a human check of those labels is a pending human annotation task and, until it returns,
+595
+596   the prices below carry the detector’s error.
+597
+598        Affirmative is the right guess for negation; the cost is the asymmetry. Among keyword strings with no negation word,
+599   the source was negated in 2.7% [1.8, 3.7] of cases (2.0% by Bayes’ rule with the corpus prevalence; 2.2% in the unweighted
+600
+      random half). Guessing the affirmative reading is therefore correct for all but a few messages in a hundred, and the
+601
+      models take it: they output an affirmative sentence for 99.9% of such inputs. The direction of the default is the rational
+602
+603   one, which is consistent with prior reports that language models state negative content too positively [10]; we do not
+604   present the default as new. What the base rate adds is the price. People dropped the negation word from 21.4% [15.4,
+605
+      27.8] of the negated messages, so an affirmative sentence silently reverses 23.9 [15.5, 32.5] messages per 1,000, while a
+606
+      spurious negation is introduced in 0.8 per 1,000. The affirmative guess breaks even with the opposite guess only if a
+607
+608   reversed negation costs less than 36.4 times a spurious one, and a prompt would have to be shown on about 37.4 inputs
+609   per reversal it prevents. The models’ confidence also exceeds the evidence: they assert a negation on 0.1% of these
+610
+      inputs where the base rate is 2.7%.
+611
+612
+           Politeness and sentence type differ in kind. For politeness the default is calibrated: the source was polite in 6.5% [4.8,
+613
+      8.2] of unmarked inputs and models add politeness to 6.7%. Politeness the writer typed is lost for 49.4 messages per
+614
+615   1,000, with a break-even ratio of 14.4, so the asymmetry is milder than for negation; the opposite error, politeness added
+616   to a plain message, occurs in 75.2 per 1,000. For sentence type the statement default is not the Bayes-preferred guess at
+617
+      all: the source was a question, request or other non-statement in 47.9% [42.5, 53.3] of unmarked inputs, while models
+618
+      assert one on only 28.2%, and 161.9 [136.4, 188.1] messages per 1,000 have their sentence type reversed or flattened
+619
+620   (break-even ratio 1.1: the statement default pays only if the two errors cost about the same). Table 6 collects these rows.
+621
+622        The same default in human-written pairs. The human-written pairs (§4.3) test the default where the truth is known.
+623   Each pair differs in one commitment and shares one bare input, so a model that commits to one reading is wrong on
+624   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    13
+625   Table 7. Model breadth (human-written pairs, writer-cluster bootstrap for gains; legend test draw 1). Affirmative share on bare
+626   polarity inputs and with no legend; cue gain on polarity (cue minus a non-critical word, points); speech-act cue contrast (points);
+627   plain word minus cue on speech act (points; positive means the word did better).
+628
+629
+                  Model                   Bare aff. (%)   No legend (%)   Polarity gain   Speech-act gain   Word − cue (act)
+630
+                  Qwen2.5-7B                 100.0             98.9          +49.5            +35.1              +9.0
+631
+                  Llama-3.1-8B                99.0             98.4          +49.0            +18.7              +14.9
+632
+                  Gemma-3-4B                 100.0             98.9          +49.5            +36.6              +13.4
+633
+                  GPT-6.1-terra (API)        100.0             97.3          +50.0            +50.7              −4.5
+634               Qwen2.5-14B                100.0            100.0          +50.0            +35.1              +3.0
+635               Mistral-Nemo-12B            99.0             99.5          +50.0            +37.3              −3.7
+636
+637
+638   exactly one variant and the true affirmative rate is 50%. On the bare channel the models chose the affirmative reading in
+639
+      99.8% of valid outputs.
+640
+641
+         Bound. Source cue labels are detector labels, the sentence-type “no cue” condition is a lexical proxy, the frame
+642
+643
+      prevalence of negation (11.4%) exceeds the corpus value, and the prices are rates over a sampled elicitation frame. We
+644   therefore read the table as the cost structure of the default, not as a deployment rate.
+645
+646   4.2   The Default Is Not a Prompt Artefact and Holds Across Models
+647
+648      Legend test. The prompt includes a legend that explains the cue vocabulary, which might itself push models toward
+649   assuming that no cue is present. We tested this on bare polarity inputs from 184 families (human-written and machine-
+650   written; draw 1) with 4 models in three arms: (a) the prompt with the legend, (b) the prompt with no legend, and (c) the
+651
+      legend plus the instruction that markers may be missing and neither reading should be assumed. The rule was fixed
+652
+653   before generation: the default is an artefact if arm (b) or arm (c) falls below 90% affirmative. Among committed outputs,
+654   the affirmative share was 99.5% [98.9, 99.9] with the legend, 98.4% [97.4, 99.2] with no legend and 99.9% [99.6, 100.0]
+655   with the explicit instruction (731, 736 and 731 outputs). Removing the legend moves the share by −1.1 points [−2.1,
+656
+      −0.3] and the explicit instruction by +0.3 [−0.3, +0.8]. The instruction does not make models abstain: the commitment
+657
+658   rate is 99.3% with the legend and 99.3% with the instruction. A second independent draw gives 99.3%, 98.6% and 99.9%,
+659   and the lowest single model–arm cell is 97.3% (an API model with no legend). The pre-declared verdict is that the
+660   default is not a legend artefact.
+661
+662      Model breadth. We repeated the bare, no-legend and cue arms on two further open models, one from a fourth family,
+663
+      so that the study covers 6 models from 5 families (the 4 original models plus Qwen2.5-14B and Mistral-Nemo-12B; open
+664
+665
+      models are 4-bit quantised GGUF builds, and none is frontier scale). Table 7 gives the per-model cells. Every model
+666   chooses the affirmative reading on at least 99.0% of bare polarity inputs; the lowest legend-test arm is 97.3%; the cue
+667   gain on polarity is at least +49.0 points for every model; and the speech-act cue contrast ranges from +18.7 to +50.7
+668
+      points, with a lower writer-cluster bound above zero for every model. Across the 36 model-by-dimension cells, the cue
+669
+670
+      beats an irrelevant cue with a lower bound above zero in 36, and a plain word matches the cue within 5 points in 27.
+671   With the full sentence as input, critical-commitment match stays at or above 87.6% in every model and dimension, so
+672   the failures belong to the compressed input and not to the generators’ ability to follow a commitment.
+673
+674      A further family. A Gemini Flash-Lite model, run through its public API under a daily quota, gives 97.8% (legend)
+675
+      and 98.9% (explicit instruction) affirmative on the same 184 families with a commitment rate of 100.0%, so the legend
+676
+                                                                                                              Manuscript submitted to ACM
+      14                                                                                                         Authors withheld
+
+677   result holds in a further family. The cue arms for this model are incomplete under the quota and are not analysed; the
+678
+      model is an additional machine replication of the default and is not part of the 6-model estimates.
+679
+680
+           Bound. One prompt template per arm, one wording of the legend instruction, quantised open models and a single
+681
+682
+      API model per proprietary family. The result says that the default does not depend on the legend; it does not say that
+683   no prompt could change it.
+684
+685   4.3     A Cue Restores the Commitment, and the Content of the Cue Does It
+686
+687
+           Human-written pairs. To move beyond machine-written test items, 20 adult non-author classmates wrote sentence
+688   pairs that differ in one commitment and chose their own keywords; pairs were kept only after classmate checks, and
+689   546 families were analysed, with 6 to 7 writers contributing to each contrast. Each family was expanded by 4 models
+690
+      under bare keywords, a non-critical extra keyword, the cue as a one-token chip (for example [NOT]), the full cue set,
+691
+692
+      and the full original text. The primary contrasts are those of the machine-written confirmation set (Holm-corrected
+693   over three); the human-written pairs are an exploratory replication of them. The chip gain over a non-critical word
+694   on speech act is 35.3 points [31.2, 40.3] (6 writers, 67 families). When the full sentence is given, politeness is added
+695
+      to plain messages more often than it is removed from polite ones, by 7.6 points [5.0, 10.4]. The bare affirmative share
+696
+697
+      (99.8%, §4.1) is the third contrast. All three agree in direction and in decision with the machine-written confirmation
+698   set. Because each contrast rests on a handful of writers, we claim the direction and its consistency across writers and
+699   models, not the width of the intervals.
+700
+701        One stored case, by declared rule. The rule: order the analysed polarity families by the SHA-256 of the family identifier
+702
+      and take the first one in which a bare output commits to the wrong value while the chip output matches. That family
+703
+704
+      is hw-pol-075, the model is Gemma-3-4B, and the target is the negated reading of “The supervisor does not read my
+705   schedule.”
+706
+                                Channel    Input                      Stored output
+707
+708                             bare       supervisor read            “The supervisor read.” (affirmative)
+709                             chip       [NOT] supervisor read      “The supervisor did not read.” (negated)
+710
+711
+      In this dimension a bare output commits to the wrong value in 49.8% [49.5, 50.0] of bare rows (the design ceiling), and
+712   when it does the chip output matches the target in 99.3% [98.6, 99.8] of 414 such rows. The same rule applied to speech
+713   act selects a family whose chip outputs match the target in a smaller share, 75.3% [66.0, 83.2] of 300 rows, in line with
+714
+      the larger residual for sentence type in §4.4.
+715
+716
+           Six dimensions. Table 8 reports the cue gain for every measured dimension with its two controls. An irrelevant chip
+717
+718
+      (a cue from another dimension, with the same token cost) adds about nothing on polarity, politeness, agent and time (at
+719   most +1.8 points) and a small amount on certainty (+6.5 [+4.9, +7.9]) and speech act (+5.2 [+1.6, +10.4]). The relevant
+720   chip beats the irrelevant chip by +30.0 to +80.9 points, so the gain is the content of the cue and not the presence of an
+721
+      extra token. A plain-language word delivers the same restoration as the chip within 5 points on every dimension except
+722
+723
+      speech act; on speech act the word is better than the chip (chip minus word −8.2 points [−12.1, −5.3]). We do not claim
+724   that the chip is better than a plain word.
+725
+726        Bound. 6 to 7 writers per dimension, one prompt template, and machine labels (with a blind arbiter for disputes); the
+727   human checks of treated outputs are a pending annotation task.
+728   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    15
+729   Table 8. Cue restoration and its controls in human-written pairs (critical-commitment match, pooled over four models, writer-cluster
+730   95% intervals; points). Chip gain is chip minus non-critical word. Polarity and politeness bare matches sit at 50% by design because
+731   both variants share one bare input; their informative quantity is the gain. Full input is the whole original sentence.
+732
+733
+            Dimension            Bare match (%)          Chip match (%)           Chip gain [CI]           Irrelevant chip adds [CI]         Chip − word [CI]
+734
+            Agent                       33.8                  100.0            +67.3 [+64.8, +69.9]            −0.6 [−1.9, +0.6]              +0.1 [+0.0, +0.4]
+735
+            Time / quantity              8.9                  97.9             +82.7 [+80.1, +86.0]            +1.8 [−0.7, +4.8]              +0.5 [+0.1, +1.0]
+736
+            Certainty                   40.8                  95.4             +54.0 [+52.4, +55.3]            +6.5 [+4.9, +7.9]              +0.1 [−0.6, +1.2]
+737
+            Polarity                    49.8                  99.5             +49.5 [+49.0, +49.9]            +0.0 [+0.0, +0.0]              +0.8 [+0.1, +1.4]
+738         Politeness                  50.0                  88.2             +38.2 [+36.8, +39.4]            +0.0 [+0.0, +0.0]             −2.1 [−4.7, +0.3]
+739         Speech act                  44.0                  78.7             +35.3 [+31.2, +40.3]            +5.2 [+1.6, +10.4]            −8.2 [−12.1, −5.3]
+740
+741
+742                                               hw1     Gain over non-critical cue (pp)    Same-items reversals / 1,000
+
+743                                                                   Irrel- Natural-
+                                                 Bare:                                                        Plain    Chip +     SLP
+                                                kept (%)
+                                                            Chip      evant language Bare           Chip
+                                                                                                                       guard     weight
+744                                                                    cue     cue                            word
+
+745
+                            Polarity (n=832)       50        +50       +0       +49         24       1.6       2.6       1.2      1.00
+746
+747                      Politeness (n=712)        50        +38       +0       +40         52       0.7       1.2       0.0      0.50
+748
+                        Speech act (n=536)         44        +35       +5       +43         195      68        58        27       0.80
+749
+750                           Agent (n=816)        34        +67        -1      +67         n/a      n/a       n/a       n/a       n/a
+751
+752                       Certainty (n=696)        41        +54       +6       +54         n/a      n/a       n/a       n/a       n/a
+
+753
+                    Time / quantity (n=776)         9        +83       +2       +82         n/a      n/a       n/a       n/a       n/a
+754
+755    Event / role (proposed; no data yet)        n/a       n/a       n/a       n/a        n/a      n/a       n/a       n/a       n/a
+756            Cells: hw1 channels, four models, writer-cluster CIs in source files. Reversals: F1 same-items run (arb mode). n/a = not measured. Chip = one-token cue.
+
+757
+758
+      Fig. 2. Dimension by intervention table. Left: share of bare outputs that keep the critical commitment (hw1, four models), and gain in
+759
+      that share over a non-critical cue for the chip, an irrelevant control cue and a natural-language cue. Right: same-items reversals per
+760   1,000 messages for bare, chip, plain word and chip plus guard (332 units; measured only for polarity, politeness and speech act), and
+761   the SLP severity weight (mean of two expert raters, 𝑛 = 2). Event/role structure is proposed but has no data. Every cell is printed;
+762   shading is redundant. Sources: figs/figure_values.json.
+763
+764
+765   4.4     Cue Restoration Priced Per 1,000 Messages on the Same Items
+766
+         Design. The gains above come from constructed pairs. To price the cue on the messages that people actually shorten,
+767
+      we returned to the elicitation sample and took the 332 units whose source carried a cue that the human keywords
+768
+769   dropped (polarity 76, politeness 136, sentence type 120, the last a seeded subsample of question and request units). Each
+770   unit was regenerated by 3 models (GPT-6.1-terra, Qwen2.5-7B, Llama-3.1-8B) under four arms at temperature zero:
+771
+      the stored bare output, the cue as a chip, the cue as a plain word, and the chip with the guard of §4.6 monitoring the
+772
+      supplied chip. The restoration share is the proportion of units whose output honours the dropped cue; reversals per
+773
+774   1,000 messages are the exposure per 1,000 messages times one minus the restoration share. The bare arm reproduces
+775   the always-commit rates of §4.1, so the unit construction matches. Disputed critical labels (27 rows) were resolved by
+776
+      the blind arbiter.
+777
+778      Results. Table 9 gives the prices. Giving the cue on every message lowers polarity reversals from 23.8 to 1.6 (chip) or
+779
+      2.6 (word) per 1,000, and politeness reversals from 51.8 to 0.7 or 1.2. Chip and word are equivalent within 5 points on
+780
+                                                                                                                                         Manuscript submitted to ACM
+      16                                                                                                                   Authors withheld
+
+781   Table 9. Same-items price of the default and of cue restoration (332 elicitation units, 3 models, message-bootstrap 95% intervals,
+782   arbiter-resolved labels). Each cell is the share of units whose output honours the dropped cue, followed by reversals per 1,000 messages
+783
+      if the arm is applied to every message and a cue is supplied each time. The price is the best case for the cue arms: it ignores the cost
+      of cueing messages that need no cue and assumes the cue is elicited.
+784
+785
+786                  Dimension (units)          Quantity        Bare          Chip            Plain word         Chip + guard
+787                  Polarity (76)           Restored (%)        2.4           93.4               89.5                95.0
+788                                         Reversals /1,000    23.8      1.6 [0.7, 2.7]     2.6 [1.4, 3.9]      1.2 [0.3, 2.2]
+789
+                     Politeness (136)        Restored (%)       8.1            98.8               97.9               100.0
+790
+                                            Reversals /1,000    51.8      0.7 [0.1, 1.4]     1.2 [0.3, 2.2]      0.0 [0.0, 0.0]
+791
+792
+                     Sentence type (120)     Restored (%)       29.9          75.6                79.2                90.4
+                                            Reversals /1,000    194.5   67.7 [50.7, 83.8]   57.7 [38.9, 77.2]   26.7 [14.1, 39.9]
+793
+794
+795
+796
+797
+798   politeness (chip minus word +0.8 points [−0.9, +2.6]) and not distinguishable on polarity (+3.9 [−0.5, +8.6]) or sentence
+799   type (−3.6 [−8.7, +1.7]). The guard on the chip arm helps on all three (polarity +1.6 points [+0.3, +3.3], politeness +1.2
+800
+      [+0.2, +2.6], sentence type +14.8 [+9.8, +20.1]); it raises the share of sentence-type units that honour the cue from 75.6%
+801
+      to 90.4% [85.6, 94.9]. Sentence type keeps the largest residual (26.7 [14.1, 39.9] per 1,000 with chip and guard, from 194.5
+802
+803   bare), consistent with the speech-act dimension being the hardest in every earlier study.
+804
+805        A superseded estimate. An earlier version of this price transported the cue-honouring rate from the constructed pairs
+806
+      to the elicitation units. The measured rates do not match the transported ones for polarity or politeness (the transported
+807
+808   rate was too optimistic for polarity and too pessimistic for politeness, in each case outside 5 points and outside the
+809   interval), so the measured rows replace the transported rows throughout.
+810
+811
+           Bound. Machine-judged outputs, three models, one prompt template, 76 polarity units, and a price that assumes the
+812
+813   cue is supplied. A human check of the restored outputs is a pending annotation task.
+814
+815
+      4.5    When to Ask: No Policy Beats Random
+816
+817   If a cue costs a tap, a system could spend taps only where a cue is likely to be missing. We tested ranking rules for
+818
+      a budget of 10% of messages on the 1,800 elicitation units: a no-model-call keyword prior, model confidence from a
+819
+820
+      forced-choice probe, an entropy stand-in, shortest keywords first, and a generic few-shot clarification trigger in the style
+821   of CLAM, all against a gated random baseline (random among messages whose keywords lack the cue). The arithmetic
+822   assumes that the user supplies the cue when asked. At the 10% budget the polarity reversals per 1,000 were 23.9 [16.0,
+823
+      32.5] with no asks, 17.1 [10.0, 28.8] for the keyword prior, 21.3 [14.2, 28.9] for gated random and 21.2 [13.6, 30.8] for the
+824
+825
+      CLAM-style trigger. None of the 4 named contrasts survives correction (0 significant); prior minus gated random on
+826   polarity is −4.2 per 1,000 [−8.5, 2.2], and the CLAM-style trigger minus gated random is 0.0 [−3.0, 2.2] (Holm 𝑝 = 1.00);
+827   on politeness it is 1.8 [−1.1, 4.3]. The minimum detectable effect is 8.5 per 1,000 for the prior contrast (35.7% of the
+828
+      always-commit rate) and 3.8 for the CLAM-style contrast, so this is a null of limited power, not an equivalence. Within
+829
+830
+      the cost accounting of this section, the efficient move is to elicit the cue, and the open problem is how a writer supplies
+831   it, not which message to ask about.
+832   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    17
+833
+834                                                   Polarity (negation)                       Politeness                           Speech act
+                                                100                                    100
+
+
+
+
+        Reversals per 1,000 messages (symlog)
+835                                                                                                 49.4                                 161.9
+836
+                                                          23.9                                                              100
+837
+838
+839                                              10                                        10
+840
+841                                                                                                                             10
+842
+843
+844                                               1                                         1
+                                                                                                                                 1
+845
+846
+847
+848
+849                                               0                                         0                                    0
+850                                                   0    200      500             1000        0    200     500         1000        0    200       500            1000
+851                                                              Taps per 1,000 messages (asks at 5, 10, 20%; cue on every message = 1,000)
+852
+853
+854                                                          Ask, ranked by prior          Ask, model confidence            Cue on every message (plain word)
+855                                                          Ask, random                   Cue on every message (chip)      Chip + guard
+856
+857
+858   Fig. 3. Reversals per 1,000 messages against taps per 1,000 messages, by dimension. Lines: ask policies at 5, 10 and 20% of messages
+859
+      (ranking arithmetic; assumes an asked writer supplies the cue). Points: cue on every message, measured on stored outputs (chip, plain
+      word, chip plus guard), with 95% intervals. Ask policies are not distinguishable from gated-random at matched taps; polarity is 17.1
+860
+      (prior-ranked) vs 21.3 (random) at 10% taps. Vertical axis is symlog.
+861
+862
+863
+864
+      4.6                                       The Commitment Guard Against a No-Feedback Baseline
+865
+866                      Guard and baselines. The guard (G1) is a monitor on the output plus a bounded retry. The monitor flags an output
+867
+      that contradicts a supplied cue or that adds politeness the keywords do not carry; on a flag the model gets one short
+868
+      feedback turn that names the commitment it must keep, up to two retries at temperature zero, stopping at the first
+869
+870   output the monitor does not flag. The monitor is a deterministic, rule-based extractor. A guard can look effective for
+871   a trivial reason, so we compare it with three alternatives that share the monitor, the trigger and the retry budget: a
+872
+      strip-only arm (G1s) that deletes an unsupplied “please” and makes no model call; a resample arm (G1r) that retries
+873
+      from the original prompt with no feedback at temperature 0.7; and a feedback arm at temperature 0.7 (G1t) that isolates
+874
+875   feedback from decoding. The no-feedback baseline is G1r. The endpoint is a machine-scored partial predicate (the
+876   critical commitment and the absence of added politeness), not a usability judgement; usability is the subject of §4.7.
+877
+878
+                         Transfer to fresh families (restated from our earlier papers). This result and the discovery-set guard result are reported
+879
+      in our earlier papers [3, 4]; we restate them here once, with the same frozen guard, because the audits below depend on
+880
+881   them. The frozen guard was applied, without change, to 78 fresh speech-act families that were not used to design it
+882   (1,872 target occurrences, 508 flagged requests). Joint pass rises from 78.8% [76.2, 81.4] to 88.6% [86.9, 90.4], a gain of
+883
+      +9.8 points [+8.4, +11.3]. Of the 478 first-pass strict failures, 251 (52.5% [48.4, 56.7]) are repaired; the guard rewrote 26
+884
+                                                                                                                                                 Manuscript submitted to ACM
+      18                                                                                                                       Authors withheld
+
+885   Table 10. The guard against its baselines (machine-scored joint pass, family-bootstrap 95% intervals; strict repair is the share of
+886   first-pass strict failures repaired). Fresh families: 78 speech-act families, 1,872 targets. Discovery: 58 families, 1,392 targets. G1r is the
+887
+      no-feedback resample at temperature 0.7.
+888
+889                                                                 Fresh families                        Discovery
+890
+                         Arm                                Joint pass (%)     Strict repair    Joint pass (%)     Strict repair
+891
+                         First pass (P0)                   78.8 [76.2, 81.4]        —          94.7 [92.4, 96.7]         —
+892
+                         Strip only (G1s)                  82.3 [80.3, 84.3]     136/478       96.8 [95.3, 98.0]       34/80
+893
+                         Resample, no feedback (G1r)       82.4 [80.0, 84.8]      87/478       95.6 [93.7, 97.3]       15/80
+894
+                         Feedback at 𝑇 = 0.7 (G1t)         89.4 [87.7, 91.0]     273/478       98.6 [97.8, 99.3]       60/80
+895                      Guard (G1)                        88.6 [86.9, 90.4]     251/478       98.9 [98.1, 99.5]       63/80
+896
+897
+898   of 1,394 first-pass-correct targets and turned 0 passes into failures. The whole run took 766 generation calls. On the
+899
+      discovery set the corresponding joint pass is 94.7% to 98.9% [98.1, 99.5].
+900
+901
+           The no-feedback baseline. Table 10 compares the arms. Resampling without feedback gives about the strip-only gain
+902
+      on the fresh families (82.4% against 82.3%) and repairs 18.2% of strict failures against 28.5% for the strip and 52.5% for
+903
+904   the guard. The paired joint-pass contrast of the guard over the resample is +6.2 points [+4.8, +7.6] on the fresh families
+905   and +3.2 [+1.9, +4.8] on the discovery set. Because the resample runs at temperature 0.7 and the guard at zero, the clean
+906
+      contrast for the value of feedback is G1t minus G1r: +6.9 points [+5.3, +8.6] on the fresh families and +2.9 [+1.7, +4.4]
+907
+      on discovery. Feedback adds value beyond resampling on both sets, and temperature is not what separates the guard
+908
+909   from the baseline (G1 minus G1t: −0.7 [−1.6, +0.1] on fresh families). The guard also beats the strip alone by +6.4 points
+910   [+5.3, +7.5], so the deletion explains part of the gain and not all of it.
+911
+912        Bound. The endpoint is a machine-scored partial predicate on speech-act families; it supports the claim that the
+913   guard repairs commitment violations that a no-feedback retry does not, not a claim that its output is usable, fluent or
+914
+      preferred. Those questions are answered next, by people.
+915
+916
+917
+      4.7     Repair Usability: A Blind Three-Rater Audit
+918        Design. A guard that changes the text can make it worse to read. We audited this with a blind human audit under
+919
+      a decision rule frozen before any rating returned. The audit uses 60 repaired texts and 60 control texts (unrepaired
+920
+921
+      outputs for which the monitor raised no flag, drawn from the same two pools), none of which had appeared in an
+922   earlier audit, rated by 6 adult non-author classmates, 3 raters per item, with the arm hidden. The primary endpoint is
+923   the item-level majority of “usable as the person’s message”; secondary endpoints are meaning preserved against the
+924
+      keywords and cues and an invented stance or attitude. The frozen rule reads: if the interval for repaired minus control
+925
+926
+      usable lies wholly below −10 points, the guard fails as a deployment clause; if it includes −10 but excludes zero, report
+927   a cost of uncertain size; if it includes zero, report no detectable cost. A comparison arm was added before any return to
+928   address the fact that controls never failed and repaired items did: the first-pass output that the guard replaced (20 items,
+929
+      each paired with its repair).
+930
+931
+           Result under the frozen rule. Repaired texts were usable in 43 of 60 items (71.7% [59.2, 81.5]) and control texts in 51 of
+932
+933
+      60 (85.0% [73.9, 91.9]). The difference is −13.3 points [−27.6, +1.5]. The interval includes zero, so under the frozen rule
+934   the audit detects no usability cost, but the interval extends to −27.6 points: the audit is inconclusive, it neither shows
+935   nor excludes a cost, and it does not establish equivalence. Table 11 gives the endpoints. Repaired texts preserved the
+936   Manuscript submitted to ACM
+      Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+      Keyword Expansion for AAC                                                                                    19
+937   Table 11. Blind audit of guard repairs (the repair-usability audit; 6 raters, 3 per item, item-level strict majority; Wilson 95% intervals for
+938   rates, Newcombe 95% intervals for differences; preserving and stance exclude one item with no majority). The items are a pre-specified
+939   deterministic list, not a probability sample, so the rates describe these items.
+940
+941
+                    Endpoint                        Repaired                       Control              Repaired − control (points)
+942
+                    Usable (primary)        43/60 = 71.7% [59.2, 81.5]    51/60 = 85.0% [73.9, 91.9]        −13.3 [−27.6, +1.5]
+943
+                    Meaning preserved       47/59 = 79.7% [67.7, 88.0]    55/59 = 93.2% [83.8, 97.3]        −13.6 [−26.2, −1.0]
+944
+                    Invented stance         17/59 = 28.8% [18.8, 41.4]    16/59 = 27.1% [17.4, 39.6]        +1.7 [−14.3, +17.6]
+945
+946
+947
+948
+      meaning less often than controls (−13.6 points [−26.2, −1.0]) and so did the combined endpoint, usable and preserving
+949   (−20.0 [−34.8, −3.9]); invented stance did not differ (+1.7 [−14.3, +17.6]). The comparison is between inputs the first
+950   pass got wrong and inputs it got right, so the gap partly measures item difficulty and not the repair; the comparison
+951
+      against each repair’s own failed original, below, holds the item fixed.
+952
+953
+         Against each repair’s own failed original. Paired with the first-pass output that the guard replaced, repairs preserve
+954
+955
+      the meaning more often (+30.0 points [+9.1, +46.8], 𝑝 = .031 on 20 pairs) and invent a stance less often (−52.6 points
+956   [−69.1, −26.4], 𝑝 = .002 on 19 pairs). Usability shows no detectable change (−5.0 points [−20.2, +10.8], 𝑝 = 1.000).
+957   Relative to the failed original, the repair preserves the meaning and removes the invented stance without a detectable
+958
+      change in how usable the sentence is.
+959
+960
+         Heterogeneity. Usability varies by the model that produced the repair. Gemma-3-4B repairs are usable in 6 of 19
+961
+      (31.6%), against 19 of 21 for Llama-3.1-8B, 6 of 8 for Qwen2.5-7B and 12 of 12 for GPT-6.1-terra. These are descriptive
+962
+963   counts on an unbalanced list. They suggest that a repair is only as readable as the repairing model’s prose, which the
+964   pooled estimate hides.
+965
+966      Bound. 60 items per arm from a fixed list, classmate raters rather than AAC users or clinicians, and a rule that detects
+967
+      no cost without excluding a cost of up to −27.6 points.
+968
+969
+970
+      4.8   Weighting the Failures by Clinical Severity
+971   Two speech-language pathologists, anonymous and paid as expert annotators of study materials, rated how serious
+972
+      each kind of silent meaning change would be if spoken as a client’s message, and then rated stored outputs with the arm
+973
+974
+      hidden: guard repairs (40 ratings), the matching first-pass originals (20), chip outputs (20) and plain-word outputs (20); a
+975   rating is one rater’s judgement of one output. This is an expert review with 𝑛 = 2 raters, not a population estimate, and
+976   the agreement statistics describe these two raters. Both rated negation dropped or added as the most serious change
+977
+      (5.0 of 5) and both would block it (100.0%).
+978
+979
+         We weight each judge-flagged failure by the severity of its type, taking the largest weight on an output. On the
+980   fresh speech-act families the guard lowers the weighted failure rate from 22.0% to 14.7% (strip only: 18.7%; unweighted
+981   30.3% to 18.6%; 1,872 targets). On the human-written pairs the weighted failure rate is 57.4% for bare keywords, 14.9%
+982
+      with a chip and 17.8% with a plain word, against 53.0% with an irrelevant chip (4,368 rows per arm). The bare and
+983
+984
+      irrelevant rates are inflated by the pair design, because two variants share one bare input; the comparison of interest is
+985   chip against word against the irrelevant control, and it again shows that the cue content carries the effect.
+986      Rated directly, the SLPs judged the guard’s repairs acceptable to speak as they stand in 32.0% of ratings, and as they
+987
+      stand or after a small edit in 60.0%, against 0.0% as they stand for the matching originals. Chip outputs were acceptable
+988
+                                                                                                                       Manuscript submitted to ACM
+       20                                                                                                      Authors withheld
+
+989    as they stand in 65.0% of ratings and plain-word outputs in 50.0%. The two raters agreed on whether an output says
+990
+       what the selected words mean on 80.0% of items (𝜅 = 0.68) and on whether it is acceptable to speak on 68.0% (𝜅 = 0.53);
+991
+992
+       we report these as descriptions of this pair. The arms were rated on different numbers of items, so the acceptability
+993    figures are descriptive and do not rank the arms.
+994
+995
+       4.9    What These Studies Establish
+996
+997    The default is measurable, mostly attributable to a missing cue, and a supplied cue removes most of it on the dimensions
+998    measured. Against people’s own keyword choices the affirmative default is the right guess for negation and costs about
+999
+       23.9 silent reversals per 1,000 messages; it is not a prompt artefact and holds in 6 models from 5 families; a one-token
+1000
+1001   cue or a plain word removes nearly all of the negation and politeness cost on the same items (to 1.6 and 0.7 per 1,000
+1002   with a chip); the cue’s content, not its presence, does the work; and a guard with feedback repairs violations that a
+1003   no-feedback retry does not, with an inconclusive usability audit (no cost detected under a frozen rule, interval wide) and
+1004
+       with SLP-weighted failure falling from 22.0% to 14.7% on fresh families. These results answer whether a commitment is
+1005
+1006   preserved. Whether the preserved draft is the message the writer meant is a different question, which §5.1 takes up
+1007   with the writers themselves.
+1008
+1009
+       5     Studies and Results II: Writer-Grounded Validity and the Limits of Commitment Preservation
+1010
+1011   Section 4 and Section 4.6 establish that a missing cue is the main source of silent reversals and that a supplied cue,
+1012
+       or a guard that deletes an unlicensed addition, removes most of them. Those results are measured against a critical
+1013
+1014
+       commitment: the one dimension that a minimal pair contrasts, labelled by automatic judges and a blind arbiter. This
+1015   section asks whether that measurement tracks what the people who write and use the messages mean by a correct draft.
+1016   It reports the studies in turn and then a set of bounded negative results. In the writer-intent study (writer-intent study)
+1017
+       the 20 writers of the human-written pairs rated drafts generated from their own pairs. A whole-message analysis of
+1018
+1019
+       those ratings separates the reasons a draft is rejected. A human check of the arbitrated labels (arbiter check) measures
+1020   how well each automatic judge and the arbiter agree with people. Speech-language pathologists (SLPs; 2 raters) supply
+1021   clinical severity weights and an acceptability review. Two paid design consultants who use AAC (2 consultants) revise
+1022
+       the requirement list; we know nothing of their communication or access method beyond that they use AAC, and nothing
+1023
+1024
+       they said is treated as data. The section closes with the frontier results that mark where asking, model uncertainty
+1025   and partner context stop helping. The result that organises the section is that preserving the critical commitment is
+1026   necessary and far from sufficient, and that the shortfall has a specific structure.
+1027
+1028
+1029
+       5.1    Writer-intent study
+1030        Design. Each of the 20 writers rated 10 drafts generated from their own kept pairs, half from the keywords alone
+1031
+       (bare) and half from the keywords plus the chip for the critical dimension (chip). Drafts came from the 4 primary models
+1032
+1033
+       under the base prompt, and the draw was seeded and fixed before rating (200 drafts in all). For each draft the writer
+1034   said which of their own two sentences it expresses (their sentence A, their sentence B, something else, or unclear) and
+1035   whether they would accept it as their message (yes, yes with a small edit, or no), with a free-text note. Writers were
+1036
+       adult non-author university classmates who consented and were paid; the study measures writer-intent agreement, not
+1037
+1038
+       validation by AAC users. The automatic judge labels only the critical dimension, whereas the writer judges the whole
+1039   message. In the bare channel the keywords do not say which sentence the writer meant, so no model could know; the
+1040   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    21
+1041   Table 12. Writer ratings of drafts generated from their own pairs (writer-intent study). Match: the writer says the draft expresses the
+1042   sentence it was generated from. Bare is a reference level because the keywords do not determine the side. Intervals are 95% Wilson
+1043   over drafts; the cue contrast uses writer clusters.
+1044
+1045
+                            Channel     Drafts          Match (%)     Accepted as written   As written or small edit (%)
+1046
+                            Bare           100     11.2 [6.4, 19.0]              1 of 100                           30.0
+1047
+                            Chip           100    39.2 [30.1, 49.1]              0 of 100                           50.0
+1048
+                            All            200    25.1 [19.6, 31.7]              1 of 200                           40.0
+1049
+1050
+1051   Table 13. From a correct critical commitment to an accepted draft (writer-intent study). Denominators are stated in each cell because
+1052   some writer answers are unknown.
+1053
+1054                                                                                 All       Chip       Bare
+1055
+                                      Drafts rated                                    200       100        100
+1056
+                                      Judge: critical commitment correct              130         96         34
+1057
+                                       and writer: it is the intended version   49 of 126   38 of 93   11 of 33
+1058
+                                       and writer: accepted as written           1 of 130    0 of 96    1 of 34
+1059
+1060
+1061
+1062
+       bare match rate is a reference level, not a failure rate, and the cue effect below is the measured value of supplying the
+1063   missing commitment, not a claim that the chip is sufficient.
+1064
+1065      Results. Table 12 gives the ratings. Writers said the draft expressed the sentence the pair was generated from in 25.1%
+1066   of rated drafts (49 of 195; 95% interval 19.6 to 31.7), and in 69.7% they said it expressed something else. The chip raises
+1067
+       the intended-version match from 11.2% to 39.2%, a gain of +28.0 points (writer-cluster interval +14.8 to +42.0). Writers
+1068
+1069
+       accepted 1 of 200 drafts as written, and the one accepted draft came from the bare channel; 40.0% were acceptable as
+1070   written or with a small edit. Writers’ agreement with the automatic judge on the four-way label (A, B, other, unclear)
+1071   was 38.5% (𝜅 = 0.24).
+1072
+1073      Is the acceptance criterion too strict? Two criteria are used on purpose and both are reported. “Intended version” asks
+1074
+       whether the draft is the sentence the writer wrote, and “accepted as written” asks whether the writer would send
+1075
+1076
+       it unchanged; both are strict, and the writer’s own sentence contained words absent from the keywords in 98% of
+1077   rejections, so some rejection is built into keyword input. A graded reading is therefore the better summary of how far
+1078   drafts are from usable: 40.0% of drafts (80 of 200) were acceptable as written or with a small edit, against 60.0% (120)
+1079
+       that the writer would not accept. The claim that commitment preservation is necessary but not sufficient does not rest
+1080
+1081
+       on the strict criterion: it holds under the graded one, because the share needing no or a small edit is far below the share
+1082   of drafts that keep the critical commitment. We did not collect an edit-distance measure, and we have not tested how
+1083   many edits writers could make with the interface they would use.
+1084
+1085      From a correct commitment to an accepted draft. Table 13 follows the drafts through three filters. The judge marked
+1086
+       the critical commitment correct in 130 of 200 drafts (65.0%). Among those, writers said the draft was the version they
+1087
+1088
+       meant in 49 of 126 cases with an answer (38.9%), and accepted 1 as written. The other direction is clean: where the
+1089   judge marked the critical commitment wrong, the writer said the draft was not the intended version in 69 of 69 cases.
+1090   The automatic judge’s failures are therefore real failures to the people who wrote the messages, and its passes are not
+1091
+       sufficient.
+1092
+                                                                                                                  Manuscript submitted to ACM
+       22                                                                                                                   Authors withheld
+
+1093
+                                 Judge-correct is not writer-intended                                    Why (n = 129); added content: 0
+1094                       225
+                                                              Cue shown (chip)
+1095                               200                                                  Who did what
+1096                       200                                Bare keywords                                               63 (49%)
+                                                                                         misresolved
+1097
+                           175
+1098                                                    4 of the 130 judge-correct
+
+
+
+
+        Outputs (of 200)
+                           150      100                outputs have no writer rating
+1099                                                                                     Writer detail                   59 (46%)
+1100
+                                             130                                             dropped
+                           125
+1101                                          34
+1102                       100
+1103                                                                                         Fluency      6 (5%)
+                            75
+1104
+
+                                    100
+                                                            49
+1105                        50                96             11
+1106
+                            25                                                         Rewording only    1 (1%)
+1107                                                         38
+1108                                                                       1
+                             0
+1109                               Rated    Judge:        Writer:      Accepted                       0    20     40    60   80 100
+1110                              outputs   critical     intended      as written
+                                                                                                   Judge-correct, not accepted as written
+                                             kept         version
+1111
+1112
+1113   Fig. 4. Judge-correct is not writer-intended. Left: of 200 writer-rated outputs, 130 keep the critical commitment by the judge, 49 of the
+1114   126 with a writer rating are the writer’s intended version, and 1 is accepted as written. Right: reasons among the judge-correct outputs
+1115   not accepted as written (writer-coded classification, kappa 0.71 on a 40-item hand check); no output was coded as adding content.
+1116
+1117
+1118
+       5.2                 Why correct drafts are rejected: the whole-message analysis
+1119
+1120           Method. For each of the 199 drafts that writers did not accept as written, we assigned a primary reason from the
+1121
+       writer’s note and a lexical diff between the draft and the writer’s own sentence: the critical commitment is wrong,
+1122
+       a different event or role is expressed (substitution), writer detail is missing (dropped), content is added, the draft is
+1123
+1124   not fluent, or it only rewords. The analysis is post hoc and used no new model calls. The diff classifier agrees with a
+1125   hand coding of 40 drafts in 80.0% of cases (𝜅 = 0.71); the hand coder was an LLM and the classifier rules were written
+1126
+       after seeing those drafts, so the agreement is an optimistic bound rather than a held-out estimate. A second flag marks
+1127
+       whether a content word of the writer’s sentence is neither among the keywords nor a chip realisation, so that the model
+1128
+1129   could not have known it.
+1130
+1131           Reasons. Table 14 gives the primary reasons by channel. Without the cue, 66.7% of non-accepted drafts fail on the
+1132   critical commitment itself; with the chip that share falls to 4.0%. The cue converts violations into the two failures that
+1133
+       remain: substitution (46.0%) and dropped writer detail (44.0%) among chip drafts. Restricting to drafts whose critical
+1134
+1135
+       commitment the judge marked correct and the writer did not accept as written (129 drafts), the primary reason is
+1136   substitution in 48.8% and dropped detail in 45.7%; fluency accounts for 4.7%. Among the 77 judge-correct drafts that
+1137   writers said were not the intended version, 56 (72.7%) are substitutions and 19 (24.7%) are dropped detail.
+1138
+1139
+               Compression loss. In 97.7% of the judge-correct, non-accepted drafts the writer’s sentence contains at least one
+1140
+       content word that is neither a keyword nor a chip realisation. The writers typed keywords because typing is slow; the
+1141
+1142   details they meant (a place, a time, an object) were not in the input. A draft is therefore a plausible completion of a
+1143   compressed message and not a reconstruction of it, and the shortfall is a property of the task before it is a property of
+1144   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    23
+1145   Table 14. Primary reason a draft was not accepted as written (writer-intent study; share of non-accepted drafts; classifier validated
+1146   against a hand coding, agreement 80.0%). Fluency and rewording account for the remainder.
+1147
+1148
+                                       Primary reason               Bare (n=99)     Chip (n=100)     All (n=199)
+1149
+1150
+                                       Critical commitment wrong            66.7               4.0           35.2
+                                       Event or role substituted            17.2              46.0           31.7
+1151
+                                       Writer detail dropped                15.2              44.0           29.6
+1152
+                                       Content added                          —                 —             0.0
+1153
+1154
+1155
+1156   Table 15. Real stored outputs by declared rule. Rates: substitution 56 of 77 and dropped 19 of 77 judge-correct drafts the writer said
+1157
+       were not the intended version; SLP substitution 11 and added 19 of 44 judge-passed rater-items marked partly or no.
+1158
+1159   Reason         Input                     Writer’s sentence or judgement      Draft                           Note
+1160   Substitution   [SURE] taxi wait          “The taxi waits outside the main    “I am sure I need to wait for   “I wait for the taxi rather than
+1161                                            gate.”                              the taxi.”                      the taxi waiting at the gate.”
+1162   Dropped        [SURE] soup warm          “The soup is warm in the            “The soup is definitely         “Adds definite certainty and
+1163                                            kitchen.”                           warm.”                          omits the kitchen.”
+1164   SLP: substi-   [TELL] bus         stop   SLP: says what was selected, no;    “I need to go to the hospital   “Invents the speaker needing
+1165   tution         hospital                  acceptable, no                      from the bus stop.”             hospital travel instead of stat-
+1166
+                                                                                                                    ing something about the bus
+                                                                                                                    stopping at the hospital.”
+1167
+       SLP: added     please     put     soup   SLP: partly; acceptable with edit   “Please put the soup bowl       “Remove the invented table;
+1168
+                      bowl                                                          on the table.”                  confirm soup into a bowl ver-
+1169
+                                                                                                                    sus moving a soup bowl.”
+1170
+1171
+1172
+1173
+       any model. The appropriate response is a draft the writer can inspect, choose among and edit, which is the design the
+1174
+1175   consultants asked for (Section 5.6).
+1176
+1177      Added content. Added content is never the primary reason for rejection in the writer data (0.0% of primary reasons).
+1178
+       As a secondary flag, 22.5% of judge-correct, non-accepted drafts contain a content word absent from the input. We
+1179
+       therefore do not claim that these drafts add unrequested content as the reason writers reject them. The SLP panel
+1180
+1181   applies a different standard, whether a sentence is safe to speak as a client’s message with no writer sentence available,
+1182   and there added content is prominent (Section 5.5).
+1183
+1184
+          A deployable signal. Among judge-correct drafts, the ratio of draft length to the number of keywords given ranks the
+1185
+       drafts that writers reject with AUROC 0.76 (item-bootstrap interval 0.68 to 0.84). The critical label alone ranks writer
+1186
+1187   rejection over all drafts at AUROC 0.74; the label plus three deployable features (judge added-content flag, length ratio,
+1188   novel content words) reaches 0.88 (0.83 to 0.92) under cross-validation. This is an observational association in 200 drafts
+1189
+       from 20 writers and identifies the drafts that say much more than the keywords gave; it is not a validated quality metric.
+1190
+1191
+          Examples. Table 15 shows stored outputs chosen by a declared rule: among judge-correct drafts that writers said
+1192
+1193   were not the intended version, for each primary reason the draft with the smallest SHA-256 of a fixed string and the
+1194   item identifier. The first two rows are writer-grounded; the last two are from the SLP panel, drawn by the same rule
+1195
+       among judge-passed outputs that an SLP marked partly or no.
+1196
+                                                                                                                    Manuscript submitted to ACM
+       24                                                                                                         Authors withheld
+
+1197   5.3     Event and role structure as a commitment dimension
+1198
+1199
+       The commitment vector used so far has 7 dimensions. The whole-message analysis shows a failure that none of them
+1200   names: the draft says something that is fluent, keeps the negation, the speech act and the tone, and nevertheless assigns
+1201   the wrong participants to the wrong event. “I am sure I need to wait for the taxi” keeps the certainty chip and changes
+1202
+       who does what. We propose event and role structure as an additional commitment dimension, defined as the event
+1203
+1204
+       the message describes and the participants that fill its roles (who acts, who or what is acted on, where or for whom),
+1205   including the event to which a negation or modal attaches. It differs from the existing agent dimension in scope: agent
+1206   covers who performs the stated action, whereas event and role structure covers whether the action, its participants and
+1207
+       its negation scope are the ones the writer meant. Because the judge labels only the dimension a pair contrasts, a role
+1208
+1209
+       error on an item whose contrast is certainty is not counted.
+1210        Three independent sources point to the same dimension. First, substitution is the leading primary reason among
+1211   judge-correct rejections (48.8%) and the leading reason among drafts the writer said were not the intended version
+1212
+       (72.7%). Second, in the SLP panel substitution is a primary reason for 11 of 44 outputs the judge passed and the SLP
+1213
+1214
+       marked partly or no. Third, the design consultants asked for relations to be preserved without being shown this analysis:
+1215   one asked that the negation attach to the intended action, the other that the system preserve “who reads, what is
+1216   negated, and what the sentence is about” (Section 5.6). Both also rejected drafts in which a button such as TELL became
+1217
+       a spoken verb that created a new event of telling someone. We state the dimension as a proposal. It has no detector and
+1218
+1219
+       no human-validated rate in this paper, and the substitution label comes from a rule-based diff classifier (agreement with
+1220   hand coding 80.0%), not from a role-level annotation.
+1221
+1222
+1223   5.4     Judges, arbiter and experts against people
+1224
+            Human check of arbitrated labels (arbiter check). The 100 units on which the two automatic judges disagreed were
+1225
+       labelled by a blind, output-text-only arbiter. Each unit was coded again by two of 20 adult annotators (classmates,
+1226
+1227   consented, paid); unsure and missing answers were excluded, leaving 124 codings on the arbiter units. People agree
+1228   with the arbiter on 77.4% of codings (interval 69.3 to 83.9; 𝜅 = 0.74), against 60.5% for judge 1 (𝜅 = 0.56) and 39.5% for
+1229
+       judge 2 (𝜅 = 0.34). Where both coders gave the same label, the arbiter matches it for 39 of 50 units (78.0%), and the
+1230
+       two coders agree with each other on 94.0% of units. The arbiter sided with judge 1 on 62, with judge 2 on 36 and with
+1231
+1232   neither on 2 units. The units are the hardest by construction, so these rates compare the judges with each other and
+1233   with people on disputed outputs; they are not overall judge accuracy. They support using the arbiter label, without a
+1234
+       fallback to judge 1, in every primary estimate.
+1235
+1236
+1237        “Can you . . . ?” as a request. Stored outputs of the form “Can you . . . ?” (30 items) were coded by the same annotators
+1238   as a request or command by 98.2% of codings (56 of 57; interval 90.7 to 99.7). The alternative coding, as a yes/no question,
+1239
+       is not what these readers do, and the primary codebook codes the form as a request.
+1240
+1241
+1242        Writers and SLPs against the judge. Writers agree with the judge on the four-way label for 38.5% of drafts (𝜅 = 0.24).
+1243   On the SLP panel the judge’s meaning-pass agrees with an SLP’s judgement that the output says what the selected
+1244
+       words mean at 𝜅 = 0.19 and 0.31 for the two SLPs (50 outputs). The pattern matches the writer data. The SLPs marked
+1245
+       20 of the 20 rater-items the judge failed as partly or no, and 44 of the 80 the judge passed (55.0%). Excluding outputs on
+1246
+1247   which the judge flagged added content, 24 of 58 (41.4%) were still marked partly or no. Neither human group disputes
+1248   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    25
+1249   Table 16. SLP severity by type of silent meaning change (mean of two raters; 1 trivial to 5 critical). The weight is the mean divided by
+1250   5.
+1251
+1252
+                                            Type of change                                 Mean severity
+1253
+1254
+                                            Negation dropped or added                                 5.0
+                                            Question, statement or command changed                    4.0
+1255
+                                            Actor switched                                            4.0
+1256
+                                            Time changed                                              4.0
+1257
+                                            Added content                                             4.0
+1258                                        Certainty added or removed                                3.5
+1259                                        Politeness added or removed                               2.5
+1260
+1261
+1262
+1263   the judge’s failures; neither confirms its passes. The automatic judges are screening instruments whose failures are
+1264   informative and whose passes need a human or arbiter check, which is the role they play in the primary estimates.
+1265
+1266
+       5.5   Speech-language pathologist review
+1267
+1268      Design. We engaged 2 practising SLPs as expert annotators of study materials, anonymously and under a written
+1269
+       professional-services agreement. They collected no personal data and the ratings concern outputs, not the raters. For
+1270
+       each of 7 kinds of silent meaning change they rated, on an anchored five-point scale, how serious the change would be if
+1271
+1272   spoken as a client’s message, and whether a system should block or flag it. They then rated 50 stored outputs drawn by
+1273   a seeded rule fixed before rating (guard repairs, the original outputs for the same inputs, and chip and plain-word-cue
+1274
+       outputs for the same inputs, with arm labels hidden) on whether each says what the selected words mean and whether
+1275
+       it is acceptable to speak as the client’s message. We weight each judge-flagged failure by the SLP severity of its type,
+1276
+1277   take the largest weight among the types flagged on an output, and report the mean over outputs next to the unweighted
+1278   rate. The panel is an expert review of a fixed set of outputs and not a population estimate.
+1279
+1280      Severity. The SLPs rated a dropped or added negation as the most serious change (mean 5.0 of 5) and both would
+1281
+       block it; the same two raters would flag every one of the 7 types (7 of 7) but block only 1. Politeness added or removed
+1282
+1283
+       was the least serious type (mean 2.5) and certainty the next lowest (mean 3.5); Table 16 gives all types.
+1284
+1285      Clinically weighted failure. Table 17 applies the weights to the judge-flagged failures in two populations; arms are
+1286   compared only within a population. On fresh speech-act families the guard lowers the weighted failure rate from
+1287   22.0% to 14.7% (unweighted 30.3% to 18.6%); the deletion-only variant reaches 18.7%. On the human-written pairs the
+1288
+       weighted failure rate is 57.4% for bare keywords, 14.9% with the chip and 17.8% with the plain word. A cue that carries
+1289
+1290   no information about the critical dimension does not help: a non-critical cue gives 55.5% and an irrelevant chip 53.0%.
+1291   Weighting compresses the unweighted rates without reordering the arms.
+1292
+1293      Acceptability. The SLPs judged 32.0% of guard repairs acceptable to speak as they stand (40 rater-judgments), against
+1294
+       0.0% of the original outputs for the same inputs (20); on the 20 paired rater-judgments, 4 were acceptable only after
+1295
+1296
+       repair, 0 only before, and 0 both. With one small edit, 60.0% of repairs and 50.0% of originals were acceptable. Chip
+1297   outputs were acceptable as they stand in 65.0% of rater-judgments and plain-word outputs in 50.0% (20 each). The two
+1298   SLPs agree on whether an output says what the selected words mean at 𝜅 = 0.68 and on acceptability at 𝜅 = 0.53. These
+1299
+       statistics describe these two raters on these outputs and have no sampling distribution over raters; intervals resample
+1300
+                                                                                                                   Manuscript submitted to ACM
+       26                                                                                                               Authors withheld
+
+1301   Table 17. Failure rate (%) unweighted and weighted by SLP severity. W-C: fresh speech-act families (1,872 targets); hw1: human-written
+1302   pairs, six dimensions (4,368 targets). Weighted rate: the largest SLP weight among the types the judge flagged on an output, averaged
+1303
+       over outputs.
+1304
+1305                                           Population    Arm           Unweighted      Weighted
+1306
+                                               W-C           Baseline              30.3         22.0
+1307                                           W-C           Guard                 18.6         14.7
+1308                                           hw1           Bare                  73.5         57.4
+1309                                           hw1           Chip                  19.8         14.9
+1310                                           hw1           Plain word            23.4         17.8
+1311
+1312
+1313   items only. They are a different question from the classmate audit of Section 4.6 (“usable”), and the two should not be
+1314
+       subtracted.
+1315
+1316
+1317   5.6    Consultant-revised requirements
+1318
+            Process. This was design consultation, not research participation. We engaged 2 paid design consultants who use
+1319
+       AAC (as they told us; we did not verify or ask about their access method or experience with keyword or language-model
+1320
+1321   tools) to review the requirement list (R1 to R5) in plain language, with real example outputs and a description of the
+1322   chip and plain-word designs, under a written consulting agreement. They rated each requirement, said what was wrong
+1323
+       or missing, named a rule we had forgotten and a list of things a system should never change without asking, indicated a
+1324
+       preference between chips and plain words, and judged 10 example outputs as acceptable to send or not. We collected no
+1325
+1326   demographic, health or communication information and report neither their experiences nor any inference about AAC
+1327   users in general: the consultants are not a sample, and their input is a set of changes to our proposed requirements,
+1328
+       which remain proposals.
+1329
+1330
+            Result. In their written feedback both consultants rated the requirements R1 to R5 as important and neither asked
+1331
+       for one to be dropped; we record this as a log of design feedback and not as a finding. Table 18 lists the suggestions that
+1332
+1333   changed the list or our practice, with the source and the change adopted in this manuscript. The central change is an
+1334   additional requirement, R6: a generated sentence remains a draft until the person approves it, and drafting or editing
+1335
+       never speaks or sends a message. It reframes the evaluation question. A silent reversal that is spoken is a communication
+1336
+       failure; a wrong draft that is inspected costs reading and taps. Approval cannot catch what the writer does not notice,
+1337
+1338   so R6 does not replace the commitment filter, and it makes the coverage of the writer’s whole intended message per
+1339   draft read the quantity that matters.
+1340
+1341        Example outputs as a design illustration. We also showed the consultants 10 stored example outputs drawn by a
+1342
+       hash-seeded rule (3 the judge passed, 4 it failed and 3 guard repairs shown with the first try) and asked whether each
+1343
+       was fine to send. We use their answers only as design feedback and report no tally of verdicts. Two of the judge-passed
+1344
+1345   examples were set aside by both consultants because they invent a telling event that the selected buttons do not contain
+1346   (“They will tell you about the club offer” for [YES] [TELL] [THEY] club offer), which is the substitution pattern of
+1347
+       Section 5.3 appearing in a judge-passed output. A guard repair that removed “please” but kept the unselected state
+1348
+       “on” (“Leave the light on” from [ASK] leave light) was not accepted either, which shows that a deletion-only repair
+1349
+1350   removes an unlicensed addition and leaves an uncued one. These cases informed the requirement changes above; 10
+1351   outputs do not support an estimate.
+1352   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    27
+1353   Table 18. Consultant suggestions (C1, C2) and the change adopted in the requirement list. Summaries paraphrase the stored written
+1354   answers; none concerns a person’s own communication.
+1355
+1356
+         Suggestion                                                     From     Change to requirements or practice
+1357
+1358
+         A draft is never spoken or sent without the person’s action;   C1, C2   New R6 (approval before speech); original words always
+         provide a clear speak action, an editable preview and quick             speakable.
+1359
+         undo; keep the original words available to speak directly.
+1360
+         Complete typed sentences are kept exactly by default;          C1, C2   R2 restated as an exact-copy default with an optional,
+1361
+         rewriting only on explicit request, with the proposed                   approval-gated rewrite.
+1362     change and the original shown, and undo.
+1363     Show a small number of meaningfully different drafts with      C1, C2   R3 restated: show differing drafts or the specific unre-
+1364     the difference highlighted, or the one unresolved choice;               solved choice, not a questionnaire.
+1365     do not chain questions; keep choices brief and reversible;
+1366     do not learn a permanent preference from one answer.
+1367     Preserve relations as well as button labels: the negation      C1, C2   R1 and R4 restated at the level of relations; event and
+1368
+         attaches to the intended action; a button such as TELL sets             role structure proposed as a commitment dimension (Sec-
+         sentence form and must not become a verb or create an                   tion 5.3).
+1369
+         event of telling.
+1370
+         A never-change-without-asking list: yes or no, scope of        C1, C2   Adopted as the protected scope; adds ownership, permis-
+1371
+         not, who acts or receives, ownership, permission, names                 sion, names and places, and amounts to the dimensions
+1372     and places, amounts, event time, certainty, question versus             measured in this paper.
+1373     statement versus command, explicit tone.
+1374     The R2 bad example uses keywords and PLAIN and so does         C1, C2   Treated as defects of the review materials, not of the
+1375     not show a typed sentence being changed; the chip and                   requirements; R5 now requires equivalent content in
+1376     plain-word mockups differ in tense and time and cannot                  both input styles.
+1377     establish which is easier; a “would be nice” input was
+1378
+         encoded as MAYBE.
+         Which is easier to imagine, a chip or a plain word: one        C1, C2   No change: we make no claim about which input is easier,
+1379
+         chose the chip as a design preference, the other said it                and tap cost is a proxy only.
+1380
+         depends on access method; both asked that the actual
+1381
+         selection effort be tested.
+1382
+1383
+1384
+       5.7   Frontier limits: asking, model uncertainty and partner context
+1385
+1386   The preceding results suggest several tempting ways to avoid supplying a cue on every message: ask the writer only
+1387   when it matters, let the model’s own uncertainty decide, or let the conversation partner’s last remark supply context.
+1388
+       We tested each in a controlled, machine-labelled study. All labels in this subsection are machine labels (two judges with
+1389
+1390
+       a blind arbiter), the studies are pilot-scale and post-pilot rounds are marked as such in the evidence files, and no human
+1391   has yet checked them.
+1392
+1393      Ask policies. The ask-policy comparison of Section 4.5 (Figure 3) is the first of these tests: no ranking rule, including
+1394   a clarification-style trigger, beats asking at random among messages that lack the cue at matched taps, and supplying
+1395   the cue on every message (1.6 polarity reversals per 1,000 with a chip, 2.6 with a plain word) undercuts them. A learned
+1396
+       gate that uses model internals averts a modest share of SLP-weighted speech-act reversals under simulated resolution
+1397
+1398   rates, but a supervised entropy-feature learner matches it; we treat that study as an evaluation framework and not as a
+1399   result.
+1400
+1401      The model’s own uncertainty does not flag the reversals. We asked whether default decoding hides a calibrated
+1402   distribution over the dropped negation, using 2 local models, an untruncated sampler and 540 messages in which the
+1403
+       negation was removed from every keyword string (a stress test) and a set of human keyword messages. For Qwen2.5-7B,
+1404
+                                                                                                                Manuscript submitted to ACM
+       28                                                                                                         Authors withheld
+
+1405   the model for which both datasets agree, sampled negation appears in 0.49% of samples against a source rate of 10.8%
+1406
+       on the stress set, and in 0.36% against 2.6% on human keywords: the model is overconfident, not hiding a calibrated tail.
+1407
+1408
+       The sampled share ranks which inputs lost their negation at AUROC 0.53 and 0.59 for the two models, against 0.64 for a
+1409   model-free classifier on the keywords alone. A continuous score from the negation-token probability mass reaches 0.67
+1410   (0.61 to 0.73); its difference from the keyword classifier is 0.03 [−0.08, 0.12], so a per-input signal exists but is no better
+1411
+       than a model-free one. A verbalised-probability score from one API model reaches 0.74, a difference of 0.10 [−0.01,
+1412
+1413
+       0.20] from the keyword classifier; its interval touches zero, so we treat it as a lead for a confirmatory run and not as a
+1414   result. The conclusion for design is that the model cannot be asked whether it dropped a cue more cheaply than the
+1415   writer can be asked for the cue.
+1416
+1417
+            Partner context improves defaults and adds an echo. Giving the model the conversation partner’s last remark is a
+1418
+       published way to improve expansion accuracy [8], and we tested whether it also moves the polarity default. With 130
+1419
+1420   polarity families, 4 models and model-written partner remarks, a negative remark raises the share of negated bare
+1421   output by +36.7 points [+32.6, +40.7], mostly by echoing the remark or agreeing with it. Excluding verbatim echoes
+1422
+       and agreement replies, the excess is +8.7 points [+6.9, +10.6]; it depends on who wrote the remarks, from +4.2 with one
+1423
+       remark author to +9.2 with the other on the 40 families written by both. A supplied polarity cue largely removes it: the
+1424
+1425   excess is +7.1 points [+5.3, +9.0] when echoes and agreements are counted as harm, and +1.2 [+0.2, +2.2] when they
+1426   are not. A question remark does not raise the affirmative default; it lowers the affirmative share by -6.0 points through
+1427
+       abstention. The study is a controlled demonstration with templated remarks. It says nothing about the rate in real AAC
+1428
+       conversation or about whether echoing a remark the writer agrees with is harmful, and no zero-tap mitigation we tried
+1429
+1430   beat random asking at matched taps.
+1431
+1432        What the limits establish. Taken together, these results fix the role of the cue. Asking, model uncertainty and partner
+1433   context each reduce reversals only partly or at a tap cost that a cue-on-every-message policy undercuts on the measured
+1434
+       dimensions, and the cue still has to be elicited from the writer. The remaining problem is not the trigger but covering
+1435
+1436
+       the writer’s whole intended message from a compressed input, which Sections 5.1 and 5.6 show is a question about
+1437   approval-gated drafts and not about a better filter.
+1438
+1439
+       6     Discussion
+1440
+1441   6.1    What the evidence establishes
+1442
+       Three results carry the paper, and one measurement result qualifies how far they reach. First, the affirmative default is a
+1443
+1444   property of the model family, not of one prompt: with bare keywords every one of the 6 models (5 families) chooses
+1445   the affirmative reading in at least 99.0% of inputs, and without the prompt legend the pooled share is still 98.4% [97.4,
+1446   99.2]. We do not present the direction of this bias as new; it builds on the positivity bias that Chen et al. report for
+1447
+       keyword-to-sentence generation about negative commonsense facts [10], adds the base rate in human-written keyword
+1448
+1449   messages, and prices the default per dimension. At the human base rate of negation in keyword messages (2.7%), always
+1450   committing to the default leaves 23.8 silent polarity reversals per 1,000 messages. Second, a one-token cue removes
+1451   most of that cost: with the cue on every message, polarity reversals fall to 1.6 (chip) or 2.6 (plain word) per 1,000,
+1452
+       politeness reversals from 51.8 to 0.7 and 1.2, and chip plus guard raises speech-act restoration from 75.6% to 90.4%.
+1453
+1454   An irrelevant control cue does not do this (Section 4). Third, the guard that repairs a failed draft by deletion raises
+1455   speech-act restoration on the same items from 75.6% to 90.4% (its transfer to fresh families is restated from our earlier
+1456   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    29
+1457
+       paper in Section 4.6), and the blind repair audit was inconclusive on usability: the difference was −13.3 points with
+1458
+1459
+       interval −27.6 to +1.5, which neither shows nor excludes a cost (Section 4.6). Against each repair’s own failed original,
+1460   the audit found large gains in preserved meaning (+30.0 points) and fewer invented stances (−52.6 points).
+1461     The qualifying result is that these gains concern a floor, not the target. Writers accepted 1 of 200 drafts as written,
+1462
+       and among drafts whose critical commitment the judge had marked correct, 61.1% were still not the version the writer
+1463
+1464
+       intended (77 of 126). The reasons were compression loss and misresolved events or roles, not added content: in 98% of
+1465   the rejected cases the writer’s sentence contained words absent from the keywords, so no model could have recovered
+1466   them, and 48.8% of the judge-correct rejections were event or role substitutions (who does what to whom). Added
+1467
+       content accounted for 0.0% of primary reasons. A cue nevertheless lifts the match to the writer’s intended version from
+1468
+1469
+       11.2% to 39.2% (+28.0 points, interval +14.8 to +42.0, clustered over 20 writers), so the cue is the most effective single
+1470   input measured here while remaining far from sufficient. We therefore read critical-commitment preservation as a hard
+1471   filter that a draft must pass before it is offered, and the coverage of the writer’s whole intended message, per tap and
+1472
+       per draft read, as the objective that remains open (Section 6.5).
+1473
+1474
+1475   6.2   Design implications for AAC
+1476
+       The implications below follow from the measured results and from the requirement changes that two paid design
+1477
+1478
+       consultants who use AAC proposed after reviewing the requirements and stored example outputs (Section 5.6). We
+1479   report the consultants’ input as changes to the requirement list; their experiences are not data and the list remains our
+1480   proposal. Table 19 states each implication with its evidence and its status. An implication marked measured rests on
+1481
+       a result in this paper; one marked consultant was proposed by the consultants and is adopted as a requirement; one
+1482
+1483
+       marked untested is a design hypothesis that the studies in Section 6.5 are built to test.
+1484
+1485     A concrete interface recommendation, and what is unmeasured. Our evidence supports a specific design: show one
+1486   draft at a time, with the selected keywords and any cue visible beside it; make the first action “speak the original
+1487
+       selection” and the second “approve this draft”, never a default; offer the negation and politeness cues as a standing
+1488
+       control that costs one selection before generation; and offer a second, differing draft only when the cue has been
+1489
+1490   supplied and the writer rejects the first. We rank this design on meaning restored and acceptance, not on tap or reading
+1491   cost: the paper never measured taps, reading time, scanning order or gaze effort, so “lowest cost” is the objective of the
+1492
+       study that follows and not a result. A cue costs the writer a selection in a direct-touch layout, and may cost far more
+1493
+       under scanning.
+1494
+1495     Two points in the table deserve emphasis. The first is the approval gate (I3). A keyword system that speaks its best
+1496   sentence converts every residual error into a statement the AAC user did not choose, and the writer-grounded numbers
+1497
+       show the residual is large even when the critical commitment survives. The consultants framed the gate as control
+1498
+       over delivery, not as a safety feature: drafting and editing never speak or send, the person decides when a draft is
+1499
+1500   spoken, and the person may keep an unusual, blunt, short or incomplete sentence. This also constrains the guard. A
+1501   deletion-based repair is acceptable as a proposal that the person sees and approves; it is not acceptable as a silent edit of
+1502
+       what is spoken. The SLPs reflect the same caution from the clinical side: they judged 32.0% of repairs acceptable to
+1503
+       speak as they stand (40 rater-judgments), against 0.0% of the originals for the same inputs.
+1504
+1505     The second is the choice between asking and cueing (I5, I7). Ask policies are attractive because a question costs one
+1506   turn. Our comparison shows no resolvable advantage of any tested policy over gated-random asking at the same budget,
+1507
+       and in our machine-only checks the model’s own uncertainty did not reliably mark the inputs at risk. Giving the writer
+1508
+                                                                                                          Manuscript submitted to ACM
+       30                                                                                                                     Authors withheld
+
+1509   Table 19. Design implications, the evidence behind each, and its status. Statuses: measured (result in this paper), consultant
+1510   (requirement proposed by the two design consultants), untested (hypothesis for future work).
+1511
+1512            Implication                                          Evidence                                                       Status
+1513
+       I1       Offer commitment cues (negation, politeness,         Polarity reversals per 1,000: 23.8 bare, 1.6 chip, 2.6 word;   measured
+1514
+                sentence type) as first-class controls, available    politeness 51.8, 0.7, 1.2. Chip and word are not distin-
+1515            as a chip or as an equivalent plain word.            guishable on polarity and are equivalent within the pre-
+1516                                                                 specified margin on politeness.
+1517   I2       Do not fix one route as the default. Both routes     One consultant found the chip easier to imagine; the           consultant;
+1518            set the same visible meaning and allow correc-       other answered that it depends on the access method            untested
+1519            tion in place.                                       and vocabulary layout. Neither claim is a measure of
+1520                                                                 selection effort.
+1521
+       I3       A generated sentence is a draft. It is spoken only   Proposed independently by both consultants as a sixth          consultant; mea-
+                after the person approves it, can be inspected       requirement (R6). Writers accepted 1 of 200 drafts as          sured
+1522
+                privately, edited or cancelled, and the original     written, so unapproved speech would voice a draft the
+1523
+                selection can always be spoken directly.             writer would change in nearly every case.
+1524
+       I4       Keep exact-copy as the default for fully typed       Both consultants. Our studies cover keyword input only,        consultant
+1525            sentences; rewriting needs an explicit request, a    so this is a scope boundary, not a result.
+1526            visible proposed change and approval.
+1527   I5       Where a draft must choose between readings,          Cue-supplied match to the intended version is 39.2%; the       consultant;
+1528            show a small number of meaningfully different        remainder is event, role and detail the cue does not carry.    untested
+1529            drafts with the difference highlighted, and re-      Asking at a fixed budget does not beat random choice of
+1530            serve a focused question for cases that block any    where to ask (I7). Both consultants asked for differing
+1531
+                useful draft.                                        drafts or a targeted choice.
+       I6       Add event and role structure (who does what to       48.8% of judge-correct rejections were event or role sub-      measured; con-
+1532
+                whom) to the commitment model, alongside the         stitutions; both consultants independently asked that          sultant
+1533
+                seven dimensions.                                    relations be preserved.
+1534
+       I7       Do not allocate effort to ask-when-uncertain poli-   Ask policies do not beat gated-random asking at a 10%          measured (null
+1535            cies. Supply the cue instead.                        budget: prior-ranked 17.1 [10.0, 28.8], gated-random 21.3      of     limited
+1536                                                                 [14.2, 28.9], a CLAM-style gate 21.2 [13.6, 30.8] polarity     power)
+1537                                                                 reversals per 1,000, against 23.9 for always-commit. Min-
+1538                                                                 imum detectable difference 8.5 per 1,000.
+1539   I8       Spend cue taps by clinical severity as well as       Two SLPs rated negation errors 5.0 of 5 and would block        measured (n=2
+1540            frequency.                                           them (100.0% of ratings). Severity weights: polarity 1.00,     experts)
+1541
+                                                                     speech act 0.80, politeness 0.50. Speech act is 72.7% of
+                                                                     weighted failure under always-commit because it is fre-
+1542
+                                                                     quent (detector-proxy labels, provisional).
+1543
+1544
+1545
+1546   the cue as a standing control is the efficient option on the dimensions we measured. Reading cost is the unmeasured
+1547   side of this trade: a set of differing drafts replaces taps with reading, and whether writers who use scanning, switches
+1548
+       or gaze can catch a wrong draft in a set is untested. The approval gate presupposes that they can.
+1549
+1550
+            Implications for evaluation practice. The measuring instrument is itself a result. Automatic judges agreed with a
+1551
+       human arbiter on 60.5% (judge 1) and 39.5% (judge 2) of 124 codings, against 77.4% (𝜅=0.74) for human coders, and
+1552
+1553   their agreement with the writers’ own judgment was low (𝜅=0.24) as was their agreement with the SLPs (𝜅=0.19 and
+1554   0.31). Whether “Can you. . . ?” is a request or a question is a convention that a judge can code differently from people:
+1555
+       98.2% of human codings (56 of 57) read it as a request. We draw three practices from this. Systems that claim meaning
+1556
+       preservation should report agreement with a human arbiter or with the writer, not only with a model judge, in line
+1557
+1558   with the argument that AI-powered AAC needs technical, user-mediated and functional evaluation together [12];
+1559   known judge biases [25] make this a requirement, not a preference. Failure rates should be reported unweighted and
+1560   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    31
+1561
+       severity-weighted, because the weights state what the rate means clinically: the weighted cue failure falls from 57.4% to
+1562
+1563
+       14.9% (chip) and 17.8% (word), against unweighted 73.5% to 19.8% and 23.4%, and the weighted guard failure falls from
+1564   22.0% to 14.7% (unweighted 30.3% to 18.6%). And a headline figure should name its denominator and its assumption: the
+1565   ask-policy arithmetic assumes that the asked person supplies the cue.
+1566
+1567
+       6.3   Limitations
+1568
+1569   We state each limitation once, with the claim it bounds.
+1570
+1571     Who contributed the human data. Writers, annotators and raters were adult non-author university classmates,
+1572   consented and paid (payment and food). They are not AAC users, and the writer-intent results (acceptance, intended-
+1573
+       version match) are agreement between writers and drafts built from their own keywords, not validation by AAC users.
+1574
+       We make no claim of benefit to AAC users and no claim about how AAC users would write keywords, which cues they
+1575
+1576   would use or how they would review drafts. The 2 speech-language pathologists are an expert review of a fixed set of
+1577   outputs, not a population estimate, and their agreement statistics describe this pair. The 2 consultants are not a sample
+1578
+       of AAC users; their feedback shaped the requirements, concerned a text-based design only, and does not establish what
+1579
+       AAC users in general want.
+1580
+1581
+         Scale and status of the replication. The human-written pair replication has 6 to 7 writers per contrast and is exploratory;
+1582
+1583
+       we claim direction and consistency across writers and models (the chip gain over a non-critical cue is 35.3 points [31.2,
+1584   40.3] over 67 families), not interval width. The study is pre-specified and git-timestamped; it is not pre-registered.
+1585
+1586     The usability audit. The interval includes zero but is wide: the lower bound is −27.6 points, and the repaired texts are
+1587   less often usable and preserving together than controls (−20.0 points). Control items are easier, so the gap is confounded
+1588
+       with item difficulty and we do not read it as a cost of repair. We therefore describe the audit as inconclusive, with the
+1589
+       interval shown, and not as “no cost” or “as good as controls”. Repairs of the smallest local model are usable in 31.6% of
+1590
+1591   cases (6 of 19), which bounds where the guard can be recommended. Each item was rated by 3 independent raters, all
+1592   classmates.
+1593
+1594     Measurement of the whole message. The whole-message analysis is post hoc. The reason classifier agrees with a hand
+1595   coder at 𝜅 = 0.71 on a 40-item check; because the hand coder is an LLM and the classifier rules were written after
+1596
+       seeing those items, the figure is optimistic and not held out. Compression loss is also partly a property of keyword
+1597
+1598
+       input: when a writer’s sentence carries content that the keywords never contained, no single draft can be accepted as
+1599   written. The acceptance rate (1 of 200) is therefore best read as a ceiling on what the single-draft paradigm can reach,
+1600   not as a ranking of the four models rated.
+1601
+1602     Cost model and frontier. The base rate of negation (2.7% of keyword messages) comes from a posterior over a labelled
+1603
+       corpus; speech-act and politeness rates rest on detector-proxy labels and are marked provisional. The ask-policy
+1604
+       comparison is a null of limited power (minimum detectable difference 8.5 per 1,000 for polarity), not an equivalence
+1605
+1606   result. The reversals-per-1,000 arithmetic assumes the asked person supplies the cue; the same-items measurement on
+1607   332 units replaces the earlier transported estimate of that quantity.
+1608
+1609     Scope of the system studied. All inputs are English text keyword strings; we did not study speech output, access
+1610   methods, vocabulary layout, prediction interfaces, multi-turn context or sustained use. Model outputs come from
+1611
+       specific model versions and a hosted API that does not honour a random seed, so exact outputs are not reproducible
+1612
+                                                                                                          Manuscript submitted to ACM
+       32                                                                                                        Authors withheld
+
+1613   even though the stored outputs, judgments and analyses are. Until those human checks return, the treated-output and
+1614
+       source-label results above rest on machine labels.
+1615
+1616
+1617   6.4    Ethics and positionality
+1618
+1619
+       Annotators were adult non-author university classmates who gave consent and received payment and food. They
+1620   labelled and audited model outputs; some also chose keywords and wrote sentence pairs that we release under CC BY 4.0
+1621   with their consent. We collected no personal data, no demographic, health or disability information, and no recordings;
+1622
+       participants are identified only by an ID, could stop at any time and were paid for the time spent. Two speech-language
+1623
+1624
+       pathologists were paid expert annotators of study materials, working anonymously under a written professional-services
+1625   agreement; the data concern the outputs, not the raters. Two paid design consultants who use AAC were engaged who
+1626   reviewed requirements and examples under a written consulting agreement. This was design consultation, not research
+1627
+       participation, and we (the authors) decided that it was; we did not collect, analyse or report their experiences, and we
+1628
+1629
+       report only which requirements changed and why. As independent researchers we did not seek an institutional review
+1630   determination, and we make no claim of approval or exemption. A study that recruits AAC users to use or evaluate a
+1631   system requires institutional review before recruitment, and none is reported here.
+1632
+            The main ethical risk this work addresses is also its principal limit. A system that expands a person’s words into
+1633
+1634
+       a fluent sentence takes part in authorship: when it is wrong it does not signal an error, it speaks for the person, and
+1635   the first-person voice makes that harm easy to miss. Prior work on AI in AAC records that language models can both
+1636   help and hinder communication [22], and our results give a quantified instance: a missing cue silently produces the
+1637
+       opposite polarity or the wrong sentence type at a measurable rate, and a draft that keeps every critical commitment
+1638
+1639
+       is still rarely the sentence the writer meant. For this reason we argue for approval-gated drafts, exact-copy defaults
+1640   and visible differences, and we present the guard as a proposal generator, not an editor of what is spoken. The cue
+1641   and guard results are measurements of model behaviour on classmates’ keyword messages; they are not evidence that
+1642
+       deploying either would benefit a person who relies on AAC, and the paper should not be cited for that. The released
+1643
+1644
+       pairs and stored outputs contain no personal data, but they could be used to tune a system to pass our checks without
+1645   improving communication; we state the checks as a floor for this reason.
+1646        Positionality. This paper takes up the design of tools for a community that the data collected here do not represent.
+1647
+       Our consultants and SLPs shaped requirements and severity weights but did not review the analysis or approve the
+1648
+1649
+       claims, and the requirements remain our proposals; we use the terms expert annotator and design consultant and avoid
+1650   “co-design” and “participatory” because neither describes what happened.
+1651
+1652
+       6.5    Future work
+1653
+1654        A study with AAC users. The central open question is whether the results transfer to the people for whom the tools
+1655
+       are intended. A study with AAC users, under institutional review and with an access-method-aware protocol, would
+1656
+1657
+       test what this paper cannot: which cues users choose to supply and in which route; how often they can detect a wrong
+1658   draft in a single draft and in a set; the reading and selection effort for scanning, switch, eye-gaze and direct-touch users;
+1659   whether exact-copy and approval gates are used as the consultants expect; and whether users want the system to learn
+1660
+       preferences from a single approval, which the consultants cautioned against. The consultants also noted that the chip
+1661
+1662
+       and plain-word routes need a working prototype with real navigation and scanning order to compare, because our
+1663   evidence on the two routes concerns meaning restored, not effort.
+1664   Manuscript submitted to ACM
+       Necessary but Not Sufficient: Preserving the Writer’s Commitments and Covering Their Intended Message in LLM
+       Keyword Expansion for AAC                                                                                    33
+1665
+          Intent coverage of approval-gated draft sets. The measure we propose to replace single-draft correctness is coverage
+1666
+1667
+       of the writer’s whole intended message. Given a writer’s own keywords, optional cue and intended sentence, a draft set
+1668   covers the item when the writer marks some draft as the intended message or as the intended message with a small
+1669   edit; the burden is the number of cue taps, drafts read and selections. Uncovered items are attributed to loss (content
+1670
+       the keywords could not carry), violation (a commitment the draft got wrong) or assumption (a reading the model
+1671
+1672
+       chose without a basis), using the reason classifier of Section 5.1. The baselines are the single draft (intended-version
+1673   match 11.2% bare and 39.2% with a chip; accepted as written 1 of 200), diverse sampling, prompted diversity, and a
+1674   random-dimension set that tests whether targeting the contrast, not variety, drives any gain. The pilot design was
+1675
+       written before any draft set was generated, and its allowed conclusions are declared in advance, including that sets help
+1676
+1677
+       only when the cue is missing, and that they do not help beyond one cue tap; a null is reportable. It will separate loss
+1678   that no draft could recover (the keywords do not contain it) from loss that a better set could, which is the ceiling that
+1679   Section 5.1 motivates. Writers in the pilot are again classmates rating sets built from their own pairs, so its outcome is
+1680
+       writer-intent agreement and not validation by AAC users.
+1681
+1682
+1683
+          The commitment model and its detectors. The whole-message result asks for an eighth dimension, event and role
+1684   structure, that has an annotation scheme, a reliable detector and a human agreement estimate, none of which exist yet;
+1685   the seven dimensions measured here are a floor. Prediction-powered inference [1] offers a route to correct machine-judge
+1686
+       estimates with a small human sample, which we regard as a methods addition, not a replacement for the human arbiter.
+1687
+1688
+1689
+          Boundary conditions. Machine-only explorations suggest that a conversation partner’s preceding remark and the
+1690   language of the message each move the default; these call for human-labelled checks before any claim. In particular,
+1691   whether a synthetic voice carries a contrast that the text carries (for example certainty or politeness) is a separate
+1692
+       question that no part of this study addresses.
+1693
+1694
+1695   References
+1696    [1] Anastasios N. Angelopoulos, Stephen Bates, Clara Fannjiang, Michael I. Jordan, and Tijana Zrnic. 2023. Prediction-powered inference. Science 382,
+1697        6671 (2023), 669–674. doi:10.1126/science.adi6000
+1698    [2] Kenneth C. Arnold, Krysta Chauncey, and Krzysztof Z. Gajos. 2020. Predictive Text Encourages Predictable Writing. In Proceedings of the 25th
+1699        International Conference on Intelligent User Interfaces. ACM. doi:10.1145/3377325.3377523
+1700    [3] Authors withheld for review. 2026. CALE-AI workshop paper (non-archival, concurrent work; citation to be completed). VERIFY.
+1701    [4] Authors withheld for review. 2026. SE4All archival paper (concurrent work; citation to be completed). VERIFY: fill from the camera-ready record.
+        [5] Earl T. Barr, Mark Harman, Phil McMinn, Muzammil Shahbaz, and Shin Yoo. 2015. The Oracle Problem in Software Testing: A Survey. IEEE
+1702
+            Transactions on Software Engineering 41, 5 (2015), 507–525. doi:10.1109/TSE.2014.2372785
+1703
+        [6] Daniel Braun. 2025. Acquiescence Bias in Large Language Models. In Findings of the Association for Computational Linguistics: EMNLP 2025.
+1704
+            arXiv:2509.08480
+1705
+        [7] Shanqing Cai, Subhashini Venugopalan, Katie Seaver, Xiang Xiao, Katrin Tomanek, Sri Jalasutram, Meredith Ringel Morris, Shaun Kane, Ajit
+1706        Narayanan, Robert L. MacDonald, Emily Kornman, Daniel Vance, Blair Casey, Steve M. Gleason, Philip Q. Nelson, and Michael P. Brenner.
+1707        2024. Using large language models to accelerate communication for eye gaze typing users with ALS. Nature Communications 15 (2024), 9449.
+1708        doi:10.1038/s41467-024-53873-3
+1709    [8] Shanqing Cai, Subhashini Venugopalan, Katrin Tomanek, Ajit Narayanan, Meredith Ringel Morris, and Michael P. Brenner. 2022. Context-Aware
+1710        Abbreviation Expansion Using Large Language Models. In Proceedings of NAACL. 1261–1275. doi:10.18653/v1/2022.naacl-main.91
+1711    [9] James I. Charlton. 1998. Nothing About Us Without Us: Disability Oppression and Empowerment. University of California Press.
+       [10] Jiangjie Chen, Wei Shi, Ziquan Fu, Sijie Cheng, Lei Li, and Yanghua Xiao. 2023. Say What You Mean! Large Language Models Speak Too Positively
+1712
+            about Negative Commonsense Knowledge. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long
+1713
+            Papers). Association for Computational Linguistics, Toronto, Canada, 9890–9908. doi:10.18653/v1/2023.acl-long.550
+1714
+       [11] Shadab Hafiz Choudhury, Asha Kumar, and Lara J. Martin. 2025. Evaluating Human-LLM Representation Alignment: A Case Study on Affective
+1715
+            Sentence Generation for Augmentative and Alternative Communication. In Proceedings of the 14th International Joint Conference on Natural Language
+1716
+                                                                                                                              Manuscript submitted to ACM
+       34                                                                                                                             Authors withheld
+
+1717        Processing and the 4th Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics. The Asian Federation of Natural
+1718        Language Processing and The Association for Computational Linguistics, 1618–1637. doi:10.18653/v1/2025.findings-ijcnlp.100
+1719   [12] Blade Frisch, Will Wade, Dylan Gaines, Michelle Kinsella, Betts Peters, Tamara Broderick, and Keith Vertanen. 2026. It’s Complicated: On the
+1720        Design and Evaluation of AI-Powered AAC Interfaces. arXiv:2606.24854 doi:10.48550/arXiv.2606.24854 Position paper, Speech AI for All workshop
+1721        at CHI 2026.
+1722
+       [13] Jeffrey T. Hancock, Mor Naaman, and Karen Levy. 2020. AI-Mediated Communication: Definition, Research Agenda, and Ethical Considerations.
+            Journal of Computer-Mediated Communication 25, 1 (2020), 89–100. doi:10.1093/jcmc/zmz022
+1723
+       [14] Maurice Jakesch, Advait Bhat, Daniel Buschek, Lior Zalmanson, and Mor Naaman. 2023. Co-Writing with Opinionated Language Models Affects
+1724
+            Users’ Views. In Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems. ACM. doi:10.1145/3544548.3581196
+1725
+       [15] Yue Jia and Mark Harman. 2011. An Analysis and Survey of the Development of Mutation Testing. IEEE Transactions on Software Engineering 37, 5
+1726        (2011), 649–678. doi:10.1109/TSE.2010.62
+1727   [16] Jennifer M. Johnson, Ella Inglebret, Carla Jones, and Jaime Ray. 2006. Perspectives of Speech Language Pathologists Regarding Success versus
+1728        Abandonment of AAC. Augmentative and Alternative Communication 22, 2 (2006), 85–99.
+1729   [17] Gabriel Loaiza-Ganem, Kevin Zhang, Wei Cui, Marc T. Law, and Kin Kwan Leung. 2026. Conf-Gen: Conformal Uncertainty Quantification for
+1730        Generative Models. arXiv:2605.28920 ICML 2026.
+1731   [18] Lei Mao, Jong Ho Lee, Yasmeen Faroqi-Shah, and Stephanie Valencia. 2025. Design Probes for AI-Driven AAC: Addressing Complex Communication
+1732
+            Needs in Aphasia. In Proceedings of the 2025 ACM Designing Interactive Systems Conference. ACM, 404–422. doi:10.1145/3715336.3735736
+       [19] Betsy Phillips and Hongxin Zhao. 1993. Predictors of Assistive Technology Abandonment. Assistive Technology 5, 1 (1993), 36–45.
+1733
+       [20] Marco Tulio Ribeiro, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. 2020. Beyond Accuracy: Behavioral Testing of NLP Models with
+1734
+            CheckList. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. Association for Computational Linguistics,
+1735
+            4902–4912. doi:10.18653/v1/2020.acl-main.442
+1736   [21] Junxiao Shen, Boyin Yang, John Dudley, and Per Ola Kristensson. 2022. KWickChat: A Multi-Turn Dialogue System for AAC Using Context-
+1737        Aware Sentence Generation by Bag-of-Keywords. In Proceedings of the 27th International Conference on Intelligent User Interfaces. ACM, 853–867.
+1738        doi:10.1145/3490099.3511145
+1739   [22] Stephanie Valencia, Richard Cave, Krystal Kallarackal, Katie Seaver, Michael Terry, and Shaun K. Kane. 2023. “The less I type, the better”: How AI
+1740        Language Models can Enhance or Impede Communication for AAC Users. In Proceedings of the 2023 CHI Conference on Human Factors in Computing
+1741        Systems. ACM. doi:10.1145/3544548.3581560
+1742
+       [23] Elaine J. Weyuker. 1982. On Testing Non-testable Programs. Comput. J. 25, 4 (1982), 465–470. doi:10.1093/comjnl/25.4.465
+       [24] Michael J. Q. Zhang and Eunsol Choi. 2025. Clarify When Necessary: Resolving Ambiguity Through Interaction with LMs. In Findings of the
+1743
+            Association for Computational Linguistics: NAACL 2025. 5541–5558. doi:10.18653/v1/2025.findings-naacl.306
+1744
+       [25] Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao
+1745
+            Zhang, Joseph E. Gonzalez, and Ion Stoica. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. In Advances in Neural Information
+1746        Processing Systems, Vol. 36. https://arxiv.org/abs/2306.05685
+1747
+1748
+1749
+1750
+1751
+1752
+1753
+1754
+1755
+1756
+1757
+1758
+1759
+1760
+1761
+1762
+1763
+1764
+1765
+1766
+1767
+1768   Manuscript submitted to ACM
+

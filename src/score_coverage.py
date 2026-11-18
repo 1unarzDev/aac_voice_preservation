@@ -33,7 +33,7 @@ RS = (0.25, 0.5, 1.0, 2.0)
 def read_returns(folder: Path, part: str) -> pd.DataFrame:
     fs = sorted(Path(folder).glob(f"labels_{part}_*.csv")) if Path(folder).exists() else []
     parts = [pd.read_csv(f, dtype=str, keep_default_na=False) for f in fs]
-    return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
+    return pd.concat(parts, ignore_index=True).fillna("") if parts else pd.DataFrame()
 
 
 def qc(ret: pd.DataFrame, key: pd.DataFrame, kind: str, qcols: list[str]) -> tuple[pd.DataFrame, dict]:
@@ -89,7 +89,7 @@ def set_view(sv: pd.DataFrame, key: pd.DataFrame) -> pd.DataFrame:
         send = r["send"]
         rows.append(dict(cv_item=m["cv_item"], writer=m["annotator"], dimension=m["dimension"], cond=m["cond"], arm=m["arm"], k=int(m["k"]), n_shown=n,
                          picked=int(picked), pos=pos, send=send, direct_cov=int(picked and send in OKACC), direct_strict=int(picked and send == "as_is"),
-                         inconsistent=int((not picked) and send != "no"), hard=int(r["hard"]), time_ms=float(r["time_ms"] or 0)))
+                         inconsistent=int((not picked) and send != "no"), hard=int(r["hard"]), time_ms=float(r.get("time_ms", "") or 0)))
     return pd.DataFrame(rows)
 
 
