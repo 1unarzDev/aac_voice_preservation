@@ -919,6 +919,27 @@ _ls = [json.loads(l) for l in (_A / "listener/stimuli.jsonl").read_text().splitl
 _lb = {r["item"]: r["output_text"] for r in _ls if r["condition"] == "bare"}
 _lg = {r["item"]: r["output_text"] for r in _ls if r["condition"] == "G1"}
 put("ls_items", len(_lb)); put("ls_g1_chg", sum(_lb[i] != _lg[i] for i in _lb)); put("ls_listeners", 20)
+# Part 28 results, read from the scored summary (frozen rule outcome; analysis/listener/summary.json)
+_lr = json.loads((_A / "listener/summary.json").read_text())
+_lc = {(c["metric"], c["cond"], c["subset"]): c for c in _lr["conditions"]}
+_lk = {(c["contrast"], c["metric"]): c for c in _lr["contrasts"]}
+def _f(x, d=0):
+    t = f"{x:.{d}f}"
+    return "$-$" + t[1:] if t.startswith("-") and float(t) != 0 else t.lstrip("-")
+for _m_, _c_, _t_ in (("success", "bare", "s_bare"), ("success", "chip1", "s_chip"), ("success", "reference", "s_ref"), ("success", "nlcue", "s_nl"),
+                      ("reversal", "bare", "rv_bare"), ("reversal", "chip1", "rv_chip"), ("slp_reversal", "bare", "slp_bare"), ("slp_reversal", "chip1", "slp_chip"),
+                      ("unclear", "bare", "un_bare"), ("unclear", "chip1", "un_chip")):
+    put(f"ls_{_t_}", _f(_lc[(_m_, _c_, "all")]["estimate"]))
+put("ls_s_bare_lo", _f(_lc[("success", "bare", "all")]["lo"])); put("ls_s_bare_hi", _f(_lc[("success", "bare", "all")]["hi"]))
+put("ls_s_chip_lo", _f(_lc[("success", "chip1", "all")]["lo"])); put("ls_s_chip_hi", _f(_lc[("success", "chip1", "all")]["hi"]))
+put("ls_cq_bare", _f(_lc[("conseq", "bare", "all")]["estimate"], 1)); put("ls_cq_chip", _f(_lc[("conseq", "chip1", "all")]["estimate"] + 1e-9, 1))
+put("ls_cq_nd_bare", _f(_lc[("conseq", "bare", "nondefault")]["estimate"])); put("ls_cq_nd_chip", _f(_lc[("conseq", "chip1", "nondefault")]["estimate"]))
+for _k_, _t_ in ((("chip1 - bare", "success"), "d"), (("chip1 - bare", "reversal"), "rd"), (("chip1 - bare", "conseq"), "cd"), (("nlcue - chip1", "success"), "nd")):
+    _e_ = _lk[_k_]; _dd_ = 1 if _t_ == "nd" else 0; put(f"ls_{_t_}", _f(_e_["estimate"], _dd_)); put(f"ls_{_t_}_lo", _f(_e_["lo"], _dd_)); put(f"ls_{_t_}_hi", _f(_e_["hi"], _dd_))
+put("ls_d_holm_lo", _f(_lk[("chip1 - bare", "success")]["lo_holm"])); put("ls_d_holm_hi", _f(_lk[("chip1 - bare", "success")]["hi_holm"]))
+put("ls_nd_lo90", _f(_lk[("nlcue - chip1", "success")]["lo90"], 1)); put("ls_nd_hi90", _f(_lk[("nlcue - chip1", "success")]["hi90"], 1))
+put("ls_nl_items", _lk[("nlcue - chip1", "success")]["n_items"])
+put("ls_g_d", _f(_lk[("G1 - bare", "success")]["estimate"], 1))
 
 
 def esc(v: str) -> str:

@@ -1760,6 +1760,29 @@ put("rl_chg", _rl["p1_rows_changed_label"], _RL, "int"); put("rl_rows", _rl["p1_
 put("rl_units", _rl["n_labelled"], _RL, "int")
 
 
+# ---- independent mutants (analysis/oracle_indep) and listener study (analysis/listener)
+_OI = ROOT / "analysis/oracle_indep/summary.json"
+_LS = ROOT / "analysis/listener/summary.json"
+if _OI.exists():
+    _o = json.load(open(_OI)); _sc = _o["scores"]
+    for _kk, _g in (("oi_nc", "lex_not_visible"), ("oi_all", "all")):
+        _r = _sc[_g]["judge_sens"]
+        put(_kk, _r["rate"], _OI); put(_kk + "_lo", _r["lo"], _OI); put(_kk + "_hi", _r["hi"], _OI)
+        put(_kk + "_k", _r["k"], _OI, "int"); put(_kk + "_n", _r["n"], _OI, "int")
+    for _kk, _m in (("oi_surf", "surface_sens"), ("oi_ovl", "overlap_sens")):
+        put(_kk, _sc["lex_not_visible"][_m]["rate"], _OI)
+    put("oi_agree", _o["agreement"]["raw_agreement"], _OI)
+    put("oi_fa_k", _sc["all"]["judge_fa"]["k"], _OI, "int"); put("oi_fa_n", _sc["all"]["judge_fa"]["n"], _OI, "int")
+if _LS.exists():
+    _l = json.load(open(_LS))
+    _cd = {(c["metric"], c["cond"], c["subset"]): c for c in _l["conditions"]}
+    put("ls_bare", _cd[("success", "bare", "all")]["estimate"] / 100, _LS)
+    put("ls_chip", _cd[("success", "chip1", "all")]["estimate"] / 100, _LS)
+    _c = [c for c in _l["contrasts"] if c["contrast"] == "chip1 - bare" and c["metric"] == "success"][0]
+    put("ls_diff", _c["estimate"] / 100, _LS, "f1x"); put("ls_lo", _c["lo"] / 100, _LS, "f1x"); put("ls_hi", _c["hi"] / 100, _LS, "f1x")
+    put("ls_n", _l["qc"]["n_listeners_used"], _LS, "int")
+
+
 def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()[:12]
 

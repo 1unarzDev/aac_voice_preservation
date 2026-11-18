@@ -27,12 +27,9 @@
 \makeatletter
 \newcommand{\resdef}[2]{\expandafter\def\csname RES@#1\endcsname{#2}}
 \newcommand{\RES}[1]{\ifcsname RES@#1\endcsname\csname RES@#1\endcsname\else\RESmissing{#1}\fi}
-%% ORACLE_INDEP slot: independent-mutant result (arrives 2026-11-19). When make_macros.py defines RES@oi_text it replaces the default.
-%% Sentence pattern: "An independent set of N mutants, written by a second author after the regression tests were frozen, was killed k/N (Wilson [lo, hi]); survivors: ..."
-\newcommand{\oracleindep}{\ifcsname RES@oi_text\endcsname\RES{oi_text}\else A second mutant set, written independently of the new tests, is the planned independent estimate; it is not yet in.\fi}
-%% LISTENER slot: one sentence on the listener study (stimuli exist; result pending). Empty until a macro RES@ls_text is generated.
-%% Sentence pattern: "In a listener study, N listeners heard M guarded and unguarded outputs and took the intended meaning from k of them versus j."
-\newcommand{\listenerslot}{\ifcsname RES@ls_text\endcsname\RES{ls_text}\fi}
+%% ORACLE_INDEP / LISTENER sentences (macros from analysis/oracle_indep and analysis/listener via make_macros.py)
+\newcommand{\oracleindep}{Non-circularly, 75 mutants built without the checker lexicon and confirmed by two annotators were caught by the judge in \pct{oi_all} of cases and in \RES{oi_nc_k}/\RES{oi_nc_n} (\pct{oi_nc}, Wilson \cip{oi_nc}) where the lexicon does not see the change (surface baselines: \pct{oi_surf}, \pct{oi_ovl}); it is weak on ``fail to'', ``refuse to'' and embedded roles, and passive and embedded-question mutants were not confirmed and are not estimated.}
+\newcommand{\listenerslot}{In a listener study with \RES{ls_n} adult annotators (not AAC partners; materials judged, not real consequences), the intended reading was chosen for \pct{ls_bare} of bare outputs and \pct{ls_chip} with a cue chip (+\RES{ls_diff}\,points, CI \RES{ls_lo} to \RES{ls_hi}).}
 \newcommand{\RESmissing}[1]{\textcolor{red}{\textbf{\texttt{[\detokenize{#1}]}}}}
 \newcommand{\IfRES}[3]{\ifcsname RES@#1\endcsname#2\else#3\fi}
 \makeatother
@@ -67,10 +64,9 @@ nicholasicheng6@gmail.com}}
 A message composed with AAC is spoken as the person's own, so when a language model expands a few keywords and silently loses a \say{not}, it puts words in their mouth; two speech-language pathologists rated that change the most serious of \RES{slp_ntypes} types (\RES{slp_neg} of 5 each, and both would block it).
 Deciding whether an output kept the meaning needs a test oracle, an automated checker that is itself software and can be wrong, so we built a test harness with six requirements and tested its oracle with software-testing methods.
 The oracle caught \kof{orr_j_mut} rule-seeded mutants of stored outputs, a sensitivity measure (\kof{orr_j_mut_ne} excluding one mutant judged equivalent after the miss) with \kof{orr_j_fa} false alarms; on two held-out sets (\RES{nat_ho_viol_npos} violation positives) its violation verdicts have \pct{nat_ho_viol_p} \cip{nat_ho_viol_p} precision and \pct{nat_ho_viol_r} \cip{nat_ho_viol_r} recall against human coders; its critical label equals the human consensus on \kof{tc_c} treated outputs; and non-author annotators side with its tie-breaking arbiter in \pct{p19_arb} of \RES{p19_arb_n} codings (chance is 50\%; arbiter rulings only).
-A seeded-fault sweep of \RES{sf_n} mutants of the harness exposed two untested components (judge post-processing and the input builder); regression tests added after the sweep raised the share of mutants killed from \RES{sf_r1_k}/\RES{sf_den} to \RES{sf_r2_k}/\RES{sf_den}, a coverage score on a fixed list and not an independent estimate. Two defects in our own harness are also regression tests, and the production oracle passes its keyed gate with zero margin (\kof{or_new_mut_det} mutants detected, two misses tolerated), and the stricter rule that scored \kof{or_new_mut_det_raw} was rejected because it failed an unchanged source. Re-labelling with a Claude session, not an OpenAI one, leaves the human-written act-chip gain at \RES{rl_p1}\,pp (\RES{rl_p1_gpt}\,pp before).
+A seeded-fault sweep of \RES{sf_n} mutants of the harness exposed two untested components (judge post-processing and the input builder); regression tests added after the sweep raised the share of mutants killed from \RES{sf_r1_k}/\RES{sf_den} to \RES{sf_r2_k}/\RES{sf_den}, a coverage score on a fixed list and not an independent estimate. Two defects in our own harness are also regression tests, and the production oracle passes its keyed gate with zero margin (\kof{or_new_mut_det} mutants detected, two misses tolerated).
 With the tested oracle, four models answered bare polarity keywords affirmatively in \pct{hwaff} of committed outputs on human-written pairs, and supplying the missing cue raised the intended speech act by \RES{hx_p1}\,pp over a length-matched word [\RES{hx_p1_lo}, \RES{hx_p1_hi}], writer-level $t$, \RES{hx_wr} writers, all positive, exploratory (first round alone, \RES{hx_r1_wr} writers: \RES{hx_r1}\,pp; pooling the second round was decided after seeing it); on a machine-written confirmation set it is \RES{wcp1}\,pp, \RES{wcp1_um}\,pp with post-hoc arbitrated labels masked; the patterns replicate on \RES{mb_nmod} models from \RES{mb_nfam} families.
 Passing the oracle is necessary but not sufficient, and the extractor shares a model family with one generator: writers rejected \kof{wm_right_rej} (\pct{wm_right_rej}) of the oracle-passed outputs they rated, mostly for compression loss and changed event or role structure, the person, not the model, owns the message, and two paid design consultants who use AAC asked for an approval requirement (R6) and a NOT-scope clause, among other changes.
-%% LISTENER: when the listener study (Stage 7) returns, add one abstract sentence here from \listenerslot.
 The harness, tests and stored outputs are released.
 \end{abstract}
 
@@ -86,7 +82,6 @@ A language model then expands the keywords into a sentence~\cite{shen2022kwickch
 Typing \kw{supervisor read} might mean \say{The supervisor read} or \say{The supervisor did not read} (Fig.~\ref{fig:gallery}).
 Whether the model erred depends on what the user supplied, and a text-similarity score cannot know that.
 A reversed \say{not} is a decision the person did not make: the pathologists would block it.
-%% LISTENER (Stage 7, due 2026-11-19; empty until then)
 \listenerslot{}
 Symbol- and grid-based AAC is out of scope.
 
@@ -359,7 +354,7 @@ This is a coverage score of a fixed list, not a fault-detection rate: the new te
 \paragraph*{Mutation and identity evidence}
 Table~\ref{tab:oracle} lists the evidence, first on authored inputs.
 The keyed challenge set has four groups of six controls and six one-feature mutants; its pre-specified gate tolerates at most two missed mutants and one false alarm among 24 each.
-Under the production rule, which carries the acceptance relaxation of Defect A, the oracle detected \kof{or_new_mut_det} mutants (Wilson interval \cip{or_new_mut_det}) and raised \kof{or_new_ctrl_fa} false alarms, so it passes the gate only because the relaxation's two misses use the whole miss tolerance (zero margin); the strict rule without the relaxation detected \kof{or_new_mut_det_raw}.
+Under the production rule, which carries the acceptance relaxation of Defect A, the oracle detected \kof{or_new_mut_det} mutants (Wilson interval \cip{or_new_mut_det}) and raised \kof{or_new_ctrl_fa} false alarms, so it passes the gate only because the relaxation's two misses use the whole miss tolerance (zero margin).
 
 \begin{table}[t]
   \caption{Oracle evidence (Wilson 95\% intervals). Upper block: seeded tests on authored sentences or rule-seeded edits of stored outputs, not an error rate on unedited outputs. Lower block: oracle against human coders on natural outputs (plurality of coders; items without a determinate human critical value excluded). Held-out: not used to build the codebook or prompts.}
@@ -401,7 +396,7 @@ Under the production rule, which carries the acceptance relaxation of Defect A, 
 \paragraph*{Mutation testing on real outputs, with baselines}
 Authored sentences are easy, so we also seeded one-value mutants into real stored outputs of the human-written pairs (seed fixed in advance; \RES{orr_nops} operators re-implemented because the authored mutants were hand-written) and drew \RES{orr_nctl} surface-edited controls (case, punctuation, contraction; \RES{orr_nboost} boosters, which the contract tolerates, are excluded from the mutants) from outputs the oracle scored as preserving.
 Table~\ref{tab:oracle} gives the result: the judge caught \kof{orr_j_mut} mutants with \kof{orr_j_fa} false alarms, matching the authored-sentence result (\kof{orr_wa}).
-Its \RES{orr_nmiss} misses are two mixed-signal time shifts and one equivalent mutant (\kof{orr_j_mut_ne} non-equivalent caught); the operators mirror the extractor's cues, so this is a sensitivity measure, not an error rate.
+The operators mirror the extractor's cues, so this is a sensitivity measure, not an error rate.
 A surface lexicon scores \kof{orr_s_mut} (near-circular) and string overlap \kof{orr_o_mut}.
 
 \paragraph*{The oracle on faults nobody seeded}
@@ -415,10 +410,8 @@ On the held-out sets, violation verdicts have precision \pct{nat_ho_viol_p} \cip
 The first human gate, with two annotators, was run on the development items; its pre-specified criterion ($\kappa\geq0.6$) passes on all \RES{human_gate_n} fields.
 Two later checks use outputs the harness had not been developed on: outputs for human-elicited keywords and for human-written pairs (Table~\ref{tab:oracle}).
 With ties and unsure counted as disagreement, critical $\kappa$ is \RES{t7g_k} (development items), \RES{t7e_k} \ci{t7e} (elicited keywords) and \RES{t7h_k} \ci{t7h} (human-written pairs), so the gate still passes; the weakest field is added content on human-written pairs (\RES{t7h_ac_k}, lower bound \RES{t7h_ac_lo}).
-These are the oracle's evidence on headline-type data, though their coders were taught the codebook.
 A third check targets the arbiter, whose rulings settle every critical disagreement between J1 and J2.
-Of \RES{p19_nexp} codings by \RES{p19_nann} non-author annotators, \RES{p19_arb_n} were on \RES{p19_nitems} arbiter-decided units, and people sided with the arbiter in \RES{p19_arb_k}/\RES{p19_arb_n} (\pct{p19_arb}, per-coding Wilson interval \cip{p19_arb}, $\kappa=\RES{p19_kappa}$); on the \RES{p19_item_n} items where all coders agree, in \RES{p19_item_k} (\pct{p19_item} \cip{p19_item}, Wilson over items).
-Units are J1/J2 disagreements, so chance is 50\%; agreement holds whichever prompt the arbiter followed (\pct{p19_sideJ1} J1, \pct{p19_sideJ2} J2).
+Of \RES{p19_nexp} codings by \RES{p19_nann} non-author annotators, \RES{p19_arb_n} were on \RES{p19_nitems} arbiter-decided units, and people sided with the arbiter in \RES{p19_arb_k}/\RES{p19_arb_n} (\pct{p19_arb}, per-coding Wilson interval \cip{p19_arb}, $\kappa=\RES{p19_kappa}$).
 \paragraph*{A second judge family}
 The extractor shares a family with one generator, so we had a Claude session re-label all \RES{rl_units} judged units without the GPT labels.
 Against the human consensus on the \RES{rl_n} human-coded units of two sets, its critical label agrees on \pct{rl_c_acc} ($\kappa=\RES{rl_c_kappa}$), and the GPT extractor on \pct{rl_g_acc} ($\kappa=\RES{rl_g_kappa}$).

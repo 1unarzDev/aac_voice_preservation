@@ -1,0 +1,370 @@
+{
+ "qc": {
+  "rows": 340,
+  "practice_dropped": 40,
+  "unknown_item": 0,
+  "wrong_annotator": 0,
+  "duplicate": 0,
+  "missing_or_invalid": 0
+ },
+ "dropped_annotators": [],
+ "agreement": {
+  "pairs": 150,
+  "raw_agreement": 0.9533,
+  "kappa_three_way": 0.9082,
+  "pairs_same_different_only": 148,
+  "raw_agreement_same_different": 0.9595,
+  "kappa_same_different": 0.9187
+ },
+ "confirmation": {
+  "mutants": {
+   "changed": 75,
+   "same": 20,
+   "unresolved": 5
+  },
+  "controls": {
+   "same": 46,
+   "unresolved": 3,
+   "changed": 1
+  },
+  "mutants_by_op": {
+   "neg_fail_to": {
+    "changed": 13
+   },
+   "neg_hardly": {
+    "changed": 12
+   },
+   "neg_nobody": {
+    "changed": 10
+   },
+   "neg_refuse_to": {
+    "changed": 13
+   },
+   "q_embed": {
+    "same": 6,
+    "unresolved": 5,
+    "changed": 1
+   },
+   "role_embed": {
+    "changed": 12
+   },
+   "role_passive": {
+    "same": 14
+   },
+   "time_implied": {
+    "changed": 14
+   }
+  },
+  "construction_failures": {
+   "role_passive": 14,
+   "q_embed": 6,
+   "ctl_paraphrase": 1
+  }
+ },
+ "scores": {
+  "n_scored_mutants": 75,
+  "n_scored_controls": 46,
+  "judge_scored": true,
+  "all": {
+   "group": "all",
+   "n_mut": 75,
+   "n_ctl": 46,
+   "judge_sens": {
+    "k": 53,
+    "n": 75,
+    "rate": 0.7067,
+    "lo": 0.5956,
+    "hi": 0.7976
+   },
+   "judge_fa": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   },
+   "surface_sens": {
+    "k": 30,
+    "n": 75,
+    "rate": 0.4,
+    "lo": 0.2966,
+    "hi": 0.5131
+   },
+   "surface_fa": {
+    "k": 11,
+    "n": 46,
+    "rate": 0.2391,
+    "lo": 0.1391,
+    "hi": 0.3794
+   },
+   "overlap_sens": {
+    "k": 28,
+    "n": 75,
+    "rate": 0.3733,
+    "lo": 0.2726,
+    "hi": 0.4865
+   },
+   "overlap_fa": {
+    "k": 15,
+    "n": 46,
+    "rate": 0.3261,
+    "lo": 0.2087,
+    "hi": 0.4703
+   },
+   "judge_sens_upper_unresolved_caught": {
+    "k": 53,
+    "n": 75,
+    "rate": 0.7067,
+    "lo": 0.5956,
+    "hi": 0.7976
+   }
+  },
+  "lex_not_visible": {
+   "group": "lex_visible False (non-circular headline)",
+   "n_mut": 53,
+   "n_ctl": 46,
+   "judge_sens": {
+    "k": 31,
+    "n": 53,
+    "rate": 0.5849,
+    "lo": 0.4509,
+    "hi": 0.7074
+   },
+   "judge_fa": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   },
+   "surface_sens": {
+    "k": 8,
+    "n": 53,
+    "rate": 0.1509,
+    "lo": 0.0785,
+    "hi": 0.2705
+   },
+   "surface_fa": {
+    "k": 11,
+    "n": 46,
+    "rate": 0.2391,
+    "lo": 0.1391,
+    "hi": 0.3794
+   },
+   "overlap_sens": {
+    "k": 16,
+    "n": 53,
+    "rate": 0.3019,
+    "lo": 0.1952,
+    "hi": 0.4354
+   },
+   "overlap_fa": {
+    "k": 15,
+    "n": 46,
+    "rate": 0.3261,
+    "lo": 0.2087,
+    "hi": 0.4703
+   },
+   "judge_sens_upper_unresolved_caught": {
+    "k": 31,
+    "n": 53,
+    "rate": 0.5849,
+    "lo": 0.4509,
+    "hi": 0.7074
+   }
+  },
+  "lex_visible": {
+   "group": "lex_visible True",
+   "n_mut": 22,
+   "n_ctl": 46,
+   "judge_sens": {
+    "k": 22,
+    "n": 22,
+    "rate": 1.0,
+    "lo": 0.8513,
+    "hi": 1.0
+   },
+   "judge_fa": {
+    "k": 4,
+    "n": 46,
+    "rate": 0.087,
+    "lo": 0.0343,
+    "hi": 0.2032
+   },
+   "surface_sens": {
+    "k": 22,
+    "n": 22,
+    "rate": 1.0,
+    "lo": 0.8513,
+    "hi": 1.0
+   },
+   "surface_fa": {
+    "k": 11,
+    "n": 46,
+    "rate": 0.2391,
+    "lo": 0.1391,
+    "hi": 0.3794
+   },
+   "overlap_sens": {
+    "k": 12,
+    "n": 22,
+    "rate": 0.5455,
+    "lo": 0.3466,
+    "hi": 0.7308
+   },
+   "overlap_fa": {
+    "k": 15,
+    "n": 46,
+    "rate": 0.3261,
+    "lo": 0.2087,
+    "hi": 0.4703
+   },
+   "judge_sens_upper_unresolved_caught": {
+    "k": 22,
+    "n": 22,
+    "rate": 1.0,
+    "lo": 0.8513,
+    "hi": 1.0
+   }
+  },
+  "mcnemar": {
+   "judge_vs_surface": {
+    "judge_only": 23,
+    "baseline_only": 0,
+    "p_exact_two_sided": 0.0
+   },
+   "judge_vs_overlap": {
+    "judge_only": 29,
+    "baseline_only": 4,
+    "p_exact_two_sided": 0.0
+   }
+  }
+ },
+ "judge_run": {
+  "run": "runs/oracle_indep_judge",
+  "input_text": "(none) placeholder; pass A (the critical label) never sees input",
+  "concurrency": 3,
+  "disputes_arbitrated": 17,
+  "arbiter": "blind (arbiter_tool view: text + production question only), claude-sonnet-5-5",
+  "arbiter_equals_J1": 17,
+  "unresolved": 0,
+  "labels": "runs/oracle_indep/judge_labels.jsonl",
+  "arbiter_decisions": "runs/oracle_indep_judge/arbiter_decisions.tsv"
+ },
+ "non_circular_stratum_by_op": {
+  "neg_fail_to": {
+   "judge": [
+    6,
+    13
+   ],
+   "surface": [
+    0,
+    13
+   ],
+   "overlap": [
+    1,
+    13
+   ]
+  },
+  "neg_hardly": {
+   "judge": [
+    12,
+    12
+   ],
+   "surface": [
+    0,
+    12
+   ],
+   "overlap": [
+    3,
+    12
+   ]
+  },
+  "neg_refuse_to": {
+   "judge": [
+    5,
+    13
+   ],
+   "surface": [
+    0,
+    13
+   ],
+   "overlap": [
+    2,
+    13
+   ]
+  },
+  "q_embed": {
+   "judge": [
+    1,
+    1
+   ],
+   "surface": [
+    1,
+    1
+   ],
+   "overlap": [
+    1,
+    1
+   ]
+  },
+  "role_embed": {
+   "judge": [
+    6,
+    12
+   ],
+   "surface": [
+    6,
+    12
+   ],
+   "overlap": [
+    7,
+    12
+   ]
+  },
+  "time_implied": {
+   "judge": [
+    1,
+    2
+   ],
+   "surface": [
+    1,
+    2
+   ],
+   "overlap": [
+    2,
+    2
+   ]
+  }
+ },
+ "mcnemar_lex_not_visible": {
+  "judge_vs_surface": [
+   23,
+   0,
+   2.384185791015625e-07
+  ],
+  "judge_vs_overlap": [
+   19,
+   4,
+   0.002599477767944336
+  ]
+ },
+ "judge_false_alarms_controls": {
+  "ids": [
+   "I052",
+   "I028",
+   "I144",
+   "I027"
+  ],
+  "by_op": {
+   "ctl_contraction": [
+    0,
+    10
+   ],
+   "ctl_paraphrase": [
+    4,
+    36
+   ]
+  }
+ }
+}
