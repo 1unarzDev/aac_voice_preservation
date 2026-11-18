@@ -901,6 +901,25 @@ _ccc = {(r["cond"], r["arm"], r["r"], r["fallback"]): float(r["cpc"]) for r in _
 put("cv_cost_bare_c3", f"{_ccc[('bare', 'C3', '0.5', 'True')]:.0f}"); put("cv_cost_chip_g1", f"{_ccc[('chip', 'G1', '0.5', 'True')]:.0f}")
 put("cv_proxy_k", f"{_cs['concordance']['h_cov']['kappa']:.2f}".lstrip("0"))
 
+# Claude (second-family) re-label of the judge units: P1 re-run and agreement
+_rl = json.loads((_A / "relabel_nongpt/summary.json").read_text())
+_rlp = _rl["p1"]["claude"]
+put("rl_p1", f"{_rlp['estimate_pp']:.1f}"); put("rl_p1_lo", f"{_rlp['t_ci_pp'][0]:.1f}"); put("rl_p1_hi", f"{_rlp['t_ci_pp'][1]:.1f}")
+put("rl_p1_rows", _rlp["rows"]); put("rl_p1_changed", _rl["p1_rows_changed_label"]); put("rl_p1_replaced", f"{_rl['p1_rows_replaced']:,}")
+_rlh = _rl["agreement"]["p13p20_claude_vs_human"]["critical"]
+put("rl_hum", f"{100 * _rlh['accuracy']:.1f}"); put("rl_hum_n", _rlh["n"]); put("rl_hum_kappa", f"{_rlh['kappa']:.2f}".lstrip("0"))
+_rlg = _rl["agreement"]["p13p20_claude_vs_gpt"]["critical"]
+put("rl_gpt", f"{100 * _rlg['accuracy']:.1f}"); put("rl_gpt_n", _rlg["n"]); put("rl_gpt_kappa", f"{_rlg['kappa']:.2f}".lstrip("0"))
+_rlc = _rl["agreement"]["hw12_claude_vs_gpt_critical_chip1"]
+put("rl_chip", f"{100 * _rlc['accuracy']:.1f}"); put("rl_chip_n", f"{_rlc['n']:,}")
+for _k_, _t_ in (("chip1", "chipc"), ("nlcue", "nlc")):
+    _e_ = _tcs["critical"][_k_]; kn(f"tc_{_t_}", _e_["k"], _e_["n"])
+# Part 28 listener study: design counts only (results are not read here; frozen plan analysis/listener/PLAN.md)
+_ls = [json.loads(l) for l in (_A / "listener/stimuli.jsonl").read_text().splitlines()]
+_lb = {r["item"]: r["output_text"] for r in _ls if r["condition"] == "bare"}
+_lg = {r["item"]: r["output_text"] for r in _ls if r["condition"] == "G1"}
+put("ls_items", len(_lb)); put("ls_g1_chg", sum(_lb[i] != _lg[i] for i in _lb)); put("ls_listeners", 20)
+
 
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
