@@ -1658,6 +1658,10 @@ put("hx_fams", _h12s["hw12_n_families"], "analysis/hw12/speech_act_sensitivity.j
 _wm_ = list(_p1["writer_means"].values()); assert min(_wm_) > 0
 put("hx_wm_min", min(_wm_), _S, "pct"); put("hx_wm_max", max(_wm_), _S, "pct")
 put("hx_sf_p", _p1["sign_flip_randomization"]["p_one_sided"], _S, "p4")
+put("hx_sf_p2", _p1["sign_flip_randomization"]["p_two_sided"], _S, "p4")
+_SS = "analysis/hw12/speech_act_sensitivity.json"
+put("hx_r1", _h12s["hw1"]["est"] / 100, _SS, "pct"); put("hx_r1_lo", _h12s["hw1"]["lo"] / 100, _SS, "pct"); put("hx_r1_hi", _h12s["hw1"]["hi"] / 100, _SS, "pct")
+put("hx_r1_wr", _h12s["hw1"]["writers"], _SS, "int")
 put("hx_loo_min", min(v["estimate"] for v in _p1["leave_one_writer_out"].values()), _S, "pct")
 put("hx_loo_max", max(v["estimate"] for v in _p1["leave_one_writer_out"].values()), _S, "pct")
 put("hx1_wr", _h12s["hw1"]["writers"], "analysis/hw12/speech_act_sensitivity.json", "int")
