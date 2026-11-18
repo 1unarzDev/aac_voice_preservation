@@ -1,0 +1,7 @@
+# SE4All final fold-in (final writer)
+- Act-chip gain now pools hw1+hw2: +37.5 [33.8, 41.2], 10 writers, all positive, 127 families, leave-one-out 36.7-38.3, sign-flip p = .0010 (floor); Llama weakest (16.9, writer means not all positive). Abstract, Table II row ("rounds 1+2"), caption, results text, confirmation-set comparison use macros hx_* (analysis/hw12). Politeness/polarity unchanged (6/7 writers).
+- New "Treated outputs" paragraph (Part 20): judge critical label = human consensus on 115/115 treated outputs, all 6 classes; added content stays weak (98/109, kappa .59). Abstract and conclusion mention it. Macros tc_* (analysis/treated_check).
+- Part 21: detector negation label 200/200 vs human; T2 2.7% / 24 per 1,000 unchanged. Macros src_*.
+- Stage 6: one sentence (cue tap main lever: one draft 13% bare vs 43% after cue; three bare drafts 22%). Macros cv_* (analysis/coverage_human). Elaboration left to CALE-AI per overlap rule.
+- Trimmed prose elsewhere (cost-of-extension, controls, model breadth, SLP, composition, consultants, limitations "Use") to stay at 8 pages; no content claims dropped. Removed the "labels" arrow label in Fig. 2 (overlapped a node). Caveat that coders were taught the codebook kept.
+- IEEE pass: IEEEtran conference 10pt, 8 pages incl. refs, author block intact, no overfull boxes/undefined refs (only a scit font-shape substitution warning), AI-use disclosure comment placeholder kept (no text written), ethics paragraph unchanged. Not committed.
