@@ -45,7 +45,8 @@ for nm, g in [("A speech_act", d[(d.stratum == "A_cue_lost") & (d.dimension == "
 K = pd.DataFrame(kap); K.to_csv(OUT / "human_q_kappa.csv", index=False)
 # Q1 vs Q2 consistency in stratum A speech act (cross-check)
 sa = d[(d.stratum == "A_cue_lost") & (d.dimension == "speech_act")]
-cross = pd.crosstab(sa.q1, sa.q2); cross.to_csv(OUT / "human_q_q1_q2_crosstab_speech_act.csv")
+rel = lambda x, row: "alt" if x == row.alternative_is else ("default" if x == row.default_is else x)
+cross = pd.crosstab(sa.apply(lambda z: rel(z.q1, z), axis=1), sa.apply(lambda z: rel(z.q2, z), axis=1)); cross.to_csv(OUT / "human_q_q1_q2_crosstab_speech_act.csv")
 # item-level: both annotators pick the alternative / neither / split
 it = sa.groupby("item_id").q2_alt.sum().value_counts().sort_index().to_dict()
 # per-annotator q (heterogeneity)
