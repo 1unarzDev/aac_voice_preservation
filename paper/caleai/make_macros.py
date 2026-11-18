@@ -825,6 +825,81 @@ _eq = [k for k, v in _cd.items() if v["vs_nl"].startswith("NL equals")]
 put("cc_eq_n", len(_eq)); put("cc_eq_max", f"{100 * max(abs(_cd[k]['chip1_minus_nlcue']) for k in _eq):.1f}")
 put("cc_pol_chipgap", f"{100 * _cd['polarity']['chip1_minus_nlcue']:.1f}")
 
+# ---------------- final-writer round 1: hw1+hw2 replication, Parts 20-22, 24, Stage 6 (each macro reads a stored summary file)
+_A = ROOT / "analysis"
+_h12 = json.loads((_A / "hw12/summary.json").read_text()); _h12s = json.loads((_A / "hw12/speech_act_sensitivity.json").read_text())
+_p1 = _h12["contrasts"]["P1"]
+put("hx_n_writers", _p1["writers"]); put("hx_rows", f"{_p1['rows']:,}"); put("hx_fams", _h12s["hw12_n_families"])
+put("hx_p1", _f(_p1["estimate"])); put("hx_p1_lo", _f(_p1["t_ci_low"])); put("hx_p1_hi", _f(_p1["t_ci_high"]))
+put("hx_wild_lo", _f(_p1["wild_rademacher"]["ci_low"])); put("hx_wild_hi", _f(_p1["wild_rademacher"]["ci_high"]))
+put("hx_sf_p", f"{_p1['sign_flip_randomization']['p_one_sided']:.5f}".lstrip("0"))
+_wm = list(_p1["writer_means"].values()); assert min(_wm) > 0
+put("hx_wm_min", _f(min(_wm))); put("hx_wm_max", _f(max(_wm)))
+_lo_ = _p1["leave_one_writer_out"]; put("hx_loo_min", _f(min(v["estimate"] for v in _lo_.values()))); put("hx_loo_max", _f(max(v["estimate"] for v in _lo_.values())))
+assert all(v["t_ci_low"] > 0 for v in _lo_.values())
+for _k_, _t_ in (("hw1", "hx1"), ("hw2", "hx2")):
+    _r_ = _h12s[_k_]; put(f"{_t_}", f"{_r_['est']:.1f}"); put(f"{_t_}_lo", f"{_r_['lo']:.1f}"); put(f"{_t_}_hi", f"{_r_['hi']:.1f}"); put(f"{_t_}_w", _r_["writers"]); put(f"{_t_}_rows", _r_["rows"])
+put("hx_chip_rate", f"{_h12s['hw12_chip1_rate']:.1f}"); put("hx_non_rate", f"{_h12s['hw12_noncrit_rate']:.1f}")
+put("hx_miss", f"{100 - _h12s['hw12_chip1_rate']:.0f}")
+put("hx_fam_nogain", _h12s["hw12_families_gain_le0"]); put("hx_fam_n", _h12s["hw12_n_families"]); put("hx_fam_share", f"{_h12s['hw12_family_neg_share']:.1f}")
+for _k_, _t_ in (("hw12_recode_can", "can"), ("hw12_recode_want", "want"), ("hw12_recode_both", "both")):
+    _r_ = _h12s[_k_]; put(f"hx_{_t_}", f"{_r_['est']:.1f}"); put(f"hx_{_t_}_lo", f"{_r_['lo']:.1f}"); put(f"hx_{_t_}_hi", f"{_r_['hi']:.1f}")
+_pm = {r["model"]: r for r in _csv.DictReader((_A / "hw12/per_model.csv").open()) if r["contrast"] == "P1"}
+for _m_, _t_ in (("llama3.1-8b", "llama"), ("gpt-6.1-terra", "terra"), ("qwen2.5-7b", "qwen"), ("gemma3-4b", "gemma")):
+    put(f"hx_{_t_}", _f(float(_pm[_m_]["estimate"])))
+put("hx_llama_lo", _f(float(_pm["llama3.1-8b"]["t_ci_low"]))); put("hx_llama_hi", _f(float(_pm["llama3.1-8b"]["t_ci_high"])))
+put("hx_oth_min", _f(min(float(_pm[m_]["estimate"]) for m_ in _pm if m_ != "llama3.1-8b"))); put("hx_oth_max", _f(max(float(_pm[m_]["estimate"]) for m_ in _pm if m_ != "llama3.1-8b")))
+_hw2 = [json.loads(l) for l in (ROOT / "data/items/hw2.jsonl").read_text().splitlines()]
+put("hx2_pairs", len(_hw2)); put("hx2_writers", _h12s["hw2"]["writers"])
+_cks = json.loads((_A / "hw2_checks/summary.json").read_text())
+_pp_ = _cks["pooled"]["passes"]; kn("hx2_chk", _pp_["k"], _pp_["n"]); put("hx2_chk_lo", f"{100 * _pp_['ci'][0]:.1f}"); put("hx2_kept", _cks["decisions"]["keep"])
+# Part 20: judge vs human on treated outputs
+_tc = json.loads((_A / "treated_check/summary.json").read_text()); _tcs = _tc["per_field"]["strict"]
+_cr = _tcs["critical"]["pooled"]; kn("tc_crit", _cr["k"], _cr["n"]); put("tc_crit_lo", f"{100 * _cr['acc_ci'][0]:.0f}"); put("tc_crit_hi", f"{100 * _cr['acc_ci'][1]:.0f}")
+put("tc_n_ann", len(_tc["annotators"])); put("tc_n_items", _tc["n_items_key"]); put("tc_crit_kappa", f"{_cr['kappa']:.1f}")
+_cn = [_tcs["critical"][c_]["n"] for c_ in ("G1", "G1r", "chip1", "nlcue", "newmodel", "gemini")]
+put("tc_cls_nmin", min(_cn)); put("tc_cls_nmax", max(_cn)); put("tc_cls_lo", f"{100 * min(_tcs['critical'][c_]['acc_ci'][0] for c_ in ('G1', 'G1r', 'chip1', 'nlcue', 'newmodel', 'gemini')):.0f}")
+put("tc_hh", f"{100 * _tc['human_human']['critical']['agree']:.1f}")
+_ac_ = _tcs["added_content"]["pooled"]; kn("tc_add", _ac_["k"], _ac_["n"]); put("tc_add_lo", f"{100 * _ac_['acc_ci'][0]:.0f}"); put("tc_add_hi", f"{100 * _ac_['acc_ci'][1]:.0f}"); put("tc_add_kappa", f"{_ac_['kappa']:.2f}".lstrip("0"))
+put("tc_viol_pos", _tc["verdict_agreement"]["violation"]["pooled"]["judge_true_human_true"]); put("tc_viol_n", _tc["verdict_agreement"]["violation"]["pooled"]["n_determined"])
+# Part 21: source-message labels and corrected T2
+_sc = json.loads((_A / "source_check/summary.json").read_text()); _sn = _sc["labels"]["negated"]["strict"]["unweighted"]
+kn("src_neg", _sn["agree"], _sn["n"]); put("src_neg_kappa", f"{_sn['kappa']:.1f}")
+_spo = _sc["labels"]["polite"]["strict"]["unweighted"]; put("src_pol_kappa", f"{_spo['kappa']:.2f}".lstrip("0"))
+put("src_act_kappa", f"{_sc['act_three_way']['kappa']:.2f}".lstrip("0"))
+_hn = _sc["human_negated_rate_by_detector_stratum"]; _nn = sum(_hn[k_]["n_labelled"] for k_ in ("polite", "question_request", "plain_other")); put("src_nn_n", _nn)
+put("src_nn_k", round(sum(_hn[k_]["n_labelled"] * _hn[k_]["human_negated_rate"] for k_ in ("polite", "question_request", "plain_other"))))
+put("src_nn_ub", f"{100 * 1.96 ** 2 / (_nn + 1.96 ** 2):.1f}")  # Wilson upper bound for 0 of n
+_t2h = _sc["t2"]["human_corrected"]["human"]; put("src_t2", _f(_t2h["posterior_empirical"])); put("src_t2_lo", _f(_t2h["posterior_empirical_lo"])); put("src_t2_hi", _f(_t2h["posterior_empirical_hi"]))
+put("src_t2_rev", f"{_t2h['silent_reversal_per_1000']:.1f}")
+assert abs(_t2h["posterior_empirical"] - _sc["t2"]["detector_based_committed"]["human"]["posterior_empirical"]) < 1e-9
+# Part 22: default-profile source labels with human consensus
+_dp22 = json.loads((_A / "frontier/default_profiles/human_summary.json").read_text())
+put("dp_n_ann", _dp22["annotators"]); put("dp_items", _dp22["items"])
+for _d_, _t_ in (("speech_act", "sa"), ("politeness", "pt")):
+    _e_ = _dp22["always_commit_model_visible_per_1000"][_d_]; put(f"dp_ac_{_t_}", f"{_e_['human'][0]:.1f}"); put(f"dp_ac_{_t_}_lo", f"{_e_['human'][1]:.1f}"); put(f"dp_ac_{_t_}_hi", f"{_e_['human'][2]:.1f}"); put(f"dp_ac_{_t_}_det", f"{_e_['detector']:.1f}")
+_vrr = {(r["set"], r["measure"]): r for r in _csv.DictReader((_A / "frontier/default_profiles/human_validity_rates.csv").open())}
+for _s_, _m_, _t_ in (("E_speech_act", "h_nonstmt", "sa_det"), ("E_politeness", "h_polite", "pt_det"), ("control", "h_nonstmt", "sa_ctl")):
+    _r_ = _vrr[(_s_, _m_)]; put(f"dp_{_t_}", f"{100 * float(_r_['share']):.1f}"); put(f"dp_{_t_}_lo", f"{100 * float(_r_['wilson_lo']):.1f}"); put(f"dp_{_t_}_hi", f"{100 * float(_r_['wilson_hi']):.1f}")
+    put(f"dp_{_t_}_k", int(float(_r_["k"]))); put(f"dp_{_t_}_n", int(float(_r_["n"])))
+put("dp_q3", f"{_dp22['human_human_kappa']['q3']:.2f}".replace("-", "-")); put("dp_q4", f"{_dp22['human_human_kappa']['q4']:.2f}")
+put("dp_q1", f"{_dp22['human_human_kappa']['q1']:.2f}".lstrip("0")); put("dp_q2", f"{_dp22['human_human_kappa']['q2']:.2f}".lstrip("0"))
+# Part 24: measured cue-supply rate q
+_vq = json.loads((_A / "frontier/value_of_cue/human_q.json").read_text())["qhat_speech_act"]
+put("vq", f"{100 * _vq['est']:.1f}"); put("vq_lo", f"{100 * _vq['lo']:.1f}"); put("vq_hi", f"{100 * _vq['hi']:.1f}"); put("vq_n", _vq["n_judgments"]); put("vq_items", _vq["n_items"])
+# Stage 6 intent coverage (human; writer-cluster CIs)
+_cba = {(r["cond"], r["arm"]): r for r in _csv.DictReader((_A / "coverage_human/by_arm.csv").open())}
+for _c_, _a_, _t_ in (("bare", "G1", "bg1"), ("bare", "D3p", "bd3"), ("bare", "C3", "bc3"), ("bare", "E3", "be3"), ("chip", "G1", "cg1"), ("chip", "D3p", "cd3"), ("chip", "E3", "ce3")):
+    _r_ = _cba[(_c_, _a_)]; put(f"cv_{_t_}", f"{100 * float(_r_['h_cov']):.0f}"); put(f"cv_{_t_}_lo", f"{100 * float(_r_['h_cov_lo']):.0f}"); put(f"cv_{_t_}_hi", f"{100 * float(_r_['h_cov_hi']):.0f}")
+_cct = {r["name"]: r for r in _csv.DictReader((_A / "coverage_human/contrasts.csv").open())}
+for _n_, _t_ in (("cue_tap_G1chip-G1bare", "tap"), ("S3_E3-G1_chip", "s3"), ("S2_E3_bare_vs_G1_chip", "s2"), ("S3x_D3p-G1_chip", "d3g")):
+    _r_ = _cct[_n_]; put(f"cv_{_t_}", f"{float(_r_['diff_pp']):+.0f}".replace("+", "")); put(f"cv_{_t_}_lo", f"{float(_r_['lo_pp']):.0f}"); put(f"cv_{_t_}_hi", f"{float(_r_['hi_pp']):.0f}")
+_cs = json.loads((_A / "coverage_human/summary.json").read_text())
+put("cv_items", _cs["n_set_view_items"]); put("cv_writers", 20)
+_ccc = {(r["cond"], r["arm"], r["r"], r["fallback"]): float(r["cpc"]) for r in _csv.DictReader((_A / "coverage_human/cost_ci.csv").open())}
+put("cv_cost_bare_c3", f"{_ccc[('bare', 'C3', '0.5', 'True')]:.0f}"); put("cv_cost_chip_g1", f"{_ccc[('chip', 'G1', '0.5', 'True')]:.0f}")
+put("cv_proxy_k", f"{_cs['concordance']['h_cov']['kappa']:.2f}".lstrip("0"))
+
 
 def esc(v: str) -> str:
     v = v.replace("%", r"\%").replace("_", r"\_")
