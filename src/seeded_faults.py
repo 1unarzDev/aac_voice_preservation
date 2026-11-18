@@ -29,6 +29,7 @@ REAL = Path(__file__).resolve().parents[1]
 SF = REAL / "tmp" / "sf"
 OUT = REAL / "analysis" / "seeded_faults"
 PY = str(REAL / ".venv" / "bin" / "python")
+PREFIX = "round2_" if "--round2" in sys.argv else ""   # round 1 files keep their names; round 2 writes round2_*
 DEPS = SF / "_deps"          # pytest installed with --target (the project venv has no pytest)
 
 
@@ -707,12 +708,12 @@ def report(muts, results, b, base_files, tree_unchanged):
             "pytest_files": base_files, "per_test": per_test, "by_class": cls,
             "survivors": [m["id"] for m in surv], "pooled_columns": primary, "supplementary_columns": SUPPLEMENTARY,
             "baseline_secs": b["res"]["secs"]}
-    (OUT / "summary.json").write_text(json.dumps(summ, indent=1))
-    (OUT / "mutant_results.json").write_text(json.dumps(
+    (OUT / (PREFIX + "summary.json")).write_text(json.dumps(summ, indent=1))
+    (OUT / (PREFIX + "mutant_results.json")).write_text(json.dumps(
         {m["id"]: {"cls": m["cls"], "file": m["file"], "desc": m["desc"], "killed_by": killed_by[m["id"]],
                    "also_killed_by_supplementary": matrix[m["id"]]["request_rebuild"], "detail": detail[m["id"]]}
          for m in muts}, indent=1))
-    with open(OUT / "kill_matrix.csv", "w", newline="") as fh:
+    with open(OUT / (PREFIX + "kill_matrix.csv"), "w", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["mutant", "class", "file", "description", "killed_by_existing"] + allcols)
         for m in muts:

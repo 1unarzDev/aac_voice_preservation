@@ -358,22 +358,9 @@ def _final(a, b, tiebreak=None):
     return None, True
 
 
-async def judge_run(run_dir: Path, items_path, model, effort, variants):
-    junits, a_units, b_units = build_units(run_dir, items_path)
-    stats = Stats()
-    log = (run_dir / "judge_calls.jsonl").open("a")
-    res = {}
-    jobs = [(v, p) for v in variants for p in ("A", "B")]   # all share one <=16 semaphore
-    outs = await asyncio.gather(*[
-        run_pass([dict(u) for u in (a_units if p == "A" else b_units).values()],
-                 v, p, model, effort, stats, log) for v, p in jobs])
-    got = dict(zip(jobs, outs))
-    for v in variants:
-        res[v] = ({k: got[(v, "A")][key_a(v, model, u)] for k, u in a_units.items()},
-                  {k: got[(v, "B")][key_b(v, model, u)] for k, u in b_units.items()})
-    elapsed = time.time() - stats.t0
-    l0 = dict(zip([u["text_id"] for u in junits],
-                  layer0.label_many([u["text"] for u in junits])))
+def assemble_rows(junits, res, variants, l0):
+    """Raw judge responses -> judgment rows (J*/L0 fields and, with two judges, the final labels).
+    res[v] = (pass-A results keyed by unit _ak, pass-B results keyed by unit _bk); l0[text_id] = layer0 labels."""
     rows = []
     for u in junits:
         r = {k: u[k] for k in ("text_id", "family_id", "input_text", "text", "dimension",
@@ -403,6 +390,26 @@ async def judge_run(run_dir: Path, items_path, model, effort, variants):
             if dis:
                 r["general_disagree"].append("added_content")
         rows.append(r)
+    return rows
+
+
+async def judge_run(run_dir: Path, items_path, model, effort, variants):
+    junits, a_units, b_units = build_units(run_dir, items_path)
+    stats = Stats()
+    log = (run_dir / "judge_calls.jsonl").open("a")
+    res = {}
+    jobs = [(v, p) for v in variants for p in ("A", "B")]   # all share one <=16 semaphore
+    outs = await asyncio.gather(*[
+        run_pass([dict(u) for u in (a_units if p == "A" else b_units).values()],
+                 v, p, model, effort, stats, log) for v, p in jobs])
+    got = dict(zip(jobs, outs))
+    for v in variants:
+        res[v] = ({k: got[(v, "A")][key_a(v, model, u)] for k, u in a_units.items()},
+                  {k: got[(v, "B")][key_b(v, model, u)] for k, u in b_units.items()})
+    elapsed = time.time() - stats.t0
+    l0 = dict(zip([u["text_id"] for u in junits],
+                  layer0.label_many([u["text"] for u in junits])))
+    rows = assemble_rows(junits, res, variants, l0)
     runio.write_jsonl(run_dir / "judgments.jsonl", rows)
     lat = sorted(stats.latency) or [0]
     perf = {"model": model, "reasoning_effort": effort, "api_calls": stats.calls,
