@@ -283,9 +283,9 @@ Two qualifications: \RES{wc_prefreeze} cached requests predate the final item fr
 Table~\ref{tab:ladder} separates the two kinds of evidence.
 In the italic cells the input is ambiguous, so the match is the model's default, bounded by a 50\% design ceiling; it is not accuracy.
 In the other cells the chip or sentence is visible, so the match measures preservation.
-Under bare input, \kn{wcaff} committed directional polarity outputs on the confirmation set were affirmative; these are Assumptions, not failures; the interface decides who pays an extra selection to say \say{not}.
+Under bare input, \kn{wcaff} committed directional polarity outputs on the confirmation set were affirmative; these are Assumptions, not failures.
 To test whether the default is a compression artifact we asked \RES{el_nann} annotators to type keywords for \RES{el_nmsg} crowd-written AACText messages; on the \RES{el_neg_c_n} messages with a negation cue they dropped it in \pct{el_neg_h} of sets, against \pct{el_neg_c} for a crude compressor.
-The default is also the better guess (among keyword strings with no negation word, only \pct{t2_post} came from a negated message), but its errors are silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations, so R3 logs the Assumption and tests its direction; the detector's negation label equals the human label on \kof{src} sampled messages, leaving the \pct{src_t2} unchanged.
+The default is also the better guess (among keyword strings with no negation word, only \pct{t2_post} came from a negated message), but its errors are silent: about \RES{t2_rev} negated messages per 1,000 are reversed without any signal, against \RES{t2_spur} spurious negations, so R3 logs the Assumption and tests its direction (the detector's negation label equals the human label on \kof{src} sampled messages).
 
 The default is not new~\cite{chen2023say}; we price it for AAC input against a human base rate. A later human coverage study found the cue tap, not a set of drafts, the main lever on covering the intended message (one draft \RES{cv_g1bare}\% bare, \RES{cv_g1chip}\% after the cue; three bare drafts \RES{cv_c3bare}\%).
 
@@ -304,7 +304,7 @@ The default is not new~\cite{chen2023say}; we price it for AAC input against a h
 \end{table}
 
 The \chip{?} chip is the weakest supplied chip (alone it failed \RES{wc_qfail_k} of \RES{wc_qfail_n}, \RES{wc_q2req_k} of them coded as requests for \say{Can you\ldots?}, a codebook decision).
-\RES{p19_nann} annotators who had not been taught the rule coded such outputs as a request in \pct{p19_cy} of \RES{p19_cy_n} codings, so the stored coding is what people do; the alternative coding moves the confirmation-set Act-chip gain from \RES{cb_wc_base} to \RES{cb_wc_q}\,pp and changes no Holm decision, so the size of the gain is codebook-dependent and its sign is not.
+Annotators not taught the rule coded such outputs as a request in \pct{p19_cy} of \RES{p19_cy_n} codings; the alternative coding moves the confirmation-set Act-chip gain from \RES{cb_wc_base} to \RES{cb_wc_q}\,pp and changes no Holm decision, so the size of the gain is codebook-dependent and its sign is not.
 Full-input violations are model-specific (Gemma-3-4B and gpt-6.1-terra added markers; Llama and Qwen more often removed them), a regression to test for per model, not a property of LLMs.
 
 \subsection{Composition (R4)}
@@ -406,7 +406,7 @@ Under the production rule, which carries the acceptance relaxation of Defect A, 
 \paragraph*{Mutation testing on real outputs, with baselines}
 Authored sentences are easy, so we also seeded one-value mutants into real stored outputs of the human-written pairs (seed fixed in advance; \RES{orr_nops} operators re-implemented because the authored mutants were hand-written) and drew \RES{orr_nctl} surface-edited controls (case, punctuation, contraction; \RES{orr_nboost} boosters, which the contract tolerates, are excluded from the mutants) from outputs the oracle scored as preserving.
 Table~\ref{tab:oracle} gives the result: the judge caught \kof{orr_j_mut} mutants with \kof{orr_j_fa} false alarms, matching the authored-sentence result (\kof{orr_wa}).
-Its \RES{orr_nmiss} misses are two mixed-signal time shifts and one equivalent mutant, so it caught \kof{orr_j_mut_ne} non-equivalent mutants; the mutants are rule-seeded by operators that mirror the extractor's cues, a sensitivity measure and not an error rate.
+Its \RES{orr_nmiss} misses are two mixed-signal time shifts and one equivalent mutant (\kof{orr_j_mut_ne} non-equivalent caught); the operators mirror the extractor's cues, so this is a sensitivity measure, not an error rate.
 A surface lexicon scores \kof{orr_s_mut} (near-circular: it matches the cues the operators edit) and string overlap \kof{orr_o_mut}.
 
 \paragraph*{The oracle on faults nobody seeded}
@@ -428,7 +428,7 @@ These are the oracle's evidence on headline-type data, though their coders were 
 A third check targets the arbiter, whose rulings settle every critical disagreement between J1 and J2.
 Of \RES{p19_nexp} codings by \RES{p19_nann} non-author annotators, \RES{p19_arb_n} were on \RES{p19_nitems} arbiter-decided units, and people sided with the arbiter in \RES{p19_arb_k}/\RES{p19_arb_n} (\pct{p19_arb}, per-coding Wilson interval \cip{p19_arb}, $\kappa=\RES{p19_kappa}$); on the \RES{p19_item_n} items where all coders agree, in \RES{p19_item_k} (\pct{p19_item} \cip{p19_item}, Wilson over items).
 Units are J1/J2 disagreements, so chance is 50\%; people agree with the arbiter whichever prompt it sided with (\pct{p19_sideJ1} when it followed J1, \pct{p19_sideJ2} when it followed J2).
-It covers only J1/J2 disputes, ruled by a Claude session after outcomes were known, from a family no generator or extractor belongs to; it limits, and does not remove, the self-preference concern.
+It covers only J1/J2 disputes, ruled by a Claude session after outcomes were known.
 \paragraph*{A second judge family}
 The extractor shares a family with one generator, so we had a Claude session re-label all \RES{rl_units} judged units without the GPT labels.
 Against the human consensus on the \RES{rl_n} human-coded units of two sets, its critical label agrees on \pct{rl_c_acc} ($\kappa=\RES{rl_c_kappa}$), and the GPT extractor on \pct{rl_g_acc} ($\kappa=\RES{rl_g_kappa}$); the two models agree with each other on \pct{rl_cg_acc} of \RES{rl_cg_n} critical labels over all sets.
