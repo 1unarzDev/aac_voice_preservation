@@ -1781,6 +1781,9 @@ if _LS.exists():
     _c = [c for c in _l["contrasts"] if c["contrast"] == "chip1 - bare" and c["metric"] == "success"][0]
     put("ls_diff", _c["estimate"] / 100, _LS, "f1x"); put("ls_lo", _c["lo"] / 100, _LS, "f1x"); put("ls_hi", _c["hi"] / 100, _LS, "f1x")
     put("ls_n", _l["qc"]["n_listeners_used"], _LS, "int")
+    put("ls_un_bare", _cd[("unclear", "bare", "all")]["estimate"] / 100, _LS)
+    _r = [c for c in _l["contrasts"] if c["contrast"] == "chip1 - bare" and c["metric"] == "reversal"][0]
+    put("ls_rd", _r['estimate'], _LS, 'int'); put("ls_rd_lo", _r['lo'], _LS, 'int'); put("ls_rd_hi", _r['hi'], _LS, 'int')
 
 
 def sha(p: Path) -> str:

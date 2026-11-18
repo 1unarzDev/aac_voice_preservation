@@ -38,3 +38,15 @@
 - Roles: "SLP consultants" -> "SLP raters"; R4 relations request attributed to the SLP raters. "information the person paid for" -> "selection effort the person spent".
 - Numbers: "six types" -> macro slp_ntypes (7); slp_acc_rep now exact k/n (32.5, was half-even 32). Stage 7 slots untouched. 8 pages, no overfull/undefined. Not committed.
 - Unfixed: p=.0003 still hand-typed; "protects authorship" wording in R2 row/Sec IV left; consultant_log.csv still has C1/C2 split (internal file).
+
+## 2026-11-18 fold: independent mutants + listener sentence
+- make_macros.py now emits oi_* (analysis/oracle_indep/summary.json: judge sensitivity 31/53 = 58.5% non-circular stratum, 53/75 = 70.7% overall, surface/overlap baselines in the stratum, agreement, controls) and ls_* (analysis/listener/summary.json: bare 8.3%, chip 28.3%, +20.0 pp [9.1, 31.2], 20 listeners). results_macros.tex regenerated (run from repo root).
+- \oracleindep and \listenerslot are now defined as sentences over those macros (default "not yet in" text removed); the %-comment placeholders deleted. Listener sentence carries the not-AAC-partners / materials-not-consequences caveat; mutant sentence states weakness on fail-to/refuse-to/embedded roles and that passive and embedded-question mutants were unconfirmed.
+- Compression to hold 8 pp: cut the Claude-relabel sentence from the abstract, the strict-rule clause, the arbiter side-of-prompt sentence, item-level arbiter agreement clause, a "taught the codebook" sentence, and one mutation-misses sentence. Build: 8 pages, no missing macros.
+- Not added (space): reversal-per-1,000, consequence and guard listener results; abstract has no listener sentence.
+
+## 2026-11-18 FINAL FIXER
+- \oracleindep: literal 75 -> macro oi_all_n; adds k/n 53/75, judge false alarms on confirmed controls (oi_fa 4/46, politeness), and states the rule-seeded figure overstates sensitivity. Abstract now calls 193/196 a circular measure and gives 70.7% on lexicon-blind mutants.
+- \listenerslot: CI labelled unadjusted 95% bootstrap; adds bare "unclear" 86.7% (new macro ls_un_bare) and reversal difference -42 per 1,000 [-99, 7] includes zero (new macros ls_rd*, make_macros.py; regenerated from repo root).
+- Cuts for 8 pp: abstract "two defects/keyed gate zero margin" sentence, "released" sentence, equivalent-mutant parenthetical. Build: 8 pages incl. refs, no undefined; pages 1 and 8 viewed.
+- Unfixed (needs new analyses/venue choice): second non-GPT/non-Claude extractor, pre-specified pooling for 37.5 pp (abstract still gives it), third defect trace, R6 test, member check, density of Tables II-V, p=.0003 hand-typed.
