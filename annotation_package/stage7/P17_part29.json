@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "1d2cebb5",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0f5d3feb",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I want the door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Nobody wants the door."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m190707a3",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I'll take medicine with breakfast tomorrow."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m31104102",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They hardly kept the bedroom door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They kept the bedroom door."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m311854ef",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Did they call their brother in the past?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether they called their brother in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m327253e7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "LATER check account"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Checked account."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m347daad1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Yes, I fail to watch films."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yes, I watch films."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m49155828",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will have soup in the dining room."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I had soup in the dining room."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4ba0e09c",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Tell you to check the chart."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The nurse suggests that you check the chart."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m52aa11db",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The folder is carried by you."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You carry the folder."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m84a17c14",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Following dinner, I secured the front door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I locked the front door after dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8b6bcb38",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are moving the chair."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The witness reports that they are moving the chair."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma6c1a98a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Did you call my brother after lunch?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether you called my brother after lunch."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbc66413e",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The platform was announced by me in the past."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I announced the platform in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbee0d5aa",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Is the pharmacy open?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the pharmacy is open."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mc28e9033",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly move the chair."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You move the chair."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

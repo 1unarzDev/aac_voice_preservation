@@ -345,3 +345,189 @@ check_id, practice, order, <one column per question>, note, time_ms, ...`). Scor
   cells), reported next to the machine tables; set-level agreement is the arm-item comparison of `proxy_cov` and `h_cov`. A conservative proxy variant is not defined here.
 - **Free text.** Notes on No ratings are in `free_text_to_code.csv`; coded by hand into critical / relation / detail dropped / added / fluency (the rule of `whole_message`); the coder is named in the report.
 - **Not decided here (open).** The ICC re-estimate and power table (PLAN 1.4), the S1 arm choice on the reserve dry run, and the timed pretest. If a deviation changes an arm, a draft or a criterion after a return, it is logged with date and reason; this section is never edited.
+
+
+## 7. Stage 7: Part 28 listener communication study and Part 29 independent-mutant confirmation (added 2026-11-17 before any return; opens Wed Nov 18, due Thu Nov 19, 12:00)
+Human outcome measure (plan section A) and non-circular mutation set (plan section B3). Same 20 people as Stages 1-6, annotators of study materials only: no data about
+the people are collected, nobody uses or is evaluated on a system, no AAC users take part. Never write "exempt" or "IRB approved".
+Same tool as Parts 22-27 (`annotation_package/rate_items.html`), extended with optional per-item answer options (`qopts`; backwards compatible, tested in `tests/test_rate_items_html.js`).
+Blind per-person files `stage7/<ID>_part28.json` and `_part29.json` carry only opaque ids, the topic line and the sentence (Part 28) or the two sentences (Part 29);
+never keywords, the intended message, the condition, the model, the operator or the dimension.
+```bash
+python src/make_listener_study.py package        # frozen (seeded; --force redraws): 40 part files, annotation/listener_key.csv + oracle_indep_key.csv (PRIVATE) + .sha256, assignments/stage7_plan.json
+python src/score_listener_study.py --self-check  # key invariants, planted listeners, exclusions; must print SELF-CHECK PASSED before the zip is built
+python src/score_oracle_indep.py --self-check    # key invariants, confirmation rule, planted judge; must print SELF-CHECK PASSED
+python src/make_assignments.py --stage 7         # sheets <ID>_stage7.md, assignments/stage7.csv, README sections, HANDOUT.md block (dates in DATES: open Wed Nov 18, due Thu Nov 19 12:00)
+uv run --with pytest python -m pytest -q tests/
+```
+**Before sending (not yet done, and the zip is NOT rebuilt by these scripts): hash-deposit (gh release, as for deposits 1-5) `annotation/listener_key.sha256`,
+`annotation/oracle_indep_key.sha256`, the sha256 of `analysis/listener/PLAN.md` (221321be61bcdc92...), `analysis/oracle_indep/PLAN.md` (0d2897760da44283... at the time of writing; it carries Amendment 2),
+`analysis/listener/stimuli.jsonl` and this section. Never put `listener_key.csv`, `oracle_indep_key.csv`, `stage7_plan.json` or `orchestration/` in the package.**
+Returns: `labels_part28_<ID>.csv` -> `annotation/returns_part28/`, `labels_part29_<ID>.csv` -> `annotation/returns_part29/`. Run the integrity duplicate check on the returns before scoring.
+Score Part 28 with `python src/score_listener_study.py` -> `analysis/listener_human/`. Part 29: confirm first, then run the production judge on the mutant text of the
+candidates (target dimension and reference value in the key columns `target_dimension`, `target_ref`) -> `runs/oracle_indep/judge_labels.jsonl` ({"id", "critical"}), then
+`python src/score_oracle_indep.py` -> `analysis/oracle_indep_human/`. The judge run happens after the returns, never before.
+
+#### Packet rules as built (frozen 2026-11-17 before any return; they add to, and do not change, the two PLAN files below)
+- **Units and listeners (Part 28).** 120 intended messages, 582 (item, condition) stimuli, 423 judge units (identical text within an item merged, reference never merged). Each unit has exactly 2
+  different listeners; a listener sees any one intended message in at most one unit (Latin square over conditions); nobody judges a family they wrote or checked (`src/make_frontier_parts.py`
+  `hw_blocks`: writer, Part 8 checkers, Part 14 tie-break checkers). Allocation uses `make_frontier_parts.Alloc` (same balancing) per part, seeded (`S7_SALT` in `src/make_listener_study.py`).
+- **Load.** 42-43 sentences (Part 28) and 15 pairs (Part 29) per person. Time assumptions: 26 s per Part 28 judgment, 16 s per Part 29 judgment, 2 practice items per part, 2 min per part to open and download:
+  28-29 min per person (limit 30). These are assumptions until the pilot gives real times; if the pilot is slower the reading order stays and the second sitting is allowed.
+- **Part 28 screen.** Topic line ("Topic: <topic>" in PLAN section 2; shown as `Topic` with the label text) and the sentence. Q1 readings in a seeded per-listener order, plus "Something else, or I cannot tell"; Q2 four fixed
+  responses in a seeded per-listener order; Q3 confidence 1-3. Option values are positional (`reading 1/2/unclear`, `action 1-4`); the private key maps them (`reading1`, `q2_roles`).
+- **Practice.** Two invented practice items per part (not from the study), with feedback; practice rows are dropped by the scorers.
+- **Part 29 screen.** Fixed, dimension-neutral question (wording in `analysis/oracle_indep/PLAN.md` Amendment 2); same / different / unsure; sentence order seeded per item.
+- **QC at scoring.** Practice rows, unknown ids, another listener's id, repeated items (last export wins), missing or invalid Q1 (Part 28) / answer (Part 29) are dropped and counted; nothing is imputed
+  and nothing is re-requested after labels are seen.
+- **Late or thin returns.** Fewer than 16 usable listeners: Part 28 results are descriptive and labelled underpowered (PLAN section 7). Fallback of the plan: CALE-AI leads with Stage 6 and Part 28 goes to the journal.
+
+#### Frozen rules, copied verbatim from `analysis/listener/PLAN.md` (sha256 221321be61bcdc92baa3843a7781f4b7d644685afaccfab4d12909c736bad8f7)
+> # Part 28 Listener Communication Study: frozen analysis plan
+>
+> Written 2026-11-17, before the stimulus draw, before the guard run, and before any stored output for the 120 drawn messages was read.
+> Nothing below may change after listener data are collected. Any later deviation is reported as a deviation, not folded in.
+> Status: not committed; to be hash-deposited before the sheets are sent (see COORDINATOR_STEPS section 7, written by the assignment task).
+>
+> ## 1. Question and role of the people
+> Twenty adult non-author volunteers act as annotators of study materials. A listener sees a context line and one sentence and says what the person is saying.
+> No data about the listeners themselves are collected. Listeners are not AAC communication partners; comprehension is not a real-world consequence.
+>
+> ## 2. Stimuli (frozen rules)
+> Source: data/items/hw.jsonl (547 families) and data/items/hw2.jsonl (60 speech-act families); every family is a kept pair (3 of 3 human checks pass).
+> Draw script: src/make_listener_study.py, seed 20261117 (python random.Random(seed), explicit sort of family ids before every draw).
+>
+> * Dimensions: polarity, speech_act, agent, time_quantity. certainty and politeness are excluded (lower SLP severity, 3 to 3.5 against 4 to 5).
+> * 30 messages per dimension, 120 total. hw and hw2 families are pooled before the speech-act draw (hw2 is not oversampled). No family is used twice.
+> * An "intended message" is one variant (A or B) of a family: its source sentence is the writer's own sentence and the reference condition.
+> * Default vs non-default intended value, declared a priori (not from any model output). Value rank, default first:
+>   polarity: affirmative > negated;
+>   speech_act: statement > question > request/command;
+>   agent: speaker > addressee > third party;
+>   time_quantity: now > past > later.
+>   In each family the variant with the higher-ranked critical value is the default variant, the other is non-default.
+>   Each dimension: 15 messages with the default variant intended, 15 with the non-default variant intended (50% non-default overall, balanced within dimension).
+> * Model: each item is assigned one of the four primary models (qwen2.5-7b, llama3.1-8b, gemma3-4b, gpt-6.1-terra) by seeded round-robin over a seeded permutation of the items within each dimension x default stratum. The same model supplies every model-made condition of that item.
+> * Context line: the item files hold no context text (all null). The neutral topic label of the pair (e.g. "plans", "transport") is shown as the context line, "Topic: <topic>". If the topic is missing the context line is omitted.
+> * Conditions per item: bare (P0 greedy, channel bare, runs/hw1 or runs/hw2); chip1 (channel chip1, the intended variant's cue, same model); nlcue (plain-word cue, runs/hwctl1 channel nlcue; hw2 has no nlcue, so nlcue exists only for hw1 items; the condition gap is documented and the nlcue contrasts are restricted to hw1 items); G1 (the unchanged guard of runs/guard_wc, src/interventions.guard_one with max_retries 2, temperature 0, 96 output tokens, tag I1-guard-v1, seed 1000 for local models, run on the bare input of the same model); reference (the writer's own sentence).
+> * G1 reads only cues the user supplied. The bare input supplies none, so G1 is expected to be inert except for removing/regenerating unsupplied politeness. This is a property of the frozen guard and is reported, not tuned. The guard policy is not modified.
+> * Identical-text rule: within an item, model-made conditions whose output text is identical after normalisation (lowercase, collapse whitespace, strip trailing punctuation) are one sentence. It is judged once per listener pair, and every condition inherits that sentence's judgments. The reference is never merged. The stimulus table keeps one row per (item, condition) with a judge_unit id.
+> * Items whose chosen model returned an empty or unparsed output for bare or chip1 are not replaced; they are reported as a gap and excluded from every contrast involving that condition.
+>
+> ## 3. Listener task and codes
+> Q1 (primary): "What is the person saying?" Options: reading A, reading B (order randomised per stimulus), "something else / unclear". Readings are the two writer sentences of the pair.
+> Q2: "How would you respond?" Four fixed options per item: the action implied by the intended reading (correct), the action implied by the opposite reading (opposite), "ask them to say it again / confirm" (clarify), and one dimension-specific third action (other). Option order is randomised.
+> Q3: confidence 1 to 3.
+>
+> ## 4. Outcomes (per judgment)
+> * Success = Q1 equals the intended reading.
+> * Received reversal = Q1 equals the opposite reading of the pair. "Something else / unclear" is neither success nor reversal and is reported separately as unclear.
+> * Consequential error = Q2 equals the opposite action. Sensitivity: Q2 is not the correct action and not clarify.
+> * Reversal per 1,000 = 1000 x mean(reversal). SLP-weighted reversal per 1,000 = 1000 x mean(w_d x reversal) with w_d = mean SLP severity of the dimension / 5, from expert_package/returns_slp task 1: polarity (NEG 5,5) 1.0; speech_act (ACT 4,4) 0.8; agent (AGT 4,4) 0.8; time_quantity (TIM 4,4) 0.8. Weights are descriptive, from two raters.
+> * Ceiling: the reference condition's success rate; it is reported next to every contrast.
+>
+> ## 5. Estimation, primary contrasts, clustering, equivalence
+> Unit of analysis: the judgment. Condition means are item-balanced: mean over items of the item's mean over its judgments in that condition.
+> Primary contrasts on success (each paired by item, same items in both arms):
+> 1. chip1 - bare
+> 2. G1 - bare
+> 3. nlcue - chip1, restricted to items that have nlcue (hw1 items), with an equivalence margin of +/-5 percentage points.
+> Uncertainty: two-way cluster bootstrap, 10,000 resamples, seed 20261117, resampling items and listeners independently with replacement (judgments kept if both their item and listener are drawn, with multiplicity). Percentile 95% CIs. Holm correction over the three primary contrasts for the 95% intervals reported as adjusted intervals (the unadjusted ones are also given).
+> Equivalence for contrast 3: declared only if the 90% bootstrap interval lies inside [-5, +5] pp (TOST). Otherwise "not shown equivalent"; absence of a difference is never claimed from a non-significant interval.
+> Secondary (descriptive, same bootstrap): reversal per 1,000 and SLP-weighted per 1,000 per condition, overall and in the non-default-intended stratum; consequential error; unclear share; by dimension; Q3 confidence; bare - reference.
+> Sensitivity (reported, not primary): logistic mixed model with crossed random intercepts for item and listener (if it fails to converge, the bootstrap stands alone).
+> The headline is only stated if the data agree: "listeners received the opposite of the intended meaning in X of 1,000 messages without the cue and Y with it", with the 50% non-default design mix stated beside it.
+>
+> ## 6. Exclusions
+> * Listener: a listener whose reference-condition Q1 success is below 75% (their attention check) is excluded from all analyses; the count is reported and results with them retained are given as a sensitivity.
+> * Listener: a listener with fewer than 80% of assigned judgments completed is excluded.
+> * Judgment: missing Q1 is dropped. No outlier-time trimming (time is not collected).
+> * Item: an item missing a condition's output is dropped from contrasts involving that condition only.
+> * Nobody judges their own pair or a pair they checked (logic of src/make_frontier_parts.py, src/make_assignments.py --stage 5).
+> * No exclusion is made on the basis of outcomes. Exclusions are applied identically to all conditions.
+>
+> ## 7. Fallbacks
+> * Local-model access for the guard run is blocked by Unity or GPU: the guard only needs a call when it flags a candidate; items whose assigned model is local and which need a call are reassigned, before any listener data, to the terra output set (terra-only items); this is documented in analysis/listener/STIMULI_NOTES.md.
+> * nlcue missing for hw2 items: nlcue restricted to hw1 items (section 2).
+> * Fewer than 16 usable listeners after exclusions: all results are descriptive and the primary contrasts are labelled underpowered.
+> * Guard gives identical outputs (expected): guard - bare is reported as exactly the same sentences, with the share of changed items.
+
+#### Frozen rules, copied verbatim from `analysis/oracle_indep/PLAN.md` (sha256 0d2897760da4428364b95aa1dd453a43df5c12cb11a638e2f7ca31619651a985 at the time of writing)
+> # Independent mutation set (plan section B3) - pre-declared before any generation
+>
+> Purpose: a non-circular sensitivity set. Mutants are built WITHOUT the checker lexicon (the NEG/HEDGE/PAST/LATER regexes
+> in src/oracle_baselines.py and the operators in src/oracle_real_ops.py). Part 29: 2 human annotators confirm each item
+> changes or keeps meaning; ONLY human-confirmed items count. This step builds candidates only; the judge and baselines are NOT scored here.
+>
+> ## Source draw (declared, seeded)
+> - Same oracle-pass filter as src/oracle_real.py build: runs/hw1/scored.parquet, valid, channel in {chip1, chipall, full},
+>   critical_match True, critical_source in {agree, arbiter}, no refusal/acceptance quarantine; one output per family, one per
+>   distinct text. Texts already used in analysis/oracle_real/sample.jsonl are excluded (no overlap with the earlier set).
+> - Seed 20261117; per-operator RNG random.Random(f"{SEED}|{op}"); each text is used at most once across the whole set.
+> - Applicability pre-filter (before any outcome is seen): length 3-22 words, single sentence, not an empty/degenerate text.
+>
+> ## Operators and quotas (100 mutants)
+> | op | n | source pool (dimension) | construction |
+> |---|---|---|---|
+> | neg_fail_to | 13 | polarity, ref affirmative | template: "I <verb>..." -> "I fail to <verb>..." / "X <verb>s" -> "X fails to <verb>" |
+> | neg_refuse_to | 13 | polarity, ref affirmative | template: same slot -> "refuse(s) to <verb>" |
+> | neg_hardly | 12 | polarity, ref affirmative | template: "can" -> "can hardly"; "am/is/are" -> "... hardly"; "I <verb>" -> "I hardly <verb>" |
+> | neg_nobody | 10 | polarity, ref affirmative | Gemini: rewrite with a quantifier subject like nobody/no one ("Nobody ...") |
+> | role_passive | 14 | agent | Gemini: swap who does what to whom (passivise or invert roles) |
+> | role_embed | 12 | agent | Gemini: embed the claim as attributed to someone else so the original speaker is no longer the agent |
+> | q_embed | 12 | speech_act, ref question | Gemini: turn the question into an embedded statement ("I wonder whether ...") |
+> | time_implied | 14 | time_quantity | Gemini: shift the time reference by implication only (no explicit time words from the checker list) |
+>
+> Item operator assignment is by seeded shuffle of the dimension pool in this order of ops; template ops walk the shuffled pool
+> until the template applies. Gemini ops take the next shuffled items, one call per item (one retry on invalid output).
+>
+> ## Controls (50, meaning-preserving)
+> - ctl_contraction (10): template toggle of contraction (I am <-> I'm, do not <-> don't excluded where negation present: only non-negated forms).
+> - ctl_paraphrase (40): Gemini paraphrase that keeps polarity, speech act, agent/roles, certainty, politeness, time and quantity; drawn across all six dimensions (seeded, pool minus mutant sources).
+>
+> ## Gemini
+> - Model gemini-3.1-flash-lite via src/gemini_backend.py, temperature 0, thinking off, max_tokens 96, concurrency 1.
+> - Hard cap 150 calls in total (62 mutant + 40 control planned, remainder for single retries). Prompts are fixed in src/independent_mutants.py
+>   (ops PROMPTS dict) and the raw responses cached in tmp/ then logged to runs/oracle_indep/gemini_calls.jsonl.
+> - Validation of a Gemini output (fixed, mechanical): non-empty, one sentence, differs from original (case/punct-insensitive),
+>   length 0.5x-2.5x, and for mutants must not contain the words "yesterday|tomorrow|tonight|ago" (time lexicon) unless op is time_implied
+>   (where it is forbidden too). Failures after retry are dropped and replaced by the next shuffled item (counted in the call budget).
+>
+> ## Outputs
+> - analysis/oracle_indep/candidates.jsonl: {id, original, mutant, dimension_hint} in a seeded shuffled order, no labels.
+> - analysis/oracle_indep/key.private.jsonl: id -> kind (mutant|control), op, expected, source text_id/family/model/variant, ref value,
+>   lex_visible flag (mutant newly matches the baseline NEG/PAST/LATER regexes; reported as a stratum, "nobody" is NEG-visible by construction).
+> - analysis/oracle_indep/draw.json: seed, pool sizes, counts by operator, call counts.
+> - Not done here: judge scoring, baseline scoring, human confirmation (Part 29). Mutants are candidates until two annotators confirm.
+>
+> ## Amendment 1 (made after the first build, which showed template ops under-filled: neg_refuse_to 6/13, neg_hardly 0/12; no outcome/judge info involved)
+> - Template negation ops walk the polarity pool first, then (seeded order) non-negated, non-question texts from the other five dimension pools; the
+>   template regex is the only applicability criterion. Their dimension_hint is the source dimension.
+> - First-build Gemini responses (temperature 0, same op+sentence) are reused from runs/oracle_indep/gemini_calls.jsonl rather than re-called;
+>   the 150-call cap counts only distinct calls actually made (first build used 106).
+> - Known limitation, kept on purpose: role_passive/q_embed/paraphrase outputs from a small model can fail to change (or fail to keep) meaning;
+>   that is exactly what the 2-annotator Part 29 confirmation filters, and only confirmed items count.
+>
+> ## Amendment 2 (Part 29 packet and scoring rules; written 2026-11-17 after candidates.jsonl was built, before any Part 29 return, before any judge or baseline score on these items)
+> Packet (src/make_listener_study.py, shared with Part 28; per-person files annotation_package/stage7/<ID>_part29.json; private key annotation/oracle_indep_key.csv):
+> - All 150 candidates (100 mutants, 50 controls) are shown, mixed, each to 2 different annotators. Nobody annotates an item whose source family they wrote or checked
+>   (src/make_frontier_parts.py logic: hw_blocks). Annotators never see kind, operator, dimension, source or which sentence is the original.
+> - Which sentence is "Sentence 1" and which is "Sentence 2" is a seeded coin per item (stored in the private key); the two annotators of an item see the same order.
+> - One fixed, dimension-neutral question for every item: "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it
+>   happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count."
+>   Answers: same / different / unsure. (The wording names every dimension, so it does not hint at the one that was changed.)
+> Confirmation rule (the only items that count):
+> - A mutant is human-confirmed CHANGED if both annotators answer different. A control is human-confirmed SAME if both answer same.
+> - Any other pair (a disagreement, or either annotator unsure, or a missing answer) is unresolved: excluded from every score and counted by operator.
+> - A mutant both annotators call same, or a control both call different, is a construction failure: reported by operator, never scored.
+> - An annotator with fewer than 80% of their assigned Part 29 items answered is dropped; the items then have one annotator and are unresolved.
+> Scoring (src/score_oracle_indep.py; the judge run is made after returns, by the unchanged production judge, on the mutant text only):
+> - Target dimension of a mutant: neg_* -> polarity (reference value affirmative); role_passive and role_embed -> agent; q_embed -> speech_act (reference question);
+>   time_implied -> time_quantity. Reference values are those in the private key. A control is scored on its own source dimension and reference value.
+> - An oracle "catches" an item when its label does not match the reference (production critical_match). Sensitivity = caught / confirmed mutants, false-alarm rate =
+>   caught / confirmed controls, both with Wilson 95% intervals; by operator, by target dimension, and by the lex_visible stratum (lex_visible False is the
+>   non-circular headline: the mutation does not newly match the baseline NEG/PAST/LATER lexicon). Oracles: production judge, surface baseline, overlap baseline
+>   (src/oracle_baselines.py, applied to the mutant text; overlap uses the source family's two sentences).
+> - Judge versus each baseline on the same confirmed mutants: exact McNemar test on the discordant pairs. Annotator agreement is reported (raw agreement and Cohen kappa on
+>   same/different over items where both answered, unsure counted as its own category in a second line).
+> - An unresolved judge label counts as not caught (conservative) with the upper bound where it counts as caught reported beside it. No exclusion is made on the basis of any oracle output.

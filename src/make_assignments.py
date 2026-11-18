@@ -12,6 +12,7 @@ usage:
                                                                        # after Part 15 returns + collect_written_pairs.py --batch hw2
 
   python src/make_assignments.py --stage 6                            # Stage 6 (Parts 26, 27: intent-coverage draft sets, own pairs): sheets, stage6.csv, hand-out block
+  python src/make_assignments.py --stage 7                            # Stage 7 (Parts 28, 29: listener study + mutant confirmation, for everyone): sheets, stage7.csv, README sections, hand-out block
   python src/make_assignments.py --stage 5                            # Stage 5 (Parts 20, 21 for everyone + each person's share of 22-25): sheets, stage5.csv, hand-out block
 
 Stage 5 (added after Stage 4 had been returned; Parts 20 and 21 for all annotators, 18 min each, plus Parts 22-25 shares; about 60 min each)
@@ -107,6 +108,10 @@ DATES.update({"stage5_open": "Wed Nov 4", "stage5": "Wed Nov 4", "stage5_due": "
 DATES.update({"stage6_open": "Fri Nov 6", "stage6": "Fri Nov 6", "stage6_due": "Sun Nov 8, 23:59", "stage6_end": "Sun Nov 8"})
 STAGE6_DIR = PKG / "stage6"
 S6_PLAN = ASSIGN_DIR / "stage6_coverage.json"   # written by src/make_coverage_stage6.py: per-person items and minutes (private key: annotation/coverage_key.csv)
+# Stage 7 (Part 28 listener communication study, Part 29 independent mutant confirmation; analysis/listener/PLAN.md, analysis/oracle_indep/PLAN.md).
+DATES.update({"stage7_open": "Wed Nov 18", "stage7": "Wed Nov 18", "stage7_due": "Thu Nov 19, 12:00", "stage7_end": "Thu Nov 19"})
+STAGE7_DIR = PKG / "stage7"
+S7_PLAN = ASSIGN_DIR / "stage7_plan.json"   # written by src/make_listener_study.py package: per-person items and minutes (private keys: annotation/listener_key.csv, oracle_indep_key.csv)
 S5_FRONTIER = ASSIGN_DIR / "stage5_frontier.json"   # written by src/make_frontier_parts.py: per-person items and minutes for Parts 22-25
 S4_WRITTEN = WRITTEN / "hw2"
 S4_BATCH = "hw2"
@@ -692,6 +697,8 @@ def handout(plan, tab, later: bool = LATER) -> str:
         txt = insert_stage5_section(txt, stage5_handout_section(rows_stage5(plan["annotators"])))
     if (ASSIGN_DIR / "stage6.csv").exists() and s6_plan():
         txt = insert_stage6_section(txt, stage6_handout_section(rows_stage6(plan["annotators"])))
+    if (ASSIGN_DIR / "stage7.csv").exists() and s7_plan():
+        txt = insert_stage7_section(txt, stage7_handout_section(rows_stage7(plan["annotators"])))
     return txt
 
 
@@ -1673,9 +1680,162 @@ def run_stage6(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sh
     return {"plan": plan, "rows": rows, "missing": missing, "s6": p6}
 
 
+# ---------------------------------------------------------------- Stage 7 (listener study Part 28, mutant confirmation Part 29)
+TASKS7 = {
+    "part28": ("Part 28", "Listen to a sentence and say what it means: {n} sentences, 3 quick questions each, 2 practice items first"),
+    "part29": ("Part 29", "Do two sentences mean the same? {n} pairs, 1 question each, 2 practice items first"),
+}
+S7_OVERHEAD_MIN = 2   # opening the file and downloading the CSV, per part
+
+
+def s7_plan(path=None) -> dict | None:
+    p = Path(path or S7_PLAN)
+    return json.loads(p.read_text()) if p.exists() else None
+
+
+def rows_stage7(ids, plan7=None) -> list[dict]:
+    plan7 = plan7 if plan7 is not None else s7_plan()
+    out = []
+    for a in ids:
+        mine = (plan7 or {}).get("per_person", {}).get(a)
+        if not mine:
+            continue
+        for o, task in enumerate(TASKS7, 1):
+            label, desc = TASKS7[task]
+            out.append({"annotator": a, "stage": "7", "order": o, "part": label, "task": task, "description": desc.format(n=mine[task]["n_items"]),
+                        "file_or_link": f"rate_items.html + stage7/{a}_{task}.json", "expected_minutes": mine[task]["minutes"] + S7_OVERHEAD_MIN,
+                        "return_file": f"labels_{task}_{a}.csv", "return_folder": f"annotation/returns_{task}/", "due": DATES["stage7_due"]})
+    return out
+
+
+S7_EXTRA_RULES = [
+    "- **Part 28:** each item shows a topic line and one sentence that a person said to you. Choose what you think the person is saying (two readings are shown), "
+    "how you would respond, and how sure you are. Sentences come from different sources (some written by a person, some produced by a program); do not try to "
+    "guess the source. If the sentence fits neither reading, or you cannot tell, choose the last option. Answer from the sentence alone.",
+    "- **Part 29:** decide only whether Sentence 2 means the same as Sentence 1 (who does what, whether it is so, when, how sure, statement or question). "
+    "Contractions and small changes of wording do not count. Use `unsure` only when you really cannot decide.",
+    "- Do not search for the sentences, do not ask anyone or any tool, and do not discuss the items until the study is finished.",
+]
+
+
+def stage7_item_line(r, a) -> str:
+    head = f"- [ ] **{r['order']}. {r['part']}: {r['description']}** (about {r['expected_minutes']} min)"
+    body = (f"Open `rate_items.html`, click the file button, choose `stage7/{a}_{r['task']}.json`, enter `{a}`. Do the 2 practice "
+            f"items (you see feedback), then every item. README: {r['part']}. Click **Download CSV** at the end. "
+            f"The file name will be `labels_{r['task']}_{a}.csv`.")
+    return f"{head}  \n  {body} Return: `{r['return_file']}`."
+
+
+def stage7_sheet(rows: list[dict], a: str) -> str:
+    rs = sorted((r for r in rows if r["annotator"] == a), key=lambda r: int(r["order"]))
+    tot = sum(r["expected_minutes"] for r in rs)
+    L = [f"# Stage 7 task sheet for {a} ({DATES['stage7']}; due {DATES['stage7_due']})", "",
+         "Stage 7 is the listener study: you read short sentences and say what they mean to you, and you check whether pairs of sentences mean the same. "
+         "Please do it by the deadline: the results are used in the write-up, so late files cannot be included. If you cannot, tell the coordinator now. "
+         "Download the current `annotation_package.zip`: your files are in its `stage7/` folder and the tool, `rate_items.html`, is in the package folder. "
+         f"About **{tot} min** in total ({', '.join(f'{r['part']} {r['expected_minutes']} min' for r in rs)}), plus breaks. Each tool saves your progress in your "
+         "browser (same browser and computer), so two sittings are fine.", "",
+         RULES.format(ID=a, END=DATES["stage7_end"]), "", "**Extra rules for Stage 7**"] + S7_EXTRA_RULES
+    L += ["", "## Steps (in this order)", "", "Order: **Part 28 first**, then Part 29.", ""]
+    L += [stage7_item_line(r, a) for r in rs] + [""]
+    L += ["**Return files (names must be exact):** " + "; ".join(f"`{r['return_file']}` ({r['part']})" for r in rs) + ".", ""]
+    L += [f"Return: email the CSV files for {', '.join(r['part'] for r in rs)} to the coordinator by {DATES['stage7_due']} "
+          f"(subject `AAC annotation {a} stage 7`), with the time you spent and any notes.", "",
+          "Thank you! Your work is anonymous: only your ID is recorded. No personal information about you is collected. You can stop at any time."]
+    return "\n".join(L) + "\n"
+
+
+def stage7_handout_section(rows: list[dict]) -> str:
+    ids = sorted({r["annotator"] for r in rows})
+    per = {a: sum(r["expected_minutes"] for r in rows if r["annotator"] == a) for a in ids}
+    return ("<!-- stage7:start -->\n"
+            f"- **Stage 7, the listener study (all {len(ids)} people)** (opens **{DATES['stage7_open']}**): due **{DATES['stage7_due']}**. Files appear in `stage7/`; re-download the zip. "
+            f"About {sum(per.values()) / 60:.1f} person-hours, {min(per.values())}-{max(per.values())} min each (two sittings are fine). Sheets: `assignments/<ID>_stage7.md`.\n"
+            "  - Part 28 (`rate_items.html` + `stage7/<ID>_part28.json`, about 42 sentences, 3 quick questions each, 2 practice items first). Return `labels_part28_<ID>.csv`.\n"
+            "  - Part 29 (`rate_items.html` + `stage7/<ID>_part29.json`, 15 pairs of sentences, 1 question each, 2 practice items first). Return `labels_part29_<ID>.csv`. Do Part 28 first.\n"
+            "<!-- stage7:end -->\n")
+
+
+def insert_stage7_section(txt: str, section: str) -> str:
+    if "<!-- stage7:start -->" in txt:
+        a, rest = txt.split("<!-- stage7:start -->", 1)
+        txt = a.rstrip("\n") + "\n" + rest.split("<!-- stage7:end -->\n", 1)[1]
+    anchor = "\n**Return method:**"
+    assert anchor in txt, "HANDOUT.md layout changed"
+    txt = txt.replace(anchor, "\n" + section + anchor, 1)
+    return txt.replace("stage <1|2|3|4|5|6>`", "stage <1|2|3|4|5|6|7>`")
+
+
+README_S7_TIME = ("<!-- stage7-time:start -->\n"
+                  "- **Parts 28 and 29 (Stage 7), `rate_items.html` with `stage7/<ID>_part28.json` and `_part29.json`** (what does a sentence mean to you? do two sentences "
+                  "mean the same?): about 28 minutes in all, everyone. See their section below.\n"
+                  "<!-- stage7-time:end -->\n")
+README_S7 = """<!-- stage7:start -->
+## Parts 28 and 29 (Stage 7, about 28 min in all): what does a sentence mean? do two sentences mean the same? `rate_items.html`
+These two short tasks use sentences only; no personal information about you is recorded. Each uses the same tool and keys as Parts 22-27 (`rate_items.html`, your files
+`stage7/<ID>_part28.json` and `stage7/<ID>_part29.json`). Do **Part 28 first**, then Part 29.
+
+1. Open `rate_items.html`, click the file button and choose your file (e.g. `stage7/P02_part28.json`). Enter **the same annotator ID** and press `Enter`.
+   The tool refuses a file that is not yours. Two practice items with feedback come first.
+2. Keys are as in Parts 22-27: `1`-`9` choose an option, `↑`/`↓` move between questions, `Tab` goes to the optional note box, `Enter` next item,
+   `Backspace` previous item. Progress is saved in the browser. Click **Download CSV** at the end of each part.
+- **Part 28, what is the person saying? (about 42 sentences, about 22 min).** You see a topic line and one sentence that a person said to you. Three questions:
+  (1) which of two readings the sentence says, or "something else, or I cannot tell"; (2) how you would respond (four short choices, one of which is to ask
+  them to say it again); (3) how sure you are (1 to 3). Answer from the sentence alone. Sentences come from different sources; do not try to guess the source.
+- **Part 29, do the two sentences mean the same? (15 pairs, about 5 min).** Two sentences. Does Sentence 2 mean the same as Sentence 1: who does what to
+  whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Wording and style
+  differences do not count. Answer same, different or unsure.
+
+Answer from the words on the page only: no searching, no AI tools, no asking anyone. Return `labels_part28_<ID>.csv` and `labels_part29_<ID>.csv`.
+<!-- stage7:end -->
+
+"""
+
+
+def insert_stage7_readme(txt: str) -> str:
+    if "<!-- stage7-time:start -->" in txt:
+        a, rest = txt.split("<!-- stage7-time:start -->", 1)
+        txt = a + rest.split("<!-- stage7-time:end -->\n", 1)[1]
+    if "<!-- stage7:start -->" in txt:
+        a, rest = txt.split("<!-- stage7:start -->", 1)
+        txt = a.rstrip("\n") + "\n" + rest.split("<!-- stage7:end -->\n", 1)[1].lstrip("\n")
+        txt = txt.replace("\n## Returning your work", "\n\n## Returning your work", 1) if "\n\n## Returning your work" not in txt else txt
+    anchor = "\n## Returning your work"
+    assert anchor in txt, "README.md layout changed"
+    txt = txt.replace(anchor, "\n" + README_S7.rstrip("\n") + "\n" + anchor, 1)
+    t_anchor = "about 30 minutes in all, everyone. See their section below.\n"
+    assert t_anchor in txt, "README.md time list changed"
+    return txt.replace(t_anchor, t_anchor + README_S7_TIME, 1)
+
+
+def run_stage7(plan_path=ASSIGN_DIR / "plan.json", out_assign=ASSIGN_DIR, out_sheets=SHEET_DIR, stage7_dir=STAGE7_DIR, pkg=PKG,
+               handout_path=None, readme_path=None, quiet=False, s7_path=None) -> dict:
+    plan = json.loads(Path(plan_path).read_text())
+    ids = plan["annotators"]
+    p7 = s7_plan(s7_path)
+    if p7 is None:
+        raise SystemExit("no stage7_plan.json: run src/make_listener_study.py package first")
+    rows = rows_stage7(ids, p7)
+    missing = [str(stage7_dir / f"{a}_{t}.json") for a in ids for t in TASKS7 if not (stage7_dir / f"{a}_{t}.json").exists()]
+    if missing and not quiet:
+        print(f"WARNING: {len(missing)} part files missing, e.g. {missing[:2]}")
+    write_csv(out_assign / "stage7.csv", rows, S4_COLS)
+    out_sheets.mkdir(parents=True, exist_ok=True)
+    for a in ids:
+        (out_sheets / f"{a}_stage7.md").write_text(stage7_sheet(rows, a))
+    hp = Path(handout_path or pkg / "HANDOUT.md")
+    hp.write_text(insert_stage7_section(hp.read_text(), stage7_handout_section(rows)))
+    rp = Path(readme_path or pkg / "README.md")
+    rp.write_text(insert_stage7_readme(rp.read_text()))
+    if not quiet:
+        per = [sum(r["expected_minutes"] for r in rows if r["annotator"] == a) for a in ids]
+        print(f"Stage 7: {len(ids)} sheets, {sum(per) / 60:.1f} person-hours, minutes per person {min(per)}-{max(per)}")
+    return {"plan": plan, "rows": rows, "missing": missing, "s7": p7}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--stage", choices=["1", "2", "3", "4", "5", "6"], required=True)
+    ap.add_argument("--stage", choices=["1", "2", "3", "4", "5", "6", "7"], required=True)
     ap.add_argument("--annotators", default="P01..P20", help="e.g. P01..P20 or P01,P02,...")
     ap.add_argument("--absent", default="", help="stage 2/3: people who will not do that stage")
     ap.add_argument("--still-checking", default="", help="stage 2: non-returning writers who still check")
@@ -1704,6 +1864,8 @@ def main(argv=None) -> int:
         run_stage5()
     elif a.stage == "6":
         run_stage6()
+    elif a.stage == "7":
+        run_stage7()
     elif a.stage == "4":
         run_stage4(writers=split(a.writers), raters=split(a.raters), checkers=split(a.checkers), rebuild=a.rebuild)
     return 0

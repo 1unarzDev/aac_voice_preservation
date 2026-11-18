@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "7fdfd907",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m155e4f1c",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I explain my schedule."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "He explains that he explains his schedule."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m2340d674",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They wish to dim the lights in the hallway following their evening meal."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They want to lower the hallway lights after dinner."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m30c1f0c4",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The driver does not know."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The operator is unaware."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4dcfed14",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They adjusted the lamp in the past."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The lamp was adjusted by them in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m5ad73610",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They do not wear headphones while traveling."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They don't use headphones when they travel."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m637c0773",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will send the bank."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will refuse to send the bank."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m725ff385",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I checked the wheelchair ramp."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I inspected the wheelchair ramp."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m8a5db855",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I fail to take the bus to the clinic."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I take the bus to the clinic."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m99fb0db2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will start the game."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will fail to start the game."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m9c088da7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I count coins."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I hardly count coins."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma79016ab",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They folded the ramp in the past."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The witness reported that they had folded the ramp in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb545c5df",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They called their sister."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will call their sister later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me5f08c40",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The clinic opens at nine on Monday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "On Monday, the clinic begins operations at nine."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "meda0d013",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I have a yes to cream for breakfast."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Nobody has a yes to cream for breakfast."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mfc0fdc79",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They refuse to send the form."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They send the form."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

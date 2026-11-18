@@ -52,3 +52,27 @@ until the template applies. Gemini ops take the next shuffled items, one call pe
   the 150-call cap counts only distinct calls actually made (first build used 106).
 - Known limitation, kept on purpose: role_passive/q_embed/paraphrase outputs from a small model can fail to change (or fail to keep) meaning;
   that is exactly what the 2-annotator Part 29 confirmation filters, and only confirmed items count.
+
+## Amendment 2 (Part 29 packet and scoring rules; written 2026-11-17 after candidates.jsonl was built, before any Part 29 return, before any judge or baseline score on these items)
+Packet (src/make_listener_study.py, shared with Part 28; per-person files annotation_package/stage7/<ID>_part29.json; private key annotation/oracle_indep_key.csv):
+- All 150 candidates (100 mutants, 50 controls) are shown, mixed, each to 2 different annotators. Nobody annotates an item whose source family they wrote or checked
+  (src/make_frontier_parts.py logic: hw_blocks). Annotators never see kind, operator, dimension, source or which sentence is the original.
+- Which sentence is "Sentence 1" and which is "Sentence 2" is a seeded coin per item (stored in the private key); the two annotators of an item see the same order.
+- One fixed, dimension-neutral question for every item: "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it
+  happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count."
+  Answers: same / different / unsure. (The wording names every dimension, so it does not hint at the one that was changed.)
+Confirmation rule (the only items that count):
+- A mutant is human-confirmed CHANGED if both annotators answer different. A control is human-confirmed SAME if both answer same.
+- Any other pair (a disagreement, or either annotator unsure, or a missing answer) is unresolved: excluded from every score and counted by operator.
+- A mutant both annotators call same, or a control both call different, is a construction failure: reported by operator, never scored.
+- An annotator with fewer than 80% of their assigned Part 29 items answered is dropped; the items then have one annotator and are unresolved.
+Scoring (src/score_oracle_indep.py; the judge run is made after returns, by the unchanged production judge, on the mutant text only):
+- Target dimension of a mutant: neg_* -> polarity (reference value affirmative); role_passive and role_embed -> agent; q_embed -> speech_act (reference question);
+  time_implied -> time_quantity. Reference values are those in the private key. A control is scored on its own source dimension and reference value.
+- An oracle "catches" an item when its label does not match the reference (production critical_match). Sensitivity = caught / confirmed mutants, false-alarm rate =
+  caught / confirmed controls, both with Wilson 95% intervals; by operator, by target dimension, and by the lex_visible stratum (lex_visible False is the
+  non-circular headline: the mutation does not newly match the baseline NEG/PAST/LATER lexicon). Oracles: production judge, surface baseline, overlap baseline
+  (src/oracle_baselines.py, applied to the mutant text; overlap uses the source family's two sentences).
+- Judge versus each baseline on the same confirmed mutants: exact McNemar test on the discordant pairs. Annotator agreement is reported (raw agreement and Cohen kappa on
+  same/different over items where both answered, unsure counted as its own category in a second line).
+- An unresolved judge label counts as not caught (conservative) with the upper bound where it counts as caught reported beside it. No exclusion is made on the basis of any oracle output.

@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "de3dd778",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m190707a3",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will take medicine with breakfast tomorrow."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I'll take medicine with breakfast tomorrow."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m25b346fc",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The form was explained by the advocate at the reception desk."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The advocate explained the form at reception."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m44581e2d",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are sure the receipt folder is here."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They're sure the receipt folder is here."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4ab5d93a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They check the chart."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The chart is checked by them."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4b91e4e1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The class might meet in room four."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It is possible that the class will meet in room four."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m5914751f",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will refuse to check the schedule."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will check the schedule."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m612d9a5e",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly call the neighbor."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You call the neighbor."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m804ff60e",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I checked my blood pressure yesterday."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yesterday, I measured my blood pressure."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma1051a11",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are loading the bags."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are hardly loading the bags."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma6c1a98a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Did you call my brother after lunch?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether you called my brother after lunch."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb276098a",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They are going to travel to the park by taxi later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will take a taxi to the park later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb2f4bd53",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I tasted the soup."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am tasting the soup now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me7073cd3",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "She says that she carries the bag."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I carry the bag."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me866d194",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly sent the assignment."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You sent the assignment."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mfff88c58",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "He insists that you pay the bill."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You pay the bill."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

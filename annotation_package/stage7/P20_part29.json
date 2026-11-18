@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "156b241f",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m0457ade9",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You put the soup bowl."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Place the soup bowl down."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m0b91263b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They told them that the bus arrived."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They told them that the bus would arrive."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m40b74fd0",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will be sure the movie starts later."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They'll be sure the movie starts later."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6234e3c0",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They will hardly fix the car."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They will fix the car."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m62564702",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The film commences."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The movie begins."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m64a2b19b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They told me to put the keys."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I was told by them to put the keys."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m90f3fad9",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "They fail to respect their neighbor."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They respect their neighbor."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m91069222",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am asking whether they are having a cafe lunch."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "They are having a cafe lunch?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma111bfaa",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Could you invite my cousin to the picnic."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Would you mind inviting my cousin to the picnic?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "ma1e73a13",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We will refuse to tell you our schedule."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We will tell you our schedule."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mb6027203",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is my desire to head to the station."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I want to go to the station."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mbc9dbc51",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "No one among our friends knows the meeting place."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Our friends know the meeting place."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mc2643f8c",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Rice is cooked by Dad for dinner at home."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Dad cooks rice for dinner at home."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mca97b3db",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Do I need to wait for the dog?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether I need to wait for the dog."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me09ee9a1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I refuse to send my statement by email each month."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I send my statement by email each month."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}

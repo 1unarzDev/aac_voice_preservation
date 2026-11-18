@@ -1,0 +1,326 @@
+{
+ "check_id": "part29",
+ "tool": "rate_items_v1",
+ "version": 1,
+ "n_items": 15,
+ "for": "1d8f123c",
+ "title": "Do two sentences mean the same?",
+ "intro": [
+  "You will see two sentences. Say whether Sentence 2 means the same as Sentence 1.",
+  "Answer from the words only. Use 'unsure' if you really cannot decide."
+ ],
+ "help": [
+  {
+   "term": "Same or different",
+   "text": "Same if a listener would understand the same thing from both. Different if the listener would understand something else, even if the wording is close."
+  },
+  {
+   "term": "Style does not count",
+   "text": "Contractions (I am / I'm), word order that does not change who does what, and similar style differences do not make a difference."
+  }
+ ],
+ "questions": {
+  "q1": {
+   "title": "Same meaning?",
+   "text": "Do the two sentences tell the listener the same thing: who does what to whom, whether it is so or not, when it happens, how sure the speaker is, and whether it is a statement, a question or a request? Small differences in wording or style do not count.",
+   "options": [
+    {
+     "v": "same",
+     "label": "same"
+    },
+    {
+     "v": "different",
+     "label": "different"
+    },
+    {
+     "v": "unsure",
+     "label": "unsure"
+    }
+   ]
+  }
+ },
+ "practice": [
+  {
+   "item_id": "prac-1",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I will go to the shop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I will not go to the shop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "different"
+   },
+   "fb": "The second sentence says the opposite (not going), so they are different."
+  },
+  {
+   "item_id": "prac-2",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "It is raining now."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "It's raining now."
+    }
+   ],
+   "qs": [
+    "q1"
+   ],
+   "expected": {
+    "q1": "same"
+   },
+   "fb": "Only the contraction differs, so they mean the same."
+  }
+ ],
+ "items": [
+  {
+   "item_id": "m4069ee46",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am of the opinion that the guitar is located in the music room."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I believe the guitar is in the music room."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m4ba0e09c",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Tell you to check the chart."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "The nurse suggests that you check the chart."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m60c60b98",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "My roommate locks the bathroom door."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No one in my room locks the bathroom door."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m612d9a5e",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "You hardly call the neighbor."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You call the neighbor."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m6b064dd7",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "The cashier gives me a receipt."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "No cashier gives me a receipt."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m74dff944",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Kindly begin the game."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Please start the game."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m82d2dd7d",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Would you mind lowering the brightness of the lamp?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Can you dim the lamp?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m98144908",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "No one respects the guest."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Yes, they respect the guest."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "m9aa0fa7c",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I collected tablets in the past."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "He claimed that he had collected tablets in the past."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mc2276e08",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "We reserved a room."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "We booked a room."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "md04f155b",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "I am asking whether the bus reaches the town centre at noon."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Does the bus reach the town centre at noon?"
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "me8788435",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Please wait by the bus stop."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "Kindly remain at the bus stop."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mffa75425",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Is the cafeteria music loud?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the cafeteria music is loud."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mfff88c58",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "He insists that you pay the bill."
+    },
+    {
+     "label": "Sentence 2",
+     "text": "You pay the bill."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  },
+  {
+   "item_id": "mffffe181",
+   "blocks": [
+    {
+     "label": "Sentence 1",
+     "text": "Did the rent payment leave my account [PAST]?"
+    },
+    {
+     "label": "Sentence 2",
+     "text": "I am asking whether the rent payment left my account."
+    }
+   ],
+   "qs": [
+    "q1"
+   ]
+  }
+ ]
+}
