@@ -112,3 +112,30 @@ Cut or compressed (no numbers or macros removed except noted):
 - Abstract, "Headline" paragraph, conclusion: "restores intended meaning" -> "improves the reading listeners choose"; states absolute 28% with "most cue outputs still miss it", "no AAC users or partners tested", frozen primary (received reversals, -42 per 1,000 [-99, +7]) not confirmed, guard usability gap with interval and "deployment clause unresolved". Intro now says cue is lead contribution, guard the worked ledger case. All numbers via macros.
 - Not done: worked example/mini-glossary on p1, Table 1 split, Table 3 overfull (nothing clipped), pooled ~34-pt note, ledger rows for gt_jgain_g1/gt_rep_g1 provenance, GenAI comment wording (no space; body held on p8).
 - Build: docker latexmk, 10 pp, Conclusion on p8, References heading p9 (pdftotext), no undefined refs. Not committed.
+
+# Round 7 (2026-11-19, framing and readability pass)
+- Title (user choice): "One Tap Triples How Often Listeners Get the Intended Meaning: A Benefit--Harm Ledger for LLM Sentence Expansion in AAC" (8.3% -> 28.3%; "Restores" dropped as an overclaim).
+- Abstract rewritten (~190 words): authorship stakes -> ledger -> listener result with the not-confirmed reversal primary -> guard as the hidden-cost case -> no AAC users, pre-specified MRT.
+- Intro rebuilt: stakes with take medicine / like medication examples; "Thesis and ledger"; three numbered contributions; the "Headline:" paragraph and meta sentences removed.
+- New Fig. 1: listener examples. Rule declared in tmp/framing/pick_listener_example.py: bare 0/2 intended + >=1 opposite action, chip 2/2, texts differ. All 3 of 120 eligible items are shown (rows generated into figs/listener_examples.tex; counts in figs/listener_examples_counts.tex).
+- Old Fig. 1 (guard/menu hidden costs) moved next to the guard section, with a reworded caption.
+- Results reordered: 6.1 people (listeners, writers' own intent), 6.2 cue in stored text (incl. second judge family), 6.3 guard (confirmation first; feedback vs free baselines; usability audit; menu), 6.4 defaults, clinical weight, cue price. Table 4 moved beside the guard section.
+- Interventions: cue first. Sec. 7 retitled "What a Causal, Longitudinal Study Must Measure Next". Conclusion rewritten as 6 short sentences.
+- Trims for the 8-page body: listener non-default subrate, listener limits sentence, audit within-pair sentence compressed (all exploratory labels kept).
+- Checks: body ends on p. 8, references from p. 9; no new numbers vs the previous PDF (every number in the new text also appears in the old one); honesty elements present; no names or URLs.
+- Fresh-reviewer fixes (score 5/10, clarity 3): guard usability wording now says the frozen test was inconclusive and the stricter secondaries showed a cost (abstract, contribution 3, conclusion); opposite-action vs reversal explained in the listener paragraph; abstract gives absolute rates before "three times"; second judge family marked non-independent; +30 marked exploratory; Fig. 1 shows the other reading of each pair; Table 3 (secondary results) cut and the sign-flip p and range of writer means moved into the text; H1 slot shortened; legend, clinical and thesis sentences compressed. Body ends on p. 8.
+
+# Round 8 (2026-11-19, outsider rewrite)
+- Blind A/B baseline (same fresh reviewer, versions unlabelled): Round 7 6/10 (clarity 5) vs the Nov 18 draft 5/10 (clarity 4).
+- Whole body rewritten for readers with no context (source pieces: tmp/framing/r8/cal_*.tex; Round 7 backup: tmp/caleai_main_r7.tex).
+  - Plain abstract.
+  - Example-led intro with three bulleted findings.
+  - Glossary table removed; terms defined in the text. Shorthand removed from the prose (G1r/G1t, strict-check vs joint pass, deployment clause, offline failure indicator, H1/H2 labels).
+  - Listener section opens by defining the three listener measures.
+  - The guard table relabelled in plain words.
+  - Table 1 rewritten.
+  - New "Where the chain from text to people could break" paragraph in Sec. 6 (uses vq, hd_chain).
+  - Fig. 1 is full-width on p. 2. Floats placed next to their text.
+  - Dropped from the text: the frontier projection paragraph (Table 1 keeps the projection row) and the secondary-results table.
+- Body ends on p. 7 (about one page of slack). No new numbers apart from section numbers. Caveats present.
+- Captions shortened (user feedback: long caption paragraphs).

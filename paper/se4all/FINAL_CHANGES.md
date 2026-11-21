@@ -73,3 +73,24 @@
 - Abstract: NLI/Claude catch rates now stated "of all 75 mutants" (macro oi_all_n), resolving the strata-mixing nit vs Table I; listener sentence now says "no AAC users were tested".
 - Listener check: reversal difference "stays not confirmed, at best borderline". No number changed; no mismatches were found by the checkers.
 - Build (docker pdflatex): 8 pages incl. references (References on p. 8), no overfull/undefined refs. Not changed: scit font warning, email underscore, AI disclosure, artifact URL (author items).
+
+# Round 7 (2026-11-19, framing and readability pass)
+- Abstract rewritten: stakes -> oracle problem -> harness + four testing methods -> "tests changed what the oracle can be trusted for" (rule-seeded 193/196 vs independent 70.7%, seeded-fault sweep) -> 115/115 treated -> application (99.8%, +37.5 exploratory, listener 22.5% -> 1.3%) -> necessary not sufficient. NLI/Claude moved to Table I and the body.
+- Intro: research question restored from the Nov 17 draft; four numbered contributions; one evidence-tier sentence.
+- Section order: II Harness, III Testing the Oracle (moved up), IV Applying the Tested Oracle (was III). Independent-mutant paragraph now follows the rule-seeded real-output result it qualifies, with its own heading.
+- Removed internal artefacts: the repo path in the Table VI caption, the consultant_log.csv path, "Stage 6"; Fig. 1 caption statistics shortened.
+- Ethics and positionality tightened, every required statement kept.
+- Trims for 8 pages: machine-agreement anecdote, composition setup, booster clause, per-set kappa list (now "at or above .925").
+- Checks: 8 pages including references, 0 overfull boxes, no undefined references; no new numbers vs the previous PDF.
+- Fresh-reviewer fixes (score 5/10, clarity 3): the abstract gives both 70.7% overall and 58.5% lexicon-blind, "four models (six in breadth checks)", 115/115 "that had a consensus", and the listener 8.3 -> 28.3 beside the opposite-action result; IV-C explains opposite action vs reversal; Table I says the seeded-fault tests were written for those faults; the conclusion's listener claim is softened. 8 pages.
+
+# Round 8 (2026-11-19, outsider rewrite)
+- Blind A/B baseline: Round 7 7/10 (clarity 6) vs the Nov 18 draft 6/10 (clarity 5).
+- Body rewritten in plain language (tmp/framing/r8/se_body.tex; assembler tmp/framing/r8/se_assemble.py; Round 7 backup tmp/se4all_main_r7.tex).
+  - Terms defined once (input conditions, cue chip, identity test, mutant, control, human gate, tie-breaker); J1/J2, "keyed" and "arbiter" jargon removed from the prose.
+  - Testing the Oracle split into five subsections; the "rule-seeded mutants overstated sensitivity" story is the centre.
+  - Table I gives all / lexicon-blind mutant results for each checker.
+  - Listener measures defined.
+  - Secondary-results table removed (key items kept in the text); confirmation-set table kept with a plain caption; composition folded into IV-D.
+- 7 pages including references, 0 overfull boxes, no undefined references, no new numbers.
+- Layout pass (user feedback): run-in italic headings in Sec. II and Related Work became lettered subsections; new Fig. 1 table (one stored Gemma output per input condition, verbatim from runs/hw1/outputs.jsonl, hw-pol-075 variant B); all table captions shortened to titles, notes moved to a short line under each table; Tables I, IV and V rebuilt with plain labels (Table V as two row groups); Tables III and VI full-width and centred; Table II requirements rewritten without C(x)/L_d(y) notation; Fig. 2 node labels updated; abstract tightened; Defect A/B and IV-D paragraphs split; stale references fixed. 7 pages, 0 overfull.
